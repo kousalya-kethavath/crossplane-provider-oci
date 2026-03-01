@@ -49,7 +49,7 @@ GO_TEST_PARALLEL := $(shell echo $$(( $(NPROCS) / 2 )))
 
 GO_REQUIRED_VERSION ?= 1.25
 GOLANGCILINT_VERSION ?= 1.50.0
-GO_STATIC_PACKAGES = $(GO_PROJECT)/cmd/provider $(GO_PROJECT)/cmd/generator
+GO_STATIC_PACKAGES = $(GO_PROJECT)/cmd/provider/monolith $(GO_PROJECT)/cmd/generator
 GO_LDFLAGS += -X $(GO_PROJECT)/internal/version.Version=$(VERSION)
 GO_SUBDIRS += cmd internal apis
 -include build/makelib/golang.mk
@@ -68,11 +68,24 @@ comma := ,
 # Configure GO_STATIC_PACKAGES based on SUBPACKAGES value
 ifeq ($(SUBPACKAGES),monolith)
 # Monolith build - traditional behavior
-GO_STATIC_PACKAGES = $(GO_PROJECT)/cmd/provider $(GO_PROJECT)/cmd/generator
+GO_STATIC_PACKAGES = $(GO_PROJECT)/cmd/provider/monolith $(GO_PROJECT)/cmd/generator
 else
 # Sub-package build - parse comma-separated list and build service-specific binaries
 SUBPACKAGE_LIST := $(subst $(comma), ,$(SUBPACKAGES))
 GO_STATIC_PACKAGES = $(GO_PROJECT)/cmd/generator $(foreach pkg,$(SUBPACKAGE_LIST),$(GO_PROJECT)/cmd/provider/$(pkg))
+endif
+
+# Keep monolith output compatible with existing image/runtime wiring that expects
+# $(GO_OUT_DIR)/provider.
+ifeq ($(SUBPACKAGES),monolith)
+build.code.platform: monolith.binary.alias
+
+monolith.binary.alias: go.build
+	@if [ -f "$(GO_OUT_DIR)/monolith$(GO_OUT_EXT)" ]; then \
+		cp "$(GO_OUT_DIR)/monolith$(GO_OUT_EXT)" "$(GO_OUT_DIR)/provider$(GO_OUT_EXT)"; \
+	fi
+
+.PHONY: monolith.binary.alias
 endif
 
 # ====================================================================================
