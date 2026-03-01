@@ -8,12 +8,12 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/crossplane/crossplane-runtime/pkg/resource"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/crossplane/upjet/pkg/terraform"
+	"github.com/crossplane/upjet/v2/pkg/terraform"
 
 	"github.com/oracle/provider-oci/apis/v1beta1"
 )
@@ -25,6 +25,7 @@ const (
 	errTrackUsage           = "cannot track ProviderConfig usage"
 	errExtractCredentials   = "cannot extract credentials"
 	errUnmarshalCredentials = "cannot unmarshal oci credentials as JSON"
+	errUnsupportedManaged   = "managed resource does not implement legacy provider config reference"
 )
 
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
@@ -39,7 +40,12 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			},
 		}
 
-		configRef := mg.GetProviderConfigReference()
+		legacyManaged, ok := mg.(resource.LegacyManaged)
+		if !ok {
+			return ps, errors.New(errUnsupportedManaged)
+		}
+
+		configRef := legacyManaged.GetProviderConfigReference()
 		if configRef == nil {
 			return ps, errors.New(errNoProviderConfig)
 		}
@@ -48,8 +54,8 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			return ps, errors.Wrap(err, errGetProviderConfig)
 		}
 
-		t := resource.NewProviderConfigUsageTracker(client, &v1beta1.ProviderConfigUsage{})
-		if err := t.Track(ctx, mg); err != nil {
+		t := resource.NewLegacyProviderConfigUsageTracker(client, &v1beta1.ProviderConfigUsage{})
+		if err := t.Track(ctx, legacyManaged); err != nil {
 			return ps, errors.Wrap(err, errTrackUsage)
 		}
 

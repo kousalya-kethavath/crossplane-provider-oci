@@ -19,9 +19,8 @@ package config
 import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
-
-	"github.com/crossplane/upjet/pkg/config"
-	"github.com/crossplane/upjet/pkg/registry/reference"
+	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/crossplane/upjet/v2/pkg/registry/reference"
 	"github.com/oracle/provider-oci/config/budget"
 	"github.com/oracle/provider-oci/config/certificatesmanagement"
 	"github.com/oracle/provider-oci/config/containerengine"

@@ -220,7 +220,7 @@ generate.init: $(TERRAFORM_PROVIDER_SCHEMA) pull-docs
 # Transform resolver references to use scheme-based resolution for sub-package architecture
 generate.resolve: generate
 	@$(INFO) transforming resolver references for sub-package architecture
-	@go run github.com/crossplane/upjet/cmd/resolver -g oci.upbound.io -a github.com/oracle/provider-oci/internal/apis -s
+	@go run github.com/crossplane/upjet/v2/cmd/resolver -g oci.upbound.io -a github.com/oracle/provider-oci/internal/apis -s
 	@$(OK) transforming resolver references for sub-package architecture
 
 # Complete build workflow: generate → resolve → build
