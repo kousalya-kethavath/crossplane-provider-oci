@@ -18,7 +18,7 @@ package config
 
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
-	"github.com/oracle/provider-oci/config/common"
+	"github.com/oracle/provider-oci/config/cluster/common"
 )
 
 // ExternalNameConfigs contains all external name configurations for this
@@ -39,7 +39,7 @@ func AutoExternalNameConfiguration() config.ResourceOption {
 				// Use IdentifierFromProvider as default for all OCI resources
 				// This is the most common pattern in OCI
 				r.ExternalName = config.IdentifierFromProvider
-				r.Version = "v1alpha1"
+				r.Version = common.VersionAlpha1
 			}
 		}
 	}
