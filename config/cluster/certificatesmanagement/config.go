@@ -47,6 +47,6 @@ func Configure(p *config.Provider) {
 		r.References["certificate_config.issuer_certificate_authority_id"] = config.Reference{
 			TerraformName: "oci_certificates_management_certificate_authority",
 		}
-		
+
 	})
 }

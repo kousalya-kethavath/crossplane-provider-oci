@@ -18,7 +18,7 @@ package loadbalancer
 
 import (
 	"context"
-	"github.com/oracle/provider-oci/config/common"
+	"github.com/oracle/provider-oci/config/cluster/common"
 )
 
 func GetBackendSetIDFunc(ctx context.Context, externalName string, parameters map[string]any,

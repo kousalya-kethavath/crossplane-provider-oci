@@ -22,7 +22,7 @@ import (
 )
 
 const (
-	SelfPackagePath = "github.com/oracle/provider-oci/config/common"
+	SelfPackagePath = "github.com/oracle/provider-oci/config/cluster/common"
 
 	VersionAlpha1 = "v1alpha1"
 
