@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DeployArtifactOverrideArgumentsInitParameters struct {
@@ -23,7 +23,7 @@ type DeployArtifactOverrideArgumentsItemsInitParameters struct {
 
 	// The OCID of the artifact to which this parameter applies.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployArtifact
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DeployArtifactID *string `json:"deployArtifactId,omitempty" tf:"deploy_artifact_id,omitempty"`
 
 	// Reference to a DeployArtifact in devops to populate deployArtifactId.
@@ -57,7 +57,7 @@ type DeployArtifactOverrideArgumentsItemsParameters struct {
 
 	// The OCID of the artifact to which this parameter applies.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployArtifact
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeployArtifactID *string `json:"deployArtifactId,omitempty" tf:"deploy_artifact_id,omitempty"`
 
@@ -155,7 +155,7 @@ type DeployStageOverrideArgumentsItemsInitParameters struct {
 
 	// Specifies the OCID of the stage to be redeployed.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployStage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DeployStageID *string `json:"deployStageId,omitempty" tf:"deploy_stage_id,omitempty"`
 
 	// Reference to a DeployStage in devops to populate deployStageId.
@@ -189,7 +189,7 @@ type DeployStageOverrideArgumentsItemsParameters struct {
 
 	// Specifies the OCID of the stage to be redeployed.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployStage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeployStageID *string `json:"deployStageId,omitempty" tf:"deploy_stage_id,omitempty"`
 
@@ -361,7 +361,7 @@ type DeploymentInitParameters struct {
 
 	// The OCID of a pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployPipeline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DeployPipelineID *string `json:"deployPipelineId,omitempty" tf:"deploy_pipeline_id,omitempty"`
 
 	// Reference to a DeployPipeline in devops to populate deployPipelineId.
@@ -374,7 +374,7 @@ type DeploymentInitParameters struct {
 
 	// Specifies the OCID of the stage to be redeployed.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployStage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DeployStageID *string `json:"deployStageId,omitempty" tf:"deploy_stage_id,omitempty"`
 
 	// Reference to a DeployStage in devops to populate deployStageId.
@@ -403,7 +403,7 @@ type DeploymentInitParameters struct {
 
 	// Specifies the OCID of the previous deployment to be redeployed.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.Deployment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PreviousDeploymentID *string `json:"previousDeploymentId,omitempty" tf:"previous_deployment_id,omitempty"`
 
 	// Reference to a Deployment in devops to populate previousDeploymentId.
@@ -503,7 +503,7 @@ type DeploymentParameters struct {
 
 	// The OCID of a pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployPipeline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeployPipelineID *string `json:"deployPipelineId,omitempty" tf:"deploy_pipeline_id,omitempty"`
 
@@ -517,7 +517,7 @@ type DeploymentParameters struct {
 
 	// Specifies the OCID of the stage to be redeployed.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployStage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeployStageID *string `json:"deployStageId,omitempty" tf:"deploy_stage_id,omitempty"`
 
@@ -552,7 +552,7 @@ type DeploymentParameters struct {
 
 	// Specifies the OCID of the previous deployment to be redeployed.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.Deployment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PreviousDeploymentID *string `json:"previousDeploymentId,omitempty" tf:"previous_deployment_id,omitempty"`
 

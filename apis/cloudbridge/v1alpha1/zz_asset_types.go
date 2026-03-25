@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AssetInitParameters struct {
@@ -52,7 +52,7 @@ type AssetInitParameters struct {
 
 	// Inventory ID to which an asset belongs.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudbridge/v1alpha1.Inventory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InventoryID *string `json:"inventoryId,omitempty" tf:"inventory_id,omitempty"`
 
 	// Reference to a Inventory in cloudbridge to populate inventoryId.
@@ -183,7 +183,7 @@ type AssetParameters struct {
 
 	// Inventory ID to which an asset belongs.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudbridge/v1alpha1.Inventory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InventoryID *string `json:"inventoryId,omitempty" tf:"inventory_id,omitempty"`
 

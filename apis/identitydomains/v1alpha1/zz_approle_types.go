@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AppRoleAppInitParameters struct {
 
 	// App identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identitydomains/v1alpha1.App
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 
 	// Reference to a App in identitydomains to populate value.
@@ -51,7 +51,7 @@ type AppRoleAppParameters struct {
 
 	// App identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identitydomains/v1alpha1.App
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 

@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BackupCancelManagementInitParameters struct {
 
 	// The backup OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.Backup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BackupID *string `json:"backupId,omitempty" tf:"backup_id,omitempty"`
 
 	// Reference to a Backup in database to populate backupId.
@@ -47,7 +47,7 @@ type BackupCancelManagementParameters struct {
 
 	// The backup OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.Backup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackupID *string `json:"backupId,omitempty" tf:"backup_id,omitempty"`
 

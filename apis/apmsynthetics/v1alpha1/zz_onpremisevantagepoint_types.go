@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AvailableCapabilitiesInitParameters struct {
@@ -32,7 +32,7 @@ type OnPremiseVantagePointInitParameters struct {
 
 	// (Updatable) The APM domain ID the request is intended for.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apm/v1alpha1.ApmDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ApmDomainID *string `json:"apmDomainId,omitempty" tf:"apm_domain_id,omitempty"`
 
 	// Reference to a ApmDomain in apm to populate apmDomainId.
@@ -103,7 +103,7 @@ type OnPremiseVantagePointParameters struct {
 
 	// (Updatable) The APM domain ID the request is intended for.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apm/v1alpha1.ApmDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApmDomainID *string `json:"apmDomainId,omitempty" tf:"apm_domain_id,omitempty"`
 

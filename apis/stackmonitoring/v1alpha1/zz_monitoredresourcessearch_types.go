@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ItemsPropertiesInitParameters struct {
@@ -68,7 +68,7 @@ type MonitoredResourcesSearchInitParameters struct {
 
 	// A filter to return resources with matching management agent id.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managementagent/v1alpha1.ManagementAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ManagementAgentID *string `json:"managementAgentId,omitempty" tf:"management_agent_id,omitempty"`
 
 	// Reference to a ManagementAgent in managementagent to populate managementAgentId.
@@ -308,7 +308,7 @@ type MonitoredResourcesSearchParameters struct {
 
 	// A filter to return resources with matching management agent id.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managementagent/v1alpha1.ManagementAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagementAgentID *string `json:"managementAgentId,omitempty" tf:"management_agent_id,omitempty"`
 

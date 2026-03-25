@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AgentConfigInitParameters struct {
@@ -427,7 +427,7 @@ type TargetAssetInitParameters struct {
 
 	// OCID of the associated migration plan.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudmigrations/v1alpha1.MigrationPlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MigrationPlanID *string `json:"migrationPlanId,omitempty" tf:"migration_plan_id,omitempty"`
 
 	// Reference to a MigrationPlan in cloudmigrations to populate migrationPlanId.
@@ -603,7 +603,7 @@ type TargetAssetParameters struct {
 
 	// OCID of the associated migration plan.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudmigrations/v1alpha1.MigrationPlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MigrationPlanID *string `json:"migrationPlanId,omitempty" tf:"migration_plan_id,omitempty"`
 
@@ -944,7 +944,7 @@ type UserSpecCreateVnicDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the subnet to create the VNIC. When launching an instance, use this subnetId instead of the deprecated subnetId in LaunchInstanceDetails. At least one of them is required; if you provide both, the values must match.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -957,7 +957,7 @@ type UserSpecCreateVnicDetailsInitParameters struct {
 
 	// (Updatable) Provide this attribute only if you are an Oracle Cloud VMware Solution customer and creating a secondary VNIC in a VLAN. The value is the OCID of the VLAN. See Vlan.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VlanID *string `json:"vlanId,omitempty" tf:"vlan_id,omitempty"`
 
 	// Reference to a Vlan in networking to populate vlanId.
@@ -1051,7 +1051,7 @@ type UserSpecCreateVnicDetailsParameters struct {
 
 	// (Updatable) The OCID of the subnet to create the VNIC. When launching an instance, use this subnetId instead of the deprecated subnetId in LaunchInstanceDetails. At least one of them is required; if you provide both, the values must match.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -1065,7 +1065,7 @@ type UserSpecCreateVnicDetailsParameters struct {
 
 	// (Updatable) Provide this attribute only if you are an Oracle Cloud VMware Solution customer and creating a secondary VNIC in a VLAN. The value is the OCID of the VLAN. See Vlan.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VlanID *string `json:"vlanId,omitempty" tf:"vlan_id,omitempty"`
 
@@ -1097,7 +1097,7 @@ type UserSpecInitParameters struct {
 
 	// (Updatable) The OCID of the dedicated VM host.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.DedicatedVmHost
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DedicatedVMHostID *string `json:"dedicatedVmHostId,omitempty" tf:"dedicated_vm_host_id,omitempty"`
 
 	// Reference to a DedicatedVmHost in compute to populate dedicatedVmHostId.
@@ -1249,7 +1249,7 @@ type UserSpecParameters struct {
 
 	// (Updatable) The OCID of the dedicated VM host.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.DedicatedVmHost
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DedicatedVMHostID *string `json:"dedicatedVmHostId,omitempty" tf:"dedicated_vm_host_id,omitempty"`
 
@@ -1403,7 +1403,7 @@ type UserSpecSourceDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the boot volume used to boot the instance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/blockstorage/v1alpha1.BootVolume
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BootVolumeID *string `json:"bootVolumeId,omitempty" tf:"boot_volume_id,omitempty"`
 
 	// Reference to a BootVolume in blockstorage to populate bootVolumeId.
@@ -1422,7 +1422,7 @@ type UserSpecSourceDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the image used to boot the instance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.Image
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
 	// Reference to a Image in compute to populate imageId.
@@ -1435,7 +1435,7 @@ type UserSpecSourceDetailsInitParameters struct {
 
 	// (Applicable when source_type=image) (Updatable) The OCID of the key management key to assign as the master encryption key for the boot volume.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
@@ -1475,7 +1475,7 @@ type UserSpecSourceDetailsParameters struct {
 
 	// (Updatable) The OCID of the boot volume used to boot the instance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/blockstorage/v1alpha1.BootVolume
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BootVolumeID *string `json:"bootVolumeId,omitempty" tf:"boot_volume_id,omitempty"`
 
@@ -1497,7 +1497,7 @@ type UserSpecSourceDetailsParameters struct {
 
 	// (Updatable) The OCID of the image used to boot the instance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.Image
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
@@ -1511,7 +1511,7 @@ type UserSpecSourceDetailsParameters struct {
 
 	// (Applicable when source_type=image) (Updatable) The OCID of the key management key to assign as the master encryption key for the boot volume.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 

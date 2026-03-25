@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CccInfrastructureInitParameters struct {
 
 	// (Updatable) Schedule used for upgrades. If no schedule is associated with the infrastructure, it can be upgraded at any time.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/computecloudatcustomer/v1alpha1.CccUpgradeSchedule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CccUpgradeScheduleID *string `json:"cccUpgradeScheduleId,omitempty" tf:"ccc_upgrade_schedule_id,omitempty"`
 
 	// Reference to a CccUpgradeSchedule in computecloudatcustomer to populate cccUpgradeScheduleId.
@@ -62,7 +62,7 @@ type CccInfrastructureInitParameters struct {
 
 	// (Updatable) Identifier for network subnet that will be used to communicate with Compute Cloud@Customer infrastructure.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -147,7 +147,7 @@ type CccInfrastructureParameters struct {
 
 	// (Updatable) Schedule used for upgrades. If no schedule is associated with the infrastructure, it can be upgraded at any time.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/computecloudatcustomer/v1alpha1.CccUpgradeSchedule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CccUpgradeScheduleID *string `json:"cccUpgradeScheduleId,omitempty" tf:"ccc_upgrade_schedule_id,omitempty"`
 
@@ -200,7 +200,7 @@ type CccInfrastructureParameters struct {
 
 	// (Updatable) Identifier for network subnet that will be used to communicate with Compute Cloud@Customer infrastructure.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type FormatEntriesInitParameters struct {
@@ -44,7 +44,7 @@ type FormatEntriesInitParameters struct {
 
 	// (Updatable) The OCID of the library masking format.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.LibraryMaskingFormat
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LibraryMaskingFormatID *string `json:"libraryMaskingFormatId,omitempty" tf:"library_masking_format_id,omitempty"`
 
 	// Reference to a LibraryMaskingFormat in datasafe to populate libraryMaskingFormatId.
@@ -90,7 +90,7 @@ type FormatEntriesInitParameters struct {
 
 	// (Updatable) The name of the table that contains the substitution column.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/nosql/v1alpha1.Table
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
 	// Reference to a Table in nosql to populate tableName.
@@ -223,7 +223,7 @@ type FormatEntriesParameters struct {
 
 	// (Updatable) The OCID of the library masking format.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.LibraryMaskingFormat
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LibraryMaskingFormatID *string `json:"libraryMaskingFormatId,omitempty" tf:"library_masking_format_id,omitempty"`
 
@@ -281,7 +281,7 @@ type FormatEntriesParameters struct {
 
 	// (Updatable) The name of the table that contains the substitution column.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/nosql/v1alpha1.Table
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 

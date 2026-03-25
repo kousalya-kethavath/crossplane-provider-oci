@@ -9,7 +9,7 @@ Copyright 2022 Upbound Inc.
 package v1alpha1
 
 import (
-	"github.com/crossplane/crossplane-runtime/apis/common/v1"
+	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -34740,7 +34740,7 @@ func (in *MyUserDbCredentialInitParameters) DeepCopyInto(out *MyUserDbCredential
 		*out = new(string)
 		**out = **in
 	}
-	out.DBPasswordSecretRef = in.DBPasswordSecretRef
+	in.DBPasswordSecretRef.DeepCopyInto(&out.DBPasswordSecretRef)
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
@@ -35085,7 +35085,7 @@ func (in *MyUserDbCredentialParameters) DeepCopyInto(out *MyUserDbCredentialPara
 		*out = new(string)
 		**out = **in
 	}
-	out.DBPasswordSecretRef = in.DBPasswordSecretRef
+	in.DBPasswordSecretRef.DeepCopyInto(&out.DBPasswordSecretRef)
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
@@ -59535,7 +59535,7 @@ func (in *UserDbCredentialInitParameters) DeepCopyInto(out *UserDbCredentialInit
 		*out = new(string)
 		**out = **in
 	}
-	out.DBPasswordSecretRef = in.DBPasswordSecretRef
+	in.DBPasswordSecretRef.DeepCopyInto(&out.DBPasswordSecretRef)
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
@@ -59926,7 +59926,7 @@ func (in *UserDbCredentialParameters) DeepCopyInto(out *UserDbCredentialParamete
 		*out = new(string)
 		**out = **in
 	}
-	out.DBPasswordSecretRef = in.DBPasswordSecretRef
+	in.DBPasswordSecretRef.DeepCopyInto(&out.DBPasswordSecretRef)
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)

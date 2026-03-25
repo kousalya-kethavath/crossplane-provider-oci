@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type OpensearchClusterPipelineInitParameters struct {
@@ -67,7 +67,7 @@ type OpensearchClusterPipelineInitParameters struct {
 
 	// (Updatable) The OCID for the compartment where the pipeline's subnet is located.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetCompartmentID *string `json:"subnetCompartmentId,omitempty" tf:"subnet_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate subnetCompartmentId.
@@ -80,7 +80,7 @@ type OpensearchClusterPipelineInitParameters struct {
 
 	// (Updatable) The OCID of the pipeline's subnet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -93,7 +93,7 @@ type OpensearchClusterPipelineInitParameters struct {
 
 	// (Updatable) The OCID for the compartment where the pipeline's VCN is located.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VcnCompartmentID *string `json:"vcnCompartmentId,omitempty" tf:"vcn_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate vcnCompartmentId.
@@ -106,7 +106,7 @@ type OpensearchClusterPipelineInitParameters struct {
 
 	// (Updatable) The OCID of the pipeline's VCN.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vcn
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VcnID *string `json:"vcnId,omitempty" tf:"vcn_id,omitempty"`
 
 	// Reference to a Vcn in networking to populate vcnId.
@@ -266,7 +266,7 @@ type OpensearchClusterPipelineParameters struct {
 
 	// (Updatable) The OCID for the compartment where the pipeline's subnet is located.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetCompartmentID *string `json:"subnetCompartmentId,omitempty" tf:"subnet_compartment_id,omitempty"`
 
@@ -280,7 +280,7 @@ type OpensearchClusterPipelineParameters struct {
 
 	// (Updatable) The OCID of the pipeline's subnet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -294,7 +294,7 @@ type OpensearchClusterPipelineParameters struct {
 
 	// (Updatable) The OCID for the compartment where the pipeline's VCN is located.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VcnCompartmentID *string `json:"vcnCompartmentId,omitempty" tf:"vcn_compartment_id,omitempty"`
 
@@ -308,7 +308,7 @@ type OpensearchClusterPipelineParameters struct {
 
 	// (Updatable) The OCID of the pipeline's VCN.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vcn
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VcnID *string `json:"vcnId,omitempty" tf:"vcn_id,omitempty"`
 

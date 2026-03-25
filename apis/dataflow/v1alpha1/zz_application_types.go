@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ApplicationInitParameters struct {
@@ -98,7 +98,7 @@ type ApplicationInitParameters struct {
 
 	// (Updatable) The OCID of a pool. Unique Id to indentify a dataflow pool resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.Pool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PoolID *string `json:"poolId,omitempty" tf:"pool_id,omitempty"`
 
 	// Reference to a Pool in dataflow to populate poolId.
@@ -111,7 +111,7 @@ type ApplicationInitParameters struct {
 
 	// (Updatable) The OCID of a private endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrivateEndpointID *string `json:"privateEndpointId,omitempty" tf:"private_endpoint_id,omitempty"`
 
 	// Reference to a PrivateEndpoint in dataflow to populate privateEndpointId.
@@ -139,7 +139,7 @@ type ApplicationLogConfigInitParameters struct {
 
 	// (Updatable) The log group id for where log objects will be for Data Flow Runs.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.LogGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
 	// Reference to a LogGroup in logging to populate logGroupId.
@@ -152,7 +152,7 @@ type ApplicationLogConfigInitParameters struct {
 
 	// (Updatable) The log id of the log object the Application Logs of Data Flow Run will be shipped to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.Log
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogID *string `json:"logId,omitempty" tf:"log_id,omitempty"`
 
 	// Reference to a Log in logging to populate logId.
@@ -177,7 +177,7 @@ type ApplicationLogConfigParameters struct {
 
 	// (Updatable) The log group id for where log objects will be for Data Flow Runs.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.LogGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
@@ -191,7 +191,7 @@ type ApplicationLogConfigParameters struct {
 
 	// (Updatable) The log id of the log object the Application Logs of Data Flow Run will be shipped to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.Log
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogID *string `json:"logId,omitempty" tf:"log_id,omitempty"`
 
@@ -423,7 +423,7 @@ type ApplicationParameters struct {
 
 	// (Updatable) The OCID of a pool. Unique Id to indentify a dataflow pool resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.Pool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PoolID *string `json:"poolId,omitempty" tf:"pool_id,omitempty"`
 
@@ -437,7 +437,7 @@ type ApplicationParameters struct {
 
 	// (Updatable) The OCID of a private endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateEndpointID *string `json:"privateEndpointId,omitempty" tf:"private_endpoint_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type PeerInitParameters struct {
@@ -23,7 +23,7 @@ type PeerInitParameters struct {
 
 	// Unique service identifier.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/blockchain/v1alpha1.BlockchainPlatform
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BlockchainPlatformID *string `json:"blockchainPlatformId,omitempty" tf:"blockchain_platform_id,omitempty"`
 
 	// Reference to a BlockchainPlatform in blockchain to populate blockchainPlatformId.
@@ -101,7 +101,7 @@ type PeerParameters struct {
 
 	// Unique service identifier.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/blockchain/v1alpha1.BlockchainPlatform
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BlockchainPlatformID *string `json:"blockchainPlatformId,omitempty" tf:"blockchain_platform_id,omitempty"`
 

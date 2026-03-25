@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BackupPolicyInitParameters struct {
@@ -331,7 +331,7 @@ type PasswordDetailsInitParameters struct {
 
 	// The OCID of the secret where the password is stored.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate secretId.
@@ -367,7 +367,7 @@ type PasswordDetailsParameters struct {
 
 	// The OCID of the secret where the password is stored.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
@@ -464,7 +464,7 @@ type PsqlDbSystemInitParameters struct {
 
 	// The OCID of the configuration associated with the database system.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apmconfig/v1alpha1.Config
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConfigID *string `json:"configId,omitempty" tf:"config_id,omitempty"`
 
 	// Reference to a Config in apmconfig to populate configId.
@@ -640,7 +640,7 @@ type PsqlDbSystemParameters struct {
 
 	// The OCID of the configuration associated with the database system.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apmconfig/v1alpha1.Config
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConfigID *string `json:"configId,omitempty" tf:"config_id,omitempty"`
 
@@ -727,7 +727,7 @@ type SourceInitParameters struct {
 
 	// The OCID of the database system backup.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/psql/v1alpha1.PsqlBackup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BackupID *string `json:"backupId,omitempty" tf:"backup_id,omitempty"`
 
 	// Reference to a PsqlBackup in psql to populate backupId.
@@ -761,7 +761,7 @@ type SourceParameters struct {
 
 	// The OCID of the database system backup.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/psql/v1alpha1.PsqlBackup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackupID *string `json:"backupId,omitempty" tf:"backup_id,omitempty"`
 

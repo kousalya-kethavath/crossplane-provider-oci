@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this AutoScalingConfiguration.
 func (mg *AutoScalingConfiguration) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *AutoScalingConfiguration) GetManagementPolicies() xpv1.ManagementPolic
 // GetProviderConfigReference of this AutoScalingConfiguration.
 func (mg *AutoScalingConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this AutoScalingConfiguration.
-func (mg *AutoScalingConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this AutoScalingConfiguration.
@@ -57,11 +52,6 @@ func (mg *AutoScalingConfiguration) SetProviderConfigReference(r *xpv1.Reference
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this AutoScalingConfiguration.
-func (mg *AutoScalingConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this AutoScalingConfiguration.
 func (mg *AutoScalingConfiguration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -85,11 +75,6 @@ func (mg *BdsCapacityReport) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this BdsCapacityReport.
 func (mg *BdsCapacityReport) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this BdsCapacityReport.
-func (mg *BdsCapacityReport) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this BdsCapacityReport.
@@ -117,11 +102,6 @@ func (mg *BdsCapacityReport) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this BdsCapacityReport.
-func (mg *BdsCapacityReport) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this BdsCapacityReport.
 func (mg *BdsCapacityReport) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -145,11 +125,6 @@ func (mg *BdsInstance) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this BdsInstance.
 func (mg *BdsInstance) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this BdsInstance.
-func (mg *BdsInstance) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this BdsInstance.
@@ -177,11 +152,6 @@ func (mg *BdsInstance) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this BdsInstance.
-func (mg *BdsInstance) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this BdsInstance.
 func (mg *BdsInstance) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -205,11 +175,6 @@ func (mg *BdsInstanceApiKey) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this BdsInstanceApiKey.
 func (mg *BdsInstanceApiKey) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this BdsInstanceApiKey.
-func (mg *BdsInstanceApiKey) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this BdsInstanceApiKey.
@@ -237,11 +202,6 @@ func (mg *BdsInstanceApiKey) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this BdsInstanceApiKey.
-func (mg *BdsInstanceApiKey) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this BdsInstanceApiKey.
 func (mg *BdsInstanceApiKey) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -265,11 +225,6 @@ func (mg *BdsInstanceIdentityConfiguration) GetManagementPolicies() xpv1.Managem
 // GetProviderConfigReference of this BdsInstanceIdentityConfiguration.
 func (mg *BdsInstanceIdentityConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this BdsInstanceIdentityConfiguration.
-func (mg *BdsInstanceIdentityConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this BdsInstanceIdentityConfiguration.
@@ -297,11 +252,6 @@ func (mg *BdsInstanceIdentityConfiguration) SetProviderConfigReference(r *xpv1.R
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this BdsInstanceIdentityConfiguration.
-func (mg *BdsInstanceIdentityConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this BdsInstanceIdentityConfiguration.
 func (mg *BdsInstanceIdentityConfiguration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -325,11 +275,6 @@ func (mg *BdsInstanceMetastoreConfig) GetManagementPolicies() xpv1.ManagementPol
 // GetProviderConfigReference of this BdsInstanceMetastoreConfig.
 func (mg *BdsInstanceMetastoreConfig) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this BdsInstanceMetastoreConfig.
-func (mg *BdsInstanceMetastoreConfig) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this BdsInstanceMetastoreConfig.
@@ -357,11 +302,6 @@ func (mg *BdsInstanceMetastoreConfig) SetProviderConfigReference(r *xpv1.Referen
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this BdsInstanceMetastoreConfig.
-func (mg *BdsInstanceMetastoreConfig) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this BdsInstanceMetastoreConfig.
 func (mg *BdsInstanceMetastoreConfig) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -385,11 +325,6 @@ func (mg *BdsInstanceNodeBackup) GetManagementPolicies() xpv1.ManagementPolicies
 // GetProviderConfigReference of this BdsInstanceNodeBackup.
 func (mg *BdsInstanceNodeBackup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this BdsInstanceNodeBackup.
-func (mg *BdsInstanceNodeBackup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this BdsInstanceNodeBackup.
@@ -417,11 +352,6 @@ func (mg *BdsInstanceNodeBackup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this BdsInstanceNodeBackup.
-func (mg *BdsInstanceNodeBackup) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this BdsInstanceNodeBackup.
 func (mg *BdsInstanceNodeBackup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -445,11 +375,6 @@ func (mg *BdsInstanceNodeBackupConfiguration) GetManagementPolicies() xpv1.Manag
 // GetProviderConfigReference of this BdsInstanceNodeBackupConfiguration.
 func (mg *BdsInstanceNodeBackupConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this BdsInstanceNodeBackupConfiguration.
-func (mg *BdsInstanceNodeBackupConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this BdsInstanceNodeBackupConfiguration.
@@ -477,11 +402,6 @@ func (mg *BdsInstanceNodeBackupConfiguration) SetProviderConfigReference(r *xpv1
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this BdsInstanceNodeBackupConfiguration.
-func (mg *BdsInstanceNodeBackupConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this BdsInstanceNodeBackupConfiguration.
 func (mg *BdsInstanceNodeBackupConfiguration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -505,11 +425,6 @@ func (mg *BdsInstanceNodeReplaceConfiguration) GetManagementPolicies() xpv1.Mana
 // GetProviderConfigReference of this BdsInstanceNodeReplaceConfiguration.
 func (mg *BdsInstanceNodeReplaceConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this BdsInstanceNodeReplaceConfiguration.
-func (mg *BdsInstanceNodeReplaceConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this BdsInstanceNodeReplaceConfiguration.
@@ -537,11 +452,6 @@ func (mg *BdsInstanceNodeReplaceConfiguration) SetProviderConfigReference(r *xpv
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this BdsInstanceNodeReplaceConfiguration.
-func (mg *BdsInstanceNodeReplaceConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this BdsInstanceNodeReplaceConfiguration.
 func (mg *BdsInstanceNodeReplaceConfiguration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -565,11 +475,6 @@ func (mg *BdsInstanceOperationCertificateManagementsManagement) GetManagementPol
 // GetProviderConfigReference of this BdsInstanceOperationCertificateManagementsManagement.
 func (mg *BdsInstanceOperationCertificateManagementsManagement) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this BdsInstanceOperationCertificateManagementsManagement.
-func (mg *BdsInstanceOperationCertificateManagementsManagement) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this BdsInstanceOperationCertificateManagementsManagement.
@@ -597,11 +502,6 @@ func (mg *BdsInstanceOperationCertificateManagementsManagement) SetProviderConfi
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this BdsInstanceOperationCertificateManagementsManagement.
-func (mg *BdsInstanceOperationCertificateManagementsManagement) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this BdsInstanceOperationCertificateManagementsManagement.
 func (mg *BdsInstanceOperationCertificateManagementsManagement) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -625,11 +525,6 @@ func (mg *BdsInstanceOsPatchAction) GetManagementPolicies() xpv1.ManagementPolic
 // GetProviderConfigReference of this BdsInstanceOsPatchAction.
 func (mg *BdsInstanceOsPatchAction) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this BdsInstanceOsPatchAction.
-func (mg *BdsInstanceOsPatchAction) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this BdsInstanceOsPatchAction.
@@ -657,11 +552,6 @@ func (mg *BdsInstanceOsPatchAction) SetProviderConfigReference(r *xpv1.Reference
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this BdsInstanceOsPatchAction.
-func (mg *BdsInstanceOsPatchAction) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this BdsInstanceOsPatchAction.
 func (mg *BdsInstanceOsPatchAction) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -685,11 +575,6 @@ func (mg *BdsInstancePatchAction) GetManagementPolicies() xpv1.ManagementPolicie
 // GetProviderConfigReference of this BdsInstancePatchAction.
 func (mg *BdsInstancePatchAction) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this BdsInstancePatchAction.
-func (mg *BdsInstancePatchAction) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this BdsInstancePatchAction.
@@ -717,11 +602,6 @@ func (mg *BdsInstancePatchAction) SetProviderConfigReference(r *xpv1.Reference) 
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this BdsInstancePatchAction.
-func (mg *BdsInstancePatchAction) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this BdsInstancePatchAction.
 func (mg *BdsInstancePatchAction) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -745,11 +625,6 @@ func (mg *BdsInstanceReplaceNodeAction) GetManagementPolicies() xpv1.ManagementP
 // GetProviderConfigReference of this BdsInstanceReplaceNodeAction.
 func (mg *BdsInstanceReplaceNodeAction) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this BdsInstanceReplaceNodeAction.
-func (mg *BdsInstanceReplaceNodeAction) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this BdsInstanceReplaceNodeAction.
@@ -777,11 +652,6 @@ func (mg *BdsInstanceReplaceNodeAction) SetProviderConfigReference(r *xpv1.Refer
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this BdsInstanceReplaceNodeAction.
-func (mg *BdsInstanceReplaceNodeAction) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this BdsInstanceReplaceNodeAction.
 func (mg *BdsInstanceReplaceNodeAction) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -805,11 +675,6 @@ func (mg *BdsInstanceResourcePrincipalConfiguration) GetManagementPolicies() xpv
 // GetProviderConfigReference of this BdsInstanceResourcePrincipalConfiguration.
 func (mg *BdsInstanceResourcePrincipalConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this BdsInstanceResourcePrincipalConfiguration.
-func (mg *BdsInstanceResourcePrincipalConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this BdsInstanceResourcePrincipalConfiguration.
@@ -837,11 +702,6 @@ func (mg *BdsInstanceResourcePrincipalConfiguration) SetProviderConfigReference(
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this BdsInstanceResourcePrincipalConfiguration.
-func (mg *BdsInstanceResourcePrincipalConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this BdsInstanceResourcePrincipalConfiguration.
 func (mg *BdsInstanceResourcePrincipalConfiguration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -867,11 +727,6 @@ func (mg *BdsInstanceSoftwareUpdateAction) GetProviderConfigReference() *xpv1.Re
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this BdsInstanceSoftwareUpdateAction.
-func (mg *BdsInstanceSoftwareUpdateAction) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this BdsInstanceSoftwareUpdateAction.
 func (mg *BdsInstanceSoftwareUpdateAction) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -895,11 +750,6 @@ func (mg *BdsInstanceSoftwareUpdateAction) SetManagementPolicies(r xpv1.Manageme
 // SetProviderConfigReference of this BdsInstanceSoftwareUpdateAction.
 func (mg *BdsInstanceSoftwareUpdateAction) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this BdsInstanceSoftwareUpdateAction.
-func (mg *BdsInstanceSoftwareUpdateAction) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this BdsInstanceSoftwareUpdateAction.

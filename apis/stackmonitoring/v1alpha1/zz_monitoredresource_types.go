@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AdditionalAliasesInitParameters struct {
@@ -62,7 +62,7 @@ type AdditionalCredentialsInitParameters struct {
 
 	// (Updatable) The master key should be created in Oracle Cloud Infrastructure Vault owned by the client of this API.  The user should have permission to access the vault key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// Reference to a Key in kms to populate keyId.
@@ -122,7 +122,7 @@ type AdditionalCredentialsParameters struct {
 
 	// (Updatable) The master key should be created in Oracle Cloud Infrastructure Vault owned by the client of this API.  The user should have permission to access the vault key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
@@ -345,7 +345,7 @@ type DatabaseConnectionDetailsInitParameters struct {
 
 	// (Updatable) SSL Secret Identifier for TCPS connector in Oracle Cloud Infrastructure VaultOCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SSLSecretID *string `json:"sslSecretId,omitempty" tf:"ssl_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate sslSecretId.
@@ -408,7 +408,7 @@ type DatabaseConnectionDetailsParameters struct {
 
 	// (Updatable) SSL Secret Identifier for TCPS connector in Oracle Cloud Infrastructure VaultOCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SSLSecretID *string `json:"sslSecretId,omitempty" tf:"ssl_secret_id,omitempty"`
 
@@ -558,7 +558,7 @@ type MonitoredResourceInitParameters struct {
 
 	// Management Agent Identifier OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managementagent/v1alpha1.ManagementAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ManagementAgentID *string `json:"managementAgentId,omitempty" tf:"management_agent_id,omitempty"`
 
 	// Reference to a ManagementAgent in managementagent to populate managementAgentId.
@@ -733,7 +733,7 @@ type MonitoredResourceParameters struct {
 
 	// Management Agent Identifier OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managementagent/v1alpha1.ManagementAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagementAgentID *string `json:"managementAgentId,omitempty" tf:"management_agent_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type NotebookSessionConfigDetailsInitParameters struct {
@@ -23,7 +23,7 @@ type NotebookSessionConfigDetailsInitParameters struct {
 
 	// The OCID of a Data Science private endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrivateEndpointID *string `json:"privateEndpointId,omitempty" tf:"private_endpoint_id,omitempty"`
 
 	// Reference to a PrivateEndpoint in dataflow to populate privateEndpointId.
@@ -39,7 +39,7 @@ type NotebookSessionConfigDetailsInitParameters struct {
 
 	// A notebook session instance is provided with a VNIC for network access.  This specifies the OCID of the subnet to create a VNIC in.  The subnet should be in a VCN with a NAT gateway for egress to the internet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -81,7 +81,7 @@ type NotebookSessionConfigDetailsParameters struct {
 
 	// The OCID of a Data Science private endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateEndpointID *string `json:"privateEndpointId,omitempty" tf:"private_endpoint_id,omitempty"`
 
@@ -99,7 +99,7 @@ type NotebookSessionConfigDetailsParameters struct {
 
 	// A notebook session instance is provided with a VNIC for network access.  This specifies the OCID of the subnet to create a VNIC in.  The subnet should be in a VCN with a NAT gateway for egress to the internet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -122,7 +122,7 @@ type NotebookSessionConfigurationDetailsInitParameters struct {
 
 	// The OCID of a Data Science private endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrivateEndpointID *string `json:"privateEndpointId,omitempty" tf:"private_endpoint_id,omitempty"`
 
 	// Reference to a PrivateEndpoint in dataflow to populate privateEndpointId.
@@ -138,7 +138,7 @@ type NotebookSessionConfigurationDetailsInitParameters struct {
 
 	// A notebook session instance is provided with a VNIC for network access.  This specifies the OCID of the subnet to create a VNIC in.  The subnet should be in a VCN with a NAT gateway for egress to the internet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -219,7 +219,7 @@ type NotebookSessionConfigurationDetailsParameters struct {
 
 	// The OCID of a Data Science private endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateEndpointID *string `json:"privateEndpointId,omitempty" tf:"private_endpoint_id,omitempty"`
 
@@ -237,7 +237,7 @@ type NotebookSessionConfigurationDetailsParameters struct {
 
 	// A notebook session instance is provided with a VNIC for network access.  This specifies the OCID of the subnet to create a VNIC in.  The subnet should be in a VCN with a NAT gateway for egress to the internet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -327,7 +327,7 @@ type NotebookSessionInitParameters struct {
 
 	// The OCID of the project to associate with the notebook session.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// Reference to a Project in datascience to populate projectId.
@@ -439,7 +439,7 @@ type NotebookSessionParameters struct {
 
 	// The OCID of the project to associate with the notebook session.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -540,7 +540,7 @@ type NotebookSessionStorageMountConfigurationDetailsListInitParameters struct {
 
 	// (Updatable) OCID of the export
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/filestorage/v1alpha1.Export
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExportID *string `json:"exportId,omitempty" tf:"export_id,omitempty"`
 
 	// Reference to a Export in filestorage to populate exportId.
@@ -553,7 +553,7 @@ type NotebookSessionStorageMountConfigurationDetailsListInitParameters struct {
 
 	// (Updatable) OCID of the mount target
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/filestorage/v1alpha1.MountTarget
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MountTargetID *string `json:"mountTargetId,omitempty" tf:"mount_target_id,omitempty"`
 
 	// Reference to a MountTarget in filestorage to populate mountTargetId.
@@ -617,7 +617,7 @@ type NotebookSessionStorageMountConfigurationDetailsListParameters struct {
 
 	// (Updatable) OCID of the export
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/filestorage/v1alpha1.Export
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExportID *string `json:"exportId,omitempty" tf:"export_id,omitempty"`
 
@@ -631,7 +631,7 @@ type NotebookSessionStorageMountConfigurationDetailsListParameters struct {
 
 	// (Updatable) OCID of the mount target
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/filestorage/v1alpha1.MountTarget
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MountTargetID *string `json:"mountTargetId,omitempty" tf:"mount_target_id,omitempty"`
 

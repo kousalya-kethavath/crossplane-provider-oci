@@ -8,10 +8,9 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -35,6 +34,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateConfig[i3].OpenSearchAPICertificateID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CertificateConfig[i3].OpenSearchAPICertificateIDRef,
 				Selector:     mg.Spec.ForProvider.CertificateConfig[i3].OpenSearchAPICertificateIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +56,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateConfig[i3].OpenSearchDashboardCertificateID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CertificateConfig[i3].OpenSearchDashboardCertificateIDRef,
 				Selector:     mg.Spec.ForProvider.CertificateConfig[i3].OpenSearchDashboardCertificateIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -76,6 +77,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -97,6 +99,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OutboundClusterConfig[i3].OutboundClusters[i4].SeedClusterID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.OutboundClusterConfig[i3].OutboundClusters[i4].SeedClusterIDRef,
 					Selector:     mg.Spec.ForProvider.OutboundClusterConfig[i3].OutboundClusters[i4].SeedClusterIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -118,6 +121,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecurityMasterUserName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SecurityMasterUserNameRef,
 			Selector:     mg.Spec.ForProvider.SecurityMasterUserNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -137,6 +141,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetCompartmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetCompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetCompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -156,6 +161,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -175,6 +181,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VcnCompartmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VcnCompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.VcnCompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -194,6 +201,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VcnID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VcnIDRef,
 			Selector:     mg.Spec.ForProvider.VcnIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -214,6 +222,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateConfig[i3].OpenSearchAPICertificateID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CertificateConfig[i3].OpenSearchAPICertificateIDRef,
 				Selector:     mg.Spec.InitProvider.CertificateConfig[i3].OpenSearchAPICertificateIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -235,6 +244,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateConfig[i3].OpenSearchDashboardCertificateID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CertificateConfig[i3].OpenSearchDashboardCertificateIDRef,
 				Selector:     mg.Spec.InitProvider.CertificateConfig[i3].OpenSearchDashboardCertificateIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -255,6 +265,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -276,6 +287,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OutboundClusterConfig[i3].OutboundClusters[i4].SeedClusterID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.OutboundClusterConfig[i3].OutboundClusters[i4].SeedClusterIDRef,
 					Selector:     mg.Spec.InitProvider.OutboundClusterConfig[i3].OutboundClusters[i4].SeedClusterIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -297,6 +309,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecurityMasterUserName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SecurityMasterUserNameRef,
 			Selector:     mg.Spec.InitProvider.SecurityMasterUserNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -316,6 +329,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetCompartmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetCompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetCompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -335,6 +349,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -354,6 +369,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VcnCompartmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VcnCompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.VcnCompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -373,6 +389,7 @@ func (mg *OpensearchCluster) ResolveReferences( // ResolveReferences of this Ope
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VcnID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VcnIDRef,
 			Selector:     mg.Spec.InitProvider.VcnIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -404,6 +421,7 @@ func (mg *OpensearchClusterPipeline) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -423,6 +441,7 @@ func (mg *OpensearchClusterPipeline) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetCompartmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetCompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetCompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -442,6 +461,7 @@ func (mg *OpensearchClusterPipeline) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -461,6 +481,7 @@ func (mg *OpensearchClusterPipeline) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VcnCompartmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VcnCompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.VcnCompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -480,6 +501,7 @@ func (mg *OpensearchClusterPipeline) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VcnID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VcnIDRef,
 			Selector:     mg.Spec.ForProvider.VcnIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -499,6 +521,7 @@ func (mg *OpensearchClusterPipeline) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -518,6 +541,7 @@ func (mg *OpensearchClusterPipeline) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetCompartmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetCompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetCompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -537,6 +561,7 @@ func (mg *OpensearchClusterPipeline) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -556,6 +581,7 @@ func (mg *OpensearchClusterPipeline) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VcnCompartmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VcnCompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.VcnCompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -575,6 +601,7 @@ func (mg *OpensearchClusterPipeline) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VcnID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VcnIDRef,
 			Selector:     mg.Spec.InitProvider.VcnIDSelector,
 			To:           reference.To{List: l, Managed: m},

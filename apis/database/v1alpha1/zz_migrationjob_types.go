@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CollectTracesDataInitParameters struct {
@@ -82,7 +82,7 @@ type MigrationJobInitParameters struct {
 
 	// The OCID of the job
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.MigrationJob
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	JobID *string `json:"jobId,omitempty" tf:"job_id,omitempty"`
 
 	// Reference to a MigrationJob in database to populate jobId.
@@ -172,7 +172,7 @@ type MigrationJobParameters struct {
 
 	// The OCID of the job
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.MigrationJob
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	JobID *string `json:"jobId,omitempty" tf:"job_id,omitempty"`
 

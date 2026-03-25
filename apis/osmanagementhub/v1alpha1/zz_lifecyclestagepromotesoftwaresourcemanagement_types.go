@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LifecycleStagePromoteSoftwareSourceManagementInitParameters struct {
@@ -20,7 +20,7 @@ type LifecycleStagePromoteSoftwareSourceManagementInitParameters struct {
 
 	// The OCID of the software source. This filter returns resources associated with this software source.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.SoftwareSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SoftwareSourceID *string `json:"softwareSourceId,omitempty" tf:"software_source_id,omitempty"`
 
 	// Reference to a SoftwareSource in osmanagementhub to populate softwareSourceId.
@@ -56,7 +56,7 @@ type LifecycleStagePromoteSoftwareSourceManagementParameters struct {
 
 	// The OCID of the software source. This filter returns resources associated with this software source.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.SoftwareSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SoftwareSourceID *string `json:"softwareSourceId,omitempty" tf:"software_source_id,omitempty"`
 

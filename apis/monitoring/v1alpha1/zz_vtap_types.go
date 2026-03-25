@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type VtapInitParameters struct {
 
 	// (Updatable) The capture filter's Oracle ID (OCID).
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/monitoring/v1alpha1.CaptureFilter
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CaptureFilterID *string `json:"captureFilterId,omitempty" tf:"capture_filter_id,omitempty"`
 
 	// Reference to a CaptureFilter in monitoring to populate captureFilterId.
@@ -68,7 +68,7 @@ type VtapInitParameters struct {
 
 	// (Updatable) The OCID of the subnet that source private endpoint belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourcePrivateEndpointSubnetID *string `json:"sourcePrivateEndpointSubnetId,omitempty" tf:"source_private_endpoint_subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate sourcePrivateEndpointSubnetId.
@@ -84,7 +84,7 @@ type VtapInitParameters struct {
 
 	// (Updatable) The OCID of the destination resource where mirrored packets are sent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudguard/v1alpha1.Target
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 
 	// Reference to a Target in cloudguard to populate targetId.
@@ -106,7 +106,7 @@ type VtapInitParameters struct {
 
 	// The OCID of the VCN containing the Vtap resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vcn
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VcnID *string `json:"vcnId,omitempty" tf:"vcn_id,omitempty"`
 
 	// Reference to a Vcn in networking to populate vcnId.
@@ -196,7 +196,7 @@ type VtapParameters struct {
 
 	// (Updatable) The capture filter's Oracle ID (OCID).
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/monitoring/v1alpha1.CaptureFilter
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CaptureFilterID *string `json:"captureFilterId,omitempty" tf:"capture_filter_id,omitempty"`
 
@@ -257,7 +257,7 @@ type VtapParameters struct {
 
 	// (Updatable) The OCID of the subnet that source private endpoint belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourcePrivateEndpointSubnetID *string `json:"sourcePrivateEndpointSubnetId,omitempty" tf:"source_private_endpoint_subnet_id,omitempty"`
 
@@ -275,7 +275,7 @@ type VtapParameters struct {
 
 	// (Updatable) The OCID of the destination resource where mirrored packets are sent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudguard/v1alpha1.Target
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 
@@ -301,7 +301,7 @@ type VtapParameters struct {
 
 	// The OCID of the VCN containing the Vtap resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vcn
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VcnID *string `json:"vcnId,omitempty" tf:"vcn_id,omitempty"`
 

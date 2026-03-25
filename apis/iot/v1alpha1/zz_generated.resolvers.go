@@ -8,10 +8,9 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -34,6 +33,7 @@ func (mg *DigitalTwinAdapter) ResolveReferences( // ResolveReferences of this Di
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DigitalTwinModelID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DigitalTwinModelIDRef,
 			Selector:     mg.Spec.ForProvider.DigitalTwinModelIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *DigitalTwinAdapter) ResolveReferences( // ResolveReferences of this Di
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IotDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IotDomainIDRef,
 			Selector:     mg.Spec.ForProvider.IotDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -72,6 +73,7 @@ func (mg *DigitalTwinAdapter) ResolveReferences( // ResolveReferences of this Di
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DigitalTwinModelID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DigitalTwinModelIDRef,
 			Selector:     mg.Spec.InitProvider.DigitalTwinModelIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -91,6 +93,7 @@ func (mg *DigitalTwinAdapter) ResolveReferences( // ResolveReferences of this Di
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IotDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IotDomainIDRef,
 			Selector:     mg.Spec.InitProvider.IotDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -122,6 +125,7 @@ func (mg *DigitalTwinInstance) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DigitalTwinAdapterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DigitalTwinAdapterIDRef,
 			Selector:     mg.Spec.ForProvider.DigitalTwinAdapterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -141,6 +145,7 @@ func (mg *DigitalTwinInstance) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DigitalTwinModelID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DigitalTwinModelIDRef,
 			Selector:     mg.Spec.ForProvider.DigitalTwinModelIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -160,6 +165,7 @@ func (mg *DigitalTwinInstance) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IotDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IotDomainIDRef,
 			Selector:     mg.Spec.ForProvider.IotDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -179,6 +185,7 @@ func (mg *DigitalTwinInstance) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DigitalTwinAdapterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DigitalTwinAdapterIDRef,
 			Selector:     mg.Spec.InitProvider.DigitalTwinAdapterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -198,6 +205,7 @@ func (mg *DigitalTwinInstance) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DigitalTwinModelID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DigitalTwinModelIDRef,
 			Selector:     mg.Spec.InitProvider.DigitalTwinModelIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -217,6 +225,7 @@ func (mg *DigitalTwinInstance) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IotDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IotDomainIDRef,
 			Selector:     mg.Spec.InitProvider.IotDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -248,6 +257,7 @@ func (mg *DigitalTwinInstanceInvokeRawCommand) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DigitalTwinInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DigitalTwinInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.DigitalTwinInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -267,6 +277,7 @@ func (mg *DigitalTwinInstanceInvokeRawCommand) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DigitalTwinInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DigitalTwinInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.DigitalTwinInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -298,6 +309,7 @@ func (mg *DigitalTwinModel) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IotDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IotDomainIDRef,
 			Selector:     mg.Spec.ForProvider.IotDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -317,6 +329,7 @@ func (mg *DigitalTwinModel) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IotDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IotDomainIDRef,
 			Selector:     mg.Spec.InitProvider.IotDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -348,6 +361,7 @@ func (mg *DigitalTwinRelationship) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IotDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IotDomainIDRef,
 			Selector:     mg.Spec.ForProvider.IotDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -367,6 +381,7 @@ func (mg *DigitalTwinRelationship) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceDigitalTwinInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceDigitalTwinInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.SourceDigitalTwinInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -386,6 +401,7 @@ func (mg *DigitalTwinRelationship) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetDigitalTwinInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TargetDigitalTwinInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.TargetDigitalTwinInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -405,6 +421,7 @@ func (mg *DigitalTwinRelationship) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IotDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IotDomainIDRef,
 			Selector:     mg.Spec.InitProvider.IotDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -424,6 +441,7 @@ func (mg *DigitalTwinRelationship) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceDigitalTwinInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceDigitalTwinInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.SourceDigitalTwinInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -443,6 +461,7 @@ func (mg *DigitalTwinRelationship) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetDigitalTwinInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TargetDigitalTwinInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.TargetDigitalTwinInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -474,6 +493,7 @@ func (mg *IotDomain) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -493,6 +513,7 @@ func (mg *IotDomain) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IotDomainGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IotDomainGroupIDRef,
 			Selector:     mg.Spec.ForProvider.IotDomainGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -512,6 +533,7 @@ func (mg *IotDomain) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -531,6 +553,7 @@ func (mg *IotDomain) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IotDomainGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IotDomainGroupIDRef,
 			Selector:     mg.Spec.InitProvider.IotDomainGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -562,6 +585,7 @@ func (mg *IotDomainChangeDataRetentionPeriod) ResolveReferences(ctx context.Cont
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IotDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IotDomainIDRef,
 			Selector:     mg.Spec.ForProvider.IotDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -581,6 +605,7 @@ func (mg *IotDomainChangeDataRetentionPeriod) ResolveReferences(ctx context.Cont
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IotDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IotDomainIDRef,
 			Selector:     mg.Spec.InitProvider.IotDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -612,6 +637,7 @@ func (mg *IotDomainConfigureDataAccess) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IotDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IotDomainIDRef,
 			Selector:     mg.Spec.ForProvider.IotDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -631,6 +657,7 @@ func (mg *IotDomainConfigureDataAccess) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IotDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IotDomainIDRef,
 			Selector:     mg.Spec.InitProvider.IotDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -662,6 +689,7 @@ func (mg *IotDomainGroup) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -681,6 +709,7 @@ func (mg *IotDomainGroup) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -712,6 +741,7 @@ func (mg *IotDomainGroupConfigureDataAccess) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IotDomainGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IotDomainGroupIDRef,
 			Selector:     mg.Spec.ForProvider.IotDomainGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -731,6 +761,7 @@ func (mg *IotDomainGroupConfigureDataAccess) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IotDomainGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IotDomainGroupIDRef,
 			Selector:     mg.Spec.InitProvider.IotDomainGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},

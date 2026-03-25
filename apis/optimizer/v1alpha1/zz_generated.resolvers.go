@@ -8,10 +8,9 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -34,6 +33,7 @@ func (mg *EnrollmentStatus) ResolveReferences( // ResolveReferences of this Enro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EnrollmentStatusID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EnrollmentStatusIDRef,
 			Selector:     mg.Spec.ForProvider.EnrollmentStatusIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *EnrollmentStatus) ResolveReferences( // ResolveReferences of this Enro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EnrollmentStatusID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.EnrollmentStatusIDRef,
 			Selector:     mg.Spec.InitProvider.EnrollmentStatusIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -84,6 +85,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -105,6 +107,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LevelsConfiguration[i3].Items[i4].RecommendationID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.LevelsConfiguration[i3].Items[i4].RecommendationIDRef,
 					Selector:     mg.Spec.ForProvider.LevelsConfiguration[i3].Items[i4].RecommendationIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -128,6 +131,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetTags[i3].Items[i4].TagNamespaceName),
 					Extract:      resource.ExtractParamPath("name", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.TargetTags[i3].Items[i4].TagNamespaceNameRef,
 					Selector:     mg.Spec.ForProvider.TargetTags[i3].Items[i4].TagNamespaceNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -149,6 +153,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -170,6 +175,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LevelsConfiguration[i3].Items[i4].RecommendationID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.LevelsConfiguration[i3].Items[i4].RecommendationIDRef,
 					Selector:     mg.Spec.InitProvider.LevelsConfiguration[i3].Items[i4].RecommendationIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -193,6 +199,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetTags[i3].Items[i4].TagNamespaceName),
 					Extract:      resource.ExtractParamPath("name", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.TargetTags[i3].Items[i4].TagNamespaceNameRef,
 					Selector:     mg.Spec.InitProvider.TargetTags[i3].Items[i4].TagNamespaceNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -227,6 +234,7 @@ func (mg *Recommendation) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecommendationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RecommendationIDRef,
 			Selector:     mg.Spec.ForProvider.RecommendationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -246,6 +254,7 @@ func (mg *Recommendation) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RecommendationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RecommendationIDRef,
 			Selector:     mg.Spec.InitProvider.RecommendationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -277,6 +286,7 @@ func (mg *ResourceAction) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceActionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceActionIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceActionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -296,6 +306,7 @@ func (mg *ResourceAction) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceActionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceActionIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceActionIDSelector,
 			To:           reference.To{List: l, Managed: m},

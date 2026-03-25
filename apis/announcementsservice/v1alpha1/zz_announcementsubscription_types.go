@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AnnouncementSubscriptionInitParameters struct {
@@ -46,7 +46,7 @@ type AnnouncementSubscriptionInitParameters struct {
 
 	// (Updatable) The OCID of the Notifications service topic that is the target for publishing announcements that match the configured announcement subscription. The caller of the operation needs the ONS_TOPIC_PUBLISH permission for the targeted Notifications service topic. For more information about Notifications permissions, see Details for Notifications.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ons/v1alpha1.NotificationTopic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OnsTopicID *string `json:"onsTopicId,omitempty" tf:"ons_topic_id,omitempty"`
 
 	// Reference to a NotificationTopic in ons to populate onsTopicId.
@@ -154,7 +154,7 @@ type AnnouncementSubscriptionParameters struct {
 
 	// (Updatable) The OCID of the Notifications service topic that is the target for publishing announcements that match the configured announcement subscription. The caller of the operation needs the ONS_TOPIC_PUBLISH permission for the targeted Notifications service topic. For more information about Notifications permissions, see Details for Notifications.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ons/v1alpha1.NotificationTopic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OnsTopicID *string `json:"onsTopicId,omitempty" tf:"ons_topic_id,omitempty"`
 

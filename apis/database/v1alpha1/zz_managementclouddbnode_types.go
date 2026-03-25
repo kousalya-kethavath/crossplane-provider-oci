@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagementCloudDbNodeInitParameters struct {
@@ -20,7 +20,7 @@ type ManagementCloudDbNodeInitParameters struct {
 
 	// The OCID of the cloud database node.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementCloudDbNode
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CloudDBNodeID *string `json:"cloudDbNodeId,omitempty" tf:"cloud_db_node_id,omitempty"`
 
 	// Reference to a ManagementCloudDbNode in database to populate cloudDbNodeId.
@@ -115,7 +115,7 @@ type ManagementCloudDbNodeParameters struct {
 
 	// The OCID of the cloud database node.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementCloudDbNode
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CloudDBNodeID *string `json:"cloudDbNodeId,omitempty" tf:"cloud_db_node_id,omitempty"`
 

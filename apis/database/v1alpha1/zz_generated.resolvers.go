@@ -8,10 +8,9 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -34,6 +33,7 @@ func (mg *ApplicationVip) ResolveReferences( // ResolveReferences of this Applic
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudVMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.CloudVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *ApplicationVip) ResolveReferences( // ResolveReferences of this Applic
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBNodeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DBNodeIDRef,
 			Selector:     mg.Spec.ForProvider.DBNodeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -72,6 +73,7 @@ func (mg *ApplicationVip) ResolveReferences( // ResolveReferences of this Applic
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -91,6 +93,7 @@ func (mg *ApplicationVip) ResolveReferences( // ResolveReferences of this Applic
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudVMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.CloudVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -110,6 +113,7 @@ func (mg *ApplicationVip) ResolveReferences( // ResolveReferences of this Applic
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBNodeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DBNodeIDRef,
 			Selector:     mg.Spec.InitProvider.DBNodeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -129,6 +133,7 @@ func (mg *ApplicationVip) ResolveReferences( // ResolveReferences of this Applic
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -160,6 +165,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutonomousExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutonomousExadataInfrastructureIDRef,
 			Selector:     mg.Spec.ForProvider.AutonomousExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -179,6 +185,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutonomousVMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.AutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -198,6 +205,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudAutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudAutonomousVMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.CloudAutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -217,6 +225,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -236,6 +245,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseSoftwareImageID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseSoftwareImageIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseSoftwareImageIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -255,6 +265,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -274,6 +285,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyStoreID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyStoreIDRef,
 			Selector:     mg.Spec.ForProvider.KeyStoreIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -293,6 +305,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OkvEndPointGroupName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.OkvEndPointGroupNameRef,
 			Selector:     mg.Spec.ForProvider.OkvEndPointGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -312,6 +325,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerAutonomousContainerDatabaseCompartmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PeerAutonomousContainerDatabaseCompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.PeerAutonomousContainerDatabaseCompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -331,6 +345,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerAutonomousExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PeerAutonomousExadataInfrastructureIDRef,
 			Selector:     mg.Spec.ForProvider.PeerAutonomousExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -350,6 +365,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerAutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PeerAutonomousVMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.PeerAutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -369,6 +385,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerCloudAutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PeerCloudAutonomousVMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.PeerCloudAutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -388,6 +405,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VaultIDRef,
 			Selector:     mg.Spec.ForProvider.VaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -407,6 +425,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutonomousExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutonomousExadataInfrastructureIDRef,
 			Selector:     mg.Spec.InitProvider.AutonomousExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -426,6 +445,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutonomousVMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.AutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -445,6 +465,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudAutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudAutonomousVMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.CloudAutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -464,6 +485,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -483,6 +505,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseSoftwareImageID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseSoftwareImageIDRef,
 			Selector:     mg.Spec.InitProvider.DatabaseSoftwareImageIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -502,6 +525,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -521,6 +545,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyStoreID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyStoreIDRef,
 			Selector:     mg.Spec.InitProvider.KeyStoreIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -540,6 +565,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OkvEndPointGroupName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.OkvEndPointGroupNameRef,
 			Selector:     mg.Spec.InitProvider.OkvEndPointGroupNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -559,6 +585,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PeerAutonomousContainerDatabaseCompartmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PeerAutonomousContainerDatabaseCompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.PeerAutonomousContainerDatabaseCompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -578,6 +605,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PeerAutonomousExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PeerAutonomousExadataInfrastructureIDRef,
 			Selector:     mg.Spec.InitProvider.PeerAutonomousExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -597,6 +625,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PeerAutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PeerAutonomousVMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.PeerAutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -616,6 +645,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PeerCloudAutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PeerCloudAutonomousVMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.PeerCloudAutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -635,6 +665,7 @@ func (mg *AutonomousContainerDatabase) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VaultID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VaultIDRef,
 			Selector:     mg.Spec.InitProvider.VaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -666,6 +697,7 @@ func (mg *AutonomousContainerDatabaseAddStandby) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutonomousContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutonomousContainerDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.AutonomousContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -687,6 +719,7 @@ func (mg *AutonomousContainerDatabaseAddStandby) ResolveReferences(ctx context.C
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerAutonomousContainerDatabaseBackupConfig[i3].BackupDestinationDetails[i4].DbrsPolicyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.PeerAutonomousContainerDatabaseBackupConfig[i3].BackupDestinationDetails[i4].DbrsPolicyIDRef,
 					Selector:     mg.Spec.ForProvider.PeerAutonomousContainerDatabaseBackupConfig[i3].BackupDestinationDetails[i4].DbrsPolicyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -708,6 +741,7 @@ func (mg *AutonomousContainerDatabaseAddStandby) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerAutonomousContainerDatabaseCompartmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PeerAutonomousContainerDatabaseCompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.PeerAutonomousContainerDatabaseCompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -727,6 +761,7 @@ func (mg *AutonomousContainerDatabaseAddStandby) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerAutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PeerAutonomousVMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.PeerAutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -746,6 +781,7 @@ func (mg *AutonomousContainerDatabaseAddStandby) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerCloudAutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PeerCloudAutonomousVMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.PeerCloudAutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -765,6 +801,7 @@ func (mg *AutonomousContainerDatabaseAddStandby) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutonomousContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutonomousContainerDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.AutonomousContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -786,6 +823,7 @@ func (mg *AutonomousContainerDatabaseAddStandby) ResolveReferences(ctx context.C
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PeerAutonomousContainerDatabaseBackupConfig[i3].BackupDestinationDetails[i4].DbrsPolicyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.PeerAutonomousContainerDatabaseBackupConfig[i3].BackupDestinationDetails[i4].DbrsPolicyIDRef,
 					Selector:     mg.Spec.InitProvider.PeerAutonomousContainerDatabaseBackupConfig[i3].BackupDestinationDetails[i4].DbrsPolicyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -807,6 +845,7 @@ func (mg *AutonomousContainerDatabaseAddStandby) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PeerAutonomousContainerDatabaseCompartmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PeerAutonomousContainerDatabaseCompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.PeerAutonomousContainerDatabaseCompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -826,6 +865,7 @@ func (mg *AutonomousContainerDatabaseAddStandby) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PeerAutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PeerAutonomousVMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.PeerAutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -845,6 +885,7 @@ func (mg *AutonomousContainerDatabaseAddStandby) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PeerCloudAutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PeerCloudAutonomousVMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.PeerCloudAutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -876,6 +917,7 @@ func (mg *AutonomousContainerDatabaseDataguardAssociation) ResolveReferences(ctx
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutonomousContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutonomousContainerDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.AutonomousContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -897,6 +939,7 @@ func (mg *AutonomousContainerDatabaseDataguardAssociation) ResolveReferences(ctx
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerAutonomousContainerDatabaseBackupConfig[i3].BackupDestinationDetails[i4].DbrsPolicyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.PeerAutonomousContainerDatabaseBackupConfig[i3].BackupDestinationDetails[i4].DbrsPolicyIDRef,
 					Selector:     mg.Spec.ForProvider.PeerAutonomousContainerDatabaseBackupConfig[i3].BackupDestinationDetails[i4].DbrsPolicyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -918,6 +961,7 @@ func (mg *AutonomousContainerDatabaseDataguardAssociation) ResolveReferences(ctx
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerAutonomousContainerDatabaseCompartmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PeerAutonomousContainerDatabaseCompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.PeerAutonomousContainerDatabaseCompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -937,6 +981,7 @@ func (mg *AutonomousContainerDatabaseDataguardAssociation) ResolveReferences(ctx
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerAutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PeerAutonomousVMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.PeerAutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -956,6 +1001,7 @@ func (mg *AutonomousContainerDatabaseDataguardAssociation) ResolveReferences(ctx
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerCloudAutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PeerCloudAutonomousVMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.PeerCloudAutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -975,6 +1021,7 @@ func (mg *AutonomousContainerDatabaseDataguardAssociation) ResolveReferences(ctx
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutonomousContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutonomousContainerDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.AutonomousContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -996,6 +1043,7 @@ func (mg *AutonomousContainerDatabaseDataguardAssociation) ResolveReferences(ctx
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PeerAutonomousContainerDatabaseBackupConfig[i3].BackupDestinationDetails[i4].DbrsPolicyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.PeerAutonomousContainerDatabaseBackupConfig[i3].BackupDestinationDetails[i4].DbrsPolicyIDRef,
 					Selector:     mg.Spec.InitProvider.PeerAutonomousContainerDatabaseBackupConfig[i3].BackupDestinationDetails[i4].DbrsPolicyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1017,6 +1065,7 @@ func (mg *AutonomousContainerDatabaseDataguardAssociation) ResolveReferences(ctx
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PeerAutonomousContainerDatabaseCompartmentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PeerAutonomousContainerDatabaseCompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.PeerAutonomousContainerDatabaseCompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1036,6 +1085,7 @@ func (mg *AutonomousContainerDatabaseDataguardAssociation) ResolveReferences(ctx
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PeerAutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PeerAutonomousVMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.PeerAutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1055,6 +1105,7 @@ func (mg *AutonomousContainerDatabaseDataguardAssociation) ResolveReferences(ctx
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PeerCloudAutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PeerCloudAutonomousVMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.PeerCloudAutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1086,6 +1137,7 @@ func (mg *AutonomousContainerDatabaseSnapshotStandby) ResolveReferences(ctx cont
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutonomousContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutonomousContainerDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.AutonomousContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1105,6 +1157,7 @@ func (mg *AutonomousContainerDatabaseSnapshotStandby) ResolveReferences(ctx cont
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutonomousContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutonomousContainerDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.AutonomousContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1136,6 +1189,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutonomousContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutonomousContainerDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.AutonomousContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1155,6 +1209,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutonomousDatabaseBackupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutonomousDatabaseBackupIDRef,
 			Selector:     mg.Spec.ForProvider.AutonomousDatabaseBackupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1174,6 +1229,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutonomousDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutonomousDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.AutonomousDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1193,6 +1249,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1213,6 +1270,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionKey[i3].CertificateID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.EncryptionKey[i3].CertificateIDRef,
 				Selector:     mg.Spec.ForProvider.EncryptionKey[i3].CertificateIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1234,6 +1292,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionKey[i3].KMSKeyID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.EncryptionKey[i3].KMSKeyIDRef,
 				Selector:     mg.Spec.ForProvider.EncryptionKey[i3].KMSKeyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1255,6 +1314,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionKey[i3].KeyName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.EncryptionKey[i3].KeyNameRef,
 				Selector:     mg.Spec.ForProvider.EncryptionKey[i3].KeyNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1276,6 +1336,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionKey[i3].VaultID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.EncryptionKey[i3].VaultIDRef,
 				Selector:     mg.Spec.ForProvider.EncryptionKey[i3].VaultIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1296,6 +1357,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1315,6 +1377,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecretID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SecretIDRef,
 			Selector:     mg.Spec.ForProvider.SecretIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1334,6 +1397,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1353,6 +1417,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VaultIDRef,
 			Selector:     mg.Spec.ForProvider.VaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1372,6 +1437,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutonomousContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutonomousContainerDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.AutonomousContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1391,6 +1457,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutonomousDatabaseBackupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutonomousDatabaseBackupIDRef,
 			Selector:     mg.Spec.InitProvider.AutonomousDatabaseBackupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1410,6 +1477,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutonomousDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutonomousDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.AutonomousDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1429,6 +1497,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1449,6 +1518,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionKey[i3].CertificateID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.EncryptionKey[i3].CertificateIDRef,
 				Selector:     mg.Spec.InitProvider.EncryptionKey[i3].CertificateIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1470,6 +1540,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionKey[i3].KMSKeyID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.EncryptionKey[i3].KMSKeyIDRef,
 				Selector:     mg.Spec.InitProvider.EncryptionKey[i3].KMSKeyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1491,6 +1562,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionKey[i3].KeyName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.EncryptionKey[i3].KeyNameRef,
 				Selector:     mg.Spec.InitProvider.EncryptionKey[i3].KeyNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1512,6 +1584,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionKey[i3].VaultID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.EncryptionKey[i3].VaultIDRef,
 				Selector:     mg.Spec.InitProvider.EncryptionKey[i3].VaultIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1532,6 +1605,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1551,6 +1625,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecretID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SecretIDRef,
 			Selector:     mg.Spec.InitProvider.SecretIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1570,6 +1645,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1589,6 +1665,7 @@ func (mg *AutonomousDatabase) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VaultID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VaultIDRef,
 			Selector:     mg.Spec.InitProvider.VaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1620,6 +1697,7 @@ func (mg *AutonomousDatabaseBackup) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutonomousDatabaseID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutonomousDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.AutonomousDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1639,6 +1717,7 @@ func (mg *AutonomousDatabaseBackup) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutonomousDatabaseID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutonomousDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.AutonomousDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1670,6 +1749,7 @@ func (mg *AutonomousDatabaseInstanceWalletManagement) ResolveReferences(ctx cont
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutonomousDatabaseID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutonomousDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.AutonomousDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1689,6 +1769,7 @@ func (mg *AutonomousDatabaseInstanceWalletManagement) ResolveReferences(ctx cont
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutonomousDatabaseID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutonomousDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.AutonomousDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1720,6 +1801,7 @@ func (mg *AutonomousDatabaseSaasAdminUser) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutonomousDatabaseID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutonomousDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.AutonomousDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1739,6 +1821,7 @@ func (mg *AutonomousDatabaseSaasAdminUser) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutonomousDatabaseID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutonomousDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.AutonomousDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1770,6 +1853,7 @@ func (mg *AutonomousDatabaseSoftwareImage) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1789,6 +1873,7 @@ func (mg *AutonomousDatabaseSoftwareImage) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1820,6 +1905,7 @@ func (mg *AutonomousDatabaseWallet) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutonomousDatabaseID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutonomousDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.AutonomousDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1839,6 +1925,7 @@ func (mg *AutonomousDatabaseWallet) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutonomousDatabaseID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutonomousDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.AutonomousDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1870,6 +1957,7 @@ func (mg *AutonomousExadataInfrastructure) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1889,6 +1977,7 @@ func (mg *AutonomousExadataInfrastructure) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1908,6 +1997,7 @@ func (mg *AutonomousExadataInfrastructure) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1927,6 +2017,7 @@ func (mg *AutonomousExadataInfrastructure) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1958,6 +2049,7 @@ func (mg *AutonomousVmCluster) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1977,6 +2069,7 @@ func (mg *AutonomousVmCluster) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExadataInfrastructureIDRef,
 			Selector:     mg.Spec.ForProvider.ExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1996,6 +2089,7 @@ func (mg *AutonomousVmCluster) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VMClusterNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VMClusterNetworkIDRef,
 			Selector:     mg.Spec.ForProvider.VMClusterNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2015,6 +2109,7 @@ func (mg *AutonomousVmCluster) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2034,6 +2129,7 @@ func (mg *AutonomousVmCluster) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExadataInfrastructureIDRef,
 			Selector:     mg.Spec.InitProvider.ExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2053,6 +2149,7 @@ func (mg *AutonomousVmCluster) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VMClusterNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VMClusterNetworkIDRef,
 			Selector:     mg.Spec.InitProvider.VMClusterNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2084,6 +2181,7 @@ func (mg *AutonomousVmClusterOrdsCertificateManagement) ResolveReferences(ctx co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutonomousVMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.AutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2103,6 +2201,7 @@ func (mg *AutonomousVmClusterOrdsCertificateManagement) ResolveReferences(ctx co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CABundleID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CABundleIDRef,
 			Selector:     mg.Spec.ForProvider.CABundleIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2122,6 +2221,7 @@ func (mg *AutonomousVmClusterOrdsCertificateManagement) ResolveReferences(ctx co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateAuthorityID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CertificateAuthorityIDRef,
 			Selector:     mg.Spec.ForProvider.CertificateAuthorityIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2141,6 +2241,7 @@ func (mg *AutonomousVmClusterOrdsCertificateManagement) ResolveReferences(ctx co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CertificateIDRef,
 			Selector:     mg.Spec.ForProvider.CertificateIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2160,6 +2261,7 @@ func (mg *AutonomousVmClusterOrdsCertificateManagement) ResolveReferences(ctx co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutonomousVMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.AutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2179,6 +2281,7 @@ func (mg *AutonomousVmClusterOrdsCertificateManagement) ResolveReferences(ctx co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CABundleID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CABundleIDRef,
 			Selector:     mg.Spec.InitProvider.CABundleIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2198,6 +2301,7 @@ func (mg *AutonomousVmClusterOrdsCertificateManagement) ResolveReferences(ctx co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateAuthorityID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CertificateAuthorityIDRef,
 			Selector:     mg.Spec.InitProvider.CertificateAuthorityIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2217,6 +2321,7 @@ func (mg *AutonomousVmClusterOrdsCertificateManagement) ResolveReferences(ctx co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CertificateIDRef,
 			Selector:     mg.Spec.InitProvider.CertificateIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2248,6 +2353,7 @@ func (mg *AutonomousVmClusterSslCertificateManagement) ResolveReferences(ctx con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutonomousVMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.AutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2267,6 +2373,7 @@ func (mg *AutonomousVmClusterSslCertificateManagement) ResolveReferences(ctx con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CABundleID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CABundleIDRef,
 			Selector:     mg.Spec.ForProvider.CABundleIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2286,6 +2393,7 @@ func (mg *AutonomousVmClusterSslCertificateManagement) ResolveReferences(ctx con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateAuthorityID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CertificateAuthorityIDRef,
 			Selector:     mg.Spec.ForProvider.CertificateAuthorityIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2305,6 +2413,7 @@ func (mg *AutonomousVmClusterSslCertificateManagement) ResolveReferences(ctx con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CertificateIDRef,
 			Selector:     mg.Spec.ForProvider.CertificateIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2324,6 +2433,7 @@ func (mg *AutonomousVmClusterSslCertificateManagement) ResolveReferences(ctx con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutonomousVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutonomousVMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.AutonomousVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2343,6 +2453,7 @@ func (mg *AutonomousVmClusterSslCertificateManagement) ResolveReferences(ctx con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CABundleID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CABundleIDRef,
 			Selector:     mg.Spec.InitProvider.CABundleIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2362,6 +2473,7 @@ func (mg *AutonomousVmClusterSslCertificateManagement) ResolveReferences(ctx con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateAuthorityID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CertificateAuthorityIDRef,
 			Selector:     mg.Spec.InitProvider.CertificateAuthorityIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2381,6 +2493,7 @@ func (mg *AutonomousVmClusterSslCertificateManagement) ResolveReferences(ctx con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CertificateIDRef,
 			Selector:     mg.Spec.InitProvider.CertificateIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2412,6 +2525,7 @@ func (mg *Backup) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2431,6 +2545,7 @@ func (mg *Backup) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.DatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2462,6 +2577,7 @@ func (mg *BackupCancelManagement) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BackupIDRef,
 			Selector:     mg.Spec.ForProvider.BackupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2481,6 +2597,7 @@ func (mg *BackupCancelManagement) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BackupIDRef,
 			Selector:     mg.Spec.InitProvider.BackupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2512,6 +2629,7 @@ func (mg *BackupDestination) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2531,6 +2649,7 @@ func (mg *BackupDestination) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2562,6 +2681,7 @@ func (mg *CloudAutonomousVmCluster) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudExadataInfrastructureID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudExadataInfrastructureIDRef,
 			Selector:     mg.Spec.ForProvider.CloudExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2581,6 +2701,7 @@ func (mg *CloudAutonomousVmCluster) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2600,6 +2721,7 @@ func (mg *CloudAutonomousVmCluster) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2619,6 +2741,7 @@ func (mg *CloudAutonomousVmCluster) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudExadataInfrastructureID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudExadataInfrastructureIDRef,
 			Selector:     mg.Spec.InitProvider.CloudExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2638,6 +2761,7 @@ func (mg *CloudAutonomousVmCluster) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2657,6 +2781,7 @@ func (mg *CloudAutonomousVmCluster) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2688,6 +2813,7 @@ func (mg *CloudDatabaseManagement) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2707,6 +2833,7 @@ func (mg *CloudDatabaseManagement) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SSLSecretID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SSLSecretIDRef,
 			Selector:     mg.Spec.ForProvider.SSLSecretIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2726,6 +2853,7 @@ func (mg *CloudDatabaseManagement) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.DatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2745,6 +2873,7 @@ func (mg *CloudDatabaseManagement) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SSLSecretID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SSLSecretIDRef,
 			Selector:     mg.Spec.InitProvider.SSLSecretIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2776,6 +2905,7 @@ func (mg *CloudExadataInfrastructure) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2795,6 +2925,7 @@ func (mg *CloudExadataInfrastructure) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2826,6 +2957,7 @@ func (mg *CloudExadataInfrastructureConfigureExascaleManagement) ResolveReferenc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudExadataInfrastructureIDRef,
 			Selector:     mg.Spec.ForProvider.CloudExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2845,6 +2977,7 @@ func (mg *CloudExadataInfrastructureConfigureExascaleManagement) ResolveReferenc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudExadataInfrastructureIDRef,
 			Selector:     mg.Spec.InitProvider.CloudExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2876,6 +3009,7 @@ func (mg *CloudVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackupSubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BackupSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.BackupSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2895,6 +3029,7 @@ func (mg *CloudVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudExadataInfrastructureIDRef,
 			Selector:     mg.Spec.ForProvider.CloudExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2914,6 +3049,7 @@ func (mg *CloudVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2933,6 +3069,7 @@ func (mg *CloudVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExascaleDBStorageVaultID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExascaleDBStorageVaultIDRef,
 			Selector:     mg.Spec.ForProvider.ExascaleDBStorageVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2952,6 +3089,7 @@ func (mg *CloudVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateZoneID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PrivateZoneIDRef,
 			Selector:     mg.Spec.ForProvider.PrivateZoneIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2971,6 +3109,7 @@ func (mg *CloudVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2990,6 +3129,7 @@ func (mg *CloudVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackupSubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BackupSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.BackupSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3009,6 +3149,7 @@ func (mg *CloudVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudExadataInfrastructureIDRef,
 			Selector:     mg.Spec.InitProvider.CloudExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3028,6 +3169,7 @@ func (mg *CloudVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3047,6 +3189,7 @@ func (mg *CloudVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExascaleDBStorageVaultID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExascaleDBStorageVaultIDRef,
 			Selector:     mg.Spec.InitProvider.ExascaleDBStorageVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3066,6 +3209,7 @@ func (mg *CloudVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateZoneID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PrivateZoneIDRef,
 			Selector:     mg.Spec.InitProvider.PrivateZoneIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3085,6 +3229,7 @@ func (mg *CloudVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3116,6 +3261,7 @@ func (mg *CloudVmClusterIormConfig) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudVMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.CloudVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3135,6 +3281,7 @@ func (mg *CloudVmClusterIormConfig) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudVMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.CloudVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3166,6 +3313,7 @@ func (mg *DataGuardAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3185,6 +3333,7 @@ func (mg *DataGuardAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseSoftwareImageID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseSoftwareImageIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseSoftwareImageIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3204,6 +3353,7 @@ func (mg *DataGuardAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerDBHomeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PeerDBHomeIDRef,
 			Selector:     mg.Spec.ForProvider.PeerDBHomeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3223,6 +3373,7 @@ func (mg *DataGuardAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerDBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PeerDBSystemIDRef,
 			Selector:     mg.Spec.ForProvider.PeerDBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3242,6 +3393,7 @@ func (mg *DataGuardAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PeerVMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.PeerVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3261,6 +3413,7 @@ func (mg *DataGuardAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3280,6 +3433,7 @@ func (mg *DataGuardAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.DatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3299,6 +3453,7 @@ func (mg *DataGuardAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseSoftwareImageID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseSoftwareImageIDRef,
 			Selector:     mg.Spec.InitProvider.DatabaseSoftwareImageIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3318,6 +3473,7 @@ func (mg *DataGuardAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PeerDBHomeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PeerDBHomeIDRef,
 			Selector:     mg.Spec.InitProvider.PeerDBHomeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3337,6 +3493,7 @@ func (mg *DataGuardAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PeerDBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PeerDBSystemIDRef,
 			Selector:     mg.Spec.InitProvider.PeerDBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3356,6 +3513,7 @@ func (mg *DataGuardAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PeerVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PeerVMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.PeerVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3375,6 +3533,7 @@ func (mg *DataGuardAssociation) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3406,6 +3565,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBHomeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DBHomeIDRef,
 			Selector:     mg.Spec.ForProvider.DBHomeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3426,6 +3586,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].BackupID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Database[i3].BackupIDRef,
 				Selector:     mg.Spec.ForProvider.Database[i3].BackupIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -3449,6 +3610,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].DBBackupConfig[i4].BackupDestinationDetails[i5].DbrsPolicyID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Database[i3].DBBackupConfig[i4].BackupDestinationDetails[i5].DbrsPolicyIDRef,
 						Selector:     mg.Spec.ForProvider.Database[i3].DBBackupConfig[i4].BackupDestinationDetails[i5].DbrsPolicyIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -3472,6 +3634,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].DatabaseSoftwareImageID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Database[i3].DatabaseSoftwareImageIDRef,
 				Selector:     mg.Spec.ForProvider.Database[i3].DatabaseSoftwareImageIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -3494,6 +3657,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].EncryptionKeyLocationDetails[i4].AwsEncryptionKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Database[i3].EncryptionKeyLocationDetails[i4].AwsEncryptionKeyIDRef,
 					Selector:     mg.Spec.ForProvider.Database[i3].EncryptionKeyLocationDetails[i4].AwsEncryptionKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -3517,6 +3681,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].EncryptionKeyLocationDetails[i4].AzureEncryptionKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Database[i3].EncryptionKeyLocationDetails[i4].AzureEncryptionKeyIDRef,
 					Selector:     mg.Spec.ForProvider.Database[i3].EncryptionKeyLocationDetails[i4].AzureEncryptionKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -3540,6 +3705,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].EncryptionKeyLocationDetails[i4].GoogleCloudProviderEncryptionKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Database[i3].EncryptionKeyLocationDetails[i4].GoogleCloudProviderEncryptionKeyIDRef,
 					Selector:     mg.Spec.ForProvider.Database[i3].EncryptionKeyLocationDetails[i4].GoogleCloudProviderEncryptionKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -3562,6 +3728,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].KMSKeyID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Database[i3].KMSKeyIDRef,
 				Selector:     mg.Spec.ForProvider.Database[i3].KMSKeyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -3583,6 +3750,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].KMSKeyVersionID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Database[i3].KMSKeyVersionIDRef,
 				Selector:     mg.Spec.ForProvider.Database[i3].KMSKeyVersionIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -3604,6 +3772,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].SourceDatabaseID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Database[i3].SourceDatabaseIDRef,
 				Selector:     mg.Spec.ForProvider.Database[i3].SourceDatabaseIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -3625,6 +3794,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].VaultID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Database[i3].VaultIDRef,
 				Selector:     mg.Spec.ForProvider.Database[i3].VaultIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -3645,6 +3815,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3664,6 +3835,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyVersionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyVersionIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyVersionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3683,6 +3855,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBHomeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DBHomeIDRef,
 			Selector:     mg.Spec.InitProvider.DBHomeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3703,6 +3876,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].BackupID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Database[i3].BackupIDRef,
 				Selector:     mg.Spec.InitProvider.Database[i3].BackupIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -3726,6 +3900,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].DBBackupConfig[i4].BackupDestinationDetails[i5].DbrsPolicyID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Database[i3].DBBackupConfig[i4].BackupDestinationDetails[i5].DbrsPolicyIDRef,
 						Selector:     mg.Spec.InitProvider.Database[i3].DBBackupConfig[i4].BackupDestinationDetails[i5].DbrsPolicyIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -3749,6 +3924,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].DatabaseSoftwareImageID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Database[i3].DatabaseSoftwareImageIDRef,
 				Selector:     mg.Spec.InitProvider.Database[i3].DatabaseSoftwareImageIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -3771,6 +3947,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].EncryptionKeyLocationDetails[i4].AwsEncryptionKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Database[i3].EncryptionKeyLocationDetails[i4].AwsEncryptionKeyIDRef,
 					Selector:     mg.Spec.InitProvider.Database[i3].EncryptionKeyLocationDetails[i4].AwsEncryptionKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -3794,6 +3971,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].EncryptionKeyLocationDetails[i4].AzureEncryptionKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Database[i3].EncryptionKeyLocationDetails[i4].AzureEncryptionKeyIDRef,
 					Selector:     mg.Spec.InitProvider.Database[i3].EncryptionKeyLocationDetails[i4].AzureEncryptionKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -3817,6 +3995,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].EncryptionKeyLocationDetails[i4].GoogleCloudProviderEncryptionKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Database[i3].EncryptionKeyLocationDetails[i4].GoogleCloudProviderEncryptionKeyIDRef,
 					Selector:     mg.Spec.InitProvider.Database[i3].EncryptionKeyLocationDetails[i4].GoogleCloudProviderEncryptionKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -3839,6 +4018,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].KMSKeyID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Database[i3].KMSKeyIDRef,
 				Selector:     mg.Spec.InitProvider.Database[i3].KMSKeyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -3860,6 +4040,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].KMSKeyVersionID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Database[i3].KMSKeyVersionIDRef,
 				Selector:     mg.Spec.InitProvider.Database[i3].KMSKeyVersionIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -3881,6 +4062,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].SourceDatabaseID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Database[i3].SourceDatabaseIDRef,
 				Selector:     mg.Spec.InitProvider.Database[i3].SourceDatabaseIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -3902,6 +4084,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].VaultID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Database[i3].VaultIDRef,
 				Selector:     mg.Spec.InitProvider.Database[i3].VaultIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -3922,6 +4105,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3941,6 +4125,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyVersionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyVersionIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyVersionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3972,6 +4157,7 @@ func (mg *DatabaseSnapshotStandby) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3991,6 +4177,7 @@ func (mg *DatabaseSnapshotStandby) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.DatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4022,6 +4209,7 @@ func (mg *DatabaseSoftwareImage) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4041,6 +4229,7 @@ func (mg *DatabaseSoftwareImage) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceDBHomeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceDBHomeIDRef,
 			Selector:     mg.Spec.ForProvider.SourceDBHomeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4060,6 +4249,7 @@ func (mg *DatabaseSoftwareImage) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4079,6 +4269,7 @@ func (mg *DatabaseSoftwareImage) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceDBHomeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceDBHomeIDRef,
 			Selector:     mg.Spec.InitProvider.SourceDBHomeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4110,6 +4301,7 @@ func (mg *DatabaseUpgrade) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4130,6 +4322,7 @@ func (mg *DatabaseUpgrade) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseUpgradeSourceDetails[i3].DatabaseSoftwareImageID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DatabaseUpgradeSourceDetails[i3].DatabaseSoftwareImageIDRef,
 				Selector:     mg.Spec.ForProvider.DatabaseUpgradeSourceDetails[i3].DatabaseSoftwareImageIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4150,6 +4343,7 @@ func (mg *DatabaseUpgrade) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.DatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4170,6 +4364,7 @@ func (mg *DatabaseUpgrade) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseUpgradeSourceDetails[i3].DatabaseSoftwareImageID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DatabaseUpgradeSourceDetails[i3].DatabaseSoftwareImageIDRef,
 				Selector:     mg.Spec.InitProvider.DatabaseUpgradeSourceDetails[i3].DatabaseSoftwareImageIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4203,6 +4398,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DBSystemIDRef,
 			Selector:     mg.Spec.ForProvider.DBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4223,6 +4419,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].BackupID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Database[i3].BackupIDRef,
 				Selector:     mg.Spec.ForProvider.Database[i3].BackupIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4246,6 +4443,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].DBBackupConfig[i4].BackupDestinationDetails[i5].DbrsPolicyID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Database[i3].DBBackupConfig[i4].BackupDestinationDetails[i5].DbrsPolicyIDRef,
 						Selector:     mg.Spec.ForProvider.Database[i3].DBBackupConfig[i4].BackupDestinationDetails[i5].DbrsPolicyIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -4269,6 +4467,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].DatabaseID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Database[i3].DatabaseIDRef,
 				Selector:     mg.Spec.ForProvider.Database[i3].DatabaseIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4290,6 +4489,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].DatabaseSoftwareImageID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Database[i3].DatabaseSoftwareImageIDRef,
 				Selector:     mg.Spec.ForProvider.Database[i3].DatabaseSoftwareImageIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4312,6 +4512,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].EncryptionKeyLocationDetails[i4].AzureEncryptionKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Database[i3].EncryptionKeyLocationDetails[i4].AzureEncryptionKeyIDRef,
 					Selector:     mg.Spec.ForProvider.Database[i3].EncryptionKeyLocationDetails[i4].AzureEncryptionKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -4334,6 +4535,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].KMSKeyID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Database[i3].KMSKeyIDRef,
 				Selector:     mg.Spec.ForProvider.Database[i3].KMSKeyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4355,6 +4557,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].KMSKeyVersionID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Database[i3].KMSKeyVersionIDRef,
 				Selector:     mg.Spec.ForProvider.Database[i3].KMSKeyVersionIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4376,6 +4579,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].KeyStoreID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Database[i3].KeyStoreIDRef,
 				Selector:     mg.Spec.ForProvider.Database[i3].KeyStoreIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4397,6 +4601,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database[i3].VaultID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Database[i3].VaultIDRef,
 				Selector:     mg.Spec.ForProvider.Database[i3].VaultIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4417,6 +4622,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseSoftwareImageID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseSoftwareImageIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseSoftwareImageIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4436,6 +4642,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4455,6 +4662,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyVersionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyVersionIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyVersionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4474,6 +4682,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.VMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4493,6 +4702,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DBSystemIDRef,
 			Selector:     mg.Spec.InitProvider.DBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4513,6 +4723,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].BackupID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Database[i3].BackupIDRef,
 				Selector:     mg.Spec.InitProvider.Database[i3].BackupIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4536,6 +4747,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].DBBackupConfig[i4].BackupDestinationDetails[i5].DbrsPolicyID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Database[i3].DBBackupConfig[i4].BackupDestinationDetails[i5].DbrsPolicyIDRef,
 						Selector:     mg.Spec.InitProvider.Database[i3].DBBackupConfig[i4].BackupDestinationDetails[i5].DbrsPolicyIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -4559,6 +4771,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].DatabaseID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Database[i3].DatabaseIDRef,
 				Selector:     mg.Spec.InitProvider.Database[i3].DatabaseIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4580,6 +4793,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].DatabaseSoftwareImageID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Database[i3].DatabaseSoftwareImageIDRef,
 				Selector:     mg.Spec.InitProvider.Database[i3].DatabaseSoftwareImageIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4602,6 +4816,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].EncryptionKeyLocationDetails[i4].AzureEncryptionKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Database[i3].EncryptionKeyLocationDetails[i4].AzureEncryptionKeyIDRef,
 					Selector:     mg.Spec.InitProvider.Database[i3].EncryptionKeyLocationDetails[i4].AzureEncryptionKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -4624,6 +4839,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].KMSKeyID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Database[i3].KMSKeyIDRef,
 				Selector:     mg.Spec.InitProvider.Database[i3].KMSKeyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4645,6 +4861,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].KMSKeyVersionID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Database[i3].KMSKeyVersionIDRef,
 				Selector:     mg.Spec.InitProvider.Database[i3].KMSKeyVersionIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4666,6 +4883,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].KeyStoreID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Database[i3].KeyStoreIDRef,
 				Selector:     mg.Spec.InitProvider.Database[i3].KeyStoreIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4687,6 +4905,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].VaultID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Database[i3].VaultIDRef,
 				Selector:     mg.Spec.InitProvider.Database[i3].VaultIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4707,6 +4926,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseSoftwareImageID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseSoftwareImageIDRef,
 			Selector:     mg.Spec.InitProvider.DatabaseSoftwareImageIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4726,6 +4946,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4745,6 +4966,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyVersionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyVersionIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyVersionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4764,6 +4986,7 @@ func (mg *DbHome) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.VMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4795,6 +5018,7 @@ func (mg *DbNode) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBNodeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DBNodeIDRef,
 			Selector:     mg.Spec.ForProvider.DBNodeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4814,6 +5038,7 @@ func (mg *DbNode) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBNodeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DBNodeIDRef,
 			Selector:     mg.Spec.InitProvider.DBNodeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4845,6 +5070,7 @@ func (mg *DbNodeConsoleConnection) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBNodeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DBNodeIDRef,
 			Selector:     mg.Spec.ForProvider.DBNodeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4864,6 +5090,7 @@ func (mg *DbNodeConsoleConnection) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBNodeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DBNodeIDRef,
 			Selector:     mg.Spec.InitProvider.DBNodeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4895,6 +5122,7 @@ func (mg *DbNodeConsoleHistory) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBNodeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DBNodeIDRef,
 			Selector:     mg.Spec.ForProvider.DBNodeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4914,6 +5142,7 @@ func (mg *DbNodeConsoleHistory) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBNodeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DBNodeIDRef,
 			Selector:     mg.Spec.InitProvider.DBNodeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4945,6 +5174,7 @@ func (mg *DbNodeSnapshotManagement) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExadbVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExadbVMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.ExadbVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4964,6 +5194,7 @@ func (mg *DbNodeSnapshotManagement) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExadbVMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExadbVMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.ExadbVMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4995,6 +5226,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackupSubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BackupSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.BackupSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5014,6 +5246,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5035,6 +5268,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBHome[i3].Database[i4].BackupID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.DBHome[i3].Database[i4].BackupIDRef,
 					Selector:     mg.Spec.ForProvider.DBHome[i3].Database[i4].BackupIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -5060,6 +5294,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBHome[i3].Database[i4].DBBackupConfig[i5].BackupDestinationDetails[i6].DbrsPolicyID),
 							Extract:      resource.ExtractResourceID(),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.ForProvider.DBHome[i3].Database[i4].DBBackupConfig[i5].BackupDestinationDetails[i6].DbrsPolicyIDRef,
 							Selector:     mg.Spec.ForProvider.DBHome[i3].Database[i4].DBBackupConfig[i5].BackupDestinationDetails[i6].DbrsPolicyIDSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -5085,6 +5320,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBHome[i3].Database[i4].DatabaseID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.DBHome[i3].Database[i4].DatabaseIDRef,
 					Selector:     mg.Spec.ForProvider.DBHome[i3].Database[i4].DatabaseIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -5108,6 +5344,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBHome[i3].Database[i4].DatabaseSoftwareImageID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.DBHome[i3].Database[i4].DatabaseSoftwareImageIDRef,
 					Selector:     mg.Spec.ForProvider.DBHome[i3].Database[i4].DatabaseSoftwareImageIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -5131,6 +5368,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBHome[i3].Database[i4].KMSKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.DBHome[i3].Database[i4].KMSKeyIDRef,
 					Selector:     mg.Spec.ForProvider.DBHome[i3].Database[i4].KMSKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -5154,6 +5392,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBHome[i3].Database[i4].KMSKeyVersionID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.DBHome[i3].Database[i4].KMSKeyVersionIDRef,
 					Selector:     mg.Spec.ForProvider.DBHome[i3].Database[i4].KMSKeyVersionIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -5177,6 +5416,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBHome[i3].Database[i4].VaultID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.DBHome[i3].Database[i4].VaultIDRef,
 					Selector:     mg.Spec.ForProvider.DBHome[i3].Database[i4].VaultIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -5199,6 +5439,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBHome[i3].DatabaseSoftwareImageID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DBHome[i3].DatabaseSoftwareImageIDRef,
 				Selector:     mg.Spec.ForProvider.DBHome[i3].DatabaseSoftwareImageIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -5219,6 +5460,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5238,6 +5480,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyVersionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyVersionIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyVersionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5257,6 +5500,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceDBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceDBSystemIDRef,
 			Selector:     mg.Spec.ForProvider.SourceDBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5276,6 +5520,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5295,6 +5540,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackupSubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BackupSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.BackupSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5314,6 +5560,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5335,6 +5582,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBHome[i3].Database[i4].BackupID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.DBHome[i3].Database[i4].BackupIDRef,
 					Selector:     mg.Spec.InitProvider.DBHome[i3].Database[i4].BackupIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -5360,6 +5608,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBHome[i3].Database[i4].DBBackupConfig[i5].BackupDestinationDetails[i6].DbrsPolicyID),
 							Extract:      resource.ExtractResourceID(),
+							Namespace:    mg.GetNamespace(),
 							Reference:    mg.Spec.InitProvider.DBHome[i3].Database[i4].DBBackupConfig[i5].BackupDestinationDetails[i6].DbrsPolicyIDRef,
 							Selector:     mg.Spec.InitProvider.DBHome[i3].Database[i4].DBBackupConfig[i5].BackupDestinationDetails[i6].DbrsPolicyIDSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -5385,6 +5634,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBHome[i3].Database[i4].DatabaseID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.DBHome[i3].Database[i4].DatabaseIDRef,
 					Selector:     mg.Spec.InitProvider.DBHome[i3].Database[i4].DatabaseIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -5408,6 +5658,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBHome[i3].Database[i4].DatabaseSoftwareImageID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.DBHome[i3].Database[i4].DatabaseSoftwareImageIDRef,
 					Selector:     mg.Spec.InitProvider.DBHome[i3].Database[i4].DatabaseSoftwareImageIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -5431,6 +5682,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBHome[i3].Database[i4].KMSKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.DBHome[i3].Database[i4].KMSKeyIDRef,
 					Selector:     mg.Spec.InitProvider.DBHome[i3].Database[i4].KMSKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -5454,6 +5706,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBHome[i3].Database[i4].KMSKeyVersionID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.DBHome[i3].Database[i4].KMSKeyVersionIDRef,
 					Selector:     mg.Spec.InitProvider.DBHome[i3].Database[i4].KMSKeyVersionIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -5477,6 +5730,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBHome[i3].Database[i4].VaultID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.DBHome[i3].Database[i4].VaultIDRef,
 					Selector:     mg.Spec.InitProvider.DBHome[i3].Database[i4].VaultIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -5499,6 +5753,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBHome[i3].DatabaseSoftwareImageID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DBHome[i3].DatabaseSoftwareImageIDRef,
 				Selector:     mg.Spec.InitProvider.DBHome[i3].DatabaseSoftwareImageIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -5519,6 +5774,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5538,6 +5794,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyVersionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyVersionIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyVersionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5557,6 +5814,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceDBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceDBSystemIDRef,
 			Selector:     mg.Spec.InitProvider.SourceDBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5576,6 +5834,7 @@ func (mg *DbSystem) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5607,6 +5866,7 @@ func (mg *DbSystemsUpgrade) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DBSystemIDRef,
 			Selector:     mg.Spec.ForProvider.DBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5626,6 +5886,7 @@ func (mg *DbSystemsUpgrade) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DBSystemIDRef,
 			Selector:     mg.Spec.InitProvider.DBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5657,6 +5918,7 @@ func (mg *ExadataInfrastructure) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5676,6 +5938,7 @@ func (mg *ExadataInfrastructure) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5707,6 +5970,7 @@ func (mg *ExadataInfrastructureConfigureExascaleManagement) ResolveReferences(ct
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExadataInfrastructureID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExadataInfrastructureIDRef,
 			Selector:     mg.Spec.ForProvider.ExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5726,6 +5990,7 @@ func (mg *ExadataInfrastructureConfigureExascaleManagement) ResolveReferences(ct
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExadataInfrastructureID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExadataInfrastructureIDRef,
 			Selector:     mg.Spec.InitProvider.ExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5757,6 +6022,7 @@ func (mg *ExadataInfrastructureStorage) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5776,6 +6042,7 @@ func (mg *ExadataInfrastructureStorage) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5807,6 +6074,7 @@ func (mg *ExadataIormConfig) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBSystemID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DBSystemIDRef,
 			Selector:     mg.Spec.ForProvider.DBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5826,6 +6094,7 @@ func (mg *ExadataIormConfig) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBSystemID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DBSystemIDRef,
 			Selector:     mg.Spec.InitProvider.DBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5857,6 +6126,7 @@ func (mg *ExadbVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackupSubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BackupSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.BackupSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5876,6 +6146,7 @@ func (mg *ExadbVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5895,6 +6166,7 @@ func (mg *ExadbVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExascaleDBStorageVaultID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExascaleDBStorageVaultIDRef,
 			Selector:     mg.Spec.ForProvider.ExascaleDBStorageVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5914,6 +6186,7 @@ func (mg *ExadbVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GridImageID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GridImageIDRef,
 			Selector:     mg.Spec.ForProvider.GridImageIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5933,6 +6206,7 @@ func (mg *ExadbVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateZoneID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PrivateZoneIDRef,
 			Selector:     mg.Spec.ForProvider.PrivateZoneIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5952,6 +6226,7 @@ func (mg *ExadbVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5971,6 +6246,7 @@ func (mg *ExadbVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackupSubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BackupSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.BackupSubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -5990,6 +6266,7 @@ func (mg *ExadbVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6009,6 +6286,7 @@ func (mg *ExadbVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExascaleDBStorageVaultID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExascaleDBStorageVaultIDRef,
 			Selector:     mg.Spec.InitProvider.ExascaleDBStorageVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6028,6 +6306,7 @@ func (mg *ExadbVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GridImageID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GridImageIDRef,
 			Selector:     mg.Spec.InitProvider.GridImageIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6047,6 +6326,7 @@ func (mg *ExadbVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateZoneID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PrivateZoneIDRef,
 			Selector:     mg.Spec.InitProvider.PrivateZoneIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6066,6 +6346,7 @@ func (mg *ExadbVmCluster) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6097,6 +6378,7 @@ func (mg *ExascaleDbStorageVault) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterPlacementGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ClusterPlacementGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ClusterPlacementGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6116,6 +6398,7 @@ func (mg *ExascaleDbStorageVault) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6135,6 +6418,7 @@ func (mg *ExascaleDbStorageVault) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExadataInfrastructureIDRef,
 			Selector:     mg.Spec.ForProvider.ExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6154,6 +6438,7 @@ func (mg *ExascaleDbStorageVault) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterPlacementGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ClusterPlacementGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ClusterPlacementGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6173,6 +6458,7 @@ func (mg *ExascaleDbStorageVault) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6192,6 +6478,7 @@ func (mg *ExascaleDbStorageVault) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExadataInfrastructureIDRef,
 			Selector:     mg.Spec.InitProvider.ExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6223,6 +6510,7 @@ func (mg *ExecutionAction) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6242,6 +6530,7 @@ func (mg *ExecutionAction) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExecutionWindowID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExecutionWindowIDRef,
 			Selector:     mg.Spec.ForProvider.ExecutionWindowIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6261,6 +6550,7 @@ func (mg *ExecutionAction) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6280,6 +6570,7 @@ func (mg *ExecutionAction) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExecutionWindowID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExecutionWindowIDRef,
 			Selector:     mg.Spec.InitProvider.ExecutionWindowIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6311,6 +6602,7 @@ func (mg *ExecutionWindow) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6330,6 +6622,7 @@ func (mg *ExecutionWindow) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6361,6 +6654,7 @@ func (mg *ExternalContainerDatabase) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6380,6 +6674,7 @@ func (mg *ExternalContainerDatabase) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6411,6 +6706,7 @@ func (mg *ExternalContainerDatabaseManagement) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalContainerDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6430,6 +6726,7 @@ func (mg *ExternalContainerDatabaseManagement) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalDatabaseConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalDatabaseConnectorIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalDatabaseConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6449,6 +6746,7 @@ func (mg *ExternalContainerDatabaseManagement) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalContainerDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6468,6 +6766,7 @@ func (mg *ExternalContainerDatabaseManagement) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalDatabaseConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalDatabaseConnectorIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalDatabaseConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6500,6 +6799,7 @@ func (mg *ExternalDatabaseConnector) ResolveReferences(ctx context.Context, c cl
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConnectionCredentials[i3].SSLSecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ConnectionCredentials[i3].SSLSecretIDRef,
 				Selector:     mg.Spec.ForProvider.ConnectionCredentials[i3].SSLSecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -6520,6 +6820,7 @@ func (mg *ExternalDatabaseConnector) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6540,6 +6841,7 @@ func (mg *ExternalDatabaseConnector) ResolveReferences(ctx context.Context, c cl
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConnectionCredentials[i3].SSLSecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ConnectionCredentials[i3].SSLSecretIDRef,
 				Selector:     mg.Spec.InitProvider.ConnectionCredentials[i3].SSLSecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -6560,6 +6862,7 @@ func (mg *ExternalDatabaseConnector) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6591,6 +6894,7 @@ func (mg *ExternalNonContainerDatabase) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6610,6 +6914,7 @@ func (mg *ExternalNonContainerDatabase) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6641,6 +6946,7 @@ func (mg *ExternalNonContainerDatabaseManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalDatabaseConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalDatabaseConnectorIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalDatabaseConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6660,6 +6966,7 @@ func (mg *ExternalNonContainerDatabaseManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalNonContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalNonContainerDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalNonContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6679,6 +6986,7 @@ func (mg *ExternalNonContainerDatabaseManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalDatabaseConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalDatabaseConnectorIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalDatabaseConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6698,6 +7006,7 @@ func (mg *ExternalNonContainerDatabaseManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalNonContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalNonContainerDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalNonContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6729,6 +7038,7 @@ func (mg *ExternalNonContainerDatabaseOperationsInsightsManagement) ResolveRefer
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalDatabaseConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalDatabaseConnectorIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalDatabaseConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6748,6 +7058,7 @@ func (mg *ExternalNonContainerDatabaseOperationsInsightsManagement) ResolveRefer
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalNonContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalNonContainerDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalNonContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6767,6 +7078,7 @@ func (mg *ExternalNonContainerDatabaseOperationsInsightsManagement) ResolveRefer
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalDatabaseConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalDatabaseConnectorIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalDatabaseConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6786,6 +7098,7 @@ func (mg *ExternalNonContainerDatabaseOperationsInsightsManagement) ResolveRefer
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalNonContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalNonContainerDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalNonContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6817,6 +7130,7 @@ func (mg *ExternalPluggableDatabase) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6836,6 +7150,7 @@ func (mg *ExternalPluggableDatabase) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalContainerDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6855,6 +7170,7 @@ func (mg *ExternalPluggableDatabase) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6874,6 +7190,7 @@ func (mg *ExternalPluggableDatabase) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalContainerDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6905,6 +7222,7 @@ func (mg *ExternalPluggableDatabaseManagement) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalDatabaseConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalDatabaseConnectorIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalDatabaseConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6924,6 +7242,7 @@ func (mg *ExternalPluggableDatabaseManagement) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalPluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalPluggableDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalPluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6943,6 +7262,7 @@ func (mg *ExternalPluggableDatabaseManagement) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalDatabaseConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalDatabaseConnectorIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalDatabaseConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6962,6 +7282,7 @@ func (mg *ExternalPluggableDatabaseManagement) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalPluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalPluggableDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalPluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -6993,6 +7314,7 @@ func (mg *ExternalPluggableDatabaseOperationsInsightsManagement) ResolveReferenc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalDatabaseConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalDatabaseConnectorIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalDatabaseConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7012,6 +7334,7 @@ func (mg *ExternalPluggableDatabaseOperationsInsightsManagement) ResolveReferenc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalPluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalPluggableDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalPluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7031,6 +7354,7 @@ func (mg *ExternalPluggableDatabaseOperationsInsightsManagement) ResolveReferenc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalDatabaseConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalDatabaseConnectorIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalDatabaseConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7050,6 +7374,7 @@ func (mg *ExternalPluggableDatabaseOperationsInsightsManagement) ResolveReferenc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalPluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalPluggableDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalPluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7081,6 +7406,7 @@ func (mg *ExternalcontainerdatabasesStackMonitoring) ResolveReferences(ctx conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalContainerDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7100,6 +7426,7 @@ func (mg *ExternalcontainerdatabasesStackMonitoring) ResolveReferences(ctx conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalDatabaseConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalDatabaseConnectorIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalDatabaseConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7119,6 +7446,7 @@ func (mg *ExternalcontainerdatabasesStackMonitoring) ResolveReferences(ctx conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalContainerDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7138,6 +7466,7 @@ func (mg *ExternalcontainerdatabasesStackMonitoring) ResolveReferences(ctx conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalDatabaseConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalDatabaseConnectorIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalDatabaseConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7169,6 +7498,7 @@ func (mg *ExternalnoncontainerdatabasesStackMonitoring) ResolveReferences(ctx co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalDatabaseConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalDatabaseConnectorIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalDatabaseConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7188,6 +7518,7 @@ func (mg *ExternalnoncontainerdatabasesStackMonitoring) ResolveReferences(ctx co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalNonContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalNonContainerDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalNonContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7207,6 +7538,7 @@ func (mg *ExternalnoncontainerdatabasesStackMonitoring) ResolveReferences(ctx co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalDatabaseConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalDatabaseConnectorIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalDatabaseConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7226,6 +7558,7 @@ func (mg *ExternalnoncontainerdatabasesStackMonitoring) ResolveReferences(ctx co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalNonContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalNonContainerDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalNonContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7257,6 +7590,7 @@ func (mg *ExternalpluggabledatabasesStackMonitoring) ResolveReferences(ctx conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalDatabaseConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalDatabaseConnectorIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalDatabaseConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7276,6 +7610,7 @@ func (mg *ExternalpluggabledatabasesStackMonitoring) ResolveReferences(ctx conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalPluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalPluggableDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalPluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7295,6 +7630,7 @@ func (mg *ExternalpluggabledatabasesStackMonitoring) ResolveReferences(ctx conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalDatabaseConnectorID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalDatabaseConnectorIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalDatabaseConnectorIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7314,6 +7650,7 @@ func (mg *ExternalpluggabledatabasesStackMonitoring) ResolveReferences(ctx conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalPluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalPluggableDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalPluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7345,6 +7682,7 @@ func (mg *KeyStore) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7365,6 +7703,7 @@ func (mg *KeyStore) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TypeDetails[i3].SecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.TypeDetails[i3].SecretIDRef,
 				Selector:     mg.Spec.ForProvider.TypeDetails[i3].SecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -7386,6 +7725,7 @@ func (mg *KeyStore) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TypeDetails[i3].VaultID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.TypeDetails[i3].VaultIDRef,
 				Selector:     mg.Spec.ForProvider.TypeDetails[i3].VaultIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -7406,6 +7746,7 @@ func (mg *KeyStore) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7426,6 +7767,7 @@ func (mg *KeyStore) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TypeDetails[i3].SecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.TypeDetails[i3].SecretIDRef,
 				Selector:     mg.Spec.InitProvider.TypeDetails[i3].SecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -7447,6 +7789,7 @@ func (mg *KeyStore) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TypeDetails[i3].VaultID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.TypeDetails[i3].VaultIDRef,
 				Selector:     mg.Spec.InitProvider.TypeDetails[i3].VaultIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -7480,6 +7823,7 @@ func (mg *MaintenanceRun) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7499,6 +7843,7 @@ func (mg *MaintenanceRun) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseSoftwareImageID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseSoftwareImageIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseSoftwareImageIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7518,6 +7863,7 @@ func (mg *MaintenanceRun) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7537,6 +7883,7 @@ func (mg *MaintenanceRun) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseSoftwareImageID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseSoftwareImageIDRef,
 			Selector:     mg.Spec.InitProvider.DatabaseSoftwareImageIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7568,6 +7915,7 @@ func (mg *ManagementAutonomousDatabaseDbmFeaturesManagement) ResolveReferences(c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutonomousDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AutonomousDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.AutonomousDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7589,6 +7937,7 @@ func (mg *ManagementAutonomousDatabaseDbmFeaturesManagement) ResolveReferences(c
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDRef,
 					Selector:     mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -7613,6 +7962,7 @@ func (mg *ManagementAutonomousDatabaseDbmFeaturesManagement) ResolveReferences(c
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretIDRef,
 						Selector:     mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -7638,6 +7988,7 @@ func (mg *ManagementAutonomousDatabaseDbmFeaturesManagement) ResolveReferences(c
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserNameRef,
 						Selector:     mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -7660,6 +8011,7 @@ func (mg *ManagementAutonomousDatabaseDbmFeaturesManagement) ResolveReferences(c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutonomousDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AutonomousDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.AutonomousDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7681,6 +8033,7 @@ func (mg *ManagementAutonomousDatabaseDbmFeaturesManagement) ResolveReferences(c
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDRef,
 					Selector:     mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -7705,6 +8058,7 @@ func (mg *ManagementAutonomousDatabaseDbmFeaturesManagement) ResolveReferences(c
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretIDRef,
 						Selector:     mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -7730,6 +8084,7 @@ func (mg *ManagementAutonomousDatabaseDbmFeaturesManagement) ResolveReferences(c
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserNameRef,
 						Selector:     mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -7765,6 +8120,7 @@ func (mg *ManagementCloudAsm) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudAsmID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudAsmIDRef,
 			Selector:     mg.Spec.ForProvider.CloudAsmIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7784,6 +8140,7 @@ func (mg *ManagementCloudAsm) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudAsmID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudAsmIDRef,
 			Selector:     mg.Spec.InitProvider.CloudAsmIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7815,6 +8172,7 @@ func (mg *ManagementCloudAsmInstance) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudAsmInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudAsmInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.CloudAsmInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7834,6 +8192,7 @@ func (mg *ManagementCloudAsmInstance) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudAsmInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudAsmInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.CloudAsmInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7865,6 +8224,7 @@ func (mg *ManagementCloudCluster) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudClusterIDRef,
 			Selector:     mg.Spec.ForProvider.CloudClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7884,6 +8244,7 @@ func (mg *ManagementCloudCluster) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudClusterIDRef,
 			Selector:     mg.Spec.InitProvider.CloudClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7915,6 +8276,7 @@ func (mg *ManagementCloudClusterInstance) ResolveReferences(ctx context.Context,
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudClusterInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudClusterInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.CloudClusterInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7934,6 +8296,7 @@ func (mg *ManagementCloudClusterInstance) ResolveReferences(ctx context.Context,
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudClusterInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudClusterInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.CloudClusterInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7965,6 +8328,7 @@ func (mg *ManagementCloudDbHome) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudDBHomeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudDBHomeIDRef,
 			Selector:     mg.Spec.ForProvider.CloudDBHomeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -7984,6 +8348,7 @@ func (mg *ManagementCloudDbHome) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudDBHomeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudDBHomeIDRef,
 			Selector:     mg.Spec.InitProvider.CloudDBHomeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8015,6 +8380,7 @@ func (mg *ManagementCloudDbNode) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudDBNodeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudDBNodeIDRef,
 			Selector:     mg.Spec.ForProvider.CloudDBNodeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8034,6 +8400,7 @@ func (mg *ManagementCloudDbNode) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudDBNodeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudDBNodeIDRef,
 			Selector:     mg.Spec.InitProvider.CloudDBNodeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8065,6 +8432,7 @@ func (mg *ManagementCloudDbSystem) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8084,6 +8452,7 @@ func (mg *ManagementCloudDbSystem) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8115,6 +8484,7 @@ func (mg *ManagementCloudDbSystemCloudDatabaseManagementsManagement) ResolveRefe
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudDBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudDBSystemIDRef,
 			Selector:     mg.Spec.ForProvider.CloudDBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8134,6 +8504,7 @@ func (mg *ManagementCloudDbSystemCloudDatabaseManagementsManagement) ResolveRefe
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudDBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudDBSystemIDRef,
 			Selector:     mg.Spec.InitProvider.CloudDBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8165,6 +8536,7 @@ func (mg *ManagementCloudDbSystemCloudStackMonitoringsManagement) ResolveReferen
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudDBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudDBSystemIDRef,
 			Selector:     mg.Spec.ForProvider.CloudDBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8184,6 +8556,7 @@ func (mg *ManagementCloudDbSystemCloudStackMonitoringsManagement) ResolveReferen
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudDBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudDBSystemIDRef,
 			Selector:     mg.Spec.InitProvider.CloudDBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8215,6 +8588,7 @@ func (mg *ManagementCloudDbSystemConnector) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudDBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudDBSystemIDRef,
 			Selector:     mg.Spec.ForProvider.CloudDBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8234,6 +8608,7 @@ func (mg *ManagementCloudDbSystemConnector) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudDBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudDBSystemIDRef,
 			Selector:     mg.Spec.InitProvider.CloudDBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8265,6 +8640,7 @@ func (mg *ManagementCloudDbSystemDiscovery) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AgentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AgentIDRef,
 			Selector:     mg.Spec.ForProvider.AgentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8284,6 +8660,7 @@ func (mg *ManagementCloudDbSystemDiscovery) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8303,6 +8680,7 @@ func (mg *ManagementCloudDbSystemDiscovery) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AgentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AgentIDRef,
 			Selector:     mg.Spec.InitProvider.AgentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8322,6 +8700,7 @@ func (mg *ManagementCloudDbSystemDiscovery) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8353,6 +8732,7 @@ func (mg *ManagementCloudListener) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudListenerID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CloudListenerIDRef,
 			Selector:     mg.Spec.ForProvider.CloudListenerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8372,6 +8752,7 @@ func (mg *ManagementCloudListener) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudListenerID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CloudListenerIDRef,
 			Selector:     mg.Spec.InitProvider.CloudListenerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8403,6 +8784,7 @@ func (mg *ManagementDatabaseDbmFeaturesManagement) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8424,6 +8806,7 @@ func (mg *ManagementDatabaseDbmFeaturesManagement) ResolveReferences(ctx context
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDRef,
 					Selector:     mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -8448,6 +8831,7 @@ func (mg *ManagementDatabaseDbmFeaturesManagement) ResolveReferences(ctx context
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].NamedCredentialID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].NamedCredentialIDRef,
 						Selector:     mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].NamedCredentialIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -8473,6 +8857,7 @@ func (mg *ManagementDatabaseDbmFeaturesManagement) ResolveReferences(ctx context
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretIDRef,
 						Selector:     mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -8498,6 +8883,7 @@ func (mg *ManagementDatabaseDbmFeaturesManagement) ResolveReferences(ctx context
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserNameRef,
 						Selector:     mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -8520,6 +8906,7 @@ func (mg *ManagementDatabaseDbmFeaturesManagement) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.DatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8541,6 +8928,7 @@ func (mg *ManagementDatabaseDbmFeaturesManagement) ResolveReferences(ctx context
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDRef,
 					Selector:     mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -8565,6 +8953,7 @@ func (mg *ManagementDatabaseDbmFeaturesManagement) ResolveReferences(ctx context
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].NamedCredentialID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].NamedCredentialIDRef,
 						Selector:     mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].NamedCredentialIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -8590,6 +8979,7 @@ func (mg *ManagementDatabaseDbmFeaturesManagement) ResolveReferences(ctx context
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretIDRef,
 						Selector:     mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -8615,6 +9005,7 @@ func (mg *ManagementDatabaseDbmFeaturesManagement) ResolveReferences(ctx context
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserNameRef,
 						Selector:     mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -8650,6 +9041,7 @@ func (mg *ManagementDbManagementPrivateEndpoint) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8669,6 +9061,7 @@ func (mg *ManagementDbManagementPrivateEndpoint) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8688,6 +9081,7 @@ func (mg *ManagementDbManagementPrivateEndpoint) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8707,6 +9101,7 @@ func (mg *ManagementDbManagementPrivateEndpoint) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8738,6 +9133,7 @@ func (mg *ManagementExternalAsm) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalAsmID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalAsmIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalAsmIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8757,6 +9153,7 @@ func (mg *ManagementExternalAsm) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalAsmID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalAsmIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalAsmIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8788,6 +9185,7 @@ func (mg *ManagementExternalAsmInstance) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalAsmInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalAsmInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalAsmInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8807,6 +9205,7 @@ func (mg *ManagementExternalAsmInstance) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalAsmInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalAsmInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalAsmInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8838,6 +9237,7 @@ func (mg *ManagementExternalCluster) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalClusterIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8857,6 +9257,7 @@ func (mg *ManagementExternalCluster) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalClusterIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8888,6 +9289,7 @@ func (mg *ManagementExternalClusterInstance) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalClusterInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalClusterInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalClusterInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8907,6 +9309,7 @@ func (mg *ManagementExternalClusterInstance) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalClusterInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalClusterInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalClusterInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8938,6 +9341,7 @@ func (mg *ManagementExternalDbHome) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalDBHomeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalDBHomeIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalDBHomeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8957,6 +9361,7 @@ func (mg *ManagementExternalDbHome) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalDBHomeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalDBHomeIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalDBHomeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -8988,6 +9393,7 @@ func (mg *ManagementExternalDbNode) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalDBNodeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalDBNodeIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalDBNodeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9007,6 +9413,7 @@ func (mg *ManagementExternalDbNode) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalDBNodeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalDBNodeIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalDBNodeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9038,6 +9445,7 @@ func (mg *ManagementExternalDbSystem) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9057,6 +9465,7 @@ func (mg *ManagementExternalDbSystem) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9088,6 +9497,7 @@ func (mg *ManagementExternalDbSystemConnector) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalDBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalDBSystemIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalDBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9107,6 +9517,7 @@ func (mg *ManagementExternalDbSystemConnector) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalDBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalDBSystemIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalDBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9138,6 +9549,7 @@ func (mg *ManagementExternalDbSystemDatabaseManagementsManagement) ResolveRefere
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalDBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalDBSystemIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalDBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9157,6 +9569,7 @@ func (mg *ManagementExternalDbSystemDatabaseManagementsManagement) ResolveRefere
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalDBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalDBSystemIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalDBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9188,6 +9601,7 @@ func (mg *ManagementExternalDbSystemDiscovery) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AgentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AgentIDRef,
 			Selector:     mg.Spec.ForProvider.AgentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9207,6 +9621,7 @@ func (mg *ManagementExternalDbSystemDiscovery) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9226,6 +9641,7 @@ func (mg *ManagementExternalDbSystemDiscovery) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AgentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AgentIDRef,
 			Selector:     mg.Spec.InitProvider.AgentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9245,6 +9661,7 @@ func (mg *ManagementExternalDbSystemDiscovery) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9276,6 +9693,7 @@ func (mg *ManagementExternalDbSystemStackMonitoringsManagement) ResolveReference
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalDBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalDBSystemIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalDBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9295,6 +9713,7 @@ func (mg *ManagementExternalDbSystemStackMonitoringsManagement) ResolveReference
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalDBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalDBSystemIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalDBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9326,6 +9745,7 @@ func (mg *ManagementExternalExadataInfrastructure) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9345,6 +9765,7 @@ func (mg *ManagementExternalExadataInfrastructure) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9376,6 +9797,7 @@ func (mg *ManagementExternalExadataInfrastructureExadataManagement) ResolveRefer
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalExadataInfrastructureIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9395,6 +9817,7 @@ func (mg *ManagementExternalExadataInfrastructureExadataManagement) ResolveRefer
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalExadataInfrastructureIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9426,6 +9849,7 @@ func (mg *ManagementExternalExadataStorageConnector) ResolveReferences(ctx conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AgentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AgentIDRef,
 			Selector:     mg.Spec.ForProvider.AgentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9445,6 +9869,7 @@ func (mg *ManagementExternalExadataStorageConnector) ResolveReferences(ctx conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AgentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AgentIDRef,
 			Selector:     mg.Spec.InitProvider.AgentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9476,6 +9901,7 @@ func (mg *ManagementExternalExadataStorageGrid) ResolveReferences(ctx context.Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalExadataStorageGridID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalExadataStorageGridIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalExadataStorageGridIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9495,6 +9921,7 @@ func (mg *ManagementExternalExadataStorageGrid) ResolveReferences(ctx context.Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalExadataStorageGridID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalExadataStorageGridIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalExadataStorageGridIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9526,6 +9953,7 @@ func (mg *ManagementExternalExadataStorageServer) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalExadataStorageServerID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalExadataStorageServerIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalExadataStorageServerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9545,6 +9973,7 @@ func (mg *ManagementExternalExadataStorageServer) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalExadataStorageServerID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalExadataStorageServerIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalExadataStorageServerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9576,6 +10005,7 @@ func (mg *ManagementExternalListener) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalListenerID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalListenerIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalListenerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9595,6 +10025,7 @@ func (mg *ManagementExternalListener) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalListenerID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalListenerIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalListenerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9626,6 +10057,7 @@ func (mg *ManagementExternalMySqlDatabase) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9645,6 +10077,7 @@ func (mg *ManagementExternalMySqlDatabase) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9676,6 +10109,7 @@ func (mg *ManagementExternalMySqlDatabaseConnector) ResolveReferences(ctx contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9696,6 +10130,7 @@ func (mg *ManagementExternalMySqlDatabaseConnector) ResolveReferences(ctx contex
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConnectorDetails[i3].MacsAgentID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ConnectorDetails[i3].MacsAgentIDRef,
 				Selector:     mg.Spec.ForProvider.ConnectorDetails[i3].MacsAgentIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -9717,6 +10152,7 @@ func (mg *ManagementExternalMySqlDatabaseConnector) ResolveReferences(ctx contex
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConnectorDetails[i3].SSLSecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ConnectorDetails[i3].SSLSecretIDRef,
 				Selector:     mg.Spec.ForProvider.ConnectorDetails[i3].SSLSecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -9737,6 +10173,7 @@ func (mg *ManagementExternalMySqlDatabaseConnector) ResolveReferences(ctx contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9757,6 +10194,7 @@ func (mg *ManagementExternalMySqlDatabaseConnector) ResolveReferences(ctx contex
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConnectorDetails[i3].MacsAgentID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ConnectorDetails[i3].MacsAgentIDRef,
 				Selector:     mg.Spec.InitProvider.ConnectorDetails[i3].MacsAgentIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -9778,6 +10216,7 @@ func (mg *ManagementExternalMySqlDatabaseConnector) ResolveReferences(ctx contex
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConnectorDetails[i3].SSLSecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ConnectorDetails[i3].SSLSecretIDRef,
 				Selector:     mg.Spec.InitProvider.ConnectorDetails[i3].SSLSecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -9811,6 +10250,7 @@ func (mg *ManagementExternalMySqlDatabaseExternalMysqlDatabases) ResolveReferenc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalMySQLDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalMySQLDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalMySQLDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9830,6 +10270,7 @@ func (mg *ManagementExternalMySqlDatabaseExternalMysqlDatabases) ResolveReferenc
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalMySQLDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalMySQLDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalMySQLDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9861,6 +10302,7 @@ func (mg *ManagementExternalcontainerdatabaseDbmFeaturesManagement) ResolveRefer
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalContainerDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9882,6 +10324,7 @@ func (mg *ManagementExternalcontainerdatabaseDbmFeaturesManagement) ResolveRefer
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDRef,
 					Selector:     mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -9903,6 +10346,7 @@ func (mg *ManagementExternalcontainerdatabaseDbmFeaturesManagement) ResolveRefer
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalContainerDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9924,6 +10368,7 @@ func (mg *ManagementExternalcontainerdatabaseDbmFeaturesManagement) ResolveRefer
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDRef,
 					Selector:     mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -9958,6 +10403,7 @@ func (mg *ManagementExternalnoncontainerdatabaseDbmFeaturesManagement) ResolveRe
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalNonContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalNonContainerDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalNonContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -9979,6 +10425,7 @@ func (mg *ManagementExternalnoncontainerdatabaseDbmFeaturesManagement) ResolveRe
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDRef,
 					Selector:     mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -10000,6 +10447,7 @@ func (mg *ManagementExternalnoncontainerdatabaseDbmFeaturesManagement) ResolveRe
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalNonContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalNonContainerDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalNonContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10021,6 +10469,7 @@ func (mg *ManagementExternalnoncontainerdatabaseDbmFeaturesManagement) ResolveRe
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDRef,
 					Selector:     mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -10055,6 +10504,7 @@ func (mg *ManagementExternalpluggabledatabaseDbmFeaturesManagement) ResolveRefer
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExternalPluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExternalPluggableDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ExternalPluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10076,6 +10526,7 @@ func (mg *ManagementExternalpluggabledatabaseDbmFeaturesManagement) ResolveRefer
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDRef,
 					Selector:     mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -10097,6 +10548,7 @@ func (mg *ManagementExternalpluggabledatabaseDbmFeaturesManagement) ResolveRefer
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExternalPluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExternalPluggableDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ExternalPluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10118,6 +10570,7 @@ func (mg *ManagementExternalpluggabledatabaseDbmFeaturesManagement) ResolveRefer
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDRef,
 					Selector:     mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -10152,6 +10605,7 @@ func (mg *ManagementManagedDatabase) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10171,6 +10625,7 @@ func (mg *ManagementManagedDatabase) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10202,6 +10657,7 @@ func (mg *ManagementManagedDatabaseGroup) ResolveReferences(ctx context.Context,
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10221,6 +10677,7 @@ func (mg *ManagementManagedDatabaseGroup) ResolveReferences(ctx context.Context,
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10253,6 +10710,7 @@ func (mg *ManagementManagedDatabasesChangeDatabaseParameter) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Credentials[i3].SecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Credentials[i3].SecretIDRef,
 				Selector:     mg.Spec.ForProvider.Credentials[i3].SecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -10274,6 +10732,7 @@ func (mg *ManagementManagedDatabasesChangeDatabaseParameter) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Credentials[i3].UserName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Credentials[i3].UserNameRef,
 				Selector:     mg.Spec.ForProvider.Credentials[i3].UserNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -10295,6 +10754,7 @@ func (mg *ManagementManagedDatabasesChangeDatabaseParameter) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseCredential[i3].NamedCredentialID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DatabaseCredential[i3].NamedCredentialIDRef,
 				Selector:     mg.Spec.ForProvider.DatabaseCredential[i3].NamedCredentialIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -10315,6 +10775,7 @@ func (mg *ManagementManagedDatabasesChangeDatabaseParameter) ResolveReferences(c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10335,6 +10796,7 @@ func (mg *ManagementManagedDatabasesChangeDatabaseParameter) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Credentials[i3].SecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Credentials[i3].SecretIDRef,
 				Selector:     mg.Spec.InitProvider.Credentials[i3].SecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -10356,6 +10818,7 @@ func (mg *ManagementManagedDatabasesChangeDatabaseParameter) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Credentials[i3].UserName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Credentials[i3].UserNameRef,
 				Selector:     mg.Spec.InitProvider.Credentials[i3].UserNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -10377,6 +10840,7 @@ func (mg *ManagementManagedDatabasesChangeDatabaseParameter) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseCredential[i3].NamedCredentialID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DatabaseCredential[i3].NamedCredentialIDRef,
 				Selector:     mg.Spec.InitProvider.DatabaseCredential[i3].NamedCredentialIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -10397,6 +10861,7 @@ func (mg *ManagementManagedDatabasesChangeDatabaseParameter) ResolveReferences(c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10429,6 +10894,7 @@ func (mg *ManagementManagedDatabasesResetDatabaseParameter) ResolveReferences(ct
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Credentials[i3].SecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Credentials[i3].SecretIDRef,
 				Selector:     mg.Spec.ForProvider.Credentials[i3].SecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -10450,6 +10916,7 @@ func (mg *ManagementManagedDatabasesResetDatabaseParameter) ResolveReferences(ct
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Credentials[i3].UserName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Credentials[i3].UserNameRef,
 				Selector:     mg.Spec.ForProvider.Credentials[i3].UserNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -10471,6 +10938,7 @@ func (mg *ManagementManagedDatabasesResetDatabaseParameter) ResolveReferences(ct
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseCredential[i3].NamedCredentialID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DatabaseCredential[i3].NamedCredentialIDRef,
 				Selector:     mg.Spec.ForProvider.DatabaseCredential[i3].NamedCredentialIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -10491,6 +10959,7 @@ func (mg *ManagementManagedDatabasesResetDatabaseParameter) ResolveReferences(ct
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10511,6 +10980,7 @@ func (mg *ManagementManagedDatabasesResetDatabaseParameter) ResolveReferences(ct
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Credentials[i3].SecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Credentials[i3].SecretIDRef,
 				Selector:     mg.Spec.InitProvider.Credentials[i3].SecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -10532,6 +11002,7 @@ func (mg *ManagementManagedDatabasesResetDatabaseParameter) ResolveReferences(ct
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Credentials[i3].UserName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Credentials[i3].UserNameRef,
 				Selector:     mg.Spec.InitProvider.Credentials[i3].UserNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -10553,6 +11024,7 @@ func (mg *ManagementManagedDatabasesResetDatabaseParameter) ResolveReferences(ct
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseCredential[i3].NamedCredentialID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DatabaseCredential[i3].NamedCredentialIDRef,
 				Selector:     mg.Spec.InitProvider.DatabaseCredential[i3].NamedCredentialIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -10573,6 +11045,7 @@ func (mg *ManagementManagedDatabasesResetDatabaseParameter) ResolveReferences(ct
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10604,6 +11077,7 @@ func (mg *ManagementNamedCredential) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10624,6 +11098,7 @@ func (mg *ManagementNamedCredential) ResolveReferences(ctx context.Context, c cl
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Content[i3].UserName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Content[i3].UserNameRef,
 				Selector:     mg.Spec.ForProvider.Content[i3].UserNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -10644,6 +11119,7 @@ func (mg *ManagementNamedCredential) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10664,6 +11140,7 @@ func (mg *ManagementNamedCredential) ResolveReferences(ctx context.Context, c cl
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Content[i3].UserName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Content[i3].UserNameRef,
 				Selector:     mg.Spec.InitProvider.Content[i3].UserNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -10699,6 +11176,7 @@ func (mg *ManagementPluggabledatabaseDbmFeaturesManagement) ResolveReferences(ct
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDRef,
 					Selector:     mg.Spec.ForProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -10723,6 +11201,7 @@ func (mg *ManagementPluggabledatabaseDbmFeaturesManagement) ResolveReferences(ct
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].NamedCredentialID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].NamedCredentialIDRef,
 						Selector:     mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].NamedCredentialIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -10748,6 +11227,7 @@ func (mg *ManagementPluggabledatabaseDbmFeaturesManagement) ResolveReferences(ct
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretIDRef,
 						Selector:     mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -10773,6 +11253,7 @@ func (mg *ManagementPluggabledatabaseDbmFeaturesManagement) ResolveReferences(ct
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserNameRef,
 						Selector:     mg.Spec.ForProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -10795,6 +11276,7 @@ func (mg *ManagementPluggabledatabaseDbmFeaturesManagement) ResolveReferences(ct
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PluggableDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.PluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10816,6 +11298,7 @@ func (mg *ManagementPluggabledatabaseDbmFeaturesManagement) ResolveReferences(ct
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDRef,
 					Selector:     mg.Spec.InitProvider.FeatureDetails[i3].ConnectorDetails[i4].ManagementAgentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -10840,6 +11323,7 @@ func (mg *ManagementPluggabledatabaseDbmFeaturesManagement) ResolveReferences(ct
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].NamedCredentialID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].NamedCredentialIDRef,
 						Selector:     mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].NamedCredentialIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -10865,6 +11349,7 @@ func (mg *ManagementPluggabledatabaseDbmFeaturesManagement) ResolveReferences(ct
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretIDRef,
 						Selector:     mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].SSLSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -10890,6 +11375,7 @@ func (mg *ManagementPluggabledatabaseDbmFeaturesManagement) ResolveReferences(ct
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserNameRef,
 						Selector:     mg.Spec.InitProvider.FeatureDetails[i3].DatabaseConnectionDetails[i4].ConnectionCredentials[i5].UserNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -10912,6 +11398,7 @@ func (mg *ManagementPluggabledatabaseDbmFeaturesManagement) ResolveReferences(ct
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PluggableDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.PluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10943,6 +11430,7 @@ func (mg *Migration) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DBSystemIDRef,
 			Selector:     mg.Spec.ForProvider.DBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10962,6 +11450,7 @@ func (mg *Migration) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DBSystemIDRef,
 			Selector:     mg.Spec.InitProvider.DBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -10993,6 +11482,7 @@ func (mg *MigrationConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11012,6 +11502,7 @@ func (mg *MigrationConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DBSystemIDRef,
 			Selector:     mg.Spec.ForProvider.DBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11031,6 +11522,7 @@ func (mg *MigrationConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11050,6 +11542,7 @@ func (mg *MigrationConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseNameRef,
 			Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11069,6 +11562,7 @@ func (mg *MigrationConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KeyIDRef,
 			Selector:     mg.Spec.ForProvider.KeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11088,6 +11582,7 @@ func (mg *MigrationConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11107,6 +11602,7 @@ func (mg *MigrationConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VaultIDRef,
 			Selector:     mg.Spec.ForProvider.VaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11126,6 +11622,7 @@ func (mg *MigrationConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11145,6 +11642,7 @@ func (mg *MigrationConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBSystemID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DBSystemIDRef,
 			Selector:     mg.Spec.InitProvider.DBSystemIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11164,6 +11662,7 @@ func (mg *MigrationConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.DatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11183,6 +11682,7 @@ func (mg *MigrationConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseNameRef,
 			Selector:     mg.Spec.InitProvider.DatabaseNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11202,6 +11702,7 @@ func (mg *MigrationConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KeyIDRef,
 			Selector:     mg.Spec.InitProvider.KeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11221,6 +11722,7 @@ func (mg *MigrationConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11240,6 +11742,7 @@ func (mg *MigrationConnection) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VaultID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VaultIDRef,
 			Selector:     mg.Spec.InitProvider.VaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11271,6 +11774,7 @@ func (mg *MigrationJob) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.JobID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.JobIDRef,
 			Selector:     mg.Spec.ForProvider.JobIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11290,6 +11794,7 @@ func (mg *MigrationJob) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.JobID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.JobIDRef,
 			Selector:     mg.Spec.InitProvider.JobIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11321,6 +11826,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11341,6 +11847,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataTransferMediumDetails[i3].AccessKeyID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DataTransferMediumDetails[i3].AccessKeyIDRef,
 				Selector:     mg.Spec.ForProvider.DataTransferMediumDetails[i3].AccessKeyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -11362,6 +11869,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataTransferMediumDetails[i3].SharedStorageMountTargetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DataTransferMediumDetails[i3].SharedStorageMountTargetIDRef,
 				Selector:     mg.Spec.ForProvider.DataTransferMediumDetails[i3].SharedStorageMountTargetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -11383,6 +11891,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HubDetails[i3].KeyID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.HubDetails[i3].KeyIDRef,
 				Selector:     mg.Spec.ForProvider.HubDetails[i3].KeyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -11404,6 +11913,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HubDetails[i3].VaultID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.HubDetails[i3].VaultIDRef,
 				Selector:     mg.Spec.ForProvider.HubDetails[i3].VaultIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -11424,6 +11934,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceContainerDatabaseConnectionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceContainerDatabaseConnectionIDRef,
 			Selector:     mg.Spec.ForProvider.SourceContainerDatabaseConnectionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11443,6 +11954,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceDatabaseConnectionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceDatabaseConnectionIDRef,
 			Selector:     mg.Spec.ForProvider.SourceDatabaseConnectionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11462,6 +11974,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceStandbyDatabaseConnectionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SourceStandbyDatabaseConnectionIDRef,
 			Selector:     mg.Spec.ForProvider.SourceStandbyDatabaseConnectionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11481,6 +11994,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetDatabaseConnectionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TargetDatabaseConnectionIDRef,
 			Selector:     mg.Spec.ForProvider.TargetDatabaseConnectionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11500,6 +12014,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11520,6 +12035,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataTransferMediumDetails[i3].AccessKeyID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DataTransferMediumDetails[i3].AccessKeyIDRef,
 				Selector:     mg.Spec.InitProvider.DataTransferMediumDetails[i3].AccessKeyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -11541,6 +12057,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataTransferMediumDetails[i3].SharedStorageMountTargetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DataTransferMediumDetails[i3].SharedStorageMountTargetIDRef,
 				Selector:     mg.Spec.InitProvider.DataTransferMediumDetails[i3].SharedStorageMountTargetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -11562,6 +12079,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HubDetails[i3].KeyID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.HubDetails[i3].KeyIDRef,
 				Selector:     mg.Spec.InitProvider.HubDetails[i3].KeyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -11583,6 +12101,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HubDetails[i3].VaultID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.HubDetails[i3].VaultIDRef,
 				Selector:     mg.Spec.InitProvider.HubDetails[i3].VaultIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -11603,6 +12122,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceContainerDatabaseConnectionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceContainerDatabaseConnectionIDRef,
 			Selector:     mg.Spec.InitProvider.SourceContainerDatabaseConnectionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11622,6 +12142,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceDatabaseConnectionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceDatabaseConnectionIDRef,
 			Selector:     mg.Spec.InitProvider.SourceDatabaseConnectionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11641,6 +12162,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceStandbyDatabaseConnectionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SourceStandbyDatabaseConnectionIDRef,
 			Selector:     mg.Spec.InitProvider.SourceStandbyDatabaseConnectionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11660,6 +12182,7 @@ func (mg *MigrationMigration) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetDatabaseConnectionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TargetDatabaseConnectionIDRef,
 			Selector:     mg.Spec.InitProvider.TargetDatabaseConnectionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11691,6 +12214,7 @@ func (mg *OneoffPatch) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11710,6 +12234,7 @@ func (mg *OneoffPatch) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11741,6 +12266,7 @@ func (mg *PluggableDatabase) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ContainerDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.ContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11760,6 +12286,7 @@ func (mg *PluggableDatabase) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyVersionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyVersionIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyVersionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11780,6 +12307,7 @@ func (mg *PluggableDatabase) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PdbCreationTypeDetails[i3].SourcePluggableDatabaseID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.PdbCreationTypeDetails[i3].SourcePluggableDatabaseIDRef,
 				Selector:     mg.Spec.ForProvider.PdbCreationTypeDetails[i3].SourcePluggableDatabaseIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -11801,6 +12329,7 @@ func (mg *PluggableDatabase) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PdbCreationTypeDetails[i3].SourcePluggableDatabaseSnapshotID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.PdbCreationTypeDetails[i3].SourcePluggableDatabaseSnapshotIDRef,
 				Selector:     mg.Spec.ForProvider.PdbCreationTypeDetails[i3].SourcePluggableDatabaseSnapshotIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -11821,6 +12350,7 @@ func (mg *PluggableDatabase) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ContainerDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.ContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11840,6 +12370,7 @@ func (mg *PluggableDatabase) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyVersionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyVersionIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyVersionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11860,6 +12391,7 @@ func (mg *PluggableDatabase) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PdbCreationTypeDetails[i3].SourcePluggableDatabaseID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.PdbCreationTypeDetails[i3].SourcePluggableDatabaseIDRef,
 				Selector:     mg.Spec.InitProvider.PdbCreationTypeDetails[i3].SourcePluggableDatabaseIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -11881,6 +12413,7 @@ func (mg *PluggableDatabase) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PdbCreationTypeDetails[i3].SourcePluggableDatabaseSnapshotID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.PdbCreationTypeDetails[i3].SourcePluggableDatabaseSnapshotIDRef,
 				Selector:     mg.Spec.InitProvider.PdbCreationTypeDetails[i3].SourcePluggableDatabaseSnapshotIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -11915,6 +12448,7 @@ func (mg *PluggableDatabasePluggabledatabasemanagementsManagement) ResolveRefere
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CredentialDetails[i3].UserName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CredentialDetails[i3].UserNameRef,
 				Selector:     mg.Spec.ForProvider.CredentialDetails[i3].UserNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -11935,6 +12469,7 @@ func (mg *PluggableDatabasePluggabledatabasemanagementsManagement) ResolveRefere
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PluggableDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.PluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11954,6 +12489,7 @@ func (mg *PluggableDatabasePluggabledatabasemanagementsManagement) ResolveRefere
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SSLSecretID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SSLSecretIDRef,
 			Selector:     mg.Spec.ForProvider.SSLSecretIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -11974,6 +12510,7 @@ func (mg *PluggableDatabasePluggabledatabasemanagementsManagement) ResolveRefere
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CredentialDetails[i3].UserName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CredentialDetails[i3].UserNameRef,
 				Selector:     mg.Spec.InitProvider.CredentialDetails[i3].UserNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -11994,6 +12531,7 @@ func (mg *PluggableDatabasePluggabledatabasemanagementsManagement) ResolveRefere
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PluggableDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.PluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12013,6 +12551,7 @@ func (mg *PluggableDatabasePluggabledatabasemanagementsManagement) ResolveRefere
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SSLSecretID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SSLSecretIDRef,
 			Selector:     mg.Spec.InitProvider.SSLSecretIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12044,6 +12583,7 @@ func (mg *PluggableDatabaseSnapshot) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PluggableDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.PluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12063,6 +12603,7 @@ func (mg *PluggableDatabaseSnapshot) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PluggableDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.PluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12094,6 +12635,7 @@ func (mg *PluggableDatabasesLocalClone) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PluggableDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.PluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12113,6 +12655,7 @@ func (mg *PluggableDatabasesLocalClone) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PluggableDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.PluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12144,6 +12687,7 @@ func (mg *PluggableDatabasesRemoteClone) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PluggableDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.PluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12163,6 +12707,7 @@ func (mg *PluggableDatabasesRemoteClone) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TargetContainerDatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.TargetContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12182,6 +12727,7 @@ func (mg *PluggableDatabasesRemoteClone) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PluggableDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PluggableDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.PluggableDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12201,6 +12747,7 @@ func (mg *PluggableDatabasesRemoteClone) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetContainerDatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TargetContainerDatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.TargetContainerDatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12232,6 +12779,7 @@ func (mg *ScheduledAction) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12251,6 +12799,7 @@ func (mg *ScheduledAction) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SchedulingPlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SchedulingPlanIDRef,
 			Selector:     mg.Spec.ForProvider.SchedulingPlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12270,6 +12819,7 @@ func (mg *ScheduledAction) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12289,6 +12839,7 @@ func (mg *ScheduledAction) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SchedulingPlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SchedulingPlanIDRef,
 			Selector:     mg.Spec.InitProvider.SchedulingPlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12320,6 +12871,7 @@ func (mg *SchedulingPlan) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12339,6 +12891,7 @@ func (mg *SchedulingPlan) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SchedulingPolicyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SchedulingPolicyIDRef,
 			Selector:     mg.Spec.ForProvider.SchedulingPolicyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12358,6 +12911,7 @@ func (mg *SchedulingPlan) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12377,6 +12931,7 @@ func (mg *SchedulingPlan) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SchedulingPolicyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SchedulingPolicyIDRef,
 			Selector:     mg.Spec.InitProvider.SchedulingPolicyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12408,6 +12963,7 @@ func (mg *SchedulingPolicy) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12427,6 +12983,7 @@ func (mg *SchedulingPolicy) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12458,6 +13015,7 @@ func (mg *SchedulingPolicySchedulingWindow) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12477,6 +13035,7 @@ func (mg *SchedulingPolicySchedulingWindow) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SchedulingPolicyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SchedulingPolicyIDRef,
 			Selector:     mg.Spec.ForProvider.SchedulingPolicyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12496,6 +13055,7 @@ func (mg *SchedulingPolicySchedulingWindow) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12515,6 +13075,7 @@ func (mg *SchedulingPolicySchedulingWindow) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SchedulingPolicyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SchedulingPolicyIDRef,
 			Selector:     mg.Spec.InitProvider.SchedulingPolicyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12546,6 +13107,7 @@ func (mg *ToolsDatabaseToolsConnection) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12567,6 +13129,7 @@ func (mg *ToolsDatabaseToolsConnection) ResolveReferences(ctx context.Context, c
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyStores[i3].KeyStoreContent[i4].SecretID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.KeyStores[i3].KeyStoreContent[i4].SecretIDRef,
 					Selector:     mg.Spec.ForProvider.KeyStores[i3].KeyStoreContent[i4].SecretIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -12590,6 +13153,7 @@ func (mg *ToolsDatabaseToolsConnection) ResolveReferences(ctx context.Context, c
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyStores[i3].KeyStorePassword[i4].SecretID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.KeyStores[i3].KeyStorePassword[i4].SecretIDRef,
 					Selector:     mg.Spec.ForProvider.KeyStores[i3].KeyStorePassword[i4].SecretIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -12611,6 +13175,7 @@ func (mg *ToolsDatabaseToolsConnection) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateEndpointID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PrivateEndpointIDRef,
 			Selector:     mg.Spec.ForProvider.PrivateEndpointIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12631,6 +13196,7 @@ func (mg *ToolsDatabaseToolsConnection) ResolveReferences(ctx context.Context, c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProxyClient[i3].UserName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ProxyClient[i3].UserNameRef,
 				Selector:     mg.Spec.ForProvider.ProxyClient[i3].UserNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -12653,6 +13219,7 @@ func (mg *ToolsDatabaseToolsConnection) ResolveReferences(ctx context.Context, c
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProxyClient[i3].UserPassword[i4].SecretID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.ProxyClient[i3].UserPassword[i4].SecretIDRef,
 					Selector:     mg.Spec.ForProvider.ProxyClient[i3].UserPassword[i4].SecretIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -12674,6 +13241,7 @@ func (mg *ToolsDatabaseToolsConnection) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.UserNameRef,
 			Selector:     mg.Spec.ForProvider.UserNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12694,6 +13262,7 @@ func (mg *ToolsDatabaseToolsConnection) ResolveReferences(ctx context.Context, c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserPassword[i3].SecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.UserPassword[i3].SecretIDRef,
 				Selector:     mg.Spec.ForProvider.UserPassword[i3].SecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -12714,6 +13283,7 @@ func (mg *ToolsDatabaseToolsConnection) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12735,6 +13305,7 @@ func (mg *ToolsDatabaseToolsConnection) ResolveReferences(ctx context.Context, c
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyStores[i3].KeyStoreContent[i4].SecretID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.KeyStores[i3].KeyStoreContent[i4].SecretIDRef,
 					Selector:     mg.Spec.InitProvider.KeyStores[i3].KeyStoreContent[i4].SecretIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -12758,6 +13329,7 @@ func (mg *ToolsDatabaseToolsConnection) ResolveReferences(ctx context.Context, c
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyStores[i3].KeyStorePassword[i4].SecretID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.KeyStores[i3].KeyStorePassword[i4].SecretIDRef,
 					Selector:     mg.Spec.InitProvider.KeyStores[i3].KeyStorePassword[i4].SecretIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -12779,6 +13351,7 @@ func (mg *ToolsDatabaseToolsConnection) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateEndpointID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PrivateEndpointIDRef,
 			Selector:     mg.Spec.InitProvider.PrivateEndpointIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12799,6 +13372,7 @@ func (mg *ToolsDatabaseToolsConnection) ResolveReferences(ctx context.Context, c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProxyClient[i3].UserName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ProxyClient[i3].UserNameRef,
 				Selector:     mg.Spec.InitProvider.ProxyClient[i3].UserNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -12821,6 +13395,7 @@ func (mg *ToolsDatabaseToolsConnection) ResolveReferences(ctx context.Context, c
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProxyClient[i3].UserPassword[i4].SecretID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.ProxyClient[i3].UserPassword[i4].SecretIDRef,
 					Selector:     mg.Spec.InitProvider.ProxyClient[i3].UserPassword[i4].SecretIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -12842,6 +13417,7 @@ func (mg *ToolsDatabaseToolsConnection) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.UserNameRef,
 			Selector:     mg.Spec.InitProvider.UserNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12862,6 +13438,7 @@ func (mg *ToolsDatabaseToolsConnection) ResolveReferences(ctx context.Context, c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserPassword[i3].SecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.UserPassword[i3].SecretIDRef,
 				Selector:     mg.Spec.InitProvider.UserPassword[i3].SecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -12895,6 +13472,7 @@ func (mg *ToolsDatabaseToolsIdentity) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12914,6 +13492,7 @@ func (mg *ToolsDatabaseToolsIdentity) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseToolsConnectionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseToolsConnectionIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseToolsConnectionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12933,6 +13512,7 @@ func (mg *ToolsDatabaseToolsIdentity) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12952,6 +13532,7 @@ func (mg *ToolsDatabaseToolsIdentity) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseToolsConnectionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseToolsConnectionIDRef,
 			Selector:     mg.Spec.InitProvider.DatabaseToolsConnectionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -12983,6 +13564,7 @@ func (mg *ToolsDatabaseToolsPrivateEndpoint) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13002,6 +13584,7 @@ func (mg *ToolsDatabaseToolsPrivateEndpoint) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13021,6 +13604,7 @@ func (mg *ToolsDatabaseToolsPrivateEndpoint) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13040,6 +13624,7 @@ func (mg *ToolsDatabaseToolsPrivateEndpoint) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13071,6 +13656,7 @@ func (mg *VmCluster) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13090,6 +13676,7 @@ func (mg *VmCluster) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExadataInfrastructureIDRef,
 			Selector:     mg.Spec.ForProvider.ExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13109,6 +13696,7 @@ func (mg *VmCluster) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExascaleDBStorageVaultID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExascaleDBStorageVaultIDRef,
 			Selector:     mg.Spec.ForProvider.ExascaleDBStorageVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13128,6 +13716,7 @@ func (mg *VmCluster) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VMClusterNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VMClusterNetworkIDRef,
 			Selector:     mg.Spec.ForProvider.VMClusterNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13147,6 +13736,7 @@ func (mg *VmCluster) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13166,6 +13756,7 @@ func (mg *VmCluster) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExadataInfrastructureIDRef,
 			Selector:     mg.Spec.InitProvider.ExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13185,6 +13776,7 @@ func (mg *VmCluster) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExascaleDBStorageVaultID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExascaleDBStorageVaultIDRef,
 			Selector:     mg.Spec.InitProvider.ExascaleDBStorageVaultIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13204,6 +13796,7 @@ func (mg *VmCluster) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VMClusterNetworkID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VMClusterNetworkIDRef,
 			Selector:     mg.Spec.InitProvider.VMClusterNetworkIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13235,6 +13828,7 @@ func (mg *VmClusterAddVirtualMachine) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.VMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13254,6 +13848,7 @@ func (mg *VmClusterAddVirtualMachine) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.VMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13285,6 +13880,7 @@ func (mg *VmClusterNetwork) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13304,6 +13900,7 @@ func (mg *VmClusterNetwork) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExadataInfrastructureIDRef,
 			Selector:     mg.Spec.ForProvider.ExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13324,6 +13921,7 @@ func (mg *VmClusterNetwork) ResolveReferences(ctx context.Context, c client.Read
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VMNetworks[i3].DomainName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.VMNetworks[i3].DomainNameRef,
 				Selector:     mg.Spec.ForProvider.VMNetworks[i3].DomainNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -13344,6 +13942,7 @@ func (mg *VmClusterNetwork) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13363,6 +13962,7 @@ func (mg *VmClusterNetwork) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExadataInfrastructureID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExadataInfrastructureIDRef,
 			Selector:     mg.Spec.InitProvider.ExadataInfrastructureIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13383,6 +13983,7 @@ func (mg *VmClusterNetwork) ResolveReferences(ctx context.Context, c client.Read
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VMNetworks[i3].DomainName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.VMNetworks[i3].DomainNameRef,
 				Selector:     mg.Spec.InitProvider.VMNetworks[i3].DomainNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -13416,6 +14017,7 @@ func (mg *VmClusterRemoveVirtualMachine) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VMClusterIDRef,
 			Selector:     mg.Spec.ForProvider.VMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -13435,6 +14037,7 @@ func (mg *VmClusterRemoveVirtualMachine) ResolveReferences(ctx context.Context, 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VMClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VMClusterIDRef,
 			Selector:     mg.Spec.InitProvider.VMClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},

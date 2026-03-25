@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AuthConfigurationInitParameters struct {
@@ -29,7 +29,7 @@ type AuthConfigurationInitParameters struct {
 
 	// Identity Domain OCID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
 	// Reference to a Domain in identity to populate domainId.
@@ -73,7 +73,7 @@ type AuthConfigurationParameters struct {
 
 	// Identity Domain OCID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
@@ -155,7 +155,7 @@ type MlApplicationInstanceInitParameters struct {
 
 	// The OCID of ML Application. This resource is an instance of ML Application referenced by this OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.MlApplication
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MLApplicationID *string `json:"mlApplicationId,omitempty" tf:"ml_application_id,omitempty"`
 
 	// Reference to a MlApplication in datascience to populate mlApplicationId.
@@ -168,7 +168,7 @@ type MlApplicationInstanceInitParameters struct {
 
 	// (Updatable) The OCID of ML Application Implementation selected as a certain solution for a given ML problem (ML Application)
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.MlApplicationImplementation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MLApplicationImplementationID *string `json:"mlApplicationImplementationId,omitempty" tf:"ml_application_implementation_id,omitempty"`
 
 	// Reference to a MlApplicationImplementation in datascience to populate mlApplicationImplementationId.
@@ -286,7 +286,7 @@ type MlApplicationInstanceParameters struct {
 
 	// The OCID of ML Application. This resource is an instance of ML Application referenced by this OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.MlApplication
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MLApplicationID *string `json:"mlApplicationId,omitempty" tf:"ml_application_id,omitempty"`
 
@@ -300,7 +300,7 @@ type MlApplicationInstanceParameters struct {
 
 	// (Updatable) The OCID of ML Application Implementation selected as a certain solution for a given ML problem (ML Application)
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.MlApplicationImplementation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MLApplicationImplementationID *string `json:"mlApplicationImplementationId,omitempty" tf:"ml_application_implementation_id,omitempty"`
 

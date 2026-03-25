@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BuildPipelineStageInitParameters struct {
 
 	// The OCID of the build pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.BuildPipeline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BuildPipelineID *string `json:"buildPipelineId,omitempty" tf:"build_pipeline_id,omitempty"`
 
 	// Reference to a BuildPipeline in devops to populate buildPipelineId.
@@ -52,7 +52,7 @@ type BuildPipelineStageInitParameters struct {
 
 	// (Updatable) A target deployment pipeline OCID that will run in this stage.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployPipeline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DeployPipelineID *string `json:"deployPipelineId,omitempty" tf:"deploy_pipeline_id,omitempty"`
 
 	// Reference to a DeployPipeline in devops to populate deployPipelineId.
@@ -180,7 +180,7 @@ type BuildPipelineStageParameters struct {
 
 	// The OCID of the build pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.BuildPipeline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BuildPipelineID *string `json:"buildPipelineId,omitempty" tf:"build_pipeline_id,omitempty"`
 
@@ -223,7 +223,7 @@ type BuildPipelineStageParameters struct {
 
 	// (Updatable) A target deployment pipeline OCID that will run in this stage.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployPipeline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeployPipelineID *string `json:"deployPipelineId,omitempty" tf:"deploy_pipeline_id,omitempty"`
 
@@ -363,7 +363,7 @@ type BuildSourceCollectionItemsInitParameters struct {
 
 	// (Updatable) Connection identifier pertinent to Bitbucket Server source provider
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.Connection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
 	// Reference to a Connection in devops to populate connectionId.
@@ -382,7 +382,7 @@ type BuildSourceCollectionItemsInitParameters struct {
 
 	// (Updatable) The DevOps code repository ID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/artifacts/v1alpha1.Repository
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
 
 	// Reference to a Repository in artifacts to populate repositoryId.
@@ -426,7 +426,7 @@ type BuildSourceCollectionItemsParameters struct {
 
 	// (Updatable) Connection identifier pertinent to Bitbucket Server source provider
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.Connection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
@@ -448,7 +448,7 @@ type BuildSourceCollectionItemsParameters struct {
 
 	// (Updatable) The DevOps code repository ID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/artifacts/v1alpha1.Repository
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
 
@@ -537,7 +537,7 @@ type PrivateAccessConfigInitParameters struct {
 
 	// (Updatable) The OCID of the subnet where VNIC resources will be created for private endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -575,7 +575,7 @@ type PrivateAccessConfigParameters struct {
 
 	// (Updatable) The OCID of the subnet where VNIC resources will be created for private endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

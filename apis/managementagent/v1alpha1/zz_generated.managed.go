@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this ManagementAgent.
 func (mg *ManagementAgent) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *ManagementAgent) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this ManagementAgent.
 func (mg *ManagementAgent) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this ManagementAgent.
-func (mg *ManagementAgent) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this ManagementAgent.
@@ -57,11 +52,6 @@ func (mg *ManagementAgent) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this ManagementAgent.
-func (mg *ManagementAgent) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this ManagementAgent.
 func (mg *ManagementAgent) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -85,11 +75,6 @@ func (mg *ManagementAgentDataSource) GetManagementPolicies() xpv1.ManagementPoli
 // GetProviderConfigReference of this ManagementAgentDataSource.
 func (mg *ManagementAgentDataSource) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this ManagementAgentDataSource.
-func (mg *ManagementAgentDataSource) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this ManagementAgentDataSource.
@@ -117,11 +102,6 @@ func (mg *ManagementAgentDataSource) SetProviderConfigReference(r *xpv1.Referenc
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this ManagementAgentDataSource.
-func (mg *ManagementAgentDataSource) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this ManagementAgentDataSource.
 func (mg *ManagementAgentDataSource) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -145,11 +125,6 @@ func (mg *ManagementAgentInstallKey) GetManagementPolicies() xpv1.ManagementPoli
 // GetProviderConfigReference of this ManagementAgentInstallKey.
 func (mg *ManagementAgentInstallKey) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this ManagementAgentInstallKey.
-func (mg *ManagementAgentInstallKey) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this ManagementAgentInstallKey.
@@ -177,11 +152,6 @@ func (mg *ManagementAgentInstallKey) SetProviderConfigReference(r *xpv1.Referenc
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this ManagementAgentInstallKey.
-func (mg *ManagementAgentInstallKey) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this ManagementAgentInstallKey.
 func (mg *ManagementAgentInstallKey) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -207,11 +177,6 @@ func (mg *NamedCredential) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this NamedCredential.
-func (mg *NamedCredential) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this NamedCredential.
 func (mg *NamedCredential) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *NamedCredential) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this NamedCredential.
 func (mg *NamedCredential) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this NamedCredential.
-func (mg *NamedCredential) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this NamedCredential.

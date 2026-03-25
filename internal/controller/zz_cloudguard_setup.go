@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	adhocquery "github.com/oracle/provider-oci/internal/controller/cloudguard/adhocquery"
 	cloudguardconfiguration "github.com/oracle/provider-oci/internal/controller/cloudguard/cloudguardconfiguration"
@@ -39,6 +39,30 @@ func Setup_cloudguard(mgr ctrl.Manager, o controller.Options) error {
 		securityzone.Setup,
 		target.Setup,
 		wlpagent.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_cloudguard creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_cloudguard(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		adhocquery.SetupGated,
+		cloudguardconfiguration.SetupGated,
+		datamaskrule.SetupGated,
+		datasource.SetupGated,
+		detectorrecipe.SetupGated,
+		managedlist.SetupGated,
+		responderrecipe.SetupGated,
+		savedquery.SetupGated,
+		securityrecipe.SetupGated,
+		securityzone.SetupGated,
+		target.SetupGated,
+		wlpagent.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagedListInitParameters struct {
@@ -52,7 +52,7 @@ type ManagedListInitParameters struct {
 
 	// OCID of the source managed list
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudguard/v1alpha1.ManagedList
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceManagedListID *string `json:"sourceManagedListId,omitempty" tf:"source_managed_list_id,omitempty"`
 
 	// Reference to a ManagedList in cloudguard to populate sourceManagedListId.
@@ -168,7 +168,7 @@ type ManagedListParameters struct {
 
 	// OCID of the source managed list
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudguard/v1alpha1.ManagedList
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceManagedListID *string `json:"sourceManagedListId,omitempty" tf:"source_managed_list_id,omitempty"`
 

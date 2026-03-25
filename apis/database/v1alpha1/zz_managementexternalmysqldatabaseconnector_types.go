@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagementExternalMySqlDatabaseConnectorConnectorDetailsInitParameters struct {
@@ -29,7 +29,7 @@ type ManagementExternalMySqlDatabaseConnectorConnectorDetailsInitParameters stru
 
 	// (Updatable) Agent Id of the MACS agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudbridge/v1alpha1.Agent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MacsAgentID *string `json:"macsAgentId,omitempty" tf:"macs_agent_id,omitempty"`
 
 	// Reference to a Agent in cloudbridge to populate macsAgentId.
@@ -48,7 +48,7 @@ type ManagementExternalMySqlDatabaseConnectorConnectorDetailsInitParameters stru
 
 	// (Updatable) If using existing SSL secret to connect, OCID for the secret resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SSLSecretID *string `json:"sslSecretId,omitempty" tf:"ssl_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate sslSecretId.
@@ -107,7 +107,7 @@ type ManagementExternalMySqlDatabaseConnectorConnectorDetailsParameters struct {
 
 	// (Updatable) Agent Id of the MACS agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudbridge/v1alpha1.Agent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MacsAgentID *string `json:"macsAgentId,omitempty" tf:"macs_agent_id,omitempty"`
 
@@ -129,7 +129,7 @@ type ManagementExternalMySqlDatabaseConnectorConnectorDetailsParameters struct {
 
 	// (Updatable) If using existing SSL secret to connect, OCID for the secret resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SSLSecretID *string `json:"sslSecretId,omitempty" tf:"ssl_secret_id,omitempty"`
 

@@ -8,18 +8,16 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
+	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Cluster.
-	apisresolver "github.com/oracle/provider-oci/internal/apis"
 )
 
-func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Cluster) ResolveReferences( // ResolveReferences of this Cluster.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -36,6 +34,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkConfiguration[i3].HcxVlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.NetworkConfiguration[i3].HcxVlanIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkConfiguration[i3].HcxVlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -57,6 +56,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkConfiguration[i3].NsxEdgeVtepVlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.NetworkConfiguration[i3].NsxEdgeVtepVlanIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkConfiguration[i3].NsxEdgeVtepVlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -78,6 +78,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkConfiguration[i3].NsxVtepVlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.NetworkConfiguration[i3].NsxVtepVlanIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkConfiguration[i3].NsxVtepVlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -99,6 +100,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkConfiguration[i3].ProvisioningSubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.NetworkConfiguration[i3].ProvisioningSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkConfiguration[i3].ProvisioningSubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -120,6 +122,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkConfiguration[i3].ProvisioningVlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.NetworkConfiguration[i3].ProvisioningVlanIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkConfiguration[i3].ProvisioningVlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -141,6 +144,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkConfiguration[i3].ReplicationVlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.NetworkConfiguration[i3].ReplicationVlanIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkConfiguration[i3].ReplicationVlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -162,6 +166,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkConfiguration[i3].VmotionVlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.NetworkConfiguration[i3].VmotionVlanIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkConfiguration[i3].VmotionVlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -183,6 +188,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkConfiguration[i3].VsanVlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.NetworkConfiguration[i3].VsanVlanIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkConfiguration[i3].VsanVlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -204,6 +210,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkConfiguration[i3].VsphereVlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.NetworkConfiguration[i3].VsphereVlanIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkConfiguration[i3].VsphereVlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -224,6 +231,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SddcID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SddcIDRef,
 			Selector:     mg.Spec.ForProvider.SddcIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -244,6 +252,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkConfiguration[i3].HcxVlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.NetworkConfiguration[i3].HcxVlanIDRef,
 				Selector:     mg.Spec.InitProvider.NetworkConfiguration[i3].HcxVlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -265,6 +274,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkConfiguration[i3].NsxEdgeVtepVlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.NetworkConfiguration[i3].NsxEdgeVtepVlanIDRef,
 				Selector:     mg.Spec.InitProvider.NetworkConfiguration[i3].NsxEdgeVtepVlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -286,6 +296,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkConfiguration[i3].NsxVtepVlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.NetworkConfiguration[i3].NsxVtepVlanIDRef,
 				Selector:     mg.Spec.InitProvider.NetworkConfiguration[i3].NsxVtepVlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -307,6 +318,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkConfiguration[i3].ProvisioningSubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.NetworkConfiguration[i3].ProvisioningSubnetIDRef,
 				Selector:     mg.Spec.InitProvider.NetworkConfiguration[i3].ProvisioningSubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -328,6 +340,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkConfiguration[i3].ProvisioningVlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.NetworkConfiguration[i3].ProvisioningVlanIDRef,
 				Selector:     mg.Spec.InitProvider.NetworkConfiguration[i3].ProvisioningVlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -349,6 +362,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkConfiguration[i3].ReplicationVlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.NetworkConfiguration[i3].ReplicationVlanIDRef,
 				Selector:     mg.Spec.InitProvider.NetworkConfiguration[i3].ReplicationVlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -370,6 +384,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkConfiguration[i3].VmotionVlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.NetworkConfiguration[i3].VmotionVlanIDRef,
 				Selector:     mg.Spec.InitProvider.NetworkConfiguration[i3].VmotionVlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -391,6 +406,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkConfiguration[i3].VsanVlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.NetworkConfiguration[i3].VsanVlanIDRef,
 				Selector:     mg.Spec.InitProvider.NetworkConfiguration[i3].VsanVlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -412,6 +428,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkConfiguration[i3].VsphereVlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.NetworkConfiguration[i3].VsphereVlanIDRef,
 				Selector:     mg.Spec.InitProvider.NetworkConfiguration[i3].VsphereVlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -432,6 +449,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SddcID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SddcIDRef,
 			Selector:     mg.Spec.InitProvider.SddcIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -463,6 +481,7 @@ func (mg *Datastore) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -482,6 +501,7 @@ func (mg *Datastore) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -513,6 +533,7 @@ func (mg *DatastoreCluster) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -532,6 +553,7 @@ func (mg *DatastoreCluster) ResolveReferences(ctx context.Context, c client.Read
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -563,6 +585,7 @@ func (mg *EsxiHost) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ClusterIDRef,
 			Selector:     mg.Spec.ForProvider.ClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -582,6 +605,7 @@ func (mg *EsxiHost) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ClusterIDRef,
 			Selector:     mg.Spec.InitProvider.ClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -613,6 +637,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -635,6 +660,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].HcxVlanID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].HcxVlanIDRef,
 						Selector:     mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].HcxVlanIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -660,6 +686,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].NsxEdgeVtepVlanID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].NsxEdgeVtepVlanIDRef,
 						Selector:     mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].NsxEdgeVtepVlanIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -685,6 +712,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].NsxVtepVlanID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].NsxVtepVlanIDRef,
 						Selector:     mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].NsxVtepVlanIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -710,6 +738,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ProvisioningSubnetID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ProvisioningSubnetIDRef,
 						Selector:     mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ProvisioningSubnetIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -735,6 +764,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ProvisioningVlanID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ProvisioningVlanIDRef,
 						Selector:     mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ProvisioningVlanIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -760,6 +790,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ReplicationVlanID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ReplicationVlanIDRef,
 						Selector:     mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ReplicationVlanIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -785,6 +816,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VmotionVlanID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VmotionVlanIDRef,
 						Selector:     mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VmotionVlanIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -810,6 +842,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VsanVlanID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VsanVlanIDRef,
 						Selector:     mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VsanVlanIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -835,6 +868,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VsphereVlanID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VsphereVlanIDRef,
 						Selector:     mg.Spec.ForProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VsphereVlanIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -857,6 +891,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -879,6 +914,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].HcxVlanID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].HcxVlanIDRef,
 						Selector:     mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].HcxVlanIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -904,6 +940,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].NsxEdgeVtepVlanID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].NsxEdgeVtepVlanIDRef,
 						Selector:     mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].NsxEdgeVtepVlanIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -929,6 +966,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].NsxVtepVlanID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].NsxVtepVlanIDRef,
 						Selector:     mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].NsxVtepVlanIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -954,6 +992,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ProvisioningSubnetID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ProvisioningSubnetIDRef,
 						Selector:     mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ProvisioningSubnetIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -979,6 +1018,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ProvisioningVlanID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ProvisioningVlanIDRef,
 						Selector:     mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ProvisioningVlanIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1004,6 +1044,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ReplicationVlanID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ReplicationVlanIDRef,
 						Selector:     mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].ReplicationVlanIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1029,6 +1070,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VmotionVlanID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VmotionVlanIDRef,
 						Selector:     mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VmotionVlanIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1054,6 +1096,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VsanVlanID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VsanVlanIDRef,
 						Selector:     mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VsanVlanIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1079,6 +1122,7 @@ func (mg *Sddc) ResolveReferences(ctx context.Context, c client.Reader) error {
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VsphereVlanID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VsphereVlanIDRef,
 						Selector:     mg.Spec.InitProvider.InitialConfiguration[i3].InitialClusterConfigurations[i4].NetworkConfiguration[i5].VsphereVlanIDSelector,
 						To:           reference.To{List: l, Managed: m},

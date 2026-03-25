@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AutomaticDrConfigurationInitParameters struct {
 
 	// (Updatable) The unique id of a Failover DR Plan.  Example: ocid1.drplan.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/disasterrecovery/v1alpha1.DrPlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DefaultFailoverDrPlanID *string `json:"defaultFailoverDrPlanId,omitempty" tf:"default_failover_dr_plan_id,omitempty"`
 
 	// Reference to a DrPlan in disasterrecovery to populate defaultFailoverDrPlanId.
@@ -30,7 +30,7 @@ type AutomaticDrConfigurationInitParameters struct {
 
 	// (Updatable) The unique id of a Switchover DR Plan.  Example: ocid1.drplan.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/disasterrecovery/v1alpha1.DrPlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DefaultSwitchoverDrPlanID *string `json:"defaultSwitchoverDrPlanId,omitempty" tf:"default_switchover_dr_plan_id,omitempty"`
 
 	// Reference to a DrPlan in disasterrecovery to populate defaultSwitchoverDrPlanId.
@@ -50,7 +50,7 @@ type AutomaticDrConfigurationInitParameters struct {
 
 	// The OCID of the DR protection group to which this Automatic DR configuration belongs.  Example: ocid1.drprotectiongroup.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/disasterrecovery/v1alpha1.DrProtectionGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DrProtectionGroupID *string `json:"drProtectionGroupId,omitempty" tf:"dr_protection_group_id,omitempty"`
 
 	// Reference to a DrProtectionGroup in disasterrecovery to populate drProtectionGroupId.
@@ -130,7 +130,7 @@ type AutomaticDrConfigurationParameters struct {
 
 	// (Updatable) The unique id of a Failover DR Plan.  Example: ocid1.drplan.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/disasterrecovery/v1alpha1.DrPlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DefaultFailoverDrPlanID *string `json:"defaultFailoverDrPlanId,omitempty" tf:"default_failover_dr_plan_id,omitempty"`
 
@@ -144,7 +144,7 @@ type AutomaticDrConfigurationParameters struct {
 
 	// (Updatable) The unique id of a Switchover DR Plan.  Example: ocid1.drplan.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/disasterrecovery/v1alpha1.DrPlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DefaultSwitchoverDrPlanID *string `json:"defaultSwitchoverDrPlanId,omitempty" tf:"default_switchover_dr_plan_id,omitempty"`
 
@@ -167,7 +167,7 @@ type AutomaticDrConfigurationParameters struct {
 
 	// The OCID of the DR protection group to which this Automatic DR configuration belongs.  Example: ocid1.drprotectiongroup.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/disasterrecovery/v1alpha1.DrProtectionGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DrProtectionGroupID *string `json:"drProtectionGroupId,omitempty" tf:"dr_protection_group_id,omitempty"`
 

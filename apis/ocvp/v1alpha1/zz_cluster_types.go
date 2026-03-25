@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ClusterInitParameters struct {
@@ -67,7 +67,7 @@ type ClusterInitParameters struct {
 
 	// The OCID of the SDDC that the Cluster belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ocvp/v1alpha1.Sddc
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SddcID *string `json:"sddcId,omitempty" tf:"sddc_id,omitempty"`
 
 	// Reference to a Sddc in ocvp to populate sddcId.
@@ -247,7 +247,7 @@ type ClusterParameters struct {
 
 	// The OCID of the SDDC that the Cluster belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ocvp/v1alpha1.Sddc
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SddcID *string `json:"sddcId,omitempty" tf:"sddc_id,omitempty"`
 
@@ -304,7 +304,7 @@ type NetworkConfigurationInitParameters struct {
 
 	// (Updatable) The OCID of the VLAN used by the SDDC for the HCX component of the VMware environment. This VLAN is a mandatory attribute  for Management Cluster when HCX is enabled.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	HcxVlanID *string `json:"hcxVlanId,omitempty" tf:"hcx_vlan_id,omitempty"`
 
 	// Reference to a Vlan in networking to populate hcxVlanId.
@@ -323,7 +323,7 @@ type NetworkConfigurationInitParameters struct {
 
 	// (Updatable) The OCID of the VLAN used by the Cluster for the NSX Edge VTEP component of the VMware environment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NsxEdgeVtepVlanID *string `json:"nsxEdgeVtepVlanId,omitempty" tf:"nsx_edge_vtep_vlan_id,omitempty"`
 
 	// Reference to a Vlan in networking to populate nsxEdgeVtepVlanId.
@@ -336,7 +336,7 @@ type NetworkConfigurationInitParameters struct {
 
 	// (Updatable) The OCID of the VLAN used by the Cluster for the NSX VTEP component of the VMware environment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NsxVtepVlanID *string `json:"nsxVtepVlanId,omitempty" tf:"nsx_vtep_vlan_id,omitempty"`
 
 	// Reference to a Vlan in networking to populate nsxVtepVlanId.
@@ -349,7 +349,7 @@ type NetworkConfigurationInitParameters struct {
 
 	// (Updatable) The OCID of the management subnet used to provision the Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProvisioningSubnetID *string `json:"provisioningSubnetId,omitempty" tf:"provisioning_subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate provisioningSubnetId.
@@ -362,7 +362,7 @@ type NetworkConfigurationInitParameters struct {
 
 	// (Updatable) The OCID of the VLAN used by the Cluster for the Provisioning component of the VMware environment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProvisioningVlanID *string `json:"provisioningVlanId,omitempty" tf:"provisioning_vlan_id,omitempty"`
 
 	// Reference to a Vlan in networking to populate provisioningVlanId.
@@ -375,7 +375,7 @@ type NetworkConfigurationInitParameters struct {
 
 	// (Updatable) The OCID of the VLAN used by the Cluster for the vSphere Replication component of the VMware environment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ReplicationVlanID *string `json:"replicationVlanId,omitempty" tf:"replication_vlan_id,omitempty"`
 
 	// Reference to a Vlan in networking to populate replicationVlanId.
@@ -388,7 +388,7 @@ type NetworkConfigurationInitParameters struct {
 
 	// (Updatable) The OCID of the VLAN used by the Cluster for the vMotion component of the VMware environment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VmotionVlanID *string `json:"vmotionVlanId,omitempty" tf:"vmotion_vlan_id,omitempty"`
 
 	// Reference to a Vlan in networking to populate vmotionVlanId.
@@ -401,7 +401,7 @@ type NetworkConfigurationInitParameters struct {
 
 	// (Updatable) The OCID of the VLAN used by the Cluster for the vSAN component of the VMware environment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VsanVlanID *string `json:"vsanVlanId,omitempty" tf:"vsan_vlan_id,omitempty"`
 
 	// Reference to a Vlan in networking to populate vsanVlanId.
@@ -414,7 +414,7 @@ type NetworkConfigurationInitParameters struct {
 
 	// (Updatable) The OCID of the VLAN used by the SDDC for the vSphere component of the VMware environment. This VLAN is a mandatory attribute for Management Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VsphereVlanID *string `json:"vsphereVlanId,omitempty" tf:"vsphere_vlan_id,omitempty"`
 
 	// Reference to a Vlan in networking to populate vsphereVlanId.
@@ -466,7 +466,7 @@ type NetworkConfigurationParameters struct {
 
 	// (Updatable) The OCID of the VLAN used by the SDDC for the HCX component of the VMware environment. This VLAN is a mandatory attribute  for Management Cluster when HCX is enabled.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	HcxVlanID *string `json:"hcxVlanId,omitempty" tf:"hcx_vlan_id,omitempty"`
 
@@ -488,7 +488,7 @@ type NetworkConfigurationParameters struct {
 
 	// (Updatable) The OCID of the VLAN used by the Cluster for the NSX Edge VTEP component of the VMware environment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NsxEdgeVtepVlanID *string `json:"nsxEdgeVtepVlanId,omitempty" tf:"nsx_edge_vtep_vlan_id,omitempty"`
 
@@ -502,7 +502,7 @@ type NetworkConfigurationParameters struct {
 
 	// (Updatable) The OCID of the VLAN used by the Cluster for the NSX VTEP component of the VMware environment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NsxVtepVlanID *string `json:"nsxVtepVlanId,omitempty" tf:"nsx_vtep_vlan_id,omitempty"`
 
@@ -516,7 +516,7 @@ type NetworkConfigurationParameters struct {
 
 	// (Updatable) The OCID of the management subnet used to provision the Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProvisioningSubnetID *string `json:"provisioningSubnetId,omitempty" tf:"provisioning_subnet_id,omitempty"`
 
@@ -530,7 +530,7 @@ type NetworkConfigurationParameters struct {
 
 	// (Updatable) The OCID of the VLAN used by the Cluster for the Provisioning component of the VMware environment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProvisioningVlanID *string `json:"provisioningVlanId,omitempty" tf:"provisioning_vlan_id,omitempty"`
 
@@ -544,7 +544,7 @@ type NetworkConfigurationParameters struct {
 
 	// (Updatable) The OCID of the VLAN used by the Cluster for the vSphere Replication component of the VMware environment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ReplicationVlanID *string `json:"replicationVlanId,omitempty" tf:"replication_vlan_id,omitempty"`
 
@@ -558,7 +558,7 @@ type NetworkConfigurationParameters struct {
 
 	// (Updatable) The OCID of the VLAN used by the Cluster for the vMotion component of the VMware environment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VmotionVlanID *string `json:"vmotionVlanId,omitempty" tf:"vmotion_vlan_id,omitempty"`
 
@@ -572,7 +572,7 @@ type NetworkConfigurationParameters struct {
 
 	// (Updatable) The OCID of the VLAN used by the Cluster for the vSAN component of the VMware environment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VsanVlanID *string `json:"vsanVlanId,omitempty" tf:"vsan_vlan_id,omitempty"`
 
@@ -586,7 +586,7 @@ type NetworkConfigurationParameters struct {
 
 	// (Updatable) The OCID of the VLAN used by the SDDC for the vSphere component of the VMware environment. This VLAN is a mandatory attribute for Management Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VsphereVlanID *string `json:"vsphereVlanId,omitempty" tf:"vsphere_vlan_id,omitempty"`
 

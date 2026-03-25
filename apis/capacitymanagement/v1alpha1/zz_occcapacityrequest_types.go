@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AssociatedOccHandoverResourceBlockListInitParameters struct {
@@ -206,7 +206,7 @@ type OccCapacityRequestInitParameters struct {
 
 	// The OCID of the availability catalog against which capacity request is made.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/capacitymanagement/v1alpha1.OccAvailabilityCatalog
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OccAvailabilityCatalogID *string `json:"occAvailabilityCatalogId,omitempty" tf:"occ_availability_catalog_id,omitempty"`
 
 	// Reference to a OccAvailabilityCatalog in capacitymanagement to populate occAvailabilityCatalogId.
@@ -354,7 +354,7 @@ type OccCapacityRequestParameters struct {
 
 	// The OCID of the availability catalog against which capacity request is made.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/capacitymanagement/v1alpha1.OccAvailabilityCatalog
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OccAvailabilityCatalogID *string `json:"occAvailabilityCatalogId,omitempty" tf:"occ_availability_catalog_id,omitempty"`
 

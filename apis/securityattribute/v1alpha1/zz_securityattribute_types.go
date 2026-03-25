@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SecurityAttributeInitParameters struct {
@@ -26,7 +26,7 @@ type SecurityAttributeInitParameters struct {
 
 	// The OCID of the security attribute namespace.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/securityattribute/v1alpha1.SecurityAttributeNamespace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SecurityAttributeNamespaceID *string `json:"securityAttributeNamespaceId,omitempty" tf:"security_attribute_namespace_id,omitempty"`
 
 	// Reference to a SecurityAttributeNamespace in securityattribute to populate securityAttributeNamespaceId.
@@ -93,7 +93,7 @@ type SecurityAttributeParameters struct {
 
 	// The OCID of the security attribute namespace.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/securityattribute/v1alpha1.SecurityAttributeNamespace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SecurityAttributeNamespaceID *string `json:"securityAttributeNamespaceId,omitempty" tf:"security_attribute_namespace_id,omitempty"`
 

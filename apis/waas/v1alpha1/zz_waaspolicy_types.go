@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AccessRulesInitParameters struct {
@@ -1494,7 +1494,7 @@ type PolicyConfigInitParameters struct {
 
 	// (Updatable) The OCID of the SSL certificate to use if HTTPS is supported.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/waas/v1alpha1.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
 
 	// Reference to a Certificate in waas to populate certificateId.
@@ -1594,7 +1594,7 @@ type PolicyConfigParameters struct {
 
 	// (Updatable) The OCID of the SSL certificate to use if HTTPS is supported.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/waas/v1alpha1.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
 

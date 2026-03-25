@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type FusionEnvironmentRefreshActivityInitParameters struct {
 
 	// unique FusionEnvironment identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fusionapps/v1alpha1.FusionEnvironment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FusionEnvironmentID *string `json:"fusionEnvironmentId,omitempty" tf:"fusion_environment_id,omitempty"`
 
 	// Reference to a FusionEnvironment in fusionapps to populate fusionEnvironmentId.
@@ -33,7 +33,7 @@ type FusionEnvironmentRefreshActivityInitParameters struct {
 
 	// The OCID of the source environment
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fusionapps/v1alpha1.FusionEnvironment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceFusionEnvironmentID *string `json:"sourceFusionEnvironmentId,omitempty" tf:"source_fusion_environment_id,omitempty"`
 
 	// Reference to a FusionEnvironment in fusionapps to populate sourceFusionEnvironmentId.
@@ -97,7 +97,7 @@ type FusionEnvironmentRefreshActivityParameters struct {
 
 	// unique FusionEnvironment identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fusionapps/v1alpha1.FusionEnvironment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FusionEnvironmentID *string `json:"fusionEnvironmentId,omitempty" tf:"fusion_environment_id,omitempty"`
 
@@ -115,7 +115,7 @@ type FusionEnvironmentRefreshActivityParameters struct {
 
 	// The OCID of the source environment
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fusionapps/v1alpha1.FusionEnvironment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceFusionEnvironmentID *string `json:"sourceFusionEnvironmentId,omitempty" tf:"source_fusion_environment_id,omitempty"`
 

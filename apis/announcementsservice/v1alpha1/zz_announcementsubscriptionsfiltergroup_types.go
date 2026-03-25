@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AnnouncementSubscriptionsFilterGroupFiltersInitParameters struct {
@@ -46,7 +46,7 @@ type AnnouncementSubscriptionsFilterGroupInitParameters struct {
 
 	// The OCID of the announcement subscription.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/announcementsservice/v1alpha1.AnnouncementSubscription
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AnnouncementSubscriptionID *string `json:"announcementSubscriptionId,omitempty" tf:"announcement_subscription_id,omitempty"`
 
 	// Reference to a AnnouncementSubscription in announcementsservice to populate announcementSubscriptionId.
@@ -82,7 +82,7 @@ type AnnouncementSubscriptionsFilterGroupParameters struct {
 
 	// The OCID of the announcement subscription.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/announcementsservice/v1alpha1.AnnouncementSubscription
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AnnouncementSubscriptionID *string `json:"announcementSubscriptionId,omitempty" tf:"announcement_subscription_id,omitempty"`
 

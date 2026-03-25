@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AlertInitParameters struct {
 
 	// The OCID of alert.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.Alert
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AlertID *string `json:"alertId,omitempty" tf:"alert_id,omitempty"`
 
 	// Reference to a Alert in datasafe to populate alertId.
@@ -141,7 +141,7 @@ type AlertParameters struct {
 
 	// The OCID of alert.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.Alert
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AlertID *string `json:"alertId,omitempty" tf:"alert_id,omitempty"`
 

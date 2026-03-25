@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagementExternalDbNodeInitParameters struct {
@@ -24,7 +24,7 @@ type ManagementExternalDbNodeInitParameters struct {
 
 	// The OCID of the external database node.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementExternalDbNode
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExternalDBNodeID *string `json:"externalDbNodeId,omitempty" tf:"external_db_node_id,omitempty"`
 
 	// Reference to a ManagementExternalDbNode in database to populate externalDbNodeId.
@@ -117,7 +117,7 @@ type ManagementExternalDbNodeParameters struct {
 
 	// The OCID of the external database node.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementExternalDbNode
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExternalDBNodeID *string `json:"externalDbNodeId,omitempty" tf:"external_db_node_id,omitempty"`
 

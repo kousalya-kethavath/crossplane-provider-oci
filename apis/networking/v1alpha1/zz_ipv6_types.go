@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type Ipv6InitParameters struct {
@@ -40,7 +40,7 @@ type Ipv6InitParameters struct {
 
 	// (Updatable) The OCID of the route table the IP address or VNIC will use. For more information, see Source Based Routing.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.RouteTable
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
 	// Reference to a RouteTable in networking to populate routeTableId.
@@ -53,7 +53,7 @@ type Ipv6InitParameters struct {
 
 	// The OCID of the subnet from which the IPv6 is to be drawn. The IP address, if supplied, must be valid for the given subnet, only valid for reserved IPs currently.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -66,7 +66,7 @@ type Ipv6InitParameters struct {
 
 	// (Updatable) The OCID of the VNIC to assign the IPv6 to. The IPv6 will be in the VNIC's subnet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.VnicAttachment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VnicID *string `json:"vnicId,omitempty" tf:"vnic_id,omitempty"`
 
 	// Reference to a VnicAttachment in networking to populate vnicId.
@@ -162,7 +162,7 @@ type Ipv6Parameters struct {
 
 	// (Updatable) The OCID of the route table the IP address or VNIC will use. For more information, see Source Based Routing.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.RouteTable
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
@@ -176,7 +176,7 @@ type Ipv6Parameters struct {
 
 	// The OCID of the subnet from which the IPv6 is to be drawn. The IP address, if supplied, must be valid for the given subnet, only valid for reserved IPs currently.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -190,7 +190,7 @@ type Ipv6Parameters struct {
 
 	// (Updatable) The OCID of the VNIC to assign the IPv6 to. The IPv6 will be in the VNIC's subnet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.VnicAttachment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VnicID *string `json:"vnicId,omitempty" tf:"vnic_id,omitempty"`
 

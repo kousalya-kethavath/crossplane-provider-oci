@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LocksInitParameters struct {
@@ -107,7 +107,7 @@ type MediaAssetInitParameters struct {
 
 	// (Updatable) The ID of the senior most asset from which this asset is derived.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/mediaservices/v1alpha1.MediaAsset
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MasterMediaAssetID *string `json:"masterMediaAssetId,omitempty" tf:"master_media_asset_id,omitempty"`
 
 	// Reference to a MediaAsset in mediaservices to populate masterMediaAssetId.
@@ -123,7 +123,7 @@ type MediaAssetInitParameters struct {
 
 	// The ID of the MediaWorkflowJob used to produce this asset.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/mediaservices/v1alpha1.MediaWorkflowJob
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MediaWorkflowJobID *string `json:"mediaWorkflowJobId,omitempty" tf:"media_workflow_job_id,omitempty"`
 
 	// Reference to a MediaWorkflowJob in mediaservices to populate mediaWorkflowJobId.
@@ -148,7 +148,7 @@ type MediaAssetInitParameters struct {
 
 	// (Updatable) The ID of the parent asset from which this asset is derived.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/mediaservices/v1alpha1.MediaAsset
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ParentMediaAssetID *string `json:"parentMediaAssetId,omitempty" tf:"parent_media_asset_id,omitempty"`
 
 	// Reference to a MediaAsset in mediaservices to populate parentMediaAssetId.
@@ -167,7 +167,7 @@ type MediaAssetInitParameters struct {
 
 	// The ID of the MediaWorkflow used to produce this asset.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/mediaservices/v1alpha1.MediaWorkflow
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceMediaWorkflowID *string `json:"sourceMediaWorkflowId,omitempty" tf:"source_media_workflow_id,omitempty"`
 
 	// Reference to a MediaWorkflow in mediaservices to populate sourceMediaWorkflowId.
@@ -307,7 +307,7 @@ type MediaAssetParameters struct {
 
 	// (Updatable) The ID of the senior most asset from which this asset is derived.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/mediaservices/v1alpha1.MediaAsset
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MasterMediaAssetID *string `json:"masterMediaAssetId,omitempty" tf:"master_media_asset_id,omitempty"`
 
@@ -325,7 +325,7 @@ type MediaAssetParameters struct {
 
 	// The ID of the MediaWorkflowJob used to produce this asset.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/mediaservices/v1alpha1.MediaWorkflowJob
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MediaWorkflowJobID *string `json:"mediaWorkflowJobId,omitempty" tf:"media_workflow_job_id,omitempty"`
 
@@ -355,7 +355,7 @@ type MediaAssetParameters struct {
 
 	// (Updatable) The ID of the parent asset from which this asset is derived.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/mediaservices/v1alpha1.MediaAsset
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ParentMediaAssetID *string `json:"parentMediaAssetId,omitempty" tf:"parent_media_asset_id,omitempty"`
 
@@ -377,7 +377,7 @@ type MediaAssetParameters struct {
 
 	// The ID of the MediaWorkflow used to produce this asset.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/mediaservices/v1alpha1.MediaWorkflow
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceMediaWorkflowID *string `json:"sourceMediaWorkflowId,omitempty" tf:"source_media_workflow_id,omitempty"`
 

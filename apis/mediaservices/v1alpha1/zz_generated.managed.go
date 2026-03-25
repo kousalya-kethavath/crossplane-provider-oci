@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this MediaAsset.
 func (mg *MediaAsset) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *MediaAsset) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this MediaAsset.
 func (mg *MediaAsset) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this MediaAsset.
-func (mg *MediaAsset) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this MediaAsset.
@@ -57,11 +52,6 @@ func (mg *MediaAsset) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this MediaAsset.
-func (mg *MediaAsset) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this MediaAsset.
 func (mg *MediaAsset) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -85,11 +75,6 @@ func (mg *MediaWorkflow) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this MediaWorkflow.
 func (mg *MediaWorkflow) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this MediaWorkflow.
-func (mg *MediaWorkflow) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this MediaWorkflow.
@@ -117,11 +102,6 @@ func (mg *MediaWorkflow) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this MediaWorkflow.
-func (mg *MediaWorkflow) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this MediaWorkflow.
 func (mg *MediaWorkflow) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -145,11 +125,6 @@ func (mg *MediaWorkflowConfiguration) GetManagementPolicies() xpv1.ManagementPol
 // GetProviderConfigReference of this MediaWorkflowConfiguration.
 func (mg *MediaWorkflowConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this MediaWorkflowConfiguration.
-func (mg *MediaWorkflowConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this MediaWorkflowConfiguration.
@@ -177,11 +152,6 @@ func (mg *MediaWorkflowConfiguration) SetProviderConfigReference(r *xpv1.Referen
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this MediaWorkflowConfiguration.
-func (mg *MediaWorkflowConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this MediaWorkflowConfiguration.
 func (mg *MediaWorkflowConfiguration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -205,11 +175,6 @@ func (mg *MediaWorkflowJob) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this MediaWorkflowJob.
 func (mg *MediaWorkflowJob) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this MediaWorkflowJob.
-func (mg *MediaWorkflowJob) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this MediaWorkflowJob.
@@ -237,11 +202,6 @@ func (mg *MediaWorkflowJob) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this MediaWorkflowJob.
-func (mg *MediaWorkflowJob) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this MediaWorkflowJob.
 func (mg *MediaWorkflowJob) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -265,11 +225,6 @@ func (mg *StreamCdnConfig) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this StreamCdnConfig.
 func (mg *StreamCdnConfig) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this StreamCdnConfig.
-func (mg *StreamCdnConfig) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this StreamCdnConfig.
@@ -297,11 +252,6 @@ func (mg *StreamCdnConfig) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this StreamCdnConfig.
-func (mg *StreamCdnConfig) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this StreamCdnConfig.
 func (mg *StreamCdnConfig) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -325,11 +275,6 @@ func (mg *StreamDistributionChannel) GetManagementPolicies() xpv1.ManagementPoli
 // GetProviderConfigReference of this StreamDistributionChannel.
 func (mg *StreamDistributionChannel) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this StreamDistributionChannel.
-func (mg *StreamDistributionChannel) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this StreamDistributionChannel.
@@ -357,11 +302,6 @@ func (mg *StreamDistributionChannel) SetProviderConfigReference(r *xpv1.Referenc
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this StreamDistributionChannel.
-func (mg *StreamDistributionChannel) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this StreamDistributionChannel.
 func (mg *StreamDistributionChannel) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -387,11 +327,6 @@ func (mg *StreamPackagingConfig) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this StreamPackagingConfig.
-func (mg *StreamPackagingConfig) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this StreamPackagingConfig.
 func (mg *StreamPackagingConfig) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -415,11 +350,6 @@ func (mg *StreamPackagingConfig) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this StreamPackagingConfig.
 func (mg *StreamPackagingConfig) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this StreamPackagingConfig.
-func (mg *StreamPackagingConfig) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this StreamPackagingConfig.

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ProfileInitParameters struct {
@@ -52,7 +52,7 @@ type ProfileInitParameters struct {
 
 	// The OCID of the managed instance group that the instance will join after registration.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.ManagedInstanceGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ManagedInstanceGroupID *string `json:"managedInstanceGroupId,omitempty" tf:"managed_instance_group_id,omitempty"`
 
 	// Reference to a ManagedInstanceGroup in osmanagementhub to populate managedInstanceGroupId.
@@ -65,7 +65,7 @@ type ProfileInitParameters struct {
 
 	// description: The OCID of the management station to associate  with an instance once registered. This is required when creating a profile for non-OCI instances.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.ManagementStation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ManagementStationID *string `json:"managementStationId,omitempty" tf:"management_station_id,omitempty"`
 
 	// Reference to a ManagementStation in osmanagementhub to populate managementStationId.
@@ -268,7 +268,7 @@ type ProfileParameters struct {
 
 	// The OCID of the managed instance group that the instance will join after registration.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.ManagedInstanceGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagedInstanceGroupID *string `json:"managedInstanceGroupId,omitempty" tf:"managed_instance_group_id,omitempty"`
 
@@ -282,7 +282,7 @@ type ProfileParameters struct {
 
 	// description: The OCID of the management station to associate  with an instance once registered. This is required when creating a profile for non-OCI instances.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.ManagementStation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagementStationID *string `json:"managementStationId,omitempty" tf:"management_station_id,omitempty"`
 

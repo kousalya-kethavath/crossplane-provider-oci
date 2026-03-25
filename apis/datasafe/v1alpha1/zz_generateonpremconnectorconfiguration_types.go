@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type GenerateOnPremConnectorConfigurationInitParameters struct {
 
 	// The OCID of the on-premises connector.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.OnPremConnector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OnPremConnectorID *string `json:"onPremConnectorId,omitempty" tf:"on_prem_connector_id,omitempty"`
 
 	// Reference to a OnPremConnector in datasafe to populate onPremConnectorId.
@@ -43,7 +43,7 @@ type GenerateOnPremConnectorConfigurationParameters struct {
 
 	// The OCID of the on-premises connector.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.OnPremConnector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OnPremConnectorID *string `json:"onPremConnectorId,omitempty" tf:"on_prem_connector_id,omitempty"`
 

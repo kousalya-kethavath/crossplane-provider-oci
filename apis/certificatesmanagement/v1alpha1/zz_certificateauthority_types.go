@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CertificateAuthorityCertificateRevocationListDetailsInitParameters struct {
@@ -49,7 +49,7 @@ type CertificateAuthorityConfigInitParameters struct {
 
 	// The OCID of the private CA.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/certificatesmanagement/v1alpha1.CertificateAuthority
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IssuerCertificateAuthorityID *string `json:"issuerCertificateAuthorityId,omitempty" tf:"issuer_certificate_authority_id,omitempty"`
 
 	// Reference to a CertificateAuthority in certificatesmanagement to populate issuerCertificateAuthorityId.
@@ -102,7 +102,7 @@ type CertificateAuthorityConfigParameters struct {
 
 	// The OCID of the private CA.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/certificatesmanagement/v1alpha1.CertificateAuthority
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IssuerCertificateAuthorityID *string `json:"issuerCertificateAuthorityId,omitempty" tf:"issuer_certificate_authority_id,omitempty"`
 
@@ -183,7 +183,7 @@ type CertificateAuthorityConfigSubjectInitParameters struct {
 
 	// (Applicable when config_type=ROOT_CA_GENERATED_INTERNALLY | SUBORDINATE_CA_ISSUED_BY_INTERNAL_CA) User ID (RDN UID).
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 
 	// Reference to a User in identity to populate userId.
@@ -317,7 +317,7 @@ type CertificateAuthorityConfigSubjectParameters struct {
 
 	// (Applicable when config_type=ROOT_CA_GENERATED_INTERNALLY | SUBORDINATE_CA_ISSUED_BY_INTERNAL_CA) User ID (RDN UID).
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 
@@ -687,7 +687,7 @@ type CertificateRevocationListDetailsObjectStorageConfigInitParameters struct {
 
 	// (Updatable) The name of the bucket where the CRL is stored.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/objectstorage/v1alpha1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	ObjectStorageBucketName *string `json:"objectStorageBucketName,omitempty" tf:"object_storage_bucket_name,omitempty"`
 
 	// Reference to a Bucket in objectstorage to populate objectStorageBucketName.
@@ -721,7 +721,7 @@ type CertificateRevocationListDetailsObjectStorageConfigParameters struct {
 
 	// (Updatable) The name of the bucket where the CRL is stored.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/objectstorage/v1alpha1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	ObjectStorageBucketName *string `json:"objectStorageBucketName,omitempty" tf:"object_storage_bucket_name,omitempty"`
 

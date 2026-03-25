@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BdsInstanceIdentityConfigurationInitParameters struct {
@@ -23,7 +23,7 @@ type BdsInstanceIdentityConfigurationInitParameters struct {
 
 	// The OCID of the cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/bds/v1alpha1.BdsInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BdsInstanceID *string `json:"bdsInstanceId,omitempty" tf:"bds_instance_id,omitempty"`
 
 	// Reference to a BdsInstance in bds to populate bdsInstanceId.
@@ -39,7 +39,7 @@ type BdsInstanceIdentityConfigurationInitParameters struct {
 
 	// Identity domain confidential application ID for the identity config, required for creating identity configuration
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.Application
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConfidentialApplicationID *string `json:"confidentialApplicationId,omitempty" tf:"confidential_application_id,omitempty"`
 
 	// Reference to a Application in dataflow to populate confidentialApplicationId.
@@ -58,7 +58,7 @@ type BdsInstanceIdentityConfigurationInitParameters struct {
 
 	// Identity domain OCID to use for identity config, required for creating identity configuration
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IdentityDomainID *string `json:"identityDomainId,omitempty" tf:"identity_domain_id,omitempty"`
 
 	// Reference to a Domain in identity to populate identityDomainId.
@@ -142,7 +142,7 @@ type BdsInstanceIdentityConfigurationParameters struct {
 
 	// The OCID of the cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/bds/v1alpha1.BdsInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BdsInstanceID *string `json:"bdsInstanceId,omitempty" tf:"bds_instance_id,omitempty"`
 
@@ -160,7 +160,7 @@ type BdsInstanceIdentityConfigurationParameters struct {
 
 	// Identity domain confidential application ID for the identity config, required for creating identity configuration
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.Application
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConfidentialApplicationID *string `json:"confidentialApplicationId,omitempty" tf:"confidential_application_id,omitempty"`
 
@@ -182,7 +182,7 @@ type BdsInstanceIdentityConfigurationParameters struct {
 
 	// Identity domain OCID to use for identity config, required for creating identity configuration
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IdentityDomainID *string `json:"identityDomainId,omitempty" tf:"identity_domain_id,omitempty"`
 
@@ -251,7 +251,7 @@ type UpstConfigurationDetailsInitParameters struct {
 
 	// (Updatable) OCID of the master encryption key in vault for encrypting token exchange service principal keytab, required for activating UPST config
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MasterEncryptionKeyID *string `json:"masterEncryptionKeyId,omitempty" tf:"master_encryption_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate masterEncryptionKeyId.
@@ -264,7 +264,7 @@ type UpstConfigurationDetailsInitParameters struct {
 
 	// (Updatable) OCID of the vault to store token exchange service principal keyta, required for activating UPST config
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
 	// Reference to a Vault in kms to populate vaultId.
@@ -289,7 +289,7 @@ type UpstConfigurationDetailsParameters struct {
 
 	// (Updatable) OCID of the master encryption key in vault for encrypting token exchange service principal keytab, required for activating UPST config
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MasterEncryptionKeyID *string `json:"masterEncryptionKeyId,omitempty" tf:"master_encryption_key_id,omitempty"`
 
@@ -303,7 +303,7 @@ type UpstConfigurationDetailsParameters struct {
 
 	// (Updatable) OCID of the vault to store token exchange service principal keyta, required for activating UPST config
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 

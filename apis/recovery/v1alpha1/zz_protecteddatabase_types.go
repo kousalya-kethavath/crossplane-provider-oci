@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MetricsInitParameters struct {
@@ -65,7 +65,7 @@ type ProtectedDatabaseInitParameters struct {
 
 	// The OCID of the protected database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.Database
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
 	// Reference to a Database in database to populate databaseId.
@@ -101,7 +101,7 @@ type ProtectedDatabaseInitParameters struct {
 
 	// (Updatable) The OCID of the protection policy associated with the protected database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/recovery/v1alpha1.ProtectionPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProtectionPolicyID *string `json:"protectionPolicyId,omitempty" tf:"protection_policy_id,omitempty"`
 
 	// Reference to a ProtectionPolicy in recovery to populate protectionPolicyId.
@@ -218,7 +218,7 @@ type ProtectedDatabaseParameters struct {
 
 	// The OCID of the protected database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.Database
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
@@ -262,7 +262,7 @@ type ProtectedDatabaseParameters struct {
 
 	// (Updatable) The OCID of the protection policy associated with the protected database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/recovery/v1alpha1.ProtectionPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProtectionPolicyID *string `json:"protectionPolicyId,omitempty" tf:"protection_policy_id,omitempty"`
 
@@ -287,7 +287,7 @@ type RecoveryServiceSubnetsInitParameters struct {
 
 	// (Updatable) The recovery service subnet OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/recovery/v1alpha1.RecoveryServiceSubnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RecoveryServiceSubnetID *string `json:"recoveryServiceSubnetId,omitempty" tf:"recovery_service_subnet_id,omitempty"`
 
 	// Reference to a RecoveryServiceSubnet in recovery to populate recoveryServiceSubnetId.
@@ -312,7 +312,7 @@ type RecoveryServiceSubnetsParameters struct {
 
 	// (Updatable) The recovery service subnet OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/recovery/v1alpha1.RecoveryServiceSubnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RecoveryServiceSubnetID *string `json:"recoveryServiceSubnetId,omitempty" tf:"recovery_service_subnet_id,omitempty"`
 

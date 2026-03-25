@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AdditionalDetailsInitParameters struct {
@@ -135,7 +135,7 @@ type EventInitParameters struct {
 
 	// (Updatable) The OCID of the event.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.Event
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EventID *string `json:"eventId,omitempty" tf:"event_id,omitempty"`
 
 	// Reference to a Event in osmanagementhub to populate eventId.
@@ -233,7 +233,7 @@ type EventParameters struct {
 
 	// (Updatable) The OCID of the event.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.Event
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EventID *string `json:"eventId,omitempty" tf:"event_id,omitempty"`
 

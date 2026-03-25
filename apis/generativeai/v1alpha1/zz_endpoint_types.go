@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EndpointContentModerationConfigInitParameters struct {
@@ -23,7 +23,7 @@ type EndpointContentModerationConfigInitParameters struct {
 
 	// (Updatable) The OCID of the model used for the feature.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
 	// Reference to a Model in generativeai to populate modelId.
@@ -59,7 +59,7 @@ type EndpointContentModerationConfigParameters struct {
 
 	// (Updatable) The OCID of the model used for the feature.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
@@ -91,7 +91,7 @@ type EndpointInitParameters struct {
 
 	// The OCID of the dedicated AI cluster on which a model will be deployed to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.DedicatedAiCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DedicatedAIClusterID *string `json:"dedicatedAiClusterId,omitempty" tf:"dedicated_ai_cluster_id,omitempty"`
 
 	// Reference to a DedicatedAiCluster in generativeai to populate dedicatedAiClusterId.
@@ -118,7 +118,7 @@ type EndpointInitParameters struct {
 
 	// (Updatable) The OCID of the Generative AI private endpoint to which this endpoint is attached to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.GenerativeAiPrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	GenerativeAIPrivateEndpointID *string `json:"generativeAiPrivateEndpointId,omitempty" tf:"generative_ai_private_endpoint_id,omitempty"`
 
 	// Reference to a GenerativeAiPrivateEndpoint in generativeai to populate generativeAiPrivateEndpointId.
@@ -131,7 +131,7 @@ type EndpointInitParameters struct {
 
 	// (Updatable) The OCID of the model used for the feature.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
 	// Reference to a Model in generativeai to populate modelId.
@@ -215,7 +215,7 @@ type EndpointParameters struct {
 
 	// The OCID of the dedicated AI cluster on which a model will be deployed to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.DedicatedAiCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DedicatedAIClusterID *string `json:"dedicatedAiClusterId,omitempty" tf:"dedicated_ai_cluster_id,omitempty"`
 
@@ -247,7 +247,7 @@ type EndpointParameters struct {
 
 	// (Updatable) The OCID of the Generative AI private endpoint to which this endpoint is attached to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.GenerativeAiPrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GenerativeAIPrivateEndpointID *string `json:"generativeAiPrivateEndpointId,omitempty" tf:"generative_ai_private_endpoint_id,omitempty"`
 
@@ -261,7 +261,7 @@ type EndpointParameters struct {
 
 	// (Updatable) The OCID of the model used for the feature.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 

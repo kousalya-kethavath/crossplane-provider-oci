@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this SubscriptionRedeemableUser.
 func (mg *SubscriptionRedeemableUser) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *SubscriptionRedeemableUser) GetManagementPolicies() xpv1.ManagementPol
 // GetProviderConfigReference of this SubscriptionRedeemableUser.
 func (mg *SubscriptionRedeemableUser) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this SubscriptionRedeemableUser.
-func (mg *SubscriptionRedeemableUser) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this SubscriptionRedeemableUser.
@@ -55,11 +50,6 @@ func (mg *SubscriptionRedeemableUser) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this SubscriptionRedeemableUser.
 func (mg *SubscriptionRedeemableUser) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SubscriptionRedeemableUser.
-func (mg *SubscriptionRedeemableUser) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SubscriptionRedeemableUser.

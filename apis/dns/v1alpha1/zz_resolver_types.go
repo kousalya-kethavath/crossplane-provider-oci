@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AttachedViewsInitParameters struct {
 
 	// (Updatable) The OCID of the view.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.View
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ViewID *string `json:"viewId,omitempty" tf:"view_id,omitempty"`
 
 	// Reference to a View in dns to populate viewId.
@@ -39,7 +39,7 @@ type AttachedViewsParameters struct {
 
 	// (Updatable) The OCID of the view.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.View
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ViewID *string `json:"viewId,omitempty" tf:"view_id,omitempty"`
 
@@ -127,7 +127,7 @@ type ResolverInitParameters struct {
 
 	// The OCID of the target resolver.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.Resolver
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResolverID *string `json:"resolverId,omitempty" tf:"resolver_id,omitempty"`
 
 	// Reference to a Resolver in dns to populate resolverId.
@@ -236,7 +236,7 @@ type ResolverParameters struct {
 
 	// The OCID of the target resolver.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.Resolver
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResolverID *string `json:"resolverId,omitempty" tf:"resolver_id,omitempty"`
 

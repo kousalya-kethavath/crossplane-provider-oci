@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ObjectStorageLinkInitParameters struct {
@@ -49,7 +49,7 @@ type ObjectStorageLinkInitParameters struct {
 
 	// The OCID of the associated Lustre file system.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/lustrefilestorage/v1alpha1.LustreFileSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LustreFileSystemID *string `json:"lustreFileSystemId,omitempty" tf:"lustre_file_system_id,omitempty"`
 
 	// Reference to a LustreFileSystem in lustrefilestorage to populate lustreFileSystemId.
@@ -188,7 +188,7 @@ type ObjectStorageLinkParameters struct {
 
 	// The OCID of the associated Lustre file system.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/lustrefilestorage/v1alpha1.LustreFileSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LustreFileSystemID *string `json:"lustreFileSystemId,omitempty" tf:"lustre_file_system_id,omitempty"`
 

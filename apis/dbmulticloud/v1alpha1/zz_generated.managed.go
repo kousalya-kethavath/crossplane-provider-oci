@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this MultiCloudResourceDiscovery.
 func (mg *MultiCloudResourceDiscovery) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *MultiCloudResourceDiscovery) GetManagementPolicies() xpv1.ManagementPo
 // GetProviderConfigReference of this MultiCloudResourceDiscovery.
 func (mg *MultiCloudResourceDiscovery) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this MultiCloudResourceDiscovery.
-func (mg *MultiCloudResourceDiscovery) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this MultiCloudResourceDiscovery.
@@ -57,11 +52,6 @@ func (mg *MultiCloudResourceDiscovery) SetProviderConfigReference(r *xpv1.Refere
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this MultiCloudResourceDiscovery.
-func (mg *MultiCloudResourceDiscovery) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this MultiCloudResourceDiscovery.
 func (mg *MultiCloudResourceDiscovery) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -85,11 +75,6 @@ func (mg *OracleDbAwsIdentityConnector) GetManagementPolicies() xpv1.ManagementP
 // GetProviderConfigReference of this OracleDbAwsIdentityConnector.
 func (mg *OracleDbAwsIdentityConnector) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OracleDbAwsIdentityConnector.
-func (mg *OracleDbAwsIdentityConnector) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OracleDbAwsIdentityConnector.
@@ -117,11 +102,6 @@ func (mg *OracleDbAwsIdentityConnector) SetProviderConfigReference(r *xpv1.Refer
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OracleDbAwsIdentityConnector.
-func (mg *OracleDbAwsIdentityConnector) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OracleDbAwsIdentityConnector.
 func (mg *OracleDbAwsIdentityConnector) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -145,11 +125,6 @@ func (mg *OracleDbAwsKey) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this OracleDbAwsKey.
 func (mg *OracleDbAwsKey) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OracleDbAwsKey.
-func (mg *OracleDbAwsKey) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OracleDbAwsKey.
@@ -177,11 +152,6 @@ func (mg *OracleDbAwsKey) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OracleDbAwsKey.
-func (mg *OracleDbAwsKey) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OracleDbAwsKey.
 func (mg *OracleDbAwsKey) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -205,11 +175,6 @@ func (mg *OracleDbAzureBlobContainer) GetManagementPolicies() xpv1.ManagementPol
 // GetProviderConfigReference of this OracleDbAzureBlobContainer.
 func (mg *OracleDbAzureBlobContainer) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OracleDbAzureBlobContainer.
-func (mg *OracleDbAzureBlobContainer) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OracleDbAzureBlobContainer.
@@ -237,11 +202,6 @@ func (mg *OracleDbAzureBlobContainer) SetProviderConfigReference(r *xpv1.Referen
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OracleDbAzureBlobContainer.
-func (mg *OracleDbAzureBlobContainer) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OracleDbAzureBlobContainer.
 func (mg *OracleDbAzureBlobContainer) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -265,11 +225,6 @@ func (mg *OracleDbAzureBlobMount) GetManagementPolicies() xpv1.ManagementPolicie
 // GetProviderConfigReference of this OracleDbAzureBlobMount.
 func (mg *OracleDbAzureBlobMount) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OracleDbAzureBlobMount.
-func (mg *OracleDbAzureBlobMount) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OracleDbAzureBlobMount.
@@ -297,11 +252,6 @@ func (mg *OracleDbAzureBlobMount) SetProviderConfigReference(r *xpv1.Reference) 
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OracleDbAzureBlobMount.
-func (mg *OracleDbAzureBlobMount) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OracleDbAzureBlobMount.
 func (mg *OracleDbAzureBlobMount) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -325,11 +275,6 @@ func (mg *OracleDbAzureConnector) GetManagementPolicies() xpv1.ManagementPolicie
 // GetProviderConfigReference of this OracleDbAzureConnector.
 func (mg *OracleDbAzureConnector) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OracleDbAzureConnector.
-func (mg *OracleDbAzureConnector) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OracleDbAzureConnector.
@@ -357,11 +302,6 @@ func (mg *OracleDbAzureConnector) SetProviderConfigReference(r *xpv1.Reference) 
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OracleDbAzureConnector.
-func (mg *OracleDbAzureConnector) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OracleDbAzureConnector.
 func (mg *OracleDbAzureConnector) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -385,11 +325,6 @@ func (mg *OracleDbAzureVault) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this OracleDbAzureVault.
 func (mg *OracleDbAzureVault) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OracleDbAzureVault.
-func (mg *OracleDbAzureVault) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OracleDbAzureVault.
@@ -417,11 +352,6 @@ func (mg *OracleDbAzureVault) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OracleDbAzureVault.
-func (mg *OracleDbAzureVault) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OracleDbAzureVault.
 func (mg *OracleDbAzureVault) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -445,11 +375,6 @@ func (mg *OracleDbAzureVaultAssociation) GetManagementPolicies() xpv1.Management
 // GetProviderConfigReference of this OracleDbAzureVaultAssociation.
 func (mg *OracleDbAzureVaultAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OracleDbAzureVaultAssociation.
-func (mg *OracleDbAzureVaultAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OracleDbAzureVaultAssociation.
@@ -477,11 +402,6 @@ func (mg *OracleDbAzureVaultAssociation) SetProviderConfigReference(r *xpv1.Refe
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OracleDbAzureVaultAssociation.
-func (mg *OracleDbAzureVaultAssociation) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OracleDbAzureVaultAssociation.
 func (mg *OracleDbAzureVaultAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -505,11 +425,6 @@ func (mg *OracleDbGcpIdentityConnector) GetManagementPolicies() xpv1.ManagementP
 // GetProviderConfigReference of this OracleDbGcpIdentityConnector.
 func (mg *OracleDbGcpIdentityConnector) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OracleDbGcpIdentityConnector.
-func (mg *OracleDbGcpIdentityConnector) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OracleDbGcpIdentityConnector.
@@ -537,11 +452,6 @@ func (mg *OracleDbGcpIdentityConnector) SetProviderConfigReference(r *xpv1.Refer
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OracleDbGcpIdentityConnector.
-func (mg *OracleDbGcpIdentityConnector) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OracleDbGcpIdentityConnector.
 func (mg *OracleDbGcpIdentityConnector) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -567,11 +477,6 @@ func (mg *OracleDbGcpKeyRing) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this OracleDbGcpKeyRing.
-func (mg *OracleDbGcpKeyRing) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this OracleDbGcpKeyRing.
 func (mg *OracleDbGcpKeyRing) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -595,11 +500,6 @@ func (mg *OracleDbGcpKeyRing) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this OracleDbGcpKeyRing.
 func (mg *OracleDbGcpKeyRing) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this OracleDbGcpKeyRing.
-func (mg *OracleDbGcpKeyRing) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this OracleDbGcpKeyRing.

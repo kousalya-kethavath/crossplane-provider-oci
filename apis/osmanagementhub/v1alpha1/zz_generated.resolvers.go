@@ -8,18 +8,16 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
+	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Event.
-	apisresolver "github.com/oracle/provider-oci/internal/apis"
 )
 
-func (mg *Event) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Event) ResolveReferences( // ResolveReferences of this Event.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -35,6 +33,7 @@ func (mg *Event) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +53,7 @@ func (mg *Event) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EventIDRef,
 			Selector:     mg.Spec.ForProvider.EventIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -73,6 +73,7 @@ func (mg *Event) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -92,6 +93,7 @@ func (mg *Event) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.EventIDRef,
 			Selector:     mg.Spec.InitProvider.EventIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -123,6 +125,7 @@ func (mg *LifecycleEnvironment) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -142,6 +145,7 @@ func (mg *LifecycleEnvironment) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -173,6 +177,7 @@ func (mg *LifecycleStagePromoteSoftwareSourceManagement) ResolveReferences(ctx c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SoftwareSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SoftwareSourceIDRef,
 			Selector:     mg.Spec.ForProvider.SoftwareSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -192,6 +197,7 @@ func (mg *LifecycleStagePromoteSoftwareSourceManagement) ResolveReferences(ctx c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SoftwareSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SoftwareSourceIDRef,
 			Selector:     mg.Spec.InitProvider.SoftwareSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -223,6 +229,7 @@ func (mg *ManagedInstance) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -242,6 +249,7 @@ func (mg *ManagedInstance) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NotificationTopicID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.NotificationTopicIDRef,
 			Selector:     mg.Spec.ForProvider.NotificationTopicIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -261,6 +269,7 @@ func (mg *ManagedInstance) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrimaryManagementStationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.PrimaryManagementStationIDRef,
 			Selector:     mg.Spec.ForProvider.PrimaryManagementStationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -280,6 +289,7 @@ func (mg *ManagedInstance) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecondaryManagementStationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SecondaryManagementStationIDRef,
 			Selector:     mg.Spec.ForProvider.SecondaryManagementStationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -299,6 +309,7 @@ func (mg *ManagedInstance) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -318,6 +329,7 @@ func (mg *ManagedInstance) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NotificationTopicID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.NotificationTopicIDRef,
 			Selector:     mg.Spec.InitProvider.NotificationTopicIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -337,6 +349,7 @@ func (mg *ManagedInstance) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrimaryManagementStationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.PrimaryManagementStationIDRef,
 			Selector:     mg.Spec.InitProvider.PrimaryManagementStationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -356,6 +369,7 @@ func (mg *ManagedInstance) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecondaryManagementStationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SecondaryManagementStationIDRef,
 			Selector:     mg.Spec.InitProvider.SecondaryManagementStationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -387,6 +401,7 @@ func (mg *ManagedInstanceAttachProfileManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -406,6 +421,7 @@ func (mg *ManagedInstanceAttachProfileManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProfileID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProfileIDRef,
 			Selector:     mg.Spec.ForProvider.ProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -425,6 +441,7 @@ func (mg *ManagedInstanceAttachProfileManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -444,6 +461,7 @@ func (mg *ManagedInstanceAttachProfileManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProfileID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ProfileIDRef,
 			Selector:     mg.Spec.InitProvider.ProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -475,6 +493,7 @@ func (mg *ManagedInstanceDetachProfileManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -494,6 +513,7 @@ func (mg *ManagedInstanceDetachProfileManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -525,6 +545,7 @@ func (mg *ManagedInstanceGroup) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -544,6 +565,7 @@ func (mg *ManagedInstanceGroup) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NotificationTopicID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.NotificationTopicIDRef,
 			Selector:     mg.Spec.ForProvider.NotificationTopicIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -563,6 +585,7 @@ func (mg *ManagedInstanceGroup) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -582,6 +605,7 @@ func (mg *ManagedInstanceGroup) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NotificationTopicID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.NotificationTopicIDRef,
 			Selector:     mg.Spec.InitProvider.NotificationTopicIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -613,6 +637,7 @@ func (mg *ManagedInstanceGroupAttachManagedInstancesManagement) ResolveReference
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -632,6 +657,7 @@ func (mg *ManagedInstanceGroupAttachManagedInstancesManagement) ResolveReference
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -663,6 +689,7 @@ func (mg *ManagedInstanceGroupAttachSoftwareSourcesManagement) ResolveReferences
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -682,6 +709,7 @@ func (mg *ManagedInstanceGroupAttachSoftwareSourcesManagement) ResolveReferences
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -713,6 +741,7 @@ func (mg *ManagedInstanceGroupDetachManagedInstancesManagement) ResolveReference
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -732,6 +761,7 @@ func (mg *ManagedInstanceGroupDetachManagedInstancesManagement) ResolveReference
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -763,6 +793,7 @@ func (mg *ManagedInstanceGroupDetachSoftwareSourcesManagement) ResolveReferences
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -782,6 +813,7 @@ func (mg *ManagedInstanceGroupDetachSoftwareSourcesManagement) ResolveReferences
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -813,6 +845,7 @@ func (mg *ManagedInstanceGroupInstallPackagesManagement) ResolveReferences(ctx c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -832,6 +865,7 @@ func (mg *ManagedInstanceGroupInstallPackagesManagement) ResolveReferences(ctx c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -863,6 +897,7 @@ func (mg *ManagedInstanceGroupInstallWindowsUpdatesManagement) ResolveReferences
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -882,6 +917,7 @@ func (mg *ManagedInstanceGroupInstallWindowsUpdatesManagement) ResolveReferences
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -914,6 +950,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Disable[i3].SoftwareSourceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Disable[i3].SoftwareSourceIDRef,
 				Selector:     mg.Spec.ForProvider.Disable[i3].SoftwareSourceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -935,6 +972,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Disable[i3].StreamName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Disable[i3].StreamNameRef,
 				Selector:     mg.Spec.ForProvider.Disable[i3].StreamNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -956,6 +994,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Enable[i3].SoftwareSourceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Enable[i3].SoftwareSourceIDRef,
 				Selector:     mg.Spec.ForProvider.Enable[i3].SoftwareSourceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -977,6 +1016,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Enable[i3].StreamName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Enable[i3].StreamNameRef,
 				Selector:     mg.Spec.ForProvider.Enable[i3].StreamNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -998,6 +1038,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Install[i3].ProfileName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Install[i3].ProfileNameRef,
 				Selector:     mg.Spec.ForProvider.Install[i3].ProfileNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1019,6 +1060,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Install[i3].SoftwareSourceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Install[i3].SoftwareSourceIDRef,
 				Selector:     mg.Spec.ForProvider.Install[i3].SoftwareSourceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1040,6 +1082,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Install[i3].StreamName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Install[i3].StreamNameRef,
 				Selector:     mg.Spec.ForProvider.Install[i3].StreamNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1060,6 +1103,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1080,6 +1124,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Remove[i3].ProfileName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Remove[i3].ProfileNameRef,
 				Selector:     mg.Spec.ForProvider.Remove[i3].ProfileNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1101,6 +1146,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Remove[i3].SoftwareSourceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Remove[i3].SoftwareSourceIDRef,
 				Selector:     mg.Spec.ForProvider.Remove[i3].SoftwareSourceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1122,6 +1168,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Remove[i3].StreamName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Remove[i3].StreamNameRef,
 				Selector:     mg.Spec.ForProvider.Remove[i3].StreamNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1143,6 +1190,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Disable[i3].SoftwareSourceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Disable[i3].SoftwareSourceIDRef,
 				Selector:     mg.Spec.InitProvider.Disable[i3].SoftwareSourceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1164,6 +1212,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Disable[i3].StreamName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Disable[i3].StreamNameRef,
 				Selector:     mg.Spec.InitProvider.Disable[i3].StreamNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1185,6 +1234,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Enable[i3].SoftwareSourceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Enable[i3].SoftwareSourceIDRef,
 				Selector:     mg.Spec.InitProvider.Enable[i3].SoftwareSourceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1206,6 +1256,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Enable[i3].StreamName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Enable[i3].StreamNameRef,
 				Selector:     mg.Spec.InitProvider.Enable[i3].StreamNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1227,6 +1278,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Install[i3].ProfileName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Install[i3].ProfileNameRef,
 				Selector:     mg.Spec.InitProvider.Install[i3].ProfileNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1248,6 +1300,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Install[i3].SoftwareSourceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Install[i3].SoftwareSourceIDRef,
 				Selector:     mg.Spec.InitProvider.Install[i3].SoftwareSourceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1269,6 +1322,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Install[i3].StreamName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Install[i3].StreamNameRef,
 				Selector:     mg.Spec.InitProvider.Install[i3].StreamNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1289,6 +1343,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1309,6 +1364,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Remove[i3].ProfileName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Remove[i3].ProfileNameRef,
 				Selector:     mg.Spec.InitProvider.Remove[i3].ProfileNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1330,6 +1386,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Remove[i3].SoftwareSourceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Remove[i3].SoftwareSourceIDRef,
 				Selector:     mg.Spec.InitProvider.Remove[i3].SoftwareSourceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1351,6 +1408,7 @@ func (mg *ManagedInstanceGroupManageModuleStreamsManagement) ResolveReferences(c
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Remove[i3].StreamName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Remove[i3].StreamNameRef,
 				Selector:     mg.Spec.InitProvider.Remove[i3].StreamNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1384,6 +1442,7 @@ func (mg *ManagedInstanceGroupRebootManagement) ResolveReferences(ctx context.Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1403,6 +1462,7 @@ func (mg *ManagedInstanceGroupRebootManagement) ResolveReferences(ctx context.Co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1434,6 +1494,7 @@ func (mg *ManagedInstanceGroupRemovePackagesManagement) ResolveReferences(ctx co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1453,6 +1514,7 @@ func (mg *ManagedInstanceGroupRemovePackagesManagement) ResolveReferences(ctx co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1484,6 +1546,7 @@ func (mg *ManagedInstanceGroupUpdateAllPackagesManagement) ResolveReferences(ctx
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1503,6 +1566,7 @@ func (mg *ManagedInstanceGroupUpdateAllPackagesManagement) ResolveReferences(ctx
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1534,6 +1598,7 @@ func (mg *ManagedInstanceInstallWindowsUpdatesManagement) ResolveReferences(ctx 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1553,6 +1618,7 @@ func (mg *ManagedInstanceInstallWindowsUpdatesManagement) ResolveReferences(ctx 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1584,6 +1650,7 @@ func (mg *ManagedInstanceRebootManagement) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1603,6 +1670,7 @@ func (mg *ManagedInstanceRebootManagement) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1634,6 +1702,7 @@ func (mg *ManagedInstanceUpdatePackagesManagement) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1653,6 +1722,7 @@ func (mg *ManagedInstanceUpdatePackagesManagement) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1684,6 +1754,7 @@ func (mg *ManagementStation) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1703,6 +1774,7 @@ func (mg *ManagementStation) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1734,6 +1806,7 @@ func (mg *ManagementStationAssociateManagedInstancesManagement) ResolveReference
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementStationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagementStationIDRef,
 			Selector:     mg.Spec.ForProvider.ManagementStationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1753,6 +1826,7 @@ func (mg *ManagementStationAssociateManagedInstancesManagement) ResolveReference
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementStationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagementStationIDRef,
 			Selector:     mg.Spec.InitProvider.ManagementStationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1784,6 +1858,7 @@ func (mg *ManagementStationMirrorSynchronizeManagement) ResolveReferences(ctx co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementStationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagementStationIDRef,
 			Selector:     mg.Spec.ForProvider.ManagementStationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1803,6 +1878,7 @@ func (mg *ManagementStationMirrorSynchronizeManagement) ResolveReferences(ctx co
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementStationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagementStationIDRef,
 			Selector:     mg.Spec.InitProvider.ManagementStationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1834,6 +1910,7 @@ func (mg *ManagementStationRefreshManagement) ResolveReferences(ctx context.Cont
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementStationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagementStationIDRef,
 			Selector:     mg.Spec.ForProvider.ManagementStationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1853,6 +1930,7 @@ func (mg *ManagementStationRefreshManagement) ResolveReferences(ctx context.Cont
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementStationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagementStationIDRef,
 			Selector:     mg.Spec.InitProvider.ManagementStationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1884,6 +1962,7 @@ func (mg *ManagementStationSynchronizeMirrorsManagement) ResolveReferences(ctx c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementStationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagementStationIDRef,
 			Selector:     mg.Spec.ForProvider.ManagementStationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1903,6 +1982,7 @@ func (mg *ManagementStationSynchronizeMirrorsManagement) ResolveReferences(ctx c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementStationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagementStationIDRef,
 			Selector:     mg.Spec.InitProvider.ManagementStationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1934,6 +2014,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1953,6 +2034,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1972,6 +2054,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementStationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagementStationIDRef,
 			Selector:     mg.Spec.ForProvider.ManagementStationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1991,6 +2074,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2010,6 +2094,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2029,6 +2114,7 @@ func (mg *Profile) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementStationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagementStationIDRef,
 			Selector:     mg.Spec.InitProvider.ManagementStationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2060,6 +2146,7 @@ func (mg *ProfileAttachLifecycleStageManagement) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProfileID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProfileIDRef,
 			Selector:     mg.Spec.ForProvider.ProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2079,6 +2166,7 @@ func (mg *ProfileAttachLifecycleStageManagement) ResolveReferences(ctx context.C
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProfileID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ProfileIDRef,
 			Selector:     mg.Spec.InitProvider.ProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2110,6 +2198,7 @@ func (mg *ProfileAttachManagedInstanceGroupManagement) ResolveReferences(ctx con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2129,6 +2218,7 @@ func (mg *ProfileAttachManagedInstanceGroupManagement) ResolveReferences(ctx con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProfileID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProfileIDRef,
 			Selector:     mg.Spec.ForProvider.ProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2148,6 +2238,7 @@ func (mg *ProfileAttachManagedInstanceGroupManagement) ResolveReferences(ctx con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedInstanceGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagedInstanceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ManagedInstanceGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2167,6 +2258,7 @@ func (mg *ProfileAttachManagedInstanceGroupManagement) ResolveReferences(ctx con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProfileID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ProfileIDRef,
 			Selector:     mg.Spec.InitProvider.ProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2198,6 +2290,7 @@ func (mg *ProfileAttachManagementStationManagement) ResolveReferences(ctx contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementStationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagementStationIDRef,
 			Selector:     mg.Spec.ForProvider.ManagementStationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2217,6 +2310,7 @@ func (mg *ProfileAttachManagementStationManagement) ResolveReferences(ctx contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProfileID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProfileIDRef,
 			Selector:     mg.Spec.ForProvider.ProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2236,6 +2330,7 @@ func (mg *ProfileAttachManagementStationManagement) ResolveReferences(ctx contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementStationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagementStationIDRef,
 			Selector:     mg.Spec.InitProvider.ManagementStationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2255,6 +2350,7 @@ func (mg *ProfileAttachManagementStationManagement) ResolveReferences(ctx contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProfileID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ProfileIDRef,
 			Selector:     mg.Spec.InitProvider.ProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2286,6 +2382,7 @@ func (mg *ProfileAttachSoftwareSourcesManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProfileID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProfileIDRef,
 			Selector:     mg.Spec.ForProvider.ProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2305,6 +2402,7 @@ func (mg *ProfileAttachSoftwareSourcesManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProfileID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ProfileIDRef,
 			Selector:     mg.Spec.InitProvider.ProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2336,6 +2434,7 @@ func (mg *ProfileDetachSoftwareSourcesManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProfileID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ProfileIDRef,
 			Selector:     mg.Spec.ForProvider.ProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2355,6 +2454,7 @@ func (mg *ProfileDetachSoftwareSourcesManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProfileID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ProfileIDRef,
 			Selector:     mg.Spec.InitProvider.ProfileIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2386,6 +2486,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2408,6 +2509,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Disable[i5].SoftwareSourceID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Disable[i5].SoftwareSourceIDRef,
 						Selector:     mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Disable[i5].SoftwareSourceIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2433,6 +2535,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Disable[i5].StreamName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Disable[i5].StreamNameRef,
 						Selector:     mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Disable[i5].StreamNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2458,6 +2561,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Enable[i5].SoftwareSourceID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Enable[i5].SoftwareSourceIDRef,
 						Selector:     mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Enable[i5].SoftwareSourceIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2483,6 +2587,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Enable[i5].StreamName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Enable[i5].StreamNameRef,
 						Selector:     mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Enable[i5].StreamNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2508,6 +2613,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].ProfileName),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].ProfileNameRef,
 						Selector:     mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].ProfileNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2533,6 +2639,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].SoftwareSourceID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].SoftwareSourceIDRef,
 						Selector:     mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].SoftwareSourceIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2558,6 +2665,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].StreamName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].StreamNameRef,
 						Selector:     mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].StreamNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2583,6 +2691,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].ProfileName),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].ProfileNameRef,
 						Selector:     mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].ProfileNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2608,6 +2717,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].SoftwareSourceID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].SoftwareSourceIDRef,
 						Selector:     mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].SoftwareSourceIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2633,6 +2743,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].StreamName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].StreamNameRef,
 						Selector:     mg.Spec.ForProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].StreamNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2657,6 +2768,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Operations[i3].SwitchModuleStreamsDetails[i4].SoftwareSourceID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Operations[i3].SwitchModuleStreamsDetails[i4].SoftwareSourceIDRef,
 					Selector:     mg.Spec.ForProvider.Operations[i3].SwitchModuleStreamsDetails[i4].SoftwareSourceIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -2680,6 +2792,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Operations[i3].SwitchModuleStreamsDetails[i4].StreamName),
 					Extract:      resource.ExtractParamPath("name", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Operations[i3].SwitchModuleStreamsDetails[i4].StreamNameRef,
 					Selector:     mg.Spec.ForProvider.Operations[i3].SwitchModuleStreamsDetails[i4].StreamNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -2701,6 +2814,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2723,6 +2837,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Disable[i5].SoftwareSourceID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Disable[i5].SoftwareSourceIDRef,
 						Selector:     mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Disable[i5].SoftwareSourceIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2748,6 +2863,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Disable[i5].StreamName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Disable[i5].StreamNameRef,
 						Selector:     mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Disable[i5].StreamNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2773,6 +2889,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Enable[i5].SoftwareSourceID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Enable[i5].SoftwareSourceIDRef,
 						Selector:     mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Enable[i5].SoftwareSourceIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2798,6 +2915,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Enable[i5].StreamName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Enable[i5].StreamNameRef,
 						Selector:     mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Enable[i5].StreamNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2823,6 +2941,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].ProfileName),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].ProfileNameRef,
 						Selector:     mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].ProfileNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2848,6 +2967,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].SoftwareSourceID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].SoftwareSourceIDRef,
 						Selector:     mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].SoftwareSourceIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2873,6 +2993,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].StreamName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].StreamNameRef,
 						Selector:     mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Install[i5].StreamNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2898,6 +3019,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].ProfileName),
 						Extract:      reference.ExternalName(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].ProfileNameRef,
 						Selector:     mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].ProfileNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2923,6 +3045,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].SoftwareSourceID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].SoftwareSourceIDRef,
 						Selector:     mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].SoftwareSourceIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2948,6 +3071,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].StreamName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].StreamNameRef,
 						Selector:     mg.Spec.InitProvider.Operations[i3].ManageModuleStreamsDetails[i4].Remove[i5].StreamNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -2972,6 +3096,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Operations[i3].SwitchModuleStreamsDetails[i4].SoftwareSourceID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Operations[i3].SwitchModuleStreamsDetails[i4].SoftwareSourceIDRef,
 					Selector:     mg.Spec.InitProvider.Operations[i3].SwitchModuleStreamsDetails[i4].SoftwareSourceIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -2995,6 +3120,7 @@ func (mg *ScheduledJob) ResolveReferences(ctx context.Context, c client.Reader) 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Operations[i3].SwitchModuleStreamsDetails[i4].StreamName),
 					Extract:      resource.ExtractParamPath("name", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Operations[i3].SwitchModuleStreamsDetails[i4].StreamNameRef,
 					Selector:     mg.Spec.InitProvider.Operations[i3].SwitchModuleStreamsDetails[i4].StreamNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -3029,6 +3155,7 @@ func (mg *SoftwareSource) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3050,6 +3177,7 @@ func (mg *SoftwareSource) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomSoftwareSourceFilter[i3].ModuleStreamProfileFilters[i4].ProfileName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.CustomSoftwareSourceFilter[i3].ModuleStreamProfileFilters[i4].ProfileNameRef,
 					Selector:     mg.Spec.ForProvider.CustomSoftwareSourceFilter[i3].ModuleStreamProfileFilters[i4].ProfileNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -3073,6 +3201,7 @@ func (mg *SoftwareSource) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomSoftwareSourceFilter[i3].ModuleStreamProfileFilters[i4].StreamName),
 					Extract:      resource.ExtractParamPath("name", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.CustomSoftwareSourceFilter[i3].ModuleStreamProfileFilters[i4].StreamNameRef,
 					Selector:     mg.Spec.ForProvider.CustomSoftwareSourceFilter[i3].ModuleStreamProfileFilters[i4].StreamNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -3094,6 +3223,7 @@ func (mg *SoftwareSource) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OriginSoftwareSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.OriginSoftwareSourceIDRef,
 			Selector:     mg.Spec.ForProvider.OriginSoftwareSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3113,6 +3243,7 @@ func (mg *SoftwareSource) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3134,6 +3265,7 @@ func (mg *SoftwareSource) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CustomSoftwareSourceFilter[i3].ModuleStreamProfileFilters[i4].ProfileName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.CustomSoftwareSourceFilter[i3].ModuleStreamProfileFilters[i4].ProfileNameRef,
 					Selector:     mg.Spec.InitProvider.CustomSoftwareSourceFilter[i3].ModuleStreamProfileFilters[i4].ProfileNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -3157,6 +3289,7 @@ func (mg *SoftwareSource) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CustomSoftwareSourceFilter[i3].ModuleStreamProfileFilters[i4].StreamName),
 					Extract:      resource.ExtractParamPath("name", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.CustomSoftwareSourceFilter[i3].ModuleStreamProfileFilters[i4].StreamNameRef,
 					Selector:     mg.Spec.InitProvider.CustomSoftwareSourceFilter[i3].ModuleStreamProfileFilters[i4].StreamNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -3178,6 +3311,7 @@ func (mg *SoftwareSource) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OriginSoftwareSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.OriginSoftwareSourceIDRef,
 			Selector:     mg.Spec.InitProvider.OriginSoftwareSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3209,6 +3343,7 @@ func (mg *SoftwareSourceAddPackagesManagement) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SoftwareSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SoftwareSourceIDRef,
 			Selector:     mg.Spec.ForProvider.SoftwareSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3228,6 +3363,7 @@ func (mg *SoftwareSourceAddPackagesManagement) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SoftwareSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SoftwareSourceIDRef,
 			Selector:     mg.Spec.InitProvider.SoftwareSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3260,6 +3396,7 @@ func (mg *SoftwareSourceChangeAvailabilityManagement) ResolveReferences(ctx cont
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SoftwareSourceAvailabilities[i3].SoftwareSourceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SoftwareSourceAvailabilities[i3].SoftwareSourceIDRef,
 				Selector:     mg.Spec.ForProvider.SoftwareSourceAvailabilities[i3].SoftwareSourceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -3281,6 +3418,7 @@ func (mg *SoftwareSourceChangeAvailabilityManagement) ResolveReferences(ctx cont
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SoftwareSourceAvailabilities[i3].SoftwareSourceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SoftwareSourceAvailabilities[i3].SoftwareSourceIDRef,
 				Selector:     mg.Spec.InitProvider.SoftwareSourceAvailabilities[i3].SoftwareSourceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -3314,6 +3452,7 @@ func (mg *SoftwareSourceGenerateMetadataManagement) ResolveReferences(ctx contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SoftwareSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SoftwareSourceIDRef,
 			Selector:     mg.Spec.ForProvider.SoftwareSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3333,6 +3472,7 @@ func (mg *SoftwareSourceGenerateMetadataManagement) ResolveReferences(ctx contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SoftwareSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SoftwareSourceIDRef,
 			Selector:     mg.Spec.InitProvider.SoftwareSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3364,6 +3504,7 @@ func (mg *SoftwareSourceManifest) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SoftwareSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SoftwareSourceIDRef,
 			Selector:     mg.Spec.ForProvider.SoftwareSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3383,6 +3524,7 @@ func (mg *SoftwareSourceManifest) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SoftwareSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SoftwareSourceIDRef,
 			Selector:     mg.Spec.InitProvider.SoftwareSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3414,6 +3556,7 @@ func (mg *SoftwareSourceRemovePackagesManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SoftwareSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SoftwareSourceIDRef,
 			Selector:     mg.Spec.ForProvider.SoftwareSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3433,6 +3576,7 @@ func (mg *SoftwareSourceRemovePackagesManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SoftwareSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SoftwareSourceIDRef,
 			Selector:     mg.Spec.InitProvider.SoftwareSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3464,6 +3608,7 @@ func (mg *SoftwareSourceReplacePackagesManagement) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SoftwareSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SoftwareSourceIDRef,
 			Selector:     mg.Spec.ForProvider.SoftwareSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -3483,6 +3628,7 @@ func (mg *SoftwareSourceReplacePackagesManagement) ResolveReferences(ctx context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SoftwareSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SoftwareSourceIDRef,
 			Selector:     mg.Spec.InitProvider.SoftwareSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},

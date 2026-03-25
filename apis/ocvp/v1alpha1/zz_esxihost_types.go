@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DatastoreAttachmentsInitParameters struct {
@@ -50,7 +50,7 @@ type EsxiHostInitParameters struct {
 
 	// The OCID of the Cluster to add the ESXi host to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ocvp/v1alpha1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
 	// Reference to a Cluster in ocvp to populate clusterId.
@@ -229,7 +229,7 @@ type EsxiHostParameters struct {
 
 	// The OCID of the Cluster to add the ESXi host to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ocvp/v1alpha1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 

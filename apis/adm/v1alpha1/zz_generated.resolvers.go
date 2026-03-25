@@ -8,10 +8,9 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -34,6 +33,7 @@ func (mg *KnowledgeBase) ResolveReferences( // ResolveReferences of this Knowled
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *KnowledgeBase) ResolveReferences( // ResolveReferences of this Knowled
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -84,6 +85,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -103,6 +105,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KnowledgeBaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KnowledgeBaseIDRef,
 			Selector:     mg.Spec.ForProvider.KnowledgeBaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -123,6 +126,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkConfiguration[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.NetworkConfiguration[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkConfiguration[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -144,6 +148,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ScmConfiguration[i3].OciCodeRepositoryID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ScmConfiguration[i3].OciCodeRepositoryIDRef,
 				Selector:     mg.Spec.ForProvider.ScmConfiguration[i3].OciCodeRepositoryIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -165,6 +170,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ScmConfiguration[i3].PatSecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ScmConfiguration[i3].PatSecretIDRef,
 				Selector:     mg.Spec.ForProvider.ScmConfiguration[i3].PatSecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -186,6 +192,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VerifyConfiguration[i3].JobName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.VerifyConfiguration[i3].JobNameRef,
 				Selector:     mg.Spec.ForProvider.VerifyConfiguration[i3].JobNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -207,6 +214,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VerifyConfiguration[i3].PatSecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.VerifyConfiguration[i3].PatSecretIDRef,
 				Selector:     mg.Spec.ForProvider.VerifyConfiguration[i3].PatSecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -228,6 +236,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VerifyConfiguration[i3].PipelineID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.VerifyConfiguration[i3].PipelineIDRef,
 				Selector:     mg.Spec.ForProvider.VerifyConfiguration[i3].PipelineIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -249,6 +258,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VerifyConfiguration[i3].TriggerSecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.VerifyConfiguration[i3].TriggerSecretIDRef,
 				Selector:     mg.Spec.ForProvider.VerifyConfiguration[i3].TriggerSecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -269,6 +279,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -288,6 +299,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KnowledgeBaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KnowledgeBaseIDRef,
 			Selector:     mg.Spec.InitProvider.KnowledgeBaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -308,6 +320,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkConfiguration[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.NetworkConfiguration[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.NetworkConfiguration[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -329,6 +342,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ScmConfiguration[i3].OciCodeRepositoryID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ScmConfiguration[i3].OciCodeRepositoryIDRef,
 				Selector:     mg.Spec.InitProvider.ScmConfiguration[i3].OciCodeRepositoryIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -350,6 +364,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ScmConfiguration[i3].PatSecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ScmConfiguration[i3].PatSecretIDRef,
 				Selector:     mg.Spec.InitProvider.ScmConfiguration[i3].PatSecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -371,6 +386,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VerifyConfiguration[i3].JobName),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.VerifyConfiguration[i3].JobNameRef,
 				Selector:     mg.Spec.InitProvider.VerifyConfiguration[i3].JobNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -392,6 +408,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VerifyConfiguration[i3].PatSecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.VerifyConfiguration[i3].PatSecretIDRef,
 				Selector:     mg.Spec.InitProvider.VerifyConfiguration[i3].PatSecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -413,6 +430,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VerifyConfiguration[i3].PipelineID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.VerifyConfiguration[i3].PipelineIDRef,
 				Selector:     mg.Spec.InitProvider.VerifyConfiguration[i3].PipelineIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -434,6 +452,7 @@ func (mg *RemediationRecipe) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VerifyConfiguration[i3].TriggerSecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.VerifyConfiguration[i3].TriggerSecretIDRef,
 				Selector:     mg.Spec.InitProvider.VerifyConfiguration[i3].TriggerSecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -467,6 +486,7 @@ func (mg *RemediationRun) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -486,6 +506,7 @@ func (mg *RemediationRun) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RemediationRecipeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.RemediationRecipeIDRef,
 			Selector:     mg.Spec.ForProvider.RemediationRecipeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -505,6 +526,7 @@ func (mg *RemediationRun) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -524,6 +546,7 @@ func (mg *RemediationRun) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RemediationRecipeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.RemediationRecipeIDRef,
 			Selector:     mg.Spec.InitProvider.RemediationRecipeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -555,6 +578,7 @@ func (mg *VulnerabilityAudit) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -574,6 +598,7 @@ func (mg *VulnerabilityAudit) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KnowledgeBaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KnowledgeBaseIDRef,
 			Selector:     mg.Spec.ForProvider.KnowledgeBaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -593,6 +618,7 @@ func (mg *VulnerabilityAudit) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -612,6 +638,7 @@ func (mg *VulnerabilityAudit) ResolveReferences(ctx context.Context, c client.Re
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KnowledgeBaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KnowledgeBaseIDRef,
 			Selector:     mg.Spec.InitProvider.KnowledgeBaseIDSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BdsInstanceMetastoreConfigInitParameters struct {
@@ -20,7 +20,7 @@ type BdsInstanceMetastoreConfigInitParameters struct {
 
 	// (Updatable) The ID of BDS Api Key used for Data Catalog metastore integration.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.ApiKey
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BdsAPIKeyID *string `json:"bdsApiKeyId,omitempty" tf:"bds_api_key_id,omitempty"`
 
 	// Reference to a ApiKey in identity to populate bdsApiKeyId.
@@ -36,7 +36,7 @@ type BdsInstanceMetastoreConfigInitParameters struct {
 
 	// The OCID of the cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/bds/v1alpha1.BdsInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BdsInstanceID *string `json:"bdsInstanceId,omitempty" tf:"bds_instance_id,omitempty"`
 
 	// Reference to a BdsInstance in bds to populate bdsInstanceId.
@@ -55,7 +55,7 @@ type BdsInstanceMetastoreConfigInitParameters struct {
 
 	// The OCID of the Data Catalog metastore.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datacatalog/v1alpha1.Metastore
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MetastoreID *string `json:"metastoreId,omitempty" tf:"metastore_id,omitempty"`
 
 	// Reference to a Metastore in datacatalog to populate metastoreId.
@@ -108,7 +108,7 @@ type BdsInstanceMetastoreConfigParameters struct {
 
 	// (Updatable) The ID of BDS Api Key used for Data Catalog metastore integration.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.ApiKey
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BdsAPIKeyID *string `json:"bdsApiKeyId,omitempty" tf:"bds_api_key_id,omitempty"`
 
@@ -126,7 +126,7 @@ type BdsInstanceMetastoreConfigParameters struct {
 
 	// The OCID of the cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/bds/v1alpha1.BdsInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BdsInstanceID *string `json:"bdsInstanceId,omitempty" tf:"bds_instance_id,omitempty"`
 
@@ -148,7 +148,7 @@ type BdsInstanceMetastoreConfigParameters struct {
 
 	// The OCID of the Data Catalog metastore.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datacatalog/v1alpha1.Metastore
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MetastoreID *string `json:"metastoreId,omitempty" tf:"metastore_id,omitempty"`
 

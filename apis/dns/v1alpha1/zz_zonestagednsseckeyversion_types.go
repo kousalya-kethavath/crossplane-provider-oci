@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ZoneStageDnssecKeyVersionInitParameters struct {
@@ -23,7 +23,7 @@ type ZoneStageDnssecKeyVersionInitParameters struct {
 
 	// The OCID of the target zone.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.Zone
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 
 	// Reference to a Zone in dns to populate zoneId.
@@ -60,7 +60,7 @@ type ZoneStageDnssecKeyVersionParameters struct {
 
 	// The OCID of the target zone.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.Zone
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 

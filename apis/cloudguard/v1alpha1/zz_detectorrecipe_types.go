@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AdditionalPropertiesInitParameters struct {
@@ -300,7 +300,7 @@ type DetailsInitParameters struct {
 
 	// (Updatable) The unique identifier of the attached data source
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudguard/v1alpha1.DataSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
 
 	// Reference to a DataSource in cloudguard to populate dataSourceId.
@@ -375,7 +375,7 @@ type DetailsParameters struct {
 
 	// (Updatable) The unique identifier of the attached data source
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudguard/v1alpha1.DataSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
 
@@ -448,7 +448,7 @@ type DetectorRecipeInitParameters struct {
 
 	// The ID of the source detector recipe
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudguard/v1alpha1.DetectorRecipe
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceDetectorRecipeID *string `json:"sourceDetectorRecipeId,omitempty" tf:"source_detector_recipe_id,omitempty"`
 
 	// Reference to a DetectorRecipe in cloudguard to populate sourceDetectorRecipeId.
@@ -560,7 +560,7 @@ type DetectorRecipeParameters struct {
 
 	// The ID of the source detector recipe
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudguard/v1alpha1.DetectorRecipe
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceDetectorRecipeID *string `json:"sourceDetectorRecipeId,omitempty" tf:"source_detector_recipe_id,omitempty"`
 
@@ -598,7 +598,7 @@ type DetectorRulesInitParameters struct {
 
 	// (Updatable) Detector recipe rule ID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/events/v1alpha1.Rule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DetectorRuleID *string `json:"detectorRuleId,omitempty" tf:"detector_rule_id,omitempty"`
 
 	// Reference to a Rule in events to populate detectorRuleId.
@@ -675,7 +675,7 @@ type DetectorRulesParameters struct {
 
 	// (Updatable) Detector recipe rule ID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/events/v1alpha1.Rule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DetectorRuleID *string `json:"detectorRuleId,omitempty" tf:"detector_rule_id,omitempty"`
 

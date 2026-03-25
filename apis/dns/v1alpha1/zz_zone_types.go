@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DNSSECConfigKskDNSSECKeyVersionsInitParameters struct {
@@ -152,7 +152,7 @@ type ZoneExternalDownstreamsInitParameters struct {
 
 	// (Updatable) The OCID of the TSIG key. A TSIG key is used to secure DNS messages (in this case, zone transfers) between two systems that both have the (shared) secret.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.TsigKey
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TsigKeyID *string `json:"tsigKeyId,omitempty" tf:"tsig_key_id,omitempty"`
 
 	// Reference to a TsigKey in dns to populate tsigKeyId.
@@ -188,7 +188,7 @@ type ZoneExternalDownstreamsParameters struct {
 
 	// (Updatable) The OCID of the TSIG key. A TSIG key is used to secure DNS messages (in this case, zone transfers) between two systems that both have the (shared) secret.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.TsigKey
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TsigKeyID *string `json:"tsigKeyId,omitempty" tf:"tsig_key_id,omitempty"`
 
@@ -211,7 +211,7 @@ type ZoneExternalMastersInitParameters struct {
 
 	// (Updatable) The OCID of the TSIG key. A TSIG key is used to secure DNS messages (in this case, zone transfers) between two systems that both have the (shared) secret.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.TsigKey
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TsigKeyID *string `json:"tsigKeyId,omitempty" tf:"tsig_key_id,omitempty"`
 
 	// Reference to a TsigKey in dns to populate tsigKeyId.
@@ -247,7 +247,7 @@ type ZoneExternalMastersParameters struct {
 
 	// (Updatable) The OCID of the TSIG key. A TSIG key is used to secure DNS messages (in this case, zone transfers) between two systems that both have the (shared) secret.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.TsigKey
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TsigKeyID *string `json:"tsigKeyId,omitempty" tf:"tsig_key_id,omitempty"`
 
@@ -300,7 +300,7 @@ type ZoneInitParameters struct {
 
 	// The OCID of the private view containing the zone. This value will be null for zones in the global DNS, which are publicly resolvable and not part of a private view.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.View
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ViewID *string `json:"viewId,omitempty" tf:"view_id,omitempty"`
 
 	// Reference to a View in dns to populate viewId.
@@ -441,7 +441,7 @@ type ZoneParameters struct {
 
 	// The OCID of the private view containing the zone. This value will be null for zones in the global DNS, which are publicly resolvable and not part of a private view.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.View
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ViewID *string `json:"viewId,omitempty" tf:"view_id,omitempty"`
 

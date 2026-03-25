@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SecurityQuestionSettingIdcsCreatedByInitParameters struct {
@@ -101,7 +101,7 @@ type SecurityQuestionSettingInitParameters struct {
 
 	// ID of the resource
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identitydomains/v1alpha1.SecurityQuestionSetting
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SecurityQuestionSettingID *string `json:"securityQuestionSettingId,omitempty" tf:"security_question_setting_id,omitempty"`
 
 	// Reference to a SecurityQuestionSetting in identitydomains to populate securityQuestionSettingId.
@@ -267,7 +267,7 @@ type SecurityQuestionSettingParameters struct {
 
 	// ID of the resource
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identitydomains/v1alpha1.SecurityQuestionSetting
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SecurityQuestionSettingID *string `json:"securityQuestionSettingId,omitempty" tf:"security_question_setting_id,omitempty"`
 

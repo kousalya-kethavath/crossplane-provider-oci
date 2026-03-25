@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DigitalTwinInstanceInvokeRawCommandInitParameters struct {
 
 	// The OCID of digital twin instance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/iot/v1alpha1.DigitalTwinInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DigitalTwinInstanceID *string `json:"digitalTwinInstanceId,omitempty" tf:"digital_twin_instance_id,omitempty"`
 
 	// Reference to a DigitalTwinInstance in iot to populate digitalTwinInstanceId.
@@ -83,7 +83,7 @@ type DigitalTwinInstanceInvokeRawCommandParameters struct {
 
 	// The OCID of digital twin instance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/iot/v1alpha1.DigitalTwinInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DigitalTwinInstanceID *string `json:"digitalTwinInstanceId,omitempty" tf:"digital_twin_instance_id,omitempty"`
 

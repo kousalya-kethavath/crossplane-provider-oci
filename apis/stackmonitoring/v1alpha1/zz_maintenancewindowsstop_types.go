@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MaintenanceWindowsStopInitParameters struct {
 
 	// The OCID of maintenance window.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/stackmonitoring/v1alpha1.MaintenanceWindow
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MaintenanceWindowID *string `json:"maintenanceWindowId,omitempty" tf:"maintenance_window_id,omitempty"`
 
 	// Reference to a MaintenanceWindow in stackmonitoring to populate maintenanceWindowId.
@@ -40,7 +40,7 @@ type MaintenanceWindowsStopParameters struct {
 
 	// The OCID of maintenance window.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/stackmonitoring/v1alpha1.MaintenanceWindow
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MaintenanceWindowID *string `json:"maintenanceWindowId,omitempty" tf:"maintenance_window_id,omitempty"`
 

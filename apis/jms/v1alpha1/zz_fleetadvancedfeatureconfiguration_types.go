@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AdvancedUsageTrackingInitParameters struct {
@@ -97,7 +97,7 @@ type FleetAdvancedFeatureConfigurationInitParameters struct {
 
 	// (Updatable) Bucket name required to store JFR and related data.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/objectstorage/v1alpha1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	AnalyticBucketName *string `json:"analyticBucketName,omitempty" tf:"analytic_bucket_name,omitempty"`
 
 	// Reference to a Bucket in objectstorage to populate analyticBucketName.
@@ -116,7 +116,7 @@ type FleetAdvancedFeatureConfigurationInitParameters struct {
 
 	// The OCID of the Fleet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/jms/v1alpha1.Fleet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FleetID *string `json:"fleetId,omitempty" tf:"fleet_id,omitempty"`
 
 	// Reference to a Fleet in jms to populate fleetId.
@@ -183,7 +183,7 @@ type FleetAdvancedFeatureConfigurationParameters struct {
 
 	// (Updatable) Bucket name required to store JFR and related data.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/objectstorage/v1alpha1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	AnalyticBucketName *string `json:"analyticBucketName,omitempty" tf:"analytic_bucket_name,omitempty"`
 
@@ -205,7 +205,7 @@ type FleetAdvancedFeatureConfigurationParameters struct {
 
 	// The OCID of the Fleet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/jms/v1alpha1.Fleet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FleetID *string `json:"fleetId,omitempty" tf:"fleet_id,omitempty"`
 
@@ -560,7 +560,7 @@ type SummarizedEventsLogInitParameters struct {
 
 	// (Updatable) The OCID of the log group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.LogGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
 	// Reference to a LogGroup in logging to populate logGroupId.
@@ -573,7 +573,7 @@ type SummarizedEventsLogInitParameters struct {
 
 	// (Updatable) The OCID of the log.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.Log
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogID *string `json:"logId,omitempty" tf:"log_id,omitempty"`
 
 	// Reference to a Log in logging to populate logId.
@@ -598,7 +598,7 @@ type SummarizedEventsLogParameters struct {
 
 	// (Updatable) The OCID of the log group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.LogGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
@@ -612,7 +612,7 @@ type SummarizedEventsLogParameters struct {
 
 	// (Updatable) The OCID of the log.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.Log
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogID *string `json:"logId,omitempty" tf:"log_id,omitempty"`
 

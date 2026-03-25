@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagementCloudClusterInitParameters struct {
 
 	// The OCID of the cloud cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementCloudCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CloudClusterID *string `json:"cloudClusterId,omitempty" tf:"cloud_cluster_id,omitempty"`
 
 	// Reference to a ManagementCloudCluster in database to populate cloudClusterId.
@@ -120,7 +120,7 @@ type ManagementCloudClusterParameters struct {
 
 	// The OCID of the cloud cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementCloudCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CloudClusterID *string `json:"cloudClusterId,omitempty" tf:"cloud_cluster_id,omitempty"`
 

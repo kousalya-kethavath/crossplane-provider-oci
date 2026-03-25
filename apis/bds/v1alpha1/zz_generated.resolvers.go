@@ -8,10 +8,9 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -34,6 +33,7 @@ func (mg *AutoScalingConfiguration) ResolveReferences( // ResolveReferences of t
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *AutoScalingConfiguration) ResolveReferences( // ResolveReferences of t
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -84,6 +85,7 @@ func (mg *BdsCapacityReport) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -103,6 +105,7 @@ func (mg *BdsCapacityReport) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -134,6 +137,7 @@ func (mg *BdsInstance) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -154,6 +158,7 @@ func (mg *BdsInstance) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ComputeOnlyWorkerNode[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ComputeOnlyWorkerNode[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.ComputeOnlyWorkerNode[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -175,6 +180,7 @@ func (mg *BdsInstance) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EdgeNode[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.EdgeNode[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.EdgeNode[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -196,6 +202,7 @@ func (mg *BdsInstance) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KafkaBrokerNode[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.KafkaBrokerNode[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.KafkaBrokerNode[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -217,6 +224,7 @@ func (mg *BdsInstance) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MasterNode[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.MasterNode[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.MasterNode[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -238,6 +246,7 @@ func (mg *BdsInstance) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UtilNode[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.UtilNode[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.UtilNode[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -259,6 +268,7 @@ func (mg *BdsInstance) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkerNode[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.WorkerNode[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.WorkerNode[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -279,6 +289,7 @@ func (mg *BdsInstance) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -299,6 +310,7 @@ func (mg *BdsInstance) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ComputeOnlyWorkerNode[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ComputeOnlyWorkerNode[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.ComputeOnlyWorkerNode[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -320,6 +332,7 @@ func (mg *BdsInstance) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EdgeNode[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.EdgeNode[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.EdgeNode[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -341,6 +354,7 @@ func (mg *BdsInstance) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KafkaBrokerNode[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.KafkaBrokerNode[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.KafkaBrokerNode[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -362,6 +376,7 @@ func (mg *BdsInstance) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MasterNode[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.MasterNode[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.MasterNode[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -383,6 +398,7 @@ func (mg *BdsInstance) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UtilNode[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.UtilNode[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.UtilNode[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -404,6 +420,7 @@ func (mg *BdsInstance) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkerNode[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.WorkerNode[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.WorkerNode[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -437,6 +454,7 @@ func (mg *BdsInstanceApiKey) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -456,6 +474,7 @@ func (mg *BdsInstanceApiKey) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.UserIDRef,
 			Selector:     mg.Spec.ForProvider.UserIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -475,6 +494,7 @@ func (mg *BdsInstanceApiKey) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -494,6 +514,7 @@ func (mg *BdsInstanceApiKey) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.UserIDRef,
 			Selector:     mg.Spec.InitProvider.UserIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -525,6 +546,7 @@ func (mg *BdsInstanceIdentityConfiguration) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -544,6 +566,7 @@ func (mg *BdsInstanceIdentityConfiguration) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConfidentialApplicationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ConfidentialApplicationIDRef,
 			Selector:     mg.Spec.ForProvider.ConfidentialApplicationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -563,6 +586,7 @@ func (mg *BdsInstanceIdentityConfiguration) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IdentityDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.IdentityDomainIDRef,
 			Selector:     mg.Spec.ForProvider.IdentityDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -583,6 +607,7 @@ func (mg *BdsInstanceIdentityConfiguration) ResolveReferences(ctx context.Contex
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UpstConfigurationDetails[i3].MasterEncryptionKeyID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.UpstConfigurationDetails[i3].MasterEncryptionKeyIDRef,
 				Selector:     mg.Spec.ForProvider.UpstConfigurationDetails[i3].MasterEncryptionKeyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -604,6 +629,7 @@ func (mg *BdsInstanceIdentityConfiguration) ResolveReferences(ctx context.Contex
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UpstConfigurationDetails[i3].VaultID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.UpstConfigurationDetails[i3].VaultIDRef,
 				Selector:     mg.Spec.ForProvider.UpstConfigurationDetails[i3].VaultIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -624,6 +650,7 @@ func (mg *BdsInstanceIdentityConfiguration) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -643,6 +670,7 @@ func (mg *BdsInstanceIdentityConfiguration) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConfidentialApplicationID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ConfidentialApplicationIDRef,
 			Selector:     mg.Spec.InitProvider.ConfidentialApplicationIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -662,6 +690,7 @@ func (mg *BdsInstanceIdentityConfiguration) ResolveReferences(ctx context.Contex
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IdentityDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.IdentityDomainIDRef,
 			Selector:     mg.Spec.InitProvider.IdentityDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -682,6 +711,7 @@ func (mg *BdsInstanceIdentityConfiguration) ResolveReferences(ctx context.Contex
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UpstConfigurationDetails[i3].MasterEncryptionKeyID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.UpstConfigurationDetails[i3].MasterEncryptionKeyIDRef,
 				Selector:     mg.Spec.InitProvider.UpstConfigurationDetails[i3].MasterEncryptionKeyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -703,6 +733,7 @@ func (mg *BdsInstanceIdentityConfiguration) ResolveReferences(ctx context.Contex
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UpstConfigurationDetails[i3].VaultID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.UpstConfigurationDetails[i3].VaultIDRef,
 				Selector:     mg.Spec.InitProvider.UpstConfigurationDetails[i3].VaultIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -736,6 +767,7 @@ func (mg *BdsInstanceMetastoreConfig) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BdsAPIKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BdsAPIKeyIDRef,
 			Selector:     mg.Spec.ForProvider.BdsAPIKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -755,6 +787,7 @@ func (mg *BdsInstanceMetastoreConfig) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -774,6 +807,7 @@ func (mg *BdsInstanceMetastoreConfig) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MetastoreID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.MetastoreIDRef,
 			Selector:     mg.Spec.ForProvider.MetastoreIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -793,6 +827,7 @@ func (mg *BdsInstanceMetastoreConfig) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BdsAPIKeyID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BdsAPIKeyIDRef,
 			Selector:     mg.Spec.InitProvider.BdsAPIKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -812,6 +847,7 @@ func (mg *BdsInstanceMetastoreConfig) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -831,6 +867,7 @@ func (mg *BdsInstanceMetastoreConfig) ResolveReferences(ctx context.Context, c c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MetastoreID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.MetastoreIDRef,
 			Selector:     mg.Spec.InitProvider.MetastoreIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -862,6 +899,7 @@ func (mg *BdsInstanceNodeBackup) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -881,6 +919,7 @@ func (mg *BdsInstanceNodeBackup) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -912,6 +951,7 @@ func (mg *BdsInstanceNodeBackupConfiguration) ResolveReferences(ctx context.Cont
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -931,6 +971,7 @@ func (mg *BdsInstanceNodeBackupConfiguration) ResolveReferences(ctx context.Cont
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -962,6 +1003,7 @@ func (mg *BdsInstanceNodeReplaceConfiguration) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -981,6 +1023,7 @@ func (mg *BdsInstanceNodeReplaceConfiguration) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1012,6 +1055,7 @@ func (mg *BdsInstanceOperationCertificateManagementsManagement) ResolveReference
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1031,6 +1075,7 @@ func (mg *BdsInstanceOperationCertificateManagementsManagement) ResolveReference
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1062,6 +1107,7 @@ func (mg *BdsInstanceOsPatchAction) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1081,6 +1127,7 @@ func (mg *BdsInstanceOsPatchAction) ResolveReferences(ctx context.Context, c cli
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1112,6 +1159,7 @@ func (mg *BdsInstancePatchAction) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1131,6 +1179,7 @@ func (mg *BdsInstancePatchAction) ResolveReferences(ctx context.Context, c clien
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1162,6 +1211,7 @@ func (mg *BdsInstanceReplaceNodeAction) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1181,6 +1231,7 @@ func (mg *BdsInstanceReplaceNodeAction) ResolveReferences(ctx context.Context, c
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1212,6 +1263,7 @@ func (mg *BdsInstanceResourcePrincipalConfiguration) ResolveReferences(ctx conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1231,6 +1283,7 @@ func (mg *BdsInstanceResourcePrincipalConfiguration) ResolveReferences(ctx conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1262,6 +1315,7 @@ func (mg *BdsInstanceSoftwareUpdateAction) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1281,6 +1335,7 @@ func (mg *BdsInstanceSoftwareUpdateAction) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BdsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BdsInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.BdsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},

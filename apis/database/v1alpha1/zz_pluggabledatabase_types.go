@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type PdbCreationTypeDetailsInitParameters struct {
@@ -35,7 +35,7 @@ type PdbCreationTypeDetailsInitParameters struct {
 
 	// The OCID of the Source Pluggable Database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.PluggableDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourcePluggableDatabaseID *string `json:"sourcePluggableDatabaseId,omitempty" tf:"source_pluggable_database_id,omitempty"`
 
 	// Reference to a PluggableDatabase in database to populate sourcePluggableDatabaseId.
@@ -48,7 +48,7 @@ type PdbCreationTypeDetailsInitParameters struct {
 
 	// (Applicable when creation_type=LOCAL_CLONE_PDB | REMOTE_CLONE_PDB) The OCID of the Source Pluggable Database Snapshot id.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.PluggableDatabaseSnapshot
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourcePluggableDatabaseSnapshotID *string `json:"sourcePluggableDatabaseSnapshotId,omitempty" tf:"source_pluggable_database_snapshot_id,omitempty"`
 
 	// Reference to a PluggableDatabaseSnapshot in database to populate sourcePluggableDatabaseSnapshotId.
@@ -109,7 +109,7 @@ type PdbCreationTypeDetailsParameters struct {
 
 	// The OCID of the Source Pluggable Database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.PluggableDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourcePluggableDatabaseID *string `json:"sourcePluggableDatabaseId,omitempty" tf:"source_pluggable_database_id,omitempty"`
 
@@ -123,7 +123,7 @@ type PdbCreationTypeDetailsParameters struct {
 
 	// (Applicable when creation_type=LOCAL_CLONE_PDB | REMOTE_CLONE_PDB) The OCID of the Source Pluggable Database Snapshot id.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.PluggableDatabaseSnapshot
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourcePluggableDatabaseSnapshotID *string `json:"sourcePluggableDatabaseSnapshotId,omitempty" tf:"source_pluggable_database_snapshot_id,omitempty"`
 
@@ -177,7 +177,7 @@ type PluggableDatabaseInitParameters struct {
 
 	// The OCID of the CDB
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.Database
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ContainerDatabaseID *string `json:"containerDatabaseId,omitempty" tf:"container_database_id,omitempty"`
 
 	// Reference to a Database in database to populate containerDatabaseId.
@@ -201,7 +201,7 @@ type PluggableDatabaseInitParameters struct {
 
 	// The OCID of the key container version that is used in database transparent data encryption (TDE) operations KMS Key can have multiple key versions. If none is specified, the current key version (latest) of the Key Id is used for the operation. Autonomous AI Database Serverless does not use key versions, hence is not applicable for Autonomous AI Database Serverless instances.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.KeyVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KMSKeyVersionID *string `json:"kmsKeyVersionId,omitempty" tf:"kms_key_version_id,omitempty"`
 
 	// Reference to a KeyVersion in kms to populate kmsKeyVersionId.
@@ -334,7 +334,7 @@ type PluggableDatabaseParameters struct {
 
 	// The OCID of the CDB
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.Database
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerDatabaseID *string `json:"containerDatabaseId,omitempty" tf:"container_database_id,omitempty"`
 
@@ -362,7 +362,7 @@ type PluggableDatabaseParameters struct {
 
 	// The OCID of the key container version that is used in database transparent data encryption (TDE) operations KMS Key can have multiple key versions. If none is specified, the current key version (latest) of the Key Id is used for the operation. Autonomous AI Database Serverless does not use key versions, hence is not applicable for Autonomous AI Database Serverless instances.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.KeyVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KMSKeyVersionID *string `json:"kmsKeyVersionId,omitempty" tf:"kms_key_version_id,omitempty"`
 

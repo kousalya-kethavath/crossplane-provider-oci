@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type FeaturesInitParameters struct {
@@ -26,7 +26,7 @@ type FeaturesInitParameters struct {
 
 	// (Applicable when feature_type=DOCUMENT_CLASSIFICATION | DOCUMENT_ELEMENTS_EXTRACTION | KEY_VALUE_EXTRACTION | TABLE_EXTRACTION | TEXT_EXTRACTION) Unique identifier custom model OCID that should be used for inference.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aidocument/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
 	// Reference to a Model in aidocument to populate modelId.
@@ -81,7 +81,7 @@ type FeaturesParameters struct {
 
 	// (Applicable when feature_type=DOCUMENT_CLASSIFICATION | DOCUMENT_ELEMENTS_EXTRACTION | KEY_VALUE_EXTRACTION | TABLE_EXTRACTION | TEXT_EXTRACTION) Unique identifier custom model OCID that should be used for inference.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aidocument/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
@@ -293,7 +293,7 @@ type ProcessorConfigInitParameters struct {
 
 	// (Applicable when feature_type=DOCUMENT_CLASSIFICATION | DOCUMENT_ELEMENTS_EXTRACTION | KEY_VALUE_EXTRACTION | TABLE_EXTRACTION | TEXT_EXTRACTION) Unique identifier custom model OCID that should be used for inference.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aidocument/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
 	// Reference to a Model in aidocument to populate modelId.
@@ -355,7 +355,7 @@ type ProcessorConfigParameters struct {
 
 	// (Applicable when feature_type=DOCUMENT_CLASSIFICATION | DOCUMENT_ELEMENTS_EXTRACTION | KEY_VALUE_EXTRACTION | TABLE_EXTRACTION | TEXT_EXTRACTION) Unique identifier custom model OCID that should be used for inference.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aidocument/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 

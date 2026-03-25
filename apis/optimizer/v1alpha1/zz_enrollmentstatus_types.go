@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EnrollmentStatusInitParameters struct {
 
 	// The unique OCID associated with the enrollment status.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/optimizer/v1alpha1.EnrollmentStatus
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EnrollmentStatusID *string `json:"enrollmentStatusId,omitempty" tf:"enrollment_status_id,omitempty"`
 
 	// Reference to a EnrollmentStatus in optimizer to populate enrollmentStatusId.
@@ -63,7 +63,7 @@ type EnrollmentStatusParameters struct {
 
 	// The unique OCID associated with the enrollment status.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/optimizer/v1alpha1.EnrollmentStatus
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EnrollmentStatusID *string `json:"enrollmentStatusId,omitempty" tf:"enrollment_status_id,omitempty"`
 

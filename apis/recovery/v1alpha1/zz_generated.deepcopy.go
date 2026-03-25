@@ -9,7 +9,7 @@ Copyright 2022 Upbound Inc.
 package v1alpha1
 
 import (
-	"github.com/crossplane/crossplane-runtime/apis/common/v1"
+	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -215,7 +215,7 @@ func (in *ProtectedDatabaseInitParameters) DeepCopyInto(out *ProtectedDatabaseIn
 		*out = new(bool)
 		**out = **in
 	}
-	out.PasswordSecretRef = in.PasswordSecretRef
+	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.ProtectionPolicyID != nil {
 		in, out := &in.ProtectionPolicyID, &out.ProtectionPolicyID
 		*out = new(string)
@@ -549,7 +549,7 @@ func (in *ProtectedDatabaseParameters) DeepCopyInto(out *ProtectedDatabaseParame
 		*out = new(bool)
 		**out = **in
 	}
-	out.PasswordSecretRef = in.PasswordSecretRef
+	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.ProtectionPolicyID != nil {
 		in, out := &in.ProtectionPolicyID, &out.ProtectionPolicyID
 		*out = new(string)

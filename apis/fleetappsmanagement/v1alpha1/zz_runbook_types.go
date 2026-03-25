@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ExecutionDetailsContentInitParameters struct {
@@ -19,7 +19,7 @@ type ExecutionDetailsContentInitParameters struct {
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datacatalog/v1alpha1.Catalog
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
 	// Reference to a Catalog in datacatalog to populate catalogId.
@@ -70,7 +70,7 @@ type ExecutionDetailsContentParameters struct {
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datacatalog/v1alpha1.Catalog
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
@@ -131,7 +131,7 @@ type ExecutionDetailsCredentialsParameters struct {
 type ExecutionDetailsInitParameters struct {
 
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datacatalog/v1alpha1.Catalog
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
 	// Reference to a Catalog in datacatalog to populate catalogId.
@@ -170,7 +170,7 @@ type ExecutionDetailsInitParameters struct {
 
 	// OCID of the compartment to which the resource belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetCompartmentID *string `json:"targetCompartmentId,omitempty" tf:"target_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate targetCompartmentId.
@@ -227,7 +227,7 @@ type ExecutionDetailsObservation struct {
 type ExecutionDetailsParameters struct {
 
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datacatalog/v1alpha1.Catalog
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
@@ -276,7 +276,7 @@ type ExecutionDetailsParameters struct {
 
 	// OCID of the compartment to which the resource belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetCompartmentID *string `json:"targetCompartmentId,omitempty" tf:"target_compartment_id,omitempty"`
 
@@ -734,7 +734,7 @@ type RollbackWorkflowDetailsWorkflowInitParameters struct {
 
 	// Name of the group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
 	// Reference to a Group in identity to populate groupName.
@@ -768,7 +768,7 @@ type RollbackWorkflowDetailsWorkflowParameters struct {
 
 	// Name of the group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
@@ -1310,7 +1310,7 @@ type StepsInitParameters struct {
 
 	// Name of the group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
 	// Reference to a Group in identity to populate groupName.
@@ -1350,7 +1350,7 @@ type StepsParameters struct {
 
 	// Name of the group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
@@ -1409,7 +1409,7 @@ type TaskRecordDetailsInitParameters struct {
 
 	// The ID of taskRecord.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.TaskRecord
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TaskRecordID *string `json:"taskRecordId,omitempty" tf:"task_record_id,omitempty"`
 
 	// Reference to a TaskRecord in fleetappsmanagement to populate taskRecordId.
@@ -1501,7 +1501,7 @@ type TaskRecordDetailsParameters struct {
 
 	// The ID of taskRecord.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.TaskRecord
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TaskRecordID *string `json:"taskRecordId,omitempty" tf:"task_record_id,omitempty"`
 
@@ -1596,7 +1596,7 @@ type WorkflowInitParameters struct {
 
 	// Name of the group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
 	// Reference to a Group in identity to populate groupName.
@@ -1630,7 +1630,7 @@ type WorkflowParameters struct {
 
 	// Name of the group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
@@ -1655,7 +1655,7 @@ type WorkflowStepsInitParameters struct {
 
 	// Name of the group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
 	// Reference to a Group in identity to populate groupName.
@@ -1695,7 +1695,7 @@ type WorkflowStepsParameters struct {
 
 	// Name of the group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 

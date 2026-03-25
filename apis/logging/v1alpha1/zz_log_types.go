@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConfigurationInitParameters struct {
@@ -63,7 +63,7 @@ type LogInitParameters struct {
 
 	// (Updatable) OCID of a log group to work with.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.LogGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
 	// Reference to a LogGroup in logging to populate logGroupId.
@@ -154,7 +154,7 @@ type LogParameters struct {
 
 	// (Updatable) OCID of a log group to work with.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.LogGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 

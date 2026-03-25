@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DatabaseSoftwareImageInitParameters struct {
@@ -58,7 +58,7 @@ type DatabaseSoftwareImageInitParameters struct {
 
 	// The OCID of the Database Home.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DbHome
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceDBHomeID *string `json:"sourceDbHomeId,omitempty" tf:"source_db_home_id,omitempty"`
 
 	// Reference to a DbHome in database to populate sourceDbHomeId.
@@ -188,7 +188,7 @@ type DatabaseSoftwareImageParameters struct {
 
 	// The OCID of the Database Home.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DbHome
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceDBHomeID *string `json:"sourceDbHomeId,omitempty" tf:"source_db_home_id,omitempty"`
 

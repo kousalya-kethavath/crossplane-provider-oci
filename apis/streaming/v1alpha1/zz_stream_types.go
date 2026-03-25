@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type StreamInitParameters struct {
@@ -46,7 +46,7 @@ type StreamInitParameters struct {
 
 	// (Updatable) The OCID of the stream pool that contains the stream.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.StreamPool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StreamPoolID *string `json:"streamPoolId,omitempty" tf:"stream_pool_id,omitempty"`
 
 	// Reference to a StreamPool in streaming to populate streamPoolId.
@@ -138,7 +138,7 @@ type StreamParameters struct {
 
 	// (Updatable) The OCID of the stream pool that contains the stream.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.StreamPool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StreamPoolID *string `json:"streamPoolId,omitempty" tf:"stream_pool_id,omitempty"`
 

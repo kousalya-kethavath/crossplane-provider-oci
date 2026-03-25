@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ApplyUpdateTimePreferenceInitParameters struct {
@@ -99,7 +99,7 @@ type CloudVmClusterInitParameters struct {
 
 	// The OCID of the backup network subnet associated with the cloud VM cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BackupSubnetID *string `json:"backupSubnetId,omitempty" tf:"backup_subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate backupSubnetId.
@@ -118,7 +118,7 @@ type CloudVmClusterInitParameters struct {
 
 	// The OCID of the cloud Exadata infrastructure resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudExadataInfrastructure
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CloudExadataInfrastructureID *string `json:"cloudExadataInfrastructureId,omitempty" tf:"cloud_exadata_infrastructure_id,omitempty"`
 
 	// Reference to a CloudExadataInfrastructure in database to populate cloudExadataInfrastructureId.
@@ -173,7 +173,7 @@ type CloudVmClusterInitParameters struct {
 
 	// The OCID of the Exadata Database Storage Vault.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExascaleDbStorageVault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExascaleDBStorageVaultID *string `json:"exascaleDbStorageVaultId,omitempty" tf:"exascale_db_storage_vault_id,omitempty"`
 
 	// Reference to a ExascaleDbStorageVault in database to populate exascaleDbStorageVaultId.
@@ -218,7 +218,7 @@ type CloudVmClusterInitParameters struct {
 
 	// The private zone id in which DNS records need to be created.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.Zone
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrivateZoneID *string `json:"privateZoneId,omitempty" tf:"private_zone_id,omitempty"`
 
 	// Reference to a Zone in dns to populate privateZoneId.
@@ -244,7 +244,7 @@ type CloudVmClusterInitParameters struct {
 
 	// The OCID of the subnet associated with the cloud VM cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -471,7 +471,7 @@ type CloudVmClusterParameters struct {
 
 	// The OCID of the backup network subnet associated with the cloud VM cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackupSubnetID *string `json:"backupSubnetId,omitempty" tf:"backup_subnet_id,omitempty"`
 
@@ -493,7 +493,7 @@ type CloudVmClusterParameters struct {
 
 	// The OCID of the cloud Exadata infrastructure resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudExadataInfrastructure
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CloudExadataInfrastructureID *string `json:"cloudExadataInfrastructureId,omitempty" tf:"cloud_exadata_infrastructure_id,omitempty"`
 
@@ -560,7 +560,7 @@ type CloudVmClusterParameters struct {
 
 	// The OCID of the Exadata Database Storage Vault.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExascaleDbStorageVault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExascaleDBStorageVaultID *string `json:"exascaleDbStorageVaultId,omitempty" tf:"exascale_db_storage_vault_id,omitempty"`
 
@@ -616,7 +616,7 @@ type CloudVmClusterParameters struct {
 
 	// The private zone id in which DNS records need to be created.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.Zone
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateZoneID *string `json:"privateZoneId,omitempty" tf:"private_zone_id,omitempty"`
 
@@ -647,7 +647,7 @@ type CloudVmClusterParameters struct {
 
 	// The OCID of the subnet associated with the cloud VM cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

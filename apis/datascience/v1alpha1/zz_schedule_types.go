@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionDetailsInitParameters struct {
@@ -26,7 +26,7 @@ type ActionDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the schedule.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.View
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MLApplicationInstanceViewID *string `json:"mlApplicationInstanceViewId,omitempty" tf:"ml_application_instance_view_id,omitempty"`
 
 	// Reference to a View in dns to populate mlApplicationInstanceViewId.
@@ -75,7 +75,7 @@ type ActionDetailsParameters struct {
 
 	// (Updatable) The OCID of the schedule.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.View
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MLApplicationInstanceViewID *string `json:"mlApplicationInstanceViewId,omitempty" tf:"ml_application_instance_view_id,omitempty"`
 
@@ -145,7 +145,7 @@ type CreateJobRunDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the job to create a run for.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Job
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	JobID *string `json:"jobId,omitempty" tf:"job_id,omitempty"`
 
 	// Reference to a Job in datascience to populate jobId.
@@ -161,7 +161,7 @@ type CreateJobRunDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the project to associate the job run with.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// Reference to a Project in datascience to populate projectId.
@@ -304,7 +304,7 @@ type CreateJobRunDetailsJobLogConfigurationOverrideDetailsInitParameters struct 
 
 	// (Applicable when http_action_type=CREATE_JOB_RUN) (Updatable) The log group id for where log objects are for job runs.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.LogGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
 	// Reference to a LogGroup in logging to populate logGroupId.
@@ -317,7 +317,7 @@ type CreateJobRunDetailsJobLogConfigurationOverrideDetailsInitParameters struct 
 
 	// (Applicable when http_action_type=CREATE_JOB_RUN) (Updatable) The log id the job run will push logs too.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.Log
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogID *string `json:"logId,omitempty" tf:"log_id,omitempty"`
 
 	// Reference to a Log in logging to populate logId.
@@ -356,7 +356,7 @@ type CreateJobRunDetailsJobLogConfigurationOverrideDetailsParameters struct {
 
 	// (Applicable when http_action_type=CREATE_JOB_RUN) (Updatable) The log group id for where log objects are for job runs.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.LogGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
@@ -370,7 +370,7 @@ type CreateJobRunDetailsJobLogConfigurationOverrideDetailsParameters struct {
 
 	// (Applicable when http_action_type=CREATE_JOB_RUN) (Updatable) The log id the job run will push logs too.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.Log
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogID *string `json:"logId,omitempty" tf:"log_id,omitempty"`
 
@@ -445,7 +445,7 @@ type CreateJobRunDetailsParameters struct {
 
 	// (Updatable) The OCID of the job to create a run for.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Job
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	JobID *string `json:"jobId,omitempty" tf:"job_id,omitempty"`
 
@@ -463,7 +463,7 @@ type CreateJobRunDetailsParameters struct {
 
 	// (Updatable) The OCID of the project to associate the job run with.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -552,7 +552,7 @@ type CreatePipelineRunDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the pipeline for which pipeline run is created.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Pipeline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PipelineID *string `json:"pipelineId,omitempty" tf:"pipeline_id,omitempty"`
 
 	// Reference to a Pipeline in datascience to populate pipelineId.
@@ -565,7 +565,7 @@ type CreatePipelineRunDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the project to associate the job run with.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// Reference to a Project in datascience to populate projectId.
@@ -594,7 +594,7 @@ type CreatePipelineRunDetailsLogConfigurationOverrideDetailsInitParameters struc
 
 	// (Applicable when http_action_type=CREATE_JOB_RUN) (Updatable) The log group id for where log objects are for job runs.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.LogGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
 	// Reference to a LogGroup in logging to populate logGroupId.
@@ -607,7 +607,7 @@ type CreatePipelineRunDetailsLogConfigurationOverrideDetailsInitParameters struc
 
 	// (Applicable when http_action_type=CREATE_JOB_RUN) (Updatable) The log id the job run will push logs too.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.Log
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogID *string `json:"logId,omitempty" tf:"log_id,omitempty"`
 
 	// Reference to a Log in logging to populate logId.
@@ -646,7 +646,7 @@ type CreatePipelineRunDetailsLogConfigurationOverrideDetailsParameters struct {
 
 	// (Applicable when http_action_type=CREATE_JOB_RUN) (Updatable) The log group id for where log objects are for job runs.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.LogGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
@@ -660,7 +660,7 @@ type CreatePipelineRunDetailsLogConfigurationOverrideDetailsParameters struct {
 
 	// (Applicable when http_action_type=CREATE_JOB_RUN) (Updatable) The log id the job run will push logs too.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.Log
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogID *string `json:"logId,omitempty" tf:"log_id,omitempty"`
 
@@ -739,7 +739,7 @@ type CreatePipelineRunDetailsParameters struct {
 
 	// (Updatable) The OCID of the pipeline for which pipeline run is created.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Pipeline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PipelineID *string `json:"pipelineId,omitempty" tf:"pipeline_id,omitempty"`
 
@@ -753,7 +753,7 @@ type CreatePipelineRunDetailsParameters struct {
 
 	// (Updatable) The OCID of the project to associate the job run with.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -990,7 +990,7 @@ type ScheduleInitParameters struct {
 
 	// (Updatable) The OCID of the project to associate the job run with.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// Reference to a Project in datascience to populate projectId.
@@ -1009,7 +1009,7 @@ type ScheduleLogDetailsInitParameters struct {
 
 	// (Applicable when http_action_type=CREATE_JOB_RUN) (Updatable) The log group id for where log objects are for job runs.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.LogGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
 	// Reference to a LogGroup in logging to populate logGroupId.
@@ -1022,7 +1022,7 @@ type ScheduleLogDetailsInitParameters struct {
 
 	// (Applicable when http_action_type=CREATE_JOB_RUN) (Updatable) The log id the job run will push logs too.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.Log
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogID *string `json:"logId,omitempty" tf:"log_id,omitempty"`
 
 	// Reference to a Log in logging to populate logId.
@@ -1047,7 +1047,7 @@ type ScheduleLogDetailsParameters struct {
 
 	// (Applicable when http_action_type=CREATE_JOB_RUN) (Updatable) The log group id for where log objects are for job runs.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.LogGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
@@ -1061,7 +1061,7 @@ type ScheduleLogDetailsParameters struct {
 
 	// (Applicable when http_action_type=CREATE_JOB_RUN) (Updatable) The log id the job run will push logs too.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/logging/v1alpha1.Log
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogID *string `json:"logId,omitempty" tf:"log_id,omitempty"`
 
@@ -1180,7 +1180,7 @@ type ScheduleParameters struct {
 
 	// (Updatable) The OCID of the project to associate the job run with.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 

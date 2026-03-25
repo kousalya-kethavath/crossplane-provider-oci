@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AttachmentDetailsInitParameters struct {
 
 	// IDCS domain OCID identifying a stripe and service administrator user.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IdcsDomainID *string `json:"idcsDomainId,omitempty" tf:"idcs_domain_id,omitempty"`
 
 	// Reference to a Domain in identity to populate idcsDomainId.
@@ -65,7 +65,7 @@ type AttachmentDetailsParameters struct {
 
 	// IDCS domain OCID identifying a stripe and service administrator user.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IdcsDomainID *string `json:"idcsDomainId,omitempty" tf:"idcs_domain_id,omitempty"`
 
@@ -103,7 +103,7 @@ type NetworkDetailsInitParameters struct {
 
 	// The OCID of the subnet for the private network details.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -134,7 +134,7 @@ type NetworkDetailsParameters struct {
 
 	// The OCID of the subnet for the private network details.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -160,7 +160,7 @@ type ResourceAnalyticsInstanceOacManagementInitParameters struct {
 
 	// The OCID of the ResourceAnalyticsInstance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/resourceanalytics/v1alpha1.ResourceAnalyticsInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceAnalyticsInstanceID *string `json:"resourceAnalyticsInstanceId,omitempty" tf:"resource_analytics_instance_id,omitempty"`
 
 	// Reference to a ResourceAnalyticsInstance in resourceanalytics to populate resourceAnalyticsInstanceId.
@@ -207,7 +207,7 @@ type ResourceAnalyticsInstanceOacManagementParameters struct {
 
 	// The OCID of the ResourceAnalyticsInstance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/resourceanalytics/v1alpha1.ResourceAnalyticsInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceAnalyticsInstanceID *string `json:"resourceAnalyticsInstanceId,omitempty" tf:"resource_analytics_instance_id,omitempty"`
 

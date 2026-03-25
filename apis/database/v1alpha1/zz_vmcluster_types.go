@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CloudAutomationUpdateDetailsApplyUpdateTimePreferenceInitParameters struct {
@@ -232,7 +232,7 @@ type VmClusterInitParameters struct {
 
 	// The OCID of the Exadata infrastructure.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExadataInfrastructure
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExadataInfrastructureID *string `json:"exadataInfrastructureId,omitempty" tf:"exadata_infrastructure_id,omitempty"`
 
 	// Reference to a ExadataInfrastructure in database to populate exadataInfrastructureId.
@@ -245,7 +245,7 @@ type VmClusterInitParameters struct {
 
 	// The OCID of the Exadata Database Storage Vault.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExascaleDbStorageVault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExascaleDBStorageVaultID *string `json:"exascaleDbStorageVaultId,omitempty" tf:"exascale_db_storage_vault_id,omitempty"`
 
 	// Reference to a ExascaleDbStorageVault in database to populate exascaleDbStorageVaultId.
@@ -292,7 +292,7 @@ type VmClusterInitParameters struct {
 
 	// The OCID of the VM cluster network.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.VmClusterNetwork
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VMClusterNetworkID *string `json:"vmClusterNetworkId,omitempty" tf:"vm_cluster_network_id,omitempty"`
 
 	// Reference to a VmClusterNetwork in database to populate vmClusterNetworkId.
@@ -478,7 +478,7 @@ type VmClusterParameters struct {
 
 	// The OCID of the Exadata infrastructure.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExadataInfrastructure
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExadataInfrastructureID *string `json:"exadataInfrastructureId,omitempty" tf:"exadata_infrastructure_id,omitempty"`
 
@@ -492,7 +492,7 @@ type VmClusterParameters struct {
 
 	// The OCID of the Exadata Database Storage Vault.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExascaleDbStorageVault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExascaleDBStorageVaultID *string `json:"exascaleDbStorageVaultId,omitempty" tf:"exascale_db_storage_vault_id,omitempty"`
 
@@ -551,7 +551,7 @@ type VmClusterParameters struct {
 
 	// The OCID of the VM cluster network.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.VmClusterNetwork
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VMClusterNetworkID *string `json:"vmClusterNetworkId,omitempty" tf:"vm_cluster_network_id,omitempty"`
 

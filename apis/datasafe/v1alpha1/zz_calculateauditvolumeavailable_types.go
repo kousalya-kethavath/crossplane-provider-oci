@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AvailableAuditVolumesInitParameters struct {
@@ -38,7 +38,7 @@ type CalculateAuditVolumeAvailableInitParameters struct {
 
 	// The OCID of the audit.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.AuditProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AuditProfileID *string `json:"auditProfileId,omitempty" tf:"audit_profile_id,omitempty"`
 
 	// Reference to a AuditProfile in datasafe to populate auditProfileId.
@@ -84,7 +84,7 @@ type CalculateAuditVolumeAvailableParameters struct {
 
 	// The OCID of the audit.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.AuditProfile
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AuditProfileID *string `json:"auditProfileId,omitempty" tf:"audit_profile_id,omitempty"`
 

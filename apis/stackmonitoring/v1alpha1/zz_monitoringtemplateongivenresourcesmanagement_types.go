@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MonitoringTemplateOnGivenResourcesManagementInitParameters struct {
@@ -20,7 +20,7 @@ type MonitoringTemplateOnGivenResourcesManagementInitParameters struct {
 
 	// The OCID of the monitoring template.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/stackmonitoring/v1alpha1.MonitoringTemplate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MonitoringTemplateID *string `json:"monitoringTemplateId,omitempty" tf:"monitoring_template_id,omitempty"`
 
 	// Reference to a MonitoringTemplate in stackmonitoring to populate monitoringTemplateId.
@@ -51,7 +51,7 @@ type MonitoringTemplateOnGivenResourcesManagementParameters struct {
 
 	// The OCID of the monitoring template.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/stackmonitoring/v1alpha1.MonitoringTemplate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MonitoringTemplateID *string `json:"monitoringTemplateId,omitempty" tf:"monitoring_template_id,omitempty"`
 

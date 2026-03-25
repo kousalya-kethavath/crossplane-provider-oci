@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SteeringPolicyAttachmentInitParameters struct {
@@ -23,7 +23,7 @@ type SteeringPolicyAttachmentInitParameters struct {
 
 	// The OCID of the attached steering policy.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.SteeringPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SteeringPolicyID *string `json:"steeringPolicyId,omitempty" tf:"steering_policy_id,omitempty"`
 
 	// Reference to a SteeringPolicy in dns to populate steeringPolicyId.
@@ -36,7 +36,7 @@ type SteeringPolicyAttachmentInitParameters struct {
 
 	// The OCID of the attached zone.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.Zone
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 
 	// Reference to a Zone in dns to populate zoneId.
@@ -93,7 +93,7 @@ type SteeringPolicyAttachmentParameters struct {
 
 	// The OCID of the attached steering policy.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.SteeringPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SteeringPolicyID *string `json:"steeringPolicyId,omitempty" tf:"steering_policy_id,omitempty"`
 
@@ -107,7 +107,7 @@ type SteeringPolicyAttachmentParameters struct {
 
 	// The OCID of the attached zone.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.Zone
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 

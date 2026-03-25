@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	accountrecoverysetting "github.com/oracle/provider-oci/internal/controller/identitydomains/accountrecoverysetting"
 	apikey "github.com/oracle/provider-oci/internal/controller/identitydomains/apikey"
@@ -105,6 +105,63 @@ func Setup_identitydomains(mgr ctrl.Manager, o controller.Options) error {
 		socialidentityprovider.Setup,
 		user.Setup,
 		userdbcredential.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_identitydomains creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_identitydomains(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		accountrecoverysetting.SetupGated,
+		apikey.SetupGated,
+		app.SetupGated,
+		approle.SetupGated,
+		approvalworkflow.SetupGated,
+		approvalworkflowassignment.SetupGated,
+		approvalworkflowstep.SetupGated,
+		authenticationfactorsetting.SetupGated,
+		authtoken.SetupGated,
+		cloudgate.SetupGated,
+		cloudgatemapping.SetupGated,
+		cloudgateserver.SetupGated,
+		condition.SetupGated,
+		customersecretkey.SetupGated,
+		dynamicresourcegroup.SetupGated,
+		grant.SetupGated,
+		group.SetupGated,
+		identitypropagationtrust.SetupGated,
+		identityprovider.SetupGated,
+		identitysetting.SetupGated,
+		kmsisetting.SetupGated,
+		myapikey.SetupGated,
+		myauthtoken.SetupGated,
+		mycustomersecretkey.SetupGated,
+		myoauth2clientcredential.SetupGated,
+		myrequest.SetupGated,
+		mysmtpcredential.SetupGated,
+		mysupportaccount.SetupGated,
+		myuserdbcredential.SetupGated,
+		networkperimeter.SetupGated,
+		notificationsetting.SetupGated,
+		oauth2clientcredential.SetupGated,
+		oauthclientcertificate.SetupGated,
+		oauthpartnercertificate.SetupGated,
+		passwordpolicy.SetupGated,
+		policy.SetupGated,
+		rule.SetupGated,
+		securityquestion.SetupGated,
+		securityquestionsetting.SetupGated,
+		selfregistrationprofile.SetupGated,
+		setting.SetupGated,
+		smtpcredential.SetupGated,
+		socialidentityprovider.SetupGated,
+		user.SetupGated,
+		userdbcredential.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

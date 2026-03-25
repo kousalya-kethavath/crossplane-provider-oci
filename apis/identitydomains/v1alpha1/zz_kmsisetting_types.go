@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type KmsiSettingIdcsCreatedByInitParameters struct {
@@ -86,7 +86,7 @@ type KmsiSettingInitParameters struct {
 
 	// ID of the resource
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identitydomains/v1alpha1.KmsiSetting
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KmsiSettingID *string `json:"kmsiSettingId,omitempty" tf:"kmsi_setting_id,omitempty"`
 
 	// Reference to a KmsiSetting in identitydomains to populate kmsiSettingId.
@@ -265,7 +265,7 @@ type KmsiSettingParameters struct {
 
 	// ID of the resource
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identitydomains/v1alpha1.KmsiSetting
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KmsiSettingID *string `json:"kmsiSettingId,omitempty" tf:"kmsi_setting_id,omitempty"`
 

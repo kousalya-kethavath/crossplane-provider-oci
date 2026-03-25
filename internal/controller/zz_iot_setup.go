@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	digitaltwinadapter "github.com/oracle/provider-oci/internal/controller/iot/digitaltwinadapter"
 	digitaltwininstance "github.com/oracle/provider-oci/internal/controller/iot/digitaltwininstance"
@@ -35,6 +35,28 @@ func Setup_iot(mgr ctrl.Manager, o controller.Options) error {
 		iotdomainconfiguredataaccess.Setup,
 		iotdomaingroup.Setup,
 		iotdomaingroupconfiguredataaccess.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_iot creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_iot(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		digitaltwinadapter.SetupGated,
+		digitaltwininstance.SetupGated,
+		digitaltwininstanceinvokerawcommand.SetupGated,
+		digitaltwinmodel.SetupGated,
+		digitaltwinrelationship.SetupGated,
+		iotdomain.SetupGated,
+		iotdomainchangedataretentionperiod.SetupGated,
+		iotdomainconfiguredataaccess.SetupGated,
+		iotdomaingroup.SetupGated,
+		iotdomaingroupconfiguredataaccess.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

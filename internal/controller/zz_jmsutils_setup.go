@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	analyzeapplicationsconfiguration "github.com/oracle/provider-oci/internal/controller/jmsutils/analyzeapplicationsconfiguration"
 	subscriptionacknowledgmentconfiguration "github.com/oracle/provider-oci/internal/controller/jmsutils/subscriptionacknowledgmentconfiguration"
@@ -19,6 +19,20 @@ func Setup_jmsutils(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		analyzeapplicationsconfiguration.Setup,
 		subscriptionacknowledgmentconfiguration.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_jmsutils creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_jmsutils(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		analyzeapplicationsconfiguration.SetupGated,
+		subscriptionacknowledgmentconfiguration.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

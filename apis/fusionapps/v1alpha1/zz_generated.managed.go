@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this FusionEnvironment.
 func (mg *FusionEnvironment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *FusionEnvironment) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this FusionEnvironment.
 func (mg *FusionEnvironment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this FusionEnvironment.
-func (mg *FusionEnvironment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this FusionEnvironment.
@@ -57,11 +52,6 @@ func (mg *FusionEnvironment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this FusionEnvironment.
-func (mg *FusionEnvironment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this FusionEnvironment.
 func (mg *FusionEnvironment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -85,11 +75,6 @@ func (mg *FusionEnvironmentAdminUser) GetManagementPolicies() xpv1.ManagementPol
 // GetProviderConfigReference of this FusionEnvironmentAdminUser.
 func (mg *FusionEnvironmentAdminUser) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this FusionEnvironmentAdminUser.
-func (mg *FusionEnvironmentAdminUser) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this FusionEnvironmentAdminUser.
@@ -117,11 +102,6 @@ func (mg *FusionEnvironmentAdminUser) SetProviderConfigReference(r *xpv1.Referen
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this FusionEnvironmentAdminUser.
-func (mg *FusionEnvironmentAdminUser) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this FusionEnvironmentAdminUser.
 func (mg *FusionEnvironmentAdminUser) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -145,11 +125,6 @@ func (mg *FusionEnvironmentDataMaskingActivity) GetManagementPolicies() xpv1.Man
 // GetProviderConfigReference of this FusionEnvironmentDataMaskingActivity.
 func (mg *FusionEnvironmentDataMaskingActivity) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this FusionEnvironmentDataMaskingActivity.
-func (mg *FusionEnvironmentDataMaskingActivity) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this FusionEnvironmentDataMaskingActivity.
@@ -177,11 +152,6 @@ func (mg *FusionEnvironmentDataMaskingActivity) SetProviderConfigReference(r *xp
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this FusionEnvironmentDataMaskingActivity.
-func (mg *FusionEnvironmentDataMaskingActivity) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this FusionEnvironmentDataMaskingActivity.
 func (mg *FusionEnvironmentDataMaskingActivity) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -205,11 +175,6 @@ func (mg *FusionEnvironmentFamily) GetManagementPolicies() xpv1.ManagementPolici
 // GetProviderConfigReference of this FusionEnvironmentFamily.
 func (mg *FusionEnvironmentFamily) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this FusionEnvironmentFamily.
-func (mg *FusionEnvironmentFamily) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this FusionEnvironmentFamily.
@@ -237,11 +202,6 @@ func (mg *FusionEnvironmentFamily) SetProviderConfigReference(r *xpv1.Reference)
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this FusionEnvironmentFamily.
-func (mg *FusionEnvironmentFamily) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this FusionEnvironmentFamily.
 func (mg *FusionEnvironmentFamily) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -265,11 +225,6 @@ func (mg *FusionEnvironmentRefreshActivity) GetManagementPolicies() xpv1.Managem
 // GetProviderConfigReference of this FusionEnvironmentRefreshActivity.
 func (mg *FusionEnvironmentRefreshActivity) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this FusionEnvironmentRefreshActivity.
-func (mg *FusionEnvironmentRefreshActivity) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this FusionEnvironmentRefreshActivity.
@@ -297,11 +252,6 @@ func (mg *FusionEnvironmentRefreshActivity) SetProviderConfigReference(r *xpv1.R
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this FusionEnvironmentRefreshActivity.
-func (mg *FusionEnvironmentRefreshActivity) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this FusionEnvironmentRefreshActivity.
 func (mg *FusionEnvironmentRefreshActivity) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -327,11 +277,6 @@ func (mg *FusionEnvironmentServiceAttachment) GetProviderConfigReference() *xpv1
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this FusionEnvironmentServiceAttachment.
-func (mg *FusionEnvironmentServiceAttachment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this FusionEnvironmentServiceAttachment.
 func (mg *FusionEnvironmentServiceAttachment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -355,11 +300,6 @@ func (mg *FusionEnvironmentServiceAttachment) SetManagementPolicies(r xpv1.Manag
 // SetProviderConfigReference of this FusionEnvironmentServiceAttachment.
 func (mg *FusionEnvironmentServiceAttachment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this FusionEnvironmentServiceAttachment.
-func (mg *FusionEnvironmentServiceAttachment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this FusionEnvironmentServiceAttachment.

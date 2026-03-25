@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CertificateConfigInitParameters struct {
@@ -23,7 +23,7 @@ type CertificateConfigInitParameters struct {
 
 	// (Updatable) certificate to be used for OpenSearch cluster api communication
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apigateway/v1alpha1.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OpenSearchAPICertificateID *string `json:"openSearchApiCertificateId,omitempty" tf:"open_search_api_certificate_id,omitempty"`
 
 	// Reference to a Certificate in apigateway to populate openSearchApiCertificateId.
@@ -36,7 +36,7 @@ type CertificateConfigInitParameters struct {
 
 	// (Updatable) certificate to be used for OpenSearch dashboard api communication
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apigateway/v1alpha1.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OpenSearchDashboardCertificateID *string `json:"openSearchDashboardCertificateId,omitempty" tf:"open_search_dashboard_certificate_id,omitempty"`
 
 	// Reference to a Certificate in apigateway to populate openSearchDashboardCertificateId.
@@ -75,7 +75,7 @@ type CertificateConfigParameters struct {
 
 	// (Updatable) certificate to be used for OpenSearch cluster api communication
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apigateway/v1alpha1.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OpenSearchAPICertificateID *string `json:"openSearchApiCertificateId,omitempty" tf:"open_search_api_certificate_id,omitempty"`
 
@@ -89,7 +89,7 @@ type CertificateConfigParameters struct {
 
 	// (Updatable) certificate to be used for OpenSearch dashboard api communication
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apigateway/v1alpha1.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OpenSearchDashboardCertificateID *string `json:"openSearchDashboardCertificateId,omitempty" tf:"open_search_dashboard_certificate_id,omitempty"`
 
@@ -251,7 +251,7 @@ type OpensearchClusterInitParameters struct {
 
 	// (Updatable) The name of the master user that are used to manage security config
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	SecurityMasterUserName *string `json:"securityMasterUserName,omitempty" tf:"security_master_user_name,omitempty"`
 
 	// Reference to a User in identity to populate securityMasterUserName.
@@ -276,7 +276,7 @@ type OpensearchClusterInitParameters struct {
 
 	// The OCID for the compartment where the cluster's subnet is located.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetCompartmentID *string `json:"subnetCompartmentId,omitempty" tf:"subnet_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate subnetCompartmentId.
@@ -289,7 +289,7 @@ type OpensearchClusterInitParameters struct {
 
 	// The OCID of the cluster's subnet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -309,7 +309,7 @@ type OpensearchClusterInitParameters struct {
 
 	// The OCID for the compartment where the cluster's VCN is located.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VcnCompartmentID *string `json:"vcnCompartmentId,omitempty" tf:"vcn_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate vcnCompartmentId.
@@ -322,7 +322,7 @@ type OpensearchClusterInitParameters struct {
 
 	// The OCID of the cluster's VCN.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vcn
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VcnID *string `json:"vcnId,omitempty" tf:"vcn_id,omitempty"`
 
 	// Reference to a Vcn in networking to populate vcnId.
@@ -674,7 +674,7 @@ type OpensearchClusterParameters struct {
 
 	// (Updatable) The name of the master user that are used to manage security config
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	SecurityMasterUserName *string `json:"securityMasterUserName,omitempty" tf:"security_master_user_name,omitempty"`
 
@@ -704,7 +704,7 @@ type OpensearchClusterParameters struct {
 
 	// The OCID for the compartment where the cluster's subnet is located.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetCompartmentID *string `json:"subnetCompartmentId,omitempty" tf:"subnet_compartment_id,omitempty"`
 
@@ -718,7 +718,7 @@ type OpensearchClusterParameters struct {
 
 	// The OCID of the cluster's subnet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -741,7 +741,7 @@ type OpensearchClusterParameters struct {
 
 	// The OCID for the compartment where the cluster's VCN is located.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VcnCompartmentID *string `json:"vcnCompartmentId,omitempty" tf:"vcn_compartment_id,omitempty"`
 
@@ -755,7 +755,7 @@ type OpensearchClusterParameters struct {
 
 	// The OCID of the cluster's VCN.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vcn
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VcnID *string `json:"vcnId,omitempty" tf:"vcn_id,omitempty"`
 
@@ -813,7 +813,7 @@ type OutboundClustersInitParameters struct {
 
 	// (Updatable) OCID of the Outbound cluster
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/opensearch/v1alpha1.OpensearchCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SeedClusterID *string `json:"seedClusterId,omitempty" tf:"seed_cluster_id,omitempty"`
 
 	// Reference to a OpensearchCluster in opensearch to populate seedClusterId.
@@ -863,7 +863,7 @@ type OutboundClustersParameters struct {
 
 	// (Updatable) OCID of the Outbound cluster
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/opensearch/v1alpha1.OpensearchCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SeedClusterID *string `json:"seedClusterId,omitempty" tf:"seed_cluster_id,omitempty"`
 

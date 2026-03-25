@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DetailsExecutionDetailsContentInitParameters struct {
@@ -19,7 +19,7 @@ type DetailsExecutionDetailsContentInitParameters struct {
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datacatalog/v1alpha1.Catalog
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
 	// Reference to a Catalog in datacatalog to populate catalogId.
@@ -70,7 +70,7 @@ type DetailsExecutionDetailsContentParameters struct {
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datacatalog/v1alpha1.Catalog
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
@@ -131,7 +131,7 @@ type DetailsExecutionDetailsCredentialsParameters struct {
 type DetailsExecutionDetailsInitParameters struct {
 
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datacatalog/v1alpha1.Catalog
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
 	// Reference to a Catalog in datacatalog to populate catalogId.
@@ -173,7 +173,7 @@ type DetailsExecutionDetailsInitParameters struct {
 
 	// (Updatable) OCID of the compartment to which the resource belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetCompartmentID *string `json:"targetCompartmentId,omitempty" tf:"target_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate targetCompartmentId.
@@ -230,7 +230,7 @@ type DetailsExecutionDetailsObservation struct {
 type DetailsExecutionDetailsParameters struct {
 
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datacatalog/v1alpha1.Catalog
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
@@ -283,7 +283,7 @@ type DetailsExecutionDetailsParameters struct {
 
 	// (Updatable) OCID of the compartment to which the resource belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetCompartmentID *string `json:"targetCompartmentId,omitempty" tf:"target_compartment_id,omitempty"`
 

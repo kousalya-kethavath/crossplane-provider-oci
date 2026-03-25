@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type PluggableDatabasesRemoteCloneConnectionStringsInitParameters struct {
@@ -42,7 +42,7 @@ type PluggableDatabasesRemoteCloneInitParameters struct {
 
 	// The database OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.PluggableDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PluggableDatabaseID *string `json:"pluggableDatabaseId,omitempty" tf:"pluggable_database_id,omitempty"`
 
 	// Reference to a PluggableDatabase in database to populate pluggableDatabaseId.
@@ -61,7 +61,7 @@ type PluggableDatabasesRemoteCloneInitParameters struct {
 
 	// The OCID of the target CDB
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.Database
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetContainerDatabaseID *string `json:"targetContainerDatabaseId,omitempty" tf:"target_container_database_id,omitempty"`
 
 	// Reference to a Database in database to populate targetContainerDatabaseId.
@@ -154,7 +154,7 @@ type PluggableDatabasesRemoteCloneParameters struct {
 
 	// The database OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.PluggableDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PluggableDatabaseID *string `json:"pluggableDatabaseId,omitempty" tf:"pluggable_database_id,omitempty"`
 
@@ -176,7 +176,7 @@ type PluggableDatabasesRemoteCloneParameters struct {
 
 	// The OCID of the target CDB
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.Database
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetContainerDatabaseID *string `json:"targetContainerDatabaseId,omitempty" tf:"target_container_database_id,omitempty"`
 

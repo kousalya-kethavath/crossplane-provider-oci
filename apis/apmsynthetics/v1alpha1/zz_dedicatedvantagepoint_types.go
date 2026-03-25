@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DedicatedVantagePointInitParameters struct {
 
 	// (Updatable) The APM domain ID the request is intended for.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apm/v1alpha1.ApmDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ApmDomainID *string `json:"apmDomainId,omitempty" tf:"apm_domain_id,omitempty"`
 
 	// Reference to a ApmDomain in apm to populate apmDomainId.
@@ -94,7 +94,7 @@ type DedicatedVantagePointParameters struct {
 
 	// (Updatable) The APM domain ID the request is intended for.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apm/v1alpha1.ApmDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApmDomainID *string `json:"apmDomainId,omitempty" tf:"apm_domain_id,omitempty"`
 
@@ -143,7 +143,7 @@ type DvpStackDetailsInitParameters struct {
 
 	// (Updatable) Stream OCID of the Resource Manager stack for dedicated vantage point.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DvpStreamID *string `json:"dvpStreamId,omitempty" tf:"dvp_stream_id,omitempty"`
 
 	// Reference to a Stream in streaming to populate dvpStreamId.
@@ -185,7 +185,7 @@ type DvpStackDetailsParameters struct {
 
 	// (Updatable) Stream OCID of the Resource Manager stack for dedicated vantage point.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DvpStreamID *string `json:"dvpStreamId,omitempty" tf:"dvp_stream_id,omitempty"`
 

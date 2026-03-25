@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type QueueInitParameters struct {
@@ -32,7 +32,7 @@ type QueueInitParameters struct {
 
 	// (Updatable) The OCID of the custom encryption key to be used to encrypt messages content.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CustomEncryptionKeyID *string `json:"customEncryptionKeyId,omitempty" tf:"custom_encryption_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate customEncryptionKeyId.
@@ -157,7 +157,7 @@ type QueueParameters struct {
 
 	// (Updatable) The OCID of the custom encryption key to be used to encrypt messages content.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CustomEncryptionKeyID *string `json:"customEncryptionKeyId,omitempty" tf:"custom_encryption_key_id,omitempty"`
 

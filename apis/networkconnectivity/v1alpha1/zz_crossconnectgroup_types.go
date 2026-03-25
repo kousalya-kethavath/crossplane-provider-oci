@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CrossConnectGroupInitParameters struct {
@@ -174,7 +174,7 @@ type MacsecPropertiesPrimaryKeyInitParameters struct {
 
 	// (Updatable) Secret OCID containing the Connectivity Association Key (CAK) of this MACsec key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConnectivityAssociationKeySecretID *string `json:"connectivityAssociationKeySecretId,omitempty" tf:"connectivity_association_key_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate connectivityAssociationKeySecretId.
@@ -190,7 +190,7 @@ type MacsecPropertiesPrimaryKeyInitParameters struct {
 
 	// (Updatable) Secret OCID containing the Connectivity association Key Name (CKN) of this MACsec key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConnectivityAssociationNameSecretID *string `json:"connectivityAssociationNameSecretId,omitempty" tf:"connectivity_association_name_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate connectivityAssociationNameSecretId.
@@ -224,7 +224,7 @@ type MacsecPropertiesPrimaryKeyParameters struct {
 
 	// (Updatable) Secret OCID containing the Connectivity Association Key (CAK) of this MACsec key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectivityAssociationKeySecretID *string `json:"connectivityAssociationKeySecretId,omitempty" tf:"connectivity_association_key_secret_id,omitempty"`
 
@@ -242,7 +242,7 @@ type MacsecPropertiesPrimaryKeyParameters struct {
 
 	// (Updatable) Secret OCID containing the Connectivity association Key Name (CKN) of this MACsec key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectivityAssociationNameSecretID *string `json:"connectivityAssociationNameSecretId,omitempty" tf:"connectivity_association_name_secret_id,omitempty"`
 

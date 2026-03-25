@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ComponentModelsInitParameters struct {
 
 	// The OCID of active custom Key Value model that need to be composed.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aidocument/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
 	// Reference to a Model in aidocument to populate modelId.
@@ -39,7 +39,7 @@ type ComponentModelsParameters struct {
 
 	// The OCID of active custom Key Value model that need to be composed.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aidocument/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
@@ -255,7 +255,7 @@ type ModelInitParameters struct {
 
 	// The OCID of the project that contains the model.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aidocument/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// Reference to a Project in aidocument to populate projectId.
@@ -447,7 +447,7 @@ type ModelParameters struct {
 
 	// The OCID of the project that contains the model.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aidocument/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -550,7 +550,7 @@ type TestingDatasetInitParameters struct {
 
 	// OCID of the Data Labeling dataset.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datalabelingservice/v1alpha1.Dataset
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatasetID *string `json:"datasetId,omitempty" tf:"dataset_id,omitempty"`
 
 	// Reference to a Dataset in datalabelingservice to populate datasetId.
@@ -597,7 +597,7 @@ type TestingDatasetParameters struct {
 
 	// OCID of the Data Labeling dataset.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datalabelingservice/v1alpha1.Dataset
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatasetID *string `json:"datasetId,omitempty" tf:"dataset_id,omitempty"`
 
@@ -629,7 +629,7 @@ type TrainingDatasetInitParameters struct {
 
 	// OCID of the Data Labeling dataset.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datalabelingservice/v1alpha1.Dataset
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatasetID *string `json:"datasetId,omitempty" tf:"dataset_id,omitempty"`
 
 	// Reference to a Dataset in datalabelingservice to populate datasetId.
@@ -676,7 +676,7 @@ type TrainingDatasetParameters struct {
 
 	// OCID of the Data Labeling dataset.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datalabelingservice/v1alpha1.Dataset
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatasetID *string `json:"datasetId,omitempty" tf:"dataset_id,omitempty"`
 
@@ -708,7 +708,7 @@ type ValidationDatasetInitParameters struct {
 
 	// OCID of the Data Labeling dataset.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datalabelingservice/v1alpha1.Dataset
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatasetID *string `json:"datasetId,omitempty" tf:"dataset_id,omitempty"`
 
 	// Reference to a Dataset in datalabelingservice to populate datasetId.
@@ -755,7 +755,7 @@ type ValidationDatasetParameters struct {
 
 	// OCID of the Data Labeling dataset.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datalabelingservice/v1alpha1.Dataset
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatasetID *string `json:"datasetId,omitempty" tf:"dataset_id,omitempty"`
 

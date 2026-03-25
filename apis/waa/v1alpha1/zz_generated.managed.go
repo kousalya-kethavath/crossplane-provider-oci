@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this WebAppAcceleration.
 func (mg *WebAppAcceleration) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *WebAppAcceleration) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this WebAppAcceleration.
 func (mg *WebAppAcceleration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this WebAppAcceleration.
-func (mg *WebAppAcceleration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this WebAppAcceleration.
@@ -57,11 +52,6 @@ func (mg *WebAppAcceleration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this WebAppAcceleration.
-func (mg *WebAppAcceleration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this WebAppAcceleration.
 func (mg *WebAppAcceleration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -87,11 +77,6 @@ func (mg *WebAppAccelerationPolicy) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this WebAppAccelerationPolicy.
-func (mg *WebAppAccelerationPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this WebAppAccelerationPolicy.
 func (mg *WebAppAccelerationPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *WebAppAccelerationPolicy) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this WebAppAccelerationPolicy.
 func (mg *WebAppAccelerationPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this WebAppAccelerationPolicy.
-func (mg *WebAppAccelerationPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this WebAppAccelerationPolicy.

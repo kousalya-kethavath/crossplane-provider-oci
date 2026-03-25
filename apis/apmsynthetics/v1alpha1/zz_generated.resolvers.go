@@ -8,10 +8,9 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -34,6 +33,7 @@ func (mg *DedicatedVantagePoint) ResolveReferences( // ResolveReferences of this
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApmDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ApmDomainIDRef,
 			Selector:     mg.Spec.ForProvider.ApmDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +54,7 @@ func (mg *DedicatedVantagePoint) ResolveReferences( // ResolveReferences of this
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DvpStackDetails[i3].DvpStreamID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DvpStackDetails[i3].DvpStreamIDRef,
 				Selector:     mg.Spec.ForProvider.DvpStackDetails[i3].DvpStreamIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -74,6 +75,7 @@ func (mg *DedicatedVantagePoint) ResolveReferences( // ResolveReferences of this
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApmDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ApmDomainIDRef,
 			Selector:     mg.Spec.InitProvider.ApmDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -94,6 +96,7 @@ func (mg *DedicatedVantagePoint) ResolveReferences( // ResolveReferences of this
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DvpStackDetails[i3].DvpStreamID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DvpStackDetails[i3].DvpStreamIDRef,
 				Selector:     mg.Spec.InitProvider.DvpStackDetails[i3].DvpStreamIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -130,6 +133,7 @@ func (mg *Monitor) ResolveReferences(ctx context.Context, c client.Reader) error
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration[i3].DatabaseAuthenticationDetails[i4].Password[i5].VaultSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Configuration[i3].DatabaseAuthenticationDetails[i4].Password[i5].VaultSecretIDRef,
 						Selector:     mg.Spec.ForProvider.Configuration[i3].DatabaseAuthenticationDetails[i4].Password[i5].VaultSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -155,6 +159,7 @@ func (mg *Monitor) ResolveReferences(ctx context.Context, c client.Reader) error
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration[i3].FtpBasicAuthenticationDetails[i4].Password[i5].VaultSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Configuration[i3].FtpBasicAuthenticationDetails[i4].Password[i5].VaultSecretIDRef,
 						Selector:     mg.Spec.ForProvider.Configuration[i3].FtpBasicAuthenticationDetails[i4].Password[i5].VaultSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -179,6 +184,7 @@ func (mg *Monitor) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Configuration[i3].ReqAuthenticationDetails[i4].AuthUserName),
 					Extract:      resource.ExtractParamPath("name", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Configuration[i3].ReqAuthenticationDetails[i4].AuthUserNameRef,
 					Selector:     mg.Spec.ForProvider.Configuration[i3].ReqAuthenticationDetails[i4].AuthUserNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -200,6 +206,7 @@ func (mg *Monitor) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ScriptID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ScriptIDRef,
 			Selector:     mg.Spec.ForProvider.ScriptIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -222,6 +229,7 @@ func (mg *Monitor) ResolveReferences(ctx context.Context, c client.Reader) error
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration[i3].DatabaseAuthenticationDetails[i4].Password[i5].VaultSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Configuration[i3].DatabaseAuthenticationDetails[i4].Password[i5].VaultSecretIDRef,
 						Selector:     mg.Spec.InitProvider.Configuration[i3].DatabaseAuthenticationDetails[i4].Password[i5].VaultSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -247,6 +255,7 @@ func (mg *Monitor) ResolveReferences(ctx context.Context, c client.Reader) error
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration[i3].FtpBasicAuthenticationDetails[i4].Password[i5].VaultSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Configuration[i3].FtpBasicAuthenticationDetails[i4].Password[i5].VaultSecretIDRef,
 						Selector:     mg.Spec.InitProvider.Configuration[i3].FtpBasicAuthenticationDetails[i4].Password[i5].VaultSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -271,6 +280,7 @@ func (mg *Monitor) ResolveReferences(ctx context.Context, c client.Reader) error
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Configuration[i3].ReqAuthenticationDetails[i4].AuthUserName),
 					Extract:      resource.ExtractParamPath("name", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Configuration[i3].ReqAuthenticationDetails[i4].AuthUserNameRef,
 					Selector:     mg.Spec.InitProvider.Configuration[i3].ReqAuthenticationDetails[i4].AuthUserNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -292,6 +302,7 @@ func (mg *Monitor) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ScriptID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ScriptIDRef,
 			Selector:     mg.Spec.InitProvider.ScriptIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -323,6 +334,7 @@ func (mg *OnPremiseVantagePoint) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApmDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ApmDomainIDRef,
 			Selector:     mg.Spec.ForProvider.ApmDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -342,6 +354,7 @@ func (mg *OnPremiseVantagePoint) ResolveReferences(ctx context.Context, c client
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApmDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ApmDomainIDRef,
 			Selector:     mg.Spec.InitProvider.ApmDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -373,6 +386,7 @@ func (mg *OnPremiseVantagePointWorker) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApmDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ApmDomainIDRef,
 			Selector:     mg.Spec.ForProvider.ApmDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -392,6 +406,7 @@ func (mg *OnPremiseVantagePointWorker) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OnPremiseVantagePointID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.OnPremiseVantagePointIDRef,
 			Selector:     mg.Spec.ForProvider.OnPremiseVantagePointIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -411,6 +426,7 @@ func (mg *OnPremiseVantagePointWorker) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApmDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ApmDomainIDRef,
 			Selector:     mg.Spec.InitProvider.ApmDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -430,6 +446,7 @@ func (mg *OnPremiseVantagePointWorker) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OnPremiseVantagePointID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.OnPremiseVantagePointIDRef,
 			Selector:     mg.Spec.InitProvider.OnPremiseVantagePointIDSelector,
 			To:           reference.To{List: l, Managed: m},

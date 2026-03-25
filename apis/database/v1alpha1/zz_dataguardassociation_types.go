@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DataGuardAssociationDataCollectionOptionsInitParameters struct {
@@ -106,7 +106,7 @@ type DataGuardAssociationInitParameters struct {
 
 	// The database OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.Database
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
 	// Reference to a Database in database to populate databaseId.
@@ -119,7 +119,7 @@ type DataGuardAssociationInitParameters struct {
 
 	// The database software image OCID. Applicable only when creationType=ExistingDbSystem and when the existing database has Exadata shape.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DatabaseSoftwareImage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatabaseSoftwareImageID *string `json:"databaseSoftwareImageId,omitempty" tf:"database_software_image_id,omitempty"`
 
 	// Reference to a DatabaseSoftwareImage in database to populate databaseSoftwareImageId.
@@ -163,7 +163,7 @@ type DataGuardAssociationInitParameters struct {
 
 	// (Applicable when creation_type=ExistingDbSystem | ExistingVmCluster) The OCID of the DB home in which to create the standby database. You must supply this value to create standby database with an existing DB home
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DbHome
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PeerDBHomeID *string `json:"peerDbHomeId,omitempty" tf:"peer_db_home_id,omitempty"`
 
 	// Reference to a DbHome in database to populate peerDbHomeId.
@@ -176,7 +176,7 @@ type DataGuardAssociationInitParameters struct {
 
 	// (Applicable when creation_type=ExistingDbSystem) The OCID of the DB system in which to create the standby database. You must supply this value if creationType is ExistingDbSystem.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DbSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PeerDBSystemID *string `json:"peerDbSystemId,omitempty" tf:"peer_db_system_id,omitempty"`
 
 	// Reference to a DbSystem in database to populate peerDbSystemId.
@@ -195,7 +195,7 @@ type DataGuardAssociationInitParameters struct {
 
 	// (Applicable when creation_type=ExistingVmCluster) The OCID of the VM Cluster in which to create the standby database. You must supply this value if creationType is ExistingVmCluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.VmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PeerVMClusterID *string `json:"peerVmClusterId,omitempty" tf:"peer_vm_cluster_id,omitempty"`
 
 	// Reference to a VmCluster in database to populate peerVmClusterId.
@@ -223,7 +223,7 @@ type DataGuardAssociationInitParameters struct {
 
 	// (Applicable when creation_type=NewDbSystem) The OCID of the subnet the DB system is associated with. Subnet Restrictions:
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -472,7 +472,7 @@ type DataGuardAssociationParameters struct {
 
 	// The database OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.Database
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
@@ -486,7 +486,7 @@ type DataGuardAssociationParameters struct {
 
 	// The database software image OCID. Applicable only when creationType=ExistingDbSystem and when the existing database has Exadata shape.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DatabaseSoftwareImage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatabaseSoftwareImageID *string `json:"databaseSoftwareImageId,omitempty" tf:"database_software_image_id,omitempty"`
 
@@ -541,7 +541,7 @@ type DataGuardAssociationParameters struct {
 
 	// (Applicable when creation_type=ExistingDbSystem | ExistingVmCluster) The OCID of the DB home in which to create the standby database. You must supply this value to create standby database with an existing DB home
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DbHome
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerDBHomeID *string `json:"peerDbHomeId,omitempty" tf:"peer_db_home_id,omitempty"`
 
@@ -555,7 +555,7 @@ type DataGuardAssociationParameters struct {
 
 	// (Applicable when creation_type=ExistingDbSystem) The OCID of the DB system in which to create the standby database. You must supply this value if creationType is ExistingDbSystem.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DbSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerDBSystemID *string `json:"peerDbSystemId,omitempty" tf:"peer_db_system_id,omitempty"`
 
@@ -577,7 +577,7 @@ type DataGuardAssociationParameters struct {
 
 	// (Applicable when creation_type=ExistingVmCluster) The OCID of the VM Cluster in which to create the standby database. You must supply this value if creationType is ExistingVmCluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.VmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerVMClusterID *string `json:"peerVmClusterId,omitempty" tf:"peer_vm_cluster_id,omitempty"`
 
@@ -611,7 +611,7 @@ type DataGuardAssociationParameters struct {
 
 	// (Applicable when creation_type=NewDbSystem) The OCID of the subnet the DB system is associated with. Subnet Restrictions:
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

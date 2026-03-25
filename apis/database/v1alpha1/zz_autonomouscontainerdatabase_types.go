@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AssociatedBackupConfigurationDetailsInitParameters struct {
@@ -65,7 +65,7 @@ type AutonomousContainerDatabaseInitParameters struct {
 
 	// No longer used. This parameter is no longer used for Autonomous AI Database on dedicated Exadata infrasture. Specify a cloudAutonomousVmClusterId instead. Using this parameter will cause the operation to fail.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousExadataInfrastructure
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AutonomousExadataInfrastructureID *string `json:"autonomousExadataInfrastructureId,omitempty" tf:"autonomous_exadata_infrastructure_id,omitempty"`
 
 	// Reference to a AutonomousExadataInfrastructure in database to populate autonomousExadataInfrastructureId.
@@ -78,7 +78,7 @@ type AutonomousContainerDatabaseInitParameters struct {
 
 	// The OCID of the Autonomous VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AutonomousVMClusterID *string `json:"autonomousVmClusterId,omitempty" tf:"autonomous_vm_cluster_id,omitempty"`
 
 	// Reference to a AutonomousVmCluster in database to populate autonomousVmClusterId.
@@ -94,7 +94,7 @@ type AutonomousContainerDatabaseInitParameters struct {
 
 	// The OCID of the cloud Autonomous Exadata VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudAutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CloudAutonomousVMClusterID *string `json:"cloudAutonomousVmClusterId,omitempty" tf:"cloud_autonomous_vm_cluster_id,omitempty"`
 
 	// Reference to a CloudAutonomousVmCluster in database to populate cloudAutonomousVmClusterId.
@@ -134,7 +134,7 @@ type AutonomousContainerDatabaseInitParameters struct {
 
 	// The Autonomous AI Database Software Image OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DatabaseSoftwareImage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatabaseSoftwareImageID *string `json:"databaseSoftwareImageId,omitempty" tf:"database_software_image_id,omitempty"`
 
 	// Reference to a DatabaseSoftwareImage in database to populate databaseSoftwareImageId.
@@ -173,7 +173,7 @@ type AutonomousContainerDatabaseInitParameters struct {
 
 	// The OCID of the key container that is used as the master encryption key in database transparent data encryption (TDE) operations.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
@@ -186,7 +186,7 @@ type AutonomousContainerDatabaseInitParameters struct {
 
 	// The OCID of the key store of Oracle Vault.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.KeyStore
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyStoreID *string `json:"keyStoreId,omitempty" tf:"key_store_id,omitempty"`
 
 	// Reference to a KeyStore in database to populate keyStoreId.
@@ -208,7 +208,7 @@ type AutonomousContainerDatabaseInitParameters struct {
 
 	// (Updatable) The OKV End Point Group name for the Autonomous Container Database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	OkvEndPointGroupName *string `json:"okvEndPointGroupName,omitempty" tf:"okv_end_point_group_name,omitempty"`
 
 	// Reference to a Group in identity to populate okvEndPointGroupName.
@@ -227,7 +227,7 @@ type AutonomousContainerDatabaseInitParameters struct {
 
 	// The OCID of the compartment where the standby Autonomous Container Database will be created.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PeerAutonomousContainerDatabaseCompartmentID *string `json:"peerAutonomousContainerDatabaseCompartmentId,omitempty" tf:"peer_autonomous_container_database_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate peerAutonomousContainerDatabaseCompartmentId.
@@ -243,7 +243,7 @@ type AutonomousContainerDatabaseInitParameters struct {
 
 	// No longer used. This parameter is no longer used for Autonomous AI Database on dedicated Exadata infrasture. Specify a peerCloudAutonomousVmClusterId instead. Using this parameter will cause the operation to fail.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousExadataInfrastructure
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PeerAutonomousExadataInfrastructureID *string `json:"peerAutonomousExadataInfrastructureId,omitempty" tf:"peer_autonomous_exadata_infrastructure_id,omitempty"`
 
 	// Reference to a AutonomousExadataInfrastructure in database to populate peerAutonomousExadataInfrastructureId.
@@ -256,7 +256,7 @@ type AutonomousContainerDatabaseInitParameters struct {
 
 	// The OCID of the peer Autonomous VM cluster for Autonomous Data Guard. Required to enable Data Guard.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PeerAutonomousVMClusterID *string `json:"peerAutonomousVmClusterId,omitempty" tf:"peer_autonomous_vm_cluster_id,omitempty"`
 
 	// Reference to a AutonomousVmCluster in database to populate peerAutonomousVmClusterId.
@@ -269,7 +269,7 @@ type AutonomousContainerDatabaseInitParameters struct {
 
 	// The OCID of the peer cloud Autonomous Exadata VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudAutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PeerCloudAutonomousVMClusterID *string `json:"peerCloudAutonomousVmClusterId,omitempty" tf:"peer_cloud_autonomous_vm_cluster_id,omitempty"`
 
 	// Reference to a CloudAutonomousVmCluster in database to populate peerCloudAutonomousVmClusterId.
@@ -308,7 +308,7 @@ type AutonomousContainerDatabaseInitParameters struct {
 
 	// The OCID of the Oracle Cloud Infrastructure vault. This parameter and secretId are required for Customer Managed Keys.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
 	// Reference to a Vault in kms to populate vaultId.
@@ -576,7 +576,7 @@ type AutonomousContainerDatabaseParameters struct {
 
 	// No longer used. This parameter is no longer used for Autonomous AI Database on dedicated Exadata infrasture. Specify a cloudAutonomousVmClusterId instead. Using this parameter will cause the operation to fail.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousExadataInfrastructure
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AutonomousExadataInfrastructureID *string `json:"autonomousExadataInfrastructureId,omitempty" tf:"autonomous_exadata_infrastructure_id,omitempty"`
 
@@ -590,7 +590,7 @@ type AutonomousContainerDatabaseParameters struct {
 
 	// The OCID of the Autonomous VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AutonomousVMClusterID *string `json:"autonomousVmClusterId,omitempty" tf:"autonomous_vm_cluster_id,omitempty"`
 
@@ -608,7 +608,7 @@ type AutonomousContainerDatabaseParameters struct {
 
 	// The OCID of the cloud Autonomous Exadata VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudAutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CloudAutonomousVMClusterID *string `json:"cloudAutonomousVmClusterId,omitempty" tf:"cloud_autonomous_vm_cluster_id,omitempty"`
 
@@ -655,7 +655,7 @@ type AutonomousContainerDatabaseParameters struct {
 
 	// The Autonomous AI Database Software Image OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DatabaseSoftwareImage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatabaseSoftwareImageID *string `json:"databaseSoftwareImageId,omitempty" tf:"database_software_image_id,omitempty"`
 
@@ -703,7 +703,7 @@ type AutonomousContainerDatabaseParameters struct {
 
 	// The OCID of the key container that is used as the master encryption key in database transparent data encryption (TDE) operations.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -717,7 +717,7 @@ type AutonomousContainerDatabaseParameters struct {
 
 	// The OCID of the key store of Oracle Vault.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.KeyStore
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyStoreID *string `json:"keyStoreId,omitempty" tf:"key_store_id,omitempty"`
 
@@ -743,7 +743,7 @@ type AutonomousContainerDatabaseParameters struct {
 
 	// (Updatable) The OKV End Point Group name for the Autonomous Container Database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	OkvEndPointGroupName *string `json:"okvEndPointGroupName,omitempty" tf:"okv_end_point_group_name,omitempty"`
 
@@ -765,7 +765,7 @@ type AutonomousContainerDatabaseParameters struct {
 
 	// The OCID of the compartment where the standby Autonomous Container Database will be created.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerAutonomousContainerDatabaseCompartmentID *string `json:"peerAutonomousContainerDatabaseCompartmentId,omitempty" tf:"peer_autonomous_container_database_compartment_id,omitempty"`
 
@@ -783,7 +783,7 @@ type AutonomousContainerDatabaseParameters struct {
 
 	// No longer used. This parameter is no longer used for Autonomous AI Database on dedicated Exadata infrasture. Specify a peerCloudAutonomousVmClusterId instead. Using this parameter will cause the operation to fail.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousExadataInfrastructure
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerAutonomousExadataInfrastructureID *string `json:"peerAutonomousExadataInfrastructureId,omitempty" tf:"peer_autonomous_exadata_infrastructure_id,omitempty"`
 
@@ -797,7 +797,7 @@ type AutonomousContainerDatabaseParameters struct {
 
 	// The OCID of the peer Autonomous VM cluster for Autonomous Data Guard. Required to enable Data Guard.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerAutonomousVMClusterID *string `json:"peerAutonomousVmClusterId,omitempty" tf:"peer_autonomous_vm_cluster_id,omitempty"`
 
@@ -811,7 +811,7 @@ type AutonomousContainerDatabaseParameters struct {
 
 	// The OCID of the peer cloud Autonomous Exadata VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudAutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerCloudAutonomousVMClusterID *string `json:"peerCloudAutonomousVmClusterId,omitempty" tf:"peer_cloud_autonomous_vm_cluster_id,omitempty"`
 
@@ -860,7 +860,7 @@ type AutonomousContainerDatabaseParameters struct {
 
 	// The OCID of the Oracle Cloud Infrastructure vault. This parameter and secretId are required for Customer Managed Keys.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 

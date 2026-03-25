@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type IotDomainGroupConfigureDataAccessInitParameters struct {
@@ -20,7 +20,7 @@ type IotDomainGroupConfigureDataAccessInitParameters struct {
 
 	// The OCID of an IoT Domain Group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/iot/v1alpha1.IotDomainGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IotDomainGroupID *string `json:"iotDomainGroupId,omitempty" tf:"iot_domain_group_id,omitempty"`
 
 	// Reference to a IotDomainGroup in iot to populate iotDomainGroupId.
@@ -51,7 +51,7 @@ type IotDomainGroupConfigureDataAccessParameters struct {
 
 	// The OCID of an IoT Domain Group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/iot/v1alpha1.IotDomainGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IotDomainGroupID *string `json:"iotDomainGroupId,omitempty" tf:"iot_domain_group_id,omitempty"`
 

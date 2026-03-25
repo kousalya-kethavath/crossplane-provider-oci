@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DeployedResourcesInitParameters struct {
@@ -53,7 +53,7 @@ type ProvisionInitParameters struct {
 
 	// A OCID of the Catalog Item to a file with key/value pairs to set up variables for createStack API.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.CatalogItem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConfigCatalogItemID *string `json:"configCatalogItemId,omitempty" tf:"config_catalog_item_id,omitempty"`
 
 	// Reference to a CatalogItem in fleetappsmanagement to populate configCatalogItemId.
@@ -73,7 +73,7 @@ type ProvisionInitParameters struct {
 
 	// The OCID of the Fleet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.Fleet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FleetID *string `json:"fleetId,omitempty" tf:"fleet_id,omitempty"`
 
 	// Reference to a Fleet in fleetappsmanagement to populate fleetId.
@@ -90,7 +90,7 @@ type ProvisionInitParameters struct {
 
 	// The OCID of the Catalog Item.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.CatalogItem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PackageCatalogItemID *string `json:"packageCatalogItemId,omitempty" tf:"package_catalog_item_id,omitempty"`
 
 	// Reference to a CatalogItem in fleetappsmanagement to populate packageCatalogItemId.
@@ -106,7 +106,7 @@ type ProvisionInitParameters struct {
 
 	// An optional variable added to a list of RMS variables for createStack API. Overrides the one supplied in configuration file.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TfVariableCompartmentID *string `json:"tfVariableCompartmentId,omitempty" tf:"tf_variable_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate tfVariableCompartmentId.
@@ -119,7 +119,7 @@ type ProvisionInitParameters struct {
 
 	// An optional variable added to a list of RMS variables for createStack API. Overrides the one supplied in configuration file.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TfVariableCurrentUserID *string `json:"tfVariableCurrentUserId,omitempty" tf:"tf_variable_current_user_id,omitempty"`
 
 	// Reference to a User in identity to populate tfVariableCurrentUserId.
@@ -244,7 +244,7 @@ type ProvisionParameters struct {
 
 	// A OCID of the Catalog Item to a file with key/value pairs to set up variables for createStack API.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.CatalogItem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConfigCatalogItemID *string `json:"configCatalogItemId,omitempty" tf:"config_catalog_item_id,omitempty"`
 
@@ -267,7 +267,7 @@ type ProvisionParameters struct {
 
 	// The OCID of the Fleet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.Fleet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FleetID *string `json:"fleetId,omitempty" tf:"fleet_id,omitempty"`
 
@@ -286,7 +286,7 @@ type ProvisionParameters struct {
 
 	// The OCID of the Catalog Item.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.CatalogItem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PackageCatalogItemID *string `json:"packageCatalogItemId,omitempty" tf:"package_catalog_item_id,omitempty"`
 
@@ -304,7 +304,7 @@ type ProvisionParameters struct {
 
 	// An optional variable added to a list of RMS variables for createStack API. Overrides the one supplied in configuration file.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TfVariableCompartmentID *string `json:"tfVariableCompartmentId,omitempty" tf:"tf_variable_compartment_id,omitempty"`
 
@@ -318,7 +318,7 @@ type ProvisionParameters struct {
 
 	// An optional variable added to a list of RMS variables for createStack API. Overrides the one supplied in configuration file.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TfVariableCurrentUserID *string `json:"tfVariableCurrentUserId,omitempty" tf:"tf_variable_current_user_id,omitempty"`
 

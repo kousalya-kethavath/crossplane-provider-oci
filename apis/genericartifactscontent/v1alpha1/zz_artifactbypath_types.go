@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ArtifactByPathInitParameters struct {
@@ -23,7 +23,7 @@ type ArtifactByPathInitParameters struct {
 
 	// The OCID of the repository.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/artifacts/v1alpha1.Repository
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
 
 	// Reference to a Repository in artifacts to populate repositoryId.
@@ -103,7 +103,7 @@ type ArtifactByPathParameters struct {
 
 	// The OCID of the repository.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/artifacts/v1alpha1.Repository
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConditionsInitParameters struct {
@@ -134,7 +134,7 @@ type FusionEnvironmentInitParameters struct {
 
 	// The unique identifier (OCID) of the Fusion Environment Family that the Fusion Environment belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fusionapps/v1alpha1.FusionEnvironmentFamily
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FusionEnvironmentFamilyID *string `json:"fusionEnvironmentFamilyId,omitempty" tf:"fusion_environment_family_id,omitempty"`
 
 	// Reference to a FusionEnvironmentFamily in fusionapps to populate fusionEnvironmentFamilyId.
@@ -153,7 +153,7 @@ type FusionEnvironmentInitParameters struct {
 
 	// (Updatable) byok kms keyId
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
@@ -309,7 +309,7 @@ type FusionEnvironmentParameters struct {
 
 	// The unique identifier (OCID) of the Fusion Environment Family that the Fusion Environment belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fusionapps/v1alpha1.FusionEnvironmentFamily
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FusionEnvironmentFamilyID *string `json:"fusionEnvironmentFamilyId,omitempty" tf:"fusion_environment_family_id,omitempty"`
 
@@ -331,7 +331,7 @@ type FusionEnvironmentParameters struct {
 
 	// (Updatable) byok kms keyId
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 

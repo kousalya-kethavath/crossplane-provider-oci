@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AuditConditionsInitParameters struct {
@@ -38,7 +38,7 @@ type AuditPolicyInitParameters struct {
 
 	// Unique audit policy identifier.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.AuditPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AuditPolicyID *string `json:"auditPolicyId,omitempty" tf:"audit_policy_id,omitempty"`
 
 	// Reference to a AuditPolicy in datasafe to populate auditPolicyId.
@@ -152,7 +152,7 @@ type AuditPolicyParameters struct {
 
 	// Unique audit policy identifier.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.AuditPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AuditPolicyID *string `json:"auditPolicyId,omitempty" tf:"audit_policy_id,omitempty"`
 

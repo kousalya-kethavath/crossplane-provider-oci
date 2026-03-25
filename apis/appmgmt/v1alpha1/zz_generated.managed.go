@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this ControlMonitorPluginManagement.
 func (mg *ControlMonitorPluginManagement) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *ControlMonitorPluginManagement) GetManagementPolicies() xpv1.Managemen
 // GetProviderConfigReference of this ControlMonitorPluginManagement.
 func (mg *ControlMonitorPluginManagement) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this ControlMonitorPluginManagement.
-func (mg *ControlMonitorPluginManagement) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this ControlMonitorPluginManagement.
@@ -55,11 +50,6 @@ func (mg *ControlMonitorPluginManagement) SetManagementPolicies(r xpv1.Managemen
 // SetProviderConfigReference of this ControlMonitorPluginManagement.
 func (mg *ControlMonitorPluginManagement) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this ControlMonitorPluginManagement.
-func (mg *ControlMonitorPluginManagement) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this ControlMonitorPluginManagement.

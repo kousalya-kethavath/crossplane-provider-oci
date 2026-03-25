@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this OciCacheConfigSet.
 func (mg *OciCacheConfigSet) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *OciCacheConfigSet) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this OciCacheConfigSet.
 func (mg *OciCacheConfigSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OciCacheConfigSet.
-func (mg *OciCacheConfigSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OciCacheConfigSet.
@@ -57,11 +52,6 @@ func (mg *OciCacheConfigSet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OciCacheConfigSet.
-func (mg *OciCacheConfigSet) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OciCacheConfigSet.
 func (mg *OciCacheConfigSet) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -85,11 +75,6 @@ func (mg *OciCacheConfigSetlistAssociatedOciCacheCluster) GetManagementPolicies(
 // GetProviderConfigReference of this OciCacheConfigSetlistAssociatedOciCacheCluster.
 func (mg *OciCacheConfigSetlistAssociatedOciCacheCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OciCacheConfigSetlistAssociatedOciCacheCluster.
-func (mg *OciCacheConfigSetlistAssociatedOciCacheCluster) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OciCacheConfigSetlistAssociatedOciCacheCluster.
@@ -117,11 +102,6 @@ func (mg *OciCacheConfigSetlistAssociatedOciCacheCluster) SetProviderConfigRefer
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OciCacheConfigSetlistAssociatedOciCacheCluster.
-func (mg *OciCacheConfigSetlistAssociatedOciCacheCluster) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OciCacheConfigSetlistAssociatedOciCacheCluster.
 func (mg *OciCacheConfigSetlistAssociatedOciCacheCluster) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -145,11 +125,6 @@ func (mg *OciCacheUser) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this OciCacheUser.
 func (mg *OciCacheUser) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OciCacheUser.
-func (mg *OciCacheUser) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OciCacheUser.
@@ -177,11 +152,6 @@ func (mg *OciCacheUser) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OciCacheUser.
-func (mg *OciCacheUser) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OciCacheUser.
 func (mg *OciCacheUser) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -205,11 +175,6 @@ func (mg *OciCacheUserGetRedisCluster) GetManagementPolicies() xpv1.ManagementPo
 // GetProviderConfigReference of this OciCacheUserGetRedisCluster.
 func (mg *OciCacheUserGetRedisCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OciCacheUserGetRedisCluster.
-func (mg *OciCacheUserGetRedisCluster) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OciCacheUserGetRedisCluster.
@@ -237,11 +202,6 @@ func (mg *OciCacheUserGetRedisCluster) SetProviderConfigReference(r *xpv1.Refere
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OciCacheUserGetRedisCluster.
-func (mg *OciCacheUserGetRedisCluster) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OciCacheUserGetRedisCluster.
 func (mg *OciCacheUserGetRedisCluster) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -265,11 +225,6 @@ func (mg *RedisCluster) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this RedisCluster.
 func (mg *RedisCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this RedisCluster.
-func (mg *RedisCluster) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this RedisCluster.
@@ -297,11 +252,6 @@ func (mg *RedisCluster) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this RedisCluster.
-func (mg *RedisCluster) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this RedisCluster.
 func (mg *RedisCluster) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -325,11 +275,6 @@ func (mg *RedisClusterAttachOciCacheUser) GetManagementPolicies() xpv1.Managemen
 // GetProviderConfigReference of this RedisClusterAttachOciCacheUser.
 func (mg *RedisClusterAttachOciCacheUser) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this RedisClusterAttachOciCacheUser.
-func (mg *RedisClusterAttachOciCacheUser) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this RedisClusterAttachOciCacheUser.
@@ -357,11 +302,6 @@ func (mg *RedisClusterAttachOciCacheUser) SetProviderConfigReference(r *xpv1.Ref
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this RedisClusterAttachOciCacheUser.
-func (mg *RedisClusterAttachOciCacheUser) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this RedisClusterAttachOciCacheUser.
 func (mg *RedisClusterAttachOciCacheUser) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -385,11 +325,6 @@ func (mg *RedisClusterCreateIdentityToken) GetManagementPolicies() xpv1.Manageme
 // GetProviderConfigReference of this RedisClusterCreateIdentityToken.
 func (mg *RedisClusterCreateIdentityToken) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this RedisClusterCreateIdentityToken.
-func (mg *RedisClusterCreateIdentityToken) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this RedisClusterCreateIdentityToken.
@@ -417,11 +352,6 @@ func (mg *RedisClusterCreateIdentityToken) SetProviderConfigReference(r *xpv1.Re
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this RedisClusterCreateIdentityToken.
-func (mg *RedisClusterCreateIdentityToken) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this RedisClusterCreateIdentityToken.
 func (mg *RedisClusterCreateIdentityToken) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -445,11 +375,6 @@ func (mg *RedisClusterDetachOciCacheUser) GetManagementPolicies() xpv1.Managemen
 // GetProviderConfigReference of this RedisClusterDetachOciCacheUser.
 func (mg *RedisClusterDetachOciCacheUser) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this RedisClusterDetachOciCacheUser.
-func (mg *RedisClusterDetachOciCacheUser) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this RedisClusterDetachOciCacheUser.
@@ -477,11 +402,6 @@ func (mg *RedisClusterDetachOciCacheUser) SetProviderConfigReference(r *xpv1.Ref
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this RedisClusterDetachOciCacheUser.
-func (mg *RedisClusterDetachOciCacheUser) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this RedisClusterDetachOciCacheUser.
 func (mg *RedisClusterDetachOciCacheUser) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -507,11 +427,6 @@ func (mg *RedisClusterGetOciCacheUser) GetProviderConfigReference() *xpv1.Refere
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this RedisClusterGetOciCacheUser.
-func (mg *RedisClusterGetOciCacheUser) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this RedisClusterGetOciCacheUser.
 func (mg *RedisClusterGetOciCacheUser) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -535,11 +450,6 @@ func (mg *RedisClusterGetOciCacheUser) SetManagementPolicies(r xpv1.ManagementPo
 // SetProviderConfigReference of this RedisClusterGetOciCacheUser.
 func (mg *RedisClusterGetOciCacheUser) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this RedisClusterGetOciCacheUser.
-func (mg *RedisClusterGetOciCacheUser) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this RedisClusterGetOciCacheUser.

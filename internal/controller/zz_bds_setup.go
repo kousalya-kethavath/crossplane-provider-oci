@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	autoscalingconfiguration "github.com/oracle/provider-oci/internal/controller/bds/autoscalingconfiguration"
 	bdscapacityreport "github.com/oracle/provider-oci/internal/controller/bds/bdscapacityreport"
@@ -45,6 +45,33 @@ func Setup_bds(mgr ctrl.Manager, o controller.Options) error {
 		bdsinstancereplacenodeaction.Setup,
 		bdsinstanceresourceprincipalconfiguration.Setup,
 		bdsinstancesoftwareupdateaction.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_bds creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_bds(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		autoscalingconfiguration.SetupGated,
+		bdscapacityreport.SetupGated,
+		bdsinstance.SetupGated,
+		bdsinstanceapikey.SetupGated,
+		bdsinstanceidentityconfiguration.SetupGated,
+		bdsinstancemetastoreconfig.SetupGated,
+		bdsinstancenodebackup.SetupGated,
+		bdsinstancenodebackupconfiguration.SetupGated,
+		bdsinstancenodereplaceconfiguration.SetupGated,
+		bdsinstanceoperationcertificatemanagementsmanagement.SetupGated,
+		bdsinstanceospatchaction.SetupGated,
+		bdsinstancepatchaction.SetupGated,
+		bdsinstancereplacenodeaction.SetupGated,
+		bdsinstanceresourceprincipalconfiguration.SetupGated,
+		bdsinstancesoftwareupdateaction.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

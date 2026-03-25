@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BackupScheduleInitParameters struct {
@@ -137,7 +137,7 @@ type DeploymentInitParameters struct {
 
 	// The OCID(https://docs.cloud.oracle.com/iaas/Content/General/Concepts/identifiers.htm) of the cluster placement group for the resource. Only applicable for multicloud subscriptions. The cluster placement group id must be provided when a multicloud subscription id is provided. Otherwise the cluster placement group must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/clusterplacementgroups/v1alpha1.ClusterPlacementGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClusterPlacementGroupID *string `json:"clusterPlacementGroupId,omitempty" tf:"cluster_placement_group_id,omitempty"`
 
 	// Reference to a ClusterPlacementGroup in clusterplacementgroups to populate clusterPlacementGroupId.
@@ -166,7 +166,7 @@ type DeploymentInitParameters struct {
 
 	// The OCID of the backup being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/goldengate/v1alpha1.DeploymentBackup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DeploymentBackupID *string `json:"deploymentBackupId,omitempty" tf:"deployment_backup_id,omitempty"`
 
 	// Reference to a DeploymentBackup in goldengate to populate deploymentBackupId.
@@ -215,7 +215,7 @@ type DeploymentInitParameters struct {
 
 	// (Updatable) The OCID of a public subnet in the customer tenancy. Can be provided only for public deployments. If provided, the loadbalancer will be created in this subnet instead of the service tenancy. For backward compatibility, this is an optional property. It will become mandatory for public deployments after October 1, 2024.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LoadBalancerSubnetID *string `json:"loadBalancerSubnetId,omitempty" tf:"load_balancer_subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate loadBalancerSubnetId.
@@ -251,7 +251,7 @@ type DeploymentInitParameters struct {
 
 	// The OCID of the deployment being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/goldengate/v1alpha1.Deployment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceDeploymentID *string `json:"sourceDeploymentId,omitempty" tf:"source_deployment_id,omitempty"`
 
 	// Reference to a Deployment in goldengate to populate sourceDeploymentId.
@@ -267,7 +267,7 @@ type DeploymentInitParameters struct {
 
 	// (Updatable) The OCID of the subnet of the deployment's private endpoint. The subnet must be a private subnet. For backward compatibility, public subnets are allowed until May 31 2025, after which the private subnet will be enforced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -518,7 +518,7 @@ type DeploymentParameters struct {
 
 	// The OCID(https://docs.cloud.oracle.com/iaas/Content/General/Concepts/identifiers.htm) of the cluster placement group for the resource. Only applicable for multicloud subscriptions. The cluster placement group id must be provided when a multicloud subscription id is provided. Otherwise the cluster placement group must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/clusterplacementgroups/v1alpha1.ClusterPlacementGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterPlacementGroupID *string `json:"clusterPlacementGroupId,omitempty" tf:"cluster_placement_group_id,omitempty"`
 
@@ -550,7 +550,7 @@ type DeploymentParameters struct {
 
 	// The OCID of the backup being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/goldengate/v1alpha1.DeploymentBackup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeploymentBackupID *string `json:"deploymentBackupId,omitempty" tf:"deployment_backup_id,omitempty"`
 
@@ -612,7 +612,7 @@ type DeploymentParameters struct {
 
 	// (Updatable) The OCID of a public subnet in the customer tenancy. Can be provided only for public deployments. If provided, the loadbalancer will be created in this subnet instead of the service tenancy. For backward compatibility, this is an optional property. It will become mandatory for public deployments after October 1, 2024.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LoadBalancerSubnetID *string `json:"loadBalancerSubnetId,omitempty" tf:"load_balancer_subnet_id,omitempty"`
 
@@ -656,7 +656,7 @@ type DeploymentParameters struct {
 
 	// The OCID of the deployment being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/goldengate/v1alpha1.Deployment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceDeploymentID *string `json:"sourceDeploymentId,omitempty" tf:"source_deployment_id,omitempty"`
 
@@ -674,7 +674,7 @@ type DeploymentParameters struct {
 
 	// (Updatable) The OCID of the subnet of the deployment's private endpoint. The subnet must be a private subnet. For backward compatibility, public subnets are allowed until May 31 2025, after which the private subnet will be enforced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -695,7 +695,7 @@ type GroupToRolesMappingInitParameters struct {
 
 	// (Updatable) The OCID of the IDP group which will be mapped to goldengate role administratorGroup. It grants full access to the user, including the ability to alter general, non-security related operational parameters and profiles of the server.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AdministratorGroupID *string `json:"administratorGroupId,omitempty" tf:"administrator_group_id,omitempty"`
 
 	// Reference to a Group in identity to populate administratorGroupId.
@@ -708,7 +708,7 @@ type GroupToRolesMappingInitParameters struct {
 
 	// (Updatable) The OCID of the IDP group which will be mapped to goldengate role operatorGroup. It allows users to perform only operational actions, like starting and stopping resources. Operators cannot alter the operational parameters or profiles of the MA server.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OperatorGroupID *string `json:"operatorGroupId,omitempty" tf:"operator_group_id,omitempty"`
 
 	// Reference to a Group in identity to populate operatorGroupId.
@@ -721,7 +721,7 @@ type GroupToRolesMappingInitParameters struct {
 
 	// (Updatable) The OCID of the IDP group which will be mapped to goldengate role securityGroup. It grants administration of security related objects and invoke security related service requests. This role has full privileges.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
 	// Reference to a Group in identity to populate securityGroupId.
@@ -734,7 +734,7 @@ type GroupToRolesMappingInitParameters struct {
 
 	// (Updatable) The OCID of the IDP group which will be mapped to goldengate role userGroup. It allows information-only service requests, which do not alter or affect the operation of either the MA. Examples of query and read-only information include performance metric information and resource status and monitoring information
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	UserGroupID *string `json:"userGroupId,omitempty" tf:"user_group_id,omitempty"`
 
 	// Reference to a Group in identity to populate userGroupId.
@@ -765,7 +765,7 @@ type GroupToRolesMappingParameters struct {
 
 	// (Updatable) The OCID of the IDP group which will be mapped to goldengate role administratorGroup. It grants full access to the user, including the ability to alter general, non-security related operational parameters and profiles of the server.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AdministratorGroupID *string `json:"administratorGroupId,omitempty" tf:"administrator_group_id,omitempty"`
 
@@ -779,7 +779,7 @@ type GroupToRolesMappingParameters struct {
 
 	// (Updatable) The OCID of the IDP group which will be mapped to goldengate role operatorGroup. It allows users to perform only operational actions, like starting and stopping resources. Operators cannot alter the operational parameters or profiles of the MA server.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OperatorGroupID *string `json:"operatorGroupId,omitempty" tf:"operator_group_id,omitempty"`
 
@@ -793,7 +793,7 @@ type GroupToRolesMappingParameters struct {
 
 	// (Updatable) The OCID of the IDP group which will be mapped to goldengate role securityGroup. It grants administration of security related objects and invoke security related service requests. This role has full privileges.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
@@ -807,7 +807,7 @@ type GroupToRolesMappingParameters struct {
 
 	// (Updatable) The OCID of the IDP group which will be mapped to goldengate role userGroup. It allows information-only service requests, which do not alter or affect the operation of either the MA. Examples of query and read-only information include performance metric information and resource status and monitoring information
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Group
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserGroupID *string `json:"userGroupId,omitempty" tf:"user_group_id,omitempty"`
 
@@ -939,7 +939,7 @@ type OggDataInitParameters struct {
 
 	// (Updatable) The OCID of the Identity Domain when IAM credential store is used.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IdentityDomainID *string `json:"identityDomainId,omitempty" tf:"identity_domain_id,omitempty"`
 
 	// Reference to a Domain in identity to populate identityDomainId.
@@ -1024,7 +1024,7 @@ type OggDataParameters struct {
 
 	// (Updatable) The OCID of the Identity Domain when IAM credential store is used.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IdentityDomainID *string `json:"identityDomainId,omitempty" tf:"identity_domain_id,omitempty"`
 

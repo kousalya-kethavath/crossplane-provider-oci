@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ItemsInitParameters struct {
@@ -31,7 +31,7 @@ type SensitiveTypeGroupGroupedSensitiveTypeInitParameters struct {
 	PatchOperations []SensitiveTypeGroupGroupedSensitiveTypePatchOperationsInitParameters `json:"patchOperations,omitempty" tf:"patch_operations,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.SensitiveTypeGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SensitiveTypeGroupID *string `json:"sensitiveTypeGroupId,omitempty" tf:"sensitive_type_group_id,omitempty"`
 
 	// Reference to a SensitiveTypeGroup in datasafe to populate sensitiveTypeGroupId.
@@ -62,7 +62,7 @@ type SensitiveTypeGroupGroupedSensitiveTypeParameters struct {
 	PatchOperations []SensitiveTypeGroupGroupedSensitiveTypePatchOperationsParameters `json:"patchOperations,omitempty" tf:"patch_operations,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.SensitiveTypeGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SensitiveTypeGroupID *string `json:"sensitiveTypeGroupId,omitempty" tf:"sensitive_type_group_id,omitempty"`
 

@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ListenerInitParameters struct {
 
 	// (Updatable) The name of the associated backend set.  Example: example_backend_set
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networkloadbalancer/v1alpha1.BackendSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	DefaultBackendSetName *string `json:"defaultBackendSetName,omitempty" tf:"default_backend_set_name,omitempty"`
 
 	// Reference to a BackendSet in networkloadbalancer to populate defaultBackendSetName.
@@ -104,7 +104,7 @@ type ListenerParameters struct {
 
 	// (Updatable) The name of the associated backend set.  Example: example_backend_set
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networkloadbalancer/v1alpha1.BackendSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	DefaultBackendSetName *string `json:"defaultBackendSetName,omitempty" tf:"default_backend_set_name,omitempty"`
 

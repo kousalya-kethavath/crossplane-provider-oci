@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AgentAgentEndpointInitParameters struct {
 
 	// The OCID of the agent that this endpoint is associated with.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.AgentAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AgentID *string `json:"agentId,omitempty" tf:"agent_id,omitempty"`
 
 	// Reference to a AgentAgent in generativeai to populate agentId.
@@ -163,7 +163,7 @@ type AgentAgentEndpointParameters struct {
 
 	// The OCID of the agent that this endpoint is associated with.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.AgentAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AgentID *string `json:"agentId,omitempty" tf:"agent_id,omitempty"`
 

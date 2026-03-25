@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionInitParameters struct {
@@ -35,7 +35,7 @@ type ResourceActionInitParameters struct {
 
 	// The unique OCID associated with the resource action.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/optimizer/v1alpha1.ResourceAction
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceActionID *string `json:"resourceActionId,omitempty" tf:"resource_action_id,omitempty"`
 
 	// Reference to a ResourceAction in optimizer to populate resourceActionId.
@@ -119,7 +119,7 @@ type ResourceActionParameters struct {
 
 	// The unique OCID associated with the resource action.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/optimizer/v1alpha1.ResourceAction
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceActionID *string `json:"resourceActionId,omitempty" tf:"resource_action_id,omitempty"`
 

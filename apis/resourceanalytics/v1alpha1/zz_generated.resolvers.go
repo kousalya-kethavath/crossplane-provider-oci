@@ -8,10 +8,9 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -34,6 +33,7 @@ func (mg *MonitoredRegion) ResolveReferences( // ResolveReferences of this Monit
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceAnalyticsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceAnalyticsInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceAnalyticsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *MonitoredRegion) ResolveReferences( // ResolveReferences of this Monit
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceAnalyticsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceAnalyticsInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceAnalyticsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -85,6 +86,7 @@ func (mg *ResourceAnalyticsInstance) ResolveReferences(ctx context.Context, c cl
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AdwAdminPassword[i3].SecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.AdwAdminPassword[i3].SecretIDRef,
 				Selector:     mg.Spec.ForProvider.AdwAdminPassword[i3].SecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -105,6 +107,7 @@ func (mg *ResourceAnalyticsInstance) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -124,6 +127,7 @@ func (mg *ResourceAnalyticsInstance) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -144,6 +148,7 @@ func (mg *ResourceAnalyticsInstance) ResolveReferences(ctx context.Context, c cl
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AdwAdminPassword[i3].SecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.AdwAdminPassword[i3].SecretIDRef,
 				Selector:     mg.Spec.InitProvider.AdwAdminPassword[i3].SecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -164,6 +169,7 @@ func (mg *ResourceAnalyticsInstance) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -183,6 +189,7 @@ func (mg *ResourceAnalyticsInstance) ResolveReferences(ctx context.Context, c cl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -215,6 +222,7 @@ func (mg *ResourceAnalyticsInstanceOacManagement) ResolveReferences(ctx context.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AttachmentDetails[i3].IdcsDomainID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.AttachmentDetails[i3].IdcsDomainIDRef,
 				Selector:     mg.Spec.ForProvider.AttachmentDetails[i3].IdcsDomainIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -237,6 +245,7 @@ func (mg *ResourceAnalyticsInstanceOacManagement) ResolveReferences(ctx context.
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AttachmentDetails[i3].NetworkDetails[i4].SubnetID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.AttachmentDetails[i3].NetworkDetails[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.AttachmentDetails[i3].NetworkDetails[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -258,6 +267,7 @@ func (mg *ResourceAnalyticsInstanceOacManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceAnalyticsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceAnalyticsInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceAnalyticsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -278,6 +288,7 @@ func (mg *ResourceAnalyticsInstanceOacManagement) ResolveReferences(ctx context.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AttachmentDetails[i3].IdcsDomainID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.AttachmentDetails[i3].IdcsDomainIDRef,
 				Selector:     mg.Spec.InitProvider.AttachmentDetails[i3].IdcsDomainIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -300,6 +311,7 @@ func (mg *ResourceAnalyticsInstanceOacManagement) ResolveReferences(ctx context.
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AttachmentDetails[i3].NetworkDetails[i4].SubnetID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.AttachmentDetails[i3].NetworkDetails[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.AttachmentDetails[i3].NetworkDetails[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -321,6 +333,7 @@ func (mg *ResourceAnalyticsInstanceOacManagement) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceAnalyticsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceAnalyticsInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceAnalyticsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -352,6 +365,7 @@ func (mg *TenancyAttachment) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceAnalyticsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ResourceAnalyticsInstanceIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceAnalyticsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -371,6 +385,7 @@ func (mg *TenancyAttachment) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceAnalyticsInstanceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ResourceAnalyticsInstanceIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceAnalyticsInstanceIDSelector,
 			To:           reference.To{List: l, Managed: m},

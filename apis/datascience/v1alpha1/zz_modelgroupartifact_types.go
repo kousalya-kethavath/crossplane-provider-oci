@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ModelGroupArtifactInitParameters struct {
@@ -26,7 +26,7 @@ type ModelGroupArtifactInitParameters struct {
 
 	// The OCID of the modelGroup.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.ModelGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ModelGroupID *string `json:"modelGroupId,omitempty" tf:"model_group_id,omitempty"`
 
 	// Reference to a ModelGroup in datascience to populate modelGroupId.
@@ -71,7 +71,7 @@ type ModelGroupArtifactParameters struct {
 
 	// The OCID of the modelGroup.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.ModelGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ModelGroupID *string `json:"modelGroupId,omitempty" tf:"model_group_id,omitempty"`
 

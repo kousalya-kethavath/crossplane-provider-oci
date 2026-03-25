@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AnswerDataInitParameters struct {
@@ -219,7 +219,7 @@ type SteeringPolicyInitParameters struct {
 
 	// (Updatable) The OCID of the health check monitor providing health data about the answers of the steering policy. A steering policy answer with rdata matching a monitored endpoint will use the health data of that endpoint. A steering policy answer with rdata not matching any monitored endpoint will be assumed healthy.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/healthchecks/v1alpha1.HTTPMonitor
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	HealthCheckMonitorID *string `json:"healthCheckMonitorId,omitempty" tf:"health_check_monitor_id,omitempty"`
 
 	// Reference to a HTTPMonitor in healthchecks to populate healthCheckMonitorId.
@@ -319,7 +319,7 @@ type SteeringPolicyParameters struct {
 
 	// (Updatable) The OCID of the health check monitor providing health data about the answers of the steering policy. A steering policy answer with rdata matching a monitored endpoint will use the health data of that endpoint. A steering policy answer with rdata not matching any monitored endpoint will be assumed healthy.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/healthchecks/v1alpha1.HTTPMonitor
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	HealthCheckMonitorID *string `json:"healthCheckMonitorId,omitempty" tf:"health_check_monitor_id,omitempty"`
 

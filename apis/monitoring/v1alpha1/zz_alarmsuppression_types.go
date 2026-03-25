@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AlarmSuppressionInitParameters struct {
@@ -150,7 +150,7 @@ type AlarmSuppressionTargetInitParameters struct {
 
 	// The OCID of the alarm that is the target of the alarm suppression.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/monitoring/v1alpha1.Alarm
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AlarmID *string `json:"alarmId,omitempty" tf:"alarm_id,omitempty"`
 
 	// Reference to a Alarm in monitoring to populate alarmId.
@@ -190,7 +190,7 @@ type AlarmSuppressionTargetParameters struct {
 
 	// The OCID of the alarm that is the target of the alarm suppression.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/monitoring/v1alpha1.Alarm
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AlarmID *string `json:"alarmId,omitempty" tf:"alarm_id,omitempty"`
 

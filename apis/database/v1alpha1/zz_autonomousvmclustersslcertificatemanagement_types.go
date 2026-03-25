@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AutonomousVmClusterSslCertificateManagementInitParameters struct {
 
 	// The autonomous VM cluster OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AutonomousVMClusterID *string `json:"autonomousVmClusterId,omitempty" tf:"autonomous_vm_cluster_id,omitempty"`
 
 	// Reference to a AutonomousVmCluster in database to populate autonomousVmClusterId.
@@ -30,7 +30,7 @@ type AutonomousVmClusterSslCertificateManagementInitParameters struct {
 
 	// The OCID of the certificate bundle.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/certificatesmanagement/v1alpha1.CaBundle
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CABundleID *string `json:"caBundleId,omitempty" tf:"ca_bundle_id,omitempty"`
 
 	// Reference to a CaBundle in certificatesmanagement to populate caBundleId.
@@ -43,7 +43,7 @@ type AutonomousVmClusterSslCertificateManagementInitParameters struct {
 
 	// The OCID of the certificate authority.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/certificatesmanagement/v1alpha1.CertificateAuthority
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CertificateAuthorityID *string `json:"certificateAuthorityId,omitempty" tf:"certificate_authority_id,omitempty"`
 
 	// Reference to a CertificateAuthority in certificatesmanagement to populate certificateAuthorityId.
@@ -59,7 +59,7 @@ type AutonomousVmClusterSslCertificateManagementInitParameters struct {
 
 	// The OCID of the certificate to use.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apigateway/v1alpha1.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
 
 	// Reference to a Certificate in apigateway to populate certificateId.
@@ -95,7 +95,7 @@ type AutonomousVmClusterSslCertificateManagementParameters struct {
 
 	// The autonomous VM cluster OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AutonomousVMClusterID *string `json:"autonomousVmClusterId,omitempty" tf:"autonomous_vm_cluster_id,omitempty"`
 
@@ -109,7 +109,7 @@ type AutonomousVmClusterSslCertificateManagementParameters struct {
 
 	// The OCID of the certificate bundle.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/certificatesmanagement/v1alpha1.CaBundle
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CABundleID *string `json:"caBundleId,omitempty" tf:"ca_bundle_id,omitempty"`
 
@@ -123,7 +123,7 @@ type AutonomousVmClusterSslCertificateManagementParameters struct {
 
 	// The OCID of the certificate authority.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/certificatesmanagement/v1alpha1.CertificateAuthority
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityID *string `json:"certificateAuthorityId,omitempty" tf:"certificate_authority_id,omitempty"`
 
@@ -141,7 +141,7 @@ type AutonomousVmClusterSslCertificateManagementParameters struct {
 
 	// The OCID of the certificate to use.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apigateway/v1alpha1.Certificate
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
 

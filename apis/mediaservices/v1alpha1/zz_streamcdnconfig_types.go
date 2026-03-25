@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConfigInitParameters struct {
@@ -156,7 +156,7 @@ type StreamCdnConfigInitParameters struct {
 
 	// Distribution Channel Identifier.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/mysql/v1alpha1.MysqlChannel
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DistributionChannelID *string `json:"distributionChannelId,omitempty" tf:"distribution_channel_id,omitempty"`
 
 	// Reference to a MysqlChannel in mysql to populate distributionChannelId.
@@ -306,7 +306,7 @@ type StreamCdnConfigParameters struct {
 
 	// Distribution Channel Identifier.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/mysql/v1alpha1.MysqlChannel
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DistributionChannelID *string `json:"distributionChannelId,omitempty" tf:"distribution_channel_id,omitempty"`
 

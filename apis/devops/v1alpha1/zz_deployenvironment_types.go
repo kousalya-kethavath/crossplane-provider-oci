@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ComputeInstanceGroupSelectorsInitParameters struct {
@@ -85,7 +85,7 @@ type DeployEnvironmentInitParameters struct {
 
 	// (Updatable) The OCID of the Kubernetes cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/containerengine/v1alpha1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
 	// Reference to a Cluster in containerengine to populate clusterId.
@@ -118,7 +118,7 @@ type DeployEnvironmentInitParameters struct {
 
 	// (Updatable) The OCID of the Function.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/functions/v1alpha1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
 	// Reference to a Function in functions to populate functionId.
@@ -134,7 +134,7 @@ type DeployEnvironmentInitParameters struct {
 
 	// The OCID of a project.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// Reference to a Project in devops to populate projectId.
@@ -207,7 +207,7 @@ type DeployEnvironmentParameters struct {
 
 	// (Updatable) The OCID of the Kubernetes cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/containerengine/v1alpha1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
@@ -247,7 +247,7 @@ type DeployEnvironmentParameters struct {
 
 	// (Updatable) The OCID of the Function.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/functions/v1alpha1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
@@ -265,7 +265,7 @@ type DeployEnvironmentParameters struct {
 
 	// The OCID of a project.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -288,7 +288,7 @@ type NetworkChannelInitParameters struct {
 
 	// (Updatable) The OCID of the subnet where VNIC resources will be created for private endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -324,7 +324,7 @@ type NetworkChannelParameters struct {
 
 	// (Updatable) The OCID of the subnet where VNIC resources will be created for private endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionsFilterInitParameters struct {
@@ -132,7 +132,7 @@ type FilterIncludeInitParameters struct {
 
 	// (Applicable when trigger_source=VBS) (Updatable) The repository name for trigger events.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.Repository
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
 
 	// Reference to a Repository in devops to populate repositoryName.
@@ -175,7 +175,7 @@ type FilterIncludeParameters struct {
 
 	// (Applicable when trigger_source=VBS) (Updatable) The repository name for trigger events.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.Repository
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
 
@@ -192,7 +192,7 @@ type TriggerActionsInitParameters struct {
 
 	// (Updatable) The OCID of the build pipeline to be triggered.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.BuildPipeline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BuildPipelineID *string `json:"buildPipelineId,omitempty" tf:"build_pipeline_id,omitempty"`
 
 	// Reference to a BuildPipeline in devops to populate buildPipelineId.
@@ -224,7 +224,7 @@ type TriggerActionsParameters struct {
 
 	// (Updatable) The OCID of the build pipeline to be triggered.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.BuildPipeline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BuildPipelineID *string `json:"buildPipelineId,omitempty" tf:"build_pipeline_id,omitempty"`
 
@@ -268,7 +268,7 @@ type TriggerInitParameters struct {
 
 	// The OCID of the DevOps project to which the trigger belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// Reference to a Project in devops to populate projectId.
@@ -281,7 +281,7 @@ type TriggerInitParameters struct {
 
 	// (Applicable when trigger_source=DEVOPS_CODE_REPOSITORY) (Updatable) The OCID of the DevOps code repository.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/artifacts/v1alpha1.Repository
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
 
 	// Reference to a Repository in artifacts to populate repositoryId.
@@ -383,7 +383,7 @@ type TriggerParameters struct {
 
 	// The OCID of the DevOps project to which the trigger belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -397,7 +397,7 @@ type TriggerParameters struct {
 
 	// (Applicable when trigger_source=DEVOPS_CODE_REPOSITORY) (Updatable) The OCID of the DevOps code repository.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/artifacts/v1alpha1.Repository
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
 

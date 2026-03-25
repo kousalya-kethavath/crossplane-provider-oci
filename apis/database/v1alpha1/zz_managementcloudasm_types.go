@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagementCloudAsmInitParameters struct {
 
 	// The OCID of the cloud ASM.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementCloudAsm
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CloudAsmID *string `json:"cloudAsmId,omitempty" tf:"cloud_asm_id,omitempty"`
 
 	// Reference to a ManagementCloudAsm in database to populate cloudAsmId.
@@ -114,7 +114,7 @@ type ManagementCloudAsmParameters struct {
 
 	// The OCID of the cloud ASM.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementCloudAsm
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CloudAsmID *string `json:"cloudAsmId,omitempty" tf:"cloud_asm_id,omitempty"`
 

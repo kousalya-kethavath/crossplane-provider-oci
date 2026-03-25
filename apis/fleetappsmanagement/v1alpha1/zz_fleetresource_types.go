@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type FleetResourceInitParameters struct {
@@ -29,7 +29,7 @@ type FleetResourceInitParameters struct {
 
 	// Unique Fleet identifier.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.Fleet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FleetID *string `json:"fleetId,omitempty" tf:"fleet_id,omitempty"`
 
 	// Reference to a Fleet in fleetappsmanagement to populate fleetId.
@@ -137,7 +137,7 @@ type FleetResourceParameters struct {
 
 	// Unique Fleet identifier.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.Fleet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FleetID *string `json:"fleetId,omitempty" tf:"fleet_id,omitempty"`
 

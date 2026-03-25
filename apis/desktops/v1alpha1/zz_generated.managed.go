@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this DesktopPool.
 func (mg *DesktopPool) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *DesktopPool) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this DesktopPool.
 func (mg *DesktopPool) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this DesktopPool.
-func (mg *DesktopPool) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this DesktopPool.
@@ -55,11 +50,6 @@ func (mg *DesktopPool) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this DesktopPool.
 func (mg *DesktopPool) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this DesktopPool.
-func (mg *DesktopPool) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this DesktopPool.

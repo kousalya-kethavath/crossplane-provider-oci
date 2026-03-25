@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AutoKeyRotationDetailsInitParameters struct {
@@ -101,7 +101,7 @@ type ExternalKeyReferenceInitParameters struct {
 
 	// ExternalKeyId refers to the globally unique key Id associated with the key created in external vault in CTM
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExternalKeyID *string `json:"externalKeyId,omitempty" tf:"external_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate externalKeyId.
@@ -123,7 +123,7 @@ type ExternalKeyReferenceParameters struct {
 
 	// ExternalKeyId refers to the globally unique key Id associated with the key created in external vault in CTM
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExternalKeyID *string `json:"externalKeyId,omitempty" tf:"external_key_id,omitempty"`
 

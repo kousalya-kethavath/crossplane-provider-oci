@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type InternalOccmDemandSignalDeliveryInitParameters struct {
@@ -55,7 +55,7 @@ type InternalOccmDemandSignalDeliveryInitParameters struct {
 
 	// The OCID of the corresponding customer group to which this demand signal delivery resource belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/capacitymanagement/v1alpha1.OccCustomerGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OccCustomerGroupID *string `json:"occCustomerGroupId,omitempty" tf:"occ_customer_group_id,omitempty"`
 
 	// Reference to a OccCustomerGroup in capacitymanagement to populate occCustomerGroupId.
@@ -166,7 +166,7 @@ type InternalOccmDemandSignalDeliveryParameters struct {
 
 	// The OCID of the corresponding customer group to which this demand signal delivery resource belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/capacitymanagement/v1alpha1.OccCustomerGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OccCustomerGroupID *string `json:"occCustomerGroupId,omitempty" tf:"occ_customer_group_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AwrHubSourceInitParameters struct {
@@ -23,7 +23,7 @@ type AwrHubSourceInitParameters struct {
 
 	// AWR Hub OCID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/opsi/v1alpha1.AwrHub
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AwrHubID *string `json:"awrHubId,omitempty" tf:"awr_hub_id,omitempty"`
 
 	// Reference to a AwrHub in opsi to populate awrHubId.
@@ -148,7 +148,7 @@ type AwrHubSourceParameters struct {
 
 	// AWR Hub OCID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/opsi/v1alpha1.AwrHub
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AwrHubID *string `json:"awrHubId,omitempty" tf:"awr_hub_id,omitempty"`
 

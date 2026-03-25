@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type RemotePeeringConnectionInitParameters struct {
@@ -52,7 +52,7 @@ type RemotePeeringConnectionInitParameters struct {
 
 	// and a peer_region_name creates a connection to the specified RPC ID. Both peer_id and peer_region_name are optional for creating the resource but are required for the connection to succeed. If only one of them is present the connection will not succeed.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.RemotePeeringConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PeerID *string `json:"peerId,omitempty" tf:"peer_id,omitempty"`
 
 	// Reference to a RemotePeeringConnection in networking to populate peerId.
@@ -155,7 +155,7 @@ type RemotePeeringConnectionParameters struct {
 
 	// and a peer_region_name creates a connection to the specified RPC ID. Both peer_id and peer_region_name are optional for creating the resource but are required for the connection to succeed. If only one of them is present the connection will not succeed.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.RemotePeeringConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerID *string `json:"peerId,omitempty" tf:"peer_id,omitempty"`
 

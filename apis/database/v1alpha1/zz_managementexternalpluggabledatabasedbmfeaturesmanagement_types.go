@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagementExternalpluggabledatabaseDbmFeaturesManagementFeatureDetailsConnectorDetailsInitParameters struct {
@@ -23,7 +23,7 @@ type ManagementExternalpluggabledatabaseDbmFeaturesManagementFeatureDetailsConne
 
 	// (Applicable when connector_type=MACS) The OCID of the management agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managementagent/v1alpha1.ManagementAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ManagementAgentID *string `json:"managementAgentId,omitempty" tf:"management_agent_id,omitempty"`
 
 	// Reference to a ManagementAgent in managementagent to populate managementAgentId.
@@ -65,7 +65,7 @@ type ManagementExternalpluggabledatabaseDbmFeaturesManagementFeatureDetailsConne
 
 	// (Applicable when connector_type=MACS) The OCID of the management agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managementagent/v1alpha1.ManagementAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagementAgentID *string `json:"managementAgentId,omitempty" tf:"management_agent_id,omitempty"`
 
@@ -118,7 +118,7 @@ type ManagementExternalpluggabledatabaseDbmFeaturesManagementInitParameters stru
 
 	// The OCID of the external pluggable database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExternalPluggableDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExternalPluggableDatabaseID *string `json:"externalPluggableDatabaseId,omitempty" tf:"external_pluggable_database_id,omitempty"`
 
 	// Reference to a ExternalPluggableDatabase in database to populate externalPluggableDatabaseId.
@@ -161,7 +161,7 @@ type ManagementExternalpluggabledatabaseDbmFeaturesManagementParameters struct {
 
 	// The OCID of the external pluggable database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExternalPluggableDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExternalPluggableDatabaseID *string `json:"externalPluggableDatabaseId,omitempty" tf:"external_pluggable_database_id,omitempty"`
 

@@ -9,7 +9,7 @@ Copyright 2022 Upbound Inc.
 package v1alpha1
 
 import (
-	"github.com/crossplane/crossplane-runtime/apis/common/v1"
+	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -113,7 +113,7 @@ func (in *AutoScalingConfigurationInitParameters) DeepCopyInto(out *AutoScalingC
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
 		*out = new(string)
@@ -274,7 +274,7 @@ func (in *AutoScalingConfigurationParameters) DeepCopyInto(out *AutoScalingConfi
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
 		*out = new(string)
@@ -718,7 +718,7 @@ func (in *BdsInstanceApiKeyInitParameters) DeepCopyInto(out *BdsInstanceApiKeyIn
 		*out = new(string)
 		**out = **in
 	}
-	out.PassphraseSecretRef = in.PassphraseSecretRef
+	in.PassphraseSecretRef.DeepCopyInto(&out.PassphraseSecretRef)
 	if in.UserID != nil {
 		in, out := &in.UserID, &out.UserID
 		*out = new(string)
@@ -881,7 +881,7 @@ func (in *BdsInstanceApiKeyParameters) DeepCopyInto(out *BdsInstanceApiKeyParame
 		*out = new(string)
 		**out = **in
 	}
-	out.PassphraseSecretRef = in.PassphraseSecretRef
+	in.PassphraseSecretRef.DeepCopyInto(&out.PassphraseSecretRef)
 	if in.UserID != nil {
 		in, out := &in.UserID, &out.UserID
 		*out = new(string)
@@ -999,7 +999,7 @@ func (in *BdsInstanceIdentityConfigurationInitParameters) DeepCopyInto(out *BdsI
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.ConfidentialApplicationID != nil {
 		in, out := &in.ConfidentialApplicationID, &out.ConfidentialApplicationID
 		*out = new(string)
@@ -1234,7 +1234,7 @@ func (in *BdsInstanceIdentityConfigurationParameters) DeepCopyInto(out *BdsInsta
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.ConfidentialApplicationID != nil {
 		in, out := &in.ConfidentialApplicationID, &out.ConfidentialApplicationID
 		*out = new(string)
@@ -1363,7 +1363,7 @@ func (in *BdsInstanceInitParameters) DeepCopyInto(out *BdsInstanceInitParameters
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.ClusterProfile != nil {
 		in, out := &in.ClusterProfile, &out.ClusterProfile
 		*out = new(string)
@@ -1647,7 +1647,7 @@ func (in *BdsInstanceMetastoreConfigInitParameters) DeepCopyInto(out *BdsInstanc
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.BdsAPIKeyPassphraseSecretRef = in.BdsAPIKeyPassphraseSecretRef
+	in.BdsAPIKeyPassphraseSecretRef.DeepCopyInto(&out.BdsAPIKeyPassphraseSecretRef)
 	if in.BdsInstanceID != nil {
 		in, out := &in.BdsInstanceID, &out.BdsInstanceID
 		*out = new(string)
@@ -1663,7 +1663,7 @@ func (in *BdsInstanceMetastoreConfigInitParameters) DeepCopyInto(out *BdsInstanc
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
 		*out = new(string)
@@ -1816,7 +1816,7 @@ func (in *BdsInstanceMetastoreConfigParameters) DeepCopyInto(out *BdsInstanceMet
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.BdsAPIKeyPassphraseSecretRef = in.BdsAPIKeyPassphraseSecretRef
+	in.BdsAPIKeyPassphraseSecretRef.DeepCopyInto(&out.BdsAPIKeyPassphraseSecretRef)
 	if in.BdsInstanceID != nil {
 		in, out := &in.BdsInstanceID, &out.BdsInstanceID
 		*out = new(string)
@@ -1832,7 +1832,7 @@ func (in *BdsInstanceMetastoreConfigParameters) DeepCopyInto(out *BdsInstanceMet
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
 		*out = new(string)
@@ -2600,7 +2600,7 @@ func (in *BdsInstanceNodeReplaceConfigurationInitParameters) DeepCopyInto(out *B
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
 		*out = new(string)
@@ -2837,7 +2837,7 @@ func (in *BdsInstanceNodeReplaceConfigurationParameters) DeepCopyInto(out *BdsIn
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
 		*out = new(string)
@@ -3209,7 +3209,7 @@ func (in *BdsInstanceOperationCertificateManagementsManagementInitParameters) De
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.EnableOperationCertificateManagement != nil {
 		in, out := &in.EnableOperationCertificateManagement, &out.EnableOperationCertificateManagement
 		*out = new(bool)
@@ -3368,7 +3368,7 @@ func (in *BdsInstanceOperationCertificateManagementsManagementParameters) DeepCo
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.EnableOperationCertificateManagement != nil {
 		in, out := &in.EnableOperationCertificateManagement, &out.EnableOperationCertificateManagement
 		*out = new(bool)
@@ -3499,7 +3499,7 @@ func (in *BdsInstanceOsPatchActionInitParameters) DeepCopyInto(out *BdsInstanceO
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.IsDryRun != nil {
 		in, out := &in.IsDryRun, &out.IsDryRun
 		*out = new(bool)
@@ -3621,7 +3621,7 @@ func (in *BdsInstanceOsPatchActionParameters) DeepCopyInto(out *BdsInstanceOsPat
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.IsDryRun != nil {
 		in, out := &in.IsDryRun, &out.IsDryRun
 		*out = new(bool)
@@ -3708,7 +3708,7 @@ func (in *BdsInstanceParameters) DeepCopyInto(out *BdsInstanceParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.ClusterProfile != nil {
 		in, out := &in.ClusterProfile, &out.ClusterProfile
 		*out = new(string)
@@ -3955,7 +3955,7 @@ func (in *BdsInstancePatchActionInitParameters) DeepCopyInto(out *BdsInstancePat
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.PatchingConfig != nil {
 		in, out := &in.PatchingConfig, &out.PatchingConfig
 		*out = make([]PatchingConfigInitParameters, len(*in))
@@ -4067,7 +4067,7 @@ func (in *BdsInstancePatchActionParameters) DeepCopyInto(out *BdsInstancePatchAc
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.PatchingConfig != nil {
 		in, out := &in.PatchingConfig, &out.PatchingConfig
 		*out = make([]PatchingConfigParameters, len(*in))
@@ -4172,7 +4172,7 @@ func (in *BdsInstanceReplaceNodeActionInitParameters) DeepCopyInto(out *BdsInsta
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.NodeBackupID != nil {
 		in, out := &in.NodeBackupID, &out.NodeBackupID
 		*out = new(string)
@@ -4290,7 +4290,7 @@ func (in *BdsInstanceReplaceNodeActionParameters) DeepCopyInto(out *BdsInstanceR
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.NodeBackupID != nil {
 		in, out := &in.NodeBackupID, &out.NodeBackupID
 		*out = new(string)
@@ -4398,7 +4398,7 @@ func (in *BdsInstanceResourcePrincipalConfigurationInitParameters) DeepCopyInto(
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
 		*out = new(string)
@@ -4541,7 +4541,7 @@ func (in *BdsInstanceResourcePrincipalConfigurationParameters) DeepCopyInto(out 
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.ClusterAdminPasswordSecretRef = in.ClusterAdminPasswordSecretRef
+	in.ClusterAdminPasswordSecretRef.DeepCopyInto(&out.ClusterAdminPasswordSecretRef)
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
 		*out = new(string)

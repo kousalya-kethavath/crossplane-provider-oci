@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DiscoveryJobInitParameters struct {
@@ -58,7 +58,7 @@ type DiscoveryJobInitParameters struct {
 
 	// The OCID of the sensitive data model.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.SensitiveDataModel
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SensitiveDataModelID *string `json:"sensitiveDataModelId,omitempty" tf:"sensitive_data_model_id,omitempty"`
 
 	// Reference to a SensitiveDataModel in datasafe to populate sensitiveDataModelId.
@@ -218,7 +218,7 @@ type DiscoveryJobParameters struct {
 
 	// The OCID of the sensitive data model.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.SensitiveDataModel
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SensitiveDataModelID *string `json:"sensitiveDataModelId,omitempty" tf:"sensitive_data_model_id,omitempty"`
 

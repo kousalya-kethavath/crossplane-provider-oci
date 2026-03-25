@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type HostInsightInitParameters struct {
@@ -36,7 +36,7 @@ type HostInsightInitParameters struct {
 
 	// OPSI Enterprise Manager Bridge OCID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/opsi/v1alpha1.EnterpriseManagerBridge
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EnterpriseManagerBridgeID *string `json:"enterpriseManagerBridgeId,omitempty" tf:"enterprise_manager_bridge_id,omitempty"`
 
 	// Reference to a EnterpriseManagerBridge in opsi to populate enterpriseManagerBridgeId.
@@ -58,7 +58,7 @@ type HostInsightInitParameters struct {
 
 	// (Applicable when entity_source=EM_MANAGED_EXTERNAL_HOST) The OCID of the Exadata insight.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/opsi/v1alpha1.ExadataInsight
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExadataInsightID *string `json:"exadataInsightId,omitempty" tf:"exadata_insight_id,omitempty"`
 
 	// Reference to a ExadataInsight in opsi to populate exadataInsightId.
@@ -75,7 +75,7 @@ type HostInsightInitParameters struct {
 
 	// The OCID of the Management Agent
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managementagent/v1alpha1.ManagementAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ManagementAgentID *string `json:"managementAgentId,omitempty" tf:"management_agent_id,omitempty"`
 
 	// Reference to a ManagementAgent in managementagent to populate managementAgentId.
@@ -202,7 +202,7 @@ type HostInsightParameters struct {
 
 	// OPSI Enterprise Manager Bridge OCID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/opsi/v1alpha1.EnterpriseManagerBridge
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EnterpriseManagerBridgeID *string `json:"enterpriseManagerBridgeId,omitempty" tf:"enterprise_manager_bridge_id,omitempty"`
 
@@ -228,7 +228,7 @@ type HostInsightParameters struct {
 
 	// (Applicable when entity_source=EM_MANAGED_EXTERNAL_HOST) The OCID of the Exadata insight.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/opsi/v1alpha1.ExadataInsight
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExadataInsightID *string `json:"exadataInsightId,omitempty" tf:"exadata_insight_id,omitempty"`
 
@@ -247,7 +247,7 @@ type HostInsightParameters struct {
 
 	// The OCID of the Management Agent
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managementagent/v1alpha1.ManagementAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagementAgentID *string `json:"managementAgentId,omitempty" tf:"management_agent_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AutonomousSettingsInitParameters struct {
@@ -75,7 +75,7 @@ type ManagedInstanceInitParameters struct {
 
 	// The OCID of the managed instance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.ManagedInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
 
 	// Reference to a ManagedInstance in osmanagementhub to populate managedInstanceId.
@@ -88,7 +88,7 @@ type ManagedInstanceInitParameters struct {
 
 	// (Updatable) The OCID for the Oracle Notifications service (ONS) topic. ONS is the channel used to send notifications to the customer.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ons/v1alpha1.NotificationTopic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NotificationTopicID *string `json:"notificationTopicId,omitempty" tf:"notification_topic_id,omitempty"`
 
 	// Reference to a NotificationTopic in ons to populate notificationTopicId.
@@ -101,7 +101,7 @@ type ManagedInstanceInitParameters struct {
 
 	// (Updatable) The OCID of the management station for the instance to use as primary management station.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.ManagementStation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrimaryManagementStationID *string `json:"primaryManagementStationId,omitempty" tf:"primary_management_station_id,omitempty"`
 
 	// Reference to a ManagementStation in osmanagementhub to populate primaryManagementStationId.
@@ -114,7 +114,7 @@ type ManagedInstanceInitParameters struct {
 
 	// (Updatable) The OCID of the management station for the instance to use as secondary management station.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.ManagementStation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SecondaryManagementStationID *string `json:"secondaryManagementStationId,omitempty" tf:"secondary_management_station_id,omitempty"`
 
 	// Reference to a ManagementStation in osmanagementhub to populate secondaryManagementStationId.
@@ -279,7 +279,7 @@ type ManagedInstanceParameters struct {
 
 	// The OCID of the managed instance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.ManagedInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
 
@@ -293,7 +293,7 @@ type ManagedInstanceParameters struct {
 
 	// (Updatable) The OCID for the Oracle Notifications service (ONS) topic. ONS is the channel used to send notifications to the customer.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ons/v1alpha1.NotificationTopic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NotificationTopicID *string `json:"notificationTopicId,omitempty" tf:"notification_topic_id,omitempty"`
 
@@ -307,7 +307,7 @@ type ManagedInstanceParameters struct {
 
 	// (Updatable) The OCID of the management station for the instance to use as primary management station.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.ManagementStation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrimaryManagementStationID *string `json:"primaryManagementStationId,omitempty" tf:"primary_management_station_id,omitempty"`
 
@@ -321,7 +321,7 @@ type ManagedInstanceParameters struct {
 
 	// (Updatable) The OCID of the management station for the instance to use as secondary management station.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.ManagementStation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SecondaryManagementStationID *string `json:"secondaryManagementStationId,omitempty" tf:"secondary_management_station_id,omitempty"`
 

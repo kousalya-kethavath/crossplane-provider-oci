@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AssociationInitParameters struct {
@@ -56,7 +56,7 @@ type AttachmentDetailsInitParameters struct {
 
 	// (Applicable when member_type=COMPUTE_INSTANCE_NON_MOVABLE) (Updatable) The OCID of the reference compute instance needed to obtain the volume attachment details. This reference compute instance belongs to the peer DR protection group.  Example: ocid1.instance.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VolumeAttachmentReferenceInstanceID *string `json:"volumeAttachmentReferenceInstanceId,omitempty" tf:"volume_attachment_reference_instance_id,omitempty"`
 
 	// Reference to a Instance in compute to populate volumeAttachmentReferenceInstanceId.
@@ -78,7 +78,7 @@ type AttachmentDetailsParameters struct {
 
 	// (Applicable when member_type=COMPUTE_INSTANCE_NON_MOVABLE) (Updatable) The OCID of the reference compute instance needed to obtain the volume attachment details. This reference compute instance belongs to the peer DR protection group.  Example: ocid1.instance.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VolumeAttachmentReferenceInstanceID *string `json:"volumeAttachmentReferenceInstanceId,omitempty" tf:"volume_attachment_reference_instance_id,omitempty"`
 
@@ -95,7 +95,7 @@ type AttachmentsInitParameters struct {
 
 	// (Updatable) The OCID of the block volume.  Example: ocid1.volume.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/blockstorage/v1alpha1.Volume
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BlockVolumeID *string `json:"blockVolumeId,omitempty" tf:"block_volume_id,omitempty"`
 
 	// Reference to a Volume in blockstorage to populate blockVolumeId.
@@ -108,7 +108,7 @@ type AttachmentsInitParameters struct {
 
 	// (Applicable when member_type=COMPUTE_INSTANCE_NON_MOVABLE) (Updatable) The OCID of the reference compute instance needed to obtain the volume attachment details. This reference compute instance belongs to the peer DR protection group.  Example: ocid1.instance.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VolumeAttachmentReferenceInstanceID *string `json:"volumeAttachmentReferenceInstanceId,omitempty" tf:"volume_attachment_reference_instance_id,omitempty"`
 
 	// Reference to a Instance in compute to populate volumeAttachmentReferenceInstanceId.
@@ -133,7 +133,7 @@ type AttachmentsParameters struct {
 
 	// (Updatable) The OCID of the block volume.  Example: ocid1.volume.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/blockstorage/v1alpha1.Volume
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BlockVolumeID *string `json:"blockVolumeId,omitempty" tf:"block_volume_id,omitempty"`
 
@@ -147,7 +147,7 @@ type AttachmentsParameters struct {
 
 	// (Applicable when member_type=COMPUTE_INSTANCE_NON_MOVABLE) (Updatable) The OCID of the reference compute instance needed to obtain the volume attachment details. This reference compute instance belongs to the peer DR protection group.  Example: ocid1.instance.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VolumeAttachmentReferenceInstanceID *string `json:"volumeAttachmentReferenceInstanceId,omitempty" tf:"volume_attachment_reference_instance_id,omitempty"`
 
@@ -164,7 +164,7 @@ type BackendSetMappingsInitParameters struct {
 
 	// (Updatable) The name of the destination backend set.  Example: Destination-BackendSet-1
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.BackendSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	DestinationBackendSetName *string `json:"destinationBackendSetName,omitempty" tf:"destination_backend_set_name,omitempty"`
 
 	// Reference to a BackendSet in loadbalancer to populate destinationBackendSetName.
@@ -180,7 +180,7 @@ type BackendSetMappingsInitParameters struct {
 
 	// (Updatable) The name of the source backend set.  Example: Source-BackendSet-1
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.BackendSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	SourceBackendSetName *string `json:"sourceBackendSetName,omitempty" tf:"source_backend_set_name,omitempty"`
 
 	// Reference to a BackendSet in loadbalancer to populate sourceBackendSetName.
@@ -208,7 +208,7 @@ type BackendSetMappingsParameters struct {
 
 	// (Updatable) The name of the destination backend set.  Example: Destination-BackendSet-1
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.BackendSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	DestinationBackendSetName *string `json:"destinationBackendSetName,omitempty" tf:"destination_backend_set_name,omitempty"`
 
@@ -226,7 +226,7 @@ type BackendSetMappingsParameters struct {
 
 	// (Updatable) The name of the source backend set.  Example: Source-BackendSet-1
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.BackendSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	SourceBackendSetName *string `json:"sourceBackendSetName,omitempty" tf:"source_backend_set_name,omitempty"`
 
@@ -249,7 +249,7 @@ type BackupConfigInitParameters struct {
 
 	// (Applicable when member_type=OKE_CLUSTER) (Updatable) The OCID of the vault secret that stores the image credential. This property applies to the OKE cluster member in both the primary and standby region.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ImageReplicationVaultSecretID *string `json:"imageReplicationVaultSecretId,omitempty" tf:"image_replication_vault_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate imageReplicationVaultSecretId.
@@ -303,7 +303,7 @@ type BackupConfigParameters struct {
 
 	// (Applicable when member_type=OKE_CLUSTER) (Updatable) The OCID of the vault secret that stores the image credential. This property applies to the OKE cluster member in both the primary and standby region.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ImageReplicationVaultSecretID *string `json:"imageReplicationVaultSecretId,omitempty" tf:"image_replication_vault_secret_id,omitempty"`
 
@@ -396,7 +396,7 @@ type BlockVolumeOperationsInitParameters struct {
 
 	// (Updatable) The OCID of the block volume.  Example: ocid1.volume.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/blockstorage/v1alpha1.Volume
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BlockVolumeID *string `json:"blockVolumeId,omitempty" tf:"block_volume_id,omitempty"`
 
 	// Reference to a Volume in blockstorage to populate blockVolumeId.
@@ -431,7 +431,7 @@ type BlockVolumeOperationsParameters struct {
 
 	// (Updatable) The OCID of the block volume.  Example: ocid1.volume.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/blockstorage/v1alpha1.Volume
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BlockVolumeID *string `json:"blockVolumeId,omitempty" tf:"block_volume_id,omitempty"`
 
@@ -452,7 +452,7 @@ type CommonDestinationKeyInitParameters struct {
 
 	// (Updatable) The OCID of the customer-managed encryption key in the destination region vault.  Example: ocid1.key.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EncryptionKeyID *string `json:"encryptionKeyId,omitempty" tf:"encryption_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate encryptionKeyId.
@@ -465,7 +465,7 @@ type CommonDestinationKeyInitParameters struct {
 
 	// (Updatable) The OCID of the destination region vault for the customer-managed encryption key.  Example: ocid1.vault.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
 	// Reference to a Vault in kms to populate vaultId.
@@ -490,7 +490,7 @@ type CommonDestinationKeyParameters struct {
 
 	// (Updatable) The OCID of the customer-managed encryption key in the destination region vault.  Example: ocid1.key.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EncryptionKeyID *string `json:"encryptionKeyId,omitempty" tf:"encryption_key_id,omitempty"`
 
@@ -504,7 +504,7 @@ type CommonDestinationKeyParameters struct {
 
 	// (Updatable) The OCID of the destination region vault for the customer-managed encryption key.  Example: ocid1.vault.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
@@ -573,7 +573,7 @@ type DestinationEncryptionKeyInitParameters struct {
 
 	// (Updatable) The OCID of the customer-managed encryption key in the destination region vault.  Example: ocid1.key.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EncryptionKeyID *string `json:"encryptionKeyId,omitempty" tf:"encryption_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate encryptionKeyId.
@@ -586,7 +586,7 @@ type DestinationEncryptionKeyInitParameters struct {
 
 	// (Updatable) The OCID of the destination region vault for the customer-managed encryption key.  Example: ocid1.vault.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
 	// Reference to a Vault in kms to populate vaultId.
@@ -611,7 +611,7 @@ type DestinationEncryptionKeyParameters struct {
 
 	// (Updatable) The OCID of the customer-managed encryption key in the destination region vault.  Example: ocid1.key.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EncryptionKeyID *string `json:"encryptionKeyId,omitempty" tf:"encryption_key_id,omitempty"`
 
@@ -625,7 +625,7 @@ type DestinationEncryptionKeyParameters struct {
 
 	// (Updatable) The OCID of the destination region vault for the customer-managed encryption key.  Example: ocid1.vault.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
@@ -748,7 +748,7 @@ type DrProtectionGroupMembersInitParameters struct {
 
 	// (Applicable when member_type=VOLUME_GROUP) (Updatable) The OCID of the backup policy to use in the destination region. This policy will be used to create backups  for this volume group after it moves the destination region.  Example: ocid1.volumebackuppolicy.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Policy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DestinationBackupPolicyID *string `json:"destinationBackupPolicyId,omitempty" tf:"destination_backup_policy_id,omitempty"`
 
 	// Reference to a Policy in identity to populate destinationBackupPolicyId.
@@ -764,7 +764,7 @@ type DrProtectionGroupMembersInitParameters struct {
 
 	// (Applicable when member_type=COMPUTE_INSTANCE | COMPUTE_INSTANCE_MOVABLE | FILE_SYSTEM | VOLUME_GROUP) (Updatable) The OCID of a compartment in the destination region in which the compute instance should be launched.  Example: ocid1.compartment.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DestinationCompartmentID *string `json:"destinationCompartmentId,omitempty" tf:"destination_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate destinationCompartmentId.
@@ -777,7 +777,7 @@ type DrProtectionGroupMembersInitParameters struct {
 
 	// (Applicable when member_type=COMPUTE_INSTANCE | COMPUTE_INSTANCE_MOVABLE) (Updatable) The OCID of a dedicated VM host in the destination region where the compute instance should be launched.  Example: ocid1.dedicatedvmhost.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.DedicatedVmHost
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DestinationDedicatedVMHostID *string `json:"destinationDedicatedVmHostId,omitempty" tf:"destination_dedicated_vm_host_id,omitempty"`
 
 	// Reference to a DedicatedVmHost in compute to populate destinationDedicatedVmHostId.
@@ -793,7 +793,7 @@ type DrProtectionGroupMembersInitParameters struct {
 
 	// (Applicable when member_type=LOAD_BALANCER) (Updatable) The OCID of the destination load balancer.  Example: ocid1.loadbalancer.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DestinationLoadBalancerID *string `json:"destinationLoadBalancerId,omitempty" tf:"destination_load_balancer_id,omitempty"`
 
 	// Reference to a LoadBalancer in loadbalancer to populate destinationLoadBalancerId.
@@ -806,7 +806,7 @@ type DrProtectionGroupMembersInitParameters struct {
 
 	// (Applicable when member_type=NETWORK_LOAD_BALANCER) (Updatable) The OCID of the destination network load balancer.  Example: ocid1.networkloadbalancer.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networkloadbalancer/v1alpha1.NetworkLoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DestinationNetworkLoadBalancerID *string `json:"destinationNetworkLoadBalancerId,omitempty" tf:"destination_network_load_balancer_id,omitempty"`
 
 	// Reference to a NetworkLoadBalancer in networkloadbalancer to populate destinationNetworkLoadBalancerId.
@@ -819,7 +819,7 @@ type DrProtectionGroupMembersInitParameters struct {
 
 	// (Applicable when member_type=FILE_SYSTEM) (Updatable) The OCID of the snapshot policy to use in the destination region. This policy will be attached to the file system after it moves to the destination region.  Example: ocid1.filesystemsnapshotpolicy.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Policy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DestinationSnapshotPolicyID *string `json:"destinationSnapshotPolicyId,omitempty" tf:"destination_snapshot_policy_id,omitempty"`
 
 	// Reference to a Policy in identity to populate destinationSnapshotPolicyId.
@@ -877,7 +877,7 @@ type DrProtectionGroupMembersInitParameters struct {
 
 	// (Applicable when member_type=OKE_CLUSTER) (Updatable) The OCID of the peer OKE cluster. This property applies to the OKE cluster member in both the primary and standby region.   Example: ocid1.cluster.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/containerengine/v1alpha1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PeerClusterID *string `json:"peerClusterId,omitempty" tf:"peer_cluster_id,omitempty"`
 
 	// Reference to a Cluster in containerengine to populate peerClusterId.
@@ -890,7 +890,7 @@ type DrProtectionGroupMembersInitParameters struct {
 
 	// (Applicable when member_type=MYSQL_DB_SYSTEM) (Updatable) The OCID of the peer HeatWave MySQL DB System from the peer region.  Example: ocid1.mysqldbsystem.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DbSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PeerDBSystemID *string `json:"peerDbSystemId,omitempty" tf:"peer_db_system_id,omitempty"`
 
 	// Reference to a DbSystem in database to populate peerDbSystemId.
@@ -1095,7 +1095,7 @@ type DrProtectionGroupMembersParameters struct {
 
 	// (Applicable when member_type=VOLUME_GROUP) (Updatable) The OCID of the backup policy to use in the destination region. This policy will be used to create backups  for this volume group after it moves the destination region.  Example: ocid1.volumebackuppolicy.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Policy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationBackupPolicyID *string `json:"destinationBackupPolicyId,omitempty" tf:"destination_backup_policy_id,omitempty"`
 
@@ -1113,7 +1113,7 @@ type DrProtectionGroupMembersParameters struct {
 
 	// (Applicable when member_type=COMPUTE_INSTANCE | COMPUTE_INSTANCE_MOVABLE | FILE_SYSTEM | VOLUME_GROUP) (Updatable) The OCID of a compartment in the destination region in which the compute instance should be launched.  Example: ocid1.compartment.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationCompartmentID *string `json:"destinationCompartmentId,omitempty" tf:"destination_compartment_id,omitempty"`
 
@@ -1127,7 +1127,7 @@ type DrProtectionGroupMembersParameters struct {
 
 	// (Applicable when member_type=COMPUTE_INSTANCE | COMPUTE_INSTANCE_MOVABLE) (Updatable) The OCID of a dedicated VM host in the destination region where the compute instance should be launched.  Example: ocid1.dedicatedvmhost.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.DedicatedVmHost
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationDedicatedVMHostID *string `json:"destinationDedicatedVmHostId,omitempty" tf:"destination_dedicated_vm_host_id,omitempty"`
 
@@ -1145,7 +1145,7 @@ type DrProtectionGroupMembersParameters struct {
 
 	// (Applicable when member_type=LOAD_BALANCER) (Updatable) The OCID of the destination load balancer.  Example: ocid1.loadbalancer.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationLoadBalancerID *string `json:"destinationLoadBalancerId,omitempty" tf:"destination_load_balancer_id,omitempty"`
 
@@ -1159,7 +1159,7 @@ type DrProtectionGroupMembersParameters struct {
 
 	// (Applicable when member_type=NETWORK_LOAD_BALANCER) (Updatable) The OCID of the destination network load balancer.  Example: ocid1.networkloadbalancer.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networkloadbalancer/v1alpha1.NetworkLoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationNetworkLoadBalancerID *string `json:"destinationNetworkLoadBalancerId,omitempty" tf:"destination_network_load_balancer_id,omitempty"`
 
@@ -1173,7 +1173,7 @@ type DrProtectionGroupMembersParameters struct {
 
 	// (Applicable when member_type=FILE_SYSTEM) (Updatable) The OCID of the snapshot policy to use in the destination region. This policy will be attached to the file system after it moves to the destination region.  Example: ocid1.filesystemsnapshotpolicy.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Policy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationSnapshotPolicyID *string `json:"destinationSnapshotPolicyId,omitempty" tf:"destination_snapshot_policy_id,omitempty"`
 
@@ -1247,7 +1247,7 @@ type DrProtectionGroupMembersParameters struct {
 
 	// (Applicable when member_type=OKE_CLUSTER) (Updatable) The OCID of the peer OKE cluster. This property applies to the OKE cluster member in both the primary and standby region.   Example: ocid1.cluster.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/containerengine/v1alpha1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerClusterID *string `json:"peerClusterId,omitempty" tf:"peer_cluster_id,omitempty"`
 
@@ -1261,7 +1261,7 @@ type DrProtectionGroupMembersParameters struct {
 
 	// (Applicable when member_type=MYSQL_DB_SYSTEM) (Updatable) The OCID of the peer HeatWave MySQL DB System from the peer region.  Example: ocid1.mysqldbsystem.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DbSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerDBSystemID *string `json:"peerDbSystemId,omitempty" tf:"peer_db_system_id,omitempty"`
 
@@ -1404,7 +1404,7 @@ type ExportMappingsInitParameters struct {
 
 	// (Updatable) The OCID of the destination mount target in the destination region which is used to export the file system.  Example: ocid1.mounttarget.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/filestorage/v1alpha1.MountTarget
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DestinationMountTargetID *string `json:"destinationMountTargetId,omitempty" tf:"destination_mount_target_id,omitempty"`
 
 	// Reference to a MountTarget in filestorage to populate destinationMountTargetId.
@@ -1417,7 +1417,7 @@ type ExportMappingsInitParameters struct {
 
 	// (Updatable) The OCID of the export path in the primary region used to mount or unmount the file system.  Example: ocid1.export.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/filestorage/v1alpha1.Export
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExportID *string `json:"exportId,omitempty" tf:"export_id,omitempty"`
 
 	// Reference to a Export in filestorage to populate exportId.
@@ -1442,7 +1442,7 @@ type ExportMappingsParameters struct {
 
 	// (Updatable) The OCID of the destination mount target in the destination region which is used to export the file system.  Example: ocid1.mounttarget.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/filestorage/v1alpha1.MountTarget
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationMountTargetID *string `json:"destinationMountTargetId,omitempty" tf:"destination_mount_target_id,omitempty"`
 
@@ -1456,7 +1456,7 @@ type ExportMappingsParameters struct {
 
 	// (Updatable) The OCID of the export path in the primary region used to mount or unmount the file system.  Example: ocid1.export.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/filestorage/v1alpha1.Export
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExportID *string `json:"exportId,omitempty" tf:"export_id,omitempty"`
 
@@ -1482,7 +1482,7 @@ type FileSystemOperationsInitParameters struct {
 
 	// (Applicable when member_type=COMPUTE_INSTANCE_MOVABLE) (Updatable) The OCID of the mount target for this file system.  Example: ocid1.mounttarget.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/filestorage/v1alpha1.MountTarget
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MountTargetID *string `json:"mountTargetId,omitempty" tf:"mount_target_id,omitempty"`
 
 	// Reference to a MountTarget in filestorage to populate mountTargetId.
@@ -1501,7 +1501,7 @@ type FileSystemOperationsMountDetailsInitParameters struct {
 
 	// (Applicable when member_type=COMPUTE_INSTANCE_MOVABLE) (Updatable) The OCID of the mount target for this file system.  Example: ocid1.mounttarget.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/filestorage/v1alpha1.MountTarget
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MountTargetID *string `json:"mountTargetId,omitempty" tf:"mount_target_id,omitempty"`
 
 	// Reference to a MountTarget in filestorage to populate mountTargetId.
@@ -1523,7 +1523,7 @@ type FileSystemOperationsMountDetailsParameters struct {
 
 	// (Applicable when member_type=COMPUTE_INSTANCE_MOVABLE) (Updatable) The OCID of the mount target for this file system.  Example: ocid1.mounttarget.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/filestorage/v1alpha1.MountTarget
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MountTargetID *string `json:"mountTargetId,omitempty" tf:"mount_target_id,omitempty"`
 
@@ -1570,7 +1570,7 @@ type FileSystemOperationsParameters struct {
 
 	// (Applicable when member_type=COMPUTE_INSTANCE_MOVABLE) (Updatable) The OCID of the mount target for this file system.  Example: ocid1.mounttarget.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/filestorage/v1alpha1.MountTarget
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MountTargetID *string `json:"mountTargetId,omitempty" tf:"mount_target_id,omitempty"`
 
@@ -1591,7 +1591,7 @@ type LoadBalancerMappingsInitParameters struct {
 
 	// (Applicable when member_type=LOAD_BALANCER) (Updatable) The OCID of the destination load balancer.  Example: ocid1.loadbalancer.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DestinationLoadBalancerID *string `json:"destinationLoadBalancerId,omitempty" tf:"destination_load_balancer_id,omitempty"`
 
 	// Reference to a LoadBalancer in loadbalancer to populate destinationLoadBalancerId.
@@ -1604,7 +1604,7 @@ type LoadBalancerMappingsInitParameters struct {
 
 	// (Updatable) The OCID of the source Load Balancer. Example: ocid1.loadbalancer.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceLoadBalancerID *string `json:"sourceLoadBalancerId,omitempty" tf:"source_load_balancer_id,omitempty"`
 
 	// Reference to a LoadBalancer in loadbalancer to populate sourceLoadBalancerId.
@@ -1629,7 +1629,7 @@ type LoadBalancerMappingsParameters struct {
 
 	// (Applicable when member_type=LOAD_BALANCER) (Updatable) The OCID of the destination load balancer.  Example: ocid1.loadbalancer.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationLoadBalancerID *string `json:"destinationLoadBalancerId,omitempty" tf:"destination_load_balancer_id,omitempty"`
 
@@ -1643,7 +1643,7 @@ type LoadBalancerMappingsParameters struct {
 
 	// (Updatable) The OCID of the source Load Balancer. Example: ocid1.loadbalancer.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceLoadBalancerID *string `json:"sourceLoadBalancerId,omitempty" tf:"source_load_balancer_id,omitempty"`
 
@@ -1737,7 +1737,7 @@ type NetworkLoadBalancerMappingsInitParameters struct {
 
 	// (Applicable when member_type=NETWORK_LOAD_BALANCER) (Updatable) The OCID of the destination network load balancer.  Example: ocid1.networkloadbalancer.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networkloadbalancer/v1alpha1.NetworkLoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DestinationNetworkLoadBalancerID *string `json:"destinationNetworkLoadBalancerId,omitempty" tf:"destination_network_load_balancer_id,omitempty"`
 
 	// Reference to a NetworkLoadBalancer in networkloadbalancer to populate destinationNetworkLoadBalancerId.
@@ -1750,7 +1750,7 @@ type NetworkLoadBalancerMappingsInitParameters struct {
 
 	// (Updatable) The OCID of the source Network Load Balancer.  Example: ocid1.networkloadbalancer.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networkloadbalancer/v1alpha1.NetworkLoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceNetworkLoadBalancerID *string `json:"sourceNetworkLoadBalancerId,omitempty" tf:"source_network_load_balancer_id,omitempty"`
 
 	// Reference to a NetworkLoadBalancer in networkloadbalancer to populate sourceNetworkLoadBalancerId.
@@ -1775,7 +1775,7 @@ type NetworkLoadBalancerMappingsParameters struct {
 
 	// (Applicable when member_type=NETWORK_LOAD_BALANCER) (Updatable) The OCID of the destination network load balancer.  Example: ocid1.networkloadbalancer.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networkloadbalancer/v1alpha1.NetworkLoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationNetworkLoadBalancerID *string `json:"destinationNetworkLoadBalancerId,omitempty" tf:"destination_network_load_balancer_id,omitempty"`
 
@@ -1789,7 +1789,7 @@ type NetworkLoadBalancerMappingsParameters struct {
 
 	// (Updatable) The OCID of the source Network Load Balancer.  Example: ocid1.networkloadbalancer.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networkloadbalancer/v1alpha1.NetworkLoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceNetworkLoadBalancerID *string `json:"sourceNetworkLoadBalancerId,omitempty" tf:"source_network_load_balancer_id,omitempty"`
 
@@ -1806,7 +1806,7 @@ type SourceVolumeToDestinationEncryptionKeyMappingsDestinationEncryptionKeyInitP
 
 	// (Updatable) The OCID of the customer-managed encryption key in the destination region vault.  Example: ocid1.key.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EncryptionKeyID *string `json:"encryptionKeyId,omitempty" tf:"encryption_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate encryptionKeyId.
@@ -1819,7 +1819,7 @@ type SourceVolumeToDestinationEncryptionKeyMappingsDestinationEncryptionKeyInitP
 
 	// (Updatable) The OCID of the destination region vault for the customer-managed encryption key.  Example: ocid1.vault.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
 	// Reference to a Vault in kms to populate vaultId.
@@ -1844,7 +1844,7 @@ type SourceVolumeToDestinationEncryptionKeyMappingsDestinationEncryptionKeyParam
 
 	// (Updatable) The OCID of the customer-managed encryption key in the destination region vault.  Example: ocid1.key.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EncryptionKeyID *string `json:"encryptionKeyId,omitempty" tf:"encryption_key_id,omitempty"`
 
@@ -1858,7 +1858,7 @@ type SourceVolumeToDestinationEncryptionKeyMappingsDestinationEncryptionKeyParam
 
 	// (Updatable) The OCID of the destination region vault for the customer-managed encryption key.  Example: ocid1.vault.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
@@ -1878,7 +1878,7 @@ type SourceVolumeToDestinationEncryptionKeyMappingsInitParameters struct {
 
 	// (Updatable) The OCID of the source boot volume or block volume.  Example: ocid1.volume.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/blockstorage/v1alpha1.Volume
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceVolumeID *string `json:"sourceVolumeId,omitempty" tf:"source_volume_id,omitempty"`
 
 	// Reference to a Volume in blockstorage to populate sourceVolumeId.
@@ -1907,7 +1907,7 @@ type SourceVolumeToDestinationEncryptionKeyMappingsParameters struct {
 
 	// (Updatable) The OCID of the source boot volume or block volume.  Example: ocid1.volume.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/blockstorage/v1alpha1.Volume
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceVolumeID *string `json:"sourceVolumeId,omitempty" tf:"source_volume_id,omitempty"`
 
@@ -1924,7 +1924,7 @@ type UnmountDetailsInitParameters struct {
 
 	// (Applicable when member_type=COMPUTE_INSTANCE_MOVABLE) (Updatable) The OCID of the mount target for this file system.  Example: ocid1.mounttarget.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/filestorage/v1alpha1.MountTarget
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MountTargetID *string `json:"mountTargetId,omitempty" tf:"mount_target_id,omitempty"`
 
 	// Reference to a MountTarget in filestorage to populate mountTargetId.
@@ -1946,7 +1946,7 @@ type UnmountDetailsParameters struct {
 
 	// (Applicable when member_type=COMPUTE_INSTANCE_MOVABLE) (Updatable) The OCID of the mount target for this file system.  Example: ocid1.mounttarget.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/filestorage/v1alpha1.MountTarget
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MountTargetID *string `json:"mountTargetId,omitempty" tf:"mount_target_id,omitempty"`
 
@@ -1963,7 +1963,7 @@ type VaultMappingsInitParameters struct {
 
 	// (Updatable) The OCID of the destination Vault.  Example: ocid1.vault.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DestinationVaultID *string `json:"destinationVaultId,omitempty" tf:"destination_vault_id,omitempty"`
 
 	// Reference to a Vault in kms to populate destinationVaultId.
@@ -1976,7 +1976,7 @@ type VaultMappingsInitParameters struct {
 
 	// (Updatable) The OCID of the source Vault.  Example: ocid1.vault.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceVaultID *string `json:"sourceVaultId,omitempty" tf:"source_vault_id,omitempty"`
 
 	// Reference to a Vault in kms to populate sourceVaultId.
@@ -2001,7 +2001,7 @@ type VaultMappingsParameters struct {
 
 	// (Updatable) The OCID of the destination Vault.  Example: ocid1.vault.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationVaultID *string `json:"destinationVaultId,omitempty" tf:"destination_vault_id,omitempty"`
 
@@ -2015,7 +2015,7 @@ type VaultMappingsParameters struct {
 
 	// (Updatable) The OCID of the source Vault.  Example: ocid1.vault.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceVaultID *string `json:"sourceVaultId,omitempty" tf:"source_vault_id,omitempty"`
 
@@ -2074,7 +2074,7 @@ type VnicMappingInitParameters struct {
 
 	// (Updatable) The OCID of the destination subnet to which this source VNIC should connect.  Example: ocid1.subnet.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DestinationSubnetID *string `json:"destinationSubnetId,omitempty" tf:"destination_subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate destinationSubnetId.
@@ -2109,7 +2109,7 @@ type VnicMappingParameters struct {
 
 	// (Updatable) The OCID of the destination subnet to which this source VNIC should connect.  Example: ocid1.subnet.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationSubnetID *string `json:"destinationSubnetId,omitempty" tf:"destination_subnet_id,omitempty"`
 
@@ -2139,7 +2139,7 @@ type VnicMappingsInitParameters struct {
 
 	// (Applicable when member_type=COMPUTE_INSTANCE_MOVABLE) (Updatable) The OCID of the reserved public IP address to be assigned to the compute instance in the destination region.  Example: ocid1.publicip.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.PublicIp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DestinationReservedPublicIPID *string `json:"destinationReservedPublicIpId,omitempty" tf:"destination_reserved_public_ip_id,omitempty"`
 
 	// Reference to a PublicIp in networking to populate destinationReservedPublicIpId.
@@ -2152,7 +2152,7 @@ type VnicMappingsInitParameters struct {
 
 	// (Updatable) The OCID of the destination subnet to which this source VNIC should connect.  Example: ocid1.subnet.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DestinationSubnetID *string `json:"destinationSubnetId,omitempty" tf:"destination_subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate destinationSubnetId.
@@ -2204,7 +2204,7 @@ type VnicMappingsParameters struct {
 
 	// (Applicable when member_type=COMPUTE_INSTANCE_MOVABLE) (Updatable) The OCID of the reserved public IP address to be assigned to the compute instance in the destination region.  Example: ocid1.publicip.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.PublicIp
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationReservedPublicIPID *string `json:"destinationReservedPublicIpId,omitempty" tf:"destination_reserved_public_ip_id,omitempty"`
 
@@ -2218,7 +2218,7 @@ type VnicMappingsParameters struct {
 
 	// (Updatable) The OCID of the destination subnet to which this source VNIC should connect.  Example: ocid1.subnet.oc1..uniqueID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationSubnetID *string `json:"destinationSubnetId,omitempty" tf:"destination_subnet_id,omitempty"`
 

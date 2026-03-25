@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ExternalnoncontainerdatabasesStackMonitoringInitParameters struct {
@@ -20,7 +20,7 @@ type ExternalnoncontainerdatabasesStackMonitoringInitParameters struct {
 
 	// The OCID of the external database connector.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExternalDatabaseConnector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExternalDatabaseConnectorID *string `json:"externalDatabaseConnectorId,omitempty" tf:"external_database_connector_id,omitempty"`
 
 	// Reference to a ExternalDatabaseConnector in database to populate externalDatabaseConnectorId.
@@ -33,7 +33,7 @@ type ExternalnoncontainerdatabasesStackMonitoringInitParameters struct {
 
 	// The external non-container database OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExternalNonContainerDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExternalNonContainerDatabaseID *string `json:"externalNonContainerDatabaseId,omitempty" tf:"external_non_container_database_id,omitempty"`
 
 	// Reference to a ExternalNonContainerDatabase in database to populate externalNonContainerDatabaseId.
@@ -67,7 +67,7 @@ type ExternalnoncontainerdatabasesStackMonitoringParameters struct {
 
 	// The OCID of the external database connector.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExternalDatabaseConnector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExternalDatabaseConnectorID *string `json:"externalDatabaseConnectorId,omitempty" tf:"external_database_connector_id,omitempty"`
 
@@ -81,7 +81,7 @@ type ExternalnoncontainerdatabasesStackMonitoringParameters struct {
 
 	// The external non-container database OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExternalNonContainerDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExternalNonContainerDatabaseID *string `json:"externalNonContainerDatabaseId,omitempty" tf:"external_non_container_database_id,omitempty"`
 

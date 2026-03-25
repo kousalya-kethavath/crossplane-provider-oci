@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CustomMetricInitParameters struct {
@@ -145,7 +145,7 @@ type ScheduledQueryInitParameters struct {
 
 	// (Updatable) The APM Domain ID for the intended request.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apm/v1alpha1.ApmDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ApmDomainID *string `json:"apmDomainId,omitempty" tf:"apm_domain_id,omitempty"`
 
 	// Reference to a ApmDomain in apm to populate apmDomainId.
@@ -274,7 +274,7 @@ type ScheduledQueryParameters struct {
 
 	// (Updatable) The APM Domain ID for the intended request.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apm/v1alpha1.ApmDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApmDomainID *string `json:"apmDomainId,omitempty" tf:"apm_domain_id,omitempty"`
 
@@ -393,7 +393,7 @@ type StreamingInitParameters struct {
 
 	// (Updatable) Stream Id.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StreamID *string `json:"streamId,omitempty" tf:"stream_id,omitempty"`
 
 	// Reference to a Stream in streaming to populate streamId.
@@ -415,7 +415,7 @@ type StreamingParameters struct {
 
 	// (Updatable) Stream Id.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StreamID *string `json:"streamId,omitempty" tf:"stream_id,omitempty"`
 

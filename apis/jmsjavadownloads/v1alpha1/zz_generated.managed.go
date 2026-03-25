@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this JavaDownloadReport.
 func (mg *JavaDownloadReport) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *JavaDownloadReport) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this JavaDownloadReport.
 func (mg *JavaDownloadReport) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this JavaDownloadReport.
-func (mg *JavaDownloadReport) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this JavaDownloadReport.
@@ -57,11 +52,6 @@ func (mg *JavaDownloadReport) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this JavaDownloadReport.
-func (mg *JavaDownloadReport) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this JavaDownloadReport.
 func (mg *JavaDownloadReport) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -85,11 +75,6 @@ func (mg *JavaDownloadToken) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this JavaDownloadToken.
 func (mg *JavaDownloadToken) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this JavaDownloadToken.
-func (mg *JavaDownloadToken) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this JavaDownloadToken.
@@ -117,11 +102,6 @@ func (mg *JavaDownloadToken) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this JavaDownloadToken.
-func (mg *JavaDownloadToken) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this JavaDownloadToken.
 func (mg *JavaDownloadToken) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -147,11 +127,6 @@ func (mg *JavaLicenseAcceptanceRecord) GetProviderConfigReference() *xpv1.Refere
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this JavaLicenseAcceptanceRecord.
-func (mg *JavaLicenseAcceptanceRecord) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this JavaLicenseAcceptanceRecord.
 func (mg *JavaLicenseAcceptanceRecord) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *JavaLicenseAcceptanceRecord) SetManagementPolicies(r xpv1.ManagementPo
 // SetProviderConfigReference of this JavaLicenseAcceptanceRecord.
 func (mg *JavaLicenseAcceptanceRecord) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this JavaLicenseAcceptanceRecord.
-func (mg *JavaLicenseAcceptanceRecord) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this JavaLicenseAcceptanceRecord.

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ComputeGpuMemoryFabricInitParameters struct {
@@ -29,7 +29,7 @@ type ComputeGpuMemoryFabricInitParameters struct {
 
 	// The OCID of the compute GPU memory fabric.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.ComputeGpuMemoryFabric
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ComputeGpuMemoryFabricID *string `json:"computeGpuMemoryFabricId,omitempty" tf:"compute_gpu_memory_fabric_id,omitempty"`
 
 	// Reference to a ComputeGpuMemoryFabric in compute to populate computeGpuMemoryFabricId.
@@ -151,7 +151,7 @@ type ComputeGpuMemoryFabricParameters struct {
 
 	// The OCID of the compute GPU memory fabric.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.ComputeGpuMemoryFabric
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ComputeGpuMemoryFabricID *string `json:"computeGpuMemoryFabricId,omitempty" tf:"compute_gpu_memory_fabric_id,omitempty"`
 

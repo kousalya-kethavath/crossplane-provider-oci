@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionMembersInitParameters struct {
@@ -102,7 +102,7 @@ type ExecutionActionInitParameters struct {
 
 	// (Updatable) The OCID of the execution window resource the execution action belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExecutionWindow
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExecutionWindowID *string `json:"executionWindowId,omitempty" tf:"execution_window_id,omitempty"`
 
 	// Reference to a ExecutionWindow in database to populate executionWindowId.
@@ -213,7 +213,7 @@ type ExecutionActionParameters struct {
 
 	// (Updatable) The OCID of the execution window resource the execution action belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExecutionWindow
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExecutionWindowID *string `json:"executionWindowId,omitempty" tf:"execution_window_id,omitempty"`
 

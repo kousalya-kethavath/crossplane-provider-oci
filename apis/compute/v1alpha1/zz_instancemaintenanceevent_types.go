@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type InstanceMaintenanceEventInitParameters struct {
@@ -34,7 +34,7 @@ type InstanceMaintenanceEventInitParameters struct {
 
 	// The OCID of the instance maintenance event.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.InstanceMaintenanceEvent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InstanceMaintenanceEventID *string `json:"instanceMaintenanceEventId,omitempty" tf:"instance_maintenance_event_id,omitempty"`
 
 	// Reference to a InstanceMaintenanceEvent in compute to populate instanceMaintenanceEventId.
@@ -159,7 +159,7 @@ type InstanceMaintenanceEventParameters struct {
 
 	// The OCID of the instance maintenance event.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.InstanceMaintenanceEvent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceMaintenanceEventID *string `json:"instanceMaintenanceEventId,omitempty" tf:"instance_maintenance_event_id,omitempty"`
 

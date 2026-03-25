@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ServiceCatalogAssociationInitParameters struct {
@@ -23,7 +23,7 @@ type ServiceCatalogAssociationInitParameters struct {
 
 	// Identifier of the service catalog.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/servicecatalog/v1alpha1.ServiceCatalog
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServiceCatalogID *string `json:"serviceCatalogId,omitempty" tf:"service_catalog_id,omitempty"`
 
 	// Reference to a ServiceCatalog in servicecatalog to populate serviceCatalogId.
@@ -65,7 +65,7 @@ type ServiceCatalogAssociationParameters struct {
 
 	// Identifier of the service catalog.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/servicecatalog/v1alpha1.ServiceCatalog
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServiceCatalogID *string `json:"serviceCatalogId,omitempty" tf:"service_catalog_id,omitempty"`
 

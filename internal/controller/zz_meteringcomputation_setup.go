@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	customtable "github.com/oracle/provider-oci/internal/controller/meteringcomputation/customtable"
 	query "github.com/oracle/provider-oci/internal/controller/meteringcomputation/query"
@@ -29,6 +29,25 @@ func Setup_meteringcomputation(mgr ctrl.Manager, o controller.Options) error {
 		usagecarbonemission.Setup,
 		usagecarbonemissionsquery.Setup,
 		usagestatementemailrecipientsgroup.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_meteringcomputation creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_meteringcomputation(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		customtable.SetupGated,
+		query.SetupGated,
+		schedule.SetupGated,
+		usage.SetupGated,
+		usagecarbonemission.SetupGated,
+		usagecarbonemissionsquery.SetupGated,
+		usagestatementemailrecipientsgroup.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

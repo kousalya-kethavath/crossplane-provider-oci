@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	privateendpoint "github.com/oracle/provider-oci/internal/controller/globallydistributeddatabase/privateendpoint"
 	shardeddatabase "github.com/oracle/provider-oci/internal/controller/globallydistributeddatabase/shardeddatabase"
@@ -19,6 +19,20 @@ func Setup_globallydistributeddatabase(mgr ctrl.Manager, o controller.Options) e
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		privateendpoint.Setup,
 		shardeddatabase.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_globallydistributeddatabase creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_globallydistributeddatabase(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		privateendpoint.SetupGated,
+		shardeddatabase.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

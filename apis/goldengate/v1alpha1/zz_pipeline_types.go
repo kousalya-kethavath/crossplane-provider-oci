@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type InitialDataLoadInitParameters struct {
@@ -141,7 +141,7 @@ type PipelineInitParameters struct {
 
 	// (Updatable) The OCID of the subnet of the pipeline's private endpoint. The subnet must be a private subnet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -341,7 +341,7 @@ type PipelineParameters struct {
 
 	// (Updatable) The OCID of the subnet of the pipeline's private endpoint. The subnet must be a private subnet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -450,7 +450,7 @@ type SourceConnectionDetailsInitParameters struct {
 
 	// The OCID of the connection being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/goldengate/v1alpha1.Connection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
 	// Reference to a Connection in goldengate to populate connectionId.
@@ -472,7 +472,7 @@ type SourceConnectionDetailsParameters struct {
 
 	// The OCID of the connection being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/goldengate/v1alpha1.Connection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
@@ -489,7 +489,7 @@ type TargetConnectionDetailsInitParameters struct {
 
 	// The OCID of the connection being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/goldengate/v1alpha1.Connection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
 	// Reference to a Connection in goldengate to populate connectionId.
@@ -511,7 +511,7 @@ type TargetConnectionDetailsParameters struct {
 
 	// The OCID of the connection being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/goldengate/v1alpha1.Connection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 

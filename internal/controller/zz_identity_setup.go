@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	apikey "github.com/oracle/provider-oci/internal/controller/identity/apikey"
 	authenticationpolicy "github.com/oracle/provider-oci/internal/controller/identity/authenticationpolicy"
@@ -61,6 +61,41 @@ func Setup_identity(mgr ctrl.Manager, o controller.Options) error {
 		user.Setup,
 		usercapabilitiesmanagement.Setup,
 		usergroupmembership.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_identity creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_identity(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		apikey.SetupGated,
+		authenticationpolicy.SetupGated,
+		authtoken.SetupGated,
+		compartment.SetupGated,
+		customersecretkey.SetupGated,
+		dbcredential.SetupGated,
+		domain.SetupGated,
+		domainreplicationtoregion.SetupGated,
+		dynamicgroup.SetupGated,
+		group.SetupGated,
+		identityprovider.SetupGated,
+		idpgroupmapping.SetupGated,
+		importstandardtagsmanagement.SetupGated,
+		networksource.SetupGated,
+		policy.SetupGated,
+		smtpcredential.SetupGated,
+		tag.SetupGated,
+		tagdefault.SetupGated,
+		tagnamespace.SetupGated,
+		uipassword.SetupGated,
+		user.SetupGated,
+		usercapabilitiesmanagement.SetupGated,
+		usergroupmembership.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

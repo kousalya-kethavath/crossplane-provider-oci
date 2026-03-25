@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagedInstanceGroupInstallPackagesManagementInitParameters struct {
@@ -20,7 +20,7 @@ type ManagedInstanceGroupInstallPackagesManagementInitParameters struct {
 
 	// The OCID of the managed instance group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.ManagedInstanceGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ManagedInstanceGroupID *string `json:"managedInstanceGroupId,omitempty" tf:"managed_instance_group_id,omitempty"`
 
 	// Reference to a ManagedInstanceGroup in osmanagementhub to populate managedInstanceGroupId.
@@ -62,7 +62,7 @@ type ManagedInstanceGroupInstallPackagesManagementParameters struct {
 
 	// The OCID of the managed instance group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.ManagedInstanceGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagedInstanceGroupID *string `json:"managedInstanceGroupId,omitempty" tf:"managed_instance_group_id,omitempty"`
 

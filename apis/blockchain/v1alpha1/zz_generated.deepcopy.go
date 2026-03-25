@@ -9,7 +9,7 @@ Copyright 2022 Upbound Inc.
 package v1alpha1
 
 import (
-	"github.com/crossplane/crossplane-runtime/apis/common/v1"
+	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -125,7 +125,7 @@ func (in *BlockchainPlatformInitParameters) DeepCopyInto(out *BlockchainPlatform
 			(*out)[key] = outVal
 		}
 	}
-	out.IdcsAccessTokenSecretRef = in.IdcsAccessTokenSecretRef
+	in.IdcsAccessTokenSecretRef.DeepCopyInto(&out.IdcsAccessTokenSecretRef)
 	if in.IsByol != nil {
 		in, out := &in.IsByol, &out.IsByol
 		*out = new(bool)
@@ -470,7 +470,7 @@ func (in *BlockchainPlatformParameters) DeepCopyInto(out *BlockchainPlatformPara
 			(*out)[key] = outVal
 		}
 	}
-	out.IdcsAccessTokenSecretRef = in.IdcsAccessTokenSecretRef
+	in.IdcsAccessTokenSecretRef.DeepCopyInto(&out.IdcsAccessTokenSecretRef)
 	if in.IsByol != nil {
 		in, out := &in.IsByol, &out.IsByol
 		*out = new(bool)

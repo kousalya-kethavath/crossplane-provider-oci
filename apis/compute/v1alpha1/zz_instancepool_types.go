@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type InstancePoolInitParameters struct {
@@ -76,7 +76,7 @@ type InstancePoolLoadBalancersInitParameters struct {
 
 	// The name of the backend set on the load balancer to add instances to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.BackendSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	BackendSetName *string `json:"backendSetName,omitempty" tf:"backend_set_name,omitempty"`
 
 	// Reference to a BackendSet in loadbalancer to populate backendSetName.
@@ -89,7 +89,7 @@ type InstancePoolLoadBalancersInitParameters struct {
 
 	// The OCID of the load balancer to attach to the instance pool.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LoadBalancerID *string `json:"loadBalancerId,omitempty" tf:"load_balancer_id,omitempty"`
 
 	// Reference to a LoadBalancer in loadbalancer to populate loadBalancerId.
@@ -135,7 +135,7 @@ type InstancePoolLoadBalancersParameters struct {
 
 	// The name of the backend set on the load balancer to add instances to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.BackendSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	BackendSetName *string `json:"backendSetName,omitempty" tf:"backend_set_name,omitempty"`
 
@@ -149,7 +149,7 @@ type InstancePoolLoadBalancersParameters struct {
 
 	// The OCID of the load balancer to attach to the instance pool.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LoadBalancerID *string `json:"loadBalancerId,omitempty" tf:"load_balancer_id,omitempty"`
 
@@ -301,7 +301,7 @@ type InstancePoolPlacementConfigurationsInitParameters struct {
 
 	// (Updatable) The OCID of the primary subnet to place instances. This field is deprecated. Use primaryVnicSubnets instead to set VNIC data for instances in the pool.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrimarySubnetID *string `json:"primarySubnetId,omitempty" tf:"primary_subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate primarySubnetId.
@@ -349,7 +349,7 @@ type InstancePoolPlacementConfigurationsParameters struct {
 
 	// (Updatable) The OCID of the primary subnet to place instances. This field is deprecated. Use primaryVnicSubnets instead to set VNIC data for instances in the pool.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrimarySubnetID *string `json:"primarySubnetId,omitempty" tf:"primary_subnet_id,omitempty"`
 
@@ -447,7 +447,7 @@ type PlacementConfigurationsPrimaryVnicSubnetsInitParameters struct {
 
 	// (Updatable) The subnet OCID for the secondary VNIC.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -502,7 +502,7 @@ type PlacementConfigurationsPrimaryVnicSubnetsParameters struct {
 
 	// (Updatable) The subnet OCID for the secondary VNIC.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -528,7 +528,7 @@ type PlacementConfigurationsSecondaryVnicSubnetsInitParameters struct {
 
 	// (Updatable) The subnet OCID for the secondary VNIC.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -590,7 +590,7 @@ type PlacementConfigurationsSecondaryVnicSubnetsParameters struct {
 
 	// (Updatable) The subnet OCID for the secondary VNIC.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

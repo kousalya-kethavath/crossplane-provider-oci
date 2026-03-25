@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagementExternalExadataStorageGridInitParameters struct {
@@ -21,7 +21,7 @@ type ManagementExternalExadataStorageGridInitParameters struct {
 
 	// The OCID of the Exadata storage grid.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementExternalExadataStorageGrid
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExternalExadataStorageGridID *string `json:"externalExadataStorageGridId,omitempty" tf:"external_exadata_storage_grid_id,omitempty"`
 
 	// Reference to a ManagementExternalExadataStorageGrid in database to populate externalExadataStorageGridId.
@@ -107,7 +107,7 @@ type ManagementExternalExadataStorageGridParameters struct {
 
 	// The OCID of the Exadata storage grid.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementExternalExadataStorageGrid
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExternalExadataStorageGridID *string `json:"externalExadataStorageGridId,omitempty" tf:"external_exadata_storage_grid_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SetSecurityAssessmentBaselineInitParameters struct {
@@ -20,7 +20,7 @@ type SetSecurityAssessmentBaselineInitParameters struct {
 
 	// The OCID of the security assessment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.SecurityAssessment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SecurityAssessmentID *string `json:"securityAssessmentId,omitempty" tf:"security_assessment_id,omitempty"`
 
 	// Reference to a SecurityAssessment in datasafe to populate securityAssessmentId.
@@ -51,7 +51,7 @@ type SetSecurityAssessmentBaselineParameters struct {
 
 	// The OCID of the security assessment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.SecurityAssessment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SecurityAssessmentID *string `json:"securityAssessmentId,omitempty" tf:"security_assessment_id,omitempty"`
 

@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	baselineablemetric "github.com/oracle/provider-oci/internal/controller/stackmonitoring/baselineablemetric"
 	config "github.com/oracle/provider-oci/internal/controller/stackmonitoring/config"
@@ -53,6 +53,37 @@ func Setup_stackmonitoring(mgr ctrl.Manager, o controller.Options) error {
 		monitoringtemplatealarmcondition.Setup,
 		monitoringtemplateongivenresourcesmanagement.Setup,
 		processset.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_stackmonitoring creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_stackmonitoring(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		baselineablemetric.SetupGated,
+		config.SetupGated,
+		discoveryjob.SetupGated,
+		maintenancewindow.SetupGated,
+		maintenancewindowsretryfailedoperation.SetupGated,
+		maintenancewindowsstop.SetupGated,
+		metricextension.SetupGated,
+		metricextensionmetricextensionongivenresourcesmanagement.SetupGated,
+		monitoredresource.SetupGated,
+		monitoredresourcesassociatemonitoredresource.SetupGated,
+		monitoredresourceslistmember.SetupGated,
+		monitoredresourcessearch.SetupGated,
+		monitoredresourcessearchassociation.SetupGated,
+		monitoredresourcetask.SetupGated,
+		monitoredresourcetype.SetupGated,
+		monitoringtemplate.SetupGated,
+		monitoringtemplatealarmcondition.SetupGated,
+		monitoringtemplateongivenresourcesmanagement.SetupGated,
+		processset.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

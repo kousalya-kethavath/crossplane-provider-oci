@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AuthenticationFactorSettingIdcsCreatedByInitParameters struct {
@@ -71,7 +71,7 @@ type AuthenticationFactorSettingInitParameters struct {
 
 	// ID of the resource
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identitydomains/v1alpha1.AuthenticationFactorSetting
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AuthenticationFactorSettingID *string `json:"authenticationFactorSettingId,omitempty" tf:"authentication_factor_setting_id,omitempty"`
 
 	// Reference to a AuthenticationFactorSetting in identitydomains to populate authenticationFactorSettingId.
@@ -344,7 +344,7 @@ type AuthenticationFactorSettingParameters struct {
 
 	// ID of the resource
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identitydomains/v1alpha1.AuthenticationFactorSetting
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AuthenticationFactorSettingID *string `json:"authenticationFactorSettingId,omitempty" tf:"authentication_factor_setting_id,omitempty"`
 

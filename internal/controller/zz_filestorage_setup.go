@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	export "github.com/oracle/provider-oci/internal/controller/filestorage/export"
 	exportset "github.com/oracle/provider-oci/internal/controller/filestorage/exportset"
@@ -33,6 +33,27 @@ func Setup_filestorage(mgr ctrl.Manager, o controller.Options) error {
 		outboundconnector.Setup,
 		replication.Setup,
 		snapshot.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_filestorage creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_filestorage(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		export.SetupGated,
+		exportset.SetupGated,
+		filesystem.SetupGated,
+		filesystemquotarule.SetupGated,
+		filesystemsnapshotpolicy.SetupGated,
+		mounttarget.SetupGated,
+		outboundconnector.SetupGated,
+		replication.SetupGated,
+		snapshot.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

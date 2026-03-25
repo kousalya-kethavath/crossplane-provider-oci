@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type NodeCollectionInitParameters struct {
@@ -83,7 +83,7 @@ type RedisClusterInitParameters struct {
 
 	// (Updatable) The ID of the corresponding Oracle Cloud Infrastructure Cache Config Set for the cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/redis/v1alpha1.OciCacheConfigSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OciCacheConfigSetID *string `json:"ociCacheConfigSetId,omitempty" tf:"oci_cache_config_set_id,omitempty"`
 
 	// Reference to a OciCacheConfigSet in redis to populate ociCacheConfigSetId.
@@ -251,7 +251,7 @@ type RedisClusterParameters struct {
 
 	// (Updatable) The ID of the corresponding Oracle Cloud Infrastructure Cache Config Set for the cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/redis/v1alpha1.OciCacheConfigSet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OciCacheConfigSetID *string `json:"ociCacheConfigSetId,omitempty" tf:"oci_cache_config_set_id,omitempty"`
 

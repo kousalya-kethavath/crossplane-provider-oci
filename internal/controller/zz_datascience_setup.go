@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	job "github.com/oracle/provider-oci/internal/controller/datascience/job"
 	jobrun "github.com/oracle/provider-oci/internal/controller/datascience/jobrun"
@@ -59,6 +59,40 @@ func Setup_datascience(mgr ctrl.Manager, o controller.Options) error {
 		privateendpoint.Setup,
 		project.Setup,
 		schedule.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_datascience creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_datascience(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		job.SetupGated,
+		jobrun.SetupGated,
+		mlapplication.SetupGated,
+		mlapplicationimplementation.SetupGated,
+		mlapplicationinstance.SetupGated,
+		model.SetupGated,
+		modelartifactexport.SetupGated,
+		modelartifactimport.SetupGated,
+		modelcustommetadataartifact.SetupGated,
+		modeldefinedmetadataartifact.SetupGated,
+		modeldeployment.SetupGated,
+		modelgroup.SetupGated,
+		modelgroupartifact.SetupGated,
+		modelgroupversionhistory.SetupGated,
+		modelprovenance.SetupGated,
+		modelversionset.SetupGated,
+		notebooksession.SetupGated,
+		pipeline.SetupGated,
+		pipelinerun.SetupGated,
+		privateendpoint.SetupGated,
+		project.SetupGated,
+		schedule.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

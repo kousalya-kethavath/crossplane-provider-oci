@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type WorkspaceInitParameters struct {
@@ -45,7 +45,7 @@ type WorkspaceInitParameters struct {
 
 	// DCMS PRivate Endpoint Compartment Identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EndpointCompartmentID *string `json:"endpointCompartmentId,omitempty" tf:"endpoint_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate endpointCompartmentId.
@@ -75,7 +75,7 @@ type WorkspaceInitParameters struct {
 
 	// DCMS Data Asset Registry Compartment Identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RegistryCompartmentID *string `json:"registryCompartmentId,omitempty" tf:"registry_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate registryCompartmentId.
@@ -94,7 +94,7 @@ type WorkspaceInitParameters struct {
 
 	// The OCID of the subnet for customer connected databases.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -107,7 +107,7 @@ type WorkspaceInitParameters struct {
 
 	// The OCID of the VCN the subnet is in.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vcn
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VcnID *string `json:"vcnId,omitempty" tf:"vcn_id,omitempty"`
 
 	// Reference to a Vcn in networking to populate vcnId.
@@ -229,7 +229,7 @@ type WorkspaceParameters struct {
 
 	// DCMS PRivate Endpoint Compartment Identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EndpointCompartmentID *string `json:"endpointCompartmentId,omitempty" tf:"endpoint_compartment_id,omitempty"`
 
@@ -266,7 +266,7 @@ type WorkspaceParameters struct {
 
 	// DCMS Data Asset Registry Compartment Identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RegistryCompartmentID *string `json:"registryCompartmentId,omitempty" tf:"registry_compartment_id,omitempty"`
 
@@ -288,7 +288,7 @@ type WorkspaceParameters struct {
 
 	// The OCID of the subnet for customer connected databases.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -302,7 +302,7 @@ type WorkspaceParameters struct {
 
 	// The OCID of the VCN the subnet is in.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vcn
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VcnID *string `json:"vcnId,omitempty" tf:"vcn_id,omitempty"`
 

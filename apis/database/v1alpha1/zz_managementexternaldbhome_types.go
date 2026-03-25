@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagementExternalDbHomeInitParameters struct {
@@ -21,7 +21,7 @@ type ManagementExternalDbHomeInitParameters struct {
 
 	// The OCID of the external database home.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementExternalDbHome
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExternalDBHomeID *string `json:"externalDbHomeId,omitempty" tf:"external_db_home_id,omitempty"`
 
 	// Reference to a ManagementExternalDbHome in database to populate externalDbHomeId.
@@ -98,7 +98,7 @@ type ManagementExternalDbHomeParameters struct {
 
 	// The OCID of the external database home.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementExternalDbHome
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExternalDBHomeID *string `json:"externalDbHomeId,omitempty" tf:"external_db_home_id,omitempty"`
 

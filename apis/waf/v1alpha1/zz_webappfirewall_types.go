@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type WebAppFirewallInitParameters struct {
@@ -43,7 +43,7 @@ type WebAppFirewallInitParameters struct {
 
 	// LoadBalancer OCID to which the WebAppFirewallPolicy is attached to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LoadBalancerID *string `json:"loadBalancerId,omitempty" tf:"load_balancer_id,omitempty"`
 
 	// Reference to a LoadBalancer in loadbalancer to populate loadBalancerId.
@@ -60,7 +60,7 @@ type WebAppFirewallInitParameters struct {
 
 	// (Updatable) The OCID of WebAppFirewallPolicy, which is attached to the resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/waf/v1alpha1.WebAppFirewallPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WebAppFirewallPolicyID *string `json:"webAppFirewallPolicyId,omitempty" tf:"web_app_firewall_policy_id,omitempty"`
 
 	// Reference to a WebAppFirewallPolicy in waf to populate webAppFirewallPolicyId.
@@ -152,7 +152,7 @@ type WebAppFirewallParameters struct {
 
 	// LoadBalancer OCID to which the WebAppFirewallPolicy is attached to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LoadBalancerID *string `json:"loadBalancerId,omitempty" tf:"load_balancer_id,omitempty"`
 
@@ -171,7 +171,7 @@ type WebAppFirewallParameters struct {
 
 	// (Updatable) The OCID of WebAppFirewallPolicy, which is attached to the resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/waf/v1alpha1.WebAppFirewallPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WebAppFirewallPolicyID *string `json:"webAppFirewallPolicyId,omitempty" tf:"web_app_firewall_policy_id,omitempty"`
 

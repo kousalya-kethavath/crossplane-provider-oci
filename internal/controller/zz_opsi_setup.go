@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	awrhub "github.com/oracle/provider-oci/internal/controller/opsi/awrhub"
 	awrhubsource "github.com/oracle/provider-oci/internal/controller/opsi/awrhubsource"
@@ -43,6 +43,32 @@ func Setup_opsi(mgr ctrl.Manager, o controller.Options) error {
 		operationsinsightswarehouserotatewarehousewallet.Setup,
 		operationsinsightswarehouseuser.Setup,
 		opsiconfiguration.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_opsi creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_opsi(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		awrhub.SetupGated,
+		awrhubsource.SetupGated,
+		awrhubsourceawrhubsourcesmanagement.SetupGated,
+		databaseinsight.SetupGated,
+		enterprisemanagerbridge.SetupGated,
+		exadatainsight.SetupGated,
+		hostinsight.SetupGated,
+		newsreport.SetupGated,
+		operationsinsightsprivateendpoint.SetupGated,
+		operationsinsightswarehouse.SetupGated,
+		operationsinsightswarehousedownloadwarehousewallet.SetupGated,
+		operationsinsightswarehouserotatewarehousewallet.SetupGated,
+		operationsinsightswarehouseuser.SetupGated,
+		opsiconfiguration.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

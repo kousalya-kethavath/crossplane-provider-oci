@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	workspace "github.com/oracle/provider-oci/internal/controller/dataintegration/workspace"
 	workspaceapplication "github.com/oracle/provider-oci/internal/controller/dataintegration/workspaceapplication"
@@ -35,6 +35,28 @@ func Setup_dataintegration(mgr ctrl.Manager, o controller.Options) error {
 		workspaceimportrequest.Setup,
 		workspaceproject.Setup,
 		workspacetask.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_dataintegration creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_dataintegration(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		workspace.SetupGated,
+		workspaceapplication.SetupGated,
+		workspaceapplicationpatch.SetupGated,
+		workspaceapplicationschedule.SetupGated,
+		workspaceapplicationtaskschedule.SetupGated,
+		workspaceexportrequest.SetupGated,
+		workspacefolder.SetupGated,
+		workspaceimportrequest.SetupGated,
+		workspaceproject.SetupGated,
+		workspacetask.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MysqlReplicaEncryptDataInitParameters struct {
@@ -206,7 +206,7 @@ type ReplicaOverridesInitParameters struct {
 
 	// (Updatable) The OCID of the Configuration to be used by the read replica.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/mysql/v1alpha1.MysqlConfiguration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConfigurationID *string `json:"configurationId,omitempty" tf:"configuration_id,omitempty"`
 
 	// Reference to a MysqlConfiguration in mysql to populate configurationId.
@@ -256,7 +256,7 @@ type ReplicaOverridesParameters struct {
 
 	// (Updatable) The OCID of the Configuration to be used by the read replica.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/mysql/v1alpha1.MysqlConfiguration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConfigurationID *string `json:"configurationId,omitempty" tf:"configuration_id,omitempty"`
 

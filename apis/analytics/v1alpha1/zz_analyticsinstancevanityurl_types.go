@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AnalyticsInstanceVanityUrlInitParameters struct {
 
 	// The OCID of the AnalyticsInstance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/analytics/v1alpha1.AnalyticsInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AnalyticsInstanceID *string `json:"analyticsInstanceId,omitempty" tf:"analytics_instance_id,omitempty"`
 
 	// Reference to a AnalyticsInstance in analytics to populate analyticsInstanceId.
@@ -71,7 +71,7 @@ type AnalyticsInstanceVanityUrlParameters struct {
 
 	// The OCID of the AnalyticsInstance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/analytics/v1alpha1.AnalyticsInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AnalyticsInstanceID *string `json:"analyticsInstanceId,omitempty" tf:"analytics_instance_id,omitempty"`
 

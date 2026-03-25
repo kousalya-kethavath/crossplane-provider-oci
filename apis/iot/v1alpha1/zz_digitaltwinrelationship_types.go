@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DigitalTwinRelationshipInitParameters struct {
@@ -37,7 +37,7 @@ type DigitalTwinRelationshipInitParameters struct {
 
 	// The OCID of the IoT domain.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/iot/v1alpha1.IotDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IotDomainID *string `json:"iotDomainId,omitempty" tf:"iot_domain_id,omitempty"`
 
 	// Reference to a IotDomain in iot to populate iotDomainId.
@@ -50,7 +50,7 @@ type DigitalTwinRelationshipInitParameters struct {
 
 	// The OCID of source digital twin instance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/iot/v1alpha1.DigitalTwinInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceDigitalTwinInstanceID *string `json:"sourceDigitalTwinInstanceId,omitempty" tf:"source_digital_twin_instance_id,omitempty"`
 
 	// Reference to a DigitalTwinInstance in iot to populate sourceDigitalTwinInstanceId.
@@ -63,7 +63,7 @@ type DigitalTwinRelationshipInitParameters struct {
 
 	// The OCID of target digital twin instance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/iot/v1alpha1.DigitalTwinInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetDigitalTwinInstanceID *string `json:"targetDigitalTwinInstanceId,omitempty" tf:"target_digital_twin_instance_id,omitempty"`
 
 	// Reference to a DigitalTwinInstance in iot to populate targetDigitalTwinInstanceId.
@@ -153,7 +153,7 @@ type DigitalTwinRelationshipParameters struct {
 
 	// The OCID of the IoT domain.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/iot/v1alpha1.IotDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IotDomainID *string `json:"iotDomainId,omitempty" tf:"iot_domain_id,omitempty"`
 
@@ -167,7 +167,7 @@ type DigitalTwinRelationshipParameters struct {
 
 	// The OCID of source digital twin instance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/iot/v1alpha1.DigitalTwinInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceDigitalTwinInstanceID *string `json:"sourceDigitalTwinInstanceId,omitempty" tf:"source_digital_twin_instance_id,omitempty"`
 
@@ -181,7 +181,7 @@ type DigitalTwinRelationshipParameters struct {
 
 	// The OCID of target digital twin instance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/iot/v1alpha1.DigitalTwinInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetDigitalTwinInstanceID *string `json:"targetDigitalTwinInstanceId,omitempty" tf:"target_digital_twin_instance_id,omitempty"`
 

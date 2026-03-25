@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SensitiveDataModelsSensitiveColumnConfidenceLevelDetailsInitParameters struct {
@@ -67,7 +67,7 @@ type SensitiveDataModelsSensitiveColumnInitParameters struct {
 
 	// The OCID of the sensitive data model.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.SensitiveDataModel
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SensitiveDataModelID *string `json:"sensitiveDataModelId,omitempty" tf:"sensitive_data_model_id,omitempty"`
 
 	// Reference to a SensitiveDataModel in datasafe to populate sensitiveDataModelId.
@@ -80,7 +80,7 @@ type SensitiveDataModelsSensitiveColumnInitParameters struct {
 
 	// (Updatable) The OCID of the sensitive type to be associated with the sensitive column.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.SensitiveType
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SensitiveTypeID *string `json:"sensitiveTypeId,omitempty" tf:"sensitive_type_id,omitempty"`
 
 	// Reference to a SensitiveType in datasafe to populate sensitiveTypeId.
@@ -216,7 +216,7 @@ type SensitiveDataModelsSensitiveColumnParameters struct {
 
 	// The OCID of the sensitive data model.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.SensitiveDataModel
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SensitiveDataModelID *string `json:"sensitiveDataModelId,omitempty" tf:"sensitive_data_model_id,omitempty"`
 
@@ -230,7 +230,7 @@ type SensitiveDataModelsSensitiveColumnParameters struct {
 
 	// (Updatable) The OCID of the sensitive type to be associated with the sensitive column.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.SensitiveType
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SensitiveTypeID *string `json:"sensitiveTypeId,omitempty" tf:"sensitive_type_id,omitempty"`
 

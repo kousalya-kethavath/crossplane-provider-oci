@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DigitalTwinAdapterInitParameters struct {
@@ -24,7 +24,7 @@ type DigitalTwinAdapterInitParameters struct {
 
 	// The OCID of the digital twin model.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/iot/v1alpha1.DigitalTwinModel
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DigitalTwinModelID *string `json:"digitalTwinModelId,omitempty" tf:"digital_twin_model_id,omitempty"`
 
 	// Reference to a DigitalTwinModel in iot to populate digitalTwinModelId.
@@ -53,7 +53,7 @@ type DigitalTwinAdapterInitParameters struct {
 
 	// The OCID of the IoT domain.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/iot/v1alpha1.IotDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IotDomainID *string `json:"iotDomainId,omitempty" tf:"iot_domain_id,omitempty"`
 
 	// Reference to a IotDomain in iot to populate iotDomainId.
@@ -126,7 +126,7 @@ type DigitalTwinAdapterParameters struct {
 
 	// The OCID of the digital twin model.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/iot/v1alpha1.DigitalTwinModel
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DigitalTwinModelID *string `json:"digitalTwinModelId,omitempty" tf:"digital_twin_model_id,omitempty"`
 
@@ -161,7 +161,7 @@ type DigitalTwinAdapterParameters struct {
 
 	// The OCID of the IoT domain.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/iot/v1alpha1.IotDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IotDomainID *string `json:"iotDomainId,omitempty" tf:"iot_domain_id,omitempty"`
 

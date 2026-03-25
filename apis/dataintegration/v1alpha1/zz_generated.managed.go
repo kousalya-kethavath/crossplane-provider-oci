@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this Workspace.
 func (mg *Workspace) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *Workspace) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this Workspace.
 func (mg *Workspace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this Workspace.
-func (mg *Workspace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this Workspace.
@@ -57,11 +52,6 @@ func (mg *Workspace) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this Workspace.
-func (mg *Workspace) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this Workspace.
 func (mg *Workspace) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -85,11 +75,6 @@ func (mg *WorkspaceApplication) GetManagementPolicies() xpv1.ManagementPolicies 
 // GetProviderConfigReference of this WorkspaceApplication.
 func (mg *WorkspaceApplication) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this WorkspaceApplication.
-func (mg *WorkspaceApplication) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this WorkspaceApplication.
@@ -117,11 +102,6 @@ func (mg *WorkspaceApplication) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this WorkspaceApplication.
-func (mg *WorkspaceApplication) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this WorkspaceApplication.
 func (mg *WorkspaceApplication) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -145,11 +125,6 @@ func (mg *WorkspaceApplicationPatch) GetManagementPolicies() xpv1.ManagementPoli
 // GetProviderConfigReference of this WorkspaceApplicationPatch.
 func (mg *WorkspaceApplicationPatch) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this WorkspaceApplicationPatch.
-func (mg *WorkspaceApplicationPatch) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this WorkspaceApplicationPatch.
@@ -177,11 +152,6 @@ func (mg *WorkspaceApplicationPatch) SetProviderConfigReference(r *xpv1.Referenc
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this WorkspaceApplicationPatch.
-func (mg *WorkspaceApplicationPatch) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this WorkspaceApplicationPatch.
 func (mg *WorkspaceApplicationPatch) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -205,11 +175,6 @@ func (mg *WorkspaceApplicationSchedule) GetManagementPolicies() xpv1.ManagementP
 // GetProviderConfigReference of this WorkspaceApplicationSchedule.
 func (mg *WorkspaceApplicationSchedule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this WorkspaceApplicationSchedule.
-func (mg *WorkspaceApplicationSchedule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this WorkspaceApplicationSchedule.
@@ -237,11 +202,6 @@ func (mg *WorkspaceApplicationSchedule) SetProviderConfigReference(r *xpv1.Refer
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this WorkspaceApplicationSchedule.
-func (mg *WorkspaceApplicationSchedule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this WorkspaceApplicationSchedule.
 func (mg *WorkspaceApplicationSchedule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -265,11 +225,6 @@ func (mg *WorkspaceApplicationTaskSchedule) GetManagementPolicies() xpv1.Managem
 // GetProviderConfigReference of this WorkspaceApplicationTaskSchedule.
 func (mg *WorkspaceApplicationTaskSchedule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this WorkspaceApplicationTaskSchedule.
-func (mg *WorkspaceApplicationTaskSchedule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this WorkspaceApplicationTaskSchedule.
@@ -297,11 +252,6 @@ func (mg *WorkspaceApplicationTaskSchedule) SetProviderConfigReference(r *xpv1.R
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this WorkspaceApplicationTaskSchedule.
-func (mg *WorkspaceApplicationTaskSchedule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this WorkspaceApplicationTaskSchedule.
 func (mg *WorkspaceApplicationTaskSchedule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -325,11 +275,6 @@ func (mg *WorkspaceExportRequest) GetManagementPolicies() xpv1.ManagementPolicie
 // GetProviderConfigReference of this WorkspaceExportRequest.
 func (mg *WorkspaceExportRequest) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this WorkspaceExportRequest.
-func (mg *WorkspaceExportRequest) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this WorkspaceExportRequest.
@@ -357,11 +302,6 @@ func (mg *WorkspaceExportRequest) SetProviderConfigReference(r *xpv1.Reference) 
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this WorkspaceExportRequest.
-func (mg *WorkspaceExportRequest) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this WorkspaceExportRequest.
 func (mg *WorkspaceExportRequest) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -385,11 +325,6 @@ func (mg *WorkspaceFolder) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this WorkspaceFolder.
 func (mg *WorkspaceFolder) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this WorkspaceFolder.
-func (mg *WorkspaceFolder) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this WorkspaceFolder.
@@ -417,11 +352,6 @@ func (mg *WorkspaceFolder) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this WorkspaceFolder.
-func (mg *WorkspaceFolder) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this WorkspaceFolder.
 func (mg *WorkspaceFolder) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -445,11 +375,6 @@ func (mg *WorkspaceImportRequest) GetManagementPolicies() xpv1.ManagementPolicie
 // GetProviderConfigReference of this WorkspaceImportRequest.
 func (mg *WorkspaceImportRequest) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this WorkspaceImportRequest.
-func (mg *WorkspaceImportRequest) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this WorkspaceImportRequest.
@@ -477,11 +402,6 @@ func (mg *WorkspaceImportRequest) SetProviderConfigReference(r *xpv1.Reference) 
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this WorkspaceImportRequest.
-func (mg *WorkspaceImportRequest) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this WorkspaceImportRequest.
 func (mg *WorkspaceImportRequest) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -505,11 +425,6 @@ func (mg *WorkspaceProject) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this WorkspaceProject.
 func (mg *WorkspaceProject) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this WorkspaceProject.
-func (mg *WorkspaceProject) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this WorkspaceProject.
@@ -537,11 +452,6 @@ func (mg *WorkspaceProject) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this WorkspaceProject.
-func (mg *WorkspaceProject) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this WorkspaceProject.
 func (mg *WorkspaceProject) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -567,11 +477,6 @@ func (mg *WorkspaceTask) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this WorkspaceTask.
-func (mg *WorkspaceTask) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this WorkspaceTask.
 func (mg *WorkspaceTask) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -595,11 +500,6 @@ func (mg *WorkspaceTask) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this WorkspaceTask.
 func (mg *WorkspaceTask) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this WorkspaceTask.
-func (mg *WorkspaceTask) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this WorkspaceTask.

@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this AcceptedAgreement.
 func (mg *AcceptedAgreement) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *AcceptedAgreement) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this AcceptedAgreement.
 func (mg *AcceptedAgreement) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this AcceptedAgreement.
-func (mg *AcceptedAgreement) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this AcceptedAgreement.
@@ -57,11 +52,6 @@ func (mg *AcceptedAgreement) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this AcceptedAgreement.
-func (mg *AcceptedAgreement) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this AcceptedAgreement.
 func (mg *AcceptedAgreement) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -85,11 +75,6 @@ func (mg *ListingPackageAgreement) GetManagementPolicies() xpv1.ManagementPolici
 // GetProviderConfigReference of this ListingPackageAgreement.
 func (mg *ListingPackageAgreement) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this ListingPackageAgreement.
-func (mg *ListingPackageAgreement) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this ListingPackageAgreement.
@@ -117,11 +102,6 @@ func (mg *ListingPackageAgreement) SetProviderConfigReference(r *xpv1.Reference)
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this ListingPackageAgreement.
-func (mg *ListingPackageAgreement) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this ListingPackageAgreement.
 func (mg *ListingPackageAgreement) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -145,11 +125,6 @@ func (mg *MarketplaceExternalAttestedMetadata) GetManagementPolicies() xpv1.Mana
 // GetProviderConfigReference of this MarketplaceExternalAttestedMetadata.
 func (mg *MarketplaceExternalAttestedMetadata) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this MarketplaceExternalAttestedMetadata.
-func (mg *MarketplaceExternalAttestedMetadata) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this MarketplaceExternalAttestedMetadata.
@@ -177,11 +152,6 @@ func (mg *MarketplaceExternalAttestedMetadata) SetProviderConfigReference(r *xpv
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this MarketplaceExternalAttestedMetadata.
-func (mg *MarketplaceExternalAttestedMetadata) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this MarketplaceExternalAttestedMetadata.
 func (mg *MarketplaceExternalAttestedMetadata) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -207,11 +177,6 @@ func (mg *Publication) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this Publication.
-func (mg *Publication) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this Publication.
 func (mg *Publication) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *Publication) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Publication.
 func (mg *Publication) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this Publication.
-func (mg *Publication) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this Publication.

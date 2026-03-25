@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ApproverDetailsInitParameters struct {
@@ -64,7 +64,7 @@ type PrivilegedApiRequestInitParameters struct {
 
 	// The OCID of the Oracle Cloud Infrastructure Notification topic to publish messages related to this Privileged Api Request.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ons/v1alpha1.NotificationTopic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NotificationTopicID *string `json:"notificationTopicId,omitempty" tf:"notification_topic_id,omitempty"`
 
 	// Reference to a NotificationTopic in ons to populate notificationTopicId.
@@ -230,7 +230,7 @@ type PrivilegedApiRequestParameters struct {
 
 	// The OCID of the Oracle Cloud Infrastructure Notification topic to publish messages related to this Privileged Api Request.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ons/v1alpha1.NotificationTopic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NotificationTopicID *string `json:"notificationTopicId,omitempty" tf:"notification_topic_id,omitempty"`
 

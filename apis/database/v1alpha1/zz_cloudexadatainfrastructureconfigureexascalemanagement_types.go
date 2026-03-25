@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CloudExadataInfrastructureConfigureExascaleManagementCustomerContactsInitParameters struct {
@@ -65,7 +65,7 @@ type CloudExadataInfrastructureConfigureExascaleManagementInitParameters struct 
 
 	// The cloud Exadata infrastructure OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudExadataInfrastructure
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CloudExadataInfrastructureID *string `json:"cloudExadataInfrastructureId,omitempty" tf:"cloud_exadata_infrastructure_id,omitempty"`
 
 	// Reference to a CloudExadataInfrastructure in database to populate cloudExadataInfrastructureId.
@@ -276,7 +276,7 @@ type CloudExadataInfrastructureConfigureExascaleManagementParameters struct {
 
 	// The cloud Exadata infrastructure OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudExadataInfrastructure
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CloudExadataInfrastructureID *string `json:"cloudExadataInfrastructureId,omitempty" tf:"cloud_exadata_infrastructure_id,omitempty"`
 

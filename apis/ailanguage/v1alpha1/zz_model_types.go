@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ClassMetricsInitParameters struct {
@@ -284,7 +284,7 @@ type ModelInitParameters struct {
 
 	// The OCID of the project to associate with the model.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ailanguage/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// Reference to a Project in ailanguage to populate projectId.
@@ -398,7 +398,7 @@ type ModelParameters struct {
 
 	// The OCID of the project to associate with the model.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ailanguage/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -462,7 +462,7 @@ type TestingDatasetInitParameters struct {
 
 	// Data Science Labelling Service OCID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datalabelingservice/v1alpha1.Dataset
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatasetID *string `json:"datasetId,omitempty" tf:"dataset_id,omitempty"`
 
 	// Reference to a Dataset in datalabelingservice to populate datasetId.
@@ -496,7 +496,7 @@ type TestingDatasetParameters struct {
 
 	// Data Science Labelling Service OCID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datalabelingservice/v1alpha1.Dataset
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatasetID *string `json:"datasetId,omitempty" tf:"dataset_id,omitempty"`
 
@@ -521,7 +521,7 @@ type TrainingDatasetInitParameters struct {
 
 	// Data Science Labelling Service OCID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datalabelingservice/v1alpha1.Dataset
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatasetID *string `json:"datasetId,omitempty" tf:"dataset_id,omitempty"`
 
 	// Reference to a Dataset in datalabelingservice to populate datasetId.
@@ -604,7 +604,7 @@ type TrainingDatasetParameters struct {
 
 	// Data Science Labelling Service OCID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datalabelingservice/v1alpha1.Dataset
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatasetID *string `json:"datasetId,omitempty" tf:"dataset_id,omitempty"`
 
@@ -629,7 +629,7 @@ type ValidationDatasetInitParameters struct {
 
 	// Data Science Labelling Service OCID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datalabelingservice/v1alpha1.Dataset
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatasetID *string `json:"datasetId,omitempty" tf:"dataset_id,omitempty"`
 
 	// Reference to a Dataset in datalabelingservice to populate datasetId.
@@ -712,7 +712,7 @@ type ValidationDatasetParameters struct {
 
 	// Data Science Labelling Service OCID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datalabelingservice/v1alpha1.Dataset
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatasetID *string `json:"datasetId,omitempty" tf:"dataset_id,omitempty"`
 

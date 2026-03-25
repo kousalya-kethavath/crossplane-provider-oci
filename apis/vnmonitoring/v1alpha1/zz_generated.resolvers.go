@@ -8,10 +8,9 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -34,6 +33,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +54,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationEndpoint[i3].InstanceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DestinationEndpoint[i3].InstanceIDRef,
 				Selector:     mg.Spec.ForProvider.DestinationEndpoint[i3].InstanceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -75,6 +76,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationEndpoint[i3].ListenerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DestinationEndpoint[i3].ListenerIDRef,
 				Selector:     mg.Spec.ForProvider.DestinationEndpoint[i3].ListenerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -96,6 +98,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationEndpoint[i3].LoadBalancerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DestinationEndpoint[i3].LoadBalancerIDRef,
 				Selector:     mg.Spec.ForProvider.DestinationEndpoint[i3].LoadBalancerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -117,6 +120,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationEndpoint[i3].NetworkLoadBalancerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DestinationEndpoint[i3].NetworkLoadBalancerIDRef,
 				Selector:     mg.Spec.ForProvider.DestinationEndpoint[i3].NetworkLoadBalancerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -138,6 +142,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationEndpoint[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DestinationEndpoint[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.DestinationEndpoint[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -159,6 +164,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationEndpoint[i3].VlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DestinationEndpoint[i3].VlanIDRef,
 				Selector:     mg.Spec.ForProvider.DestinationEndpoint[i3].VlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -180,6 +186,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationEndpoint[i3].VnicID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.DestinationEndpoint[i3].VnicIDRef,
 				Selector:     mg.Spec.ForProvider.DestinationEndpoint[i3].VnicIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -201,6 +208,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceEndpoint[i3].InstanceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SourceEndpoint[i3].InstanceIDRef,
 				Selector:     mg.Spec.ForProvider.SourceEndpoint[i3].InstanceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -222,6 +230,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceEndpoint[i3].ListenerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SourceEndpoint[i3].ListenerIDRef,
 				Selector:     mg.Spec.ForProvider.SourceEndpoint[i3].ListenerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -243,6 +252,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceEndpoint[i3].LoadBalancerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SourceEndpoint[i3].LoadBalancerIDRef,
 				Selector:     mg.Spec.ForProvider.SourceEndpoint[i3].LoadBalancerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -264,6 +274,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceEndpoint[i3].NetworkLoadBalancerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SourceEndpoint[i3].NetworkLoadBalancerIDRef,
 				Selector:     mg.Spec.ForProvider.SourceEndpoint[i3].NetworkLoadBalancerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -285,6 +296,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceEndpoint[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SourceEndpoint[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SourceEndpoint[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -306,6 +318,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceEndpoint[i3].VlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SourceEndpoint[i3].VlanIDRef,
 				Selector:     mg.Spec.ForProvider.SourceEndpoint[i3].VlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -327,6 +340,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceEndpoint[i3].VnicID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.SourceEndpoint[i3].VnicIDRef,
 				Selector:     mg.Spec.ForProvider.SourceEndpoint[i3].VnicIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -347,6 +361,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -367,6 +382,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationEndpoint[i3].InstanceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DestinationEndpoint[i3].InstanceIDRef,
 				Selector:     mg.Spec.InitProvider.DestinationEndpoint[i3].InstanceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -388,6 +404,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationEndpoint[i3].ListenerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DestinationEndpoint[i3].ListenerIDRef,
 				Selector:     mg.Spec.InitProvider.DestinationEndpoint[i3].ListenerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -409,6 +426,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationEndpoint[i3].LoadBalancerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DestinationEndpoint[i3].LoadBalancerIDRef,
 				Selector:     mg.Spec.InitProvider.DestinationEndpoint[i3].LoadBalancerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -430,6 +448,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationEndpoint[i3].NetworkLoadBalancerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DestinationEndpoint[i3].NetworkLoadBalancerIDRef,
 				Selector:     mg.Spec.InitProvider.DestinationEndpoint[i3].NetworkLoadBalancerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -451,6 +470,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationEndpoint[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DestinationEndpoint[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.DestinationEndpoint[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -472,6 +492,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationEndpoint[i3].VlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DestinationEndpoint[i3].VlanIDRef,
 				Selector:     mg.Spec.InitProvider.DestinationEndpoint[i3].VlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -493,6 +514,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationEndpoint[i3].VnicID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.DestinationEndpoint[i3].VnicIDRef,
 				Selector:     mg.Spec.InitProvider.DestinationEndpoint[i3].VnicIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -514,6 +536,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceEndpoint[i3].InstanceID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SourceEndpoint[i3].InstanceIDRef,
 				Selector:     mg.Spec.InitProvider.SourceEndpoint[i3].InstanceIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -535,6 +558,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceEndpoint[i3].ListenerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SourceEndpoint[i3].ListenerIDRef,
 				Selector:     mg.Spec.InitProvider.SourceEndpoint[i3].ListenerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -556,6 +580,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceEndpoint[i3].LoadBalancerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SourceEndpoint[i3].LoadBalancerIDRef,
 				Selector:     mg.Spec.InitProvider.SourceEndpoint[i3].LoadBalancerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -577,6 +602,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceEndpoint[i3].NetworkLoadBalancerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SourceEndpoint[i3].NetworkLoadBalancerIDRef,
 				Selector:     mg.Spec.InitProvider.SourceEndpoint[i3].NetworkLoadBalancerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -598,6 +624,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceEndpoint[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SourceEndpoint[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.SourceEndpoint[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -619,6 +646,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceEndpoint[i3].VlanID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SourceEndpoint[i3].VlanIDRef,
 				Selector:     mg.Spec.InitProvider.SourceEndpoint[i3].VlanIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -640,6 +668,7 @@ func (mg *PathAnalysi) ResolveReferences( // ResolveReferences of this PathAnaly
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceEndpoint[i3].VnicID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.SourceEndpoint[i3].VnicIDRef,
 				Selector:     mg.Spec.InitProvider.SourceEndpoint[i3].VnicIDSelector,
 				To:           reference.To{List: l, Managed: m},

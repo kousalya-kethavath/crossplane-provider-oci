@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type OdaPrivateEndpointScanProxyInitParameters struct {
 
 	// Unique ODA Private Endpoint identifier which is the OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/oda/v1alpha1.OdaPrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OdaPrivateEndpointID *string `json:"odaPrivateEndpointId,omitempty" tf:"oda_private_endpoint_id,omitempty"`
 
 	// Reference to a OdaPrivateEndpoint in oda to populate odaPrivateEndpointId.
@@ -66,7 +66,7 @@ type OdaPrivateEndpointScanProxyParameters struct {
 
 	// Unique ODA Private Endpoint identifier which is the OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/oda/v1alpha1.OdaPrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OdaPrivateEndpointID *string `json:"odaPrivateEndpointId,omitempty" tf:"oda_private_endpoint_id,omitempty"`
 

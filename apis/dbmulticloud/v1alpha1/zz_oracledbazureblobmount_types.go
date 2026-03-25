@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type OracleDbAzureBlobMountInitParameters struct {
@@ -40,7 +40,7 @@ type OracleDbAzureBlobMountInitParameters struct {
 
 	// (Updatable) The OCID of the Oracle DB Azure Blob Container resource that contains Oracle DB Azure Blob Mount resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dbmulticloud/v1alpha1.OracleDbAzureBlobContainer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OracleDBAzureBlobContainerID *string `json:"oracleDbAzureBlobContainerId,omitempty" tf:"oracle_db_azure_blob_container_id,omitempty"`
 
 	// Reference to a OracleDbAzureBlobContainer in dbmulticloud to populate oracleDbAzureBlobContainerId.
@@ -53,7 +53,7 @@ type OracleDbAzureBlobMountInitParameters struct {
 
 	// (Updatable) The OCID of the Oracle DB Azure Connector resource that contains Oracle DB Azure Blob Mount resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dbmulticloud/v1alpha1.OracleDbAzureConnector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OracleDBAzureConnectorID *string `json:"oracleDbAzureConnectorId,omitempty" tf:"oracle_db_azure_connector_id,omitempty"`
 
 	// Reference to a OracleDbAzureConnector in dbmulticloud to populate oracleDbAzureConnectorId.
@@ -144,7 +144,7 @@ type OracleDbAzureBlobMountParameters struct {
 
 	// (Updatable) The OCID of the Oracle DB Azure Blob Container resource that contains Oracle DB Azure Blob Mount resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dbmulticloud/v1alpha1.OracleDbAzureBlobContainer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OracleDBAzureBlobContainerID *string `json:"oracleDbAzureBlobContainerId,omitempty" tf:"oracle_db_azure_blob_container_id,omitempty"`
 
@@ -158,7 +158,7 @@ type OracleDbAzureBlobMountParameters struct {
 
 	// (Updatable) The OCID of the Oracle DB Azure Connector resource that contains Oracle DB Azure Blob Mount resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dbmulticloud/v1alpha1.OracleDbAzureConnector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OracleDBAzureConnectorID *string `json:"oracleDbAzureConnectorId,omitempty" tf:"oracle_db_azure_connector_id,omitempty"`
 

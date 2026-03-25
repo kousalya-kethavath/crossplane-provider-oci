@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type InternalOccmDemandSignalInitParameters struct {
@@ -20,7 +20,7 @@ type InternalOccmDemandSignalInitParameters struct {
 
 	// The OCID of the demand signal.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/capacitymanagement/v1alpha1.OccmDemandSignal
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OccmDemandSignalID *string `json:"occmDemandSignalId,omitempty" tf:"occm_demand_signal_id,omitempty"`
 
 	// Reference to a OccmDemandSignal in capacitymanagement to populate occmDemandSignalId.
@@ -85,7 +85,7 @@ type InternalOccmDemandSignalParameters struct {
 
 	// The OCID of the demand signal.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/capacitymanagement/v1alpha1.OccmDemandSignal
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OccmDemandSignalID *string `json:"occmDemandSignalId,omitempty" tf:"occm_demand_signal_id,omitempty"`
 

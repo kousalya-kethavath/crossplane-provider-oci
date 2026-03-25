@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type IdentitySettingIdcsCreatedByInitParameters struct {
@@ -83,7 +83,7 @@ type IdentitySettingInitParameters struct {
 
 	// ID of the resource
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identitydomains/v1alpha1.IdentitySetting
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IdentitySettingID *string `json:"identitySettingId,omitempty" tf:"identity_setting_id,omitempty"`
 
 	// Reference to a IdentitySetting in identitydomains to populate identitySettingId.
@@ -270,7 +270,7 @@ type IdentitySettingParameters struct {
 
 	// ID of the resource
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identitydomains/v1alpha1.IdentitySetting
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IdentitySettingID *string `json:"identitySettingId,omitempty" tf:"identity_setting_id,omitempty"`
 

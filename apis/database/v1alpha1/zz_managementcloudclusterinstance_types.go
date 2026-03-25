@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagementCloudClusterInstanceInitParameters struct {
 
 	// The OCID of the cloud cluster instance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementCloudClusterInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CloudClusterInstanceID *string `json:"cloudClusterInstanceId,omitempty" tf:"cloud_cluster_instance_id,omitempty"`
 
 	// Reference to a ManagementCloudClusterInstance in database to populate cloudClusterInstanceId.
@@ -113,7 +113,7 @@ type ManagementCloudClusterInstanceParameters struct {
 
 	// The OCID of the cloud cluster instance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementCloudClusterInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CloudClusterInstanceID *string `json:"cloudClusterInstanceId,omitempty" tf:"cloud_cluster_instance_id,omitempty"`
 

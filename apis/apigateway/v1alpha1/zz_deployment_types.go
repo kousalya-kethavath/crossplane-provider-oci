@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AccessLogInitParameters struct {
@@ -120,7 +120,7 @@ type AuthenticationInitParameters struct {
 
 	// (Updatable) The OCID of the Oracle Functions function resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/functions/v1alpha1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
 	// Reference to a Function in functions to populate functionId.
@@ -230,7 +230,7 @@ type AuthenticationParameters struct {
 
 	// (Updatable) The OCID of the Oracle Functions function resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/functions/v1alpha1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
@@ -302,7 +302,7 @@ type AuthenticationServerDetailInitParameters struct {
 
 	// (Updatable) The OCID of the Oracle Functions function resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/functions/v1alpha1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
 	// Reference to a Function in functions to populate functionId.
@@ -412,7 +412,7 @@ type AuthenticationServerDetailParameters struct {
 
 	// (Updatable) The OCID of the Oracle Functions function resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/functions/v1alpha1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
@@ -689,7 +689,7 @@ type AuthenticationServerDetailValidationPolicyClientDetailsInitParameters struc
 
 	// (Updatable) The OCID of the Oracle Vault Service secret resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClientSecretID *string `json:"clientSecretId,omitempty" tf:"client_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate clientSecretId.
@@ -730,7 +730,7 @@ type AuthenticationServerDetailValidationPolicyClientDetailsParameters struct {
 
 	// (Updatable) The OCID of the Oracle Vault Service secret resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClientSecretID *string `json:"clientSecretId,omitempty" tf:"client_secret_id,omitempty"`
 
@@ -1132,7 +1132,7 @@ type BackendInitParameters struct {
 
 	// (Updatable) The OCID of the Oracle Functions function resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/functions/v1alpha1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
 	// Reference to a Function in functions to populate functionId.
@@ -1235,7 +1235,7 @@ type BackendParameters struct {
 
 	// (Updatable) The OCID of the Oracle Functions function resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/functions/v1alpha1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
@@ -1363,7 +1363,7 @@ type ClientDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the Oracle Vault Service secret resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClientSecretID *string `json:"clientSecretId,omitempty" tf:"client_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate clientSecretId.
@@ -1404,7 +1404,7 @@ type ClientDetailsParameters struct {
 
 	// (Updatable) The OCID of the Oracle Vault Service secret resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClientSecretID *string `json:"clientSecretId,omitempty" tf:"client_secret_id,omitempty"`
 
@@ -1550,7 +1550,7 @@ type DeploymentInitParameters struct {
 
 	// The OCID of the resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apigateway/v1alpha1.Gateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
 	// Reference to a Gateway in apigateway to populate gatewayId.
@@ -1694,7 +1694,7 @@ type DeploymentParameters struct {
 
 	// The OCID of the resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apigateway/v1alpha1.Gateway
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
@@ -3629,7 +3629,7 @@ type RoutingBackendsBackendInitParameters struct {
 
 	// (Updatable) The OCID of the Oracle Functions function resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/functions/v1alpha1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
 	// Reference to a Function in functions to populate functionId.
@@ -3701,7 +3701,7 @@ type RoutingBackendsBackendParameters struct {
 
 	// (Updatable) The OCID of the Oracle Functions function resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/functions/v1alpha1.Function
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
@@ -4061,7 +4061,7 @@ type ValidationFailurePolicyClientDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the Oracle Vault Service secret resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClientSecretID *string `json:"clientSecretId,omitempty" tf:"client_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate clientSecretId.
@@ -4102,7 +4102,7 @@ type ValidationFailurePolicyClientDetailsParameters struct {
 
 	// (Updatable) The OCID of the Oracle Vault Service secret resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClientSecretID *string `json:"clientSecretId,omitempty" tf:"client_secret_id,omitempty"`
 
@@ -4386,7 +4386,7 @@ type ValidationPolicyClientDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the Oracle Vault Service secret resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClientSecretID *string `json:"clientSecretId,omitempty" tf:"client_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate clientSecretId.
@@ -4427,7 +4427,7 @@ type ValidationPolicyClientDetailsParameters struct {
 
 	// (Updatable) The OCID of the Oracle Vault Service secret resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClientSecretID *string `json:"clientSecretId,omitempty" tf:"client_secret_id,omitempty"`
 

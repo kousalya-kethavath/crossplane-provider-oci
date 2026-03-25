@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConnectionInfoConnectionCredentialsInitParameters struct {
@@ -190,7 +190,7 @@ type ManagementCloudDbSystemConnectorInitParameters struct {
 
 	// The OCID of the cloud DB system.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementCloudDbSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CloudDBSystemID *string `json:"cloudDbSystemId,omitempty" tf:"cloud_db_system_id,omitempty"`
 
 	// Reference to a ManagementCloudDbSystem in database to populate cloudDbSystemId.
@@ -284,7 +284,7 @@ type ManagementCloudDbSystemConnectorParameters struct {
 
 	// The OCID of the cloud DB system.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementCloudDbSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CloudDBSystemID *string `json:"cloudDbSystemId,omitempty" tf:"cloud_db_system_id,omitempty"`
 

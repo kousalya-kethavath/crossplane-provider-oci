@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	addsdmcolumns "github.com/oracle/provider-oci/internal/controller/datasafe/addsdmcolumns"
 	alert "github.com/oracle/provider-oci/internal/controller/datasafe/alert"
@@ -151,6 +151,86 @@ func Setup_datasafe(mgr ctrl.Manager, o controller.Options) error {
 		unsetuserassessmentbaseline.Setup,
 		unsetuserassessmentbaselinemanagement.Setup,
 		userassessment.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_datasafe creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_datasafe(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		addsdmcolumns.SetupGated,
+		alert.SetupGated,
+		alertpolicy.SetupGated,
+		alertpolicyrule.SetupGated,
+		attributeset.SetupGated,
+		auditarchiveretrieval.SetupGated,
+		auditpolicy.SetupGated,
+		auditpolicymanagement.SetupGated,
+		auditprofile.SetupGated,
+		auditprofilemanagement.SetupGated,
+		audittrail.SetupGated,
+		audittrailmanagement.SetupGated,
+		calculateauditvolumeavailable.SetupGated,
+		calculateauditvolumecollected.SetupGated,
+		comparesecurityassessment.SetupGated,
+		compareuserassessment.SetupGated,
+		databasesecurityconfig.SetupGated,
+		databasesecurityconfigmanagement.SetupGated,
+		datasafeconfiguration.SetupGated,
+		datasafeprivateendpoint.SetupGated,
+		discoveryjob.SetupGated,
+		discoveryjobsresult.SetupGated,
+		generateonpremconnectorconfiguration.SetupGated,
+		librarymaskingformat.SetupGated,
+		maskdata.SetupGated,
+		maskingpoliciesapplydifferencetomaskingcolumns.SetupGated,
+		maskingpoliciesmaskingcolumn.SetupGated,
+		maskingpolicy.SetupGated,
+		maskingpolicyhealthreportmanagement.SetupGated,
+		maskingreportmanagement.SetupGated,
+		onpremconnector.SetupGated,
+		report.SetupGated,
+		reportdefinition.SetupGated,
+		sdmmaskingpolicydifference.SetupGated,
+		securityassessment.SetupGated,
+		securityassessmentcheck.SetupGated,
+		securityassessmentfinding.SetupGated,
+		securitypolicy.SetupGated,
+		securitypolicyconfig.SetupGated,
+		securitypolicydeployment.SetupGated,
+		securitypolicydeploymentmanagement.SetupGated,
+		securitypolicymanagement.SetupGated,
+		sensitivedatamodel.SetupGated,
+		sensitivedatamodelreferentialrelation.SetupGated,
+		sensitivedatamodelsapplydiscoveryjobresults.SetupGated,
+		sensitivedatamodelssensitivecolumn.SetupGated,
+		sensitivetype.SetupGated,
+		sensitivetypegroup.SetupGated,
+		sensitivetypegroupgroupedsensitivetype.SetupGated,
+		sensitivetypesexport.SetupGated,
+		setsecurityassessmentbaseline.SetupGated,
+		setsecurityassessmentbaselinemanagement.SetupGated,
+		setuserassessmentbaseline.SetupGated,
+		setuserassessmentbaselinemanagement.SetupGated,
+		sqlcollection.SetupGated,
+		sqlfirewallpolicy.SetupGated,
+		sqlfirewallpolicymanagement.SetupGated,
+		targetalertpolicyassociation.SetupGated,
+		targetdatabase.SetupGated,
+		targetdatabasegroup.SetupGated,
+		targetdatabasepeertargetdatabase.SetupGated,
+		unifiedauditpolicy.SetupGated,
+		unifiedauditpolicydefinition.SetupGated,
+		unsetsecurityassessmentbaseline.SetupGated,
+		unsetsecurityassessmentbaselinemanagement.SetupGated,
+		unsetuserassessmentbaseline.SetupGated,
+		unsetuserassessmentbaselinemanagement.SetupGated,
+		userassessment.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

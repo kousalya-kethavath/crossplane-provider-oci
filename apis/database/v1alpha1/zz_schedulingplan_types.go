@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SchedulingPlanInitParameters struct {
@@ -43,7 +43,7 @@ type SchedulingPlanInitParameters struct {
 
 	// The OCID of the Scheduling Policy.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.SchedulingPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SchedulingPolicyID *string `json:"schedulingPolicyId,omitempty" tf:"scheduling_policy_id,omitempty"`
 
 	// Reference to a SchedulingPolicy in database to populate schedulingPolicyId.
@@ -147,7 +147,7 @@ type SchedulingPlanParameters struct {
 
 	// The OCID of the Scheduling Policy.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.SchedulingPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SchedulingPolicyID *string `json:"schedulingPolicyId,omitempty" tf:"scheduling_policy_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CompliancePolicyRuleInitParameters struct {
@@ -150,7 +150,7 @@ type PatchSelectionInitParameters struct {
 
 	// (Updatable) Patch Name.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.Patch
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	PatchName *string `json:"patchName,omitempty" tf:"patch_name,omitempty"`
 
 	// Reference to a Patch in fleetappsmanagement to populate patchName.
@@ -192,7 +192,7 @@ type PatchSelectionParameters struct {
 
 	// (Updatable) Patch Name.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.Patch
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	PatchName *string `json:"patchName,omitempty" tf:"patch_name,omitempty"`
 

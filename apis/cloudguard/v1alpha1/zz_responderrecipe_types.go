@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EffectiveResponderRulesDetailsConfigurationsInitParameters struct {
@@ -130,7 +130,7 @@ type ResponderRecipeInitParameters struct {
 
 	// The unique identifier of the source responder recipe
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudguard/v1alpha1.ResponderRecipe
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceResponderRecipeID *string `json:"sourceResponderRecipeId,omitempty" tf:"source_responder_recipe_id,omitempty"`
 
 	// Reference to a ResponderRecipe in cloudguard to populate sourceResponderRecipeId.
@@ -232,7 +232,7 @@ type ResponderRecipeParameters struct {
 
 	// The unique identifier of the source responder recipe
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudguard/v1alpha1.ResponderRecipe
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceResponderRecipeID *string `json:"sourceResponderRecipeId,omitempty" tf:"source_responder_recipe_id,omitempty"`
 
@@ -301,7 +301,7 @@ type ResponderRulesInitParameters struct {
 
 	// (Updatable) Unique identifier for the responder rule
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/events/v1alpha1.Rule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResponderRuleID *string `json:"responderRuleId,omitempty" tf:"responder_rule_id,omitempty"`
 
 	// Reference to a Rule in events to populate responderRuleId.
@@ -364,7 +364,7 @@ type ResponderRulesParameters struct {
 
 	// (Updatable) Unique identifier for the responder rule
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/events/v1alpha1.Rule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResponderRuleID *string `json:"responderRuleId,omitempty" tf:"responder_rule_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AssetSourceInitParameters struct {
@@ -23,7 +23,7 @@ type AssetSourceInitParameters struct {
 
 	// (Updatable) The OCID of the compartment that is going to be used to create assets.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AssetsCompartmentID *string `json:"assetsCompartmentId,omitempty" tf:"assets_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate assetsCompartmentId.
@@ -55,7 +55,7 @@ type AssetSourceInitParameters struct {
 
 	// (Updatable) The OCID of the discovery schedule that is going to be attached to the created asset.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudbridge/v1alpha1.DiscoverySchedule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DiscoveryScheduleID *string `json:"discoveryScheduleId,omitempty" tf:"discovery_schedule_id,omitempty"`
 
 	// Reference to a DiscoverySchedule in cloudbridge to populate discoveryScheduleId.
@@ -71,7 +71,7 @@ type AssetSourceInitParameters struct {
 
 	// The OCID of the environment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudbridge/v1alpha1.Environment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
 
 	// Reference to a Environment in cloudbridge to populate environmentId.
@@ -88,7 +88,7 @@ type AssetSourceInitParameters struct {
 
 	// The OCID of the inventory that will contain created assets.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudbridge/v1alpha1.Inventory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InventoryID *string `json:"inventoryId,omitempty" tf:"inventory_id,omitempty"`
 
 	// Reference to a Inventory in cloudbridge to populate inventoryId.
@@ -191,7 +191,7 @@ type AssetSourceParameters struct {
 
 	// (Updatable) The OCID of the compartment that is going to be used to create assets.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AssetsCompartmentID *string `json:"assetsCompartmentId,omitempty" tf:"assets_compartment_id,omitempty"`
 
@@ -227,7 +227,7 @@ type AssetSourceParameters struct {
 
 	// (Updatable) The OCID of the discovery schedule that is going to be attached to the created asset.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudbridge/v1alpha1.DiscoverySchedule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DiscoveryScheduleID *string `json:"discoveryScheduleId,omitempty" tf:"discovery_schedule_id,omitempty"`
 
@@ -245,7 +245,7 @@ type AssetSourceParameters struct {
 
 	// The OCID of the environment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudbridge/v1alpha1.Environment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
 
@@ -264,7 +264,7 @@ type AssetSourceParameters struct {
 
 	// The OCID of the inventory that will contain created assets.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudbridge/v1alpha1.Inventory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InventoryID *string `json:"inventoryId,omitempty" tf:"inventory_id,omitempty"`
 
@@ -298,7 +298,7 @@ type DiscoveryCredentialsInitParameters struct {
 
 	// (Updatable) The OCID of the secret in a vault. If the the type of the credentials is BASIC, the secret must contain the username and password in JSON format, which is in the form of { "username": "", "password": "" }`.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate secretId.
@@ -326,7 +326,7 @@ type DiscoveryCredentialsParameters struct {
 
 	// (Updatable) The OCID of the secret in a vault. If the the type of the credentials is BASIC, the secret must contain the username and password in JSON format, which is in the form of { "username": "", "password": "" }`.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
@@ -347,7 +347,7 @@ type ReplicationCredentialsInitParameters struct {
 
 	// (Updatable) The OCID of the secret in a vault. If the the type of the credentials is BASIC, the secret must contain the username and password in JSON format, which is in the form of { "username": "", "password": "" }`.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate secretId.
@@ -375,7 +375,7 @@ type ReplicationCredentialsParameters struct {
 
 	// (Updatable) The OCID of the secret in a vault. If the the type of the credentials is BASIC, the secret must contain the username and password in JSON format, which is in the form of { "username": "", "password": "" }`.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 

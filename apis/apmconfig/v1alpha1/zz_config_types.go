@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConfigConfigInitParameters struct {
@@ -39,7 +39,7 @@ type ConfigInitParameters struct {
 
 	// (Updatable) The APM Domain ID the request is intended for.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apm/v1alpha1.ApmDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ApmDomainID *string `json:"apmDomainId,omitempty" tf:"apm_domain_id,omitempty"`
 
 	// Reference to a ApmDomain in apm to populate apmDomainId.
@@ -90,7 +90,7 @@ type ConfigInitParameters struct {
 
 	// The OCID of the Management Agent that will provision the APM Agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managementagent/v1alpha1.ManagementAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ManagementAgentID *string `json:"managementAgentId,omitempty" tf:"management_agent_id,omitempty"`
 
 	// Reference to a ManagementAgent in managementagent to populate managementAgentId.
@@ -280,7 +280,7 @@ type ConfigParameters struct {
 
 	// (Updatable) The APM Domain ID the request is intended for.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apm/v1alpha1.ApmDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ApmDomainID *string `json:"apmDomainId,omitempty" tf:"apm_domain_id,omitempty"`
 
@@ -344,7 +344,7 @@ type ConfigParameters struct {
 
 	// The OCID of the Management Agent that will provision the APM Agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managementagent/v1alpha1.ManagementAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagementAgentID *string `json:"managementAgentId,omitempty" tf:"management_agent_id,omitempty"`
 

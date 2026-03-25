@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ComputeInitParameters struct {
@@ -82,7 +82,7 @@ type MigrationPlanInitParameters struct {
 
 	// The OCID of the associated migration.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudmigrations/v1alpha1.Migration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MigrationID *string `json:"migrationId,omitempty" tf:"migration_id,omitempty"`
 
 	// Reference to a Migration in cloudmigrations to populate migrationId.
@@ -95,7 +95,7 @@ type MigrationPlanInitParameters struct {
 
 	// Source migraiton plan ID to be cloned.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudmigrations/v1alpha1.MigrationPlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceMigrationPlanID *string `json:"sourceMigrationPlanId,omitempty" tf:"source_migration_plan_id,omitempty"`
 
 	// Reference to a MigrationPlan in cloudmigrations to populate sourceMigrationPlanId.
@@ -202,7 +202,7 @@ type MigrationPlanParameters struct {
 
 	// The OCID of the associated migration.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudmigrations/v1alpha1.Migration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MigrationID *string `json:"migrationId,omitempty" tf:"migration_id,omitempty"`
 
@@ -216,7 +216,7 @@ type MigrationPlanParameters struct {
 
 	// Source migraiton plan ID to be cloned.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudmigrations/v1alpha1.MigrationPlan
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceMigrationPlanID *string `json:"sourceMigrationPlanId,omitempty" tf:"source_migration_plan_id,omitempty"`
 
@@ -379,7 +379,7 @@ type TargetEnvironmentsInitParameters struct {
 
 	// (Updatable) Target compartment identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetCompartmentID *string `json:"targetCompartmentId,omitempty" tf:"target_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate targetCompartmentId.
@@ -455,7 +455,7 @@ type TargetEnvironmentsParameters struct {
 
 	// (Updatable) Target compartment identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetCompartmentID *string `json:"targetCompartmentId,omitempty" tf:"target_compartment_id,omitempty"`
 

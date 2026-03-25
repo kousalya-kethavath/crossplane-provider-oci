@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ColumnSourceInitParameters struct {
@@ -20,7 +20,7 @@ type ColumnSourceInitParameters struct {
 
 	// (Updatable) The OCID of the sensitive data model to be associated as the column source with the masking policy.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.SensitiveDataModel
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SensitiveDataModelID *string `json:"sensitiveDataModelId,omitempty" tf:"sensitive_data_model_id,omitempty"`
 
 	// Reference to a SensitiveDataModel in datasafe to populate sensitiveDataModelId.
@@ -33,7 +33,7 @@ type ColumnSourceInitParameters struct {
 
 	// (Updatable) The OCID of the target database to be associated as the column source with the masking policy.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudguard/v1alpha1.Target
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 
 	// Reference to a Target in cloudguard to populate targetId.
@@ -65,7 +65,7 @@ type ColumnSourceParameters struct {
 
 	// (Updatable) The OCID of the sensitive data model to be associated as the column source with the masking policy.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.SensitiveDataModel
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SensitiveDataModelID *string `json:"sensitiveDataModelId,omitempty" tf:"sensitive_data_model_id,omitempty"`
 
@@ -79,7 +79,7 @@ type ColumnSourceParameters struct {
 
 	// (Updatable) The OCID of the target database to be associated as the column source with the masking policy.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudguard/v1alpha1.Target
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 

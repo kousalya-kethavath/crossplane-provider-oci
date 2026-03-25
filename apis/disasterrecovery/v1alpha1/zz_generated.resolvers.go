@@ -8,10 +8,9 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -34,6 +33,7 @@ func (mg *AutomaticDrConfiguration) ResolveReferences( // ResolveReferences of t
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultFailoverDrPlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DefaultFailoverDrPlanIDRef,
 			Selector:     mg.Spec.ForProvider.DefaultFailoverDrPlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *AutomaticDrConfiguration) ResolveReferences( // ResolveReferences of t
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultSwitchoverDrPlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DefaultSwitchoverDrPlanIDRef,
 			Selector:     mg.Spec.ForProvider.DefaultSwitchoverDrPlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -72,6 +73,7 @@ func (mg *AutomaticDrConfiguration) ResolveReferences( // ResolveReferences of t
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DrProtectionGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DrProtectionGroupIDRef,
 			Selector:     mg.Spec.ForProvider.DrProtectionGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -91,6 +93,7 @@ func (mg *AutomaticDrConfiguration) ResolveReferences( // ResolveReferences of t
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultFailoverDrPlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DefaultFailoverDrPlanIDRef,
 			Selector:     mg.Spec.InitProvider.DefaultFailoverDrPlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -110,6 +113,7 @@ func (mg *AutomaticDrConfiguration) ResolveReferences( // ResolveReferences of t
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultSwitchoverDrPlanID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DefaultSwitchoverDrPlanIDRef,
 			Selector:     mg.Spec.InitProvider.DefaultSwitchoverDrPlanIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -129,6 +133,7 @@ func (mg *AutomaticDrConfiguration) ResolveReferences( // ResolveReferences of t
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DrProtectionGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DrProtectionGroupIDRef,
 			Selector:     mg.Spec.InitProvider.DrProtectionGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -160,6 +165,7 @@ func (mg *DrPlan) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DrProtectionGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DrProtectionGroupIDRef,
 			Selector:     mg.Spec.ForProvider.DrProtectionGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -179,6 +185,7 @@ func (mg *DrPlan) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DrProtectionGroupID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DrProtectionGroupIDRef,
 			Selector:     mg.Spec.InitProvider.DrProtectionGroupIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -210,6 +217,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -231,6 +239,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].BackendSetMappings[i4].DestinationBackendSetName),
 					Extract:      resource.ExtractParamPath("name", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].BackendSetMappings[i4].DestinationBackendSetNameRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].BackendSetMappings[i4].DestinationBackendSetNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -254,6 +263,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].BackendSetMappings[i4].SourceBackendSetName),
 					Extract:      resource.ExtractParamPath("name", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].BackendSetMappings[i4].SourceBackendSetNameRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].BackendSetMappings[i4].SourceBackendSetNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -277,6 +287,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].BackupConfig[i4].ImageReplicationVaultSecretID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].BackupConfig[i4].ImageReplicationVaultSecretIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].BackupConfig[i4].ImageReplicationVaultSecretIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -301,6 +312,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].BlockVolumeAttachAndMountOperations[i4].Attachments[i5].BlockVolumeID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Members[i3].BlockVolumeAttachAndMountOperations[i4].Attachments[i5].BlockVolumeIDRef,
 						Selector:     mg.Spec.ForProvider.Members[i3].BlockVolumeAttachAndMountOperations[i4].Attachments[i5].BlockVolumeIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -326,6 +338,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].BlockVolumeAttachAndMountOperations[i4].Attachments[i5].VolumeAttachmentReferenceInstanceID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Members[i3].BlockVolumeAttachAndMountOperations[i4].Attachments[i5].VolumeAttachmentReferenceInstanceIDRef,
 						Selector:     mg.Spec.ForProvider.Members[i3].BlockVolumeAttachAndMountOperations[i4].Attachments[i5].VolumeAttachmentReferenceInstanceIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -351,6 +364,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].BlockVolumeOperations[i4].AttachmentDetails[i5].VolumeAttachmentReferenceInstanceID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Members[i3].BlockVolumeOperations[i4].AttachmentDetails[i5].VolumeAttachmentReferenceInstanceIDRef,
 						Selector:     mg.Spec.ForProvider.Members[i3].BlockVolumeOperations[i4].AttachmentDetails[i5].VolumeAttachmentReferenceInstanceIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -375,6 +389,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].BlockVolumeOperations[i4].BlockVolumeID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].BlockVolumeOperations[i4].BlockVolumeIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].BlockVolumeOperations[i4].BlockVolumeIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -398,6 +413,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].CommonDestinationKey[i4].EncryptionKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].CommonDestinationKey[i4].EncryptionKeyIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].CommonDestinationKey[i4].EncryptionKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -421,6 +437,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].CommonDestinationKey[i4].VaultID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].CommonDestinationKey[i4].VaultIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].CommonDestinationKey[i4].VaultIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -443,6 +460,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].DestinationBackupPolicyID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Members[i3].DestinationBackupPolicyIDRef,
 				Selector:     mg.Spec.ForProvider.Members[i3].DestinationBackupPolicyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -464,6 +482,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].DestinationCompartmentID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Members[i3].DestinationCompartmentIDRef,
 				Selector:     mg.Spec.ForProvider.Members[i3].DestinationCompartmentIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -485,6 +504,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].DestinationDedicatedVMHostID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Members[i3].DestinationDedicatedVMHostIDRef,
 				Selector:     mg.Spec.ForProvider.Members[i3].DestinationDedicatedVMHostIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -507,6 +527,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].DestinationEncryptionKey[i4].EncryptionKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].DestinationEncryptionKey[i4].EncryptionKeyIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].DestinationEncryptionKey[i4].EncryptionKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -530,6 +551,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].DestinationEncryptionKey[i4].VaultID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].DestinationEncryptionKey[i4].VaultIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].DestinationEncryptionKey[i4].VaultIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -552,6 +574,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].DestinationLoadBalancerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Members[i3].DestinationLoadBalancerIDRef,
 				Selector:     mg.Spec.ForProvider.Members[i3].DestinationLoadBalancerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -573,6 +596,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].DestinationNetworkLoadBalancerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Members[i3].DestinationNetworkLoadBalancerIDRef,
 				Selector:     mg.Spec.ForProvider.Members[i3].DestinationNetworkLoadBalancerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -594,6 +618,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].DestinationSnapshotPolicyID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Members[i3].DestinationSnapshotPolicyIDRef,
 				Selector:     mg.Spec.ForProvider.Members[i3].DestinationSnapshotPolicyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -616,6 +641,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].ExportMappings[i4].DestinationMountTargetID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].ExportMappings[i4].DestinationMountTargetIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].ExportMappings[i4].DestinationMountTargetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -639,6 +665,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].ExportMappings[i4].ExportID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].ExportMappings[i4].ExportIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].ExportMappings[i4].ExportIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -663,6 +690,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].FileSystemOperations[i4].MountDetails[i5].MountTargetID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Members[i3].FileSystemOperations[i4].MountDetails[i5].MountTargetIDRef,
 						Selector:     mg.Spec.ForProvider.Members[i3].FileSystemOperations[i4].MountDetails[i5].MountTargetIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -687,6 +715,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].FileSystemOperations[i4].MountTargetID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].FileSystemOperations[i4].MountTargetIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].FileSystemOperations[i4].MountTargetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -711,6 +740,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].FileSystemOperations[i4].UnmountDetails[i5].MountTargetID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Members[i3].FileSystemOperations[i4].UnmountDetails[i5].MountTargetIDRef,
 						Selector:     mg.Spec.ForProvider.Members[i3].FileSystemOperations[i4].UnmountDetails[i5].MountTargetIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -735,6 +765,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].LoadBalancerMappings[i4].DestinationLoadBalancerID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].LoadBalancerMappings[i4].DestinationLoadBalancerIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].LoadBalancerMappings[i4].DestinationLoadBalancerIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -758,6 +789,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].LoadBalancerMappings[i4].SourceLoadBalancerID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].LoadBalancerMappings[i4].SourceLoadBalancerIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].LoadBalancerMappings[i4].SourceLoadBalancerIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -781,6 +813,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].NetworkLoadBalancerMappings[i4].DestinationNetworkLoadBalancerID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].NetworkLoadBalancerMappings[i4].DestinationNetworkLoadBalancerIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].NetworkLoadBalancerMappings[i4].DestinationNetworkLoadBalancerIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -804,6 +837,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].NetworkLoadBalancerMappings[i4].SourceNetworkLoadBalancerID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].NetworkLoadBalancerMappings[i4].SourceNetworkLoadBalancerIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].NetworkLoadBalancerMappings[i4].SourceNetworkLoadBalancerIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -826,6 +860,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].PeerClusterID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Members[i3].PeerClusterIDRef,
 				Selector:     mg.Spec.ForProvider.Members[i3].PeerClusterIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -847,6 +882,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].PeerDBSystemID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Members[i3].PeerDBSystemIDRef,
 				Selector:     mg.Spec.ForProvider.Members[i3].PeerDBSystemIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -870,6 +906,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].DestinationEncryptionKey[i5].EncryptionKeyID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].DestinationEncryptionKey[i5].EncryptionKeyIDRef,
 						Selector:     mg.Spec.ForProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].DestinationEncryptionKey[i5].EncryptionKeyIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -895,6 +932,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].DestinationEncryptionKey[i5].VaultID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].DestinationEncryptionKey[i5].VaultIDRef,
 						Selector:     mg.Spec.ForProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].DestinationEncryptionKey[i5].VaultIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -919,6 +957,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].SourceVolumeID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].SourceVolumeIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].SourceVolumeIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -942,6 +981,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].VaultMappings[i4].DestinationVaultID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].VaultMappings[i4].DestinationVaultIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].VaultMappings[i4].DestinationVaultIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -965,6 +1005,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].VaultMappings[i4].SourceVaultID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].VaultMappings[i4].SourceVaultIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].VaultMappings[i4].SourceVaultIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -988,6 +1029,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].VnicMapping[i4].DestinationSubnetID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].VnicMapping[i4].DestinationSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].VnicMapping[i4].DestinationSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1011,6 +1053,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].VnicMappings[i4].DestinationReservedPublicIPID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].VnicMappings[i4].DestinationReservedPublicIPIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].VnicMappings[i4].DestinationReservedPublicIPIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1034,6 +1077,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Members[i3].VnicMappings[i4].DestinationSubnetID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Members[i3].VnicMappings[i4].DestinationSubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Members[i3].VnicMappings[i4].DestinationSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1055,6 +1099,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1076,6 +1121,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].BackendSetMappings[i4].DestinationBackendSetName),
 					Extract:      resource.ExtractParamPath("name", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].BackendSetMappings[i4].DestinationBackendSetNameRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].BackendSetMappings[i4].DestinationBackendSetNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1099,6 +1145,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].BackendSetMappings[i4].SourceBackendSetName),
 					Extract:      resource.ExtractParamPath("name", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].BackendSetMappings[i4].SourceBackendSetNameRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].BackendSetMappings[i4].SourceBackendSetNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1122,6 +1169,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].BackupConfig[i4].ImageReplicationVaultSecretID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].BackupConfig[i4].ImageReplicationVaultSecretIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].BackupConfig[i4].ImageReplicationVaultSecretIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1146,6 +1194,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].BlockVolumeAttachAndMountOperations[i4].Attachments[i5].BlockVolumeID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Members[i3].BlockVolumeAttachAndMountOperations[i4].Attachments[i5].BlockVolumeIDRef,
 						Selector:     mg.Spec.InitProvider.Members[i3].BlockVolumeAttachAndMountOperations[i4].Attachments[i5].BlockVolumeIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1171,6 +1220,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].BlockVolumeAttachAndMountOperations[i4].Attachments[i5].VolumeAttachmentReferenceInstanceID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Members[i3].BlockVolumeAttachAndMountOperations[i4].Attachments[i5].VolumeAttachmentReferenceInstanceIDRef,
 						Selector:     mg.Spec.InitProvider.Members[i3].BlockVolumeAttachAndMountOperations[i4].Attachments[i5].VolumeAttachmentReferenceInstanceIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1196,6 +1246,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].BlockVolumeOperations[i4].AttachmentDetails[i5].VolumeAttachmentReferenceInstanceID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Members[i3].BlockVolumeOperations[i4].AttachmentDetails[i5].VolumeAttachmentReferenceInstanceIDRef,
 						Selector:     mg.Spec.InitProvider.Members[i3].BlockVolumeOperations[i4].AttachmentDetails[i5].VolumeAttachmentReferenceInstanceIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1220,6 +1271,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].BlockVolumeOperations[i4].BlockVolumeID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].BlockVolumeOperations[i4].BlockVolumeIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].BlockVolumeOperations[i4].BlockVolumeIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1243,6 +1295,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].CommonDestinationKey[i4].EncryptionKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].CommonDestinationKey[i4].EncryptionKeyIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].CommonDestinationKey[i4].EncryptionKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1266,6 +1319,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].CommonDestinationKey[i4].VaultID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].CommonDestinationKey[i4].VaultIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].CommonDestinationKey[i4].VaultIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1288,6 +1342,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].DestinationBackupPolicyID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Members[i3].DestinationBackupPolicyIDRef,
 				Selector:     mg.Spec.InitProvider.Members[i3].DestinationBackupPolicyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1309,6 +1364,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].DestinationCompartmentID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Members[i3].DestinationCompartmentIDRef,
 				Selector:     mg.Spec.InitProvider.Members[i3].DestinationCompartmentIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1330,6 +1386,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].DestinationDedicatedVMHostID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Members[i3].DestinationDedicatedVMHostIDRef,
 				Selector:     mg.Spec.InitProvider.Members[i3].DestinationDedicatedVMHostIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1352,6 +1409,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].DestinationEncryptionKey[i4].EncryptionKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].DestinationEncryptionKey[i4].EncryptionKeyIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].DestinationEncryptionKey[i4].EncryptionKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1375,6 +1433,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].DestinationEncryptionKey[i4].VaultID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].DestinationEncryptionKey[i4].VaultIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].DestinationEncryptionKey[i4].VaultIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1397,6 +1456,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].DestinationLoadBalancerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Members[i3].DestinationLoadBalancerIDRef,
 				Selector:     mg.Spec.InitProvider.Members[i3].DestinationLoadBalancerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1418,6 +1478,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].DestinationNetworkLoadBalancerID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Members[i3].DestinationNetworkLoadBalancerIDRef,
 				Selector:     mg.Spec.InitProvider.Members[i3].DestinationNetworkLoadBalancerIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1439,6 +1500,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].DestinationSnapshotPolicyID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Members[i3].DestinationSnapshotPolicyIDRef,
 				Selector:     mg.Spec.InitProvider.Members[i3].DestinationSnapshotPolicyIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1461,6 +1523,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].ExportMappings[i4].DestinationMountTargetID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].ExportMappings[i4].DestinationMountTargetIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].ExportMappings[i4].DestinationMountTargetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1484,6 +1547,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].ExportMappings[i4].ExportID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].ExportMappings[i4].ExportIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].ExportMappings[i4].ExportIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1508,6 +1572,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].FileSystemOperations[i4].MountDetails[i5].MountTargetID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Members[i3].FileSystemOperations[i4].MountDetails[i5].MountTargetIDRef,
 						Selector:     mg.Spec.InitProvider.Members[i3].FileSystemOperations[i4].MountDetails[i5].MountTargetIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1532,6 +1597,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].FileSystemOperations[i4].MountTargetID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].FileSystemOperations[i4].MountTargetIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].FileSystemOperations[i4].MountTargetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1556,6 +1622,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].FileSystemOperations[i4].UnmountDetails[i5].MountTargetID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Members[i3].FileSystemOperations[i4].UnmountDetails[i5].MountTargetIDRef,
 						Selector:     mg.Spec.InitProvider.Members[i3].FileSystemOperations[i4].UnmountDetails[i5].MountTargetIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1580,6 +1647,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].LoadBalancerMappings[i4].DestinationLoadBalancerID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].LoadBalancerMappings[i4].DestinationLoadBalancerIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].LoadBalancerMappings[i4].DestinationLoadBalancerIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1603,6 +1671,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].LoadBalancerMappings[i4].SourceLoadBalancerID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].LoadBalancerMappings[i4].SourceLoadBalancerIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].LoadBalancerMappings[i4].SourceLoadBalancerIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1626,6 +1695,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].NetworkLoadBalancerMappings[i4].DestinationNetworkLoadBalancerID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].NetworkLoadBalancerMappings[i4].DestinationNetworkLoadBalancerIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].NetworkLoadBalancerMappings[i4].DestinationNetworkLoadBalancerIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1649,6 +1719,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].NetworkLoadBalancerMappings[i4].SourceNetworkLoadBalancerID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].NetworkLoadBalancerMappings[i4].SourceNetworkLoadBalancerIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].NetworkLoadBalancerMappings[i4].SourceNetworkLoadBalancerIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1671,6 +1742,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].PeerClusterID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Members[i3].PeerClusterIDRef,
 				Selector:     mg.Spec.InitProvider.Members[i3].PeerClusterIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1692,6 +1764,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].PeerDBSystemID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Members[i3].PeerDBSystemIDRef,
 				Selector:     mg.Spec.InitProvider.Members[i3].PeerDBSystemIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1715,6 +1788,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].DestinationEncryptionKey[i5].EncryptionKeyID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].DestinationEncryptionKey[i5].EncryptionKeyIDRef,
 						Selector:     mg.Spec.InitProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].DestinationEncryptionKey[i5].EncryptionKeyIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1740,6 +1814,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].DestinationEncryptionKey[i5].VaultID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].DestinationEncryptionKey[i5].VaultIDRef,
 						Selector:     mg.Spec.InitProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].DestinationEncryptionKey[i5].VaultIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1764,6 +1839,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].SourceVolumeID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].SourceVolumeIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].SourceVolumeToDestinationEncryptionKeyMappings[i4].SourceVolumeIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1787,6 +1863,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].VaultMappings[i4].DestinationVaultID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].VaultMappings[i4].DestinationVaultIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].VaultMappings[i4].DestinationVaultIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1810,6 +1887,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].VaultMappings[i4].SourceVaultID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].VaultMappings[i4].SourceVaultIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].VaultMappings[i4].SourceVaultIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1833,6 +1911,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].VnicMapping[i4].DestinationSubnetID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].VnicMapping[i4].DestinationSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].VnicMapping[i4].DestinationSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1856,6 +1935,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].VnicMappings[i4].DestinationReservedPublicIPID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].VnicMappings[i4].DestinationReservedPublicIPIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].VnicMappings[i4].DestinationReservedPublicIPIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1879,6 +1959,7 @@ func (mg *DrProtectionGroup) ResolveReferences(ctx context.Context, c client.Rea
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Members[i3].VnicMappings[i4].DestinationSubnetID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Members[i3].VnicMappings[i4].DestinationSubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Members[i3].VnicMappings[i4].DestinationSubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LicenseRecordInitParameters struct {
@@ -43,7 +43,7 @@ type LicenseRecordInitParameters struct {
 
 	// Unique product license identifier.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/licensemanager/v1alpha1.ProductLicense
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProductLicenseID *string `json:"productLicenseId,omitempty" tf:"product_license_id,omitempty"`
 
 	// Reference to a ProductLicense in licensemanager to populate productLicenseId.
@@ -156,7 +156,7 @@ type LicenseRecordParameters struct {
 
 	// Unique product license identifier.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/licensemanager/v1alpha1.ProductLicense
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProductLicenseID *string `json:"productLicenseId,omitempty" tf:"product_license_id,omitempty"`
 

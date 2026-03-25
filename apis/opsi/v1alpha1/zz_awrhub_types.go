@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AwrHubInitParameters struct {
@@ -40,7 +40,7 @@ type AwrHubInitParameters struct {
 
 	// Object Storage Bucket Name
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/objectstorage/v1alpha1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	ObjectStorageBucketName *string `json:"objectStorageBucketName,omitempty" tf:"object_storage_bucket_name,omitempty"`
 
 	// Reference to a Bucket in objectstorage to populate objectStorageBucketName.
@@ -53,7 +53,7 @@ type AwrHubInitParameters struct {
 
 	// OPSI Warehouse OCID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/opsi/v1alpha1.OperationsInsightsWarehouse
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OperationsInsightsWarehouseID *string `json:"operationsInsightsWarehouseId,omitempty" tf:"operations_insights_warehouse_id,omitempty"`
 
 	// Reference to a OperationsInsightsWarehouse in opsi to populate operationsInsightsWarehouseId.
@@ -144,7 +144,7 @@ type AwrHubParameters struct {
 
 	// Object Storage Bucket Name
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/objectstorage/v1alpha1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	ObjectStorageBucketName *string `json:"objectStorageBucketName,omitempty" tf:"object_storage_bucket_name,omitempty"`
 
@@ -158,7 +158,7 @@ type AwrHubParameters struct {
 
 	// OPSI Warehouse OCID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/opsi/v1alpha1.OperationsInsightsWarehouse
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OperationsInsightsWarehouseID *string `json:"operationsInsightsWarehouseId,omitempty" tf:"operations_insights_warehouse_id,omitempty"`
 

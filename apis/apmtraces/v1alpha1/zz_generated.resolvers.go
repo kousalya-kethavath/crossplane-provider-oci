@@ -8,10 +8,9 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -34,6 +33,7 @@ func (mg *ScheduledQuery) ResolveReferences( // ResolveReferences of this Schedu
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApmDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ApmDomainIDRef,
 			Selector:     mg.Spec.ForProvider.ApmDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *ScheduledQuery) ResolveReferences( // ResolveReferences of this Schedu
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ScheduledQueryName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ScheduledQueryNameRef,
 			Selector:     mg.Spec.ForProvider.ScheduledQueryNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -74,6 +75,7 @@ func (mg *ScheduledQuery) ResolveReferences( // ResolveReferences of this Schedu
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ScheduledQueryProcessingConfiguration[i3].Streaming[i4].StreamID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.ScheduledQueryProcessingConfiguration[i3].Streaming[i4].StreamIDRef,
 					Selector:     mg.Spec.ForProvider.ScheduledQueryProcessingConfiguration[i3].Streaming[i4].StreamIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -95,6 +97,7 @@ func (mg *ScheduledQuery) ResolveReferences( // ResolveReferences of this Schedu
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApmDomainID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ApmDomainIDRef,
 			Selector:     mg.Spec.InitProvider.ApmDomainIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -114,6 +117,7 @@ func (mg *ScheduledQuery) ResolveReferences( // ResolveReferences of this Schedu
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ScheduledQueryName),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ScheduledQueryNameRef,
 			Selector:     mg.Spec.InitProvider.ScheduledQueryNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -135,6 +139,7 @@ func (mg *ScheduledQuery) ResolveReferences( // ResolveReferences of this Schedu
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ScheduledQueryProcessingConfiguration[i3].Streaming[i4].StreamID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.ScheduledQueryProcessingConfiguration[i3].Streaming[i4].StreamIDRef,
 					Selector:     mg.Spec.InitProvider.ScheduledQueryProcessingConfiguration[i3].Streaming[i4].StreamIDSelector,
 					To:           reference.To{List: l, Managed: m},

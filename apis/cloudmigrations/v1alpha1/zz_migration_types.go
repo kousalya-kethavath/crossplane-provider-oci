@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MigrationInitParameters struct {
@@ -43,7 +43,7 @@ type MigrationInitParameters struct {
 
 	// (Updatable) Replication schedule identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudmigrations/v1alpha1.ReplicationSchedule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ReplicationScheduleID *string `json:"replicationScheduleId,omitempty" tf:"replication_schedule_id,omitempty"`
 
 	// Reference to a ReplicationSchedule in cloudmigrations to populate replicationScheduleId.
@@ -132,7 +132,7 @@ type MigrationParameters struct {
 
 	// (Updatable) Replication schedule identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudmigrations/v1alpha1.ReplicationSchedule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ReplicationScheduleID *string `json:"replicationScheduleId,omitempty" tf:"replication_schedule_id,omitempty"`
 

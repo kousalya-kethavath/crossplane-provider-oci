@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EndpointInitParameters struct {
@@ -49,7 +49,7 @@ type EndpointInitParameters struct {
 
 	// (Updatable) The OCID of the model to associate with the endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ailanguage/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
 	// Reference to a Model in ailanguage to populate modelId.
@@ -155,7 +155,7 @@ type EndpointParameters struct {
 
 	// (Updatable) The OCID of the model to associate with the endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ailanguage/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 

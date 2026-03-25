@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ApplyActionScheduleInitParameters struct {
@@ -95,7 +95,7 @@ type ComponentsGoalVersionDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the custom 'GI' software image.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.Image
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	GoalSoftwareImageID *string `json:"goalSoftwareImageId,omitempty" tf:"goal_software_image_id,omitempty"`
 
 	// Reference to a Image in compute to populate goalSoftwareImageId.
@@ -129,7 +129,7 @@ type ComponentsGoalVersionDetailsParameters struct {
 
 	// (Updatable) The OCID of the custom 'GI' software image.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.Image
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GoalSoftwareImageID *string `json:"goalSoftwareImageId,omitempty" tf:"goal_software_image_id,omitempty"`
 
@@ -205,7 +205,7 @@ type FsuCycleInitParameters struct {
 
 	// The OCID of the Exadata Fleet Update Collection which will be updated by the Exadata Fleet Update Cycle being created.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetsoftwareupdate/v1alpha1.FsuCollection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FsuCollectionID *string `json:"fsuCollectionId,omitempty" tf:"fsu_collection_id,omitempty"`
 
 	// Reference to a FsuCollection in fleetsoftwareupdate to populate fsuCollectionId.
@@ -377,7 +377,7 @@ type FsuCycleParameters struct {
 
 	// The OCID of the Exadata Fleet Update Collection which will be updated by the Exadata Fleet Update Cycle being created.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetsoftwareupdate/v1alpha1.FsuCollection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FsuCollectionID *string `json:"fsuCollectionId,omitempty" tf:"fsu_collection_id,omitempty"`
 
@@ -484,7 +484,7 @@ type GoalVersionDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the goal database software image.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.Image
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SoftwareImageID *string `json:"softwareImageId,omitempty" tf:"software_image_id,omitempty"`
 
 	// Reference to a Image in compute to populate softwareImageId.
@@ -539,7 +539,7 @@ type GoalVersionDetailsParameters struct {
 
 	// (Updatable) The OCID of the goal database software image.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.Image
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SoftwareImageID *string `json:"softwareImageId,omitempty" tf:"software_image_id,omitempty"`
 

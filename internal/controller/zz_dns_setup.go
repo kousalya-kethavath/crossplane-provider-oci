@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	actioncreatezonefromzonefile "github.com/oracle/provider-oci/internal/controller/dns/actioncreatezonefromzonefile"
 	record "github.com/oracle/provider-oci/internal/controller/dns/record"
@@ -39,6 +39,30 @@ func Setup_dns(mgr ctrl.Manager, o controller.Options) error {
 		zone.Setup,
 		zonepromotednsseckeyversion.Setup,
 		zonestagednsseckeyversion.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_dns creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_dns(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		actioncreatezonefromzonefile.SetupGated,
+		record.SetupGated,
+		resolver.SetupGated,
+		resolverendpoint.SetupGated,
+		rrset.SetupGated,
+		steeringpolicy.SetupGated,
+		steeringpolicyattachment.SetupGated,
+		tsigkey.SetupGated,
+		view.SetupGated,
+		zone.SetupGated,
+		zonepromotednsseckeyversion.SetupGated,
+		zonestagednsseckeyversion.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

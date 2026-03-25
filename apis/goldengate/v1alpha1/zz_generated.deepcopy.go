@@ -9,7 +9,7 @@ Copyright 2022 Upbound Inc.
 package v1alpha1
 
 import (
-	"github.com/crossplane/crossplane-runtime/apis/common/v1"
+	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -3498,7 +3498,7 @@ func (in *DatabaseRegistrationInitParameters) DeepCopyInto(out *DatabaseRegistra
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.PasswordSecretRef = in.PasswordSecretRef
+	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.SecretCompartmentID != nil {
 		in, out := &in.SecretCompartmentID, &out.SecretCompartmentID
 		*out = new(string)
@@ -3886,7 +3886,7 @@ func (in *DatabaseRegistrationParameters) DeepCopyInto(out *DatabaseRegistration
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.PasswordSecretRef = in.PasswordSecretRef
+	in.PasswordSecretRef.DeepCopyInto(&out.PasswordSecretRef)
 	if in.SecretCompartmentID != nil {
 		in, out := &in.SecretCompartmentID, &out.SecretCompartmentID
 		*out = new(string)

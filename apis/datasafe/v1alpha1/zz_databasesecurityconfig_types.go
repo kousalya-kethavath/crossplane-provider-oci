@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DatabaseSecurityConfigInitParameters struct {
@@ -29,7 +29,7 @@ type DatabaseSecurityConfigInitParameters struct {
 
 	// The OCID of the database security configuration resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.DatabaseSecurityConfig
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatabaseSecurityConfigID *string `json:"databaseSecurityConfigId,omitempty" tf:"database_security_config_id,omitempty"`
 
 	// Reference to a DatabaseSecurityConfig in datasafe to populate databaseSecurityConfigId.
@@ -132,7 +132,7 @@ type DatabaseSecurityConfigParameters struct {
 
 	// The OCID of the database security configuration resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.DatabaseSecurityConfig
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatabaseSecurityConfigID *string `json:"databaseSecurityConfigId,omitempty" tf:"database_security_config_id,omitempty"`
 

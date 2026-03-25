@@ -9,7 +9,7 @@ Copyright 2022 Upbound Inc.
 package v1alpha1
 
 import (
-	"github.com/crossplane/crossplane-runtime/apis/common/v1"
+	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -1189,7 +1189,7 @@ func (in *PasswordDetailsInitParameters) DeepCopyInto(out *PasswordDetailsInitPa
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
-	out.PasswordTypeSecretRef = in.PasswordTypeSecretRef
+	in.PasswordTypeSecretRef.DeepCopyInto(&out.PasswordTypeSecretRef)
 	if in.SecretID != nil {
 		in, out := &in.SecretID, &out.SecretID
 		*out = new(string)
@@ -1255,7 +1255,7 @@ func (in *PasswordDetailsParameters) DeepCopyInto(out *PasswordDetailsParameters
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
-	out.PasswordTypeSecretRef = in.PasswordTypeSecretRef
+	in.PasswordTypeSecretRef.DeepCopyInto(&out.PasswordTypeSecretRef)
 	if in.SecretID != nil {
 		in, out := &in.SecretID, &out.SecretID
 		*out = new(string)

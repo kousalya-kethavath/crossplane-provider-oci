@@ -8,18 +8,16 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
+	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Fleet.
-	apisresolver "github.com/oracle/provider-oci/internal/apis"
 )
 
-func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Fleet) ResolveReferences( // ResolveReferences of this Fleet.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -35,6 +33,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -55,6 +54,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InventoryLog[i3].LogGroupID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.InventoryLog[i3].LogGroupIDRef,
 				Selector:     mg.Spec.ForProvider.InventoryLog[i3].LogGroupIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -76,6 +76,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InventoryLog[i3].LogID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.InventoryLog[i3].LogIDRef,
 				Selector:     mg.Spec.ForProvider.InventoryLog[i3].LogIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -97,6 +98,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OperationLog[i3].LogGroupID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.OperationLog[i3].LogGroupIDRef,
 				Selector:     mg.Spec.ForProvider.OperationLog[i3].LogGroupIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -118,6 +120,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OperationLog[i3].LogID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.OperationLog[i3].LogIDRef,
 				Selector:     mg.Spec.ForProvider.OperationLog[i3].LogIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -138,6 +141,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -158,6 +162,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InventoryLog[i3].LogGroupID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.InventoryLog[i3].LogGroupIDRef,
 				Selector:     mg.Spec.InitProvider.InventoryLog[i3].LogGroupIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -179,6 +184,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InventoryLog[i3].LogID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.InventoryLog[i3].LogIDRef,
 				Selector:     mg.Spec.InitProvider.InventoryLog[i3].LogIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -200,6 +206,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OperationLog[i3].LogGroupID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.OperationLog[i3].LogGroupIDRef,
 				Selector:     mg.Spec.InitProvider.OperationLog[i3].LogGroupIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -221,6 +228,7 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OperationLog[i3].LogID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.OperationLog[i3].LogIDRef,
 				Selector:     mg.Spec.InitProvider.OperationLog[i3].LogIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -254,6 +262,7 @@ func (mg *FleetAdvancedFeatureConfiguration) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AnalyticBucketName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AnalyticBucketNameRef,
 			Selector:     mg.Spec.ForProvider.AnalyticBucketNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -275,6 +284,7 @@ func (mg *FleetAdvancedFeatureConfiguration) ResolveReferences(ctx context.Conte
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CryptoEventAnalysis[i3].SummarizedEventsLog[i4].LogGroupID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.CryptoEventAnalysis[i3].SummarizedEventsLog[i4].LogGroupIDRef,
 					Selector:     mg.Spec.ForProvider.CryptoEventAnalysis[i3].SummarizedEventsLog[i4].LogGroupIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -298,6 +308,7 @@ func (mg *FleetAdvancedFeatureConfiguration) ResolveReferences(ctx context.Conte
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CryptoEventAnalysis[i3].SummarizedEventsLog[i4].LogID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.CryptoEventAnalysis[i3].SummarizedEventsLog[i4].LogIDRef,
 					Selector:     mg.Spec.ForProvider.CryptoEventAnalysis[i3].SummarizedEventsLog[i4].LogIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -319,6 +330,7 @@ func (mg *FleetAdvancedFeatureConfiguration) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FleetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FleetIDRef,
 			Selector:     mg.Spec.ForProvider.FleetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -338,6 +350,7 @@ func (mg *FleetAdvancedFeatureConfiguration) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AnalyticBucketName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AnalyticBucketNameRef,
 			Selector:     mg.Spec.InitProvider.AnalyticBucketNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -359,6 +372,7 @@ func (mg *FleetAdvancedFeatureConfiguration) ResolveReferences(ctx context.Conte
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CryptoEventAnalysis[i3].SummarizedEventsLog[i4].LogGroupID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.CryptoEventAnalysis[i3].SummarizedEventsLog[i4].LogGroupIDRef,
 					Selector:     mg.Spec.InitProvider.CryptoEventAnalysis[i3].SummarizedEventsLog[i4].LogGroupIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -382,6 +396,7 @@ func (mg *FleetAdvancedFeatureConfiguration) ResolveReferences(ctx context.Conte
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CryptoEventAnalysis[i3].SummarizedEventsLog[i4].LogID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.CryptoEventAnalysis[i3].SummarizedEventsLog[i4].LogIDRef,
 					Selector:     mg.Spec.InitProvider.CryptoEventAnalysis[i3].SummarizedEventsLog[i4].LogIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -403,6 +418,7 @@ func (mg *FleetAdvancedFeatureConfiguration) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FleetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FleetIDRef,
 			Selector:     mg.Spec.InitProvider.FleetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -434,6 +450,7 @@ func (mg *FleetAgentConfiguration) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FleetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FleetIDRef,
 			Selector:     mg.Spec.ForProvider.FleetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -453,6 +470,7 @@ func (mg *FleetAgentConfiguration) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FleetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FleetIDRef,
 			Selector:     mg.Spec.InitProvider.FleetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -484,6 +502,7 @@ func (mg *JmsPlugin) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -503,6 +522,7 @@ func (mg *JmsPlugin) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FleetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FleetIDRef,
 			Selector:     mg.Spec.ForProvider.FleetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -522,6 +542,7 @@ func (mg *JmsPlugin) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -541,6 +562,7 @@ func (mg *JmsPlugin) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FleetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FleetIDRef,
 			Selector:     mg.Spec.InitProvider.FleetIDSelector,
 			To:           reference.To{List: l, Managed: m},

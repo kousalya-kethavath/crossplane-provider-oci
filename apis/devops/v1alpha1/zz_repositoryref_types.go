@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type RepositoryRefInitParameters struct {
@@ -20,7 +20,7 @@ type RepositoryRefInitParameters struct {
 
 	// (Updatable) SHA-1 hash value of the object pointed to by the tag.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/objectstorage/v1alpha1.Object
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// Reference to a Object in objectstorage to populate objectId.
@@ -39,7 +39,7 @@ type RepositoryRefInitParameters struct {
 
 	// Unique repository identifier.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.Repository
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
 
 	// Reference to a Repository in devops to populate repositoryId.
@@ -90,7 +90,7 @@ type RepositoryRefParameters struct {
 
 	// (Updatable) SHA-1 hash value of the object pointed to by the tag.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/objectstorage/v1alpha1.Object
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
@@ -112,7 +112,7 @@ type RepositoryRefParameters struct {
 
 	// Unique repository identifier.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.Repository
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
 

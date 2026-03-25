@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type APISchemaInitParameters struct {
@@ -76,7 +76,7 @@ type AgentToolInitParameters struct {
 
 	// The OCID of the agent that this Tool is attached to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.AgentAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AgentID *string `json:"agentId,omitempty" tf:"agent_id,omitempty"`
 
 	// Reference to a AgentAgent in generativeai to populate agentId.
@@ -171,7 +171,7 @@ type AgentToolParameters struct {
 
 	// The OCID of the agent that this Tool is attached to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.AgentAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AgentID *string `json:"agentId,omitempty" tf:"agent_id,omitempty"`
 
@@ -394,7 +394,7 @@ type HTTPEndpointAuthScopeConfigInitParameters struct {
 
 	// (Updatable) The OCID of the vault secret with username:password. Required when authScope is AGENT.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VaultSecretID *string `json:"vaultSecretId,omitempty" tf:"vault_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate vaultSecretId.
@@ -467,7 +467,7 @@ type HTTPEndpointAuthScopeConfigParameters struct {
 
 	// (Updatable) The OCID of the vault secret with username:password. Required when authScope is AGENT.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultSecretID *string `json:"vaultSecretId,omitempty" tf:"vault_secret_id,omitempty"`
 
@@ -572,7 +572,7 @@ type KnowledgeBaseConfigsInitParameters struct {
 
 	// (Updatable) The OCID of the knowledgeBase this RAG Tool uses
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.AgentKnowledgeBase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KnowledgeBaseID *string `json:"knowledgeBaseId,omitempty" tf:"knowledge_base_id,omitempty"`
 
 	// Reference to a AgentKnowledgeBase in generativeai to populate knowledgeBaseId.
@@ -594,7 +594,7 @@ type KnowledgeBaseConfigsParameters struct {
 
 	// (Updatable) The OCID of the knowledgeBase this RAG Tool uses
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.AgentKnowledgeBase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KnowledgeBaseID *string `json:"knowledgeBaseId,omitempty" tf:"knowledge_base_id,omitempty"`
 
@@ -670,7 +670,7 @@ type ToolConfigDatabaseConnectionInitParameters struct {
 
 	// (Updatable) The OCID of the Database Tools Connection.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.MigrationConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
 	// Reference to a MigrationConnection in database to populate connectionId.
@@ -698,7 +698,7 @@ type ToolConfigDatabaseConnectionParameters struct {
 
 	// (Updatable) The OCID of the Database Tools Connection.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.MigrationConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
@@ -722,7 +722,7 @@ type ToolConfigInitParameters struct {
 
 	// (Updatable) The AgentEndpoint OCID to be used as a tool in this agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.AgentAgentEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AgentEndpointID *string `json:"agentEndpointId,omitempty" tf:"agent_endpoint_id,omitempty"`
 
 	// Reference to a AgentAgentEndpoint in generativeai to populate agentEndpointId.
@@ -768,7 +768,7 @@ type ToolConfigInitParameters struct {
 
 	// (Updatable) The subnet ID from agent developer tenancy through which the egress is going to be routed.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -845,7 +845,7 @@ type ToolConfigParameters struct {
 
 	// (Updatable) The AgentEndpoint OCID to be used as a tool in this agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.AgentAgentEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AgentEndpointID *string `json:"agentEndpointId,omitempty" tf:"agent_endpoint_id,omitempty"`
 
@@ -903,7 +903,7 @@ type ToolConfigParameters struct {
 
 	// (Updatable) The subnet ID from agent developer tenancy through which the egress is going to be routed.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

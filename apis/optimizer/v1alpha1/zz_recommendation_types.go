@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type RecommendationInitParameters struct {
 
 	// The unique OCID associated with the recommendation.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/optimizer/v1alpha1.Recommendation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RecommendationID *string `json:"recommendationId,omitempty" tf:"recommendation_id,omitempty"`
 
 	// Reference to a Recommendation in optimizer to populate recommendationId.
@@ -94,7 +94,7 @@ type RecommendationParameters struct {
 
 	// The unique OCID associated with the recommendation.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/optimizer/v1alpha1.Recommendation
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RecommendationID *string `json:"recommendationId,omitempty" tf:"recommendation_id,omitempty"`
 

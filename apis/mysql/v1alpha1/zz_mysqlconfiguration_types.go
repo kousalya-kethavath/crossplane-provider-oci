@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type InitVariablesInitParameters struct {
@@ -65,7 +65,7 @@ type MysqlConfigurationInitParameters struct {
 
 	// The OCID of the Configuration from which the new Configuration is derived. The values in CreateConfigurationDetails.variables supersede the variables of the parent Configuration.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/audit/v1alpha1.Configuration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ParentConfigurationID *string `json:"parentConfigurationId,omitempty" tf:"parent_configuration_id,omitempty"`
 
 	// Reference to a Configuration in audit to populate parentConfigurationId.
@@ -173,7 +173,7 @@ type MysqlConfigurationParameters struct {
 
 	// The OCID of the Configuration from which the new Configuration is derived. The values in CreateConfigurationDetails.variables supersede the variables of the parent Configuration.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/audit/v1alpha1.Configuration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ParentConfigurationID *string `json:"parentConfigurationId,omitempty" tf:"parent_configuration_id,omitempty"`
 

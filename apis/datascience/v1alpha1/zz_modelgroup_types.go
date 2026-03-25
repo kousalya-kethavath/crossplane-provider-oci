@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ItemsInitParameters struct {
@@ -49,7 +49,7 @@ type MemberModelDetailsInitParameters struct {
 
 	// The OCID of the model.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
 	// Reference to a Model in datascience to populate modelId.
@@ -78,7 +78,7 @@ type MemberModelDetailsParameters struct {
 
 	// The OCID of the model.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
@@ -212,7 +212,7 @@ type ModelGroupDetailsInitParameters struct {
 
 	// The OCID of the model in the group that represents the base model for stacked deployment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BaseModelID *string `json:"baseModelId,omitempty" tf:"base_model_id,omitempty"`
 
 	// Reference to a Model in datascience to populate baseModelId.
@@ -246,7 +246,7 @@ type ModelGroupDetailsParameters struct {
 
 	// The OCID of the model in the group that represents the base model for stacked deployment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BaseModelID *string `json:"baseModelId,omitempty" tf:"base_model_id,omitempty"`
 
@@ -309,7 +309,7 @@ type ModelGroupInitParameters struct {
 
 	// The OCID of the model group version history to which the modelGroup is associated.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.ModelGroupVersionHistory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ModelGroupVersionHistoryID *string `json:"modelGroupVersionHistoryId,omitempty" tf:"model_group_version_history_id,omitempty"`
 
 	// Reference to a ModelGroupVersionHistory in datascience to populate modelGroupVersionHistoryId.
@@ -322,7 +322,7 @@ type ModelGroupInitParameters struct {
 
 	// The OCID of the project to associate with the modelGroup.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// Reference to a Project in datascience to populate projectId.
@@ -390,7 +390,7 @@ type ModelGroupModelGroupDetailsInitParameters struct {
 
 	// The OCID of the model in the group that represents the base model for stacked deployment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BaseModelID *string `json:"baseModelId,omitempty" tf:"base_model_id,omitempty"`
 
 	// Reference to a Model in datascience to populate baseModelId.
@@ -424,7 +424,7 @@ type ModelGroupModelGroupDetailsParameters struct {
 
 	// The OCID of the model in the group that represents the base model for stacked deployment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BaseModelID *string `json:"baseModelId,omitempty" tf:"base_model_id,omitempty"`
 
@@ -568,7 +568,7 @@ type ModelGroupParameters struct {
 
 	// The OCID of the model group version history to which the modelGroup is associated.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.ModelGroupVersionHistory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ModelGroupVersionHistoryID *string `json:"modelGroupVersionHistoryId,omitempty" tf:"model_group_version_history_id,omitempty"`
 
@@ -582,7 +582,7 @@ type ModelGroupParameters struct {
 
 	// The OCID of the project to associate with the modelGroup.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -620,7 +620,7 @@ type ModifyModelGroupDetailsInitParameters struct {
 
 	// The OCID of the model group version history to which the modelGroup is associated.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.ModelGroupVersionHistory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ModelGroupVersionHistoryID *string `json:"modelGroupVersionHistoryId,omitempty" tf:"model_group_version_history_id,omitempty"`
 
 	// Reference to a ModelGroupVersionHistory in datascience to populate modelGroupVersionHistoryId.
@@ -687,7 +687,7 @@ type ModifyModelGroupDetailsParameters struct {
 
 	// The OCID of the model group version history to which the modelGroup is associated.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.ModelGroupVersionHistory
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ModelGroupVersionHistoryID *string `json:"modelGroupVersionHistoryId,omitempty" tf:"model_group_version_history_id,omitempty"`
 
@@ -730,7 +730,7 @@ type ValuesInitParameters struct {
 
 	// The OCID of the model.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
 	// Reference to a Model in datascience to populate modelId.
@@ -759,7 +759,7 @@ type ValuesParameters struct {
 
 	// The OCID of the model.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 

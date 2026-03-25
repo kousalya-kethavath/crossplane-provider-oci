@@ -8,10 +8,9 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -34,6 +33,7 @@ func (mg *FsuCollection) ResolveReferences( // ResolveReferences of this FsuColl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *FsuCollection) ResolveReferences( // ResolveReferences of this FsuColl
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -84,6 +85,7 @@ func (mg *FsuCycle) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -103,6 +105,7 @@ func (mg *FsuCycle) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FsuCollectionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.FsuCollectionIDRef,
 			Selector:     mg.Spec.ForProvider.FsuCollectionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -125,6 +128,7 @@ func (mg *FsuCycle) ResolveReferences(ctx context.Context, c client.Reader) erro
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GoalVersionDetails[i3].Components[i4].GoalVersionDetails[i5].GoalSoftwareImageID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.GoalVersionDetails[i3].Components[i4].GoalVersionDetails[i5].GoalSoftwareImageIDRef,
 						Selector:     mg.Spec.ForProvider.GoalVersionDetails[i3].Components[i4].GoalVersionDetails[i5].GoalSoftwareImageIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -148,6 +152,7 @@ func (mg *FsuCycle) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GoalVersionDetails[i3].SoftwareImageID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.GoalVersionDetails[i3].SoftwareImageIDRef,
 				Selector:     mg.Spec.ForProvider.GoalVersionDetails[i3].SoftwareImageIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -168,6 +173,7 @@ func (mg *FsuCycle) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -187,6 +193,7 @@ func (mg *FsuCycle) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FsuCollectionID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.FsuCollectionIDRef,
 			Selector:     mg.Spec.InitProvider.FsuCollectionIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -209,6 +216,7 @@ func (mg *FsuCycle) ResolveReferences(ctx context.Context, c client.Reader) erro
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GoalVersionDetails[i3].Components[i4].GoalVersionDetails[i5].GoalSoftwareImageID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.GoalVersionDetails[i3].Components[i4].GoalVersionDetails[i5].GoalSoftwareImageIDRef,
 						Selector:     mg.Spec.InitProvider.GoalVersionDetails[i3].Components[i4].GoalVersionDetails[i5].GoalSoftwareImageIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -232,6 +240,7 @@ func (mg *FsuCycle) ResolveReferences(ctx context.Context, c client.Reader) erro
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GoalVersionDetails[i3].SoftwareImageID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.GoalVersionDetails[i3].SoftwareImageIDRef,
 				Selector:     mg.Spec.InitProvider.GoalVersionDetails[i3].SoftwareImageIDSelector,
 				To:           reference.To{List: l, Managed: m},

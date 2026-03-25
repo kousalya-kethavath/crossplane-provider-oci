@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DkimInitParameters struct {
@@ -24,7 +24,7 @@ type DkimInitParameters struct {
 
 	// The OCID of the EmailDomain for this DKIM.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/email/v1alpha1.EmailDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EmailDomainID *string `json:"emailDomainId,omitempty" tf:"email_domain_id,omitempty"`
 
 	// Reference to a EmailDomain in email to populate emailDomainId.
@@ -116,7 +116,7 @@ type DkimParameters struct {
 
 	// The OCID of the EmailDomain for this DKIM.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/email/v1alpha1.EmailDomain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EmailDomainID *string `json:"emailDomainId,omitempty" tf:"email_domain_id,omitempty"`
 

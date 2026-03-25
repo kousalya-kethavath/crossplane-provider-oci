@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ApprovalPolicyInitParameters struct {
@@ -180,7 +180,7 @@ type ContainerConfigNetworkChannelInitParameters struct {
 
 	// (Updatable) The OCID of the subnet where VNIC resources will be created for private endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -216,7 +216,7 @@ type ContainerConfigNetworkChannelParameters struct {
 
 	// (Updatable) The OCID of the subnet where VNIC resources will be created for private endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -296,7 +296,7 @@ type DeployStageInitParameters struct {
 
 	// (Updatable) The OCID of the artifact that contains the command specification.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployArtifact
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CommandSpecDeployArtifactID *string `json:"commandSpecDeployArtifactId,omitempty" tf:"command_spec_deploy_artifact_id,omitempty"`
 
 	// Reference to a DeployArtifact in devops to populate commandSpecDeployArtifactId.
@@ -309,7 +309,7 @@ type DeployStageInitParameters struct {
 
 	// The OCID of the upstream compute instance group blue-green deployment stage in this pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployStage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ComputeInstanceGroupBlueGreenDeploymentDeployStageID *string `json:"computeInstanceGroupBlueGreenDeploymentDeployStageId,omitempty" tf:"compute_instance_group_blue_green_deployment_deploy_stage_id,omitempty"`
 
 	// Reference to a DeployStage in devops to populate computeInstanceGroupBlueGreenDeploymentDeployStageId.
@@ -322,7 +322,7 @@ type DeployStageInitParameters struct {
 
 	// A compute instance group canary stage OCID for load balancer.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployStage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ComputeInstanceGroupCanaryDeployStageID *string `json:"computeInstanceGroupCanaryDeployStageId,omitempty" tf:"compute_instance_group_canary_deploy_stage_id,omitempty"`
 
 	// Reference to a DeployStage in devops to populate computeInstanceGroupCanaryDeployStageId.
@@ -335,7 +335,7 @@ type DeployStageInitParameters struct {
 
 	// (Updatable) A compute instance group canary traffic shift stage OCID for load balancer.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployStage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ComputeInstanceGroupCanaryTrafficShiftDeployStageID *string `json:"computeInstanceGroupCanaryTrafficShiftDeployStageId,omitempty" tf:"compute_instance_group_canary_traffic_shift_deploy_stage_id,omitempty"`
 
 	// Reference to a DeployStage in devops to populate computeInstanceGroupCanaryTrafficShiftDeployStageId.
@@ -348,7 +348,7 @@ type DeployStageInitParameters struct {
 
 	// (Updatable) A compute instance group environment OCID for rolling deployment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployEnvironment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ComputeInstanceGroupDeployEnvironmentID *string `json:"computeInstanceGroupDeployEnvironmentId,omitempty" tf:"compute_instance_group_deploy_environment_id,omitempty"`
 
 	// Reference to a DeployEnvironment in devops to populate computeInstanceGroupDeployEnvironmentId.
@@ -372,7 +372,7 @@ type DeployStageInitParameters struct {
 
 	// (Applicable when deploy_stage_type=INVOKE_FUNCTION) (Updatable) Optional artifact OCID. The artifact will be included in the body for the function invocation during the stage's execution. If the DeployArtifact.argumentSubstituitionMode is set to SUBSTITUTE_PLACEHOLDERS, then the pipeline parameter values will be used to replace the placeholders in the artifact content.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployArtifact
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DeployArtifactID *string `json:"deployArtifactId,omitempty" tf:"deploy_artifact_id,omitempty"`
 
 	// Reference to a DeployArtifact in devops to populate deployArtifactId.
@@ -394,7 +394,7 @@ type DeployStageInitParameters struct {
 
 	// The OCID of a pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployPipeline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DeployPipelineID *string `json:"deployPipelineId,omitempty" tf:"deploy_pipeline_id,omitempty"`
 
 	// Reference to a DeployPipeline in devops to populate deployPipelineId.
@@ -413,7 +413,7 @@ type DeployStageInitParameters struct {
 
 	// (Updatable) The OCID of the artifact that contains the deployment specification.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployArtifact
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DeploymentSpecDeployArtifactID *string `json:"deploymentSpecDeployArtifactId,omitempty" tf:"deployment_spec_deploy_artifact_id,omitempty"`
 
 	// Reference to a DeployArtifact in devops to populate deploymentSpecDeployArtifactId.
@@ -432,7 +432,7 @@ type DeployStageInitParameters struct {
 
 	// (Updatable) A Docker image artifact OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployArtifact
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DockerImageDeployArtifactID *string `json:"dockerImageDeployArtifactId,omitempty" tf:"docker_image_deploy_artifact_id,omitempty"`
 
 	// Reference to a DeployArtifact in devops to populate dockerImageDeployArtifactId.
@@ -452,7 +452,7 @@ type DeployStageInitParameters struct {
 
 	// (Updatable) Function environment OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployEnvironment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FunctionDeployEnvironmentID *string `json:"functionDeployEnvironmentId,omitempty" tf:"function_deploy_environment_id,omitempty"`
 
 	// Reference to a DeployEnvironment in devops to populate functionDeployEnvironmentId.
@@ -471,7 +471,7 @@ type DeployStageInitParameters struct {
 
 	// (Updatable) Helm chart artifact OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployArtifact
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	HelmChartDeployArtifactID *string `json:"helmChartDeployArtifactId,omitempty" tf:"helm_chart_deploy_artifact_id,omitempty"`
 
 	// Reference to a DeployArtifact in devops to populate helmChartDeployArtifactId.
@@ -517,7 +517,7 @@ type DeployStageInitParameters struct {
 
 	// The OCID of the upstream OKE blue-green deployment stage in this pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployStage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OkeBlueGreenDeployStageID *string `json:"okeBlueGreenDeployStageId,omitempty" tf:"oke_blue_green_deploy_stage_id,omitempty"`
 
 	// Reference to a DeployStage in devops to populate okeBlueGreenDeployStageId.
@@ -530,7 +530,7 @@ type DeployStageInitParameters struct {
 
 	// The OCID of an upstream OKE canary deployment stage in this pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployStage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OkeCanaryDeployStageID *string `json:"okeCanaryDeployStageId,omitempty" tf:"oke_canary_deploy_stage_id,omitempty"`
 
 	// Reference to a DeployStage in devops to populate okeCanaryDeployStageId.
@@ -543,7 +543,7 @@ type DeployStageInitParameters struct {
 
 	// The OCID of an upstream OKE canary deployment traffic shift stage in this pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployStage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OkeCanaryTrafficShiftDeployStageID *string `json:"okeCanaryTrafficShiftDeployStageId,omitempty" tf:"oke_canary_traffic_shift_deploy_stage_id,omitempty"`
 
 	// Reference to a DeployStage in devops to populate okeCanaryTrafficShiftDeployStageId.
@@ -556,7 +556,7 @@ type DeployStageInitParameters struct {
 
 	// (Updatable) Kubernetes cluster environment OCID for deployment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployEnvironment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OkeClusterDeployEnvironmentID *string `json:"okeClusterDeployEnvironmentId,omitempty" tf:"oke_cluster_deploy_environment_id,omitempty"`
 
 	// Reference to a DeployEnvironment in devops to populate okeClusterDeployEnvironmentId.
@@ -866,7 +866,7 @@ type DeployStageParameters struct {
 
 	// (Updatable) The OCID of the artifact that contains the command specification.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployArtifact
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CommandSpecDeployArtifactID *string `json:"commandSpecDeployArtifactId,omitempty" tf:"command_spec_deploy_artifact_id,omitempty"`
 
@@ -880,7 +880,7 @@ type DeployStageParameters struct {
 
 	// The OCID of the upstream compute instance group blue-green deployment stage in this pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployStage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ComputeInstanceGroupBlueGreenDeploymentDeployStageID *string `json:"computeInstanceGroupBlueGreenDeploymentDeployStageId,omitempty" tf:"compute_instance_group_blue_green_deployment_deploy_stage_id,omitempty"`
 
@@ -894,7 +894,7 @@ type DeployStageParameters struct {
 
 	// A compute instance group canary stage OCID for load balancer.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployStage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ComputeInstanceGroupCanaryDeployStageID *string `json:"computeInstanceGroupCanaryDeployStageId,omitempty" tf:"compute_instance_group_canary_deploy_stage_id,omitempty"`
 
@@ -908,7 +908,7 @@ type DeployStageParameters struct {
 
 	// (Updatable) A compute instance group canary traffic shift stage OCID for load balancer.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployStage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ComputeInstanceGroupCanaryTrafficShiftDeployStageID *string `json:"computeInstanceGroupCanaryTrafficShiftDeployStageId,omitempty" tf:"compute_instance_group_canary_traffic_shift_deploy_stage_id,omitempty"`
 
@@ -922,7 +922,7 @@ type DeployStageParameters struct {
 
 	// (Updatable) A compute instance group environment OCID for rolling deployment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployEnvironment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ComputeInstanceGroupDeployEnvironmentID *string `json:"computeInstanceGroupDeployEnvironmentId,omitempty" tf:"compute_instance_group_deploy_environment_id,omitempty"`
 
@@ -950,7 +950,7 @@ type DeployStageParameters struct {
 
 	// (Applicable when deploy_stage_type=INVOKE_FUNCTION) (Updatable) Optional artifact OCID. The artifact will be included in the body for the function invocation during the stage's execution. If the DeployArtifact.argumentSubstituitionMode is set to SUBSTITUTE_PLACEHOLDERS, then the pipeline parameter values will be used to replace the placeholders in the artifact content.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployArtifact
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeployArtifactID *string `json:"deployArtifactId,omitempty" tf:"deploy_artifact_id,omitempty"`
 
@@ -976,7 +976,7 @@ type DeployStageParameters struct {
 
 	// The OCID of a pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployPipeline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeployPipelineID *string `json:"deployPipelineId,omitempty" tf:"deploy_pipeline_id,omitempty"`
 
@@ -998,7 +998,7 @@ type DeployStageParameters struct {
 
 	// (Updatable) The OCID of the artifact that contains the deployment specification.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployArtifact
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeploymentSpecDeployArtifactID *string `json:"deploymentSpecDeployArtifactId,omitempty" tf:"deployment_spec_deploy_artifact_id,omitempty"`
 
@@ -1020,7 +1020,7 @@ type DeployStageParameters struct {
 
 	// (Updatable) A Docker image artifact OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployArtifact
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DockerImageDeployArtifactID *string `json:"dockerImageDeployArtifactId,omitempty" tf:"docker_image_deploy_artifact_id,omitempty"`
 
@@ -1043,7 +1043,7 @@ type DeployStageParameters struct {
 
 	// (Updatable) Function environment OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployEnvironment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FunctionDeployEnvironmentID *string `json:"functionDeployEnvironmentId,omitempty" tf:"function_deploy_environment_id,omitempty"`
 
@@ -1065,7 +1065,7 @@ type DeployStageParameters struct {
 
 	// (Updatable) Helm chart artifact OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployArtifact
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	HelmChartDeployArtifactID *string `json:"helmChartDeployArtifactId,omitempty" tf:"helm_chart_deploy_artifact_id,omitempty"`
 
@@ -1123,7 +1123,7 @@ type DeployStageParameters struct {
 
 	// The OCID of the upstream OKE blue-green deployment stage in this pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployStage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OkeBlueGreenDeployStageID *string `json:"okeBlueGreenDeployStageId,omitempty" tf:"oke_blue_green_deploy_stage_id,omitempty"`
 
@@ -1137,7 +1137,7 @@ type DeployStageParameters struct {
 
 	// The OCID of an upstream OKE canary deployment stage in this pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployStage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OkeCanaryDeployStageID *string `json:"okeCanaryDeployStageId,omitempty" tf:"oke_canary_deploy_stage_id,omitempty"`
 
@@ -1151,7 +1151,7 @@ type DeployStageParameters struct {
 
 	// The OCID of an upstream OKE canary deployment traffic shift stage in this pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployStage
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OkeCanaryTrafficShiftDeployStageID *string `json:"okeCanaryTrafficShiftDeployStageId,omitempty" tf:"oke_canary_traffic_shift_deploy_stage_id,omitempty"`
 
@@ -1165,7 +1165,7 @@ type DeployStageParameters struct {
 
 	// (Updatable) Kubernetes cluster environment OCID for deployment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.DeployEnvironment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OkeClusterDeployEnvironmentID *string `json:"okeClusterDeployEnvironmentId,omitempty" tf:"oke_cluster_deploy_environment_id,omitempty"`
 
@@ -1382,7 +1382,7 @@ type LoadBalancerConfigInitParameters struct {
 
 	// (Updatable) Name of the load balancer listener.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.Listener
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	ListenerName *string `json:"listenerName,omitempty" tf:"listener_name,omitempty"`
 
 	// Reference to a Listener in loadbalancer to populate listenerName.
@@ -1395,7 +1395,7 @@ type LoadBalancerConfigInitParameters struct {
 
 	// (Updatable) The OCID of the load balancer.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LoadBalancerID *string `json:"loadBalancerId,omitempty" tf:"load_balancer_id,omitempty"`
 
 	// Reference to a LoadBalancer in loadbalancer to populate loadBalancerId.
@@ -1430,7 +1430,7 @@ type LoadBalancerConfigParameters struct {
 
 	// (Updatable) Name of the load balancer listener.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.Listener
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	ListenerName *string `json:"listenerName,omitempty" tf:"listener_name,omitempty"`
 
@@ -1444,7 +1444,7 @@ type LoadBalancerConfigParameters struct {
 
 	// (Updatable) The OCID of the load balancer.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LoadBalancerID *string `json:"loadBalancerId,omitempty" tf:"load_balancer_id,omitempty"`
 
@@ -1464,7 +1464,7 @@ type ProductionLoadBalancerConfigInitParameters struct {
 
 	// (Updatable) Name of the load balancer listener.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.Listener
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	ListenerName *string `json:"listenerName,omitempty" tf:"listener_name,omitempty"`
 
 	// Reference to a Listener in loadbalancer to populate listenerName.
@@ -1477,7 +1477,7 @@ type ProductionLoadBalancerConfigInitParameters struct {
 
 	// (Updatable) The OCID of the load balancer.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LoadBalancerID *string `json:"loadBalancerId,omitempty" tf:"load_balancer_id,omitempty"`
 
 	// Reference to a LoadBalancer in loadbalancer to populate loadBalancerId.
@@ -1512,7 +1512,7 @@ type ProductionLoadBalancerConfigParameters struct {
 
 	// (Updatable) Name of the load balancer listener.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.Listener
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	ListenerName *string `json:"listenerName,omitempty" tf:"listener_name,omitempty"`
 
@@ -1526,7 +1526,7 @@ type ProductionLoadBalancerConfigParameters struct {
 
 	// (Updatable) The OCID of the load balancer.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LoadBalancerID *string `json:"loadBalancerId,omitempty" tf:"load_balancer_id,omitempty"`
 
@@ -1749,7 +1749,7 @@ type TestLoadBalancerConfigInitParameters struct {
 
 	// (Updatable) Name of the load balancer listener.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.Listener
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	ListenerName *string `json:"listenerName,omitempty" tf:"listener_name,omitempty"`
 
 	// Reference to a Listener in loadbalancer to populate listenerName.
@@ -1762,7 +1762,7 @@ type TestLoadBalancerConfigInitParameters struct {
 
 	// (Updatable) The OCID of the load balancer.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LoadBalancerID *string `json:"loadBalancerId,omitempty" tf:"load_balancer_id,omitempty"`
 
 	// Reference to a LoadBalancer in loadbalancer to populate loadBalancerId.
@@ -1797,7 +1797,7 @@ type TestLoadBalancerConfigParameters struct {
 
 	// (Updatable) Name of the load balancer listener.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.Listener
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	ListenerName *string `json:"listenerName,omitempty" tf:"listener_name,omitempty"`
 
@@ -1811,7 +1811,7 @@ type TestLoadBalancerConfigParameters struct {
 
 	// (Updatable) The OCID of the load balancer.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loadbalancer/v1alpha1.LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LoadBalancerID *string `json:"loadBalancerId,omitempty" tf:"load_balancer_id,omitempty"`
 

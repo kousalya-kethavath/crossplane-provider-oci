@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AccessSubnetsInitParameters struct {
@@ -99,7 +99,7 @@ type KafkaClusterInitParameters struct {
 
 	// (Updatable) The OCID of Kafka Cluster configuration object
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apmconfig/v1alpha1.Config
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClusterConfigID *string `json:"clusterConfigId,omitempty" tf:"cluster_config_id,omitempty"`
 
 	// Reference to a Config in apmconfig to populate clusterConfigId.
@@ -228,7 +228,7 @@ type KafkaClusterParameters struct {
 
 	// (Updatable) The OCID of Kafka Cluster configuration object
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apmconfig/v1alpha1.Config
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterConfigID *string `json:"clusterConfigId,omitempty" tf:"cluster_config_id,omitempty"`
 

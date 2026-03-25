@@ -9,7 +9,7 @@ Copyright 2022 Upbound Inc.
 package v1alpha1
 
 import (
-	"github.com/crossplane/crossplane-runtime/apis/common/v1"
+	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -1007,7 +1007,7 @@ func (in *AnalyticsInstanceVanityUrlInitParameters) DeepCopyInto(out *AnalyticsI
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
-	out.PrivateKeySecretRef = in.PrivateKeySecretRef
+	in.PrivateKeySecretRef.DeepCopyInto(&out.PrivateKeySecretRef)
 	if in.PublicCertificate != nil {
 		in, out := &in.PublicCertificate, &out.PublicCertificate
 		*out = new(string)
@@ -1152,7 +1152,7 @@ func (in *AnalyticsInstanceVanityUrlParameters) DeepCopyInto(out *AnalyticsInsta
 		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
-	out.PrivateKeySecretRef = in.PrivateKeySecretRef
+	in.PrivateKeySecretRef.DeepCopyInto(&out.PrivateKeySecretRef)
 	if in.PublicCertificate != nil {
 		in, out := &in.PublicCertificate, &out.PublicCertificate
 		*out = new(string)

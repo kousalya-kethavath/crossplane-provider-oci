@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DbmgmtFeatureConfigsConnectorDetailsInitParameters struct {
@@ -154,7 +154,7 @@ type ManagementManagedDatabaseInitParameters struct {
 
 	// The OCID of the Managed Database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementManagedDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ManagedDatabaseID *string `json:"managedDatabaseId,omitempty" tf:"managed_database_id,omitempty"`
 
 	// Reference to a ManagementManagedDatabase in database to populate managedDatabaseId.
@@ -256,7 +256,7 @@ type ManagementManagedDatabaseParameters struct {
 
 	// The OCID of the Managed Database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementManagedDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagedDatabaseID *string `json:"managedDatabaseId,omitempty" tf:"managed_database_id,omitempty"`
 

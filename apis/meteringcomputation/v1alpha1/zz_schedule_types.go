@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DateRangeInitParameters struct {
@@ -275,7 +275,7 @@ type ScheduleInitParameters struct {
 
 	// The saved report ID which can also be used to generate a query.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.Report
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SavedReportID *string `json:"savedReportId,omitempty" tf:"saved_report_id,omitempty"`
 
 	// Reference to a Report in datasafe to populate savedReportId.
@@ -394,7 +394,7 @@ type ScheduleParameters struct {
 
 	// The saved report ID which can also be used to generate a query.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.Report
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SavedReportID *string `json:"savedReportId,omitempty" tf:"saved_report_id,omitempty"`
 

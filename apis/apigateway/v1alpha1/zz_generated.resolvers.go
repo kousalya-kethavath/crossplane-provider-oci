@@ -8,18 +8,16 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
+	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Api.
-	apisresolver "github.com/oracle/provider-oci/internal/apis"
 )
 
-func (mg *Api) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Api) ResolveReferences( // ResolveReferences of this Api.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -35,6 +33,7 @@ func (mg *Api) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +53,7 @@ func (mg *Api) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -85,6 +85,7 @@ func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -104,6 +105,7 @@ func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -135,6 +137,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -154,6 +157,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GatewayID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.GatewayIDRef,
 			Selector:     mg.Spec.ForProvider.GatewayIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -176,6 +180,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].FunctionID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].FunctionIDRef,
 						Selector:     mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].FunctionIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -203,6 +208,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 								CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].ValidationFailurePolicy[i6].ClientDetails[i7].ClientSecretID),
 								Extract:      resource.ExtractResourceID(),
+								Namespace:    mg.GetNamespace(),
 								Reference:    mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].ValidationFailurePolicy[i6].ClientDetails[i7].ClientSecretIDRef,
 								Selector:     mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].ValidationFailurePolicy[i6].ClientDetails[i7].ClientSecretIDSelector,
 								To:           reference.To{List: l, Managed: m},
@@ -232,6 +238,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 								CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].ValidationPolicy[i6].ClientDetails[i7].ClientSecretID),
 								Extract:      resource.ExtractResourceID(),
+								Namespace:    mg.GetNamespace(),
 								Reference:    mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].ValidationPolicy[i6].ClientDetails[i7].ClientSecretIDRef,
 								Selector:     mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].ValidationPolicy[i6].ClientDetails[i7].ClientSecretIDSelector,
 								To:           reference.To{List: l, Managed: m},
@@ -261,6 +268,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 								CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].FunctionID),
 								Extract:      resource.ExtractResourceID(),
+								Namespace:    mg.GetNamespace(),
 								Reference:    mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].FunctionIDRef,
 								Selector:     mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].FunctionIDSelector,
 								To:           reference.To{List: l, Managed: m},
@@ -292,6 +300,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 									rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 										CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].ValidationFailurePolicy[i8].ClientDetails[i9].ClientSecretID),
 										Extract:      resource.ExtractResourceID(),
+										Namespace:    mg.GetNamespace(),
 										Reference:    mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].ValidationFailurePolicy[i8].ClientDetails[i9].ClientSecretIDRef,
 										Selector:     mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].ValidationFailurePolicy[i8].ClientDetails[i9].ClientSecretIDSelector,
 										To:           reference.To{List: l, Managed: m},
@@ -325,6 +334,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 									rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 										CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].ValidationPolicy[i8].ClientDetails[i9].ClientSecretID),
 										Extract:      resource.ExtractResourceID(),
+										Namespace:    mg.GetNamespace(),
 										Reference:    mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].ValidationPolicy[i8].ClientDetails[i9].ClientSecretIDRef,
 										Selector:     mg.Spec.ForProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].ValidationPolicy[i8].ClientDetails[i9].ClientSecretIDSelector,
 										To:           reference.To{List: l, Managed: m},
@@ -354,6 +364,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Specification[i3].Routes[i4].Backend[i5].FunctionID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.Specification[i3].Routes[i4].Backend[i5].FunctionIDRef,
 						Selector:     mg.Spec.ForProvider.Specification[i3].Routes[i4].Backend[i5].FunctionIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -381,6 +392,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 								CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Specification[i3].Routes[i4].Backend[i5].RoutingBackends[i6].Backend[i7].FunctionID),
 								Extract:      resource.ExtractResourceID(),
+								Namespace:    mg.GetNamespace(),
 								Reference:    mg.Spec.ForProvider.Specification[i3].Routes[i4].Backend[i5].RoutingBackends[i6].Backend[i7].FunctionIDRef,
 								Selector:     mg.Spec.ForProvider.Specification[i3].Routes[i4].Backend[i5].RoutingBackends[i6].Backend[i7].FunctionIDSelector,
 								To:           reference.To{List: l, Managed: m},
@@ -405,6 +417,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -424,6 +437,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GatewayID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.GatewayIDRef,
 			Selector:     mg.Spec.InitProvider.GatewayIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -446,6 +460,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].FunctionID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].FunctionIDRef,
 						Selector:     mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].FunctionIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -473,6 +488,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 								CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].ValidationFailurePolicy[i6].ClientDetails[i7].ClientSecretID),
 								Extract:      resource.ExtractResourceID(),
+								Namespace:    mg.GetNamespace(),
 								Reference:    mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].ValidationFailurePolicy[i6].ClientDetails[i7].ClientSecretIDRef,
 								Selector:     mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].ValidationFailurePolicy[i6].ClientDetails[i7].ClientSecretIDSelector,
 								To:           reference.To{List: l, Managed: m},
@@ -502,6 +518,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 								CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].ValidationPolicy[i6].ClientDetails[i7].ClientSecretID),
 								Extract:      resource.ExtractResourceID(),
+								Namespace:    mg.GetNamespace(),
 								Reference:    mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].ValidationPolicy[i6].ClientDetails[i7].ClientSecretIDRef,
 								Selector:     mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].Authentication[i5].ValidationPolicy[i6].ClientDetails[i7].ClientSecretIDSelector,
 								To:           reference.To{List: l, Managed: m},
@@ -531,6 +548,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 								CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].FunctionID),
 								Extract:      resource.ExtractResourceID(),
+								Namespace:    mg.GetNamespace(),
 								Reference:    mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].FunctionIDRef,
 								Selector:     mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].FunctionIDSelector,
 								To:           reference.To{List: l, Managed: m},
@@ -562,6 +580,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 									rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 										CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].ValidationFailurePolicy[i8].ClientDetails[i9].ClientSecretID),
 										Extract:      resource.ExtractResourceID(),
+										Namespace:    mg.GetNamespace(),
 										Reference:    mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].ValidationFailurePolicy[i8].ClientDetails[i9].ClientSecretIDRef,
 										Selector:     mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].ValidationFailurePolicy[i8].ClientDetails[i9].ClientSecretIDSelector,
 										To:           reference.To{List: l, Managed: m},
@@ -595,6 +614,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 									rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 										CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].ValidationPolicy[i8].ClientDetails[i9].ClientSecretID),
 										Extract:      resource.ExtractResourceID(),
+										Namespace:    mg.GetNamespace(),
 										Reference:    mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].ValidationPolicy[i8].ClientDetails[i9].ClientSecretIDRef,
 										Selector:     mg.Spec.InitProvider.Specification[i3].RequestPolicies[i4].DynamicAuthentication[i5].AuthenticationServers[i6].AuthenticationServerDetail[i7].ValidationPolicy[i8].ClientDetails[i9].ClientSecretIDSelector,
 										To:           reference.To{List: l, Managed: m},
@@ -624,6 +644,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Specification[i3].Routes[i4].Backend[i5].FunctionID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.Specification[i3].Routes[i4].Backend[i5].FunctionIDRef,
 						Selector:     mg.Spec.InitProvider.Specification[i3].Routes[i4].Backend[i5].FunctionIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -651,6 +672,7 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 								CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Specification[i3].Routes[i4].Backend[i5].RoutingBackends[i6].Backend[i7].FunctionID),
 								Extract:      resource.ExtractResourceID(),
+								Namespace:    mg.GetNamespace(),
 								Reference:    mg.Spec.InitProvider.Specification[i3].Routes[i4].Backend[i5].RoutingBackends[i6].Backend[i7].FunctionIDRef,
 								Selector:     mg.Spec.InitProvider.Specification[i3].Routes[i4].Backend[i5].RoutingBackends[i6].Backend[i7].FunctionIDSelector,
 								To:           reference.To{List: l, Managed: m},
@@ -688,6 +710,7 @@ func (mg *Gateway) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -708,6 +731,7 @@ func (mg *Gateway) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResponseCacheDetails[i3].AuthenticationSecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ResponseCacheDetails[i3].AuthenticationSecretIDRef,
 				Selector:     mg.Spec.ForProvider.ResponseCacheDetails[i3].AuthenticationSecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -728,6 +752,7 @@ func (mg *Gateway) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -747,6 +772,7 @@ func (mg *Gateway) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -767,6 +793,7 @@ func (mg *Gateway) ResolveReferences(ctx context.Context, c client.Reader) error
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResponseCacheDetails[i3].AuthenticationSecretID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ResponseCacheDetails[i3].AuthenticationSecretIDRef,
 				Selector:     mg.Spec.InitProvider.ResponseCacheDetails[i3].AuthenticationSecretIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -787,6 +814,7 @@ func (mg *Gateway) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -818,6 +846,7 @@ func (mg *Subscriber) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -837,6 +866,7 @@ func (mg *Subscriber) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -868,6 +898,7 @@ func (mg *UsagePlan) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -889,6 +920,7 @@ func (mg *UsagePlan) ResolveReferences(ctx context.Context, c client.Reader) err
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Entitlements[i3].Targets[i4].DeploymentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Entitlements[i3].Targets[i4].DeploymentIDRef,
 					Selector:     mg.Spec.ForProvider.Entitlements[i3].Targets[i4].DeploymentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -910,6 +942,7 @@ func (mg *UsagePlan) ResolveReferences(ctx context.Context, c client.Reader) err
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -931,6 +964,7 @@ func (mg *UsagePlan) ResolveReferences(ctx context.Context, c client.Reader) err
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Entitlements[i3].Targets[i4].DeploymentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Entitlements[i3].Targets[i4].DeploymentIDRef,
 					Selector:     mg.Spec.InitProvider.Entitlements[i3].Targets[i4].DeploymentIDSelector,
 					To:           reference.To{List: l, Managed: m},

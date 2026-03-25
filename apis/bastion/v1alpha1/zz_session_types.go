@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type KeyDetailsInitParameters struct {
@@ -36,7 +36,7 @@ type SessionInitParameters struct {
 
 	// The unique identifier (OCID) of the bastion on which to create this session.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/bastion/v1alpha1.Bastion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BastionID *string `json:"bastionId,omitempty" tf:"bastion_id,omitempty"`
 
 	// Reference to a Bastion in bastion to populate bastionId.
@@ -116,7 +116,7 @@ type SessionParameters struct {
 
 	// The unique identifier (OCID) of the bastion on which to create this session.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/bastion/v1alpha1.Bastion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BastionID *string `json:"bastionId,omitempty" tf:"bastion_id,omitempty"`
 
@@ -162,7 +162,7 @@ type TargetResourceDetailsInitParameters struct {
 
 	// The name of the user on the target resource operating system that the session uses for the connection.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	TargetResourceOperatingSystemUserName *string `json:"targetResourceOperatingSystemUserName,omitempty" tf:"target_resource_operating_system_user_name,omitempty"`
 
 	// Reference to a User in identity to populate targetResourceOperatingSystemUserName.
@@ -220,7 +220,7 @@ type TargetResourceDetailsParameters struct {
 
 	// The name of the user on the target resource operating system that the session uses for the connection.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	TargetResourceOperatingSystemUserName *string `json:"targetResourceOperatingSystemUserName,omitempty" tf:"target_resource_operating_system_user_name,omitempty"`
 

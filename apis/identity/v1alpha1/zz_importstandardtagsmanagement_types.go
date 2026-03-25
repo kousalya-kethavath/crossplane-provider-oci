@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ImportStandardTagsManagementInitParameters struct {
@@ -29,7 +29,7 @@ type ImportStandardTagsManagementInitParameters struct {
 
 	// The name of standard tag namespace that will be imported in bulk
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.TagNamespace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	StandardTagNamespaceName *string `json:"standardTagNamespaceName,omitempty" tf:"standard_tag_namespace_name,omitempty"`
 
 	// Reference to a TagNamespace in identity to populate standardTagNamespaceName.
@@ -71,7 +71,7 @@ type ImportStandardTagsManagementParameters struct {
 
 	// The name of standard tag namespace that will be imported in bulk
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.TagNamespace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	StandardTagNamespaceName *string `json:"standardTagNamespaceName,omitempty" tf:"standard_tag_namespace_name,omitempty"`
 

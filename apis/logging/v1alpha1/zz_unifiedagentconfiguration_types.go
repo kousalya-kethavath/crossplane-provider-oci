@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AdvancedOptionsInitParameters struct {
@@ -1099,7 +1099,7 @@ type ServiceConfigurationDestinationInitParameters struct {
 
 	// (Updatable) The OCID of the resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/objectstorage/v1alpha1.Object
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogObjectID *string `json:"logObjectId,omitempty" tf:"log_object_id,omitempty"`
 
 	// Reference to a Object in objectstorage to populate logObjectId.
@@ -1127,7 +1127,7 @@ type ServiceConfigurationDestinationParameters struct {
 
 	// (Updatable) The OCID of the resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/objectstorage/v1alpha1.Object
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogObjectID *string `json:"logObjectId,omitempty" tf:"log_object_id,omitempty"`
 

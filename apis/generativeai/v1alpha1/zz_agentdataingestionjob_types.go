@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AgentDataIngestionJobInitParameters struct {
@@ -29,7 +29,7 @@ type AgentDataIngestionJobInitParameters struct {
 
 	// The OCID of the parent DataSource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.AgentDataSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
 
 	// Reference to a AgentDataSource in generativeai to populate dataSourceId.
@@ -123,7 +123,7 @@ type AgentDataIngestionJobParameters struct {
 
 	// The OCID of the parent DataSource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.AgentDataSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
 

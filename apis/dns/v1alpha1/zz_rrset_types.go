@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ItemsInitParameters struct {
@@ -100,7 +100,7 @@ type RrsetInitParameters struct {
 
 	// The OCID of the view the zone is associated with. Required when accessing a private zone by name.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.View
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ViewID *string `json:"viewId,omitempty" tf:"view_id,omitempty"`
 
 	// Reference to a View in dns to populate viewId.
@@ -113,7 +113,7 @@ type RrsetInitParameters struct {
 
 	// The name or OCID of the target zone.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.Zone
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ZoneNameOrID *string `json:"zoneNameOrId,omitempty" tf:"zone_name_or_id,omitempty"`
 
 	// Reference to a Zone in dns to populate zoneNameOrId.
@@ -186,7 +186,7 @@ type RrsetParameters struct {
 
 	// The OCID of the view the zone is associated with. Required when accessing a private zone by name.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.View
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ViewID *string `json:"viewId,omitempty" tf:"view_id,omitempty"`
 
@@ -200,7 +200,7 @@ type RrsetParameters struct {
 
 	// The name or OCID of the target zone.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dns/v1alpha1.Zone
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ZoneNameOrID *string `json:"zoneNameOrId,omitempty" tf:"zone_name_or_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConfigurationInitParameters struct {
@@ -93,7 +93,7 @@ type KMSKeyInitParameters struct {
 
 	// (Applicable when environment=HOSTED) (Updatable) The OCID of the vault containing the encryption key assigned to this Hosted Environment. If the Hosted Environment is using an Oracle-managed Key (i.e., not a CMEK), then the kmsVaultId will be a null string.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KMSVaultID *string `json:"kmsVaultId,omitempty" tf:"kms_vault_id,omitempty"`
 
 	// Reference to a Vault in kms to populate kmsVaultId.
@@ -141,7 +141,7 @@ type KMSKeyParameters struct {
 
 	// (Applicable when environment=HOSTED) (Updatable) The OCID of the vault containing the encryption key assigned to this Hosted Environment. If the Hosted Environment is using an Oracle-managed Key (i.e., not a CMEK), then the kmsVaultId will be a null string.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KMSVaultID *string `json:"kmsVaultId,omitempty" tf:"kms_vault_id,omitempty"`
 

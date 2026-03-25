@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	loganalyticsentity "github.com/oracle/provider-oci/internal/controller/loganalytics/loganalyticsentity"
 	loganalyticsentitytype "github.com/oracle/provider-oci/internal/controller/loganalytics/loganalyticsentitytype"
@@ -49,6 +49,35 @@ func Setup_loganalytics(mgr ctrl.Manager, o controller.Options) error {
 		namespacescheduledtask.Setup,
 		namespacestoragearchivalconfig.Setup,
 		namespacestorageenabledisablearchiving.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_loganalytics creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_loganalytics(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		loganalyticsentity.SetupGated,
+		loganalyticsentitytype.SetupGated,
+		loganalyticsimportcustomcontent.SetupGated,
+		loganalyticsloggroup.SetupGated,
+		loganalyticsobjectcollectionrule.SetupGated,
+		loganalyticspreferencesmanagement.SetupGated,
+		loganalyticsresourcecategoriesmanagement.SetupGated,
+		loganalyticsunprocesseddatabucketmanagement.SetupGated,
+		namespace.SetupGated,
+		namespaceingesttimerule.SetupGated,
+		namespaceingesttimerulesmanagement.SetupGated,
+		namespacelookup.SetupGated,
+		namespacelookupsappenddatamanagement.SetupGated,
+		namespacelookupsupdatedatamanagement.SetupGated,
+		namespacescheduledtask.SetupGated,
+		namespacestoragearchivalconfig.SetupGated,
+		namespacestorageenabledisablearchiving.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

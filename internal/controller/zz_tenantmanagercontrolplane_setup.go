@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	subscriptionmapping "github.com/oracle/provider-oci/internal/controller/tenantmanagercontrolplane/subscriptionmapping"
 )
@@ -17,6 +17,19 @@ import (
 func Setup_tenantmanagercontrolplane(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		subscriptionmapping.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_tenantmanagercontrolplane creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_tenantmanagercontrolplane(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		subscriptionmapping.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

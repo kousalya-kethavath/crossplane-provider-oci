@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type OperatorControlAssignmentInitParameters struct {
@@ -52,7 +52,7 @@ type OperatorControlAssignmentInitParameters struct {
 
 	// The OCID of the operator control that is being assigned to a target resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/operatoraccesscontrol/v1alpha1.OperatorControl
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OperatorControlID *string `json:"operatorControlId,omitempty" tf:"operator_control_id,omitempty"`
 
 	// Reference to a OperatorControl in operatoraccesscontrol to populate operatorControlId.
@@ -74,7 +74,7 @@ type OperatorControlAssignmentInitParameters struct {
 
 	// The OCID of the compartment that contains the target resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceCompartmentID *string `json:"resourceCompartmentId,omitempty" tf:"resource_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate resourceCompartmentId.
@@ -249,7 +249,7 @@ type OperatorControlAssignmentParameters struct {
 
 	// The OCID of the operator control that is being assigned to a target resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/operatoraccesscontrol/v1alpha1.OperatorControl
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OperatorControlID *string `json:"operatorControlId,omitempty" tf:"operator_control_id,omitempty"`
 
@@ -275,7 +275,7 @@ type OperatorControlAssignmentParameters struct {
 
 	// The OCID of the compartment that contains the target resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceCompartmentID *string `json:"resourceCompartmentId,omitempty" tf:"resource_compartment_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type SqlFirewallPolicyInitParameters struct {
@@ -55,7 +55,7 @@ type SqlFirewallPolicyInitParameters struct {
 
 	// The OCID of the SQL Firewall policy resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.SqlFirewallPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SQLFirewallPolicyID *string `json:"sqlFirewallPolicyId,omitempty" tf:"sql_firewall_policy_id,omitempty"`
 
 	// Reference to a SqlFirewallPolicy in datasafe to populate sqlFirewallPolicyId.
@@ -199,7 +199,7 @@ type SqlFirewallPolicyParameters struct {
 
 	// The OCID of the SQL Firewall policy resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.SqlFirewallPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SQLFirewallPolicyID *string `json:"sqlFirewallPolicyId,omitempty" tf:"sql_firewall_policy_id,omitempty"`
 

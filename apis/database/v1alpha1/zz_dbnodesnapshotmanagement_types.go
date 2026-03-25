@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DbNodeSnapshotManagementInitParameters struct {
@@ -21,7 +21,7 @@ type DbNodeSnapshotManagementInitParameters struct {
 
 	// The Exadata VM cluster OCID on Exascale Infrastructure.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExadbVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExadbVMClusterID *string `json:"exadbVmClusterId,omitempty" tf:"exadb_vm_cluster_id,omitempty"`
 
 	// Reference to a ExadbVmCluster in database to populate exadbVmClusterId.
@@ -80,7 +80,7 @@ type DbNodeSnapshotManagementParameters struct {
 
 	// The Exadata VM cluster OCID on Exascale Infrastructure.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExadbVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExadbVMClusterID *string `json:"exadbVmClusterId,omitempty" tf:"exadb_vm_cluster_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type InputConfigurationInitParameters struct {
@@ -237,7 +237,7 @@ type ModelMetadataDetailsInitParameters struct {
 
 	// Unique identifier endpoint OCID that should be used for inference
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ailanguage/v1alpha1.Endpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
 	// Reference to a Endpoint in ailanguage to populate endpointId.
@@ -253,7 +253,7 @@ type ModelMetadataDetailsInitParameters struct {
 
 	// Unique identifier model OCID that should be used for inference
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ailanguage/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 
 	// Reference to a Model in ailanguage to populate modelId.
@@ -294,7 +294,7 @@ type ModelMetadataDetailsParameters struct {
 
 	// Unique identifier endpoint OCID that should be used for inference
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ailanguage/v1alpha1.Endpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EndpointID *string `json:"endpointId,omitempty" tf:"endpoint_id,omitempty"`
 
@@ -312,7 +312,7 @@ type ModelMetadataDetailsParameters struct {
 
 	// Unique identifier model OCID that should be used for inference
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ailanguage/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
 

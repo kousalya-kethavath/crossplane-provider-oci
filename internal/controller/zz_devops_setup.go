@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	buildpipeline "github.com/oracle/provider-oci/internal/controller/devops/buildpipeline"
 	buildpipelinestage "github.com/oracle/provider-oci/internal/controller/devops/buildpipelinestage"
@@ -49,6 +49,35 @@ func Setup_devops(mgr ctrl.Manager, o controller.Options) error {
 		repositoryref.Setup,
 		repositorysetting.Setup,
 		trigger.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_devops creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_devops(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		buildpipeline.SetupGated,
+		buildpipelinestage.SetupGated,
+		buildrun.SetupGated,
+		connection.SetupGated,
+		deployartifact.SetupGated,
+		deployenvironment.SetupGated,
+		deployment.SetupGated,
+		deploypipeline.SetupGated,
+		deploystage.SetupGated,
+		project.SetupGated,
+		projectrepositorysetting.SetupGated,
+		repository.SetupGated,
+		repositorymirror.SetupGated,
+		repositoryprotectedbranchmanagement.SetupGated,
+		repositoryref.SetupGated,
+		repositorysetting.SetupGated,
+		trigger.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

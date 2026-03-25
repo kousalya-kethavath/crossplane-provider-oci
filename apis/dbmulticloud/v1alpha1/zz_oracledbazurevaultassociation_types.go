@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type OracleDbAzureVaultAssociationInitParameters struct {
@@ -40,7 +40,7 @@ type OracleDbAzureVaultAssociationInitParameters struct {
 
 	// (Updatable) The OCID of the Oracle DB Azure Connector that contains Oracle DB Azure Vault Association resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dbmulticloud/v1alpha1.OracleDbAzureConnector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OracleDBAzureConnectorID *string `json:"oracleDbAzureConnectorId,omitempty" tf:"oracle_db_azure_connector_id,omitempty"`
 
 	// Reference to a OracleDbAzureConnector in dbmulticloud to populate oracleDbAzureConnectorId.
@@ -53,7 +53,7 @@ type OracleDbAzureVaultAssociationInitParameters struct {
 
 	// (Updatable) The OCID of the Oracle DB Azure Vault that contains Oracle DB Azure Vault Association resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dbmulticloud/v1alpha1.OracleDbAzureVault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OracleDBAzureVaultID *string `json:"oracleDbAzureVaultId,omitempty" tf:"oracle_db_azure_vault_id,omitempty"`
 
 	// Reference to a OracleDbAzureVault in dbmulticloud to populate oracleDbAzureVaultId.
@@ -144,7 +144,7 @@ type OracleDbAzureVaultAssociationParameters struct {
 
 	// (Updatable) The OCID of the Oracle DB Azure Connector that contains Oracle DB Azure Vault Association resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dbmulticloud/v1alpha1.OracleDbAzureConnector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OracleDBAzureConnectorID *string `json:"oracleDbAzureConnectorId,omitempty" tf:"oracle_db_azure_connector_id,omitempty"`
 
@@ -158,7 +158,7 @@ type OracleDbAzureVaultAssociationParameters struct {
 
 	// (Updatable) The OCID of the Oracle DB Azure Vault that contains Oracle DB Azure Vault Association resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dbmulticloud/v1alpha1.OracleDbAzureVault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OracleDBAzureVaultID *string `json:"oracleDbAzureVaultId,omitempty" tf:"oracle_db_azure_vault_id,omitempty"`
 

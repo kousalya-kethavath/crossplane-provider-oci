@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CloudVmClusterIormConfigDBPlansInitParameters struct {
@@ -49,7 +49,7 @@ type CloudVmClusterIormConfigInitParameters struct {
 
 	// The Cluster OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CloudVMClusterID *string `json:"cloudVmClusterId,omitempty" tf:"cloud_vm_cluster_id,omitempty"`
 
 	// Reference to a CloudVmCluster in database to populate cloudVmClusterId.
@@ -91,7 +91,7 @@ type CloudVmClusterIormConfigParameters struct {
 
 	// The Cluster OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CloudVMClusterID *string `json:"cloudVmClusterId,omitempty" tf:"cloud_vm_cluster_id,omitempty"`
 

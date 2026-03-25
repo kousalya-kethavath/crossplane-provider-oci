@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MonitoredRegionInitParameters struct {
@@ -20,7 +20,7 @@ type MonitoredRegionInitParameters struct {
 
 	// The OCID of the ResourceAnalyticsInstance associated with this MonitoredRegion.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/resourceanalytics/v1alpha1.ResourceAnalyticsInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ResourceAnalyticsInstanceID *string `json:"resourceAnalyticsInstanceId,omitempty" tf:"resource_analytics_instance_id,omitempty"`
 
 	// Reference to a ResourceAnalyticsInstance in resourceanalytics to populate resourceAnalyticsInstanceId.
@@ -68,7 +68,7 @@ type MonitoredRegionParameters struct {
 
 	// The OCID of the ResourceAnalyticsInstance associated with this MonitoredRegion.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/resourceanalytics/v1alpha1.ResourceAnalyticsInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceAnalyticsInstanceID *string `json:"resourceAnalyticsInstanceId,omitempty" tf:"resource_analytics_instance_id,omitempty"`
 

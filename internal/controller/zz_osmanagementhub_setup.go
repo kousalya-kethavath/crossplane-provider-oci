@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	event "github.com/oracle/provider-oci/internal/controller/osmanagementhub/event"
 	lifecycleenvironment "github.com/oracle/provider-oci/internal/controller/osmanagementhub/lifecycleenvironment"
@@ -101,6 +101,61 @@ func Setup_osmanagementhub(mgr ctrl.Manager, o controller.Options) error {
 		softwaresourceremovepackagesmanagement.Setup,
 		softwaresourcereplacepackagesmanagement.Setup,
 		workrequestrerunmanagement.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_osmanagementhub creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_osmanagementhub(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		event.SetupGated,
+		lifecycleenvironment.SetupGated,
+		lifecyclestageattachmanagedinstancesmanagement.SetupGated,
+		lifecyclestagedetachmanagedinstancesmanagement.SetupGated,
+		lifecyclestagepromotesoftwaresourcemanagement.SetupGated,
+		lifecyclestagerebootmanagement.SetupGated,
+		managedinstance.SetupGated,
+		managedinstanceattachprofilemanagement.SetupGated,
+		managedinstancedetachprofilemanagement.SetupGated,
+		managedinstancegroup.SetupGated,
+		managedinstancegroupattachmanagedinstancesmanagement.SetupGated,
+		managedinstancegroupattachsoftwaresourcesmanagement.SetupGated,
+		managedinstancegroupdetachmanagedinstancesmanagement.SetupGated,
+		managedinstancegroupdetachsoftwaresourcesmanagement.SetupGated,
+		managedinstancegroupinstallpackagesmanagement.SetupGated,
+		managedinstancegroupinstallwindowsupdatesmanagement.SetupGated,
+		managedinstancegroupmanagemodulestreamsmanagement.SetupGated,
+		managedinstancegrouprebootmanagement.SetupGated,
+		managedinstancegroupremovepackagesmanagement.SetupGated,
+		managedinstancegroupupdateallpackagesmanagement.SetupGated,
+		managedinstanceinstallwindowsupdatesmanagement.SetupGated,
+		managedinstancerebootmanagement.SetupGated,
+		managedinstanceupdatepackagesmanagement.SetupGated,
+		managementstation.SetupGated,
+		managementstationassociatemanagedinstancesmanagement.SetupGated,
+		managementstationmirrorsynchronizemanagement.SetupGated,
+		managementstationrefreshmanagement.SetupGated,
+		managementstationsynchronizemirrorsmanagement.SetupGated,
+		profile.SetupGated,
+		profileattachlifecyclestagemanagement.SetupGated,
+		profileattachmanagedinstancegroupmanagement.SetupGated,
+		profileattachmanagementstationmanagement.SetupGated,
+		profileattachsoftwaresourcesmanagement.SetupGated,
+		profiledetachsoftwaresourcesmanagement.SetupGated,
+		scheduledjob.SetupGated,
+		softwaresource.SetupGated,
+		softwaresourceaddpackagesmanagement.SetupGated,
+		softwaresourcechangeavailabilitymanagement.SetupGated,
+		softwaresourcegeneratemetadatamanagement.SetupGated,
+		softwaresourcemanifest.SetupGated,
+		softwaresourceremovepackagesmanagement.SetupGated,
+		softwaresourcereplacepackagesmanagement.SetupGated,
+		workrequestrerunmanagement.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AutonomousContainerDatabaseAddStandbyBackupConfigInitParameters struct {
@@ -152,7 +152,7 @@ type AutonomousContainerDatabaseAddStandbyInitParameters struct {
 
 	// The Autonomous Container Database OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousContainerDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AutonomousContainerDatabaseID *string `json:"autonomousContainerDatabaseId,omitempty" tf:"autonomous_container_database_id,omitempty"`
 
 	// Reference to a AutonomousContainerDatabase in database to populate autonomousContainerDatabaseId.
@@ -174,7 +174,7 @@ type AutonomousContainerDatabaseAddStandbyInitParameters struct {
 
 	// The OCID of the compartment where the standby Autonomous Container Database will be created.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PeerAutonomousContainerDatabaseCompartmentID *string `json:"peerAutonomousContainerDatabaseCompartmentId,omitempty" tf:"peer_autonomous_container_database_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate peerAutonomousContainerDatabaseCompartmentId.
@@ -190,7 +190,7 @@ type AutonomousContainerDatabaseAddStandbyInitParameters struct {
 
 	// The OCID of the peer Autonomous Exadata VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PeerAutonomousVMClusterID *string `json:"peerAutonomousVmClusterId,omitempty" tf:"peer_autonomous_vm_cluster_id,omitempty"`
 
 	// Reference to a AutonomousVmCluster in database to populate peerAutonomousVmClusterId.
@@ -203,7 +203,7 @@ type AutonomousContainerDatabaseAddStandbyInitParameters struct {
 
 	// The OCID of the peer cloud Autonomous Exadata VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudAutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PeerCloudAutonomousVMClusterID *string `json:"peerCloudAutonomousVmClusterId,omitempty" tf:"peer_cloud_autonomous_vm_cluster_id,omitempty"`
 
 	// Reference to a CloudAutonomousVmCluster in database to populate peerCloudAutonomousVmClusterId.
@@ -494,7 +494,7 @@ type AutonomousContainerDatabaseAddStandbyParameters struct {
 
 	// The Autonomous Container Database OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousContainerDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AutonomousContainerDatabaseID *string `json:"autonomousContainerDatabaseId,omitempty" tf:"autonomous_container_database_id,omitempty"`
 
@@ -520,7 +520,7 @@ type AutonomousContainerDatabaseAddStandbyParameters struct {
 
 	// The OCID of the compartment where the standby Autonomous Container Database will be created.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerAutonomousContainerDatabaseCompartmentID *string `json:"peerAutonomousContainerDatabaseCompartmentId,omitempty" tf:"peer_autonomous_container_database_compartment_id,omitempty"`
 
@@ -538,7 +538,7 @@ type AutonomousContainerDatabaseAddStandbyParameters struct {
 
 	// The OCID of the peer Autonomous Exadata VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerAutonomousVMClusterID *string `json:"peerAutonomousVmClusterId,omitempty" tf:"peer_autonomous_vm_cluster_id,omitempty"`
 
@@ -552,7 +552,7 @@ type AutonomousContainerDatabaseAddStandbyParameters struct {
 
 	// The OCID of the peer cloud Autonomous Exadata VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudAutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerCloudAutonomousVMClusterID *string `json:"peerCloudAutonomousVmClusterId,omitempty" tf:"peer_cloud_autonomous_vm_cluster_id,omitempty"`
 
@@ -584,7 +584,7 @@ type AutonomousContainerDatabaseAddStandbyPeerAutonomousContainerDatabaseBackupC
 
 	// The OCID of the DBRS policy used for backup.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Policy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DbrsPolicyID *string `json:"dbrsPolicyId,omitempty" tf:"dbrs_policy_id,omitempty"`
 
 	// Reference to a Policy in identity to populate dbrsPolicyId.
@@ -646,7 +646,7 @@ type AutonomousContainerDatabaseAddStandbyPeerAutonomousContainerDatabaseBackupC
 
 	// The OCID of the DBRS policy used for backup.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Policy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DbrsPolicyID *string `json:"dbrsPolicyId,omitempty" tf:"dbrs_policy_id,omitempty"`
 

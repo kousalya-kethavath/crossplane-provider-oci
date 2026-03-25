@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this IntegrationInstance.
 func (mg *IntegrationInstance) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *IntegrationInstance) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this IntegrationInstance.
 func (mg *IntegrationInstance) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this IntegrationInstance.
-func (mg *IntegrationInstance) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this IntegrationInstance.
@@ -57,11 +52,6 @@ func (mg *IntegrationInstance) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this IntegrationInstance.
-func (mg *IntegrationInstance) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this IntegrationInstance.
 func (mg *IntegrationInstance) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -85,11 +75,6 @@ func (mg *OracleManagedCustomEndpoint) GetManagementPolicies() xpv1.ManagementPo
 // GetProviderConfigReference of this OracleManagedCustomEndpoint.
 func (mg *OracleManagedCustomEndpoint) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OracleManagedCustomEndpoint.
-func (mg *OracleManagedCustomEndpoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OracleManagedCustomEndpoint.
@@ -117,11 +102,6 @@ func (mg *OracleManagedCustomEndpoint) SetProviderConfigReference(r *xpv1.Refere
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OracleManagedCustomEndpoint.
-func (mg *OracleManagedCustomEndpoint) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OracleManagedCustomEndpoint.
 func (mg *OracleManagedCustomEndpoint) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -147,11 +127,6 @@ func (mg *PrivateEndpointOutboundConnection) GetProviderConfigReference() *xpv1.
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this PrivateEndpointOutboundConnection.
-func (mg *PrivateEndpointOutboundConnection) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this PrivateEndpointOutboundConnection.
 func (mg *PrivateEndpointOutboundConnection) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -175,11 +150,6 @@ func (mg *PrivateEndpointOutboundConnection) SetManagementPolicies(r xpv1.Manage
 // SetProviderConfigReference of this PrivateEndpointOutboundConnection.
 func (mg *PrivateEndpointOutboundConnection) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this PrivateEndpointOutboundConnection.
-func (mg *PrivateEndpointOutboundConnection) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this PrivateEndpointOutboundConnection.

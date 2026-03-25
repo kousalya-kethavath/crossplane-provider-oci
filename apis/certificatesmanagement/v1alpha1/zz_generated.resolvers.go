@@ -8,18 +8,16 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
+	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this CaBundle.
-	apisresolver "github.com/oracle/provider-oci/internal/apis"
 )
 
-func (mg *CaBundle) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *CaBundle) ResolveReferences( // ResolveReferences of this CaBundle.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -35,6 +33,7 @@ func (mg *CaBundle) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +53,7 @@ func (mg *CaBundle) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -86,6 +86,7 @@ func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateConfig[i3].IssuerCertificateAuthorityID),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CertificateConfig[i3].IssuerCertificateAuthorityIDRef,
 				Selector:     mg.Spec.ForProvider.CertificateConfig[i3].IssuerCertificateAuthorityIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -108,6 +109,7 @@ func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) e
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateConfig[i3].Subject[i4].UserID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.CertificateConfig[i3].Subject[i4].UserIDRef,
 					Selector:     mg.Spec.ForProvider.CertificateConfig[i3].Subject[i4].UserIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -129,6 +131,7 @@ func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -149,6 +152,7 @@ func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) e
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateConfig[i3].IssuerCertificateAuthorityID),
 				Extract:      reference.ExternalName(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CertificateConfig[i3].IssuerCertificateAuthorityIDRef,
 				Selector:     mg.Spec.InitProvider.CertificateConfig[i3].IssuerCertificateAuthorityIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -171,6 +175,7 @@ func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) e
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateConfig[i3].Subject[i4].UserID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.CertificateConfig[i3].Subject[i4].UserIDRef,
 					Selector:     mg.Spec.InitProvider.CertificateConfig[i3].Subject[i4].UserIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -192,6 +197,7 @@ func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -224,6 +230,7 @@ func (mg *CertificateAuthority) ResolveReferences(ctx context.Context, c client.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateAuthorityConfig[i3].IssuerCertificateAuthorityID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CertificateAuthorityConfig[i3].IssuerCertificateAuthorityIDRef,
 				Selector:     mg.Spec.ForProvider.CertificateAuthorityConfig[i3].IssuerCertificateAuthorityIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -246,6 +253,7 @@ func (mg *CertificateAuthority) ResolveReferences(ctx context.Context, c client.
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateAuthorityConfig[i3].Subject[i4].UserID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.CertificateAuthorityConfig[i3].Subject[i4].UserIDRef,
 					Selector:     mg.Spec.ForProvider.CertificateAuthorityConfig[i3].Subject[i4].UserIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -269,6 +277,7 @@ func (mg *CertificateAuthority) ResolveReferences(ctx context.Context, c client.
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateRevocationListDetails[i3].ObjectStorageConfig[i4].ObjectStorageBucketName),
 					Extract:      resource.ExtractParamPath("name", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.CertificateRevocationListDetails[i3].ObjectStorageConfig[i4].ObjectStorageBucketNameRef,
 					Selector:     mg.Spec.ForProvider.CertificateRevocationListDetails[i3].ObjectStorageConfig[i4].ObjectStorageBucketNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -290,6 +299,7 @@ func (mg *CertificateAuthority) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -309,6 +319,7 @@ func (mg *CertificateAuthority) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -329,6 +340,7 @@ func (mg *CertificateAuthority) ResolveReferences(ctx context.Context, c client.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateAuthorityConfig[i3].IssuerCertificateAuthorityID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CertificateAuthorityConfig[i3].IssuerCertificateAuthorityIDRef,
 				Selector:     mg.Spec.InitProvider.CertificateAuthorityConfig[i3].IssuerCertificateAuthorityIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -351,6 +363,7 @@ func (mg *CertificateAuthority) ResolveReferences(ctx context.Context, c client.
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateAuthorityConfig[i3].Subject[i4].UserID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.CertificateAuthorityConfig[i3].Subject[i4].UserIDRef,
 					Selector:     mg.Spec.InitProvider.CertificateAuthorityConfig[i3].Subject[i4].UserIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -374,6 +387,7 @@ func (mg *CertificateAuthority) ResolveReferences(ctx context.Context, c client.
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateRevocationListDetails[i3].ObjectStorageConfig[i4].ObjectStorageBucketName),
 					Extract:      resource.ExtractParamPath("name", false),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.CertificateRevocationListDetails[i3].ObjectStorageConfig[i4].ObjectStorageBucketNameRef,
 					Selector:     mg.Spec.InitProvider.CertificateRevocationListDetails[i3].ObjectStorageConfig[i4].ObjectStorageBucketNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -395,6 +409,7 @@ func (mg *CertificateAuthority) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -414,6 +429,7 @@ func (mg *CertificateAuthority) ResolveReferences(ctx context.Context, c client.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},

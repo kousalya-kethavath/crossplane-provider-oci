@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	cpe "github.com/oracle/provider-oci/internal/controller/networkconnectivity/cpe"
 	crossconnect "github.com/oracle/provider-oci/internal/controller/networkconnectivity/crossconnect"
@@ -43,6 +43,32 @@ func Setup_networkconnectivity(mgr ctrl.Manager, o controller.Options) error {
 		ipsec.Setup,
 		ipsecconnectiontunnelmanagement.Setup,
 		virtualcircuit.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_networkconnectivity creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_networkconnectivity(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		cpe.SetupGated,
+		crossconnect.SetupGated,
+		crossconnectgroup.SetupGated,
+		drg.SetupGated,
+		drgattachment.SetupGated,
+		drgattachmentmanagement.SetupGated,
+		drgattachmentslist.SetupGated,
+		drgroutedistribution.SetupGated,
+		drgroutedistributionstatement.SetupGated,
+		drgroutetable.SetupGated,
+		drgroutetablerouterule.SetupGated,
+		ipsec.SetupGated,
+		ipsecconnectiontunnelmanagement.SetupGated,
+		virtualcircuit.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

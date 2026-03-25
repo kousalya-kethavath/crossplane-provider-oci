@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ApplicationVipInitParameters struct {
 
 	// The OCID of the cloud VM cluster associated with the application virtual IP (VIP) address.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CloudVMClusterID *string `json:"cloudVmClusterId,omitempty" tf:"cloud_vm_cluster_id,omitempty"`
 
 	// Reference to a CloudVmCluster in database to populate cloudVmClusterId.
@@ -30,7 +30,7 @@ type ApplicationVipInitParameters struct {
 
 	// The OCID of the DB node associated with the application virtual IP (VIP) address.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DbNode
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DBNodeID *string `json:"dbNodeId,omitempty" tf:"db_node_id,omitempty"`
 
 	// Reference to a DbNode in database to populate dbNodeId.
@@ -52,7 +52,7 @@ type ApplicationVipInitParameters struct {
 
 	// The OCID of the subnet associated with the application virtual IP (VIP) address.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -112,7 +112,7 @@ type ApplicationVipParameters struct {
 
 	// The OCID of the cloud VM cluster associated with the application virtual IP (VIP) address.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CloudVMClusterID *string `json:"cloudVmClusterId,omitempty" tf:"cloud_vm_cluster_id,omitempty"`
 
@@ -126,7 +126,7 @@ type ApplicationVipParameters struct {
 
 	// The OCID of the DB node associated with the application virtual IP (VIP) address.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DbNode
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DBNodeID *string `json:"dbNodeId,omitempty" tf:"db_node_id,omitempty"`
 
@@ -152,7 +152,7 @@ type ApplicationVipParameters struct {
 
 	// The OCID of the subnet associated with the application virtual IP (VIP) address.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

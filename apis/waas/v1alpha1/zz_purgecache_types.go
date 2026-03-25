@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type PurgeCacheInitParameters struct {
@@ -20,7 +20,7 @@ type PurgeCacheInitParameters struct {
 
 	// The OCID of the WAAS policy.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/waas/v1alpha1.WaasPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WaasPolicyID *string `json:"waasPolicyId,omitempty" tf:"waas_policy_id,omitempty"`
 
 	// Reference to a WaasPolicy in waas to populate waasPolicyId.
@@ -50,7 +50,7 @@ type PurgeCacheParameters struct {
 
 	// The OCID of the WAAS policy.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/waas/v1alpha1.WaasPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WaasPolicyID *string `json:"waasPolicyId,omitempty" tf:"waas_policy_id,omitempty"`
 

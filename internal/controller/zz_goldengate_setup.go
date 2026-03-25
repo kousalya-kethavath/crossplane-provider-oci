@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	connection "github.com/oracle/provider-oci/internal/controller/goldengate/connection"
 	connectionassignment "github.com/oracle/provider-oci/internal/controller/goldengate/connectionassignment"
@@ -29,6 +29,25 @@ func Setup_goldengate(mgr ctrl.Manager, o controller.Options) error {
 		deploymentbackup.Setup,
 		deploymentcertificate.Setup,
 		pipeline.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_goldengate creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_goldengate(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		connection.SetupGated,
+		connectionassignment.SetupGated,
+		databaseregistration.SetupGated,
+		deployment.SetupGated,
+		deploymentbackup.SetupGated,
+		deploymentcertificate.SetupGated,
+		pipeline.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

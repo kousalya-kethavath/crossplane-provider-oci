@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type GCPNodesInitParameters struct {
@@ -64,7 +64,7 @@ type OracleDbGcpIdentityConnectorInitParameters struct {
 
 	// (Updatable) The ID of the GCP resource service agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudbridge/v1alpha1.Agent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	GCPResourceServiceAgentID *string `json:"gcpResourceServiceAgentId,omitempty" tf:"gcp_resource_service_agent_id,omitempty"`
 
 	// Reference to a Agent in cloudbridge to populate gcpResourceServiceAgentId.
@@ -77,7 +77,7 @@ type OracleDbGcpIdentityConnectorInitParameters struct {
 
 	// (Updatable) The ID of the cloud GCP Workload Identity Pool.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.Pool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	GCPWorkloadIdentityPoolID *string `json:"gcpWorkloadIdentityPoolId,omitempty" tf:"gcp_workload_identity_pool_id,omitempty"`
 
 	// Reference to a Pool in dataflow to populate gcpWorkloadIdentityPoolId.
@@ -90,7 +90,7 @@ type OracleDbGcpIdentityConnectorInitParameters struct {
 
 	// (Updatable) The ID of the GCP Workload Identity Provider.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.IdentityProvider
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	GCPWorkloadIdentityProviderID *string `json:"gcpWorkloadIdentityProviderId,omitempty" tf:"gcp_workload_identity_provider_id,omitempty"`
 
 	// Reference to a IdentityProvider in identity to populate gcpWorkloadIdentityProviderId.
@@ -106,7 +106,7 @@ type OracleDbGcpIdentityConnectorInitParameters struct {
 
 	// (Updatable) Project id of the customer project.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aidocument/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// Reference to a Project in aidocument to populate projectId.
@@ -219,7 +219,7 @@ type OracleDbGcpIdentityConnectorParameters struct {
 
 	// (Updatable) The ID of the GCP resource service agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudbridge/v1alpha1.Agent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GCPResourceServiceAgentID *string `json:"gcpResourceServiceAgentId,omitempty" tf:"gcp_resource_service_agent_id,omitempty"`
 
@@ -233,7 +233,7 @@ type OracleDbGcpIdentityConnectorParameters struct {
 
 	// (Updatable) The ID of the cloud GCP Workload Identity Pool.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.Pool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GCPWorkloadIdentityPoolID *string `json:"gcpWorkloadIdentityPoolId,omitempty" tf:"gcp_workload_identity_pool_id,omitempty"`
 
@@ -247,7 +247,7 @@ type OracleDbGcpIdentityConnectorParameters struct {
 
 	// (Updatable) The ID of the GCP Workload Identity Provider.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.IdentityProvider
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GCPWorkloadIdentityProviderID *string `json:"gcpWorkloadIdentityProviderId,omitempty" tf:"gcp_workload_identity_provider_id,omitempty"`
 
@@ -265,7 +265,7 @@ type OracleDbGcpIdentityConnectorParameters struct {
 
 	// (Updatable) Project id of the customer project.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aidocument/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 

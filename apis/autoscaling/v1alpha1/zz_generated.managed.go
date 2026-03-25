@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this AutoScalingConfiguration.
 func (mg *AutoScalingConfiguration) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *AutoScalingConfiguration) GetManagementPolicies() xpv1.ManagementPolic
 // GetProviderConfigReference of this AutoScalingConfiguration.
 func (mg *AutoScalingConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this AutoScalingConfiguration.
-func (mg *AutoScalingConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this AutoScalingConfiguration.
@@ -55,11 +50,6 @@ func (mg *AutoScalingConfiguration) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this AutoScalingConfiguration.
 func (mg *AutoScalingConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this AutoScalingConfiguration.
-func (mg *AutoScalingConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this AutoScalingConfiguration.

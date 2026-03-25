@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AgentDataSourceInitParameters struct {
@@ -46,7 +46,7 @@ type AgentDataSourceInitParameters struct {
 
 	// The OCID of the parent KnowledgeBase.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.AgentKnowledgeBase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KnowledgeBaseID *string `json:"knowledgeBaseId,omitempty" tf:"knowledge_base_id,omitempty"`
 
 	// Reference to a AgentKnowledgeBase in generativeai to populate knowledgeBaseId.
@@ -150,7 +150,7 @@ type AgentDataSourceParameters struct {
 
 	// The OCID of the parent KnowledgeBase.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/generativeai/v1alpha1.AgentKnowledgeBase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KnowledgeBaseID *string `json:"knowledgeBaseId,omitempty" tf:"knowledge_base_id,omitempty"`
 

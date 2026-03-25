@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AnalyticsInstancePrivateAccessChannelInitParameters struct {
 
 	// The OCID of the AnalyticsInstance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/analytics/v1alpha1.AnalyticsInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AnalyticsInstanceID *string `json:"analyticsInstanceId,omitempty" tf:"analytics_instance_id,omitempty"`
 
 	// Reference to a AnalyticsInstance in analytics to populate analyticsInstanceId.
@@ -43,7 +43,7 @@ type AnalyticsInstancePrivateAccessChannelInitParameters struct {
 
 	// (Updatable) OCID of the customer subnet connected to private access channel.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -56,7 +56,7 @@ type AnalyticsInstancePrivateAccessChannelInitParameters struct {
 
 	// (Updatable) OCID of the customer VCN peered with private access channel.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vcn
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VcnID *string `json:"vcnId,omitempty" tf:"vcn_id,omitempty"`
 
 	// Reference to a Vcn in networking to populate vcnId.
@@ -108,7 +108,7 @@ type AnalyticsInstancePrivateAccessChannelParameters struct {
 
 	// The OCID of the AnalyticsInstance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/analytics/v1alpha1.AnalyticsInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AnalyticsInstanceID *string `json:"analyticsInstanceId,omitempty" tf:"analytics_instance_id,omitempty"`
 
@@ -139,7 +139,7 @@ type AnalyticsInstancePrivateAccessChannelParameters struct {
 
 	// (Updatable) OCID of the customer subnet connected to private access channel.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -153,7 +153,7 @@ type AnalyticsInstancePrivateAccessChannelParameters struct {
 
 	// (Updatable) OCID of the customer VCN peered with private access channel.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Vcn
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VcnID *string `json:"vcnId,omitempty" tf:"vcn_id,omitempty"`
 

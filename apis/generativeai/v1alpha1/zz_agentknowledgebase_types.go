@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AgentKnowledgeBaseInitParameters struct {
@@ -132,7 +132,7 @@ type DatabaseConnectionInitParameters struct {
 
 	// (Updatable) The OCID of the Database Tools Connection.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.MigrationConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
 	// Reference to a MigrationConnection in database to populate connectionId.
@@ -160,7 +160,7 @@ type DatabaseConnectionParameters struct {
 
 	// (Updatable) The OCID of the Database Tools Connection.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.MigrationConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
@@ -200,7 +200,7 @@ type IndexConfigInitParameters struct {
 
 	// (Updatable) The OCID of the OpenSearch Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/containerengine/v1alpha1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
 	// Reference to a Cluster in containerengine to populate clusterId.
@@ -258,7 +258,7 @@ type IndexConfigParameters struct {
 
 	// (Updatable) The OCID of the OpenSearch Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/containerengine/v1alpha1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
@@ -404,7 +404,7 @@ type SecretDetailInitParameters struct {
 
 	// (Updatable) The OCID of the secret for basic authentication.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VaultSecretID *string `json:"vaultSecretId,omitempty" tf:"vault_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate vaultSecretId.
@@ -454,7 +454,7 @@ type SecretDetailParameters struct {
 
 	// (Updatable) The OCID of the secret for basic authentication.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultSecretID *string `json:"vaultSecretId,omitempty" tf:"vault_secret_id,omitempty"`
 

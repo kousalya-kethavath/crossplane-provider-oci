@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type NetworkFirewallPolicyNatRuleConditionInitParameters struct {
@@ -68,7 +68,7 @@ type NetworkFirewallPolicyNatRuleInitParameters struct {
 
 	// Unique Network Firewall Policy identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networkfirewall/v1alpha1.NetworkFirewallPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NetworkFirewallPolicyID *string `json:"networkFirewallPolicyId,omitempty" tf:"network_firewall_policy_id,omitempty"`
 
 	// Reference to a NetworkFirewallPolicy in networkfirewall to populate networkFirewallPolicyId.
@@ -138,7 +138,7 @@ type NetworkFirewallPolicyNatRuleParameters struct {
 
 	// Unique Network Firewall Policy identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networkfirewall/v1alpha1.NetworkFirewallPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkFirewallPolicyID *string `json:"networkFirewallPolicyId,omitempty" tf:"network_firewall_policy_id,omitempty"`
 

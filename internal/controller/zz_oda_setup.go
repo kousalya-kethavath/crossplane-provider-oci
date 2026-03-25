@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	odainstance "github.com/oracle/provider-oci/internal/controller/oda/odainstance"
 	odaprivateendpoint "github.com/oracle/provider-oci/internal/controller/oda/odaprivateendpoint"
@@ -23,6 +23,22 @@ func Setup_oda(mgr ctrl.Manager, o controller.Options) error {
 		odaprivateendpoint.Setup,
 		odaprivateendpointattachment.Setup,
 		odaprivateendpointscanproxy.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_oda creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_oda(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		odainstance.SetupGated,
+		odaprivateendpoint.SetupGated,
+		odaprivateendpointattachment.SetupGated,
+		odaprivateendpointscanproxy.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

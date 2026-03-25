@@ -8,18 +8,16 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
+	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this AwrHub.
-	apisresolver "github.com/oracle/provider-oci/internal/apis"
 )
 
-func (mg *AwrHub) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *AwrHub) ResolveReferences( // ResolveReferences of this AwrHub.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -35,6 +33,7 @@ func (mg *AwrHub) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +53,7 @@ func (mg *AwrHub) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ObjectStorageBucketName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ObjectStorageBucketNameRef,
 			Selector:     mg.Spec.ForProvider.ObjectStorageBucketNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -73,6 +73,7 @@ func (mg *AwrHub) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OperationsInsightsWarehouseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.OperationsInsightsWarehouseIDRef,
 			Selector:     mg.Spec.ForProvider.OperationsInsightsWarehouseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -92,6 +93,7 @@ func (mg *AwrHub) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -111,6 +113,7 @@ func (mg *AwrHub) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ObjectStorageBucketName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ObjectStorageBucketNameRef,
 			Selector:     mg.Spec.InitProvider.ObjectStorageBucketNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -130,6 +133,7 @@ func (mg *AwrHub) ResolveReferences(ctx context.Context, c client.Reader) error 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OperationsInsightsWarehouseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.OperationsInsightsWarehouseIDRef,
 			Selector:     mg.Spec.InitProvider.OperationsInsightsWarehouseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -161,6 +165,7 @@ func (mg *AwrHubSource) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AwrHubID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AwrHubIDRef,
 			Selector:     mg.Spec.ForProvider.AwrHubIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -180,6 +185,7 @@ func (mg *AwrHubSource) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -199,6 +205,7 @@ func (mg *AwrHubSource) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AwrHubID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AwrHubIDRef,
 			Selector:     mg.Spec.InitProvider.AwrHubIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -218,6 +225,7 @@ func (mg *AwrHubSource) ResolveReferences(ctx context.Context, c client.Reader) 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -249,6 +257,7 @@ func (mg *AwrHubSourceAwrhubsourcesManagement) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AwrHubSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.AwrHubSourceIDRef,
 			Selector:     mg.Spec.ForProvider.AwrHubSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -268,6 +277,7 @@ func (mg *AwrHubSourceAwrhubsourcesManagement) ResolveReferences(ctx context.Con
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AwrHubSourceID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.AwrHubSourceIDRef,
 			Selector:     mg.Spec.InitProvider.AwrHubSourceIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -299,6 +309,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -319,6 +330,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConnectionCredentialDetails[i3].NamedCredentialID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ConnectionCredentialDetails[i3].NamedCredentialIDRef,
 				Selector:     mg.Spec.ForProvider.ConnectionCredentialDetails[i3].NamedCredentialIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -340,6 +352,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConnectionCredentialDetails[i3].UserName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ConnectionCredentialDetails[i3].UserNameRef,
 				Selector:     mg.Spec.ForProvider.ConnectionCredentialDetails[i3].UserNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -361,6 +374,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CredentialDetails[i3].NamedCredentialID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CredentialDetails[i3].NamedCredentialIDRef,
 				Selector:     mg.Spec.ForProvider.CredentialDetails[i3].NamedCredentialIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -382,6 +396,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CredentialDetails[i3].UserName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CredentialDetails[i3].UserNameRef,
 				Selector:     mg.Spec.ForProvider.CredentialDetails[i3].UserNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -402,6 +417,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DatabaseIDRef,
 			Selector:     mg.Spec.ForProvider.DatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -421,6 +437,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DbmPrivateEndpointID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DbmPrivateEndpointIDRef,
 			Selector:     mg.Spec.ForProvider.DbmPrivateEndpointIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -440,6 +457,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EnterpriseManagerBridgeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EnterpriseManagerBridgeIDRef,
 			Selector:     mg.Spec.ForProvider.EnterpriseManagerBridgeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -459,6 +477,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExadataInsightID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExadataInsightIDRef,
 			Selector:     mg.Spec.ForProvider.ExadataInsightIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -478,6 +497,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementAgentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagementAgentIDRef,
 			Selector:     mg.Spec.ForProvider.ManagementAgentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -497,6 +517,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpsiPrivateEndpointID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.OpsiPrivateEndpointIDRef,
 			Selector:     mg.Spec.ForProvider.OpsiPrivateEndpointIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -516,6 +537,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -536,6 +558,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConnectionCredentialDetails[i3].NamedCredentialID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ConnectionCredentialDetails[i3].NamedCredentialIDRef,
 				Selector:     mg.Spec.InitProvider.ConnectionCredentialDetails[i3].NamedCredentialIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -557,6 +580,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConnectionCredentialDetails[i3].UserName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ConnectionCredentialDetails[i3].UserNameRef,
 				Selector:     mg.Spec.InitProvider.ConnectionCredentialDetails[i3].UserNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -578,6 +602,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CredentialDetails[i3].NamedCredentialID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CredentialDetails[i3].NamedCredentialIDRef,
 				Selector:     mg.Spec.InitProvider.CredentialDetails[i3].NamedCredentialIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -599,6 +624,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CredentialDetails[i3].UserName),
 				Extract:      resource.ExtractParamPath("name", false),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CredentialDetails[i3].UserNameRef,
 				Selector:     mg.Spec.InitProvider.CredentialDetails[i3].UserNameSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -619,6 +645,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DatabaseIDRef,
 			Selector:     mg.Spec.InitProvider.DatabaseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -638,6 +665,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DbmPrivateEndpointID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DbmPrivateEndpointIDRef,
 			Selector:     mg.Spec.InitProvider.DbmPrivateEndpointIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -657,6 +685,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EnterpriseManagerBridgeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.EnterpriseManagerBridgeIDRef,
 			Selector:     mg.Spec.InitProvider.EnterpriseManagerBridgeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -676,6 +705,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExadataInsightID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExadataInsightIDRef,
 			Selector:     mg.Spec.InitProvider.ExadataInsightIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -695,6 +725,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementAgentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagementAgentIDRef,
 			Selector:     mg.Spec.InitProvider.ManagementAgentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -714,6 +745,7 @@ func (mg *DatabaseInsight) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OpsiPrivateEndpointID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.OpsiPrivateEndpointIDRef,
 			Selector:     mg.Spec.InitProvider.OpsiPrivateEndpointIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -745,6 +777,7 @@ func (mg *EnterpriseManagerBridge) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -764,6 +797,7 @@ func (mg *EnterpriseManagerBridge) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ObjectStorageBucketName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ObjectStorageBucketNameRef,
 			Selector:     mg.Spec.ForProvider.ObjectStorageBucketNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -783,6 +817,7 @@ func (mg *EnterpriseManagerBridge) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -802,6 +837,7 @@ func (mg *EnterpriseManagerBridge) ResolveReferences(ctx context.Context, c clie
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ObjectStorageBucketName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ObjectStorageBucketNameRef,
 			Selector:     mg.Spec.InitProvider.ObjectStorageBucketNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -833,6 +869,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -852,6 +889,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EnterpriseManagerBridgeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EnterpriseManagerBridgeIDRef,
 			Selector:     mg.Spec.ForProvider.EnterpriseManagerBridgeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -872,6 +910,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].DbmPrivateEndpointID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].DbmPrivateEndpointIDRef,
 				Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].DbmPrivateEndpointIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -895,6 +934,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].NamedCredentialID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].NamedCredentialIDRef,
 						Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].NamedCredentialIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -920,6 +960,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].UserName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].UserNameRef,
 						Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].UserNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -945,6 +986,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].WalletSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].WalletSecretIDRef,
 						Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].WalletSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -970,6 +1012,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].NamedCredentialID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].NamedCredentialIDRef,
 						Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].NamedCredentialIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -995,6 +1038,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].UserName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].UserNameRef,
 						Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].UserNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1020,6 +1064,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].WalletSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].WalletSecretIDRef,
 						Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].WalletSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1044,6 +1089,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].DatabaseID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].DatabaseIDRef,
 					Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].DatabaseIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1067,6 +1113,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ManagementAgentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ManagementAgentIDRef,
 					Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ManagementAgentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1090,6 +1137,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].OpsiPrivateEndpointID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].OpsiPrivateEndpointIDRef,
 					Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].OpsiPrivateEndpointIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1114,6 +1162,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].NamedCredentialID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].NamedCredentialIDRef,
 						Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].NamedCredentialIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1139,6 +1188,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].UserName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].UserNameRef,
 						Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].UserNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1164,6 +1214,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].WalletSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].WalletSecretIDRef,
 						Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].WalletSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1189,6 +1240,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].NamedCredentialID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].NamedCredentialIDRef,
 						Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].NamedCredentialIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1214,6 +1266,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].UserName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].UserNameRef,
 						Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].UserNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1239,6 +1292,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].WalletSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].WalletSecretIDRef,
 						Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].WalletSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1263,6 +1317,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].DatabaseID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].DatabaseIDRef,
 					Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].DatabaseIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1286,6 +1341,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].DbmPrivateEndpointID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].DbmPrivateEndpointIDRef,
 					Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].DbmPrivateEndpointIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1309,6 +1365,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ManagementAgentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ManagementAgentIDRef,
 					Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ManagementAgentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1332,6 +1389,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].OpsiPrivateEndpointID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].OpsiPrivateEndpointIDRef,
 					Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].OpsiPrivateEndpointIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1354,6 +1412,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberVMClusterDetails[i3].OpsiPrivateEndpointID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.MemberVMClusterDetails[i3].OpsiPrivateEndpointIDRef,
 				Selector:     mg.Spec.ForProvider.MemberVMClusterDetails[i3].OpsiPrivateEndpointIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1374,6 +1433,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1393,6 +1453,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EnterpriseManagerBridgeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.EnterpriseManagerBridgeIDRef,
 			Selector:     mg.Spec.InitProvider.EnterpriseManagerBridgeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1413,6 +1474,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].DbmPrivateEndpointID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].DbmPrivateEndpointIDRef,
 				Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].DbmPrivateEndpointIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1436,6 +1498,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].NamedCredentialID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].NamedCredentialIDRef,
 						Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].NamedCredentialIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1461,6 +1524,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].UserName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].UserNameRef,
 						Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].UserNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1486,6 +1550,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].WalletSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].WalletSecretIDRef,
 						Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ConnectionCredentialDetails[i5].WalletSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1511,6 +1576,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].NamedCredentialID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].NamedCredentialIDRef,
 						Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].NamedCredentialIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1536,6 +1602,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].UserName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].UserNameRef,
 						Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].UserNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1561,6 +1628,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].WalletSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].WalletSecretIDRef,
 						Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].CredentialDetails[i5].WalletSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1585,6 +1653,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].DatabaseID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].DatabaseIDRef,
 					Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].DatabaseIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1608,6 +1677,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ManagementAgentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ManagementAgentIDRef,
 					Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].ManagementAgentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1631,6 +1701,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].OpsiPrivateEndpointID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].OpsiPrivateEndpointIDRef,
 					Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberAutonomousDetails[i4].OpsiPrivateEndpointIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1655,6 +1726,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].NamedCredentialID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].NamedCredentialIDRef,
 						Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].NamedCredentialIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1680,6 +1752,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].UserName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].UserNameRef,
 						Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].UserNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1705,6 +1778,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].WalletSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].WalletSecretIDRef,
 						Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ConnectionCredentialDetails[i5].WalletSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1730,6 +1804,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].NamedCredentialID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].NamedCredentialIDRef,
 						Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].NamedCredentialIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1755,6 +1830,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].UserName),
 						Extract:      resource.ExtractParamPath("name", false),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].UserNameRef,
 						Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].UserNameSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1780,6 +1856,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].WalletSecretID),
 						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
 						Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].WalletSecretIDRef,
 						Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].CredentialDetails[i5].WalletSecretIDSelector,
 						To:           reference.To{List: l, Managed: m},
@@ -1804,6 +1881,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].DatabaseID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].DatabaseIDRef,
 					Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].DatabaseIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1827,6 +1905,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].DbmPrivateEndpointID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].DbmPrivateEndpointIDRef,
 					Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].DbmPrivateEndpointIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1850,6 +1929,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ManagementAgentID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ManagementAgentIDRef,
 					Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].ManagementAgentIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1873,6 +1953,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].OpsiPrivateEndpointID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].OpsiPrivateEndpointIDRef,
 					Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].MemberDatabaseDetails[i4].OpsiPrivateEndpointIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1895,6 +1976,7 @@ func (mg *ExadataInsight) ResolveReferences(ctx context.Context, c client.Reader
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberVMClusterDetails[i3].OpsiPrivateEndpointID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.MemberVMClusterDetails[i3].OpsiPrivateEndpointIDRef,
 				Selector:     mg.Spec.InitProvider.MemberVMClusterDetails[i3].OpsiPrivateEndpointIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -1928,6 +2010,7 @@ func (mg *HostInsight) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1947,6 +2030,7 @@ func (mg *HostInsight) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EnterpriseManagerBridgeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.EnterpriseManagerBridgeIDRef,
 			Selector:     mg.Spec.ForProvider.EnterpriseManagerBridgeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1966,6 +2050,7 @@ func (mg *HostInsight) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExadataInsightID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ExadataInsightIDRef,
 			Selector:     mg.Spec.ForProvider.ExadataInsightIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -1985,6 +2070,7 @@ func (mg *HostInsight) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementAgentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.ManagementAgentIDRef,
 			Selector:     mg.Spec.ForProvider.ManagementAgentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2004,6 +2090,7 @@ func (mg *HostInsight) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2023,6 +2110,7 @@ func (mg *HostInsight) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EnterpriseManagerBridgeID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.EnterpriseManagerBridgeIDRef,
 			Selector:     mg.Spec.InitProvider.EnterpriseManagerBridgeIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2042,6 +2130,7 @@ func (mg *HostInsight) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExadataInsightID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ExadataInsightIDRef,
 			Selector:     mg.Spec.InitProvider.ExadataInsightIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2061,6 +2150,7 @@ func (mg *HostInsight) ResolveReferences(ctx context.Context, c client.Reader) e
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementAgentID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.ManagementAgentIDRef,
 			Selector:     mg.Spec.InitProvider.ManagementAgentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2092,6 +2182,7 @@ func (mg *NewsReport) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2111,6 +2202,7 @@ func (mg *NewsReport) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2142,6 +2234,7 @@ func (mg *OperationsInsightsPrivateEndpoint) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2161,6 +2254,7 @@ func (mg *OperationsInsightsPrivateEndpoint) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2180,6 +2274,7 @@ func (mg *OperationsInsightsPrivateEndpoint) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VcnID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.VcnIDRef,
 			Selector:     mg.Spec.ForProvider.VcnIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2199,6 +2294,7 @@ func (mg *OperationsInsightsPrivateEndpoint) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2218,6 +2314,7 @@ func (mg *OperationsInsightsPrivateEndpoint) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2237,6 +2334,7 @@ func (mg *OperationsInsightsPrivateEndpoint) ResolveReferences(ctx context.Conte
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VcnID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.VcnIDRef,
 			Selector:     mg.Spec.InitProvider.VcnIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2268,6 +2366,7 @@ func (mg *OperationsInsightsWarehouse) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2287,6 +2386,7 @@ func (mg *OperationsInsightsWarehouse) ResolveReferences(ctx context.Context, c 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2318,6 +2418,7 @@ func (mg *OperationsInsightsWarehouseDownloadWarehouseWallet) ResolveReferences(
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OperationsInsightsWarehouseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.OperationsInsightsWarehouseIDRef,
 			Selector:     mg.Spec.ForProvider.OperationsInsightsWarehouseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2337,6 +2438,7 @@ func (mg *OperationsInsightsWarehouseDownloadWarehouseWallet) ResolveReferences(
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OperationsInsightsWarehouseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.OperationsInsightsWarehouseIDRef,
 			Selector:     mg.Spec.InitProvider.OperationsInsightsWarehouseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2368,6 +2470,7 @@ func (mg *OperationsInsightsWarehouseRotateWarehouseWallet) ResolveReferences(ct
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OperationsInsightsWarehouseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.OperationsInsightsWarehouseIDRef,
 			Selector:     mg.Spec.ForProvider.OperationsInsightsWarehouseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2387,6 +2490,7 @@ func (mg *OperationsInsightsWarehouseRotateWarehouseWallet) ResolveReferences(ct
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OperationsInsightsWarehouseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.OperationsInsightsWarehouseIDRef,
 			Selector:     mg.Spec.InitProvider.OperationsInsightsWarehouseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2418,6 +2522,7 @@ func (mg *OperationsInsightsWarehouseUser) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2437,6 +2542,7 @@ func (mg *OperationsInsightsWarehouseUser) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OperationsInsightsWarehouseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.OperationsInsightsWarehouseIDRef,
 			Selector:     mg.Spec.ForProvider.OperationsInsightsWarehouseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2456,6 +2562,7 @@ func (mg *OperationsInsightsWarehouseUser) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2475,6 +2582,7 @@ func (mg *OperationsInsightsWarehouseUser) ResolveReferences(ctx context.Context
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OperationsInsightsWarehouseID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.OperationsInsightsWarehouseIDRef,
 			Selector:     mg.Spec.InitProvider.OperationsInsightsWarehouseIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2506,6 +2614,7 @@ func (mg *OpsiConfiguration) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -2525,6 +2634,7 @@ func (mg *OpsiConfiguration) ResolveReferences(ctx context.Context, c client.Rea
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},

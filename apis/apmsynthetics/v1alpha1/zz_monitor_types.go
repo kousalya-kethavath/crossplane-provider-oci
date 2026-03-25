@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AuthHeadersInitParameters struct {
@@ -604,7 +604,7 @@ type FtpBasicAuthenticationDetailsPasswordInitParameters struct {
 
 	// (Updatable) Vault secret OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VaultSecretID *string `json:"vaultSecretId,omitempty" tf:"vault_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate vaultSecretId.
@@ -634,7 +634,7 @@ type FtpBasicAuthenticationDetailsPasswordParameters struct {
 
 	// (Updatable) Vault secret OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultSecretID *string `json:"vaultSecretId,omitempty" tf:"vault_secret_id,omitempty"`
 
@@ -724,7 +724,7 @@ type MonitorInitParameters struct {
 
 	// (Updatable) The OCID of the script. scriptId is mandatory for creation of SCRIPTED_BROWSER and SCRIPTED_REST monitor types. For other monitor types, it should be set to null.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apmsynthetics/v1alpha1.Script
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ScriptID *string `json:"scriptId,omitempty" tf:"script_id,omitempty"`
 
 	// Reference to a Script in apmsynthetics to populate scriptId.
@@ -905,7 +905,7 @@ type MonitorParameters struct {
 
 	// (Updatable) The OCID of the script. scriptId is mandatory for creation of SCRIPTED_BROWSER and SCRIPTED_REST monitor types. For other monitor types, it should be set to null.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/apmsynthetics/v1alpha1.Script
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ScriptID *string `json:"scriptId,omitempty" tf:"script_id,omitempty"`
 
@@ -1026,7 +1026,7 @@ type PasswordInitParameters struct {
 
 	// (Updatable) Vault secret OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VaultSecretID *string `json:"vaultSecretId,omitempty" tf:"vault_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate vaultSecretId.
@@ -1056,7 +1056,7 @@ type PasswordParameters struct {
 
 	// (Updatable) Vault secret OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultSecretID *string `json:"vaultSecretId,omitempty" tf:"vault_secret_id,omitempty"`
 
@@ -1117,7 +1117,7 @@ type ReqAuthenticationDetailsInitParameters struct {
 
 	// (Applicable when config_type=REST_CONFIG) (Updatable) User name for authentication.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	AuthUserName *string `json:"authUserName,omitempty" tf:"auth_user_name,omitempty"`
 
 	// Reference to a User in identity to populate authUserName.
@@ -1183,7 +1183,7 @@ type ReqAuthenticationDetailsParameters struct {
 
 	// (Applicable when config_type=REST_CONFIG) (Updatable) User name for authentication.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	AuthUserName *string `json:"authUserName,omitempty" tf:"auth_user_name,omitempty"`
 

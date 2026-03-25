@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CustomSoftwareSourceFilterInitParameters struct {
@@ -74,7 +74,7 @@ type ModuleStreamProfileFiltersInitParameters struct {
 
 	// (Applicable when software_source_type=CUSTOM | VERSIONED) (Updatable) Stream name.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 
 	// Reference to a Stream in streaming to populate streamName.
@@ -126,7 +126,7 @@ type ModuleStreamProfileFiltersParameters struct {
 
 	// (Applicable when software_source_type=CUSTOM | VERSIONED) (Updatable) Stream name.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 
@@ -280,7 +280,7 @@ type SoftwareSourceInitParameters struct {
 
 	// The OCID of the vendor software source in the root compartment that is being replicated.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.SoftwareSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OriginSoftwareSourceID *string `json:"originSoftwareSourceId,omitempty" tf:"origin_software_source_id,omitempty"`
 
 	// Reference to a SoftwareSource in osmanagementhub to populate originSoftwareSourceId.
@@ -515,7 +515,7 @@ type SoftwareSourceParameters struct {
 
 	// The OCID of the vendor software source in the root compartment that is being replicated.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.SoftwareSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OriginSoftwareSourceID *string `json:"originSoftwareSourceId,omitempty" tf:"origin_software_source_id,omitempty"`
 

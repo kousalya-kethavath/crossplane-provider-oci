@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this MonitoredRegion.
 func (mg *MonitoredRegion) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *MonitoredRegion) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this MonitoredRegion.
 func (mg *MonitoredRegion) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this MonitoredRegion.
-func (mg *MonitoredRegion) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this MonitoredRegion.
@@ -57,11 +52,6 @@ func (mg *MonitoredRegion) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this MonitoredRegion.
-func (mg *MonitoredRegion) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this MonitoredRegion.
 func (mg *MonitoredRegion) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -85,11 +75,6 @@ func (mg *ResourceAnalyticsInstance) GetManagementPolicies() xpv1.ManagementPoli
 // GetProviderConfigReference of this ResourceAnalyticsInstance.
 func (mg *ResourceAnalyticsInstance) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this ResourceAnalyticsInstance.
-func (mg *ResourceAnalyticsInstance) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this ResourceAnalyticsInstance.
@@ -117,11 +102,6 @@ func (mg *ResourceAnalyticsInstance) SetProviderConfigReference(r *xpv1.Referenc
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this ResourceAnalyticsInstance.
-func (mg *ResourceAnalyticsInstance) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this ResourceAnalyticsInstance.
 func (mg *ResourceAnalyticsInstance) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -145,11 +125,6 @@ func (mg *ResourceAnalyticsInstanceOacManagement) GetManagementPolicies() xpv1.M
 // GetProviderConfigReference of this ResourceAnalyticsInstanceOacManagement.
 func (mg *ResourceAnalyticsInstanceOacManagement) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this ResourceAnalyticsInstanceOacManagement.
-func (mg *ResourceAnalyticsInstanceOacManagement) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this ResourceAnalyticsInstanceOacManagement.
@@ -177,11 +152,6 @@ func (mg *ResourceAnalyticsInstanceOacManagement) SetProviderConfigReference(r *
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this ResourceAnalyticsInstanceOacManagement.
-func (mg *ResourceAnalyticsInstanceOacManagement) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this ResourceAnalyticsInstanceOacManagement.
 func (mg *ResourceAnalyticsInstanceOacManagement) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -207,11 +177,6 @@ func (mg *TenancyAttachment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this TenancyAttachment.
-func (mg *TenancyAttachment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this TenancyAttachment.
 func (mg *TenancyAttachment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -235,11 +200,6 @@ func (mg *TenancyAttachment) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this TenancyAttachment.
 func (mg *TenancyAttachment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this TenancyAttachment.
-func (mg *TenancyAttachment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this TenancyAttachment.

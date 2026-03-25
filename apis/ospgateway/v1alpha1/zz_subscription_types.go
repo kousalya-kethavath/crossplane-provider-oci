@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BillingAddressInitParameters struct {
@@ -492,7 +492,7 @@ type SubscriptionInitParameters struct {
 
 	// Subscription id(OCID).
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ospgateway/v1alpha1.Subscription
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
 	// Reference to a Subscription in ospgateway to populate subscriptionId.
@@ -617,7 +617,7 @@ type SubscriptionParameters struct {
 
 	// Subscription id(OCID).
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ospgateway/v1alpha1.Subscription
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 

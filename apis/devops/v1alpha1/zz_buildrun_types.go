@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionsInitParameters struct {
@@ -133,7 +133,7 @@ type BuildRunInitParameters struct {
 
 	// The OCID of the build pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.BuildPipeline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BuildPipelineID *string `json:"buildPipelineId,omitempty" tf:"build_pipeline_id,omitempty"`
 
 	// Reference to a BuildPipeline in devops to populate buildPipelineId.
@@ -223,7 +223,7 @@ type BuildRunParameters struct {
 
 	// The OCID of the build pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/devops/v1alpha1.BuildPipeline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BuildPipelineID *string `json:"buildPipelineId,omitempty" tf:"build_pipeline_id,omitempty"`
 

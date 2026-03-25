@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ToolsDatabaseToolsIdentityInitParameters struct {
@@ -32,7 +32,7 @@ type ToolsDatabaseToolsIdentityInitParameters struct {
 
 	// The OCID of the related Database Tools connection.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ToolsDatabaseToolsConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatabaseToolsConnectionID *string `json:"databaseToolsConnectionId,omitempty" tf:"database_tools_connection_id,omitempty"`
 
 	// Reference to a ToolsDatabaseToolsConnection in database to populate databaseToolsConnectionId.
@@ -165,7 +165,7 @@ type ToolsDatabaseToolsIdentityParameters struct {
 
 	// The OCID of the related Database Tools connection.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ToolsDatabaseToolsConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatabaseToolsConnectionID *string `json:"databaseToolsConnectionId,omitempty" tf:"database_tools_connection_id,omitempty"`
 

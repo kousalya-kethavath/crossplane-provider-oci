@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AlarmInitParameters struct {
@@ -39,7 +39,7 @@ type AlarmInitParameters struct {
 
 	// (Updatable) A list of destinations for alarm notifications. Each destination is represented by the OCID of a related resource, such as a topic. Supported destination services: Notifications, Streaming. Limit: One destination per supported destination service.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ons/v1alpha1.NotificationTopic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
 	// References to NotificationTopic in ons to populate destinations.
@@ -252,7 +252,7 @@ type AlarmParameters struct {
 
 	// (Updatable) A list of destinations for alarm notifications. Each destination is represented by the OCID of a related resource, such as a topic. Supported destination services: Notifications, Streaming. Limit: One destination per supported destination service.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ons/v1alpha1.NotificationTopic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
 

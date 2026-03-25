@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type OauthPartnerCertificateIdcsCreatedByInitParameters struct {
@@ -77,7 +77,7 @@ type OauthPartnerCertificateInitParameters struct {
 
 	// Key store ID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.KeyStore
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyStoreID *string `json:"keyStoreId,omitempty" tf:"key_store_id,omitempty"`
 
 	// Reference to a KeyStore in database to populate keyStoreId.
@@ -247,7 +247,7 @@ type OauthPartnerCertificateParameters struct {
 
 	// Key store ID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.KeyStore
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyStoreID *string `json:"keyStoreId,omitempty" tf:"key_store_id,omitempty"`
 

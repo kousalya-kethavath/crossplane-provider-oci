@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type KafkaClusterSuperusersManagementInitParameters struct {
@@ -32,7 +32,7 @@ type KafkaClusterSuperusersManagementInitParameters struct {
 
 	// The OCID of the KafkaCluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managedkafka/v1alpha1.KafkaCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KafkaClusterID *string `json:"kafkaClusterId,omitempty" tf:"kafka_cluster_id,omitempty"`
 
 	// Reference to a KafkaCluster in managedkafka to populate kafkaClusterId.
@@ -45,7 +45,7 @@ type KafkaClusterSuperusersManagementInitParameters struct {
 
 	// The OCID of the secret that will be populated with the generated superuser password.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate secretId.
@@ -95,7 +95,7 @@ type KafkaClusterSuperusersManagementParameters struct {
 
 	// The OCID of the KafkaCluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managedkafka/v1alpha1.KafkaCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KafkaClusterID *string `json:"kafkaClusterId,omitempty" tf:"kafka_cluster_id,omitempty"`
 
@@ -109,7 +109,7 @@ type KafkaClusterSuperusersManagementParameters struct {
 
 	// The OCID of the secret that will be populated with the generated superuser password.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 

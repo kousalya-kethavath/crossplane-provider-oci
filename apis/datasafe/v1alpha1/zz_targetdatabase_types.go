@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConnectionOptionInitParameters struct {
@@ -20,7 +20,7 @@ type ConnectionOptionInitParameters struct {
 
 	// (Updatable) The OCID of the Data Safe private endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatasafePrivateEndpointID *string `json:"datasafePrivateEndpointId,omitempty" tf:"datasafe_private_endpoint_id,omitempty"`
 
 	// Reference to a PrivateEndpoint in dataflow to populate datasafePrivateEndpointId.
@@ -33,7 +33,7 @@ type ConnectionOptionInitParameters struct {
 
 	// (Updatable) The OCID of the on-premises connector.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.OnPremConnector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OnPremConnectorID *string `json:"onPremConnectorId,omitempty" tf:"on_prem_connector_id,omitempty"`
 
 	// Reference to a OnPremConnector in datasafe to populate onPremConnectorId.
@@ -65,7 +65,7 @@ type ConnectionOptionParameters struct {
 
 	// (Updatable) The OCID of the Data Safe private endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatasafePrivateEndpointID *string `json:"datasafePrivateEndpointId,omitempty" tf:"datasafe_private_endpoint_id,omitempty"`
 
@@ -79,7 +79,7 @@ type ConnectionOptionParameters struct {
 
 	// (Updatable) The OCID of the on-premises connector.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.OnPremConnector
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OnPremConnectorID *string `json:"onPremConnectorId,omitempty" tf:"on_prem_connector_id,omitempty"`
 
@@ -99,7 +99,7 @@ type CredentialsInitParameters struct {
 
 	// (Updatable) The database user name.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
 	// Reference to a User in identity to populate userName.
@@ -125,7 +125,7 @@ type CredentialsParameters struct {
 
 	// (Updatable) The database user name.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
@@ -142,7 +142,7 @@ type DatabaseDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the Autonomous Database registered as a target database in Data Safe.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AutonomousDatabaseID *string `json:"autonomousDatabaseId,omitempty" tf:"autonomous_database_id,omitempty"`
 
 	// Reference to a AutonomousDatabase in database to populate autonomousDatabaseId.
@@ -155,7 +155,7 @@ type DatabaseDetailsInitParameters struct {
 
 	// (Applicable when database_type=DATABASE_CLOUD_SERVICE) (Updatable) The OCID of the cloud database registered as a target database in Data Safe.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DbSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DBSystemID *string `json:"dbSystemId,omitempty" tf:"db_system_id,omitempty"`
 
 	// Reference to a DbSystem in database to populate dbSystemId.
@@ -177,7 +177,7 @@ type DatabaseDetailsInitParameters struct {
 
 	// (Applicable when database_type=INSTALLED_DATABASE) (Updatable) The OCID of the compute instance on which the database is running.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
 	// Reference to a Instance in compute to populate instanceId.
@@ -193,7 +193,7 @@ type DatabaseDetailsInitParameters struct {
 
 	// (Applicable when database_type=DATABASE_CLOUD_SERVICE) (Updatable) The OCID of the pluggable database registered as a target database in Data Safe.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.PluggableDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PluggableDatabaseID *string `json:"pluggableDatabaseId,omitempty" tf:"pluggable_database_id,omitempty"`
 
 	// Reference to a PluggableDatabase in database to populate pluggableDatabaseId.
@@ -209,7 +209,7 @@ type DatabaseDetailsInitParameters struct {
 
 	// (Applicable when database_type=DATABASE_CLOUD_SERVICE) (Updatable) The OCID of the VM cluster in which the database is running.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.VmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VMClusterID *string `json:"vmClusterId,omitempty" tf:"vm_cluster_id,omitempty"`
 
 	// Reference to a VmCluster in database to populate vmClusterId.
@@ -258,7 +258,7 @@ type DatabaseDetailsParameters struct {
 
 	// (Updatable) The OCID of the Autonomous Database registered as a target database in Data Safe.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AutonomousDatabaseID *string `json:"autonomousDatabaseId,omitempty" tf:"autonomous_database_id,omitempty"`
 
@@ -272,7 +272,7 @@ type DatabaseDetailsParameters struct {
 
 	// (Applicable when database_type=DATABASE_CLOUD_SERVICE) (Updatable) The OCID of the cloud database registered as a target database in Data Safe.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DbSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DBSystemID *string `json:"dbSystemId,omitempty" tf:"db_system_id,omitempty"`
 
@@ -298,7 +298,7 @@ type DatabaseDetailsParameters struct {
 
 	// (Applicable when database_type=INSTALLED_DATABASE) (Updatable) The OCID of the compute instance on which the database is running.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
@@ -316,7 +316,7 @@ type DatabaseDetailsParameters struct {
 
 	// (Applicable when database_type=DATABASE_CLOUD_SERVICE) (Updatable) The OCID of the pluggable database registered as a target database in Data Safe.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.PluggableDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PluggableDatabaseID *string `json:"pluggableDatabaseId,omitempty" tf:"pluggable_database_id,omitempty"`
 
@@ -334,7 +334,7 @@ type DatabaseDetailsParameters struct {
 
 	// (Applicable when database_type=DATABASE_CLOUD_SERVICE) (Updatable) The OCID of the VM cluster in which the database is running.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.VmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VMClusterID *string `json:"vmClusterId,omitempty" tf:"vm_cluster_id,omitempty"`
 
@@ -351,7 +351,7 @@ type PeerTargetDatabaseDetailsDatabaseDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the Autonomous Database registered as a target database in Data Safe.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AutonomousDatabaseID *string `json:"autonomousDatabaseId,omitempty" tf:"autonomous_database_id,omitempty"`
 
 	// Reference to a AutonomousDatabase in database to populate autonomousDatabaseId.
@@ -364,7 +364,7 @@ type PeerTargetDatabaseDetailsDatabaseDetailsInitParameters struct {
 
 	// (Applicable when database_type=DATABASE_CLOUD_SERVICE) (Updatable) The OCID of the cloud database registered as a target database in Data Safe.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DbSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DBSystemID *string `json:"dbSystemId,omitempty" tf:"db_system_id,omitempty"`
 
 	// Reference to a DbSystem in database to populate dbSystemId.
@@ -386,7 +386,7 @@ type PeerTargetDatabaseDetailsDatabaseDetailsInitParameters struct {
 
 	// (Applicable when database_type=INSTALLED_DATABASE) (Updatable) The OCID of the compute instance on which the database is running.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
 	// Reference to a Instance in compute to populate instanceId.
@@ -402,7 +402,7 @@ type PeerTargetDatabaseDetailsDatabaseDetailsInitParameters struct {
 
 	// (Applicable when database_type=DATABASE_CLOUD_SERVICE) (Updatable) The OCID of the pluggable database registered as a target database in Data Safe.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.PluggableDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PluggableDatabaseID *string `json:"pluggableDatabaseId,omitempty" tf:"pluggable_database_id,omitempty"`
 
 	// Reference to a PluggableDatabase in database to populate pluggableDatabaseId.
@@ -418,7 +418,7 @@ type PeerTargetDatabaseDetailsDatabaseDetailsInitParameters struct {
 
 	// (Applicable when database_type=DATABASE_CLOUD_SERVICE) (Updatable) The OCID of the VM cluster in which the database is running.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.VmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VMClusterID *string `json:"vmClusterId,omitempty" tf:"vm_cluster_id,omitempty"`
 
 	// Reference to a VmCluster in database to populate vmClusterId.
@@ -467,7 +467,7 @@ type PeerTargetDatabaseDetailsDatabaseDetailsParameters struct {
 
 	// (Updatable) The OCID of the Autonomous Database registered as a target database in Data Safe.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.AutonomousDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AutonomousDatabaseID *string `json:"autonomousDatabaseId,omitempty" tf:"autonomous_database_id,omitempty"`
 
@@ -481,7 +481,7 @@ type PeerTargetDatabaseDetailsDatabaseDetailsParameters struct {
 
 	// (Applicable when database_type=DATABASE_CLOUD_SERVICE) (Updatable) The OCID of the cloud database registered as a target database in Data Safe.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DbSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DBSystemID *string `json:"dbSystemId,omitempty" tf:"db_system_id,omitempty"`
 
@@ -507,7 +507,7 @@ type PeerTargetDatabaseDetailsDatabaseDetailsParameters struct {
 
 	// (Applicable when database_type=INSTALLED_DATABASE) (Updatable) The OCID of the compute instance on which the database is running.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
@@ -525,7 +525,7 @@ type PeerTargetDatabaseDetailsDatabaseDetailsParameters struct {
 
 	// (Applicable when database_type=DATABASE_CLOUD_SERVICE) (Updatable) The OCID of the pluggable database registered as a target database in Data Safe.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.PluggableDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PluggableDatabaseID *string `json:"pluggableDatabaseId,omitempty" tf:"pluggable_database_id,omitempty"`
 
@@ -543,7 +543,7 @@ type PeerTargetDatabaseDetailsDatabaseDetailsParameters struct {
 
 	// (Applicable when database_type=DATABASE_CLOUD_SERVICE) (Updatable) The OCID of the VM cluster in which the database is running.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.VmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VMClusterID *string `json:"vmClusterId,omitempty" tf:"vm_cluster_id,omitempty"`
 

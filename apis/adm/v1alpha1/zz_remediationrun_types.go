@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type RemediationRunInitParameters struct {
@@ -40,7 +40,7 @@ type RemediationRunInitParameters struct {
 
 	// The Oracle Cloud identifier (OCID) of the Remediation Recipe.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/adm/v1alpha1.RemediationRecipe
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RemediationRecipeID *string `json:"remediationRecipeId,omitempty" tf:"remediation_recipe_id,omitempty"`
 
 	// Reference to a RemediationRecipe in adm to populate remediationRecipeId.
@@ -134,7 +134,7 @@ type RemediationRunParameters struct {
 
 	// The Oracle Cloud identifier (OCID) of the Remediation Recipe.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/adm/v1alpha1.RemediationRecipe
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RemediationRecipeID *string `json:"remediationRecipeId,omitempty" tf:"remediation_recipe_id,omitempty"`
 

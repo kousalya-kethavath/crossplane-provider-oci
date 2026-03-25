@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	appcataloglistingresourceversionagreement "github.com/oracle/provider-oci/internal/controller/compute/appcataloglistingresourceversionagreement"
 	appcatalogsubscription "github.com/oracle/provider-oci/internal/controller/compute/appcatalogsubscription"
@@ -59,6 +59,40 @@ func Setup_compute(mgr ctrl.Manager, o controller.Options) error {
 		instancepool.Setup,
 		instancepoolinstance.Setup,
 		shapemanagement.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_compute creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_compute(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		appcataloglistingresourceversionagreement.SetupGated,
+		appcatalogsubscription.SetupGated,
+		clusternetwork.SetupGated,
+		computecapacityreport.SetupGated,
+		computecapacityreservation.SetupGated,
+		computecapacitytopology.SetupGated,
+		computecluster.SetupGated,
+		computegpumemorycluster.SetupGated,
+		computegpumemoryfabric.SetupGated,
+		computehost.SetupGated,
+		computehostgroup.SetupGated,
+		computeimagecapabilityschema.SetupGated,
+		consolehistory.SetupGated,
+		dedicatedvmhost.SetupGated,
+		image.SetupGated,
+		instance.SetupGated,
+		instanceconfiguration.SetupGated,
+		instanceconsoleconnection.SetupGated,
+		instancemaintenanceevent.SetupGated,
+		instancepool.SetupGated,
+		instancepoolinstance.SetupGated,
+		shapemanagement.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

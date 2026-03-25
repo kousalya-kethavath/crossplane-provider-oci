@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	catalog "github.com/oracle/provider-oci/internal/controller/datacatalog/catalog"
 	catalogprivateendpoint "github.com/oracle/provider-oci/internal/controller/datacatalog/catalogprivateendpoint"
@@ -25,6 +25,23 @@ func Setup_datacatalog(mgr ctrl.Manager, o controller.Options) error {
 		connection.Setup,
 		dataasset.Setup,
 		metastore.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_datacatalog creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_datacatalog(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		catalog.SetupGated,
+		catalogprivateendpoint.SetupGated,
+		connection.SetupGated,
+		dataasset.SetupGated,
+		metastore.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

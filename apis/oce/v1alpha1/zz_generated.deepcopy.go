@@ -9,7 +9,7 @@ Copyright 2022 Upbound Inc.
 package v1alpha1
 
 import (
-	"github.com/crossplane/crossplane-runtime/apis/common/v1"
+	"github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -116,7 +116,7 @@ func (in *OceInstanceInitParameters) DeepCopyInto(out *OceInstanceInitParameters
 			(*out)[key] = outVal
 		}
 	}
-	out.IdcsAccessTokenSecretRef = in.IdcsAccessTokenSecretRef
+	in.IdcsAccessTokenSecretRef.DeepCopyInto(&out.IdcsAccessTokenSecretRef)
 	if in.InstanceAccessType != nil {
 		in, out := &in.InstanceAccessType, &out.InstanceAccessType
 		*out = new(string)
@@ -477,7 +477,7 @@ func (in *OceInstanceParameters) DeepCopyInto(out *OceInstanceParameters) {
 			(*out)[key] = outVal
 		}
 	}
-	out.IdcsAccessTokenSecretRef = in.IdcsAccessTokenSecretRef
+	in.IdcsAccessTokenSecretRef.DeepCopyInto(&out.IdcsAccessTokenSecretRef)
 	if in.InstanceAccessType != nil {
 		in, out := &in.InstanceAccessType, &out.InstanceAccessType
 		*out = new(string)

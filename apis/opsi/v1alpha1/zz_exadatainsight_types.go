@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ConnectionDetailsHostsInitParameters struct {
@@ -62,7 +62,7 @@ type ExadataInsightInitParameters struct {
 
 	// OPSI Enterprise Manager Bridge OCID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/opsi/v1alpha1.EnterpriseManagerBridge
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	EnterpriseManagerBridgeID *string `json:"enterpriseManagerBridgeId,omitempty" tf:"enterprise_manager_bridge_id,omitempty"`
 
 	// Reference to a EnterpriseManagerBridge in opsi to populate enterpriseManagerBridgeId.
@@ -206,7 +206,7 @@ type ExadataInsightParameters struct {
 
 	// OPSI Enterprise Manager Bridge OCID
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/opsi/v1alpha1.EnterpriseManagerBridge
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EnterpriseManagerBridgeID *string `json:"enterpriseManagerBridgeId,omitempty" tf:"enterprise_manager_bridge_id,omitempty"`
 
@@ -262,7 +262,7 @@ type MemberAutonomousDetailsConnectionCredentialDetailsInitParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_NAMED_CREDS) The credential OCID stored in management agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementNamedCredential
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NamedCredentialID *string `json:"namedCredentialId,omitempty" tf:"named_credential_id,omitempty"`
 
 	// Reference to a ManagementNamedCredential in database to populate namedCredentialId.
@@ -281,7 +281,7 @@ type MemberAutonomousDetailsConnectionCredentialDetailsInitParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_VAULT) database user name.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
 	// Reference to a User in identity to populate userName.
@@ -294,7 +294,7 @@ type MemberAutonomousDetailsConnectionCredentialDetailsInitParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_VAULT) The OCID of the Secret where the database keystore contents are stored. This is used for TCPS support in BM/VM/ExaCS cases.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WalletSecretID *string `json:"walletSecretId,omitempty" tf:"wallet_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate walletSecretId.
@@ -339,7 +339,7 @@ type MemberAutonomousDetailsConnectionCredentialDetailsParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_NAMED_CREDS) The credential OCID stored in management agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementNamedCredential
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NamedCredentialID *string `json:"namedCredentialId,omitempty" tf:"named_credential_id,omitempty"`
 
@@ -361,7 +361,7 @@ type MemberAutonomousDetailsConnectionCredentialDetailsParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_VAULT) database user name.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
@@ -375,7 +375,7 @@ type MemberAutonomousDetailsConnectionCredentialDetailsParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_VAULT) The OCID of the Secret where the database keystore contents are stored. This is used for TCPS support in BM/VM/ExaCS cases.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WalletSecretID *string `json:"walletSecretId,omitempty" tf:"wallet_secret_id,omitempty"`
 
@@ -447,7 +447,7 @@ type MemberAutonomousDetailsCredentialDetailsInitParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_NAMED_CREDS) The credential OCID stored in management agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementNamedCredential
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NamedCredentialID *string `json:"namedCredentialId,omitempty" tf:"named_credential_id,omitempty"`
 
 	// Reference to a ManagementNamedCredential in database to populate namedCredentialId.
@@ -466,7 +466,7 @@ type MemberAutonomousDetailsCredentialDetailsInitParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_VAULT) database user name.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
 	// Reference to a User in identity to populate userName.
@@ -479,7 +479,7 @@ type MemberAutonomousDetailsCredentialDetailsInitParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_VAULT) The OCID of the Secret where the database keystore contents are stored. This is used for TCPS support in BM/VM/ExaCS cases.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WalletSecretID *string `json:"walletSecretId,omitempty" tf:"wallet_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate walletSecretId.
@@ -524,7 +524,7 @@ type MemberAutonomousDetailsCredentialDetailsParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_NAMED_CREDS) The credential OCID stored in management agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementNamedCredential
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NamedCredentialID *string `json:"namedCredentialId,omitempty" tf:"named_credential_id,omitempty"`
 
@@ -546,7 +546,7 @@ type MemberAutonomousDetailsCredentialDetailsParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_VAULT) database user name.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
@@ -560,7 +560,7 @@ type MemberAutonomousDetailsCredentialDetailsParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_VAULT) The OCID of the Secret where the database keystore contents are stored. This is used for TCPS support in BM/VM/ExaCS cases.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WalletSecretID *string `json:"walletSecretId,omitempty" tf:"wallet_secret_id,omitempty"`
 
@@ -589,7 +589,7 @@ type MemberAutonomousDetailsInitParameters struct {
 
 	// The OCID of the database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.Database
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
 	// Reference to a Database in database to populate databaseId.
@@ -622,7 +622,7 @@ type MemberAutonomousDetailsInitParameters struct {
 
 	// The OCID of the Management Agent
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managementagent/v1alpha1.ManagementAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ManagementAgentID *string `json:"managementAgentId,omitempty" tf:"management_agent_id,omitempty"`
 
 	// Reference to a ManagementAgent in managementagent to populate managementAgentId.
@@ -635,7 +635,7 @@ type MemberAutonomousDetailsInitParameters struct {
 
 	// (Applicable when entity_source=PE_COMANAGED_EXADATA) The OCID of the OPSI private endpoint
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OpsiPrivateEndpointID *string `json:"opsiPrivateEndpointId,omitempty" tf:"opsi_private_endpoint_id,omitempty"`
 
 	// Reference to a PrivateEndpoint in dataflow to populate opsiPrivateEndpointId.
@@ -719,7 +719,7 @@ type MemberAutonomousDetailsParameters struct {
 
 	// The OCID of the database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.Database
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
@@ -759,7 +759,7 @@ type MemberAutonomousDetailsParameters struct {
 
 	// The OCID of the Management Agent
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managementagent/v1alpha1.ManagementAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagementAgentID *string `json:"managementAgentId,omitempty" tf:"management_agent_id,omitempty"`
 
@@ -773,7 +773,7 @@ type MemberAutonomousDetailsParameters struct {
 
 	// (Applicable when entity_source=PE_COMANAGED_EXADATA) The OCID of the OPSI private endpoint
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OpsiPrivateEndpointID *string `json:"opsiPrivateEndpointId,omitempty" tf:"opsi_private_endpoint_id,omitempty"`
 
@@ -801,7 +801,7 @@ type MemberDatabaseDetailsConnectionCredentialDetailsInitParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_NAMED_CREDS) The credential OCID stored in management agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementNamedCredential
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NamedCredentialID *string `json:"namedCredentialId,omitempty" tf:"named_credential_id,omitempty"`
 
 	// Reference to a ManagementNamedCredential in database to populate namedCredentialId.
@@ -820,7 +820,7 @@ type MemberDatabaseDetailsConnectionCredentialDetailsInitParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_VAULT) database user name.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
 	// Reference to a User in identity to populate userName.
@@ -833,7 +833,7 @@ type MemberDatabaseDetailsConnectionCredentialDetailsInitParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_VAULT) The OCID of the Secret where the database keystore contents are stored. This is used for TCPS support in BM/VM/ExaCS cases.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WalletSecretID *string `json:"walletSecretId,omitempty" tf:"wallet_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate walletSecretId.
@@ -878,7 +878,7 @@ type MemberDatabaseDetailsConnectionCredentialDetailsParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_NAMED_CREDS) The credential OCID stored in management agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementNamedCredential
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NamedCredentialID *string `json:"namedCredentialId,omitempty" tf:"named_credential_id,omitempty"`
 
@@ -900,7 +900,7 @@ type MemberDatabaseDetailsConnectionCredentialDetailsParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_VAULT) database user name.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
@@ -914,7 +914,7 @@ type MemberDatabaseDetailsConnectionCredentialDetailsParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_VAULT) The OCID of the Secret where the database keystore contents are stored. This is used for TCPS support in BM/VM/ExaCS cases.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WalletSecretID *string `json:"walletSecretId,omitempty" tf:"wallet_secret_id,omitempty"`
 
@@ -996,7 +996,7 @@ type MemberDatabaseDetailsCredentialDetailsInitParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_NAMED_CREDS) The credential OCID stored in management agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementNamedCredential
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NamedCredentialID *string `json:"namedCredentialId,omitempty" tf:"named_credential_id,omitempty"`
 
 	// Reference to a ManagementNamedCredential in database to populate namedCredentialId.
@@ -1015,7 +1015,7 @@ type MemberDatabaseDetailsCredentialDetailsInitParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_VAULT) database user name.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
 	// Reference to a User in identity to populate userName.
@@ -1028,7 +1028,7 @@ type MemberDatabaseDetailsCredentialDetailsInitParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_VAULT) The OCID of the Secret where the database keystore contents are stored. This is used for TCPS support in BM/VM/ExaCS cases.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WalletSecretID *string `json:"walletSecretId,omitempty" tf:"wallet_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate walletSecretId.
@@ -1073,7 +1073,7 @@ type MemberDatabaseDetailsCredentialDetailsParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_NAMED_CREDS) The credential OCID stored in management agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementNamedCredential
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NamedCredentialID *string `json:"namedCredentialId,omitempty" tf:"named_credential_id,omitempty"`
 
@@ -1095,7 +1095,7 @@ type MemberDatabaseDetailsCredentialDetailsParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_VAULT) database user name.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
@@ -1109,7 +1109,7 @@ type MemberDatabaseDetailsCredentialDetailsParameters struct {
 
 	// (Applicable when credential_type=CREDENTIALS_BY_VAULT) The OCID of the Secret where the database keystore contents are stored. This is used for TCPS support in BM/VM/ExaCS cases.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WalletSecretID *string `json:"walletSecretId,omitempty" tf:"wallet_secret_id,omitempty"`
 
@@ -1138,7 +1138,7 @@ type MemberDatabaseDetailsInitParameters struct {
 
 	// The OCID of the database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.Database
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
 	// Reference to a Database in database to populate databaseId.
@@ -1154,7 +1154,7 @@ type MemberDatabaseDetailsInitParameters struct {
 
 	// (Applicable when entity_source=PE_COMANAGED_EXADATA) The OCID of the Database Management private endpoint
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DbmPrivateEndpointID *string `json:"dbmPrivateEndpointId,omitempty" tf:"dbm_private_endpoint_id,omitempty"`
 
 	// Reference to a PrivateEndpoint in dataflow to populate dbmPrivateEndpointId.
@@ -1181,7 +1181,7 @@ type MemberDatabaseDetailsInitParameters struct {
 
 	// The OCID of the Management Agent
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managementagent/v1alpha1.ManagementAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ManagementAgentID *string `json:"managementAgentId,omitempty" tf:"management_agent_id,omitempty"`
 
 	// Reference to a ManagementAgent in managementagent to populate managementAgentId.
@@ -1194,7 +1194,7 @@ type MemberDatabaseDetailsInitParameters struct {
 
 	// (Applicable when entity_source=PE_COMANAGED_EXADATA) The OCID of the OPSI private endpoint
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OpsiPrivateEndpointID *string `json:"opsiPrivateEndpointId,omitempty" tf:"opsi_private_endpoint_id,omitempty"`
 
 	// Reference to a PrivateEndpoint in dataflow to populate opsiPrivateEndpointId.
@@ -1284,7 +1284,7 @@ type MemberDatabaseDetailsParameters struct {
 
 	// The OCID of the database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.Database
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
@@ -1302,7 +1302,7 @@ type MemberDatabaseDetailsParameters struct {
 
 	// (Applicable when entity_source=PE_COMANAGED_EXADATA) The OCID of the Database Management private endpoint
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DbmPrivateEndpointID *string `json:"dbmPrivateEndpointId,omitempty" tf:"dbm_private_endpoint_id,omitempty"`
 
@@ -1334,7 +1334,7 @@ type MemberDatabaseDetailsParameters struct {
 
 	// The OCID of the Management Agent
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managementagent/v1alpha1.ManagementAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagementAgentID *string `json:"managementAgentId,omitempty" tf:"management_agent_id,omitempty"`
 
@@ -1348,7 +1348,7 @@ type MemberDatabaseDetailsParameters struct {
 
 	// (Applicable when entity_source=PE_COMANAGED_EXADATA) The OCID of the OPSI private endpoint
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OpsiPrivateEndpointID *string `json:"opsiPrivateEndpointId,omitempty" tf:"opsi_private_endpoint_id,omitempty"`
 
@@ -1377,7 +1377,7 @@ type MemberVMClusterDetailsInitParameters struct {
 
 	// (Applicable when entity_source=PE_COMANAGED_EXADATA) The OCID of the Database Management private endpoint
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DbmPrivateEndpointID *string `json:"dbmPrivateEndpointId,omitempty" tf:"dbm_private_endpoint_id,omitempty"`
 
 	// Reference to a PrivateEndpoint in dataflow to populate dbmPrivateEndpointId.
@@ -1396,7 +1396,7 @@ type MemberVMClusterDetailsInitParameters struct {
 
 	// (Applicable when entity_source=PE_COMANAGED_EXADATA) The OCID of the OPSI private endpoint
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OpsiPrivateEndpointID *string `json:"opsiPrivateEndpointId,omitempty" tf:"opsi_private_endpoint_id,omitempty"`
 
 	// Reference to a PrivateEndpoint in dataflow to populate opsiPrivateEndpointId.
@@ -1446,7 +1446,7 @@ type MemberVMClusterDetailsParameters struct {
 
 	// (Applicable when entity_source=PE_COMANAGED_EXADATA) The OCID of the Database Management private endpoint
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DbmPrivateEndpointID *string `json:"dbmPrivateEndpointId,omitempty" tf:"dbm_private_endpoint_id,omitempty"`
 
@@ -1468,7 +1468,7 @@ type MemberVMClusterDetailsParameters struct {
 
 	// (Applicable when entity_source=PE_COMANAGED_EXADATA) The OCID of the OPSI private endpoint
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/dataflow/v1alpha1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OpsiPrivateEndpointID *string `json:"opsiPrivateEndpointId,omitempty" tf:"opsi_private_endpoint_id,omitempty"`
 

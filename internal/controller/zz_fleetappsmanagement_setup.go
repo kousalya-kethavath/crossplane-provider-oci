@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	catalogitem "github.com/oracle/provider-oci/internal/controller/fleetappsmanagement/catalogitem"
 	compliancepolicyrule "github.com/oracle/provider-oci/internal/controller/fleetappsmanagement/compliancepolicyrule"
@@ -47,6 +47,34 @@ func Setup_fleetappsmanagement(mgr ctrl.Manager, o controller.Options) error {
 		runbookversion.Setup,
 		schedulerdefinition.Setup,
 		taskrecord.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_fleetappsmanagement creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_fleetappsmanagement(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		catalogitem.SetupGated,
+		compliancepolicyrule.SetupGated,
+		fleet.SetupGated,
+		fleetcredential.SetupGated,
+		fleetproperty.SetupGated,
+		fleetresource.SetupGated,
+		maintenancewindow.SetupGated,
+		onboarding.SetupGated,
+		patch.SetupGated,
+		platformconfiguration.SetupGated,
+		property.SetupGated,
+		provision.SetupGated,
+		runbook.SetupGated,
+		runbookversion.SetupGated,
+		schedulerdefinition.SetupGated,
+		taskrecord.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

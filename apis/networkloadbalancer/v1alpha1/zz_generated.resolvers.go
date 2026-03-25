@@ -8,18 +8,16 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
+	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Backend.
-	apisresolver "github.com/oracle/provider-oci/internal/apis"
 )
 
-func (mg *Backend) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Backend) ResolveReferences( // ResolveReferences of this Backend.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -35,6 +33,7 @@ func (mg *Backend) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackendSetName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.BackendSetNameRef,
 			Selector:     mg.Spec.ForProvider.BackendSetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -54,6 +53,7 @@ func (mg *Backend) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkLoadBalancerID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.NetworkLoadBalancerIDRef,
 			Selector:     mg.Spec.ForProvider.NetworkLoadBalancerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -73,6 +73,7 @@ func (mg *Backend) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.TargetIDRef,
 			Selector:     mg.Spec.ForProvider.TargetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -92,6 +93,7 @@ func (mg *Backend) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BackendSetName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.BackendSetNameRef,
 			Selector:     mg.Spec.InitProvider.BackendSetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -111,6 +113,7 @@ func (mg *Backend) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkLoadBalancerID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.NetworkLoadBalancerIDRef,
 			Selector:     mg.Spec.InitProvider.NetworkLoadBalancerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -130,6 +133,7 @@ func (mg *Backend) ResolveReferences(ctx context.Context, c client.Reader) error
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.TargetIDRef,
 			Selector:     mg.Spec.InitProvider.TargetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -163,6 +167,7 @@ func (mg *BackendSet) ResolveReferences(ctx context.Context, c client.Reader) er
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HealthChecker[i3].DNS[i4].DomainName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.HealthChecker[i3].DNS[i4].DomainNameRef,
 					Selector:     mg.Spec.ForProvider.HealthChecker[i3].DNS[i4].DomainNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -184,6 +189,7 @@ func (mg *BackendSet) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkLoadBalancerID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.NetworkLoadBalancerIDRef,
 			Selector:     mg.Spec.ForProvider.NetworkLoadBalancerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -205,6 +211,7 @@ func (mg *BackendSet) ResolveReferences(ctx context.Context, c client.Reader) er
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HealthChecker[i3].DNS[i4].DomainName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.HealthChecker[i3].DNS[i4].DomainNameRef,
 					Selector:     mg.Spec.InitProvider.HealthChecker[i3].DNS[i4].DomainNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -226,6 +233,7 @@ func (mg *BackendSet) ResolveReferences(ctx context.Context, c client.Reader) er
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkLoadBalancerID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.NetworkLoadBalancerIDRef,
 			Selector:     mg.Spec.InitProvider.NetworkLoadBalancerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -257,6 +265,7 @@ func (mg *Listener) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultBackendSetName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.DefaultBackendSetNameRef,
 			Selector:     mg.Spec.ForProvider.DefaultBackendSetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -276,6 +285,7 @@ func (mg *Listener) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkLoadBalancerID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.NetworkLoadBalancerIDRef,
 			Selector:     mg.Spec.ForProvider.NetworkLoadBalancerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -295,6 +305,7 @@ func (mg *Listener) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultBackendSetName),
 			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.DefaultBackendSetNameRef,
 			Selector:     mg.Spec.InitProvider.DefaultBackendSetNameSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -314,6 +325,7 @@ func (mg *Listener) ResolveReferences(ctx context.Context, c client.Reader) erro
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkLoadBalancerID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.NetworkLoadBalancerIDRef,
 			Selector:     mg.Spec.InitProvider.NetworkLoadBalancerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -345,6 +357,7 @@ func (mg *NetworkLoadBalancer) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -364,6 +377,7 @@ func (mg *NetworkLoadBalancer) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -383,6 +397,7 @@ func (mg *NetworkLoadBalancer) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -402,6 +417,7 @@ func (mg *NetworkLoadBalancer) ResolveReferences(ctx context.Context, c client.R
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -434,6 +450,7 @@ func (mg *NetworkLoadBalancersBackendSetsUnified) ResolveReferences(ctx context.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Backends[i3].TargetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Backends[i3].TargetIDRef,
 				Selector:     mg.Spec.ForProvider.Backends[i3].TargetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -456,6 +473,7 @@ func (mg *NetworkLoadBalancersBackendSetsUnified) ResolveReferences(ctx context.
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HealthChecker[i3].DNS[i4].DomainName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.HealthChecker[i3].DNS[i4].DomainNameRef,
 					Selector:     mg.Spec.ForProvider.HealthChecker[i3].DNS[i4].DomainNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -477,6 +495,7 @@ func (mg *NetworkLoadBalancersBackendSetsUnified) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkLoadBalancerID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.NetworkLoadBalancerIDRef,
 			Selector:     mg.Spec.ForProvider.NetworkLoadBalancerIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -497,6 +516,7 @@ func (mg *NetworkLoadBalancersBackendSetsUnified) ResolveReferences(ctx context.
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Backends[i3].TargetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Backends[i3].TargetIDRef,
 				Selector:     mg.Spec.InitProvider.Backends[i3].TargetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -519,6 +539,7 @@ func (mg *NetworkLoadBalancersBackendSetsUnified) ResolveReferences(ctx context.
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HealthChecker[i3].DNS[i4].DomainName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.HealthChecker[i3].DNS[i4].DomainNameRef,
 					Selector:     mg.Spec.InitProvider.HealthChecker[i3].DNS[i4].DomainNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -540,6 +561,7 @@ func (mg *NetworkLoadBalancersBackendSetsUnified) ResolveReferences(ctx context.
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkLoadBalancerID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.NetworkLoadBalancerIDRef,
 			Selector:     mg.Spec.InitProvider.NetworkLoadBalancerIDSelector,
 			To:           reference.To{List: l, Managed: m},

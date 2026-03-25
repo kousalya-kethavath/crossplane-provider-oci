@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagementExternalnoncontainerdatabaseDbmFeaturesManagementFeatureDetailsConnectorDetailsInitParameters struct {
@@ -23,7 +23,7 @@ type ManagementExternalnoncontainerdatabaseDbmFeaturesManagementFeatureDetailsCo
 
 	// (Applicable when connector_type=MACS) The OCID of the management agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managementagent/v1alpha1.ManagementAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ManagementAgentID *string `json:"managementAgentId,omitempty" tf:"management_agent_id,omitempty"`
 
 	// Reference to a ManagementAgent in managementagent to populate managementAgentId.
@@ -65,7 +65,7 @@ type ManagementExternalnoncontainerdatabaseDbmFeaturesManagementFeatureDetailsCo
 
 	// (Applicable when connector_type=MACS) The OCID of the management agent.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/managementagent/v1alpha1.ManagementAgent
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagementAgentID *string `json:"managementAgentId,omitempty" tf:"management_agent_id,omitempty"`
 
@@ -148,7 +148,7 @@ type ManagementExternalnoncontainerdatabaseDbmFeaturesManagementInitParameters s
 
 	// The OCID of the external non-container database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExternalNonContainerDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExternalNonContainerDatabaseID *string `json:"externalNonContainerDatabaseId,omitempty" tf:"external_non_container_database_id,omitempty"`
 
 	// Reference to a ExternalNonContainerDatabase in database to populate externalNonContainerDatabaseId.
@@ -185,7 +185,7 @@ type ManagementExternalnoncontainerdatabaseDbmFeaturesManagementParameters struc
 
 	// The OCID of the external non-container database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ExternalNonContainerDatabase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExternalNonContainerDatabaseID *string `json:"externalNonContainerDatabaseId,omitempty" tf:"external_non_container_database_id,omitempty"`
 

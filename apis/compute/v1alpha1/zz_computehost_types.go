@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CheckDetailsInitParameters struct {
@@ -41,7 +41,7 @@ type ComputeHostInitParameters struct {
 
 	// The OCID of the compute host.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.ComputeHost
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ComputeHostID *string `json:"computeHostId,omitempty" tf:"compute_host_id,omitempty"`
 
 	// Reference to a ComputeHost in compute to populate computeHostId.
@@ -148,7 +148,7 @@ type ComputeHostParameters struct {
 
 	// The OCID of the compute host.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/compute/v1alpha1.ComputeHost
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ComputeHostID *string `json:"computeHostId,omitempty" tf:"compute_host_id,omitempty"`
 

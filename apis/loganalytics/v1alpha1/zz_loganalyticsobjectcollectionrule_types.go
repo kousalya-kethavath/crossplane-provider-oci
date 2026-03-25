@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type LogAnalyticsObjectCollectionRuleInitParameters struct {
@@ -55,7 +55,7 @@ type LogAnalyticsObjectCollectionRuleInitParameters struct {
 
 	// (Updatable) Logging Analytics Log group OCID to associate the processed logs with.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loganalytics/v1alpha1.LogAnalyticsLogGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
 	// Reference to a LogAnalyticsLogGroup in loganalytics to populate logGroupId.
@@ -92,7 +92,7 @@ type LogAnalyticsObjectCollectionRuleInitParameters struct {
 
 	// Name of the Object Storage bucket.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/objectstorage/v1alpha1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	OsBucketName *string `json:"osBucketName,omitempty" tf:"os_bucket_name,omitempty"`
 
 	// Reference to a Bucket in objectstorage to populate osBucketName.
@@ -123,7 +123,7 @@ type LogAnalyticsObjectCollectionRuleInitParameters struct {
 
 	// (Updatable) A Stream OCID is required for Object Collection rules of type LIVE or HISTORIC_LIVE, which will be used by Logging Analytics while creating Event Rule and consume the event notifications created by the Object Storage.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StreamID *string `json:"streamId,omitempty" tf:"stream_id,omitempty"`
 
 	// Reference to a Stream in streaming to populate streamId.
@@ -293,7 +293,7 @@ type LogAnalyticsObjectCollectionRuleParameters struct {
 
 	// (Updatable) Logging Analytics Log group OCID to associate the processed logs with.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/loganalytics/v1alpha1.LogAnalyticsLogGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
@@ -339,7 +339,7 @@ type LogAnalyticsObjectCollectionRuleParameters struct {
 
 	// Name of the Object Storage bucket.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/objectstorage/v1alpha1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	OsBucketName *string `json:"osBucketName,omitempty" tf:"os_bucket_name,omitempty"`
 
@@ -377,7 +377,7 @@ type LogAnalyticsObjectCollectionRuleParameters struct {
 
 	// (Updatable) A Stream OCID is required for Object Collection rules of type LIVE or HISTORIC_LIVE, which will be used by Logging Analytics while creating Event Rule and consume the event notifications created by the Object Storage.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StreamID *string `json:"streamId,omitempty" tf:"stream_id,omitempty"`
 

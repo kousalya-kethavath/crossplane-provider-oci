@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this AnalyzeApplicationsConfiguration.
 func (mg *AnalyzeApplicationsConfiguration) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *AnalyzeApplicationsConfiguration) GetManagementPolicies() xpv1.Managem
 // GetProviderConfigReference of this AnalyzeApplicationsConfiguration.
 func (mg *AnalyzeApplicationsConfiguration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this AnalyzeApplicationsConfiguration.
-func (mg *AnalyzeApplicationsConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this AnalyzeApplicationsConfiguration.
@@ -57,11 +52,6 @@ func (mg *AnalyzeApplicationsConfiguration) SetProviderConfigReference(r *xpv1.R
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this AnalyzeApplicationsConfiguration.
-func (mg *AnalyzeApplicationsConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this AnalyzeApplicationsConfiguration.
 func (mg *AnalyzeApplicationsConfiguration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -87,11 +77,6 @@ func (mg *SubscriptionAcknowledgmentConfiguration) GetProviderConfigReference() 
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this SubscriptionAcknowledgmentConfiguration.
-func (mg *SubscriptionAcknowledgmentConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this SubscriptionAcknowledgmentConfiguration.
 func (mg *SubscriptionAcknowledgmentConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -115,11 +100,6 @@ func (mg *SubscriptionAcknowledgmentConfiguration) SetManagementPolicies(r xpv1.
 // SetProviderConfigReference of this SubscriptionAcknowledgmentConfiguration.
 func (mg *SubscriptionAcknowledgmentConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this SubscriptionAcknowledgmentConfiguration.
-func (mg *SubscriptionAcknowledgmentConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this SubscriptionAcknowledgmentConfiguration.

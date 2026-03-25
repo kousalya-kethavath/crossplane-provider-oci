@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BudgetInitParameters struct {
@@ -61,7 +61,7 @@ type BudgetInitParameters struct {
 
 	// This is DEPRECATED. Set the target compartment ID in targets instead.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetCompartmentID *string `json:"targetCompartmentId,omitempty" tf:"target_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate targetCompartmentId.
@@ -212,7 +212,7 @@ type BudgetParameters struct {
 
 	// This is DEPRECATED. Set the target compartment ID in targets instead.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetCompartmentID *string `json:"targetCompartmentId,omitempty" tf:"target_compartment_id,omitempty"`
 

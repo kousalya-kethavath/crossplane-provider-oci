@@ -8,10 +8,9 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -34,6 +33,7 @@ func (mg *PrivateEndpoint) ResolveReferences( // ResolveReferences of this Priva
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -53,6 +53,7 @@ func (mg *PrivateEndpoint) ResolveReferences( // ResolveReferences of this Priva
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -72,6 +73,7 @@ func (mg *PrivateEndpoint) ResolveReferences( // ResolveReferences of this Priva
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -91,6 +93,7 @@ func (mg *PrivateEndpoint) ResolveReferences( // ResolveReferences of this Priva
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
 			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.SubnetIDRef,
 			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -123,6 +126,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CatalogDetails[i3].CloudAutonomousVMClusterID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CatalogDetails[i3].CloudAutonomousVMClusterIDRef,
 				Selector:     mg.Spec.ForProvider.CatalogDetails[i3].CloudAutonomousVMClusterIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -145,6 +149,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].KMSKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].KMSKeyIDRef,
 					Selector:     mg.Spec.ForProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].KMSKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -168,6 +173,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].KMSKeyVersionID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].KMSKeyVersionIDRef,
 					Selector:     mg.Spec.ForProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].KMSKeyVersionIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -191,6 +197,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].VaultID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].VaultIDRef,
 					Selector:     mg.Spec.ForProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].VaultIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -213,6 +220,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CatalogDetails[i3].PeerCloudAutonomousVMClusterID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.CatalogDetails[i3].PeerCloudAutonomousVMClusterIDRef,
 				Selector:     mg.Spec.ForProvider.CatalogDetails[i3].PeerCloudAutonomousVMClusterIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -233,6 +241,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -253,6 +262,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShardDetails[i3].CloudAutonomousVMClusterID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ShardDetails[i3].CloudAutonomousVMClusterIDRef,
 				Selector:     mg.Spec.ForProvider.ShardDetails[i3].CloudAutonomousVMClusterIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -275,6 +285,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShardDetails[i3].EncryptionKeyDetails[i4].KMSKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.ShardDetails[i3].EncryptionKeyDetails[i4].KMSKeyIDRef,
 					Selector:     mg.Spec.ForProvider.ShardDetails[i3].EncryptionKeyDetails[i4].KMSKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -298,6 +309,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShardDetails[i3].EncryptionKeyDetails[i4].KMSKeyVersionID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.ShardDetails[i3].EncryptionKeyDetails[i4].KMSKeyVersionIDRef,
 					Selector:     mg.Spec.ForProvider.ShardDetails[i3].EncryptionKeyDetails[i4].KMSKeyVersionIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -321,6 +333,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShardDetails[i3].EncryptionKeyDetails[i4].VaultID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.ShardDetails[i3].EncryptionKeyDetails[i4].VaultIDRef,
 					Selector:     mg.Spec.ForProvider.ShardDetails[i3].EncryptionKeyDetails[i4].VaultIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -343,6 +356,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShardDetails[i3].PeerCloudAutonomousVMClusterID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.ShardDetails[i3].PeerCloudAutonomousVMClusterIDRef,
 				Selector:     mg.Spec.ForProvider.ShardDetails[i3].PeerCloudAutonomousVMClusterIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -364,6 +378,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CatalogDetails[i3].CloudAutonomousVMClusterID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CatalogDetails[i3].CloudAutonomousVMClusterIDRef,
 				Selector:     mg.Spec.InitProvider.CatalogDetails[i3].CloudAutonomousVMClusterIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -386,6 +401,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].KMSKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].KMSKeyIDRef,
 					Selector:     mg.Spec.InitProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].KMSKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -409,6 +425,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].KMSKeyVersionID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].KMSKeyVersionIDRef,
 					Selector:     mg.Spec.InitProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].KMSKeyVersionIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -432,6 +449,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].VaultID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].VaultIDRef,
 					Selector:     mg.Spec.InitProvider.CatalogDetails[i3].EncryptionKeyDetails[i4].VaultIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -454,6 +472,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CatalogDetails[i3].PeerCloudAutonomousVMClusterID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.CatalogDetails[i3].PeerCloudAutonomousVMClusterIDRef,
 				Selector:     mg.Spec.InitProvider.CatalogDetails[i3].PeerCloudAutonomousVMClusterIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -474,6 +493,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -494,6 +514,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ShardDetails[i3].CloudAutonomousVMClusterID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ShardDetails[i3].CloudAutonomousVMClusterIDRef,
 				Selector:     mg.Spec.InitProvider.ShardDetails[i3].CloudAutonomousVMClusterIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -516,6 +537,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ShardDetails[i3].EncryptionKeyDetails[i4].KMSKeyID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.ShardDetails[i3].EncryptionKeyDetails[i4].KMSKeyIDRef,
 					Selector:     mg.Spec.InitProvider.ShardDetails[i3].EncryptionKeyDetails[i4].KMSKeyIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -539,6 +561,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ShardDetails[i3].EncryptionKeyDetails[i4].KMSKeyVersionID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.ShardDetails[i3].EncryptionKeyDetails[i4].KMSKeyVersionIDRef,
 					Selector:     mg.Spec.InitProvider.ShardDetails[i3].EncryptionKeyDetails[i4].KMSKeyVersionIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -562,6 +585,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ShardDetails[i3].EncryptionKeyDetails[i4].VaultID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.ShardDetails[i3].EncryptionKeyDetails[i4].VaultIDRef,
 					Selector:     mg.Spec.InitProvider.ShardDetails[i3].EncryptionKeyDetails[i4].VaultIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -584,6 +608,7 @@ func (mg *ShardedDatabase) ResolveReferences(ctx context.Context, c client.Reade
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ShardDetails[i3].PeerCloudAutonomousVMClusterID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.ShardDetails[i3].PeerCloudAutonomousVMClusterIDRef,
 				Selector:     mg.Spec.InitProvider.ShardDetails[i3].PeerCloudAutonomousVMClusterIDSelector,
 				To:           reference.To{List: l, Managed: m},

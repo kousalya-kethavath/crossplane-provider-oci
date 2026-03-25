@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManageModuleStreamsDetailsDisableInitParameters struct {
@@ -20,7 +20,7 @@ type ManageModuleStreamsDetailsDisableInitParameters struct {
 
 	// (Updatable) The OCID of the software source that contains the module stream.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.SoftwareSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SoftwareSourceID *string `json:"softwareSourceId,omitempty" tf:"software_source_id,omitempty"`
 
 	// Reference to a SoftwareSource in osmanagementhub to populate softwareSourceId.
@@ -33,7 +33,7 @@ type ManageModuleStreamsDetailsDisableInitParameters struct {
 
 	// (Updatable) The name of a stream of the specified module.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 
 	// Reference to a Stream in streaming to populate streamName.
@@ -65,7 +65,7 @@ type ManageModuleStreamsDetailsDisableParameters struct {
 
 	// (Updatable) The OCID of the software source that contains the module stream.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.SoftwareSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SoftwareSourceID *string `json:"softwareSourceId,omitempty" tf:"software_source_id,omitempty"`
 
@@ -79,7 +79,7 @@ type ManageModuleStreamsDetailsDisableParameters struct {
 
 	// (Updatable) The name of a stream of the specified module.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 
@@ -99,7 +99,7 @@ type ManageModuleStreamsDetailsEnableInitParameters struct {
 
 	// (Updatable) The OCID of the software source that contains the module stream.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.SoftwareSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SoftwareSourceID *string `json:"softwareSourceId,omitempty" tf:"software_source_id,omitempty"`
 
 	// Reference to a SoftwareSource in osmanagementhub to populate softwareSourceId.
@@ -112,7 +112,7 @@ type ManageModuleStreamsDetailsEnableInitParameters struct {
 
 	// (Updatable) The name of a stream of the specified module.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 
 	// Reference to a Stream in streaming to populate streamName.
@@ -144,7 +144,7 @@ type ManageModuleStreamsDetailsEnableParameters struct {
 
 	// (Updatable) The OCID of the software source that contains the module stream.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.SoftwareSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SoftwareSourceID *string `json:"softwareSourceId,omitempty" tf:"software_source_id,omitempty"`
 
@@ -158,7 +158,7 @@ type ManageModuleStreamsDetailsEnableParameters struct {
 
 	// (Updatable) The name of a stream of the specified module.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 
@@ -205,7 +205,7 @@ type ManageModuleStreamsDetailsInstallInitParameters struct {
 
 	// (Updatable) The OCID of the software source that contains the module stream.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.SoftwareSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SoftwareSourceID *string `json:"softwareSourceId,omitempty" tf:"software_source_id,omitempty"`
 
 	// Reference to a SoftwareSource in osmanagementhub to populate softwareSourceId.
@@ -218,7 +218,7 @@ type ManageModuleStreamsDetailsInstallInitParameters struct {
 
 	// (Updatable) The name of a stream of the specified module.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 
 	// Reference to a Stream in streaming to populate streamName.
@@ -266,7 +266,7 @@ type ManageModuleStreamsDetailsInstallParameters struct {
 
 	// (Updatable) The OCID of the software source that contains the module stream.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.SoftwareSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SoftwareSourceID *string `json:"softwareSourceId,omitempty" tf:"software_source_id,omitempty"`
 
@@ -280,7 +280,7 @@ type ManageModuleStreamsDetailsInstallParameters struct {
 
 	// (Updatable) The name of a stream of the specified module.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 
@@ -346,7 +346,7 @@ type ManageModuleStreamsDetailsRemoveInitParameters struct {
 
 	// (Updatable) The OCID of the software source that contains the module stream.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.SoftwareSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SoftwareSourceID *string `json:"softwareSourceId,omitempty" tf:"software_source_id,omitempty"`
 
 	// Reference to a SoftwareSource in osmanagementhub to populate softwareSourceId.
@@ -359,7 +359,7 @@ type ManageModuleStreamsDetailsRemoveInitParameters struct {
 
 	// (Updatable) The name of a stream of the specified module.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 
 	// Reference to a Stream in streaming to populate streamName.
@@ -407,7 +407,7 @@ type ManageModuleStreamsDetailsRemoveParameters struct {
 
 	// (Updatable) The OCID of the software source that contains the module stream.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.SoftwareSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SoftwareSourceID *string `json:"softwareSourceId,omitempty" tf:"software_source_id,omitempty"`
 
@@ -421,7 +421,7 @@ type ManageModuleStreamsDetailsRemoveParameters struct {
 
 	// (Updatable) The name of a stream of the specified module.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 
@@ -758,7 +758,7 @@ type SwitchModuleStreamsDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the software source that contains the module stream.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.SoftwareSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SoftwareSourceID *string `json:"softwareSourceId,omitempty" tf:"software_source_id,omitempty"`
 
 	// Reference to a SoftwareSource in osmanagementhub to populate softwareSourceId.
@@ -771,7 +771,7 @@ type SwitchModuleStreamsDetailsInitParameters struct {
 
 	// (Updatable) The name of a stream of the specified module.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 
 	// Reference to a Stream in streaming to populate streamName.
@@ -803,7 +803,7 @@ type SwitchModuleStreamsDetailsParameters struct {
 
 	// (Updatable) The OCID of the software source that contains the module stream.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/osmanagementhub/v1alpha1.SoftwareSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SoftwareSourceID *string `json:"softwareSourceId,omitempty" tf:"software_source_id,omitempty"`
 
@@ -817,7 +817,7 @@ type SwitchModuleStreamsDetailsParameters struct {
 
 	// (Updatable) The name of a stream of the specified module.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.Stream
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CatalogDetailsInitParameters struct {
@@ -20,7 +20,7 @@ type CatalogDetailsInitParameters struct {
 
 	// The OCID of the cloud Autonomous Exadata VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudAutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CloudAutonomousVMClusterID *string `json:"cloudAutonomousVmClusterId,omitempty" tf:"cloud_autonomous_vm_cluster_id,omitempty"`
 
 	// Reference to a CloudAutonomousVmCluster in database to populate cloudAutonomousVmClusterId.
@@ -45,7 +45,7 @@ type CatalogDetailsInitParameters struct {
 
 	// The OCID of the peer cloud Autonomous Exadata VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudAutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PeerCloudAutonomousVMClusterID *string `json:"peerCloudAutonomousVmClusterId,omitempty" tf:"peer_cloud_autonomous_vm_cluster_id,omitempty"`
 
 	// Reference to a CloudAutonomousVmCluster in database to populate peerCloudAutonomousVmClusterId.
@@ -117,7 +117,7 @@ type CatalogDetailsParameters struct {
 
 	// The OCID of the cloud Autonomous Exadata VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudAutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CloudAutonomousVMClusterID *string `json:"cloudAutonomousVmClusterId,omitempty" tf:"cloud_autonomous_vm_cluster_id,omitempty"`
 
@@ -147,7 +147,7 @@ type CatalogDetailsParameters struct {
 
 	// The OCID of the peer cloud Autonomous Exadata VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudAutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerCloudAutonomousVMClusterID *string `json:"peerCloudAutonomousVmClusterId,omitempty" tf:"peer_cloud_autonomous_vm_cluster_id,omitempty"`
 
@@ -177,7 +177,7 @@ type EncryptionKeyDetailsInitParameters struct {
 
 	// The OCID of the KMS key in vault identified by vaultId in customer tenancy  that is used as the master encryption key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
@@ -190,7 +190,7 @@ type EncryptionKeyDetailsInitParameters struct {
 
 	// The OCID of the KMS key version for key identified by kmsKeyId that is used in data encryption (TDE) operations.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.KeyVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KMSKeyVersionID *string `json:"kmsKeyVersionId,omitempty" tf:"kms_key_version_id,omitempty"`
 
 	// Reference to a KeyVersion in kms to populate kmsKeyVersionId.
@@ -203,7 +203,7 @@ type EncryptionKeyDetailsInitParameters struct {
 
 	// The OCID of the vault in customer tenancy where KMS key is present. For shard or catalog with cross-region data guard enabled, user needs to make sure to provide virtual private vault only, which is also replicated in the region of standby shard.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
 	// Reference to a Vault in kms to populate vaultId.
@@ -231,7 +231,7 @@ type EncryptionKeyDetailsParameters struct {
 
 	// The OCID of the KMS key in vault identified by vaultId in customer tenancy  that is used as the master encryption key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -245,7 +245,7 @@ type EncryptionKeyDetailsParameters struct {
 
 	// The OCID of the KMS key version for key identified by kmsKeyId that is used in data encryption (TDE) operations.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.KeyVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KMSKeyVersionID *string `json:"kmsKeyVersionId,omitempty" tf:"kms_key_version_id,omitempty"`
 
@@ -259,7 +259,7 @@ type EncryptionKeyDetailsParameters struct {
 
 	// The OCID of the vault in customer tenancy where KMS key is present. For shard or catalog with cross-region data guard enabled, user needs to make sure to provide virtual private vault only, which is also replicated in the region of standby shard.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
@@ -352,7 +352,7 @@ type ShardDetailsEncryptionKeyDetailsInitParameters struct {
 
 	// The OCID of the KMS key in vault identified by vaultId in customer tenancy  that is used as the master encryption key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
@@ -365,7 +365,7 @@ type ShardDetailsEncryptionKeyDetailsInitParameters struct {
 
 	// The OCID of the KMS key version for key identified by kmsKeyId that is used in data encryption (TDE) operations.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.KeyVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KMSKeyVersionID *string `json:"kmsKeyVersionId,omitempty" tf:"kms_key_version_id,omitempty"`
 
 	// Reference to a KeyVersion in kms to populate kmsKeyVersionId.
@@ -378,7 +378,7 @@ type ShardDetailsEncryptionKeyDetailsInitParameters struct {
 
 	// The OCID of the vault in customer tenancy where KMS key is present. For shard or catalog with cross-region data guard enabled, user needs to make sure to provide virtual private vault only, which is also replicated in the region of standby shard.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
 	// Reference to a Vault in kms to populate vaultId.
@@ -406,7 +406,7 @@ type ShardDetailsEncryptionKeyDetailsParameters struct {
 
 	// The OCID of the KMS key in vault identified by vaultId in customer tenancy  that is used as the master encryption key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -420,7 +420,7 @@ type ShardDetailsEncryptionKeyDetailsParameters struct {
 
 	// The OCID of the KMS key version for key identified by kmsKeyId that is used in data encryption (TDE) operations.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.KeyVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KMSKeyVersionID *string `json:"kmsKeyVersionId,omitempty" tf:"kms_key_version_id,omitempty"`
 
@@ -434,7 +434,7 @@ type ShardDetailsEncryptionKeyDetailsParameters struct {
 
 	// The OCID of the vault in customer tenancy where KMS key is present. For shard or catalog with cross-region data guard enabled, user needs to make sure to provide virtual private vault only, which is also replicated in the region of standby shard.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
@@ -454,7 +454,7 @@ type ShardDetailsInitParameters struct {
 
 	// The OCID of the cloud Autonomous Exadata VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudAutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CloudAutonomousVMClusterID *string `json:"cloudAutonomousVmClusterId,omitempty" tf:"cloud_autonomous_vm_cluster_id,omitempty"`
 
 	// Reference to a CloudAutonomousVmCluster in database to populate cloudAutonomousVmClusterId.
@@ -479,7 +479,7 @@ type ShardDetailsInitParameters struct {
 
 	// The OCID of the peer cloud Autonomous Exadata VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudAutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PeerCloudAutonomousVMClusterID *string `json:"peerCloudAutonomousVmClusterId,omitempty" tf:"peer_cloud_autonomous_vm_cluster_id,omitempty"`
 
 	// Reference to a CloudAutonomousVmCluster in database to populate peerCloudAutonomousVmClusterId.
@@ -557,7 +557,7 @@ type ShardDetailsParameters struct {
 
 	// The OCID of the cloud Autonomous Exadata VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudAutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CloudAutonomousVMClusterID *string `json:"cloudAutonomousVmClusterId,omitempty" tf:"cloud_autonomous_vm_cluster_id,omitempty"`
 
@@ -587,7 +587,7 @@ type ShardDetailsParameters struct {
 
 	// The OCID of the peer cloud Autonomous Exadata VM Cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.CloudAutonomousVmCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerCloudAutonomousVMClusterID *string `json:"peerCloudAutonomousVmClusterId,omitempty" tf:"peer_cloud_autonomous_vm_cluster_id,omitempty"`
 

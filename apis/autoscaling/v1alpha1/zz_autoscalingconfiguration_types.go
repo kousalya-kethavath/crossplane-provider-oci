@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionInitParameters struct {
@@ -278,7 +278,7 @@ type MetricInitParameters struct {
 
 	// The OCID of the compartment containing the metrics.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MetricCompartmentID *string `json:"metricCompartmentId,omitempty" tf:"metric_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate metricCompartmentId.
@@ -338,7 +338,7 @@ type MetricParameters struct {
 
 	// The OCID of the compartment containing the metrics.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MetricCompartmentID *string `json:"metricCompartmentId,omitempty" tf:"metric_compartment_id,omitempty"`
 

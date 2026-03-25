@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AdvancedParametersInitParameters struct {
@@ -154,7 +154,7 @@ type DataTransferMediumDetailsInitParameters struct {
 
 	// (Applicable when type=AWS_S3) (Updatable) AWS access key credentials identifier Details: https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AccessKeyID *string `json:"accessKeyId,omitempty" tf:"access_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate accessKeyId.
@@ -179,7 +179,7 @@ type DataTransferMediumDetailsInitParameters struct {
 
 	// (Applicable when type=NFS) (Updatable) OCID of the shared storage mount target
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/filestorage/v1alpha1.MountTarget
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SharedStorageMountTargetID *string `json:"sharedStorageMountTargetId,omitempty" tf:"shared_storage_mount_target_id,omitempty"`
 
 	// Reference to a MountTarget in filestorage to populate sharedStorageMountTargetId.
@@ -231,7 +231,7 @@ type DataTransferMediumDetailsParameters struct {
 
 	// (Applicable when type=AWS_S3) (Updatable) AWS access key credentials identifier Details: https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AccessKeyID *string `json:"accessKeyId,omitempty" tf:"access_key_id,omitempty"`
 
@@ -261,7 +261,7 @@ type DataTransferMediumDetailsParameters struct {
 
 	// (Applicable when type=NFS) (Updatable) OCID of the shared storage mount target
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/filestorage/v1alpha1.MountTarget
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SharedStorageMountTargetID *string `json:"sharedStorageMountTargetId,omitempty" tf:"shared_storage_mount_target_id,omitempty"`
 
@@ -502,7 +502,7 @@ type HubDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the resource being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// Reference to a Key in kms to populate keyId.
@@ -524,7 +524,7 @@ type HubDetailsInitParameters struct {
 
 	// (Updatable) The OCID of the resource being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
 	// Reference to a Vault in kms to populate vaultId.
@@ -579,7 +579,7 @@ type HubDetailsParameters struct {
 
 	// (Updatable) The OCID of the resource being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
@@ -605,7 +605,7 @@ type HubDetailsParameters struct {
 
 	// (Updatable) The OCID of the resource being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
@@ -953,7 +953,7 @@ type MigrationMigrationInitParameters struct {
 
 	// (Applicable when database_combination=ORACLE) (Updatable) The OCID of the resource being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.MigrationConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceContainerDatabaseConnectionID *string `json:"sourceContainerDatabaseConnectionId,omitempty" tf:"source_container_database_connection_id,omitempty"`
 
 	// Reference to a MigrationConnection in database to populate sourceContainerDatabaseConnectionId.
@@ -966,7 +966,7 @@ type MigrationMigrationInitParameters struct {
 
 	// (Updatable) The OCID of the resource being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.MigrationConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceDatabaseConnectionID *string `json:"sourceDatabaseConnectionId,omitempty" tf:"source_database_connection_id,omitempty"`
 
 	// Reference to a MigrationConnection in database to populate sourceDatabaseConnectionId.
@@ -979,7 +979,7 @@ type MigrationMigrationInitParameters struct {
 
 	// (Applicable when database_combination=ORACLE) (Updatable) The OCID of the resource being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.MigrationConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourceStandbyDatabaseConnectionID *string `json:"sourceStandbyDatabaseConnectionId,omitempty" tf:"source_standby_database_connection_id,omitempty"`
 
 	// Reference to a MigrationConnection in database to populate sourceStandbyDatabaseConnectionId.
@@ -992,7 +992,7 @@ type MigrationMigrationInitParameters struct {
 
 	// (Updatable) The OCID of the resource being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.MigrationConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetDatabaseConnectionID *string `json:"targetDatabaseConnectionId,omitempty" tf:"target_database_connection_id,omitempty"`
 
 	// Reference to a MigrationConnection in database to populate targetDatabaseConnectionId.
@@ -1175,7 +1175,7 @@ type MigrationMigrationParameters struct {
 
 	// (Applicable when database_combination=ORACLE) (Updatable) The OCID of the resource being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.MigrationConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceContainerDatabaseConnectionID *string `json:"sourceContainerDatabaseConnectionId,omitempty" tf:"source_container_database_connection_id,omitempty"`
 
@@ -1189,7 +1189,7 @@ type MigrationMigrationParameters struct {
 
 	// (Updatable) The OCID of the resource being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.MigrationConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceDatabaseConnectionID *string `json:"sourceDatabaseConnectionId,omitempty" tf:"source_database_connection_id,omitempty"`
 
@@ -1203,7 +1203,7 @@ type MigrationMigrationParameters struct {
 
 	// (Applicable when database_combination=ORACLE) (Updatable) The OCID of the resource being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.MigrationConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceStandbyDatabaseConnectionID *string `json:"sourceStandbyDatabaseConnectionId,omitempty" tf:"source_standby_database_connection_id,omitempty"`
 
@@ -1217,7 +1217,7 @@ type MigrationMigrationParameters struct {
 
 	// (Updatable) The OCID of the resource being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.MigrationConnection
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetDatabaseConnectionID *string `json:"targetDatabaseConnectionId,omitempty" tf:"target_database_connection_id,omitempty"`
 

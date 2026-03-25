@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type UnifiedAuditPolicyDefinitionInitParameters struct {
@@ -43,7 +43,7 @@ type UnifiedAuditPolicyDefinitionInitParameters struct {
 
 	// The OCID of the unified audit policy definition resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.UnifiedAuditPolicyDefinition
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	UnifiedAuditPolicyDefinitionID *string `json:"unifiedAuditPolicyDefinitionId,omitempty" tf:"unified_audit_policy_definition_id,omitempty"`
 
 	// Reference to a UnifiedAuditPolicyDefinition in datasafe to populate unifiedAuditPolicyDefinitionId.
@@ -144,7 +144,7 @@ type UnifiedAuditPolicyDefinitionParameters struct {
 
 	// The OCID of the unified audit policy definition resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.UnifiedAuditPolicyDefinition
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UnifiedAuditPolicyDefinitionID *string `json:"unifiedAuditPolicyDefinitionId,omitempty" tf:"unified_audit_policy_definition_id,omitempty"`
 

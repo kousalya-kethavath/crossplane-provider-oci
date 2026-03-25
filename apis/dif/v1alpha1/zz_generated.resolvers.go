@@ -8,18 +8,16 @@ package v1alpha1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	resource "github.com/crossplane/upjet/pkg/resource"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
+	apisresolver "github.com/oracle/provider-oci/internal/apis"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Stack.
-	apisresolver "github.com/oracle/provider-oci/internal/apis"
 )
 
-func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
+func (mg *Stack) ResolveReferences( // ResolveReferences of this Stack.
+	ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)
@@ -36,6 +34,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Adb[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Adb[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.Adb[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -56,6 +55,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
 			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -77,6 +77,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Dataflow[i3].Connections[i4].SubnetID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Dataflow[i3].Connections[i4].SubnetIDRef,
 					Selector:     mg.Spec.ForProvider.Dataflow[i3].Connections[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -99,6 +100,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Dataflow[i3].PrivateEndpointID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Dataflow[i3].PrivateEndpointIDRef,
 				Selector:     mg.Spec.ForProvider.Dataflow[i3].PrivateEndpointIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -121,6 +123,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Ggcs[i3].Connections[i4].ConnectionID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Ggcs[i3].Connections[i4].ConnectionIDRef,
 					Selector:     mg.Spec.ForProvider.Ggcs[i3].Connections[i4].ConnectionIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -144,6 +147,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Ggcs[i3].Connections[i4].ConnectionName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.ForProvider.Ggcs[i3].Connections[i4].ConnectionNameRef,
 					Selector:     mg.Spec.ForProvider.Ggcs[i3].Connections[i4].ConnectionNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -166,6 +170,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Ggcs[i3].PublicSubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Ggcs[i3].PublicSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.Ggcs[i3].PublicSubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -187,6 +192,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Ggcs[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.ForProvider.Ggcs[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.Ggcs[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -208,6 +214,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Adb[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Adb[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.Adb[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -228,6 +235,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
 			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
 			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
 			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -249,6 +257,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Dataflow[i3].Connections[i4].SubnetID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Dataflow[i3].Connections[i4].SubnetIDRef,
 					Selector:     mg.Spec.InitProvider.Dataflow[i3].Connections[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -271,6 +280,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Dataflow[i3].PrivateEndpointID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Dataflow[i3].PrivateEndpointIDRef,
 				Selector:     mg.Spec.InitProvider.Dataflow[i3].PrivateEndpointIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -293,6 +303,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Ggcs[i3].Connections[i4].ConnectionID),
 					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Ggcs[i3].Connections[i4].ConnectionIDRef,
 					Selector:     mg.Spec.InitProvider.Ggcs[i3].Connections[i4].ConnectionIDSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -316,6 +327,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Ggcs[i3].Connections[i4].ConnectionName),
 					Extract:      reference.ExternalName(),
+					Namespace:    mg.GetNamespace(),
 					Reference:    mg.Spec.InitProvider.Ggcs[i3].Connections[i4].ConnectionNameRef,
 					Selector:     mg.Spec.InitProvider.Ggcs[i3].Connections[i4].ConnectionNameSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -338,6 +350,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Ggcs[i3].PublicSubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Ggcs[i3].PublicSubnetIDRef,
 				Selector:     mg.Spec.InitProvider.Ggcs[i3].PublicSubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -359,6 +372,7 @@ func (mg *Stack) ResolveReferences(ctx context.Context, c client.Reader) error {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Ggcs[i3].SubnetID),
 				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
 				Reference:    mg.Spec.InitProvider.Ggcs[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.Ggcs[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},

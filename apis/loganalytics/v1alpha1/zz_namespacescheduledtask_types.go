@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionInitParameters struct {
@@ -26,7 +26,7 @@ type ActionInitParameters struct {
 
 	// the compartment OCID under which the data will be purged
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PurgeCompartmentID *string `json:"purgeCompartmentId,omitempty" tf:"purge_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate purgeCompartmentId.
@@ -99,7 +99,7 @@ type ActionParameters struct {
 
 	// the compartment OCID under which the data will be purged
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PurgeCompartmentID *string `json:"purgeCompartmentId,omitempty" tf:"purge_compartment_id,omitempty"`
 

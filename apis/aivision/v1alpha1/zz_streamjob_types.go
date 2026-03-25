@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type FeaturesInitParameters struct {
@@ -98,7 +98,7 @@ type StreamJobInitParameters struct {
 
 	// (Updatable) OCID of streamSource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aivision/v1alpha1.StreamSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StreamSourceID *string `json:"streamSourceId,omitempty" tf:"stream_source_id,omitempty"`
 
 	// Reference to a StreamSource in aivision to populate streamSourceId.
@@ -201,7 +201,7 @@ type StreamJobParameters struct {
 
 	// (Updatable) OCID of streamSource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aivision/v1alpha1.StreamSource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StreamSourceID *string `json:"streamSourceId,omitempty" tf:"stream_source_id,omitempty"`
 
@@ -277,7 +277,7 @@ type TrackingTypesInitParameters struct {
 
 	// (Applicable when feature_type=OBJECT_TRACKING) (Updatable) compartment Id of biometric compartment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	BiometricStoreCompartmentID *string `json:"biometricStoreCompartmentId,omitempty" tf:"biometric_store_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate biometricStoreCompartmentId.
@@ -293,7 +293,7 @@ type TrackingTypesInitParameters struct {
 
 	// (Applicable when feature_type=OBJECT_TRACKING) (Updatable) The detection model OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aivision/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DetectionModelID *string `json:"detectionModelId,omitempty" tf:"detection_model_id,omitempty"`
 
 	// Reference to a Model in aivision to populate detectionModelId.
@@ -315,7 +315,7 @@ type TrackingTypesInitParameters struct {
 
 	// (Applicable when feature_type=OBJECT_TRACKING) (Updatable) The tracking model OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aivision/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TrackingModelID *string `json:"trackingModelId,omitempty" tf:"tracking_model_id,omitempty"`
 
 	// Reference to a Model in aivision to populate trackingModelId.
@@ -355,7 +355,7 @@ type TrackingTypesParameters struct {
 
 	// (Applicable when feature_type=OBJECT_TRACKING) (Updatable) compartment Id of biometric compartment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BiometricStoreCompartmentID *string `json:"biometricStoreCompartmentId,omitempty" tf:"biometric_store_compartment_id,omitempty"`
 
@@ -373,7 +373,7 @@ type TrackingTypesParameters struct {
 
 	// (Applicable when feature_type=OBJECT_TRACKING) (Updatable) The detection model OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aivision/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DetectionModelID *string `json:"detectionModelId,omitempty" tf:"detection_model_id,omitempty"`
 
@@ -399,7 +399,7 @@ type TrackingTypesParameters struct {
 
 	// (Applicable when feature_type=OBJECT_TRACKING) (Updatable) The tracking model OCID.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aivision/v1alpha1.Model
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TrackingModelID *string `json:"trackingModelId,omitempty" tf:"tracking_model_id,omitempty"`
 

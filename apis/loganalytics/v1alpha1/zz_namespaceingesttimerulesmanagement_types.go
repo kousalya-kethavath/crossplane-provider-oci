@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type NamespaceIngestTimeRulesManagementInitParameters struct {
@@ -20,7 +20,7 @@ type NamespaceIngestTimeRulesManagementInitParameters struct {
 
 	// Unique ocid of the ingest time rule.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/events/v1alpha1.Rule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	IngestTimeRuleID *string `json:"ingestTimeRuleId,omitempty" tf:"ingest_time_rule_id,omitempty"`
 
 	// Reference to a Rule in events to populate ingestTimeRuleId.
@@ -57,7 +57,7 @@ type NamespaceIngestTimeRulesManagementParameters struct {
 
 	// Unique ocid of the ingest time rule.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/events/v1alpha1.Rule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IngestTimeRuleID *string `json:"ingestTimeRuleId,omitempty" tf:"ingest_time_rule_id,omitempty"`
 

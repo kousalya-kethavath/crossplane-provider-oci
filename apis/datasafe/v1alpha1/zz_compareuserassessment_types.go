@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CompareUserAssessmentInitParameters struct {
 
 	// The OCID of the user assessment to be compared. You can compare with another user assessment, a latest assessment, or a baseline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.UserAssessment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ComparisonUserAssessmentID *string `json:"comparisonUserAssessmentId,omitempty" tf:"comparison_user_assessment_id,omitempty"`
 
 	// Reference to a UserAssessment in datasafe to populate comparisonUserAssessmentId.
@@ -30,7 +30,7 @@ type CompareUserAssessmentInitParameters struct {
 
 	// The OCID of the user assessment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.UserAssessment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	UserAssessmentID *string `json:"userAssessmentId,omitempty" tf:"user_assessment_id,omitempty"`
 
 	// Reference to a UserAssessment in datasafe to populate userAssessmentId.
@@ -57,7 +57,7 @@ type CompareUserAssessmentParameters struct {
 
 	// The OCID of the user assessment to be compared. You can compare with another user assessment, a latest assessment, or a baseline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.UserAssessment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ComparisonUserAssessmentID *string `json:"comparisonUserAssessmentId,omitempty" tf:"comparison_user_assessment_id,omitempty"`
 
@@ -71,7 +71,7 @@ type CompareUserAssessmentParameters struct {
 
 	// The OCID of the user assessment.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.UserAssessment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserAssessmentID *string `json:"userAssessmentId,omitempty" tf:"user_assessment_id,omitempty"`
 

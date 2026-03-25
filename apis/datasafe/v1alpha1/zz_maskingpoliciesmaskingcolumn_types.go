@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MaskingFormatsFormatEntriesInitParameters struct {
@@ -44,7 +44,7 @@ type MaskingFormatsFormatEntriesInitParameters struct {
 
 	// (Updatable) The OCID of the library masking format.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.LibraryMaskingFormat
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LibraryMaskingFormatID *string `json:"libraryMaskingFormatId,omitempty" tf:"library_masking_format_id,omitempty"`
 
 	// Reference to a LibraryMaskingFormat in datasafe to populate libraryMaskingFormatId.
@@ -90,7 +90,7 @@ type MaskingFormatsFormatEntriesInitParameters struct {
 
 	// (Updatable) The name of the table that contains the substitution column.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/nosql/v1alpha1.Table
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
 	// Reference to a Table in nosql to populate tableName.
@@ -223,7 +223,7 @@ type MaskingFormatsFormatEntriesParameters struct {
 
 	// (Updatable) The OCID of the library masking format.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.LibraryMaskingFormat
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LibraryMaskingFormatID *string `json:"libraryMaskingFormatId,omitempty" tf:"library_masking_format_id,omitempty"`
 
@@ -281,7 +281,7 @@ type MaskingFormatsFormatEntriesParameters struct {
 
 	// (Updatable) The name of the table that contains the substitution column.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/nosql/v1alpha1.Table
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
@@ -357,7 +357,7 @@ type MaskingPoliciesMaskingColumnInitParameters struct {
 
 	// The OCID of the masking policy.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.MaskingPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MaskingPolicyID *string `json:"maskingPolicyId,omitempty" tf:"masking_policy_id,omitempty"`
 
 	// Reference to a MaskingPolicy in datasafe to populate maskingPolicyId.
@@ -379,7 +379,7 @@ type MaskingPoliciesMaskingColumnInitParameters struct {
 
 	// (Updatable) The OCID of the sensitive type to be associated with the masking column. Note that  if the maskingFormats attribute isn't provided while creating a masking column,   the default masking format associated with the specified sensitive type is assigned  to the masking column.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.SensitiveType
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SensitiveTypeID *string `json:"sensitiveTypeId,omitempty" tf:"sensitive_type_id,omitempty"`
 
 	// Reference to a SensitiveType in datasafe to populate sensitiveTypeId.
@@ -464,7 +464,7 @@ type MaskingPoliciesMaskingColumnParameters struct {
 
 	// The OCID of the masking policy.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.MaskingPolicy
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MaskingPolicyID *string `json:"maskingPolicyId,omitempty" tf:"masking_policy_id,omitempty"`
 
@@ -490,7 +490,7 @@ type MaskingPoliciesMaskingColumnParameters struct {
 
 	// (Updatable) The OCID of the sensitive type to be associated with the masking column. Note that  if the maskingFormats attribute isn't provided while creating a masking column,   the default masking format associated with the specified sensitive type is assigned  to the masking column.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datasafe/v1alpha1.SensitiveType
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SensitiveTypeID *string `json:"sensitiveTypeId,omitempty" tf:"sensitive_type_id,omitempty"`
 

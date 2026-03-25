@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	model "github.com/oracle/provider-oci/internal/controller/aidocument/model"
 	processorjob "github.com/oracle/provider-oci/internal/controller/aidocument/processorjob"
@@ -21,6 +21,21 @@ func Setup_aidocument(mgr ctrl.Manager, o controller.Options) error {
 		model.Setup,
 		processorjob.Setup,
 		project.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_aidocument creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_aidocument(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		model.SetupGated,
+		processorjob.SetupGated,
+		project.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

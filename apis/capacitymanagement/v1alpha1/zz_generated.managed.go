@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this InternalOccmDemandSignal.
 func (mg *InternalOccmDemandSignal) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *InternalOccmDemandSignal) GetManagementPolicies() xpv1.ManagementPolic
 // GetProviderConfigReference of this InternalOccmDemandSignal.
 func (mg *InternalOccmDemandSignal) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this InternalOccmDemandSignal.
-func (mg *InternalOccmDemandSignal) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this InternalOccmDemandSignal.
@@ -57,11 +52,6 @@ func (mg *InternalOccmDemandSignal) SetProviderConfigReference(r *xpv1.Reference
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this InternalOccmDemandSignal.
-func (mg *InternalOccmDemandSignal) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this InternalOccmDemandSignal.
 func (mg *InternalOccmDemandSignal) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -85,11 +75,6 @@ func (mg *InternalOccmDemandSignalDelivery) GetManagementPolicies() xpv1.Managem
 // GetProviderConfigReference of this InternalOccmDemandSignalDelivery.
 func (mg *InternalOccmDemandSignalDelivery) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this InternalOccmDemandSignalDelivery.
-func (mg *InternalOccmDemandSignalDelivery) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this InternalOccmDemandSignalDelivery.
@@ -117,11 +102,6 @@ func (mg *InternalOccmDemandSignalDelivery) SetProviderConfigReference(r *xpv1.R
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this InternalOccmDemandSignalDelivery.
-func (mg *InternalOccmDemandSignalDelivery) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this InternalOccmDemandSignalDelivery.
 func (mg *InternalOccmDemandSignalDelivery) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -145,11 +125,6 @@ func (mg *OccAvailabilityCatalog) GetManagementPolicies() xpv1.ManagementPolicie
 // GetProviderConfigReference of this OccAvailabilityCatalog.
 func (mg *OccAvailabilityCatalog) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OccAvailabilityCatalog.
-func (mg *OccAvailabilityCatalog) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OccAvailabilityCatalog.
@@ -177,11 +152,6 @@ func (mg *OccAvailabilityCatalog) SetProviderConfigReference(r *xpv1.Reference) 
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OccAvailabilityCatalog.
-func (mg *OccAvailabilityCatalog) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OccAvailabilityCatalog.
 func (mg *OccAvailabilityCatalog) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -205,11 +175,6 @@ func (mg *OccCapacityRequest) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this OccCapacityRequest.
 func (mg *OccCapacityRequest) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OccCapacityRequest.
-func (mg *OccCapacityRequest) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OccCapacityRequest.
@@ -237,11 +202,6 @@ func (mg *OccCapacityRequest) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OccCapacityRequest.
-func (mg *OccCapacityRequest) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OccCapacityRequest.
 func (mg *OccCapacityRequest) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -265,11 +225,6 @@ func (mg *OccCustomerGroup) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this OccCustomerGroup.
 func (mg *OccCustomerGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OccCustomerGroup.
-func (mg *OccCustomerGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OccCustomerGroup.
@@ -297,11 +252,6 @@ func (mg *OccCustomerGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OccCustomerGroup.
-func (mg *OccCustomerGroup) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OccCustomerGroup.
 func (mg *OccCustomerGroup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -325,11 +275,6 @@ func (mg *OccCustomerGroupOccCustomer) GetManagementPolicies() xpv1.ManagementPo
 // GetProviderConfigReference of this OccCustomerGroupOccCustomer.
 func (mg *OccCustomerGroupOccCustomer) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OccCustomerGroupOccCustomer.
-func (mg *OccCustomerGroupOccCustomer) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OccCustomerGroupOccCustomer.
@@ -357,11 +302,6 @@ func (mg *OccCustomerGroupOccCustomer) SetProviderConfigReference(r *xpv1.Refere
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OccCustomerGroupOccCustomer.
-func (mg *OccCustomerGroupOccCustomer) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OccCustomerGroupOccCustomer.
 func (mg *OccCustomerGroupOccCustomer) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -385,11 +325,6 @@ func (mg *OccmDemandSignal) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this OccmDemandSignal.
 func (mg *OccmDemandSignal) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this OccmDemandSignal.
-func (mg *OccmDemandSignal) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this OccmDemandSignal.
@@ -417,11 +352,6 @@ func (mg *OccmDemandSignal) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this OccmDemandSignal.
-func (mg *OccmDemandSignal) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this OccmDemandSignal.
 func (mg *OccmDemandSignal) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -447,11 +377,6 @@ func (mg *OccmDemandSignalItem) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this OccmDemandSignalItem.
-func (mg *OccmDemandSignalItem) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this OccmDemandSignalItem.
 func (mg *OccmDemandSignalItem) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -475,11 +400,6 @@ func (mg *OccmDemandSignalItem) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this OccmDemandSignalItem.
 func (mg *OccmDemandSignalItem) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this OccmDemandSignalItem.
-func (mg *OccmDemandSignalItem) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this OccmDemandSignalItem.

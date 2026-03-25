@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type OdaPrivateEndpointAttachmentInitParameters struct {
 
 	// The OCID of the attached ODA Instance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/oda/v1alpha1.OdaInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OdaInstanceID *string `json:"odaInstanceId,omitempty" tf:"oda_instance_id,omitempty"`
 
 	// Reference to a OdaInstance in oda to populate odaInstanceId.
@@ -30,7 +30,7 @@ type OdaPrivateEndpointAttachmentInitParameters struct {
 
 	// The OCID of the ODA Private Endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/oda/v1alpha1.OdaPrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OdaPrivateEndpointID *string `json:"odaPrivateEndpointId,omitempty" tf:"oda_private_endpoint_id,omitempty"`
 
 	// Reference to a OdaPrivateEndpoint in oda to populate odaPrivateEndpointId.
@@ -70,7 +70,7 @@ type OdaPrivateEndpointAttachmentParameters struct {
 
 	// The OCID of the attached ODA Instance.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/oda/v1alpha1.OdaInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OdaInstanceID *string `json:"odaInstanceId,omitempty" tf:"oda_instance_id,omitempty"`
 
@@ -84,7 +84,7 @@ type OdaPrivateEndpointAttachmentParameters struct {
 
 	// The OCID of the ODA Private Endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/oda/v1alpha1.OdaPrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OdaPrivateEndpointID *string `json:"odaPrivateEndpointId,omitempty" tf:"oda_private_endpoint_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type CrossConnectInitParameters struct {
@@ -29,7 +29,7 @@ type CrossConnectInitParameters struct {
 
 	// The OCID of the cross-connect group to put this cross-connect in.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networkconnectivity/v1alpha1.CrossConnectGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CrossConnectGroupID *string `json:"crossConnectGroupId,omitempty" tf:"cross_connect_group_id,omitempty"`
 
 	// Reference to a CrossConnectGroup in networkconnectivity to populate crossConnectGroupId.
@@ -52,7 +52,7 @@ type CrossConnectInitParameters struct {
 
 	// If you already have an existing cross-connect or cross-connect group at this FastConnect location, and you want this new cross-connect to be on a different router (for the purposes of redundancy), provide the OCID of that existing cross-connect or cross-connect group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networkconnectivity/v1alpha1.CrossConnectGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FarCrossConnectOrCrossConnectGroupID *string `json:"farCrossConnectOrCrossConnectGroupId,omitempty" tf:"far_cross_connect_or_cross_connect_group_id,omitempty"`
 
 	// Reference to a CrossConnectGroup in networkconnectivity to populate farCrossConnectOrCrossConnectGroupId.
@@ -78,7 +78,7 @@ type CrossConnectInitParameters struct {
 
 	// If you already have an existing cross-connect or cross-connect group at this FastConnect location, and you want this new cross-connect to be on the same router, provide the OCID of that existing cross-connect or cross-connect group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networkconnectivity/v1alpha1.CrossConnectGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NearCrossConnectOrCrossConnectGroupID *string `json:"nearCrossConnectOrCrossConnectGroupId,omitempty" tf:"near_cross_connect_or_cross_connect_group_id,omitempty"`
 
 	// Reference to a CrossConnectGroup in networkconnectivity to populate nearCrossConnectOrCrossConnectGroupId.
@@ -169,7 +169,7 @@ type CrossConnectParameters struct {
 
 	// The OCID of the cross-connect group to put this cross-connect in.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networkconnectivity/v1alpha1.CrossConnectGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CrossConnectGroupID *string `json:"crossConnectGroupId,omitempty" tf:"cross_connect_group_id,omitempty"`
 
@@ -196,7 +196,7 @@ type CrossConnectParameters struct {
 
 	// If you already have an existing cross-connect or cross-connect group at this FastConnect location, and you want this new cross-connect to be on a different router (for the purposes of redundancy), provide the OCID of that existing cross-connect or cross-connect group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networkconnectivity/v1alpha1.CrossConnectGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FarCrossConnectOrCrossConnectGroupID *string `json:"farCrossConnectOrCrossConnectGroupId,omitempty" tf:"far_cross_connect_or_cross_connect_group_id,omitempty"`
 
@@ -227,7 +227,7 @@ type CrossConnectParameters struct {
 
 	// If you already have an existing cross-connect or cross-connect group at this FastConnect location, and you want this new cross-connect to be on the same router, provide the OCID of that existing cross-connect or cross-connect group.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networkconnectivity/v1alpha1.CrossConnectGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NearCrossConnectOrCrossConnectGroupID *string `json:"nearCrossConnectOrCrossConnectGroupId,omitempty" tf:"near_cross_connect_or_cross_connect_group_id,omitempty"`
 
@@ -297,7 +297,7 @@ type PrimaryKeyInitParameters struct {
 
 	// (Updatable) Secret OCID containing the Connectivity Association Key (CAK) of this MACsec key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConnectivityAssociationKeySecretID *string `json:"connectivityAssociationKeySecretId,omitempty" tf:"connectivity_association_key_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate connectivityAssociationKeySecretId.
@@ -313,7 +313,7 @@ type PrimaryKeyInitParameters struct {
 
 	// (Updatable) Secret OCID containing the Connectivity association Key Name (CKN) of this MACsec key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ConnectivityAssociationNameSecretID *string `json:"connectivityAssociationNameSecretId,omitempty" tf:"connectivity_association_name_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate connectivityAssociationNameSecretId.
@@ -347,7 +347,7 @@ type PrimaryKeyParameters struct {
 
 	// (Updatable) Secret OCID containing the Connectivity Association Key (CAK) of this MACsec key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectivityAssociationKeySecretID *string `json:"connectivityAssociationKeySecretId,omitempty" tf:"connectivity_association_key_secret_id,omitempty"`
 
@@ -365,7 +365,7 @@ type PrimaryKeyParameters struct {
 
 	// (Updatable) Secret OCID containing the Connectivity association Key Name (CKN) of this MACsec key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectivityAssociationNameSecretID *string `json:"connectivityAssociationNameSecretId,omitempty" tf:"connectivity_association_name_secret_id,omitempty"`
 

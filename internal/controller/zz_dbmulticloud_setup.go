@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	multicloudresourcediscovery "github.com/oracle/provider-oci/internal/controller/dbmulticloud/multicloudresourcediscovery"
 	oracledbawsidentityconnector "github.com/oracle/provider-oci/internal/controller/dbmulticloud/oracledbawsidentityconnector"
@@ -35,6 +35,28 @@ func Setup_dbmulticloud(mgr ctrl.Manager, o controller.Options) error {
 		oracledbazurevaultassociation.Setup,
 		oracledbgcpidentityconnector.Setup,
 		oracledbgcpkeyring.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_dbmulticloud creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_dbmulticloud(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		multicloudresourcediscovery.SetupGated,
+		oracledbawsidentityconnector.SetupGated,
+		oracledbawskey.SetupGated,
+		oracledbazureblobcontainer.SetupGated,
+		oracledbazureblobmount.SetupGated,
+		oracledbazureconnector.SetupGated,
+		oracledbazurevault.SetupGated,
+		oracledbazurevaultassociation.SetupGated,
+		oracledbgcpidentityconnector.SetupGated,
+		oracledbgcpkeyring.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

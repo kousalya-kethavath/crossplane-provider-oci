@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type DetectConfigurationInitParameters struct {
@@ -80,7 +80,7 @@ type NetworkConfigurationInitParameters struct {
 
 	// (Updatable) The Oracle Cloud Identifier (OCID) of the subnet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -111,7 +111,7 @@ type NetworkConfigurationParameters struct {
 
 	// (Updatable) The Oracle Cloud Identifier (OCID) of the subnet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -157,7 +157,7 @@ type RemediationRecipeInitParameters struct {
 
 	// (Updatable) The Oracle Cloud Identifier (OCID) of the knowledge base.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/adm/v1alpha1.KnowledgeBase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KnowledgeBaseID *string `json:"knowledgeBaseId,omitempty" tf:"knowledge_base_id,omitempty"`
 
 	// Reference to a KnowledgeBase in adm to populate knowledgeBaseId.
@@ -271,7 +271,7 @@ type RemediationRecipeParameters struct {
 
 	// (Updatable) The Oracle Cloud Identifier (OCID) of the knowledge base.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/adm/v1alpha1.KnowledgeBase
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KnowledgeBaseID *string `json:"knowledgeBaseId,omitempty" tf:"knowledge_base_id,omitempty"`
 
@@ -316,7 +316,7 @@ type ScmConfigurationInitParameters struct {
 
 	// (Updatable) The Oracle Cloud Identifier (OCID) of the Oracle Cloud Infrastructure DevOps repository.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/artifacts/v1alpha1.Repository
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	OciCodeRepositoryID *string `json:"ociCodeRepositoryId,omitempty" tf:"oci_code_repository_id,omitempty"`
 
 	// Reference to a Repository in artifacts to populate ociCodeRepositoryId.
@@ -329,7 +329,7 @@ type ScmConfigurationInitParameters struct {
 
 	// (Updatable) The Oracle Cloud Identifier (OCID) of the Private Access Token (PAT) Secret. The secret provides the credentials necessary to authenticate against the SCM.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PatSecretID *string `json:"patSecretId,omitempty" tf:"pat_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate patSecretId.
@@ -400,7 +400,7 @@ type ScmConfigurationParameters struct {
 
 	// (Updatable) The Oracle Cloud Identifier (OCID) of the Oracle Cloud Infrastructure DevOps repository.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/artifacts/v1alpha1.Repository
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OciCodeRepositoryID *string `json:"ociCodeRepositoryId,omitempty" tf:"oci_code_repository_id,omitempty"`
 
@@ -414,7 +414,7 @@ type ScmConfigurationParameters struct {
 
 	// (Updatable) The Oracle Cloud Identifier (OCID) of the Private Access Token (PAT) Secret. The secret provides the credentials necessary to authenticate against the SCM.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PatSecretID *string `json:"patSecretId,omitempty" tf:"pat_secret_id,omitempty"`
 
@@ -465,7 +465,7 @@ type VerifyConfigurationInitParameters struct {
 
 	// (Updatable) The Oracle Cloud Identifier (OCID) of the Private Access Token (PAT) Secret. The secret provides the credentials necessary to authenticate against the SCM.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PatSecretID *string `json:"patSecretId,omitempty" tf:"pat_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate patSecretId.
@@ -478,7 +478,7 @@ type VerifyConfigurationInitParameters struct {
 
 	// (Updatable) The Oracle Cloud Identifier (OCID) of the user's DevOps Build Pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Pipeline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PipelineID *string `json:"pipelineId,omitempty" tf:"pipeline_id,omitempty"`
 
 	// Reference to a Pipeline in datascience to populate pipelineId.
@@ -494,7 +494,7 @@ type VerifyConfigurationInitParameters struct {
 
 	// (Updatable) The Oracle Cloud Identifier (OCID) of the trigger Secret. The Secret provides access to the trigger for a GitLab pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TriggerSecretID *string `json:"triggerSecretId,omitempty" tf:"trigger_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate triggerSecretId.
@@ -576,7 +576,7 @@ type VerifyConfigurationParameters struct {
 
 	// (Updatable) The Oracle Cloud Identifier (OCID) of the Private Access Token (PAT) Secret. The secret provides the credentials necessary to authenticate against the SCM.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PatSecretID *string `json:"patSecretId,omitempty" tf:"pat_secret_id,omitempty"`
 
@@ -590,7 +590,7 @@ type VerifyConfigurationParameters struct {
 
 	// (Updatable) The Oracle Cloud Identifier (OCID) of the user's DevOps Build Pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/datascience/v1alpha1.Pipeline
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PipelineID *string `json:"pipelineId,omitempty" tf:"pipeline_id,omitempty"`
 
@@ -608,7 +608,7 @@ type VerifyConfigurationParameters struct {
 
 	// (Updatable) The Oracle Cloud Identifier (OCID) of the trigger Secret. The Secret provides access to the trigger for a GitLab pipeline.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TriggerSecretID *string `json:"triggerSecretId,omitempty" tf:"trigger_secret_id,omitempty"`
 

@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ActionGroupsInitParameters struct {
@@ -20,7 +20,7 @@ type ActionGroupsInitParameters struct {
 
 	// (Updatable) ID of the fleet
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.Fleet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	FleetID *string `json:"fleetId,omitempty" tf:"fleet_id,omitempty"`
 
 	// Reference to a Fleet in fleetappsmanagement to populate fleetId.
@@ -36,7 +36,7 @@ type ActionGroupsInitParameters struct {
 
 	// (Updatable) ID of the runbook
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.Runbook
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RunbookID *string `json:"runbookId,omitempty" tf:"runbook_id,omitempty"`
 
 	// Reference to a Runbook in fleetappsmanagement to populate runbookId.
@@ -49,7 +49,7 @@ type ActionGroupsInitParameters struct {
 
 	// (Updatable) Name of the runbook version
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.RunbookVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)
 	RunbookVersionName *string `json:"runbookVersionName,omitempty" tf:"runbook_version_name,omitempty"`
 
 	// Reference to a RunbookVersion in fleetappsmanagement to populate runbookVersionName.
@@ -93,7 +93,7 @@ type ActionGroupsParameters struct {
 
 	// (Updatable) ID of the fleet
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.Fleet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FleetID *string `json:"fleetId,omitempty" tf:"fleet_id,omitempty"`
 
@@ -111,7 +111,7 @@ type ActionGroupsParameters struct {
 
 	// (Updatable) ID of the runbook
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.Runbook
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RunbookID *string `json:"runbookId,omitempty" tf:"runbook_id,omitempty"`
 
@@ -125,7 +125,7 @@ type ActionGroupsParameters struct {
 
 	// (Updatable) Name of the runbook version
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.RunbookVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)
 	// +kubebuilder:validation:Optional
 	RunbookVersionName *string `json:"runbookVersionName,omitempty" tf:"runbook_version_name,omitempty"`
 
@@ -286,7 +286,7 @@ type RunBooksInitParameters struct {
 
 	// (Updatable) ID of the runbook
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.Runbook
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RunbookID *string `json:"runbookId,omitempty" tf:"runbook_id,omitempty"`
 
 	// Reference to a Runbook in fleetappsmanagement to populate runbookId.
@@ -299,7 +299,7 @@ type RunBooksInitParameters struct {
 
 	// (Updatable) Name of the runbook version
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.RunbookVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)
 	RunbookVersionName *string `json:"runbookVersionName,omitempty" tf:"runbook_version_name,omitempty"`
 
 	// Reference to a RunbookVersion in fleetappsmanagement to populate runbookVersionName.
@@ -331,7 +331,7 @@ type RunBooksParameters struct {
 
 	// (Updatable) ID of the runbook
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.Runbook
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RunbookID *string `json:"runbookId,omitempty" tf:"runbook_id,omitempty"`
 
@@ -345,7 +345,7 @@ type RunBooksParameters struct {
 
 	// (Updatable) Name of the runbook version
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.RunbookVersion
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",true)
 	// +kubebuilder:validation:Optional
 	RunbookVersionName *string `json:"runbookVersionName,omitempty" tf:"runbook_version_name,omitempty"`
 
@@ -368,7 +368,7 @@ type ScheduleInitParameters struct {
 
 	// (Updatable) Provide MaintenanceWindowId
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.MaintenanceWindow
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MaintenanceWindowID *string `json:"maintenanceWindowId,omitempty" tf:"maintenance_window_id,omitempty"`
 
 	// Reference to a MaintenanceWindow in fleetappsmanagement to populate maintenanceWindowId.
@@ -416,7 +416,7 @@ type ScheduleParameters struct {
 
 	// (Updatable) Provide MaintenanceWindowId
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.MaintenanceWindow
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MaintenanceWindowID *string `json:"maintenanceWindowId,omitempty" tf:"maintenance_window_id,omitempty"`
 

@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	announcementsubscription "github.com/oracle/provider-oci/internal/controller/announcementsservice/announcementsubscription"
 	announcementsubscriptionsactionschangecompartment "github.com/oracle/provider-oci/internal/controller/announcementsservice/announcementsubscriptionsactionschangecompartment"
@@ -21,6 +21,21 @@ func Setup_announcementsservice(mgr ctrl.Manager, o controller.Options) error {
 		announcementsubscription.Setup,
 		announcementsubscriptionsactionschangecompartment.Setup,
 		announcementsubscriptionsfiltergroup.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_announcementsservice creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_announcementsservice(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		announcementsubscription.SetupGated,
+		announcementsubscriptionsactionschangecompartment.SetupGated,
+		announcementsubscriptionsfiltergroup.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

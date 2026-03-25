@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MigrationAssetInitParameters struct {
@@ -29,7 +29,7 @@ type MigrationAssetInitParameters struct {
 
 	// OCID of the associated migration.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudmigrations/v1alpha1.Migration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MigrationID *string `json:"migrationId,omitempty" tf:"migration_id,omitempty"`
 
 	// Reference to a Migration in cloudmigrations to populate migrationId.
@@ -42,7 +42,7 @@ type MigrationAssetInitParameters struct {
 
 	// Replication compartment identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ReplicationCompartmentID *string `json:"replicationCompartmentId,omitempty" tf:"replication_compartment_id,omitempty"`
 
 	// Reference to a Compartment in identity to populate replicationCompartmentId.
@@ -55,7 +55,7 @@ type MigrationAssetInitParameters struct {
 
 	// (Updatable) Replication schedule identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudmigrations/v1alpha1.ReplicationSchedule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ReplicationScheduleID *string `json:"replicationScheduleId,omitempty" tf:"replication_schedule_id,omitempty"`
 
 	// Reference to a ReplicationSchedule in cloudmigrations to populate replicationScheduleId.
@@ -68,7 +68,7 @@ type MigrationAssetInitParameters struct {
 
 	// Name of snapshot bucket
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/objectstorage/v1alpha1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	SnapShotBucketName *string `json:"snapShotBucketName,omitempty" tf:"snap_shot_bucket_name,omitempty"`
 
 	// Reference to a Bucket in objectstorage to populate snapShotBucketName.
@@ -167,7 +167,7 @@ type MigrationAssetParameters struct {
 
 	// OCID of the associated migration.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudmigrations/v1alpha1.Migration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MigrationID *string `json:"migrationId,omitempty" tf:"migration_id,omitempty"`
 
@@ -181,7 +181,7 @@ type MigrationAssetParameters struct {
 
 	// Replication compartment identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.Compartment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ReplicationCompartmentID *string `json:"replicationCompartmentId,omitempty" tf:"replication_compartment_id,omitempty"`
 
@@ -195,7 +195,7 @@ type MigrationAssetParameters struct {
 
 	// (Updatable) Replication schedule identifier
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cloudmigrations/v1alpha1.ReplicationSchedule
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ReplicationScheduleID *string `json:"replicationScheduleId,omitempty" tf:"replication_schedule_id,omitempty"`
 
@@ -209,7 +209,7 @@ type MigrationAssetParameters struct {
 
 	// Name of snapshot bucket
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/objectstorage/v1alpha1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	SnapShotBucketName *string `json:"snapShotBucketName,omitempty" tf:"snap_shot_bucket_name,omitempty"`
 

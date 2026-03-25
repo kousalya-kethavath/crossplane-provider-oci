@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagementExternalAsmInitParameters struct {
@@ -21,7 +21,7 @@ type ManagementExternalAsmInitParameters struct {
 
 	// The OCID of the external ASM.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementExternalAsm
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ExternalAsmID *string `json:"externalAsmId,omitempty" tf:"external_asm_id,omitempty"`
 
 	// Reference to a ManagementExternalAsm in database to populate externalAsmId.
@@ -116,7 +116,7 @@ type ManagementExternalAsmParameters struct {
 
 	// The OCID of the external ASM.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementExternalAsm
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExternalAsmID *string `json:"externalAsmId,omitempty" tf:"external_asm_id,omitempty"`
 

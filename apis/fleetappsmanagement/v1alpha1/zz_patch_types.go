@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ArtifactDetailsInitParameters struct {
@@ -419,7 +419,7 @@ type PatchTypeInitParameters struct {
 
 	// (Updatable) PlatformConfiguration Id corresponding to the Patch Type
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.PlatformConfiguration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PlatformConfigurationID *string `json:"platformConfigurationId,omitempty" tf:"platform_configuration_id,omitempty"`
 
 	// Reference to a PlatformConfiguration in fleetappsmanagement to populate platformConfigurationId.
@@ -441,7 +441,7 @@ type PatchTypeParameters struct {
 
 	// (Updatable) PlatformConfiguration Id corresponding to the Patch Type
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.PlatformConfiguration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PlatformConfigurationID *string `json:"platformConfigurationId,omitempty" tf:"platform_configuration_id,omitempty"`
 
@@ -458,7 +458,7 @@ type ProductInitParameters struct {
 
 	// (Updatable) PlatformConfiguration Id corresponding to the Patch Type
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.PlatformConfiguration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PlatformConfigurationID *string `json:"platformConfigurationId,omitempty" tf:"platform_configuration_id,omitempty"`
 
 	// Reference to a PlatformConfiguration in fleetappsmanagement to populate platformConfigurationId.
@@ -486,7 +486,7 @@ type ProductParameters struct {
 
 	// (Updatable) PlatformConfiguration Id corresponding to the Patch Type
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/fleetappsmanagement/v1alpha1.PlatformConfiguration
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PlatformConfigurationID *string `json:"platformConfigurationId,omitempty" tf:"platform_configuration_id,omitempty"`
 

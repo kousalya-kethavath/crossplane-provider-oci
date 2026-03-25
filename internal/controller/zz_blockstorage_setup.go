@@ -7,7 +7,7 @@ package controller
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	bootvolume "github.com/oracle/provider-oci/internal/controller/blockstorage/bootvolume"
 	bootvolumebackup "github.com/oracle/provider-oci/internal/controller/blockstorage/bootvolumebackup"
@@ -33,6 +33,27 @@ func Setup_blockstorage(mgr ctrl.Manager, o controller.Options) error {
 		volumebackuppolicyassignment.Setup,
 		volumegroup.Setup,
 		volumegroupbackup.Setup,
+	} {
+		if err := setup(mgr, o); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// SetupGated_blockstorage creates all controllers with the supplied logger and adds them to
+// the supplied manager gated.
+func SetupGated_blockstorage(mgr ctrl.Manager, o controller.Options) error {
+	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		bootvolume.SetupGated,
+		bootvolumebackup.SetupGated,
+		volume.SetupGated,
+		volumeattachment.SetupGated,
+		volumebackup.SetupGated,
+		volumebackuppolicy.SetupGated,
+		volumebackuppolicyassignment.SetupGated,
+		volumegroup.SetupGated,
+		volumegroupbackup.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

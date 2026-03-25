@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type EncryptionInitParameters struct {
@@ -20,7 +20,7 @@ type EncryptionInitParameters struct {
 
 	// (Applicable when algorithm=AES128) The identifier of the customer managed Vault KMS symmetric encryption key (null if Oracle managed).
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
@@ -49,7 +49,7 @@ type EncryptionParameters struct {
 
 	// (Applicable when algorithm=AES128) The identifier of the customer managed Vault KMS symmetric encryption key (null if Oracle managed).
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -73,7 +73,7 @@ type StreamPackagingConfigInitParameters struct {
 
 	// Unique identifier of the Distribution Channel that this stream packaging configuration belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/mysql/v1alpha1.MysqlChannel
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DistributionChannelID *string `json:"distributionChannelId,omitempty" tf:"distribution_channel_id,omitempty"`
 
 	// Reference to a MysqlChannel in mysql to populate distributionChannelId.
@@ -225,7 +225,7 @@ type StreamPackagingConfigParameters struct {
 
 	// Unique identifier of the Distribution Channel that this stream packaging configuration belongs to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/mysql/v1alpha1.MysqlChannel
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DistributionChannelID *string `json:"distributionChannelId,omitempty" tf:"distribution_channel_id,omitempty"`
 

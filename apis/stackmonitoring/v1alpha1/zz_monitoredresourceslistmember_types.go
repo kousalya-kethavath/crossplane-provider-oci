@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type MonitoredResourcesListMemberInitParameters struct {
@@ -23,7 +23,7 @@ type MonitoredResourcesListMemberInitParameters struct {
 
 	// The OCID of monitored resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/stackmonitoring/v1alpha1.MonitoredResource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	MonitoredResourceID *string `json:"monitoredResourceId,omitempty" tf:"monitored_resource_id,omitempty"`
 
 	// Reference to a MonitoredResource in stackmonitoring to populate monitoredResourceId.
@@ -121,7 +121,7 @@ type MonitoredResourcesListMemberParameters struct {
 
 	// The OCID of monitored resource.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/stackmonitoring/v1alpha1.MonitoredResource
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MonitoredResourceID *string `json:"monitoredResourceId,omitempty" tf:"monitored_resource_id,omitempty"`
 

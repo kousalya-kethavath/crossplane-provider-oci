@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type Oauth2clientCredentialIdcsCreatedByInitParameters struct {
@@ -368,7 +368,7 @@ type Oauth2clientCredentialUserInitParameters struct {
 
 	// The OCID of the SCIM resource that represents the User or App who created this Resource
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identitydomains/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("ocid",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("ocid",false)
 	Ocid *string `json:"ocid,omitempty" tf:"ocid,omitempty"`
 
 	// Reference to a User in identitydomains to populate ocid.
@@ -381,7 +381,7 @@ type Oauth2clientCredentialUserInitParameters struct {
 
 	// The ID of the SCIM resource that represents the User or App who created this Resource
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identitydomains/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 
 	// Reference to a User in identitydomains to populate value.
@@ -415,7 +415,7 @@ type Oauth2clientCredentialUserParameters struct {
 
 	// The OCID of the SCIM resource that represents the User or App who created this Resource
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identitydomains/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("ocid",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("ocid",false)
 	// +kubebuilder:validation:Optional
 	Ocid *string `json:"ocid,omitempty" tf:"ocid,omitempty"`
 
@@ -429,7 +429,7 @@ type Oauth2clientCredentialUserParameters struct {
 
 	// The ID of the SCIM resource that represents the User or App who created this Resource
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identitydomains/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 

@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this NetworkFirewall.
 func (mg *NetworkFirewall) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *NetworkFirewall) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this NetworkFirewall.
 func (mg *NetworkFirewall) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this NetworkFirewall.
-func (mg *NetworkFirewall) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this NetworkFirewall.
@@ -57,11 +52,6 @@ func (mg *NetworkFirewall) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this NetworkFirewall.
-func (mg *NetworkFirewall) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this NetworkFirewall.
 func (mg *NetworkFirewall) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -85,11 +75,6 @@ func (mg *NetworkFirewallPolicy) GetManagementPolicies() xpv1.ManagementPolicies
 // GetProviderConfigReference of this NetworkFirewallPolicy.
 func (mg *NetworkFirewallPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this NetworkFirewallPolicy.
-func (mg *NetworkFirewallPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this NetworkFirewallPolicy.
@@ -117,11 +102,6 @@ func (mg *NetworkFirewallPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this NetworkFirewallPolicy.
-func (mg *NetworkFirewallPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this NetworkFirewallPolicy.
 func (mg *NetworkFirewallPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -145,11 +125,6 @@ func (mg *NetworkFirewallPolicyAddressList) GetManagementPolicies() xpv1.Managem
 // GetProviderConfigReference of this NetworkFirewallPolicyAddressList.
 func (mg *NetworkFirewallPolicyAddressList) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this NetworkFirewallPolicyAddressList.
-func (mg *NetworkFirewallPolicyAddressList) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this NetworkFirewallPolicyAddressList.
@@ -177,11 +152,6 @@ func (mg *NetworkFirewallPolicyAddressList) SetProviderConfigReference(r *xpv1.R
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this NetworkFirewallPolicyAddressList.
-func (mg *NetworkFirewallPolicyAddressList) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this NetworkFirewallPolicyAddressList.
 func (mg *NetworkFirewallPolicyAddressList) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -205,11 +175,6 @@ func (mg *NetworkFirewallPolicyApplication) GetManagementPolicies() xpv1.Managem
 // GetProviderConfigReference of this NetworkFirewallPolicyApplication.
 func (mg *NetworkFirewallPolicyApplication) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this NetworkFirewallPolicyApplication.
-func (mg *NetworkFirewallPolicyApplication) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this NetworkFirewallPolicyApplication.
@@ -237,11 +202,6 @@ func (mg *NetworkFirewallPolicyApplication) SetProviderConfigReference(r *xpv1.R
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this NetworkFirewallPolicyApplication.
-func (mg *NetworkFirewallPolicyApplication) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this NetworkFirewallPolicyApplication.
 func (mg *NetworkFirewallPolicyApplication) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -265,11 +225,6 @@ func (mg *NetworkFirewallPolicyApplicationGroup) GetManagementPolicies() xpv1.Ma
 // GetProviderConfigReference of this NetworkFirewallPolicyApplicationGroup.
 func (mg *NetworkFirewallPolicyApplicationGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this NetworkFirewallPolicyApplicationGroup.
-func (mg *NetworkFirewallPolicyApplicationGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this NetworkFirewallPolicyApplicationGroup.
@@ -297,11 +252,6 @@ func (mg *NetworkFirewallPolicyApplicationGroup) SetProviderConfigReference(r *x
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this NetworkFirewallPolicyApplicationGroup.
-func (mg *NetworkFirewallPolicyApplicationGroup) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this NetworkFirewallPolicyApplicationGroup.
 func (mg *NetworkFirewallPolicyApplicationGroup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -325,11 +275,6 @@ func (mg *NetworkFirewallPolicyDecryptionProfile) GetManagementPolicies() xpv1.M
 // GetProviderConfigReference of this NetworkFirewallPolicyDecryptionProfile.
 func (mg *NetworkFirewallPolicyDecryptionProfile) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this NetworkFirewallPolicyDecryptionProfile.
-func (mg *NetworkFirewallPolicyDecryptionProfile) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this NetworkFirewallPolicyDecryptionProfile.
@@ -357,11 +302,6 @@ func (mg *NetworkFirewallPolicyDecryptionProfile) SetProviderConfigReference(r *
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this NetworkFirewallPolicyDecryptionProfile.
-func (mg *NetworkFirewallPolicyDecryptionProfile) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this NetworkFirewallPolicyDecryptionProfile.
 func (mg *NetworkFirewallPolicyDecryptionProfile) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -385,11 +325,6 @@ func (mg *NetworkFirewallPolicyDecryptionRule) GetManagementPolicies() xpv1.Mana
 // GetProviderConfigReference of this NetworkFirewallPolicyDecryptionRule.
 func (mg *NetworkFirewallPolicyDecryptionRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this NetworkFirewallPolicyDecryptionRule.
-func (mg *NetworkFirewallPolicyDecryptionRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this NetworkFirewallPolicyDecryptionRule.
@@ -417,11 +352,6 @@ func (mg *NetworkFirewallPolicyDecryptionRule) SetProviderConfigReference(r *xpv
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this NetworkFirewallPolicyDecryptionRule.
-func (mg *NetworkFirewallPolicyDecryptionRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this NetworkFirewallPolicyDecryptionRule.
 func (mg *NetworkFirewallPolicyDecryptionRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -445,11 +375,6 @@ func (mg *NetworkFirewallPolicyMappedSecret) GetManagementPolicies() xpv1.Manage
 // GetProviderConfigReference of this NetworkFirewallPolicyMappedSecret.
 func (mg *NetworkFirewallPolicyMappedSecret) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this NetworkFirewallPolicyMappedSecret.
-func (mg *NetworkFirewallPolicyMappedSecret) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this NetworkFirewallPolicyMappedSecret.
@@ -477,11 +402,6 @@ func (mg *NetworkFirewallPolicyMappedSecret) SetProviderConfigReference(r *xpv1.
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this NetworkFirewallPolicyMappedSecret.
-func (mg *NetworkFirewallPolicyMappedSecret) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this NetworkFirewallPolicyMappedSecret.
 func (mg *NetworkFirewallPolicyMappedSecret) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -505,11 +425,6 @@ func (mg *NetworkFirewallPolicyNatRule) GetManagementPolicies() xpv1.ManagementP
 // GetProviderConfigReference of this NetworkFirewallPolicyNatRule.
 func (mg *NetworkFirewallPolicyNatRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this NetworkFirewallPolicyNatRule.
-func (mg *NetworkFirewallPolicyNatRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this NetworkFirewallPolicyNatRule.
@@ -537,11 +452,6 @@ func (mg *NetworkFirewallPolicyNatRule) SetProviderConfigReference(r *xpv1.Refer
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this NetworkFirewallPolicyNatRule.
-func (mg *NetworkFirewallPolicyNatRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this NetworkFirewallPolicyNatRule.
 func (mg *NetworkFirewallPolicyNatRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -565,11 +475,6 @@ func (mg *NetworkFirewallPolicySecurityRule) GetManagementPolicies() xpv1.Manage
 // GetProviderConfigReference of this NetworkFirewallPolicySecurityRule.
 func (mg *NetworkFirewallPolicySecurityRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this NetworkFirewallPolicySecurityRule.
-func (mg *NetworkFirewallPolicySecurityRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this NetworkFirewallPolicySecurityRule.
@@ -597,11 +502,6 @@ func (mg *NetworkFirewallPolicySecurityRule) SetProviderConfigReference(r *xpv1.
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this NetworkFirewallPolicySecurityRule.
-func (mg *NetworkFirewallPolicySecurityRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this NetworkFirewallPolicySecurityRule.
 func (mg *NetworkFirewallPolicySecurityRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -625,11 +525,6 @@ func (mg *NetworkFirewallPolicyService) GetManagementPolicies() xpv1.ManagementP
 // GetProviderConfigReference of this NetworkFirewallPolicyService.
 func (mg *NetworkFirewallPolicyService) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this NetworkFirewallPolicyService.
-func (mg *NetworkFirewallPolicyService) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this NetworkFirewallPolicyService.
@@ -657,11 +552,6 @@ func (mg *NetworkFirewallPolicyService) SetProviderConfigReference(r *xpv1.Refer
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this NetworkFirewallPolicyService.
-func (mg *NetworkFirewallPolicyService) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this NetworkFirewallPolicyService.
 func (mg *NetworkFirewallPolicyService) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -687,11 +577,6 @@ func (mg *NetworkFirewallPolicyTunnelInspectionRule) GetProviderConfigReference(
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this NetworkFirewallPolicyTunnelInspectionRule.
-func (mg *NetworkFirewallPolicyTunnelInspectionRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this NetworkFirewallPolicyTunnelInspectionRule.
 func (mg *NetworkFirewallPolicyTunnelInspectionRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -715,11 +600,6 @@ func (mg *NetworkFirewallPolicyTunnelInspectionRule) SetManagementPolicies(r xpv
 // SetProviderConfigReference of this NetworkFirewallPolicyTunnelInspectionRule.
 func (mg *NetworkFirewallPolicyTunnelInspectionRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this NetworkFirewallPolicyTunnelInspectionRule.
-func (mg *NetworkFirewallPolicyTunnelInspectionRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this NetworkFirewallPolicyTunnelInspectionRule.

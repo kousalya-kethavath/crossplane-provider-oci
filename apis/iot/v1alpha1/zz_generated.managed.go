@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
 // GetCondition of this DigitalTwinAdapter.
 func (mg *DigitalTwinAdapter) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
@@ -25,11 +25,6 @@ func (mg *DigitalTwinAdapter) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this DigitalTwinAdapter.
 func (mg *DigitalTwinAdapter) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this DigitalTwinAdapter.
-func (mg *DigitalTwinAdapter) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this DigitalTwinAdapter.
@@ -57,11 +52,6 @@ func (mg *DigitalTwinAdapter) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this DigitalTwinAdapter.
-func (mg *DigitalTwinAdapter) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this DigitalTwinAdapter.
 func (mg *DigitalTwinAdapter) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -85,11 +75,6 @@ func (mg *DigitalTwinInstance) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this DigitalTwinInstance.
 func (mg *DigitalTwinInstance) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this DigitalTwinInstance.
-func (mg *DigitalTwinInstance) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this DigitalTwinInstance.
@@ -117,11 +102,6 @@ func (mg *DigitalTwinInstance) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this DigitalTwinInstance.
-func (mg *DigitalTwinInstance) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this DigitalTwinInstance.
 func (mg *DigitalTwinInstance) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -145,11 +125,6 @@ func (mg *DigitalTwinInstanceInvokeRawCommand) GetManagementPolicies() xpv1.Mana
 // GetProviderConfigReference of this DigitalTwinInstanceInvokeRawCommand.
 func (mg *DigitalTwinInstanceInvokeRawCommand) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this DigitalTwinInstanceInvokeRawCommand.
-func (mg *DigitalTwinInstanceInvokeRawCommand) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this DigitalTwinInstanceInvokeRawCommand.
@@ -177,11 +152,6 @@ func (mg *DigitalTwinInstanceInvokeRawCommand) SetProviderConfigReference(r *xpv
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this DigitalTwinInstanceInvokeRawCommand.
-func (mg *DigitalTwinInstanceInvokeRawCommand) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this DigitalTwinInstanceInvokeRawCommand.
 func (mg *DigitalTwinInstanceInvokeRawCommand) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -205,11 +175,6 @@ func (mg *DigitalTwinModel) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this DigitalTwinModel.
 func (mg *DigitalTwinModel) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this DigitalTwinModel.
-func (mg *DigitalTwinModel) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this DigitalTwinModel.
@@ -237,11 +202,6 @@ func (mg *DigitalTwinModel) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this DigitalTwinModel.
-func (mg *DigitalTwinModel) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this DigitalTwinModel.
 func (mg *DigitalTwinModel) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -265,11 +225,6 @@ func (mg *DigitalTwinRelationship) GetManagementPolicies() xpv1.ManagementPolici
 // GetProviderConfigReference of this DigitalTwinRelationship.
 func (mg *DigitalTwinRelationship) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this DigitalTwinRelationship.
-func (mg *DigitalTwinRelationship) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this DigitalTwinRelationship.
@@ -297,11 +252,6 @@ func (mg *DigitalTwinRelationship) SetProviderConfigReference(r *xpv1.Reference)
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this DigitalTwinRelationship.
-func (mg *DigitalTwinRelationship) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this DigitalTwinRelationship.
 func (mg *DigitalTwinRelationship) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -325,11 +275,6 @@ func (mg *IotDomain) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this IotDomain.
 func (mg *IotDomain) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this IotDomain.
-func (mg *IotDomain) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this IotDomain.
@@ -357,11 +302,6 @@ func (mg *IotDomain) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this IotDomain.
-func (mg *IotDomain) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this IotDomain.
 func (mg *IotDomain) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -385,11 +325,6 @@ func (mg *IotDomainChangeDataRetentionPeriod) GetManagementPolicies() xpv1.Manag
 // GetProviderConfigReference of this IotDomainChangeDataRetentionPeriod.
 func (mg *IotDomainChangeDataRetentionPeriod) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this IotDomainChangeDataRetentionPeriod.
-func (mg *IotDomainChangeDataRetentionPeriod) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this IotDomainChangeDataRetentionPeriod.
@@ -417,11 +352,6 @@ func (mg *IotDomainChangeDataRetentionPeriod) SetProviderConfigReference(r *xpv1
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this IotDomainChangeDataRetentionPeriod.
-func (mg *IotDomainChangeDataRetentionPeriod) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this IotDomainChangeDataRetentionPeriod.
 func (mg *IotDomainChangeDataRetentionPeriod) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -445,11 +375,6 @@ func (mg *IotDomainConfigureDataAccess) GetManagementPolicies() xpv1.ManagementP
 // GetProviderConfigReference of this IotDomainConfigureDataAccess.
 func (mg *IotDomainConfigureDataAccess) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this IotDomainConfigureDataAccess.
-func (mg *IotDomainConfigureDataAccess) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this IotDomainConfigureDataAccess.
@@ -477,11 +402,6 @@ func (mg *IotDomainConfigureDataAccess) SetProviderConfigReference(r *xpv1.Refer
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this IotDomainConfigureDataAccess.
-func (mg *IotDomainConfigureDataAccess) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this IotDomainConfigureDataAccess.
 func (mg *IotDomainConfigureDataAccess) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -505,11 +425,6 @@ func (mg *IotDomainGroup) GetManagementPolicies() xpv1.ManagementPolicies {
 // GetProviderConfigReference of this IotDomainGroup.
 func (mg *IotDomainGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
-}
-
-// GetPublishConnectionDetailsTo of this IotDomainGroup.
-func (mg *IotDomainGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
 }
 
 // GetWriteConnectionSecretToReference of this IotDomainGroup.
@@ -537,11 +452,6 @@ func (mg *IotDomainGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this IotDomainGroup.
-func (mg *IotDomainGroup) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
 // SetWriteConnectionSecretToReference of this IotDomainGroup.
 func (mg *IotDomainGroup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
@@ -567,11 +477,6 @@ func (mg *IotDomainGroupConfigureDataAccess) GetProviderConfigReference() *xpv1.
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this IotDomainGroupConfigureDataAccess.
-func (mg *IotDomainGroupConfigureDataAccess) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
 // GetWriteConnectionSecretToReference of this IotDomainGroupConfigureDataAccess.
 func (mg *IotDomainGroupConfigureDataAccess) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
@@ -595,11 +500,6 @@ func (mg *IotDomainGroupConfigureDataAccess) SetManagementPolicies(r xpv1.Manage
 // SetProviderConfigReference of this IotDomainGroupConfigureDataAccess.
 func (mg *IotDomainGroupConfigureDataAccess) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-// SetPublishConnectionDetailsTo of this IotDomainGroupConfigureDataAccess.
-func (mg *IotDomainGroupConfigureDataAccess) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
 }
 
 // SetWriteConnectionSecretToReference of this IotDomainGroupConfigureDataAccess.

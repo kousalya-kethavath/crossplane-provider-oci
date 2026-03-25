@@ -10,14 +10,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagementCloudDbHomeInitParameters struct {
 
 	// The OCID of the cloud database home.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementCloudDbHome
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	CloudDBHomeID *string `json:"cloudDbHomeId,omitempty" tf:"cloud_db_home_id,omitempty"`
 
 	// Reference to a ManagementCloudDbHome in database to populate cloudDbHomeId.
@@ -96,7 +96,7 @@ type ManagementCloudDbHomeParameters struct {
 
 	// The OCID of the cloud database home.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.ManagementCloudDbHome
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CloudDBHomeID *string `json:"cloudDbHomeId,omitempty" tf:"cloud_db_home_id,omitempty"`
 

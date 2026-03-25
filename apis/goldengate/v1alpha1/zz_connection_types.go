@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type AdditionalAttributesInitParameters struct {
@@ -94,7 +94,7 @@ type CatalogInitParameters struct {
 
 	// (Updatable) The OCID of the Secret that stores the password Oracle GoldenGate uses to connect to Snowflake platform.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClientSecretSecretID *string `json:"clientSecretSecretId,omitempty" tf:"client_secret_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate clientSecretSecretId.
@@ -116,7 +116,7 @@ type CatalogInitParameters struct {
 
 	// (Updatable) The OCID of the Secret that stores the content of the configuration file containing additional properties for the REST catalog. See documentation: https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/managingcredentials.htm
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PropertiesSecretID *string `json:"propertiesSecretId,omitempty" tf:"properties_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate propertiesSecretId.
@@ -177,7 +177,7 @@ type CatalogParameters struct {
 
 	// (Updatable) The OCID of the Secret that stores the password Oracle GoldenGate uses to connect to Snowflake platform.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClientSecretSecretID *string `json:"clientSecretSecretId,omitempty" tf:"client_secret_secret_id,omitempty"`
 
@@ -203,7 +203,7 @@ type CatalogParameters struct {
 
 	// (Updatable) The OCID of the Secret that stores the content of the configuration file containing additional properties for the REST catalog. See documentation: https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/managingcredentials.htm
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PropertiesSecretID *string `json:"propertiesSecretId,omitempty" tf:"properties_secret_id,omitempty"`
 
@@ -224,7 +224,7 @@ type ConnectionInitParameters struct {
 
 	// (Updatable) Access key ID to access the Amazon S3 bucket. e.g.: "this-is-not-the-secret"
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AccessKeyID *string `json:"accessKeyId,omitempty" tf:"access_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate accessKeyId.
@@ -237,7 +237,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=AZURE_DATA_LAKE_STORAGE) (Updatable) The OCID of the Secret where the account key is stored. Note: When provided, 'accountKey' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AccountKeySecretID *string `json:"accountKeySecretId,omitempty" tf:"account_key_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate accountKeySecretId.
@@ -280,7 +280,7 @@ type ConnectionInitParameters struct {
 
 	// (Updatable) The OCID of the Secret that stores the password Oracle GoldenGate uses to connect to Snowflake platform.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClientSecretSecretID *string `json:"clientSecretSecretId,omitempty" tf:"client_secret_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate clientSecretSecretId.
@@ -296,7 +296,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=KAFKA) (Updatable) The OCID of the Kafka cluster being referenced from Oracle Cloud Infrastructure Streaming with Apache Kafka.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/containerengine/v1alpha1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
 	// Reference to a Cluster in containerengine to populate clusterId.
@@ -309,7 +309,7 @@ type ConnectionInitParameters struct {
 
 	// The OCID(https://docs.cloud.oracle.com/iaas/Content/General/Concepts/identifiers.htm) of the cluster placement group for the resource. Only applicable for multicloud subscriptions. The cluster placement group id must be provided when a multicloud subscription id is provided. Otherwise the cluster placement group must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/clusterplacementgroups/v1alpha1.ClusterPlacementGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ClusterPlacementGroupID *string `json:"clusterPlacementGroupId,omitempty" tf:"cluster_placement_group_id,omitempty"`
 
 	// Reference to a ClusterPlacementGroup in clusterplacementgroups to populate clusterPlacementGroupId.
@@ -352,7 +352,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=MYSQL | POSTGRESQL) (Updatable) The OCID of the database system being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DbSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DBSystemID *string `json:"dbSystemId,omitempty" tf:"db_system_id,omitempty"`
 
 	// Reference to a DbSystem in database to populate dbSystemId.
@@ -365,7 +365,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=MONGODB | ORACLE) (Updatable) The OCID of the Oracle Autonomous Json Database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.Database
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
 	// Reference to a Database in database to populate databaseId.
@@ -394,7 +394,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=GOLDENGATE) (Updatable) The OCID of the deployment being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/goldengate/v1alpha1.Deployment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
 
 	// Reference to a Deployment in goldengate to populate deploymentId.
@@ -440,7 +440,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=JAVA_MESSAGE_SERVICE) (Updatable) The OCID of the Secret where the security credentials are stored associated to the principal. Note: When provided, 'jndiSecurityCredentials' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	JndiSecurityCredentialsSecretID *string `json:"jndiSecurityCredentialsSecretId,omitempty" tf:"jndi_security_credentials_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate jndiSecurityCredentialsSecretId.
@@ -459,7 +459,7 @@ type ConnectionInitParameters struct {
 
 	// (Updatable) Refers to the customer's master key OCID.  If provided, it references a key to manage secrets. Customers must add policies to permit GoldenGate to use this key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// Reference to a Key in kms to populate keyId.
@@ -472,7 +472,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=JAVA_MESSAGE_SERVICE | KAFKA | KAFKA_SCHEMA_REGISTRY | REDIS) (Updatable) The OCID of the Secret where the kafka Ssl KeyStore password is stored. Note: When provided, 'keyStorePassword' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyStorePasswordSecretID *string `json:"keyStorePasswordSecretId,omitempty" tf:"key_store_password_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate keyStorePasswordSecretId.
@@ -488,7 +488,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=JAVA_MESSAGE_SERVICE | KAFKA | KAFKA_SCHEMA_REGISTRY | REDIS) (Updatable) The OCID of the Secret where the content of the KeyStore file is stored. Note: When provided, 'keyStore' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	KeyStoreSecretID *string `json:"keyStoreSecretId,omitempty" tf:"key_store_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate keyStoreSecretId.
@@ -511,7 +511,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=AMAZON_REDSHIFT | AZURE_SYNAPSE_ANALYTICS | DATABRICKS | DB2 | ELASTICSEARCH | GOLDENGATE | JAVA_MESSAGE_SERVICE | KAFKA | KAFKA_SCHEMA_REGISTRY | MICROSOFT_SQLSERVER | MONGODB | MYSQL | ORACLE | POSTGRESQL | REDIS | SNOWFLAKE) (Updatable) The OCID of the Secret where the password is stored. The password Oracle GoldenGate uses to connect the associated system of the given technology. It must conform to the specific security requirements including length, case sensitivity, and so on. If secretId is used plaintext field must not be provided. Note: When provided, 'password' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PasswordSecretID *string `json:"passwordSecretId,omitempty" tf:"password_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate passwordSecretId.
@@ -533,7 +533,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=OCI_OBJECT_STORAGE | ORACLE_AI_DATA_PLATFORM | ORACLE_NOSQL | SNOWFLAKE) (Updatable) The OCID of the Secret that stores the content of the private key file (PEM file) corresponding to the API key of the fingerprint. See documentation: https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/managingcredentials.htm Note: When provided, 'privateKeyFile' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrivateKeyFileSecretID *string `json:"privateKeyFileSecretId,omitempty" tf:"private_key_file_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate privateKeyFileSecretId.
@@ -549,7 +549,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=OCI_OBJECT_STORAGE | ORACLE_AI_DATA_PLATFORM | ORACLE_NOSQL | SNOWFLAKE) (Updatable) The OCID of the Secret that stores the password for the private key file. Note: When provided, 'privateKeyPassphrase' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	PrivateKeyPassphraseSecretID *string `json:"privateKeyPassphraseSecretId,omitempty" tf:"private_key_passphrase_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate privateKeyPassphraseSecretId.
@@ -571,7 +571,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=REDIS) (Updatable) The OCID of the Redis cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/redis/v1alpha1.RedisCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	RedisClusterID *string `json:"redisClusterId,omitempty" tf:"redis_cluster_id,omitempty"`
 
 	// Reference to a RedisCluster in redis to populate redisClusterId.
@@ -596,7 +596,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=DB2) (Updatable) The OCID of the Secret where the keystash file is stored,  which contains the encrypted password to the key database file. This property is not supported for IBM Db2 for i, as client TLS mode is not available.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SSLClientKeystashSecretID *string `json:"sslClientKeystashSecretId,omitempty" tf:"ssl_client_keystash_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate sslClientKeystashSecretId.
@@ -612,7 +612,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=DB2) (Updatable) The OCID of the Secret where the keystore file stored,  which created at the client containing the server certificate / CA root certificate. This property is not supported for IBM Db2 for i, as client TLS mode is not available.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SSLClientKeystoredbSecretID *string `json:"sslClientKeystoredbSecretId,omitempty" tf:"ssl_client_keystoredb_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate sslClientKeystoredbSecretId.
@@ -631,7 +631,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=JAVA_MESSAGE_SERVICE | KAFKA | KAFKA_SCHEMA_REGISTRY) (Updatable) The OCID of the Secret where the password is stored for the cert inside of the Keystore. In case it differs from the KeyStore password, it should be provided. Note: When provided, 'sslKeyPassword' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SSLKeyPasswordSecretID *string `json:"sslKeyPasswordSecretId,omitempty" tf:"ssl_key_password_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate sslKeyPasswordSecretId.
@@ -647,7 +647,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=MYSQL | POSTGRESQL) (Updatable) The OCID of the Secret that stores the Client Key
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SSLKeySecretID *string `json:"sslKeySecretId,omitempty" tf:"ssl_key_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate sslKeySecretId.
@@ -669,7 +669,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=AZURE_DATA_LAKE_STORAGE) (Updatable) The OCID of the Secret where the sas token is stored. Note: When provided, 'sasToken' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SasTokenSecretID *string `json:"sasTokenSecretId,omitempty" tf:"sas_token_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate sasTokenSecretId.
@@ -685,7 +685,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=AMAZON_KINESIS | AMAZON_S3) (Updatable) The OCID of the Secret where the secret access key is stored. Note: When provided, 'secretAccessKey' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SecretAccessKeySecretID *string `json:"secretAccessKeySecretId,omitempty" tf:"secret_access_key_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate secretAccessKeySecretId.
@@ -711,7 +711,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=GOOGLE_BIGQUERY | GOOGLE_CLOUD_STORAGE | GOOGLE_PUBSUB) (Updatable) The OCID of the Secret where the content of the service account key file is stored, which contains the credentials required to use Google Cloud Storage. Note: When provided, 'serviceAccountKeyFile' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServiceAccountKeyFileSecretID *string `json:"serviceAccountKeyFileSecretId,omitempty" tf:"service_account_key_file_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate serviceAccountKeyFileSecretId.
@@ -745,7 +745,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=KAFKA) (Updatable) The OCID of the stream pool being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.StreamPool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	StreamPoolID *string `json:"streamPoolId,omitempty" tf:"stream_pool_id,omitempty"`
 
 	// Reference to a StreamPool in streaming to populate streamPoolId.
@@ -758,7 +758,7 @@ type ConnectionInitParameters struct {
 
 	// (Updatable) The OCID of the target subnet of the dedicated connection.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate subnetId.
@@ -786,7 +786,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=MONGODB) (Updatable) The OCID of the Secret that stores the certificate key file of the mtls connection.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TLSCertificateKeyFileSecretID *string `json:"tlsCertificateKeyFileSecretId,omitempty" tf:"tls_certificate_key_file_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate tlsCertificateKeyFileSecretId.
@@ -810,7 +810,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=JAVA_MESSAGE_SERVICE | KAFKA | KAFKA_SCHEMA_REGISTRY | REDIS) (Updatable) The OCID of the Secret where the kafka Ssl TrustStore password is stored. Note: When provided, 'trustStorePassword' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TrustStorePasswordSecretID *string `json:"trustStorePasswordSecretId,omitempty" tf:"trust_store_password_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate trustStorePasswordSecretId.
@@ -826,7 +826,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=JAVA_MESSAGE_SERVICE | KAFKA | KAFKA_SCHEMA_REGISTRY | REDIS) (Updatable) The OCID of the Secret where the content of the TrustStore file is stored. Note: When provided, 'trustStore' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TrustStoreSecretID *string `json:"trustStoreSecretId,omitempty" tf:"trust_store_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate trustStoreSecretId.
@@ -845,7 +845,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=OCI_OBJECT_STORAGE | ORACLE_AI_DATA_PLATFORM | ORACLE_NOSQL) (Updatable) The OCID of the Oracle Cloud Infrastructure user who will access the Oracle NoSQL database. The user must have write access to the table they want to connect to. If the user is not provided, backend will default to the user who is calling the API endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 
 	// Reference to a User in identity to populate userId.
@@ -861,7 +861,7 @@ type ConnectionInitParameters struct {
 
 	// (Updatable) Refers to the customer's vault OCID.  If provided, it references a vault where GoldenGate can manage secrets. Customers must add policies to permit GoldenGate to manage secrets contained within this vault.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
 	// Reference to a Vault in kms to populate vaultId.
@@ -874,7 +874,7 @@ type ConnectionInitParameters struct {
 
 	// (Applicable when connection_type=ORACLE) (Updatable) The OCID of the Secret where the wallet file is stored.  The wallet contents Oracle GoldenGate uses to make connections to a database. Note: When provided, 'wallet' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	WalletSecretID *string `json:"walletSecretId,omitempty" tf:"wallet_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate walletSecretId.
@@ -1196,7 +1196,7 @@ type ConnectionParameters struct {
 
 	// (Updatable) Access key ID to access the Amazon S3 bucket. e.g.: "this-is-not-the-secret"
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AccessKeyID *string `json:"accessKeyId,omitempty" tf:"access_key_id,omitempty"`
 
@@ -1210,7 +1210,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=AZURE_DATA_LAKE_STORAGE) (Updatable) The OCID of the Secret where the account key is stored. Note: When provided, 'accountKey' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AccountKeySecretID *string `json:"accountKeySecretId,omitempty" tf:"account_key_secret_id,omitempty"`
 
@@ -1264,7 +1264,7 @@ type ConnectionParameters struct {
 
 	// (Updatable) The OCID of the Secret that stores the password Oracle GoldenGate uses to connect to Snowflake platform.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClientSecretSecretID *string `json:"clientSecretSecretId,omitempty" tf:"client_secret_secret_id,omitempty"`
 
@@ -1282,7 +1282,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=KAFKA) (Updatable) The OCID of the Kafka cluster being referenced from Oracle Cloud Infrastructure Streaming with Apache Kafka.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/containerengine/v1alpha1.Cluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
@@ -1296,7 +1296,7 @@ type ConnectionParameters struct {
 
 	// The OCID(https://docs.cloud.oracle.com/iaas/Content/General/Concepts/identifiers.htm) of the cluster placement group for the resource. Only applicable for multicloud subscriptions. The cluster placement group id must be provided when a multicloud subscription id is provided. Otherwise the cluster placement group must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/clusterplacementgroups/v1alpha1.ClusterPlacementGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterPlacementGroupID *string `json:"clusterPlacementGroupId,omitempty" tf:"cluster_placement_group_id,omitempty"`
 
@@ -1347,7 +1347,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=MYSQL | POSTGRESQL) (Updatable) The OCID of the database system being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.DbSystem
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DBSystemID *string `json:"dbSystemId,omitempty" tf:"db_system_id,omitempty"`
 
@@ -1361,7 +1361,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=MONGODB | ORACLE) (Updatable) The OCID of the Oracle Autonomous Json Database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/database/v1alpha1.Database
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
@@ -1393,7 +1393,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=GOLDENGATE) (Updatable) The OCID of the deployment being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/goldengate/v1alpha1.Deployment
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
 
@@ -1451,7 +1451,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=JAVA_MESSAGE_SERVICE) (Updatable) The OCID of the Secret where the security credentials are stored associated to the principal. Note: When provided, 'jndiSecurityCredentials' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	JndiSecurityCredentialsSecretID *string `json:"jndiSecurityCredentialsSecretId,omitempty" tf:"jndi_security_credentials_secret_id,omitempty"`
 
@@ -1473,7 +1473,7 @@ type ConnectionParameters struct {
 
 	// (Updatable) Refers to the customer's master key OCID.  If provided, it references a key to manage secrets. Customers must add policies to permit GoldenGate to use this key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
@@ -1487,7 +1487,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=JAVA_MESSAGE_SERVICE | KAFKA | KAFKA_SCHEMA_REGISTRY | REDIS) (Updatable) The OCID of the Secret where the kafka Ssl KeyStore password is stored. Note: When provided, 'keyStorePassword' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyStorePasswordSecretID *string `json:"keyStorePasswordSecretId,omitempty" tf:"key_store_password_secret_id,omitempty"`
 
@@ -1505,7 +1505,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=JAVA_MESSAGE_SERVICE | KAFKA | KAFKA_SCHEMA_REGISTRY | REDIS) (Updatable) The OCID of the Secret where the content of the KeyStore file is stored. Note: When provided, 'keyStore' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyStoreSecretID *string `json:"keyStoreSecretId,omitempty" tf:"key_store_secret_id,omitempty"`
 
@@ -1532,7 +1532,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=AMAZON_REDSHIFT | AZURE_SYNAPSE_ANALYTICS | DATABRICKS | DB2 | ELASTICSEARCH | GOLDENGATE | JAVA_MESSAGE_SERVICE | KAFKA | KAFKA_SCHEMA_REGISTRY | MICROSOFT_SQLSERVER | MONGODB | MYSQL | ORACLE | POSTGRESQL | REDIS | SNOWFLAKE) (Updatable) The OCID of the Secret where the password is stored. The password Oracle GoldenGate uses to connect the associated system of the given technology. It must conform to the specific security requirements including length, case sensitivity, and so on. If secretId is used plaintext field must not be provided. Note: When provided, 'password' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PasswordSecretID *string `json:"passwordSecretId,omitempty" tf:"password_secret_id,omitempty"`
 
@@ -1558,7 +1558,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=OCI_OBJECT_STORAGE | ORACLE_AI_DATA_PLATFORM | ORACLE_NOSQL | SNOWFLAKE) (Updatable) The OCID of the Secret that stores the content of the private key file (PEM file) corresponding to the API key of the fingerprint. See documentation: https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/managingcredentials.htm Note: When provided, 'privateKeyFile' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateKeyFileSecretID *string `json:"privateKeyFileSecretId,omitempty" tf:"private_key_file_secret_id,omitempty"`
 
@@ -1576,7 +1576,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=OCI_OBJECT_STORAGE | ORACLE_AI_DATA_PLATFORM | ORACLE_NOSQL | SNOWFLAKE) (Updatable) The OCID of the Secret that stores the password for the private key file. Note: When provided, 'privateKeyPassphrase' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateKeyPassphraseSecretID *string `json:"privateKeyPassphraseSecretId,omitempty" tf:"private_key_passphrase_secret_id,omitempty"`
 
@@ -1602,7 +1602,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=REDIS) (Updatable) The OCID of the Redis cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/redis/v1alpha1.RedisCluster
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RedisClusterID *string `json:"redisClusterId,omitempty" tf:"redis_cluster_id,omitempty"`
 
@@ -1632,7 +1632,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=DB2) (Updatable) The OCID of the Secret where the keystash file is stored,  which contains the encrypted password to the key database file. This property is not supported for IBM Db2 for i, as client TLS mode is not available.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SSLClientKeystashSecretID *string `json:"sslClientKeystashSecretId,omitempty" tf:"ssl_client_keystash_secret_id,omitempty"`
 
@@ -1650,7 +1650,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=DB2) (Updatable) The OCID of the Secret where the keystore file stored,  which created at the client containing the server certificate / CA root certificate. This property is not supported for IBM Db2 for i, as client TLS mode is not available.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SSLClientKeystoredbSecretID *string `json:"sslClientKeystoredbSecretId,omitempty" tf:"ssl_client_keystoredb_secret_id,omitempty"`
 
@@ -1672,7 +1672,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=JAVA_MESSAGE_SERVICE | KAFKA | KAFKA_SCHEMA_REGISTRY) (Updatable) The OCID of the Secret where the password is stored for the cert inside of the Keystore. In case it differs from the KeyStore password, it should be provided. Note: When provided, 'sslKeyPassword' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SSLKeyPasswordSecretID *string `json:"sslKeyPasswordSecretId,omitempty" tf:"ssl_key_password_secret_id,omitempty"`
 
@@ -1690,7 +1690,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=MYSQL | POSTGRESQL) (Updatable) The OCID of the Secret that stores the Client Key
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SSLKeySecretID *string `json:"sslKeySecretId,omitempty" tf:"ssl_key_secret_id,omitempty"`
 
@@ -1716,7 +1716,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=AZURE_DATA_LAKE_STORAGE) (Updatable) The OCID of the Secret where the sas token is stored. Note: When provided, 'sasToken' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SasTokenSecretID *string `json:"sasTokenSecretId,omitempty" tf:"sas_token_secret_id,omitempty"`
 
@@ -1734,7 +1734,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=AMAZON_KINESIS | AMAZON_S3) (Updatable) The OCID of the Secret where the secret access key is stored. Note: When provided, 'secretAccessKey' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SecretAccessKeySecretID *string `json:"secretAccessKeySecretId,omitempty" tf:"secret_access_key_secret_id,omitempty"`
 
@@ -1765,7 +1765,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=GOOGLE_BIGQUERY | GOOGLE_CLOUD_STORAGE | GOOGLE_PUBSUB) (Updatable) The OCID of the Secret where the content of the service account key file is stored, which contains the credentials required to use Google Cloud Storage. Note: When provided, 'serviceAccountKeyFile' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServiceAccountKeyFileSecretID *string `json:"serviceAccountKeyFileSecretId,omitempty" tf:"service_account_key_file_secret_id,omitempty"`
 
@@ -1807,7 +1807,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=KAFKA) (Updatable) The OCID of the stream pool being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/streaming/v1alpha1.StreamPool
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StreamPoolID *string `json:"streamPoolId,omitempty" tf:"stream_pool_id,omitempty"`
 
@@ -1821,7 +1821,7 @@ type ConnectionParameters struct {
 
 	// (Updatable) The OCID of the target subnet of the dedicated connection.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -1855,7 +1855,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=MONGODB) (Updatable) The OCID of the Secret that stores the certificate key file of the mtls connection.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TLSCertificateKeyFileSecretID *string `json:"tlsCertificateKeyFileSecretId,omitempty" tf:"tls_certificate_key_file_secret_id,omitempty"`
 
@@ -1884,7 +1884,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=JAVA_MESSAGE_SERVICE | KAFKA | KAFKA_SCHEMA_REGISTRY | REDIS) (Updatable) The OCID of the Secret where the kafka Ssl TrustStore password is stored. Note: When provided, 'trustStorePassword' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TrustStorePasswordSecretID *string `json:"trustStorePasswordSecretId,omitempty" tf:"trust_store_password_secret_id,omitempty"`
 
@@ -1902,7 +1902,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=JAVA_MESSAGE_SERVICE | KAFKA | KAFKA_SCHEMA_REGISTRY | REDIS) (Updatable) The OCID of the Secret where the content of the TrustStore file is stored. Note: When provided, 'trustStore' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TrustStoreSecretID *string `json:"trustStoreSecretId,omitempty" tf:"trust_store_secret_id,omitempty"`
 
@@ -1924,7 +1924,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=OCI_OBJECT_STORAGE | ORACLE_AI_DATA_PLATFORM | ORACLE_NOSQL) (Updatable) The OCID of the Oracle Cloud Infrastructure user who will access the Oracle NoSQL database. The user must have write access to the table they want to connect to. If the user is not provided, backend will default to the user who is calling the API endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/identity/v1alpha1.User
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 
@@ -1942,7 +1942,7 @@ type ConnectionParameters struct {
 
 	// (Updatable) Refers to the customer's vault OCID.  If provided, it references a vault where GoldenGate can manage secrets. Customers must add policies to permit GoldenGate to manage secrets contained within this vault.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Vault
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
@@ -1956,7 +1956,7 @@ type ConnectionParameters struct {
 
 	// (Applicable when connection_type=ORACLE) (Updatable) The OCID of the Secret where the wallet file is stored.  The wallet contents Oracle GoldenGate uses to make connections to a database. Note: When provided, 'wallet' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WalletSecretID *string `json:"walletSecretId,omitempty" tf:"wallet_secret_id,omitempty"`
 
@@ -2024,7 +2024,7 @@ type StorageInitParameters struct {
 
 	// (Updatable) Access key ID to access the Amazon S3 bucket. e.g.: "this-is-not-the-secret"
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AccessKeyID *string `json:"accessKeyId,omitempty" tf:"access_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate accessKeyId.
@@ -2037,7 +2037,7 @@ type StorageInitParameters struct {
 
 	// (Applicable when connection_type=AZURE_DATA_LAKE_STORAGE) (Updatable) The OCID of the Secret where the account key is stored. Note: When provided, 'accountKey' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	AccountKeySecretID *string `json:"accountKeySecretId,omitempty" tf:"account_key_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate accountKeySecretId.
@@ -2062,7 +2062,7 @@ type StorageInitParameters struct {
 
 	// (Updatable) The Google Cloud Project where the bucket exists.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aidocument/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
 	// Reference to a Project in aidocument to populate projectId.
@@ -2081,7 +2081,7 @@ type StorageInitParameters struct {
 
 	// (Applicable when connection_type=AMAZON_KINESIS | AMAZON_S3) (Updatable) The OCID of the Secret where the secret access key is stored. Note: When provided, 'secretAccessKey' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SecretAccessKeySecretID *string `json:"secretAccessKeySecretId,omitempty" tf:"secret_access_key_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate secretAccessKeySecretId.
@@ -2094,7 +2094,7 @@ type StorageInitParameters struct {
 
 	// (Applicable when connection_type=GOOGLE_BIGQUERY | GOOGLE_CLOUD_STORAGE | GOOGLE_PUBSUB) (Updatable) The OCID of the Secret where the content of the service account key file is stored, which contains the credentials required to use Google Cloud Storage. Note: When provided, 'serviceAccountKeyFile' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServiceAccountKeyFileSecretID *string `json:"serviceAccountKeyFileSecretId,omitempty" tf:"service_account_key_file_secret_id,omitempty"`
 
 	// Reference to a Secret in vault to populate serviceAccountKeyFileSecretId.
@@ -2152,7 +2152,7 @@ type StorageParameters struct {
 
 	// (Updatable) Access key ID to access the Amazon S3 bucket. e.g.: "this-is-not-the-secret"
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/kms/v1alpha1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AccessKeyID *string `json:"accessKeyId,omitempty" tf:"access_key_id,omitempty"`
 
@@ -2166,7 +2166,7 @@ type StorageParameters struct {
 
 	// (Applicable when connection_type=AZURE_DATA_LAKE_STORAGE) (Updatable) The OCID of the Secret where the account key is stored. Note: When provided, 'accountKey' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AccountKeySecretID *string `json:"accountKeySecretId,omitempty" tf:"account_key_secret_id,omitempty"`
 
@@ -2196,7 +2196,7 @@ type StorageParameters struct {
 
 	// (Updatable) The Google Cloud Project where the bucket exists.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/aidocument/v1alpha1.Project
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
 
@@ -2218,7 +2218,7 @@ type StorageParameters struct {
 
 	// (Applicable when connection_type=AMAZON_KINESIS | AMAZON_S3) (Updatable) The OCID of the Secret where the secret access key is stored. Note: When provided, 'secretAccessKey' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SecretAccessKeySecretID *string `json:"secretAccessKeySecretId,omitempty" tf:"secret_access_key_secret_id,omitempty"`
 
@@ -2232,7 +2232,7 @@ type StorageParameters struct {
 
 	// (Applicable when connection_type=GOOGLE_BIGQUERY | GOOGLE_CLOUD_STORAGE | GOOGLE_PUBSUB) (Updatable) The OCID of the Secret where the content of the service account key file is stored, which contains the credentials required to use Google Cloud Storage. Note: When provided, 'serviceAccountKeyFile' field must not be provided.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/vault/v1alpha1.Secret
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServiceAccountKeyFileSecretID *string `json:"serviceAccountKeyFileSecretId,omitempty" tf:"service_account_key_file_secret_id,omitempty"`
 

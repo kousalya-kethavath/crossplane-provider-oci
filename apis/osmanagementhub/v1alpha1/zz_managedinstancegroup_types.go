@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type ManagedInstanceGroupAutonomousSettingsInitParameters struct {
@@ -77,7 +77,7 @@ type ManagedInstanceGroupInitParameters_2 struct {
 
 	// (Updatable) The OCID for the Oracle Notifications service (ONS) topic. ONS is the channel used to send notifications to the customer.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ons/v1alpha1.NotificationTopic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	NotificationTopicID *string `json:"notificationTopicId,omitempty" tf:"notification_topic_id,omitempty"`
 
 	// Reference to a NotificationTopic in ons to populate notificationTopicId.
@@ -221,7 +221,7 @@ type ManagedInstanceGroupParameters_2 struct {
 
 	// (Updatable) The OCID for the Oracle Notifications service (ONS) topic. ONS is the channel used to send notifications to the customer.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/ons/v1alpha1.NotificationTopic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NotificationTopicID *string `json:"notificationTopicId,omitempty" tf:"notification_topic_id,omitempty"`
 

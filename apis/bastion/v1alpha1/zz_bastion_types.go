@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
 type BastionInitParameters struct {
@@ -62,7 +62,7 @@ type BastionInitParameters struct {
 
 	// The unique identifier (OCID) of the subnet that the bastion connects to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TargetSubnetID *string `json:"targetSubnetId,omitempty" tf:"target_subnet_id,omitempty"`
 
 	// Reference to a Subnet in networking to populate targetSubnetId.
@@ -204,7 +204,7 @@ type BastionParameters struct {
 
 	// The unique identifier (OCID) of the subnet that the bastion connects to.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/networking/v1alpha1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetSubnetID *string `json:"targetSubnetId,omitempty" tf:"target_subnet_id,omitempty"`
 
