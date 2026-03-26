@@ -81,6 +81,29 @@ data:
         health_status.status = "Progressing"
         health_status.message = "Waiting for resource status"
         return health_status
+    "*.oci.m.upbound.io/*":
+      health.lua: |
+        health_status = {}
+        if obj.status ~= nil then
+          if obj.status.conditions ~= nil then
+            for i, condition in ipairs(obj.status.conditions) do
+              if condition.type == "Ready" then
+                if condition.status == "True" then
+                  health_status.status = "Healthy"
+                  health_status.message = "Resource is ready"
+                  return health_status
+                else
+                  health_status.status = "Progressing"
+                  health_status.message = "Waiting for resource to be ready"
+                  return health_status
+                end
+              end
+            end
+          end
+        end
+        health_status.status = "Progressing"
+        health_status.message = "Waiting for resource status"
+        return health_status
     "oci.upbound.io/ProviderConfig":
       health.lua: |
         health_status = {}
@@ -92,6 +115,28 @@ data:
         end
         health_status.status = "Progressing"
         health_status.message = "ProviderConfig not properly configured"
+        return health_status
+    "oci.m.upbound.io/ProviderConfig":
+      health.lua: |
+        health_status = {}
+        if obj.spec ~= nil then
+          health_status.status = "Healthy"
+          health_status.message = "ProviderConfig is configured"
+          return health_status
+        end
+        health_status.status = "Progressing"
+        health_status.message = "ProviderConfig not properly configured"
+        return health_status
+    "oci.m.upbound.io/ClusterProviderConfig":
+      health.lua: |
+        health_status = {}
+        if obj.spec ~= nil then
+          health_status.status = "Healthy"
+          health_status.message = "ClusterProviderConfig is configured"
+          return health_status
+        end
+        health_status.status = "Progressing"
+        health_status.message = "ClusterProviderConfig not properly configured"
         return health_status
     "oke.crossplane.io/*":
       health.lua: |
@@ -134,7 +179,6 @@ data:
   resource.customizations.ignoreDifferences.apiextensions.crossplane.io_Composition: |
     jqPathExpressions:
     - .spec.mode
-    - .spec.publishConnectionDetailsWithStoreConfigRef
     - .spec.resources[].readinessChecks
     - '.spec.resources[]?.patches[]?.transforms[]?.string.type'
 

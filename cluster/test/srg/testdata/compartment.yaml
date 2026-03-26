@@ -9,11 +9,11 @@ spec:
   # default provider config by adding providerConfigRef as below.
   #
   providerConfigRef:
+    kind: ProviderConfig
     name: oci-home-region
   forProvider:
     compartmentId: ocid1.compartment.xxx
     description: "crossplane-srg-compartment"
     name: "crossplane-srg-compartment"
     enableDelete : True
-
 

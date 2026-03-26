@@ -266,6 +266,18 @@ You may assign a new metadata name to the family provider, but you **must** keep
 
     ```yaml
     cat <<EOF | kubectl apply -f -
+    apiVersion: oci.m.upbound.io/v1beta1
+    kind: ClusterProviderConfig
+    metadata:
+      name: default
+    spec:
+      credentials:
+        source: Secret
+        secretRef:
+          name: oci-creds
+          namespace: crossplane-system
+          key: credentials
+    ---
     apiVersion: oci.upbound.io/v1beta1
     kind: ProviderConfig
     metadata:
@@ -282,9 +294,8 @@ You may assign a new metadata name to the family provider, but you **must** keep
     Verify creation:
 
     ```sh
-    kubectl get providerconfig
-    NAME      AGE
-    default   7s
+    kubectl get clusterproviderconfigs.oci.m.upbound.io
+    kubectl get providerconfigs.oci.upbound.io
     ```
 
    Check the associated resource sync status:

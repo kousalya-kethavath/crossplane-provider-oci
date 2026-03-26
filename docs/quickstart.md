@@ -82,6 +82,69 @@ spec:
       pullSecretRef:
         name: private-registry-credentials
 ```
+
+OCI service sub-packages such as `provider-oci-compute` depend on `provider-family-oci` for authentication. If you rewrite only the service package image, Crossplane still resolves the family dependency from `ghcr.io`. Mirror both packages under a shared prefix and rewrite that shared prefix instead.
+
+For example, if you mirror OCI packages to `iad.ocir.io/<tenancy-namespace>/<repository-prefix>/<package-name>` and preserve the upstream package names and tags, use:
+
+```bash
+cat <<EOF | kubectl apply -f -
+apiVersion: pkg.crossplane.io/v1beta1
+kind: ImageConfig
+metadata:
+  name: rewrite-oci-packages-to-ocir
+spec:
+  matchImages:
+    - prefix: ghcr.io/oracle
+  rewriteImage:
+    prefix: iad.ocir.io/<tenancy-namespace>/<repository-prefix>
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: oracle-provider-oci-compute
+spec:
+  package: ghcr.io/oracle/provider-oci-compute:<version>
+EOF
+```
+
+If you need to rewrite a specific OCI package image path or tag as well, add a second `ImageConfig` with a longer matching prefix for that exact package reference. Crossplane selects the longest matching prefix, so the specific rule overrides the broad OCI rule for that package while the broad rule still rewrites dependencies such as `provider-family-oci`.
+
+```bash
+cat <<EOF | kubectl apply -f -
+apiVersion: pkg.crossplane.io/v1beta1
+kind: ImageConfig
+metadata:
+  name: rewrite-oci-packages-to-ocir
+spec:
+  matchImages:
+    - prefix: ghcr.io/oracle
+  rewriteImage:
+    prefix: iad.ocir.io/<tenancy-namespace>/<repository-prefix>
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: ImageConfig
+metadata:
+  name: rewrite-oci-compute-image-and-tag
+spec:
+  matchImages:
+    - prefix: ghcr.io/oracle/provider-oci-compute:v0.2.0-test
+  rewriteImage:
+    prefix: iad.ocir.io/<tenancy-namespace>/<repository-prefix>/provider-oci-compute:v0.2.0-ocir
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: oracle-provider-oci-compute
+spec:
+  package: ghcr.io/oracle/provider-oci-compute:v0.2.0-test
+EOF
+```
+
+If the mirrored family package also uses a different tag, add another specific `ImageConfig` for `ghcr.io/oracle/provider-family-oci:<version>`.
+
+If you mirror only selected OCI packages, ensure `provider-family-oci` is mirrored alongside each OCI service package or install the family provider separately from a reachable registry before installing the service sub-package.
+
 ## Configure family provider for OCI
 
 The official provider-family requires credentials to create and manage OCI resources. Choose one of the following authentication methods:
@@ -210,6 +273,18 @@ This method uses OCI Workload Identity for authentication in OKE environments.
 After choosing one authentication method above, register the provider configuration:
 ```bash
 cat <<EOF | kubectl apply -f -
+apiVersion: oci.m.upbound.io/v1beta1
+kind: ClusterProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: oci-creds
+      namespace: crossplane-system
+      key: credentials
+---
 apiVersion: oci.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
@@ -226,6 +301,9 @@ EOF
 
 > [!NOTE]
 > If the provider configuration is incorrect (for example, wrong credentials or authentication settings), managed resources can report `READY=False` and `SYNCED=False` until the configuration is fixed.
+>
+> `ClusterProviderConfig.oci.m.upbound.io` is the modern default for namespaced managed resources (`*.oci.m.upbound.io`).
+> Legacy cluster-scoped managed resources (`*.oci.upbound.io`) continue to use `ProviderConfig.oci.upbound.io`.
 
 
 ## Create a managed resource
@@ -235,11 +313,23 @@ Create a managed resource to verify the provider-oci-objectstorage is functionin
 Use this command to instruct Crossplane to create the bucket in the OCI tenancy.
 
 ```bash
-# Edit examples/objectstorage/bucket.yaml with your compartment and storage name space as documented.
+# Edit examples/objectstorage/v1alpha1/bucket.yaml with your compartment and storage namespace as documented.
 # Apply the example that creates an Object Storage bucket
 
-kubectl apply -f examples/objectstorage/bucket.yaml
+kubectl apply -f examples/objectstorage/v1alpha1/bucket.yaml
 ```
+
+For namespaced managed resources (`apiVersion: *.oci.m.upbound.io/*`), set:
+```yaml
+metadata:
+  namespace: upbound-system
+spec:
+  providerConfigRef:
+    kind: ClusterProviderConfig
+    name: default
+```
+
+For local namespaced secret references inside namespaced resources, do not set `namespace` in the local ref fields.
 
 Verify the status of the resource by running this command (example output is shown).
 ```bash
@@ -296,20 +386,16 @@ Events:
 The output indicates the `Bucket` is using a `ProviderConfig` named `default`. The applied `ProviderConfig` is `oci-provider`.
 
 ```bash
-kubectl get providerconfig
-```
-```
-# Sample output
-NAME           AGE
-oci-provider   7s
+kubectl get clusterproviderconfigs.oci.m.upbound.io
+kubectl get providerconfigs.oci.upbound.io
 ```
 
 ## Delete the managed resource
 
-Remove the managed resource by using `kubectl delete -f examples/objectstorage/bucket.yaml`. Verify removal of the bucket with kubectl get buckets
+Remove the managed resource by using `kubectl delete -f examples/objectstorage/v1alpha1/bucket.yaml`. Verify removal of the bucket with kubectl get buckets
 
 ```bash
-kubectl delete -f examples/objectstorage/bucket.yaml
+kubectl delete -f examples/objectstorage/v1alpha1/bucket.yaml
 ```
 ```
 # Sample output
