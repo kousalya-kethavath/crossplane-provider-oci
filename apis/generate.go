@@ -33,7 +33,8 @@ Copyright 2021 Upbound Inc.
 //go:generate go run -tags generate github.com/crossplane/crossplane-tools/cmd/angryjet generate-methodsets --header-file=../hack/boilerplate.go.txt ./...
 
 // Transform generated resolvers to use runtime resolution (removes cross-package imports)
-//go:generate go run github.com/crossplane/upjet/v2/cmd/resolver -g oci.upbound.io -a github.com/oracle/provider-oci/internal/apis -s
+//go:generate go run github.com/crossplane/upjet/v2/cmd/resolver -g oci.upbound.io -a github.com/oracle/provider-oci/internal/apis -s -p ./cluster/...
+//go:generate go run github.com/crossplane/upjet/v2/cmd/resolver -g oci.m.upbound.io -a github.com/oracle/provider-oci/internal/apis -s -p ./namespaced/...
 
 package apis
 

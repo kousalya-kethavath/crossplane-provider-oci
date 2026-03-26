@@ -36,6 +36,7 @@ type ProviderConfigStatus struct {
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,provider,oci}
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 type ProviderConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -56,6 +57,7 @@ type ProviderConfigList struct {
 // A ProviderConfigUsage indicates that a resource is using a ProviderConfig.
 // +kubebuilder:object:root=true
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,provider,oci}
+// +kubebuilder:storageversion
 type ProviderConfigUsage struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -94,6 +96,13 @@ var ProviderConfigGroupVersionKind = schema.GroupVersionKind{
 	Group:   Group,
 	Version: Version,
 	Kind:    "ProviderConfig",
+}
+
+// ProviderConfigUsageGroupVersionKind is the GroupVersionKind for ProviderConfigUsage
+var ProviderConfigUsageGroupVersionKind = schema.GroupVersionKind{
+	Group:   Group,
+	Version: Version,
+	Kind:    "ProviderConfigUsage",
 }
 
 // ProviderConfigUsageListGroupVersionKind is the GroupVersionKind for ProviderConfigUsageList

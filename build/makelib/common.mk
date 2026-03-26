@@ -156,9 +156,13 @@ OS := $(word 1, $(subst _, ,$(PLATFORM)))
 ARCH := $(word 2, $(subst _, ,$(PLATFORM)))
 
 ifeq ($(HOSTOS),darwin)
-NPROCS := $(shell sysctl -n hw.ncpu)
+NPROCS := $(shell sysctl -n hw.ncpu 2>/dev/null)
 else
-NPROCS := $(shell nproc)
+NPROCS := $(shell nproc 2>/dev/null)
+endif
+
+ifeq ($(strip $(NPROCS)),)
+NPROCS := 1
 endif
 
 # ====================================================================================

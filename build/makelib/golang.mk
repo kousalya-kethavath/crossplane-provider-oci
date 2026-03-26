@@ -235,10 +235,14 @@ go.modules.update:
 	@$(OK) update go modules
 
 go.modules.clean:
-	@$(GO) clean -modcache
+	@modcache=$$($(GO) env GOMODCACHE); \
+	if [ -n "$$modcache" ] && [ -d "$$modcache" ]; then \
+		chmod -R u+w "$$modcache" 2>/dev/null || true; \
+		rm -rf "$$modcache" || $(FAIL); \
+	fi
 
 go.clean:
-	@$(GO) clean -cache -testcache -modcache
+	@$(GO) clean -cache -testcache
 	@rm -fr $(GO_BIN_DIR) $(GO_TEST_DIR)
 
 go.generate:

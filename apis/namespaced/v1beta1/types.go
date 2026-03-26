@@ -6,8 +6,14 @@ package v1beta1
 
 import (
 	xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	xpv2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
+)
+
+const (
+	ProviderConfigKind        = "ProviderConfig"
+	ClusterProviderConfigKind = "ClusterProviderConfig"
 )
 
 // A ProviderConfigSpec defines the desired state of a ProviderConfig.
@@ -34,8 +40,9 @@ type ProviderConfigStatus struct {
 
 // A ProviderConfig configures a Oracle Cloud Infrastructure (OCI) provider.
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,provider,oci}
+// +kubebuilder:resource:scope=Namespaced,categories={crossplane,provider,oci}
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 type ProviderConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -53,18 +60,43 @@ type ProviderConfigList struct {
 	Items           []ProviderConfig `json:"items"`
 }
 
+// +kubebuilder:object:root=true
+
+// A ClusterProviderConfig configures a Oracle Cloud Infrastructure (OCI) provider.
+// +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,provider,oci}
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
+type ClusterProviderConfig struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	Spec   ProviderConfigSpec   `json:"spec"`
+	Status ProviderConfigStatus `json:"status,omitempty"`
+}
+
+// +kubebuilder:object:root=true
+
+// ClusterProviderConfigList contains a list of ClusterProviderConfig.
+type ClusterProviderConfigList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []ClusterProviderConfig `json:"items"`
+}
+
 // A ProviderConfigUsage indicates that a resource is using a ProviderConfig.
 // +kubebuilder:object:root=true
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,provider,oci}
+// +kubebuilder:resource:scope=Namespaced,categories={crossplane,provider,oci}
+// +kubebuilder:storageversion
 type ProviderConfigUsage struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	xpv1.ProviderConfigUsage `json:",inline"`
+	xpv2.TypedProviderConfigUsage `json:",inline"`
 }
 
 // GetProviderConfigReference of this ProviderConfigUsage.
-func (pc *ProviderConfigUsage) GetProviderConfigReference() xpv1.Reference {
+func (pc *ProviderConfigUsage) GetProviderConfigReference() xpv1.ProviderConfigReference {
 	return pc.ProviderConfigReference
 }
 
@@ -74,7 +106,7 @@ func (pc *ProviderConfigUsage) GetResourceReference() xpv1.TypedReference {
 }
 
 // SetProviderConfigReference of this ProviderConfigUsage.
-func (pc *ProviderConfigUsage) SetProviderConfigReference(r xpv1.Reference) {
+func (pc *ProviderConfigUsage) SetProviderConfigReference(r xpv1.ProviderConfigReference) {
 	pc.ProviderConfigReference = r
 }
 
@@ -86,14 +118,34 @@ func (pc *ProviderConfigUsage) SetResourceReference(r xpv1.TypedReference) {
 // ProviderConfigGroupKind is the GroupKind for ProviderConfig
 var ProviderConfigGroupKind = schema.GroupKind{
 	Group: Group,
-	Kind:  "ProviderConfig",
+	Kind:  ProviderConfigKind,
 }.String()
 
 // ProviderConfigGroupVersionKind is the GroupVersionKind for ProviderConfig  
 var ProviderConfigGroupVersionKind = schema.GroupVersionKind{
 	Group:   Group,
 	Version: Version,
-	Kind:    "ProviderConfig",
+	Kind:    ProviderConfigKind,
+}
+
+// ClusterProviderConfigGroupKind is the GroupKind for ClusterProviderConfig
+var ClusterProviderConfigGroupKind = schema.GroupKind{
+	Group: Group,
+	Kind:  ClusterProviderConfigKind,
+}.String()
+
+// ClusterProviderConfigGroupVersionKind is the GroupVersionKind for ClusterProviderConfig
+var ClusterProviderConfigGroupVersionKind = schema.GroupVersionKind{
+	Group:   Group,
+	Version: Version,
+	Kind:    ClusterProviderConfigKind,
+}
+
+// ProviderConfigUsageGroupVersionKind is the GroupVersionKind for ProviderConfigUsage
+var ProviderConfigUsageGroupVersionKind = schema.GroupVersionKind{
+	Group:   Group,
+	Version: Version,
+	Kind:    "ProviderConfigUsage",
 }
 
 // ProviderConfigUsageListGroupVersionKind is the GroupVersionKind for ProviderConfigUsageList

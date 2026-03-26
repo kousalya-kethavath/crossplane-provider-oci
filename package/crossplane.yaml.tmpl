@@ -34,6 +34,8 @@ metadata:
       {{ end }}
     friendly-name.meta.crossplane.io: OCI Provider ({{ .ServiceDisplayName }})
 spec:
+  capabilities:
+  - SafeStart
 {{ if ne .Service "monolith" }}
   crossplane:
     version: ">=v1.14.0"
