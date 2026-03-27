@@ -1,0 +1,14 @@
+apiVersion: identity.oci.upbound.io/v1alpha1
+kind: AuthToken
+metadata:
+  annotations:
+    meta.upbound.io/example-id: identity/v1alpha1/authtoken
+  labels:
+    testing.upbound.io/example-name: test_auth_token
+  name: test-auth-token
+spec:
+  forProvider:
+    description: ${var.auth_token_description}
+    userIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_user

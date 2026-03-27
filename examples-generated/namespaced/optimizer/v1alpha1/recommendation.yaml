@@ -1,0 +1,16 @@
+apiVersion: optimizer.oci.m.upbound.io/v1alpha1
+kind: Recommendation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: optimizer/v1alpha1/recommendation
+  labels:
+    testing.upbound.io/example-name: test_recommendation
+  name: test-recommendation
+  namespace: upbound-system
+spec:
+  forProvider:
+    recommendationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_recommendation
+    status: ${var.recommendation_status}
+    timeStatusEnd: ${var.recommendation_time_status_end}

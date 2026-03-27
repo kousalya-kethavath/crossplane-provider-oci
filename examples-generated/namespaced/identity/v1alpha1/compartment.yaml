@@ -1,0 +1,20 @@
+apiVersion: identity.oci.m.upbound.io/v1alpha1
+kind: Compartment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: identity/v1alpha1/compartment
+  labels:
+    testing.upbound.io/example-name: test_compartment
+  name: test-compartment
+  namespace: upbound-system
+spec:
+  forProvider:
+    compartmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    definedTags:
+      Operations.CostCenter: "42"
+    description: ${var.compartment_description}
+    freeformTags:
+      Department: Finance
+    name: ${var.compartment_name}

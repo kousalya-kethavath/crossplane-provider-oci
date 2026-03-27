@@ -1,0 +1,14 @@
+apiVersion: identity.oci.upbound.io/v1alpha1
+kind: ApiKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: identity/v1alpha1/apikey
+  labels:
+    testing.upbound.io/example-name: test_api_key
+  name: test-api-key
+spec:
+  forProvider:
+    keyValue: ${var.api_key_key_value}
+    userIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_user

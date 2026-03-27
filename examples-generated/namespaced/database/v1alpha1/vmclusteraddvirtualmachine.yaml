@@ -1,0 +1,16 @@
+apiVersion: database.oci.m.upbound.io/v1alpha1
+kind: VmClusterAddVirtualMachine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/vmclusteraddvirtualmachine
+  labels:
+    testing.upbound.io/example-name: test_vm_cluster_add_virtual_machine
+  name: test-vm-cluster-add-virtual-machine
+  namespace: upbound-system
+spec:
+  forProvider:
+    dbServers:
+    - dbServerId: ${oci_database_db_server.test_db_server.id}
+    vmClusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_vm_cluster

@@ -1,0 +1,23 @@
+apiVersion: containerengine.oci.m.upbound.io/v1alpha1
+kind: Addon
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerengine/v1alpha1/addon
+  labels:
+    testing.upbound.io/example-name: test_addon
+  name: test-addon
+  namespace: upbound-system
+spec:
+  forProvider:
+    addonNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_addon
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_cluster
+    configurations:
+    - key: ${var.addon_configurations_key}
+      value: ${var.addon_configurations_value}
+    overrideExisting: false
+    removeAddonResourcesOnDelete: true
+    version: ${var.addon_version}

@@ -3,21 +3,34 @@
 package main
 
 import (
+	"context"
 	"io"
 	"os"
 	"path/filepath"
 	"time"
 
 	"github.com/alecthomas/kingpin/v2"
+	changelogsv1alpha1 "github.com/crossplane/crossplane-runtime/v2/apis/changelogs/proto/v1alpha1"
+	authorizationv1 "k8s.io/api/authorization/v1"
+	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime/schema"
+	"k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/leaderelection/resourcelock"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/cache"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
 	xpcontroller "github.com/crossplane/crossplane-runtime/v2/pkg/controller"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/feature"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/gate"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/logging"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/ratelimiter"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/reconciler/customresourcesgate"
+	"github.com/crossplane/crossplane-runtime/v2/pkg/reconciler/managed"
 	tjcontroller "github.com/crossplane/upjet/v2/pkg/controller"
 	"github.com/crossplane/upjet/v2/pkg/terraform"
 
@@ -25,8 +38,9 @@ import (
 	"github.com/oracle/provider-oci/config"
 	resolverapis "github.com/oracle/provider-oci/internal/apis"
 	"github.com/oracle/provider-oci/internal/clients"
-	"github.com/oracle/provider-oci/internal/controller"
+	clustercontroller "github.com/oracle/provider-oci/internal/controller/cluster"
 	"github.com/oracle/provider-oci/internal/features"
+	namespacedcontroller "github.com/oracle/provider-oci/internal/controller/namespaced"
 )
 
 func main() {
@@ -40,7 +54,9 @@ func main() {
 		providerSource   = app.Flag("terraform-provider-source", "Terraform provider source.").Required().Envar("TERRAFORM_PROVIDER_SOURCE").String()
 		providerVersion  = app.Flag("terraform-provider-version", "Terraform provider version.").Required().Envar("TERRAFORM_PROVIDER_VERSION").String()
 		maxReconcileRate = app.Flag("max-reconcile-rate", "The global maximum rate per second at which resources may checked for drift from the desired state.").Default("10").Int()
+		changelogsSocketPath = app.Flag("changelogs-socket-path", "Path for changelogs socket (if enabled).").Default("/var/run/changelogs/changelogs.sock").Envar("CHANGELOGS_SOCKET_PATH").String()
 		enableManagementPolicies = app.Flag("enable-management-policies", "Enable support for ManagementPolicies.").Default("true").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
+		enableChangeLogs = app.Flag("enable-changelogs", "Enable support for capturing change logs during reconciliation.").Default("false").Envar("ENABLE_CHANGE_LOGS").Bool()
 	)
 
 	kingpin.MustParse(app.Parse(os.Args[1:]))
@@ -75,6 +91,7 @@ func main() {
 	})
 	kingpin.FatalIfError(err, "Cannot create controller manager")
 	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add Oci APIs to scheme")
+	kingpin.FatalIfError(apiextensionsv1.AddToScheme(mgr.GetScheme()), "Cannot add apiextensions APIs to scheme")
 	kingpin.FatalIfError(resolverapis.BuildScheme(apis.AddToSchemes), "Cannot register the OCI APIs with the API resolver's runtime scheme")
 	o := tjcontroller.Options{
 		Options: xpcontroller.Options{
@@ -95,7 +112,71 @@ func main() {
 		o.Features.Enable(features.EnableBetaManagementPolicies)
 		log.Info("Beta feature enabled", "flag", features.EnableBetaManagementPolicies)
 	}
+	if *enableChangeLogs {
+		o.Features.Enable(features.EnableAlphaChangeLogs)
+		log.Info("Alpha feature enabled", "flag", features.EnableAlphaChangeLogs)
 
-	kingpin.FatalIfError(controller.Setup_datascience(mgr, o), "Cannot setup datascience controllers")
+		conn, err := grpc.NewClient("unix://"+*changelogsSocketPath, grpc.WithTransportCredentials(insecure.NewCredentials()))
+		kingpin.FatalIfError(err, "failed to create change logs client connection at %s", *changelogsSocketPath)
+
+		o.ChangeLogOptions = &xpcontroller.ChangeLogOptions{
+			ChangeLogger: managed.NewGRPCChangeLogger(
+				changelogsv1alpha1.NewChangeLogServiceClient(conn),
+				managed.WithProviderVersion(*providerSource+":"+*providerVersion)),
+		}
+	}
+
+	if canWatchCRD(context.Background(), cfg, log) {
+		log.Info("SafeStart enabled", "service", "datascience")
+		o.Gate = &gate.Gate[schema.GroupVersionKind]{}
+
+		kingpin.FatalIfError(setupGatedControllers(mgr, o), "Cannot setup gated datascience controllers")
+		kingpin.FatalIfError(customresourcesgate.Setup(mgr, o.Options), "Cannot setup custom resource gate controller")
+	} else {
+		log.Info("SafeStart disabled; falling back to eager controller setup", "service", "datascience")
+		kingpin.FatalIfError(setupControllers(mgr, o), "Cannot setup datascience controllers")
+	}
 	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
+}
+
+func setupControllers(mgr ctrl.Manager, o tjcontroller.Options) error {
+	if err := clustercontroller.Setup_datascience(mgr, o); err != nil {
+		return err
+	}
+	return namespacedcontroller.Setup_datascience(mgr, o)
+}
+
+func setupGatedControllers(mgr ctrl.Manager, o tjcontroller.Options) error {
+	if err := clustercontroller.SetupGated_datascience(mgr, o); err != nil {
+		return err
+	}
+	return namespacedcontroller.SetupGated_datascience(mgr, o)
+}
+
+func canWatchCRD(ctx context.Context, cfg *rest.Config, log logging.Logger) bool {
+	cs, err := kubernetes.NewForConfig(cfg)
+	if err != nil {
+		log.Info("SafeStart disabled; failed to create Kubernetes client", "error", err)
+		return false
+	}
+
+	resp, err := cs.AuthorizationV1().SelfSubjectAccessReviews().Create(ctx, &authorizationv1.SelfSubjectAccessReview{
+		Spec: authorizationv1.SelfSubjectAccessReviewSpec{
+			ResourceAttributes: &authorizationv1.ResourceAttributes{
+				Group:    "apiextensions.k8s.io",
+				Resource: "customresourcedefinitions",
+				Verb:     "watch",
+			},
+		},
+	}, metav1.CreateOptions{})
+	if err != nil {
+		log.Info("SafeStart disabled; CRD watch capability check failed", "error", err)
+		return false
+	}
+
+	if !resp.Status.Allowed {
+		log.Info("SafeStart disabled; CRD watch access denied", "reason", resp.Status.Reason, "evaluationError", resp.Status.EvaluationError)
+		return false
+	}
+	return true
 }

@@ -1,0 +1,36 @@
+apiVersion: filestorage.oci.m.upbound.io/v1alpha1
+kind: FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: filestorage/v1alpha1/filesystem
+  labels:
+    testing.upbound.io/example-name: test_file_system
+  name: test-file-system
+  namespace: upbound-system
+spec:
+  forProvider:
+    areQuotaRulesEnabled: ${var.file_system_are_quota_rules_enabled}
+    availabilityDomain: ${var.file_system_availability_domain}
+    cloneAttachStatus: ${var.file_system_clone_attach_status}
+    compartmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    definedTags:
+      Operations.CostCenter: "42"
+    displayName: ${var.file_system_display_name}
+    filesystemSnapshotPolicyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_filesystem_snapshot_policy
+    freeformTags:
+      Department: Finance
+    kmsKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_key
+    locks:
+    - message: ${var.file_system_locks_message}
+      relatedResourceId: ${oci_cloud_guard_resource.test_resource.id}
+      timeCreated: ${var.file_system_locks_time_created}
+      type: ${var.file_system_locks_type}
+    sourceSnapshotIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_snapshot

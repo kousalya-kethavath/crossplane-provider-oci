@@ -1,0 +1,19 @@
+apiVersion: stackmonitoring.oci.m.upbound.io/v1alpha1
+kind: BaselineableMetric
+metadata:
+  annotations:
+    meta.upbound.io/example-id: stackmonitoring/v1alpha1/baselineablemetric
+  labels:
+    testing.upbound.io/example-name: test_baselineable_metric
+  name: test-baselineable-metric
+  namespace: upbound-system
+spec:
+  forProvider:
+    column: ${var.baselineable_metric_column}
+    compartmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: ${var.baselineable_metric_name}
+    namespace: ${var.baselineable_metric_namespace}
+    resourceGroup: ${var.baselineable_metric_resource_group}
+    resourceType: ${var.baselineable_metric_resource_type}

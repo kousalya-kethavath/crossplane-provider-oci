@@ -1,0 +1,27 @@
+apiVersion: networking.oci.m.upbound.io/v1alpha1
+kind: ServiceGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networking/v1alpha1/servicegateway
+  labels:
+    testing.upbound.io/example-name: test_service_gateway
+  name: test-service-gateway
+  namespace: upbound-system
+spec:
+  forProvider:
+    compartmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    definedTags:
+      Operations.CostCenter: "42"
+    displayName: ${var.service_gateway_display_name}
+    freeformTags:
+      Department: Finance
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_route_table
+    services:
+    - serviceId: ${data.oci_core_services.test_services.services.0.id}
+    vcnIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_vcn

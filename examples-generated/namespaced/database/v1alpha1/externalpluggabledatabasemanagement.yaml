@@ -1,0 +1,17 @@
+apiVersion: database.oci.m.upbound.io/v1alpha1
+kind: ExternalPluggableDatabaseManagement
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/externalpluggabledatabasemanagement
+  labels:
+    testing.upbound.io/example-name: test_external_pluggable_database_management
+  name: test-external-pluggable-database-management
+  namespace: upbound-system
+spec:
+  forProvider:
+    externalDatabaseConnectorIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_external_database_connector
+    externalPluggableDatabaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_external_pluggable_database

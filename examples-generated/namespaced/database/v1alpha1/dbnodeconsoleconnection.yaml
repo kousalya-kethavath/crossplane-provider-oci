@@ -1,0 +1,18 @@
+apiVersion: database.oci.m.upbound.io/v1alpha1
+kind: DbNodeConsoleConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/dbnodeconsoleconnection
+  labels:
+    testing.upbound.io/example-name: test_db_node_console_connection
+  name: test-db-node-console-connection
+  namespace: upbound-system
+spec:
+  forProvider:
+    dbNodeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_db_node
+    definedTags: ${var.db_node_console_connection_defined_tags}
+    freeformTags:
+      Department: Finance
+    publicKey: ${var.db_node_console_connection_public_key}

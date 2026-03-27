@@ -1,0 +1,18 @@
+apiVersion: database.oci.m.upbound.io/v1alpha1
+kind: PluggableDatabaseSnapshot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/pluggabledatabasesnapshot
+  labels:
+    testing.upbound.io/example-name: test_pluggable_database_snapshot
+  name: test-pluggable-database-snapshot
+  namespace: upbound-system
+spec:
+  forProvider:
+    definedTags: ${var.pluggable_database_snapshot_defined_tags}
+    freeformTags:
+      Department: Finance
+    name: ${var.pluggable_database_snapshot_name}
+    pluggableDatabaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_pluggable_database

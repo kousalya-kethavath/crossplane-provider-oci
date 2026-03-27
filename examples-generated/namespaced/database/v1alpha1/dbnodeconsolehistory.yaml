@@ -1,0 +1,18 @@
+apiVersion: database.oci.m.upbound.io/v1alpha1
+kind: DbNodeConsoleHistory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/dbnodeconsolehistory
+  labels:
+    testing.upbound.io/example-name: test_db_node_console_history
+  name: test-db-node-console-history
+  namespace: upbound-system
+spec:
+  forProvider:
+    dbNodeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_db_node
+    definedTags: ${var.db_node_console_history_defined_tags}
+    displayName: ${var.db_node_console_history_display_name}
+    freeformTags:
+      Department: Finance

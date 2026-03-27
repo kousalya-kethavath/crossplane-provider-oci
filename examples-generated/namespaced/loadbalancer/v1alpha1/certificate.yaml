@@ -1,0 +1,23 @@
+apiVersion: loadbalancer.oci.m.upbound.io/v1alpha1
+kind: Certificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: loadbalancer/v1alpha1/certificate
+  labels:
+    testing.upbound.io/example-name: test_certificate
+  name: test-certificate
+  namespace: upbound-system
+spec:
+  forProvider:
+    caCertificate: ${var.certificate_ca_certificate}
+    certificateName: ${var.certificate_certificate_name}
+    loadBalancerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_load_balancer
+    passphraseSecretRef:
+      key: example-key
+      name: example-secret
+    privateKeySecretRef:
+      key: example-key
+      name: example-secret
+    publicCertificate: ${var.certificate_public_certificate}

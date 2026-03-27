@@ -1,0 +1,17 @@
+apiVersion: database.oci.m.upbound.io/v1alpha1
+kind: DbNode
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/dbnode
+  labels:
+    testing.upbound.io/example-name: test_db_node
+  name: test-db-node
+  namespace: upbound-system
+spec:
+  forProvider:
+    dbNodeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_db_node
+    definedTags: ${var.db_node_defined_tags}
+    freeformTags:
+      Department: Finance

@@ -1,0 +1,14 @@
+apiVersion: stackmonitoring.oci.m.upbound.io/v1alpha1
+kind: MaintenanceWindowsStop
+metadata:
+  annotations:
+    meta.upbound.io/example-id: stackmonitoring/v1alpha1/maintenancewindowsstop
+  labels:
+    testing.upbound.io/example-name: test_maintenance_windows_stop
+  name: test-maintenance-windows-stop
+  namespace: upbound-system
+spec:
+  forProvider:
+    maintenanceWindowIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_maintenance_window

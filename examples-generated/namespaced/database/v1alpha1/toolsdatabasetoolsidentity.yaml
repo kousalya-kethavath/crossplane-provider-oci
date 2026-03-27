@@ -1,0 +1,27 @@
+apiVersion: database.oci.m.upbound.io/v1alpha1
+kind: ToolsDatabaseToolsIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/toolsdatabasetoolsidentity
+  labels:
+    testing.upbound.io/example-name: test_database_tools_identity
+  name: test-database-tools-identity
+  namespace: upbound-system
+spec:
+  forProvider:
+    compartmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    credentialKey: ${var.database_tools_identity_credential_key}
+    databaseToolsConnectionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_database_tools_connection
+    definedTags:
+      foo-namespace.bar-key: value
+    displayName: ${var.database_tools_identity_display_name}
+    freeformTags:
+      bar-key: value
+    locks:
+    - message: ${var.database_tools_identity_locks_message}
+      type: ${var.database_tools_identity_locks_type}
+    type: ${var.database_tools_identity_type}

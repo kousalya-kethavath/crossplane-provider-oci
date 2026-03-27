@@ -1,0 +1,18 @@
+apiVersion: database.oci.m.upbound.io/v1alpha1
+kind: ManagementExternalDbHome
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/managementexternaldbhome
+  labels:
+    testing.upbound.io/example-name: test_external_db_home
+  name: test-external-db-home
+  namespace: upbound-system
+spec:
+  forProvider:
+    definedTags:
+      Operations.CostCenter: "42"
+    externalDbHomeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_external_db_home
+    freeformTags:
+      Department: Finance

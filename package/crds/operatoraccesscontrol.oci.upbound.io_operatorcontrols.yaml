@@ -554,6 +554,8 @@ spec:
                   - Delete
                   - LateInitialize
                   - '*'
+                  - MustCreate
+                  - Orphan
                   type: string
                 type: array
               providerConfigRef:

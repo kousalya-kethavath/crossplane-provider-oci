@@ -1,0 +1,15 @@
+apiVersion: database.oci.upbound.io/v1alpha1
+kind: AutonomousContainerDatabaseSnapshotStandby
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/autonomouscontainerdatabasesnapshotstandby
+  labels:
+    testing.upbound.io/example-name: test_autonomous_container_database_snapshot_standby
+  name: test-autonomous-container-database-snapshot-standby
+spec:
+  forProvider:
+    autonomousContainerDatabaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_autonomous_container_database
+    connectionStringsType: ${var.autonomous_container_database_snapshot_standby_connection_strings_type}
+    role: ${var.autonomous_container_database_snapshot_standby_role}

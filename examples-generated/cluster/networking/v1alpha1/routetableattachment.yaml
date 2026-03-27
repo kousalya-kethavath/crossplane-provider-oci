@@ -1,0 +1,16 @@
+apiVersion: networking.oci.upbound.io/v1alpha1
+kind: RouteTableAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networking/v1alpha1/routetableattachment
+  labels:
+    testing.upbound.io/example-name: test_route_table_attachment
+  name: test-route-table-attachment
+spec:
+  forProvider:
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_route_table
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_subnet

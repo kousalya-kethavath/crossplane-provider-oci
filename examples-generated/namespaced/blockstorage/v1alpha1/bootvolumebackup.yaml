@@ -1,0 +1,23 @@
+apiVersion: blockstorage.oci.m.upbound.io/v1alpha1
+kind: BootVolumeBackup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: blockstorage/v1alpha1/bootvolumebackup
+  labels:
+    testing.upbound.io/example-name: test_boot_volume_backup
+  name: test-boot-volume-backup
+  namespace: upbound-system
+spec:
+  forProvider:
+    bootVolumeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_boot_volume
+    definedTags:
+      Operations.CostCenter: "42"
+    displayName: ${var.boot_volume_backup_display_name}
+    freeformTags:
+      Department: Finance
+    kmsKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_key
+    type: ${var.boot_volume_backup_type}

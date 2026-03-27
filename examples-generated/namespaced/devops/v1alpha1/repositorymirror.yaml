@@ -1,0 +1,14 @@
+apiVersion: devops.oci.m.upbound.io/v1alpha1
+kind: RepositoryMirror
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devops/v1alpha1/repositorymirror
+  labels:
+    testing.upbound.io/example-name: test_repository_mirror
+  name: test-repository-mirror
+  namespace: upbound-system
+spec:
+  forProvider:
+    repositoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_repository

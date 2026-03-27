@@ -1,0 +1,17 @@
+apiVersion: datasafe.oci.m.upbound.io/v1alpha1
+kind: SetUserAssessmentBaselineManagement
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasafe/v1alpha1/setuserassessmentbaselinemanagement
+  labels:
+    testing.upbound.io/example-name: test_set_user_assessment_baseline_management
+  name: test-set-user-assessment-baseline-management
+  namespace: upbound-system
+spec:
+  forProvider:
+    compartmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    targetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_target_database

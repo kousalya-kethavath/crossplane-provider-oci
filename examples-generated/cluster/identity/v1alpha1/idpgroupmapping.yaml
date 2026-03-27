@@ -1,0 +1,17 @@
+apiVersion: identity.oci.upbound.io/v1alpha1
+kind: IdpGroupMapping
+metadata:
+  annotations:
+    meta.upbound.io/example-id: identity/v1alpha1/idpgroupmapping
+  labels:
+    testing.upbound.io/example-name: test_idp_group_mapping
+  name: test-idp-group-mapping
+spec:
+  forProvider:
+    groupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_group
+    identityProviderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_identity_provider
+    idpGroupName: ${var.idp_group_mapping_idp_group_name}

@@ -1,0 +1,18 @@
+apiVersion: networkfirewall.oci.m.upbound.io/v1alpha1
+kind: NetworkFirewallPolicyApplication
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkfirewall/v1alpha1/networkfirewallpolicyapplication
+  labels:
+    testing.upbound.io/example-name: test_network_firewall_policy_application
+  name: test-network-firewall-policy-application
+  namespace: upbound-system
+spec:
+  forProvider:
+    icmpCode: ${var.network_firewall_policy_application_icmp_code}
+    icmpType: ${var.network_firewall_policy_application_icmp_type}
+    name: ${var.network_firewall_policy_application_name}
+    networkFirewallPolicyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_network_firewall_policy
+    type: ${var.network_firewall_policy_application_type}

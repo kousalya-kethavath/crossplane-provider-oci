@@ -1,0 +1,16 @@
+apiVersion: database.oci.m.upbound.io/v1alpha1
+kind: ManagementExternalExadataInfrastructureExadataManagement
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/managementexternalexadatainfrastructureexadatamanagement
+  labels:
+    testing.upbound.io/example-name: test_external_exadata_infrastructure_exadata_management
+  name: test-external-exadata-infrastructure-exadata-management
+  namespace: upbound-system
+spec:
+  forProvider:
+    enableExadata: ${var.enable_exadata}
+    externalExadataInfrastructureIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_external_exadata_infrastructure
+    licenseModel: ${var.external_exadata_infrastructure_exadata_management_license_model}
