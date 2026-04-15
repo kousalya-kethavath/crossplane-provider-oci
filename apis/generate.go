@@ -8,8 +8,8 @@ Copyright 2021 Upbound Inc.
 // NOTE: See the below link for details on what is happening here.
 // https://github.com/golang/go/wiki/Modules#how-can-i-track-tool-dependencies-for-a-module
 
-// Remove existing CRDs
-//go:generate rm -rf ../package/crds
+// Backup existing CRDs
+//go:generate bash -c "mkdir -p ../.package.bck && rm -rf ../.package.bck/crds && [ -d ../package/crds ] && mv ../package/crds ../.package.bck/crds || true"
 
 // Remove generated files
 //go:generate bash -c "find . -iname 'zz_*' -delete"
@@ -28,6 +28,12 @@ Copyright 2021 Upbound Inc.
 
 // Generate deepcopy methodsets and CRD manifests
 //go:generate go run -tags generate sigs.k8s.io/controller-tools/cmd/controller-gen object:headerFile=../hack/boilerplate.go.txt paths=./... crd:allowDangerousTypes=true,crdVersions=v1 output:artifacts:config=../package/crds
+
+// Compute CRD service delta
+//go:generate go run ../cmd/crd-delta --old ../.package.bck --new ../package
+
+// Cleanup backup
+//go:generate rm -rf ../.package.bck
 
 // Generate crossplane-runtime methodsets (resource.Claim, etc)
 //go:generate go run -tags generate github.com/crossplane/crossplane-tools/cmd/angryjet generate-methodsets --header-file=../hack/boilerplate.go.txt ./...
