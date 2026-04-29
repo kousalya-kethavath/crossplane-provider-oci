@@ -1,12 +1,13 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: argo-workflow-cluster-admin
+  name: argo-workflow-manual-access
 subjects:
 - kind: ServiceAccount
   name: argo-workflow
   namespace: default
 roleRef:
   kind: ClusterRole
-  name: cluster-admin
+  # Replace this placeholder with a least-privilege ClusterRole before applying.
+  name: replace-with-least-privilege-clusterrole
   apiGroup: rbac.authorization.k8s.io

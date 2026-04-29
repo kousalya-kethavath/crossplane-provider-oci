@@ -4,7 +4,7 @@ This directory contains the Argo assets used to run provider examples as Argo wo
 
 The directory is organized into four main areas:
 
-- `argo/setup/`: bootstrap manifests for the workflow service account, token secret, PVC, and provider config.
+- `argo/setup/`: bootstrap manifests for the workflow service account, token secret, PVC, provider config, and a manual RBAC binding template.
 - `argo/workflowtemplates/templates/`: hand-maintained reusable templates such as repository cloning, Crossplane installation, and generic create/delete resource helpers.
 - `argo/workflowtemplates/generated-workflowtemplates/`: generated per-service `WorkflowTemplate` manifests.
 - `argo/workflows/generated-workflows/`: generated top-level `Workflow` manifests that invoke one or more service templates.
@@ -31,16 +31,24 @@ kubectl create namespace argo
 kubectl apply -n argo -f https://github.com/argoproj/argo-workflows/releases/download/v3.7.6/install.yaml
 ```
 
-Create the service account, token secret, and PVC used by the workflows in this repo:
+Create the service account and PVC used by the workflows in this repo:
 
 ```bash
 kubectl apply -f argo/setup/workflow-serviceaccount.yaml
-kubectl apply -f argo/setup/workflow-admin-clusterrolebinding.yaml
-kubectl apply -f argo/setup/workflow-token-secret.yaml
 kubectl apply -f argo/setup/git-repo-pvc.yaml
 ```
 
 These manifests use the `argo-workflow` service account in the `default` namespace because the checked-in workflow templates reference that identity directly.
+
+The repository does not ship a default privileged RBAC grant for that service account. Before running workflows that need Kubernetes API access, create a least-privilege `ClusterRole` or `Role` for your environment and bind it manually.
+
+The file below is only a manual template. It intentionally does not grant permissions until you replace the placeholder role name `replace-with-least-privilege-clusterrole`:
+
+```bash
+kubectl apply -f argo/setup/workflow-admin-clusterrolebinding.yaml
+```
+
+Review `argo/setup/workflow-admin-clusterrolebinding.yaml` and replace `replace-with-least-privilege-clusterrole` with your own role before applying it.
 
 ## Register the Shared Templates
 
@@ -96,10 +104,18 @@ Port-forward the Argo server:
 kubectl -n argo port-forward deployment/argo-server 2746:2746
 ```
 
-Fetch a bearer token for the `argo-workflow` service account:
+If you want a manually created service account token secret for UI login, first review and update `argo/setup/workflow-token-secret.yaml`, then apply it:
 
 ```bash
-ARGO_TOKEN="Bearer $(kubectl get secret argo-workflow.service-account-token -o=jsonpath='{.data.token}' | base64 --decode)"
+kubectl apply -f argo/setup/workflow-token-secret.yaml
+```
+
+Replace the placeholder `replace-with-service-account-name` with your target service account name before applying the manifest.
+
+Fetch a bearer token for the resulting service account token secret:
+
+```bash
+ARGO_TOKEN="Bearer $(kubectl get secret argo-workflow-manual-token -o=jsonpath='{.data.token}' | base64 --decode)"
 echo "${ARGO_TOKEN}"
 ```
 
@@ -120,6 +136,8 @@ If your Argo installation does not default ad hoc submissions to the `argo-workf
 ```bash
 --serviceaccount argo-workflow
 ```
+
+That service account should be bound only to the minimum Kubernetes permissions required by the specific workflow templates you intend to run.
 
 ## Install Crossplane and OCI Providers from Argo
 
@@ -196,5 +214,5 @@ oci-<service>-<version>-tests-template
 
 - If a workflow fails because `/git-repo/...` does not exist, rerun `clone-repo-template` to repopulate `git-repo-pvc`.
 - If provider installation stalls, inspect `kubectl get providers` and the Crossplane pods in `crossplane-system`.
-- If the UI token lookup fails, verify that `argo/setup/workflow-token-secret.yaml` exists in the `default` namespace and has been populated by the cluster.
+- If the UI token lookup fails, verify that you updated and applied `argo/setup/workflow-token-secret.yaml`, and that the secret has been populated by the cluster.
 - If OCI authentication fails, confirm that the cluster can use `InstancePrincipal`, or update the provider setup to use a different credential source.
