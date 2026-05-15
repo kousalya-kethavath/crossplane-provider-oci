@@ -14,7 +14,7 @@ export TERRAFORM_NATIVE_PROVIDER_BINARY := terraform-provider-oci_v$(TERRAFORM_P
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://releases.hashicorp.com/terraform-provider-oci/$(TERRAFORM_PROVIDER_VERSION)
 export TERRAFORM_DOCS_PATH := website/docs/r
 
-export CROSSPLANE_PROVIDER_VERSION := 1.0
+export CROSSPLANE_PROVIDER_VERSION := 1.0.1
 # Insert Oracle-CrossplaneProvider/<version> to terraform oci User-Agent using
 # USER_AGENT_PROVIDER_NAME (default=Oracle-TerraformProvider).
 # The value will be inserted as <USER_AGENT_PROVIDER_NAME>/<terraform oci version>
