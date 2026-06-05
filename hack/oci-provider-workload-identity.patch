@@ -1,0 +1,723 @@
+diff --git a/internal/client/provider_clients.go b/internal/client/provider_clients.go
+index e83195c0..13cf67ab 100644
+--- a/internal/client/provider_clients.go
++++ b/internal/client/provider_clients.go
+@@ -5,8 +5,10 @@ package client
+ 
+ import (
+ 	"fmt"
++	"reflect"
+ 	"strconv"
+ 	"strings"
++	"sync"
+ 
+ 	"github.com/oracle/terraform-provider-oci/internal/tfresource"
+ 
+@@ -58,18 +60,61 @@ type OracleClients struct {
+ 	Configuration     map[string]string
+ 	SdkClientMap      map[string]interface{}
+ 	WorkRequestClient *oci_work_requests.WorkRequestClient
++	ConfigureClient   ConfigureClient
+ }
+ 
+ func (m *OracleClients) GetClient(name string) interface{} {
+ 	return m.SdkClientMap[name]
+ }
+ 
++var configureClientRegistry sync.Map
++
++func configurationProviderKey(configProvider oci_common.ConfigurationProvider) string {
++	if configProvider == nil {
++		return ""
++	}
++	v := reflect.ValueOf(configProvider)
++	if v.IsValid() && v.Kind() == reflect.Pointer && !v.IsNil() {
++		return fmt.Sprintf("%T:%p", configProvider, v.Interface())
++	}
++	return fmt.Sprintf("%T:%v", configProvider, configProvider)
++}
++
++func (m *OracleClients) setConfigureClient(configProvider oci_common.ConfigurationProvider, configureClient ConfigureClient) {
++	m.ConfigureClient = configureClient
++	if key := configurationProviderKey(configProvider); key != "" && configureClient != nil {
++		configureClientRegistry.Store(key, configureClient)
++	}
++}
++
++func (m *OracleClients) ConfigureBaseClient(client *oci_common.BaseClient) error {
++	if m != nil && m.ConfigureClient != nil {
++		return m.ConfigureClient(client)
++	}
++	if ConfigureClientVar != nil {
++		return ConfigureClientVar(client)
++	}
++	return fmt.Errorf("cannot configure OCI client: no configure client is registered")
++}
++
++func ConfigureClientForConfigurationProvider(configProvider oci_common.ConfigurationProvider, client *oci_common.BaseClient) error {
++	if key := configurationProviderKey(configProvider); key != "" {
++		if configureClient, ok := configureClientRegistry.Load(key); ok {
++			return configureClient.(ConfigureClient)(client)
++		}
++	}
++	if ConfigureClientVar != nil {
++		return ConfigureClientVar(client)
++	}
++	return fmt.Errorf("cannot configure OCI client: no configure client is registered")
++}
++
+ // The following clients require special endpoint information that is only known at Terraform apply time; so they
+ // Create duplicate clients reusing the same Configuration provider as the initialized client and adding the endpoint
+ // here.
+ func (m *OracleClients) FunctionsInvokeClientWithEndpoint(endpoint string) (*oci_functions.FunctionsInvokeClient, error) {
+ 	if client, err := oci_functions.NewFunctionsInvokeClientWithConfigurationProvider(*m.FunctionsInvokeClient().ConfigurationProvider(), endpoint); err == nil {
+-		if err = ConfigureClientVar(&client.BaseClient); err != nil {
++		if err = m.ConfigureBaseClient(&client.BaseClient); err != nil {
+ 			return nil, err
+ 		}
+ 		return &client, nil
+@@ -79,7 +124,7 @@ func (m *OracleClients) FunctionsInvokeClientWithEndpoint(endpoint string) (*oci
+ }
+ func (m *OracleClients) KmsCryptoClientWithEndpoint(endpoint string) (*oci_kms.KmsCryptoClient, error) {
+ 	if client, err := oci_kms.NewKmsCryptoClientWithConfigurationProvider(*m.KmsCryptoClient().ConfigurationProvider(), endpoint); err == nil {
+-		if err = ConfigureClientVar(&client.BaseClient); err != nil {
++		if err = m.ConfigureBaseClient(&client.BaseClient); err != nil {
+ 			return nil, err
+ 		}
+ 		return &client, nil
+@@ -90,7 +135,7 @@ func (m *OracleClients) KmsCryptoClientWithEndpoint(endpoint string) (*oci_kms.K
+ 
+ func (m *OracleClients) KmsManagementClientWithEndpoint(endpoint string) (*oci_kms.KmsManagementClient, error) {
+ 	if client, err := oci_kms.NewKmsManagementClientWithConfigurationProvider(*m.KmsManagementClient().ConfigurationProvider(), endpoint); err == nil {
+-		if err = ConfigureClientVar(&client.BaseClient); err != nil {
++		if err = m.ConfigureBaseClient(&client.BaseClient); err != nil {
+ 			return nil, err
+ 		}
+ 		return &client, nil
+@@ -101,7 +146,7 @@ func (m *OracleClients) KmsManagementClientWithEndpoint(endpoint string) (*oci_k
+ 
+ func (m *OracleClients) IdentityDomainsClientWithEndpoint(endpoint string) (*oci_identity_domains.IdentityDomainsClient, error) {
+ 	if client, err := oci_identity_domains.NewIdentityDomainsClientWithConfigurationProvider(*m.IdentityDomainsClient().ConfigurationProvider(), endpoint); err == nil {
+-		if err = ConfigureClientVar(&client.BaseClient); err != nil {
++		if err = m.ConfigureBaseClient(&client.BaseClient); err != nil {
+ 			return nil, err
+ 		}
+ 		return &client, nil
+@@ -130,6 +175,9 @@ func getClientHostOverrides() map[string]string {
+ }
+ 
+ func CreateSDKClients(clients *OracleClients, configProvider oci_common.ConfigurationProvider, configureClient ConfigureClient) (err error) {
++	if clients != nil {
++		clients.setConfigureClient(configProvider, configureClient)
++	}
+ 	if OracleClientRegistrationsVar == nil || len(OracleClientRegistrationsVar.RegisteredClients) == 0 {
+ 		return fmt.Errorf("there are no clients to Create")
+ 	}
+diff --git a/internal/globalvar/constants.go b/internal/globalvar/constants.go
+index 2bf62f6c..e0dd74f1 100644
+--- a/internal/globalvar/constants.go
++++ b/internal/globalvar/constants.go
+@@ -10,6 +10,9 @@ const (
+ 	AuthInstancePrincipalWithCertsSetting = "InstancePrincipalWithCerts"
+ 	AuthSecurityToken                     = "SecurityToken"
+ 	AuthOKEWorkloadIdentity               = "OKEWorkloadIdentity"
++	AuthWorkloadIdentityFederation        = "WorkloadIdentityFederation"
++	TokenExchangeAuthOAuthClientCredentials = "OAuthClientCredentials"
++	TokenExchangeAuthInstancePrincipal      = "InstancePrincipal"
+ 	ResourcePrincipal                     = "ResourcePrincipal"
+ 	RequestHeaderOpcOboToken              = "opc-obo-token"
+ 	RequestHeaderOpcHostSerial            = "opc-host-serial"
+@@ -49,6 +52,16 @@ const (
+ 	PrivateKeyPathAttrName                      = "private_key_path"
+ 	PrivateKeyPasswordAttrName                  = "private_key_password"
+ 	RegionAttrName                              = "region"
++	WorkloadIdentityTokenPathAttrName           = "workload_identity_token_path"
++	TokenExchangeDomainURLAttrName              = "token_exchange_domain_url"
++	TokenExchangeAuthAttrName                   = "token_exchange_auth"
++	TokenExchangeClientIDAttrName               = "token_exchange_client_id"
++	TokenExchangeClientSecretAttrName           = "token_exchange_client_secret"
++	TokenExchangeRequestedTokenTypeAttrName     = "token_exchange_requested_token_type"
++	TokenExchangeSubjectTokenTypeAttrName       = "token_exchange_subject_token_type"
++	TokenExchangeResourceTypeAttrName           = "token_exchange_resource_type"
++	TokenExchangeRPSTExpirationAttrName         = "token_exchange_rpst_exp"
++	TokenExchangePublicKeyAttrName              = "token_exchange_public_key"
+ 	DisableAutoRetriesAttrName                  = "disable_auto_retries"
+ 	RetryDurationSecondsAttrName                = "retry_duration_seconds"
+ 	OboTokenAttrName                            = "obo_token"
+diff --git a/internal/provider/workload_identity_federation.go b/internal/provider/workload_identity_federation.go
+new file mode 100644
+index 00000000..cfd1950b
+--- /dev/null
++++ b/internal/provider/workload_identity_federation.go
+@@ -0,0 +1,103 @@
++// Copyright (c) 2024, Oracle and/or its affiliates.
++// Licensed under the Mozilla Public License v2.0
++
++package provider
++
++import (
++	"fmt"
++	"os"
++	"strings"
++
++	oci_common "github.com/oracle/oci-go-sdk/v65/common"
++	oci_common_auth "github.com/oracle/oci-go-sdk/v65/common/auth"
++
++	"github.com/oracle/terraform-provider-oci/internal/globalvar"
++)
++
++type fileTokenIssuer struct {
++	path string
++}
++
++func (i fileTokenIssuer) GetToken() (string, error) {
++	tokenBytes, err := os.ReadFile(i.path)
++	if err != nil {
++		return "", err
++	}
++	token := strings.TrimSpace(string(tokenBytes))
++	if token == "" {
++		return "", fmt.Errorf("%s is empty", globalvar.WorkloadIdentityTokenPathAttrName)
++	}
++	return token, nil
++}
++
++type workloadIdentityFederationSettings struct {
++	TokenPath          string
++	DomainURL          string
++	AuthMethod         string
++	ClientID           string
++	ClientSecret       string
++	Region             string
++	RequestedTokenType string
++	SubjectTokenType   string
++	ResourceType       string
++	RPSTExpiration     string
++	PublicKey          string
++}
++
++func workloadIdentityFederationConfigProvider(settings workloadIdentityFederationSettings) (oci_common.ConfigurationProvider, error) {
++	if settings.TokenPath == "" {
++		return nil, fmt.Errorf("%s must be provided when auth is %s", globalvar.WorkloadIdentityTokenPathAttrName, globalvar.AuthWorkloadIdentityFederation)
++	}
++	if settings.DomainURL == "" {
++		return nil, fmt.Errorf("%s must be provided when auth is %s", globalvar.TokenExchangeDomainURLAttrName, globalvar.AuthWorkloadIdentityFederation)
++	}
++	if settings.Region == "" {
++		return nil, fmt.Errorf("%s must be provided when auth is %s", globalvar.RegionAttrName, globalvar.AuthWorkloadIdentityFederation)
++	}
++	if settings.RequestedTokenType == "" {
++		return nil, fmt.Errorf("%s must be provided when auth is %s", globalvar.TokenExchangeRequestedTokenTypeAttrName, globalvar.AuthWorkloadIdentityFederation)
++	}
++	if settings.RequestedTokenType == "urn:oci:token-type:oci-rpst" && settings.ResourceType == "" {
++		return nil, fmt.Errorf("%s must be provided when %s is urn:oci:token-type:oci-rpst", globalvar.TokenExchangeResourceTypeAttrName, globalvar.TokenExchangeRequestedTokenTypeAttrName)
++	}
++
++	builder := oci_common_auth.TokenExchangeBuilder{
++		DomainUrl:          settings.DomainURL,
++		Region:             settings.Region,
++		RequestedTokenType: settings.RequestedTokenType,
++		SubjectTokenType:   settings.SubjectTokenType,
++		ResType:            settings.ResourceType,
++		RpstExp:            settings.RPSTExpiration,
++		PublicKey:          settings.PublicKey,
++	}
++
++	authMethod := strings.TrimSpace(settings.AuthMethod)
++	if authMethod == "" {
++		authMethod = globalvar.TokenExchangeAuthOAuthClientCredentials
++	}
++
++	switch {
++	case strings.EqualFold(authMethod, globalvar.TokenExchangeAuthOAuthClientCredentials):
++		if settings.ClientID == "" || settings.ClientSecret == "" {
++			return nil, fmt.Errorf("%s and %s must be provided when %s is %s", globalvar.TokenExchangeClientIDAttrName, globalvar.TokenExchangeClientSecretAttrName, globalvar.TokenExchangeAuthAttrName, globalvar.TokenExchangeAuthOAuthClientCredentials)
++		}
++		builder.ClientId = settings.ClientID
++		builder.ClientSecret = settings.ClientSecret
++	case strings.EqualFold(authMethod, globalvar.TokenExchangeAuthInstancePrincipal):
++		if settings.ClientID != "" || settings.ClientSecret != "" {
++			return nil, fmt.Errorf("%s and %s must not be provided when %s is %s", globalvar.TokenExchangeClientIDAttrName, globalvar.TokenExchangeClientSecretAttrName, globalvar.TokenExchangeAuthAttrName, globalvar.TokenExchangeAuthInstancePrincipal)
++		}
++		instancePrincipalProvider, err := oci_common_auth.InstancePrincipalConfigurationProvider()
++		if err != nil {
++			return nil, fmt.Errorf("can not get instance principal provider for workload identity federation %v", err)
++		}
++		builder.InstancePrincipalProvider = instancePrincipalProvider
++	default:
++		return nil, fmt.Errorf("%s must be one of %q or %q", globalvar.TokenExchangeAuthAttrName, globalvar.TokenExchangeAuthOAuthClientCredentials, globalvar.TokenExchangeAuthInstancePrincipal)
++	}
++
++	return oci_common_auth.TokenExchangeConfigurationProviderFromIssuer(
++		fileTokenIssuer{path: settings.TokenPath},
++		builder,
++	)
++}
+diff --git a/internal/provider/provider.go b/internal/provider/provider.go
+index 58cef786..05edf3dc 100644
+--- a/internal/provider/provider.go
++++ b/internal/provider/provider.go
+@@ -90,11 +151,21 @@ func ociVarName(attrName string) string {
+ 
+ func init() {
+ 	descriptions = map[string]string{
+-		globalvar.AuthAttrName:        fmt.Sprintf("(Optional) The type of auth to use. Options are '%s', '%s', '%s', '%s' and '%s'. By default, '%s' will be used.", globalvar.AuthAPIKeySetting, globalvar.AuthSecurityToken, globalvar.AuthInstancePrincipalSetting, globalvar.ResourcePrincipal, globalvar.AuthOKEWorkloadIdentity, globalvar.AuthAPIKeySetting),
+-		globalvar.TenancyOcidAttrName: fmt.Sprintf("(Optional) The tenancy OCID for a user. The tenancy OCID can be found at the bottom of user settings in the Oracle Cloud Infrastructure console. Required if auth is set to '%s', ignored otherwise.", globalvar.AuthAPIKeySetting),
+-		globalvar.UserOcidAttrName:    fmt.Sprintf("(Optional) The user OCID. This can be found in user settings in the Oracle Cloud Infrastructure console. Required if auth is set to '%s', ignored otherwise.", globalvar.AuthAPIKeySetting),
+-		globalvar.FingerprintAttrName: fmt.Sprintf("(Optional) The fingerprint for the user's RSA key. This can be found in user settings in the Oracle Cloud Infrastructure console. Required if auth is set to '%s', ignored otherwise.", globalvar.AuthAPIKeySetting),
+-		globalvar.RegionAttrName:      "(Required) The region for API connections (e.g. us-ashburn-1).",
++		globalvar.AuthAttrName:                            fmt.Sprintf("(Optional) The type of auth to use. Options are '%s', '%s', '%s', '%s', '%s' and '%s'. By default, '%s' will be used.", globalvar.AuthAPIKeySetting, globalvar.AuthSecurityToken, globalvar.AuthInstancePrincipalSetting, globalvar.ResourcePrincipal, globalvar.AuthOKEWorkloadIdentity, globalvar.AuthWorkloadIdentityFederation, globalvar.AuthAPIKeySetting),
++		globalvar.TenancyOcidAttrName:                     fmt.Sprintf("(Optional) The tenancy OCID for a user. The tenancy OCID can be found at the bottom of user settings in the Oracle Cloud Infrastructure console. Required if auth is set to '%s', ignored otherwise.", globalvar.AuthAPIKeySetting),
++		globalvar.UserOcidAttrName:                        fmt.Sprintf("(Optional) The user OCID. This can be found in user settings in the Oracle Cloud Infrastructure console. Required if auth is set to '%s', ignored otherwise.", globalvar.AuthAPIKeySetting),
++		globalvar.FingerprintAttrName:                     fmt.Sprintf("(Optional) The fingerprint for the user's RSA key. This can be found in user settings in the Oracle Cloud Infrastructure console. Required if auth is set to '%s', ignored otherwise.", globalvar.AuthAPIKeySetting),
++		globalvar.RegionAttrName:                          "(Required) The region for API connections (e.g. us-ashburn-1).",
++		globalvar.WorkloadIdentityTokenPathAttrName:       fmt.Sprintf("(Optional) Path to the projected Kubernetes service account token. Required if auth is set to '%s'.", globalvar.AuthWorkloadIdentityFederation),
++		globalvar.TokenExchangeDomainURLAttrName:          fmt.Sprintf("(Optional) OCI IAM identity domain URL used for token exchange. Required if auth is set to '%s'.", globalvar.AuthWorkloadIdentityFederation),
++		globalvar.TokenExchangeAuthAttrName:               fmt.Sprintf("(Optional) Method used to authorize the OCI IAM token exchange request. Options are '%s' and '%s'. Defaults to '%s'.", globalvar.TokenExchangeAuthOAuthClientCredentials, globalvar.TokenExchangeAuthInstancePrincipal, globalvar.TokenExchangeAuthOAuthClientCredentials),
++		globalvar.TokenExchangeClientIDAttrName:           fmt.Sprintf("(Optional) Token exchange confidential client ID. Required if %s is '%s'.", globalvar.TokenExchangeAuthAttrName, globalvar.TokenExchangeAuthOAuthClientCredentials),
++		globalvar.TokenExchangeClientSecretAttrName:       fmt.Sprintf("(Optional) Token exchange confidential client secret. Required if %s is '%s'.", globalvar.TokenExchangeAuthAttrName, globalvar.TokenExchangeAuthOAuthClientCredentials),
++		globalvar.TokenExchangeRequestedTokenTypeAttrName: fmt.Sprintf("(Optional) Requested token type for OCI IAM token exchange. Required if auth is set to '%s'.", globalvar.AuthWorkloadIdentityFederation),
++		globalvar.TokenExchangeSubjectTokenTypeAttrName:   fmt.Sprintf("(Optional) Subject token type for OCI IAM token exchange when auth is set to '%s'.", globalvar.AuthWorkloadIdentityFederation),
++		globalvar.TokenExchangeResourceTypeAttrName:       fmt.Sprintf("(Optional) OCI resource type for token exchange. Required for RPST token exchange when auth is set to '%s'.", globalvar.AuthWorkloadIdentityFederation),
++		globalvar.TokenExchangeRPSTExpirationAttrName:     fmt.Sprintf("(Optional) RPST expiration requested for token exchange when auth is set to '%s'.", globalvar.AuthWorkloadIdentityFederation),
++		globalvar.TokenExchangePublicKeyAttrName:          fmt.Sprintf("(Optional) Public key parameter for token exchange when auth is set to '%s'.", globalvar.AuthWorkloadIdentityFederation),
+ 		globalvar.PrivateKeyAttrName: "(Optional) A PEM formatted RSA private key for the user.\n" +
+ 			fmt.Sprintf("A private_key or a private_key_path must be provided if auth is set to '%s', ignored otherwise.", globalvar.AuthAPIKeySetting),
+ 		globalvar.PrivateKeyPathAttrName: "(Optional) The path to the user's PEM formatted private key.\n" +
+@@ -129,7 +199,7 @@ func SchemaMap() map[string]*schema.Schema {
+ 			Optional:     true,
+ 			Description:  descriptions[globalvar.AuthAttrName],
+ 			DefaultFunc:  schema.MultiEnvDefaultFunc([]string{tfVarName(globalvar.AuthAttrName), ociVarName(globalvar.AuthAttrName)}, globalvar.AuthAPIKeySetting),
+-			ValidateFunc: validation.StringInSlice([]string{globalvar.AuthAPIKeySetting, globalvar.AuthInstancePrincipalSetting, globalvar.AuthInstancePrincipalWithCertsSetting, globalvar.AuthSecurityToken, globalvar.ResourcePrincipal, globalvar.AuthOKEWorkloadIdentity}, true),
++			ValidateFunc: validation.StringInSlice([]string{globalvar.AuthAPIKeySetting, globalvar.AuthInstancePrincipalSetting, globalvar.AuthInstancePrincipalWithCertsSetting, globalvar.AuthSecurityToken, globalvar.ResourcePrincipal, globalvar.AuthOKEWorkloadIdentity, globalvar.AuthWorkloadIdentityFederation}, true),
+ 		},
+ 		globalvar.TenancyOcidAttrName: {
+ 			Type:        schema.TypeString,
+@@ -176,6 +247,69 @@ func SchemaMap() map[string]*schema.Schema {
+ 			Description: descriptions[globalvar.RegionAttrName],
+ 			DefaultFunc: schema.MultiEnvDefaultFunc([]string{tfVarName(globalvar.RegionAttrName), ociVarName(globalvar.RegionAttrName)}, nil),
+ 		},
++		globalvar.WorkloadIdentityTokenPathAttrName: {
++			Type:        schema.TypeString,
++			Optional:    true,
++			Description: descriptions[globalvar.WorkloadIdentityTokenPathAttrName],
++			DefaultFunc: schema.MultiEnvDefaultFunc([]string{tfVarName(globalvar.WorkloadIdentityTokenPathAttrName), ociVarName(globalvar.WorkloadIdentityTokenPathAttrName)}, nil),
++		},
++		globalvar.TokenExchangeDomainURLAttrName: {
++			Type:        schema.TypeString,
++			Optional:    true,
++			Description: descriptions[globalvar.TokenExchangeDomainURLAttrName],
++			DefaultFunc: schema.MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangeDomainURLAttrName), ociVarName(globalvar.TokenExchangeDomainURLAttrName)}, nil),
++		},
++		globalvar.TokenExchangeAuthAttrName: {
++			Type:         schema.TypeString,
++			Optional:     true,
++			Description:  descriptions[globalvar.TokenExchangeAuthAttrName],
++			DefaultFunc:  schema.MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangeAuthAttrName), ociVarName(globalvar.TokenExchangeAuthAttrName)}, globalvar.TokenExchangeAuthOAuthClientCredentials),
++			ValidateFunc: validation.StringInSlice([]string{globalvar.TokenExchangeAuthOAuthClientCredentials, globalvar.TokenExchangeAuthInstancePrincipal}, true),
++		},
++		globalvar.TokenExchangeClientIDAttrName: {
++			Type:        schema.TypeString,
++			Optional:    true,
++			Description: descriptions[globalvar.TokenExchangeClientIDAttrName],
++			DefaultFunc: schema.MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangeClientIDAttrName), ociVarName(globalvar.TokenExchangeClientIDAttrName)}, nil),
++		},
++		globalvar.TokenExchangeClientSecretAttrName: {
++			Type:        schema.TypeString,
++			Optional:    true,
++			Sensitive:   true,
++			Description: descriptions[globalvar.TokenExchangeClientSecretAttrName],
++			DefaultFunc: schema.MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangeClientSecretAttrName), ociVarName(globalvar.TokenExchangeClientSecretAttrName)}, nil),
++		},
++		globalvar.TokenExchangeRequestedTokenTypeAttrName: {
++			Type:        schema.TypeString,
++			Optional:    true,
++			Description: descriptions[globalvar.TokenExchangeRequestedTokenTypeAttrName],
++			DefaultFunc: schema.MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangeRequestedTokenTypeAttrName), ociVarName(globalvar.TokenExchangeRequestedTokenTypeAttrName)}, nil),
++		},
++		globalvar.TokenExchangeSubjectTokenTypeAttrName: {
++			Type:        schema.TypeString,
++			Optional:    true,
++			Description: descriptions[globalvar.TokenExchangeSubjectTokenTypeAttrName],
++			DefaultFunc: schema.MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangeSubjectTokenTypeAttrName), ociVarName(globalvar.TokenExchangeSubjectTokenTypeAttrName)}, nil),
++		},
++		globalvar.TokenExchangeResourceTypeAttrName: {
++			Type:        schema.TypeString,
++			Optional:    true,
++			Description: descriptions[globalvar.TokenExchangeResourceTypeAttrName],
++			DefaultFunc: schema.MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangeResourceTypeAttrName), ociVarName(globalvar.TokenExchangeResourceTypeAttrName)}, nil),
++		},
++		globalvar.TokenExchangeRPSTExpirationAttrName: {
++			Type:        schema.TypeString,
++			Optional:    true,
++			Description: descriptions[globalvar.TokenExchangeRPSTExpirationAttrName],
++			DefaultFunc: schema.MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangeRPSTExpirationAttrName), ociVarName(globalvar.TokenExchangeRPSTExpirationAttrName)}, nil),
++		},
++		globalvar.TokenExchangePublicKeyAttrName: {
++			Type:        schema.TypeString,
++			Optional:    true,
++			Sensitive:   true,
++			Description: descriptions[globalvar.TokenExchangePublicKeyAttrName],
++			DefaultFunc: schema.MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangePublicKeyAttrName), ociVarName(globalvar.TokenExchangePublicKeyAttrName)}, nil),
++		},
+ 		globalvar.DisableAutoRetriesAttrName: {
+ 			Type:        schema.TypeBool,
+ 			Optional:    true,
+@@ -292,12 +418,12 @@ func ProviderConfig(d *schema.ResourceData) (interface{}, error) {
+ 	httpClient := BuildHttpClient()
+ 
+ 	// beware: global variable `configureClient` set here--used elsewhere outside this execution path
+-	tf_client.ConfigureClientVar, err = BuildConfigureClientFn(sdkConfigProvider, httpClient)
++	configureClient, err := BuildConfigureClientFn(sdkConfigProvider, httpClient)
+ 	if err != nil {
+ 		return nil, err
+ 	}
+ 
+-	err = tf_client.CreateSDKClients(clients, sdkConfigProvider, tf_client.ConfigureClientVar)
++	err = tf_client.CreateSDKClients(clients, sdkConfigProvider, configureClient)
+ 	if err != nil {
+ 		return nil, err
+ 	}
+@@ -345,6 +471,14 @@ func GetSdkConfigProvider(d *schema.ResourceData, clients *tf_client.OracleClien
+ 	return sdkConfigProvider, nil
+ }
+ 
++func stringConfigValue(d *schema.ResourceData, attrName string) string {
++	v, ok := d.GetOk(attrName)
++	if !ok {
++		return ""
++	}
++	return v.(string)
++}
++
+ func getConfigProviders(d *schema.ResourceData, auth string) ([]oci_common.ConfigurationProvider, error) {
+ 	var configProviders []oci_common.ConfigurationProvider
+ 
+@@ -478,8 +620,26 @@ func getConfigProviders(d *schema.ResourceData, auth string) ([]oci_common.Confi
+ 			return nil, fmt.Errorf("can not get oke workload indentity based auth config provider %v", err)
+ 		}
+ 		configProviders = append(configProviders, okeWorkloadIdentityConfigProvider)
++	case strings.ToLower(globalvar.AuthWorkloadIdentityFederation):
++		cfg, err := workloadIdentityFederationConfigProvider(workloadIdentityFederationSettings{
++			TokenPath:          stringConfigValue(d, globalvar.WorkloadIdentityTokenPathAttrName),
++			DomainURL:          stringConfigValue(d, globalvar.TokenExchangeDomainURLAttrName),
++			AuthMethod:         stringConfigValue(d, globalvar.TokenExchangeAuthAttrName),
++			ClientID:           stringConfigValue(d, globalvar.TokenExchangeClientIDAttrName),
++			ClientSecret:       stringConfigValue(d, globalvar.TokenExchangeClientSecretAttrName),
++			Region:             stringConfigValue(d, globalvar.RegionAttrName),
++			RequestedTokenType: stringConfigValue(d, globalvar.TokenExchangeRequestedTokenTypeAttrName),
++			SubjectTokenType:   stringConfigValue(d, globalvar.TokenExchangeSubjectTokenTypeAttrName),
++			ResourceType:       stringConfigValue(d, globalvar.TokenExchangeResourceTypeAttrName),
++			RPSTExpiration:     stringConfigValue(d, globalvar.TokenExchangeRPSTExpirationAttrName),
++			PublicKey:          stringConfigValue(d, globalvar.TokenExchangePublicKeyAttrName),
++		})
++		if err != nil {
++			return nil, fmt.Errorf("can not get workload identity federation based auth config provider %v", err)
++		}
++		configProviders = append(configProviders, cfg)
+ 	default:
+-		return nil, fmt.Errorf("auth must be one of '%s' or '%s' or '%s' or '%s' or '%s' or '%s'", globalvar.AuthAPIKeySetting, globalvar.AuthInstancePrincipalSetting, globalvar.AuthInstancePrincipalWithCertsSetting, globalvar.AuthSecurityToken, globalvar.ResourcePrincipal, globalvar.AuthOKEWorkloadIdentity)
++		return nil, fmt.Errorf("auth must be one of '%s' or '%s' or '%s' or '%s' or '%s' or '%s' or '%s'", globalvar.AuthAPIKeySetting, globalvar.AuthInstancePrincipalSetting, globalvar.AuthInstancePrincipalWithCertsSetting, globalvar.AuthSecurityToken, globalvar.ResourcePrincipal, globalvar.AuthOKEWorkloadIdentity, globalvar.AuthWorkloadIdentityFederation)
+ 	}
+ 
+ 	return configProviders, nil
+diff --git a/internal/provider/provider_framework.go b/internal/provider/provider_framework.go
+index bcba6578..a50b85e8 100644
+--- a/internal/provider/provider_framework.go
++++ b/internal/provider/provider_framework.go
+@@ -39,6 +39,16 @@ type ociPluginProvider struct {
+ 	privateKeyPath                              string
+ 	privateKeyPassword                          string
+ 	region                                      string
++	workloadIdentityTokenPath                   string
++	tokenExchangeDomainURL                      string
++	tokenExchangeAuth                           string
++	tokenExchangeClientID                       string
++	tokenExchangeClientSecret                   string
++	tokenExchangeRequestedTokenType             string
++	tokenExchangeSubjectTokenType               string
++	tokenExchangeResourceType                   string
++	tokenExchangeRPSTExpiration                 string
++	tokenExchangePublicKey                      string
+ 	disableAutoRetries                          bool
+ 	retryDurationSeconds                        int64
+ 	configFileProfile                           string
+@@ -58,6 +68,16 @@ type ociProviderModel struct {
+ 	PrivateKeyPath                              types.String `tfsdk:"private_key_path"`
+ 	PrivateKeyPassword                          types.String `tfsdk:"private_key_password"`
+ 	Region                                      types.String `tfsdk:"region"`
++	WorkloadIdentityTokenPath                   types.String `tfsdk:"workload_identity_token_path"`
++	TokenExchangeDomainURL                      types.String `tfsdk:"token_exchange_domain_url"`
++	TokenExchangeAuth                           types.String `tfsdk:"token_exchange_auth"`
++	TokenExchangeClientID                       types.String `tfsdk:"token_exchange_client_id"`
++	TokenExchangeClientSecret                   types.String `tfsdk:"token_exchange_client_secret"`
++	TokenExchangeRequestedTokenType             types.String `tfsdk:"token_exchange_requested_token_type"`
++	TokenExchangeSubjectTokenType               types.String `tfsdk:"token_exchange_subject_token_type"`
++	TokenExchangeResourceType                   types.String `tfsdk:"token_exchange_resource_type"`
++	TokenExchangeRPSTExpiration                 types.String `tfsdk:"token_exchange_rpst_exp"`
++	TokenExchangePublicKey                      types.String `tfsdk:"token_exchange_public_key"`
+ 	DisableAutoRetries                          types.Bool   `tfsdk:"disable_auto_retries"`
+ 	RetryDurationSeconds                        types.Int64  `tfsdk:"retry_duration_seconds"`
+ 	ConfigFileProfile                           types.String `tfsdk:"config_file_profile"`
+@@ -83,7 +101,7 @@ func (p *ociPluginProvider) Schema(ctx context.Context, req provider.SchemaReque
+ 				Optional:    true,
+ 				Description: descriptions[globalvar.AuthAttrName],
+ 				Validators: []validator.String{
+-					stringvalidator.OneOfCaseInsensitive(globalvar.AuthAPIKeySetting, globalvar.AuthInstancePrincipalSetting, globalvar.AuthInstancePrincipalWithCertsSetting, globalvar.AuthSecurityToken, globalvar.ResourcePrincipal, globalvar.AuthOKEWorkloadIdentity),
++					stringvalidator.OneOfCaseInsensitive(globalvar.AuthAPIKeySetting, globalvar.AuthInstancePrincipalSetting, globalvar.AuthInstancePrincipalWithCertsSetting, globalvar.AuthSecurityToken, globalvar.ResourcePrincipal, globalvar.AuthOKEWorkloadIdentity, globalvar.AuthWorkloadIdentityFederation),
+ 				},
+ 			},
+ 			globalvar.TenancyOcidAttrName: schema.StringAttribute{
+@@ -117,6 +137,51 @@ func (p *ociPluginProvider) Schema(ctx context.Context, req provider.SchemaReque
+ 				Optional:    true,
+ 				Description: descriptions[globalvar.RegionAttrName],
+ 			},
++			globalvar.WorkloadIdentityTokenPathAttrName: schema.StringAttribute{
++				Optional:    true,
++				Description: descriptions[globalvar.WorkloadIdentityTokenPathAttrName],
++			},
++			globalvar.TokenExchangeDomainURLAttrName: schema.StringAttribute{
++				Optional:    true,
++				Description: descriptions[globalvar.TokenExchangeDomainURLAttrName],
++			},
++			globalvar.TokenExchangeAuthAttrName: schema.StringAttribute{
++				Optional:    true,
++				Description: descriptions[globalvar.TokenExchangeAuthAttrName],
++				Validators: []validator.String{
++					stringvalidator.OneOfCaseInsensitive(globalvar.TokenExchangeAuthOAuthClientCredentials, globalvar.TokenExchangeAuthInstancePrincipal),
++				},
++			},
++			globalvar.TokenExchangeClientIDAttrName: schema.StringAttribute{
++				Optional:    true,
++				Description: descriptions[globalvar.TokenExchangeClientIDAttrName],
++			},
++			globalvar.TokenExchangeClientSecretAttrName: schema.StringAttribute{
++				Optional:    true,
++				Sensitive:   true,
++				Description: descriptions[globalvar.TokenExchangeClientSecretAttrName],
++			},
++			globalvar.TokenExchangeRequestedTokenTypeAttrName: schema.StringAttribute{
++				Optional:    true,
++				Description: descriptions[globalvar.TokenExchangeRequestedTokenTypeAttrName],
++			},
++			globalvar.TokenExchangeSubjectTokenTypeAttrName: schema.StringAttribute{
++				Optional:    true,
++				Description: descriptions[globalvar.TokenExchangeSubjectTokenTypeAttrName],
++			},
++			globalvar.TokenExchangeResourceTypeAttrName: schema.StringAttribute{
++				Optional:    true,
++				Description: descriptions[globalvar.TokenExchangeResourceTypeAttrName],
++			},
++			globalvar.TokenExchangeRPSTExpirationAttrName: schema.StringAttribute{
++				Optional:    true,
++				Description: descriptions[globalvar.TokenExchangeRPSTExpirationAttrName],
++			},
++			globalvar.TokenExchangePublicKeyAttrName: schema.StringAttribute{
++				Optional:    true,
++				Sensitive:   true,
++				Description: descriptions[globalvar.TokenExchangePublicKeyAttrName],
++			},
+ 			globalvar.DisableAutoRetriesAttrName: schema.BoolAttribute{
+ 				Optional: true,
+ 				//Default:     false,
+@@ -221,6 +286,46 @@ func (p *ociPluginProvider) SetDefaults(config *ociProviderModel) {
+ 		config.Region = types.StringValue(MultiEnvDefaultFunc([]string{tfVarName(globalvar.RegionAttrName), ociVarName(globalvar.RegionAttrName)}, ""))
+ 	}
+ 
++	if config.WorkloadIdentityTokenPath.IsUnknown() || config.WorkloadIdentityTokenPath.IsNull() {
++		config.WorkloadIdentityTokenPath = types.StringValue(MultiEnvDefaultFunc([]string{tfVarName(globalvar.WorkloadIdentityTokenPathAttrName), ociVarName(globalvar.WorkloadIdentityTokenPathAttrName)}, ""))
++	}
++
++	if config.TokenExchangeDomainURL.IsUnknown() || config.TokenExchangeDomainURL.IsNull() {
++		config.TokenExchangeDomainURL = types.StringValue(MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangeDomainURLAttrName), ociVarName(globalvar.TokenExchangeDomainURLAttrName)}, ""))
++	}
++
++	if config.TokenExchangeAuth.IsUnknown() || config.TokenExchangeAuth.IsNull() {
++		config.TokenExchangeAuth = types.StringValue(MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangeAuthAttrName), ociVarName(globalvar.TokenExchangeAuthAttrName)}, globalvar.TokenExchangeAuthOAuthClientCredentials))
++	}
++
++	if config.TokenExchangeClientID.IsUnknown() || config.TokenExchangeClientID.IsNull() {
++		config.TokenExchangeClientID = types.StringValue(MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangeClientIDAttrName), ociVarName(globalvar.TokenExchangeClientIDAttrName)}, ""))
++	}
++
++	if config.TokenExchangeClientSecret.IsUnknown() || config.TokenExchangeClientSecret.IsNull() {
++		config.TokenExchangeClientSecret = types.StringValue(MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangeClientSecretAttrName), ociVarName(globalvar.TokenExchangeClientSecretAttrName)}, ""))
++	}
++
++	if config.TokenExchangeRequestedTokenType.IsUnknown() || config.TokenExchangeRequestedTokenType.IsNull() {
++		config.TokenExchangeRequestedTokenType = types.StringValue(MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangeRequestedTokenTypeAttrName), ociVarName(globalvar.TokenExchangeRequestedTokenTypeAttrName)}, ""))
++	}
++
++	if config.TokenExchangeSubjectTokenType.IsUnknown() || config.TokenExchangeSubjectTokenType.IsNull() {
++		config.TokenExchangeSubjectTokenType = types.StringValue(MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangeSubjectTokenTypeAttrName), ociVarName(globalvar.TokenExchangeSubjectTokenTypeAttrName)}, ""))
++	}
++
++	if config.TokenExchangeResourceType.IsUnknown() || config.TokenExchangeResourceType.IsNull() {
++		config.TokenExchangeResourceType = types.StringValue(MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangeResourceTypeAttrName), ociVarName(globalvar.TokenExchangeResourceTypeAttrName)}, ""))
++	}
++
++	if config.TokenExchangeRPSTExpiration.IsUnknown() || config.TokenExchangeRPSTExpiration.IsNull() {
++		config.TokenExchangeRPSTExpiration = types.StringValue(MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangeRPSTExpirationAttrName), ociVarName(globalvar.TokenExchangeRPSTExpirationAttrName)}, ""))
++	}
++
++	if config.TokenExchangePublicKey.IsUnknown() || config.TokenExchangePublicKey.IsNull() {
++		config.TokenExchangePublicKey = types.StringValue(MultiEnvDefaultFunc([]string{tfVarName(globalvar.TokenExchangePublicKeyAttrName), ociVarName(globalvar.TokenExchangePublicKeyAttrName)}, ""))
++	}
++
+ 	if config.DisableAutoRetries.IsUnknown() || config.DisableAutoRetries.IsNull() {
+ 		config.DisableAutoRetries = types.BoolValue(MultiEnvDefaultBoolFunc([]string{tfVarName(globalvar.DisableAutoRetriesAttrName), ociVarName(globalvar.DisableAutoRetriesAttrName)}, false))
+ 	}
+@@ -245,6 +350,16 @@ func (p *ociPluginProvider) SetDefaults(config *ociProviderModel) {
+ 	p.privateKeyPath = config.PrivateKeyPath.ValueString()
+ 	p.privateKeyPassword = config.PrivateKeyPassword.ValueString()
+ 	p.region = config.Region.ValueString()
++	p.workloadIdentityTokenPath = config.WorkloadIdentityTokenPath.ValueString()
++	p.tokenExchangeDomainURL = config.TokenExchangeDomainURL.ValueString()
++	p.tokenExchangeAuth = config.TokenExchangeAuth.ValueString()
++	p.tokenExchangeClientID = config.TokenExchangeClientID.ValueString()
++	p.tokenExchangeClientSecret = config.TokenExchangeClientSecret.ValueString()
++	p.tokenExchangeRequestedTokenType = config.TokenExchangeRequestedTokenType.ValueString()
++	p.tokenExchangeSubjectTokenType = config.TokenExchangeSubjectTokenType.ValueString()
++	p.tokenExchangeResourceType = config.TokenExchangeResourceType.ValueString()
++	p.tokenExchangeRPSTExpiration = config.TokenExchangeRPSTExpiration.ValueString()
++	p.tokenExchangePublicKey = config.TokenExchangePublicKey.ValueString()
+ 	p.disableAutoRetries = config.DisableAutoRetries.ValueBool()
+ 	p.retryDurationSeconds = config.RetryDurationSeconds.ValueInt64()
+ 	p.configFileProfile = config.ConfigFileProfile.ValueString()
+@@ -294,12 +409,12 @@ func (p *ociPluginProvider) SetProviderConfig() (interface{}, error) {
+ 	httpClient := BuildHttpClient()
+ 
+ 	// beware: global variable `configureClient` set here--used elsewhere outside this execution path
+-	tf_client.ConfigureClientVar, err = BuildConfigureClientFn(sdkConfigProvider, httpClient)
++	configureClient, err := BuildConfigureClientFn(sdkConfigProvider, httpClient)
+ 	if err != nil {
+ 		return nil, err
+ 	}
+ 
+-	err = tf_client.CreateSDKClients(clients, sdkConfigProvider, tf_client.ConfigureClientVar)
++	err = tf_client.CreateSDKClients(clients, sdkConfigProvider, configureClient)
+ 	if err != nil {
+ 		return nil, err
+ 	}
+@@ -503,8 +618,26 @@ func (p *ociPluginProvider) _getConfigProviders() ([]oci_common.ConfigurationPro
+ 			return nil, fmt.Errorf("can not get oke workload indentity based auth config provider %v", err)
+ 		}
+ 		configProviders = append(configProviders, okeWorkloadIdentityConfigProvider)
++	case strings.ToLower(globalvar.AuthWorkloadIdentityFederation):
++		cfg, err := workloadIdentityFederationConfigProvider(workloadIdentityFederationSettings{
++			TokenPath:          p.workloadIdentityTokenPath,
++			DomainURL:          p.tokenExchangeDomainURL,
++			AuthMethod:         p.tokenExchangeAuth,
++			ClientID:           p.tokenExchangeClientID,
++			ClientSecret:       p.tokenExchangeClientSecret,
++			Region:             p.region,
++			RequestedTokenType: p.tokenExchangeRequestedTokenType,
++			SubjectTokenType:   p.tokenExchangeSubjectTokenType,
++			ResourceType:       p.tokenExchangeResourceType,
++			RPSTExpiration:     p.tokenExchangeRPSTExpiration,
++			PublicKey:          p.tokenExchangePublicKey,
++		})
++		if err != nil {
++			return nil, fmt.Errorf("can not get workload identity federation based auth config provider %v", err)
++		}
++		configProviders = append(configProviders, cfg)
+ 	default:
+-		return nil, fmt.Errorf("auth must be one of '%s' or '%s' or '%s' or '%s' or '%s' or '%s'", globalvar.AuthAPIKeySetting, globalvar.AuthInstancePrincipalSetting, globalvar.AuthInstancePrincipalWithCertsSetting, globalvar.AuthSecurityToken, globalvar.ResourcePrincipal, globalvar.AuthOKEWorkloadIdentity)
++		return nil, fmt.Errorf("auth must be one of '%s' or '%s' or '%s' or '%s' or '%s' or '%s' or '%s'", globalvar.AuthAPIKeySetting, globalvar.AuthInstancePrincipalSetting, globalvar.AuthInstancePrincipalWithCertsSetting, globalvar.AuthSecurityToken, globalvar.ResourcePrincipal, globalvar.AuthOKEWorkloadIdentity, globalvar.AuthWorkloadIdentityFederation)
+ 	}
+ 
+ 	return configProviders, nil
+diff --git a/internal/service/core/helpers_core.go b/internal/service/core/helpers_core.go
+index b8ef218d..f5882825 100644
+--- a/internal/service/core/helpers_core.go
++++ b/internal/service/core/helpers_core.go
+@@ -96,7 +96,7 @@ func (s *CoreVolumeBackupResourceCrud) createBlockStorageSourceRegionClient(regi
+ 		if err != nil {
+ 			return fmt.Errorf("cannot Create client for the source region: %v", err)
+ 		}
+-		err = tf_client.ConfigureClientVar(&sourceBlockStorageClient.BaseClient)
++		err = tf_client.ConfigureClientForConfigurationProvider(*s.Client.ConfigurationProvider(), &sourceBlockStorageClient.BaseClient)
+ 		if err != nil {
+ 			return fmt.Errorf("cannot configure client for the source region: %v", err)
+ 		}
+@@ -113,7 +113,7 @@ func (s *CoreVolumeGroupBackupResourceCrud) createBlockStorageSourceRegionClient
+ 		if err != nil {
+ 			return fmt.Errorf("cannot Create client for the source region: %v", err)
+ 		}
+-		err = tf_client.ConfigureClientVar(&sourceBlockStorageClient.BaseClient)
++		err = tf_client.ConfigureClientForConfigurationProvider(*s.Client.ConfigurationProvider(), &sourceBlockStorageClient.BaseClient)
+ 		if err != nil {
+ 			return fmt.Errorf("cannot configure client for the source region: %v", err)
+ 		}
+@@ -130,7 +130,7 @@ func (s *CoreBootVolumeBackupResourceCrud) createBlockStorageSourceRegionClient(
+ 		if err != nil {
+ 			return fmt.Errorf("cannot Create client for the source region: %v", err)
+ 		}
+-		err = tf_client.ConfigureClientVar(&sourceBlockStorageClient.BaseClient)
++		err = tf_client.ConfigureClientForConfigurationProvider(*s.Client.ConfigurationProvider(), &sourceBlockStorageClient.BaseClient)
+ 		if err != nil {
+ 			return fmt.Errorf("cannot configure client for the source region: %v", err)
+ 		}
+diff --git a/internal/service/mysql/helpers_mysql.go b/internal/service/mysql/helpers_mysql.go
+index bcc3f579..ce2a27d3 100644
+--- a/internal/service/mysql/helpers_mysql.go
++++ b/internal/service/mysql/helpers_mysql.go
+@@ -13,7 +13,7 @@ func (s *MysqlMysqlBackupResourceCrud) createDbBackupClientInRegion(region strin
+ 		if err != nil {
+ 			return fmt.Errorf("cannot Create client for the region: %v", err)
+ 		}
+-		err = tf_client.ConfigureClientVar(&dbBackupClient.BaseClient)
++		err = tf_client.ConfigureClientForConfigurationProvider(*s.Client.ConfigurationProvider(), &dbBackupClient.BaseClient)
+ 		if err != nil {
+ 			return fmt.Errorf("cannot configure client for the region: %v", err)
+ 		}
+diff --git a/internal/service/objectstorage/helpers_objectstorage.go b/internal/service/objectstorage/helpers_objectstorage.go
+index 69fd52ef..9d6e68f0 100644
+--- a/internal/service/objectstorage/helpers_objectstorage.go
++++ b/internal/service/objectstorage/helpers_objectstorage.go
+@@ -422,7 +422,7 @@ func (s *ObjectStorageObjectResourceCrud) createSourceRegionClient(region string
+ 		if err != nil {
+ 			return fmt.Errorf("cannot Create client for the source region: %v", err)
+ 		}
+-		err = tf_client.ConfigureClientVar(&sourceObjectStorageClient.BaseClient)
++		err = tf_client.ConfigureClientForConfigurationProvider(*s.Client.ConfigurationProvider(), &sourceObjectStorageClient.BaseClient)
+ 		if err != nil {
+ 			return fmt.Errorf("cannot configure client for the source region: %v", err)
+ 		}
+diff --git a/internal/service/psql/helpers_psql.go b/internal/service/psql/helpers_psql.go
+index 12adc53d..d951a6d4 100644
+--- a/internal/service/psql/helpers_psql.go
++++ b/internal/service/psql/helpers_psql.go
+@@ -13,7 +13,7 @@ func (s *PsqlBackupResourceCrud) createPsqlSourceRegionClient(region string) err
+ 		if err != nil {
+ 			return fmt.Errorf("cannot Create client for the source region: %v", err)
+ 		}
+-		err = tf_client.ConfigureClientVar(&sourcePsqlClient.BaseClient)
++		err = tf_client.ConfigureClientForConfigurationProvider(*s.Client.ConfigurationProvider(), &sourcePsqlClient.BaseClient)
+ 		if err != nil {
+ 			return fmt.Errorf("cannot configure client for the source region: %v", err)
+ 		}
+diff --git a/oci/provider.go b/oci/provider.go
+new file mode 100644
+index 00000000..ba62d1d8
+--- /dev/null
++++ b/oci/provider.go
+@@ -0,0 +1,18 @@
++// Copyright (c) 2024, Oracle and/or its affiliates.
++// Licensed under the Mozilla Public License Version 2.0
++
++package oci
++
++import (
++	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
++	internalprovider "github.com/oracle/terraform-provider-oci/internal/provider"
++)
++
++// New returns a factory function that produces a fresh *schema.Provider on
++// each call. Callers must not cache the factory — cache the configured Meta
++// instead.
++func New() func() *schema.Provider {
++	return func() *schema.Provider {
++		return internalprovider.Provider()
++	}
++}
