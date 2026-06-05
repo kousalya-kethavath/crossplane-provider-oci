@@ -1,9 +1,9 @@
 provider_installation {
   filesystem_mirror {
     path    = "/terraform/provider-mirror"
-    include = ["*/*"]
+    include = ["registry.terraform.io/oracle/oci"]
   }
   direct {
-    exclude = ["*/*"]
+    exclude = ["registry.terraform.io/oracle/oci"]
   }
 }

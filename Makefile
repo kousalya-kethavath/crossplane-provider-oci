@@ -156,6 +156,10 @@ export CONFIG_DEPENDENCY_REG_ORG := $(CONFIG_DEPENDENCY_REG_ORG)
 # we ensure image is present in daemon.
 xpkg.build.provider-oci: do.build.images
 
+# OCI images carry a locally patched terraform-provider-oci binary until the
+# workload identity auth mode is available in an upstream release.
+do.build.images: build-patched-oci-provider
+
 # NOTE(hasheddan): we ensure up is installed prior to running platform-specific
 # build steps in parallel to avoid encountering an installation race condition.
 build.init: $(UP) kustomize-crds
@@ -229,7 +233,34 @@ build.complete: generate.resolve build
 	@$(INFO) complete build workflow finished
 	@$(OK) complete build workflow finished
 
-.PHONY: $(TERRAFORM_PROVIDER_SCHEMA) pull-docs generate.resolve build.complete
+TERRAFORM_PROVIDER_SRC_DIR ?= $(OUTPUT_DIR)/terraform-provider-src
+TERRAFORM_PROVIDER_BUILD_DIR ?= $(OUTPUT_DIR)/terraform-provider
+PATCHED_TERRAFORM_PROVIDER_PLATFORMS ?= $(filter linux_%,$(PLATFORMS))
+
+validate-oci-provider-patch:
+	@TF_PROVIDER_VERSION=$(TERRAFORM_PROVIDER_VERSION) hack/validate-oci-provider-patch.sh
+
+patch-oci-provider:
+	@TF_PROVIDER_VERSION=$(TERRAFORM_PROVIDER_VERSION) \
+		WORKDIR=$(TERRAFORM_PROVIDER_SRC_DIR) \
+		PATCH_FILE=hack/oci-provider-workload-identity.patch \
+		hack/patch-tf-provider.sh
+
+build-patched-oci-provider: patch-oci-provider
+	@for platform in $(PATCHED_TERRAFORM_PROVIDER_PLATFORMS); do \
+		goos=$${platform%_*}; \
+		goarch=$${platform#*_}; \
+		TF_PROVIDER_VERSION=$(TERRAFORM_PROVIDER_VERSION) \
+			WORKDIR=$(TERRAFORM_PROVIDER_SRC_DIR) \
+			GOOS=$$goos GOARCH=$$goarch \
+			OUT_DIR=$(TERRAFORM_PROVIDER_BUILD_DIR)/$${goos}_$${goarch} \
+			hack/build-patched-oci-provider.sh || exit 1; \
+	done
+
+clean-patched-oci-provider:
+	@rm -rf "$(TERRAFORM_PROVIDER_SRC_DIR)" "$(TERRAFORM_PROVIDER_BUILD_DIR)"
+
+.PHONY: $(TERRAFORM_PROVIDER_SCHEMA) pull-docs generate.resolve build.complete validate-oci-provider-patch patch-oci-provider build-patched-oci-provider clean-patched-oci-provider
 # ====================================================================================
 # Targets
 
