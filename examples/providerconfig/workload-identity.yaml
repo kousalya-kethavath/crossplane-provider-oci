@@ -1,0 +1,90 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: oci-workload-identity-oauth-creds
+  namespace: crossplane-system
+type: Opaque
+stringData:
+  credentials: |
+    {
+      "auth": "WorkloadIdentityFederation",
+      "region": "us-ashburn-1",
+      "workload_identity_token_path": "/var/run/secrets/tokens/oci",
+      "token_exchange_domain_url": "https://identity.oraclecloud.com/...",
+      "token_exchange_auth_method": "ClientSecret",
+      "token_exchange_client_id": "replace-with-client-id",
+      "token_exchange_client_secret": "replace-with-client-secret",
+      "token_exchange_requested_token_type": "urn:oci:token-type:oci-rpst",
+      "token_exchange_subject_token_type": "jwt",
+      "token_exchange_resource_type": "replace-with-resource-type",
+      "token_exchange_rpst_exp": "3600"
+    }
+---
+apiVersion: oci.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: oci-workload-identity-oauth
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: oci-workload-identity-oauth-creds
+      key: credentials
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: oci-workload-identity-instance-principal-creds
+  namespace: crossplane-system
+type: Opaque
+stringData:
+  credentials: |
+    {
+      "auth": "WorkloadIdentityFederation",
+      "region": "us-ashburn-1",
+      "workload_identity_token_path": "/var/run/secrets/tokens/oci",
+      "token_exchange_domain_url": "https://identity.oraclecloud.com/...",
+      "token_exchange_auth_method": "InstancePrincipal",
+      "token_exchange_requested_token_type": "urn:oci:token-type:oci-rpst",
+      "token_exchange_subject_token_type": "jwt",
+      "token_exchange_resource_type": "replace-with-resource-type",
+      "token_exchange_rpst_exp": "3600"
+    }
+---
+apiVersion: oci.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: oci-workload-identity-instance-principal
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: oci-workload-identity-instance-principal-creds
+      key: credentials
+---
+apiVersion: pkg.crossplane.io/v1beta1
+kind: DeploymentRuntimeConfig
+metadata:
+  name: oci-workload-identity-runtime
+spec:
+  deploymentTemplate:
+    spec:
+      selector: {}
+      template:
+        spec:
+          containers:
+            - name: package-runtime
+              volumeMounts:
+                - name: oci-workload-identity-token
+                  mountPath: /var/run/secrets/tokens
+                  readOnly: true
+          volumes:
+            - name: oci-workload-identity-token
+              projected:
+                sources:
+                  - serviceAccountToken:
+                      path: oci
+                      audience: oci
+                      expirationSeconds: 3600
