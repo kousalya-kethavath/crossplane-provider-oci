@@ -15,6 +15,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: test_cluster
     computeAvailabilityDomain: ${var.esxi_host_compute_availability_domain}
+    currentCommitment: ${var.esxi_host_current_commitment}
     definedTags:
       Operations.CostCenter: "42"
     displayName: ${var.esxi_host_display_name}
@@ -24,6 +25,7 @@ spec:
     hostOcpuCount: ${var.esxi_host_host_ocpu_count}
     hostShapeName: ${oci_core_shape.test_shape.name}
     isVsanByolEnabled: ${var.esxi_host_is_vsan_byol_enabled}
+    nextCommitment: ${var.esxi_host_next_commitment}
     vcfByolAllocationIdSelector:
       matchLabels:
         testing.upbound.io/example-name: test_byol_allocation

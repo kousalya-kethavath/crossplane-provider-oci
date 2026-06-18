@@ -64,6 +64,9 @@ type EsxiHostInitParameters struct {
 	// The availability domain to create the ESXi host in. If keep empty, for AD-specific Cluster, new ESXi host will be created in the same availability domain; for multi-AD Cluster, new ESXi host will be auto assigned to the next availability domain following evenly distribution strategy.
 	ComputeAvailabilityDomain *string `json:"computeAvailabilityDomain,omitempty" tf:"compute_availability_domain,omitempty"`
 
+	// The billing option currently used by the ESXi host. ListSupportedCommitments.
+	CurrentCommitment *string `json:"currentCommitment,omitempty" tf:"current_commitment,omitempty"`
+
 	// (Deprecated)  The billing option currently used by the ESXi host. It is only effective during resource creation. Changes to its value after creation will be ignored. ListSupportedSkus. Deprecated. Please use current_commitment instead.
 	CurrentSku *string `json:"currentSku,omitempty" tf:"current_sku,omitempty"`
 
@@ -95,6 +98,9 @@ type EsxiHostInitParameters struct {
 
 	// (Updatable) Indicates whether this host embedded VMware vSAN with BYOL Allocation.
 	IsVsanByolEnabled *bool `json:"isVsanByolEnabled,omitempty" tf:"is_vsan_byol_enabled,omitempty"`
+
+	// (Updatable) The billing option to switch to after the existing billing cycle ends. If nextCommitment is null or empty, currentCommitment continues to the next billing cycle. ListSupportedCommitments.
+	NextCommitment *string `json:"nextCommitment,omitempty" tf:"next_commitment,omitempty"`
 
 	// (Deprecated)  (Updatable) The billing option to switch to after the existing billing cycle ends. If nextSku is null or empty, currentSku continues to the next billing cycle. ListSupportedSkus.  Deprecated. Please use next_commitment instead.
 	NextSku *string `json:"nextSku,omitempty" tf:"next_sku,omitempty"`
@@ -277,6 +283,10 @@ type EsxiHostParameters struct {
 	// +kubebuilder:validation:Optional
 	ComputeAvailabilityDomain *string `json:"computeAvailabilityDomain,omitempty" tf:"compute_availability_domain,omitempty"`
 
+	// The billing option currently used by the ESXi host. ListSupportedCommitments.
+	// +kubebuilder:validation:Optional
+	CurrentCommitment *string `json:"currentCommitment,omitempty" tf:"current_commitment,omitempty"`
+
 	// (Deprecated)  The billing option currently used by the ESXi host. It is only effective during resource creation. Changes to its value after creation will be ignored. ListSupportedSkus. Deprecated. Please use current_commitment instead.
 	// +kubebuilder:validation:Optional
 	CurrentSku *string `json:"currentSku,omitempty" tf:"current_sku,omitempty"`
@@ -318,6 +328,10 @@ type EsxiHostParameters struct {
 	// (Updatable) Indicates whether this host embedded VMware vSAN with BYOL Allocation.
 	// +kubebuilder:validation:Optional
 	IsVsanByolEnabled *bool `json:"isVsanByolEnabled,omitempty" tf:"is_vsan_byol_enabled,omitempty"`
+
+	// (Updatable) The billing option to switch to after the existing billing cycle ends. If nextCommitment is null or empty, currentCommitment continues to the next billing cycle. ListSupportedCommitments.
+	// +kubebuilder:validation:Optional
+	NextCommitment *string `json:"nextCommitment,omitempty" tf:"next_commitment,omitempty"`
 
 	// (Deprecated)  (Updatable) The billing option to switch to after the existing billing cycle ends. If nextSku is null or empty, currentSku continues to the next billing cycle. ListSupportedSkus.  Deprecated. Please use next_commitment instead.
 	// +kubebuilder:validation:Optional

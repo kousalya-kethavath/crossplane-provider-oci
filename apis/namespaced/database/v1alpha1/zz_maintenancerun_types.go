@@ -155,6 +155,9 @@ type MaintenanceRunObservation struct {
 	// The list of OCIDs for the maintenance runs associated with their Autonomous Data Guard peer container databases.
 	PeerMaintenanceRunIds []*string `json:"peerMaintenanceRunIds,omitempty" tf:"peer_maintenance_run_ids,omitempty"`
 
+	// The OCID of the resource the maintenance run will refer to when trying to fetch target versions. This field is set during maintenance run creation based on infrastructure's maintenance run version preferences.  Currently this is only be supported for monthly maintenance runs created via scheduling plans.
+	ReferenceResourceIDForImageUpdates *string `json:"referenceResourceIdForImageUpdates,omitempty" tf:"reference_resource_id_for_image_updates,omitempty"`
+
 	// The current state of the maintenance run. For Autonomous AI Database Serverless instances, valid states are IN_PROGRESS, SUCCEEDED, and FAILED.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
@@ -185,6 +188,9 @@ type MaintenanceRunObservation struct {
 
 	// The total time taken by corresponding resource activity in minutes.
 	TotalTimeTakenInMins *float64 `json:"totalTimeTakenInMins,omitempty" tf:"total_time_taken_in_mins,omitempty"`
+
+	// A list of key-value pairs where the key will contain the window type and value contains all the windowDetails of that window type.
+	WindowTypeDescriptions []WindowTypeDescriptionsObservation `json:"windowTypeDescriptions,omitempty" tf:"window_type_descriptions,omitempty"`
 }
 
 type MaintenanceRunParameters struct {
@@ -235,6 +241,21 @@ type MaintenanceRunParameters struct {
 	// (Updatable) The date and time that update should be scheduled.
 	// +kubebuilder:validation:Optional
 	TimeScheduled *string `json:"timeScheduled,omitempty" tf:"time_scheduled,omitempty"`
+}
+
+type WindowTypeDescriptionsInitParameters struct {
+}
+
+type WindowTypeDescriptionsObservation struct {
+
+	// A list of window detail messages from all the active execution windows based on the window type.
+	Messages []*string `json:"messages,omitempty" tf:"messages,omitempty"`
+
+	// The execution window is of PLANNED or UNPLANNED type.
+	WindowType *string `json:"windowType,omitempty" tf:"window_type,omitempty"`
+}
+
+type WindowTypeDescriptionsParameters struct {
 }
 
 // MaintenanceRunSpec defines the desired state of MaintenanceRun

@@ -775,6 +775,10 @@ spec:
                     description: The IP address the read replica is configured to
                       listen on.
                     type: string
+                  ipv6address:
+                    description: The IPv6 address the read replica is configured to
+                      listen on.
+                    type: string
                   isDeleteProtected:
                     description: (Updatable) Specifies whether the read replica can
                       be deleted. Set to true to prevent deletion, false (default)

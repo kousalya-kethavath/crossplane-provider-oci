@@ -504,7 +504,7 @@ type AutonomousContainerDatabaseAddStandbyObservation struct {
 	// The number of CPUs allocated to the Autonomous VM cluster.
 	TotalCpus *float64 `json:"totalCpus,omitempty" tf:"total_cpus,omitempty"`
 
-	// The percentage of CPUs reserved across nodes to support node failover. Allowed values are 0%, 25%, and 50%, with 50% being the default option.
+	// The percentage of CPUs reserved across nodes to support node failover. Allowed values are 0%, 25%, 50%, 75%, and 100%, with 50% being the default option.
 	VMFailoverReservation *float64 `json:"vmFailoverReservation,omitempty" tf:"vm_failover_reservation,omitempty"`
 
 	// The OCID of the Oracle Cloud Infrastructure vault. This parameter and secretId are required for Customer Managed Keys.

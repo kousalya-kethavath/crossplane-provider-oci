@@ -9,12 +9,10 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    bdsInstanceIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: test_bds_instance
+    bdsInstanceId: ${var.bds_instance_id}
     clusterAdminPasswordSecretRef:
-      key: attribute.cluster_admin_password
-      name: example-bds-bds-instance
-    nodeBackupId: ${var.bds_instance_replace_node_action.node_backup_id}
-    nodeHostName: ${var.bds_instance_replace_node_action.node_host_name}
+      key: example-key
+      name: example-secret
+    nodeBackupId: ${var.node_backup_id}
+    nodeHostName: ${var.node_host_name}
     shape: ${var.shape}

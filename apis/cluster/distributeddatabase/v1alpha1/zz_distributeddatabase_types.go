@@ -1116,6 +1116,9 @@ type DistributedDatabaseObservation struct {
 	// (Updatable) An optional property when incremented triggers Download Gsm Certificate Signing Request. Could be set to any integer value.
 	DownloadGsmCertificateSigningRequestTrigger *float64 `json:"downloadGsmCertificateSigningRequestTrigger,omitempty" tf:"download_gsm_certificate_signing_request_trigger,omitempty"`
 
+	// The replication unit count for RAFT based distributed database. For RAFT replication based Globally distributed database, the value should be at least twice the number of shards.
+	EffectiveReplicationUnit *float64 `json:"effectiveReplicationUnit,omitempty" tf:"effective_replication_unit,omitempty"`
+
 	// (Updatable) Simple key-value pair that is applied without any predefined name, type or scope. Exists for cross-compatibility only. Example: {"bar-key": "value"}
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
@@ -2684,7 +2687,6 @@ type DistributedDatabase struct {
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.onsPortRemote) || (has(self.initProvider) && has(self.initProvider.onsPortRemote))",message="spec.forProvider.onsPortRemote is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.prefix) || (has(self.initProvider) && has(self.initProvider.prefix))",message="spec.forProvider.prefix is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.privateEndpointIds) || (has(self.initProvider) && has(self.initProvider.privateEndpointIds))",message="spec.forProvider.privateEndpointIds is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.shardDetails) || (has(self.initProvider) && has(self.initProvider.shardDetails))",message="spec.forProvider.shardDetails is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.shardingMethod) || (has(self.initProvider) && has(self.initProvider.shardingMethod))",message="spec.forProvider.shardingMethod is a required parameter"
 	Spec   DistributedDatabaseSpec   `json:"spec"`
 	Status DistributedDatabaseStatus `json:"status,omitempty"`

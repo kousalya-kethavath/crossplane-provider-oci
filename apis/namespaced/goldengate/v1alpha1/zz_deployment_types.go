@@ -184,6 +184,9 @@ type DeploymentInitParameters struct {
 	// (Updatable) Metadata about this specific object.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Indicates if disaster recovery is enabled for a deployment. If not specified, disaster recovery is ENABLED when no clusterPlacementGroupId is provided, and DISABLED when a clusterPlacementGroupId is provided.
+	DisasterRecoveryStatus *string `json:"disasterRecoveryStatus,omitempty" tf:"disaster_recovery_status,omitempty"`
+
 	// (Updatable) An object's Display Name.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
@@ -362,6 +365,9 @@ type DeploymentObservation struct {
 
 	// (Updatable) Metadata about this specific object.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Indicates if disaster recovery is enabled for a deployment. If not specified, disaster recovery is ENABLED when no clusterPlacementGroupId is provided, and DISABLED when a clusterPlacementGroupId is provided.
+	DisasterRecoveryStatus *string `json:"disasterRecoveryStatus,omitempty" tf:"disaster_recovery_status,omitempty"`
 
 	// (Updatable) An object's Display Name.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
@@ -567,6 +573,10 @@ type DeploymentParameters struct {
 	// (Updatable) Metadata about this specific object.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Indicates if disaster recovery is enabled for a deployment. If not specified, disaster recovery is ENABLED when no clusterPlacementGroupId is provided, and DISABLED when a clusterPlacementGroupId is provided.
+	// +kubebuilder:validation:Optional
+	DisasterRecoveryStatus *string `json:"disasterRecoveryStatus,omitempty" tf:"disaster_recovery_status,omitempty"`
 
 	// (Updatable) An object's Display Name.
 	// +kubebuilder:validation:Optional
@@ -920,7 +930,7 @@ type OggDataInitParameters struct {
 	// (Updatable) The type of credential store for OGG.
 	CredentialStore *string `json:"credentialStore,omitempty" tf:"credential_store,omitempty"`
 
-	// The name given to the GoldenGate service deployment. The name must be 1 to 32 characters long, must contain only alphanumeric characters and must start with a letter.
+	// The name given to the GoldenGate service deployment. The name must contain only alphanumeric characters and must start with a letter. For standby deployment the deployment name is inherited from primary.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/goldengate/v1alpha1.Deployment
 	DeploymentName *string `json:"deploymentName,omitempty" tf:"deployment_name,omitempty"`
 
@@ -951,6 +961,19 @@ type OggDataInitParameters struct {
 	// (Updatable) The base64 encoded content of the PEM file containing the private key.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
+	// (Updatable) The OCID of the Secret where the deployment ssl private key is stored in PEM format.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/vault/v1alpha1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	KeySecretID *string `json:"keySecretId,omitempty" tf:"key_secret_id,omitempty"`
+
+	// Reference to a Secret in vault to populate keySecretId.
+	// +kubebuilder:validation:Optional
+	KeySecretIDRef *v1.NamespacedReference `json:"keySecretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in vault to populate keySecretId.
+	// +kubebuilder:validation:Optional
+	KeySecretIDSelector *v1.NamespacedSelector `json:"keySecretIdSelector,omitempty" tf:"-"`
+
 	// Version of OGG
 	OggVersion *string `json:"oggVersion,omitempty" tf:"ogg_version,omitempty"`
 
@@ -969,7 +992,7 @@ type OggDataObservation struct {
 	// (Updatable) The type of credential store for OGG.
 	CredentialStore *string `json:"credentialStore,omitempty" tf:"credential_store,omitempty"`
 
-	// The name given to the GoldenGate service deployment. The name must be 1 to 32 characters long, must contain only alphanumeric characters and must start with a letter.
+	// The name given to the GoldenGate service deployment. The name must contain only alphanumeric characters and must start with a letter. For standby deployment the deployment name is inherited from primary.
 	DeploymentName *string `json:"deploymentName,omitempty" tf:"deployment_name,omitempty"`
 
 	// (Updatable) Defines the IDP Groups to GoldenGate roles mapping. This field is used only for IAM deployment and does not have any impact on non-IAM deployments. For IAM deployment, when user does not specify this mapping, then it has null value and default mapping is used. User belonging to each group can only perform the actions according to the role the respective group is mapped to.
@@ -980,6 +1003,9 @@ type OggDataObservation struct {
 
 	// (Updatable) The base64 encoded content of the PEM file containing the private key.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (Updatable) The OCID of the Secret where the deployment ssl private key is stored in PEM format.
+	KeySecretID *string `json:"keySecretId,omitempty" tf:"key_secret_id,omitempty"`
 
 	// Version of OGG
 	OggVersion *string `json:"oggVersion,omitempty" tf:"ogg_version,omitempty"`
@@ -1003,7 +1029,7 @@ type OggDataParameters struct {
 	// +kubebuilder:validation:Optional
 	CredentialStore *string `json:"credentialStore,omitempty" tf:"credential_store,omitempty"`
 
-	// The name given to the GoldenGate service deployment. The name must be 1 to 32 characters long, must contain only alphanumeric characters and must start with a letter.
+	// The name given to the GoldenGate service deployment. The name must contain only alphanumeric characters and must start with a letter. For standby deployment the deployment name is inherited from primary.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/goldengate/v1alpha1.Deployment
 	// +kubebuilder:validation:Optional
 	DeploymentName *string `json:"deploymentName,omitempty" tf:"deployment_name,omitempty"`
@@ -1037,6 +1063,20 @@ type OggDataParameters struct {
 	// (Updatable) The base64 encoded content of the PEM file containing the private key.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (Updatable) The OCID of the Secret where the deployment ssl private key is stored in PEM format.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/vault/v1alpha1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	KeySecretID *string `json:"keySecretId,omitempty" tf:"key_secret_id,omitempty"`
+
+	// Reference to a Secret in vault to populate keySecretId.
+	// +kubebuilder:validation:Optional
+	KeySecretIDRef *v1.NamespacedReference `json:"keySecretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in vault to populate keySecretId.
+	// +kubebuilder:validation:Optional
+	KeySecretIDSelector *v1.NamespacedSelector `json:"keySecretIdSelector,omitempty" tf:"-"`
 
 	// Version of OGG
 	// +kubebuilder:validation:Optional

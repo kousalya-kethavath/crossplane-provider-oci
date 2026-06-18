@@ -46,3 +46,43 @@ func (mg *ManagementDashboardsImport) SetProviderConfigReference(r *xpv1.Provide
 func (mg *ManagementDashboardsImport) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}

@@ -175,6 +175,10 @@ spec:
                     description: The user-friendly name for the Autonomous VM cluster.
                       The name does not need to be unique.
                     type: string
+                  distributionAlgorithm:
+                    description: (Updatable) The distribution algorithm used for the
+                      Autonomous VM cluster.
+                    type: string
                   exadataInfrastructureId:
                     description: The OCID of the Exadata infrastructure.
                     type: string
@@ -276,8 +280,8 @@ spec:
                       VM cluster.
                     type: boolean
                   isMtlsEnabled:
-                    description: Enable mutual TLS(mTLS) authentication for database
-                      while provisioning a VMCluster. Default is TLS.
+                    description: (Updatable) Enable mutual TLS(mTLS) authentication
+                      for database while provisioning a VMCluster. Default is TLS.
                     type: boolean
                   licenseModel:
                     description: (Updatable) The Oracle license model that applies
@@ -363,16 +367,20 @@ spec:
                       or ECPU.
                     type: number
                   scanListenerPortNonTls:
-                    description: The SCAN Listener Non TLS port number. Default value
-                      is 1521.
+                    description: (Updatable) The SCAN Listener Non TLS port number.
+                      Default value is 1521.
                     type: number
                   scanListenerPortTls:
-                    description: The SCAN Listener TLS port number. Default value
-                      is 2484.
+                    description: (Updatable) The SCAN Listener TLS port number. Default
+                      value is 2484.
+                    type: number
+                  sgaPercentage:
+                    description: Percentage of ECPU memory allocated for SGA(System
+                      Global Area).
                     type: number
                   timeZone:
-                    description: The time zone to use for the Autonomous VM cluster.
-                      For details, see DB System Time Zones.
+                    description: (Updatable) The time zone to use for the Autonomous
+                      VM cluster. For details, see DB System Time Zones.
                     type: string
                   totalContainerDatabases:
                     description: (Updatable) The total number of Autonomous Container
@@ -592,6 +600,10 @@ spec:
                     description: The user-friendly name for the Autonomous VM cluster.
                       The name does not need to be unique.
                     type: string
+                  distributionAlgorithm:
+                    description: (Updatable) The distribution algorithm used for the
+                      Autonomous VM cluster.
+                    type: string
                   exadataInfrastructureId:
                     description: The OCID of the Exadata infrastructure.
                     type: string
@@ -693,8 +705,8 @@ spec:
                       VM cluster.
                     type: boolean
                   isMtlsEnabled:
-                    description: Enable mutual TLS(mTLS) authentication for database
-                      while provisioning a VMCluster. Default is TLS.
+                    description: (Updatable) Enable mutual TLS(mTLS) authentication
+                      for database while provisioning a VMCluster. Default is TLS.
                     type: boolean
                   licenseModel:
                     description: (Updatable) The Oracle license model that applies
@@ -780,16 +792,20 @@ spec:
                       or ECPU.
                     type: number
                   scanListenerPortNonTls:
-                    description: The SCAN Listener Non TLS port number. Default value
-                      is 1521.
+                    description: (Updatable) The SCAN Listener Non TLS port number.
+                      Default value is 1521.
                     type: number
                   scanListenerPortTls:
-                    description: The SCAN Listener TLS port number. Default value
-                      is 2484.
+                    description: (Updatable) The SCAN Listener TLS port number. Default
+                      value is 2484.
+                    type: number
+                  sgaPercentage:
+                    description: Percentage of ECPU memory allocated for SGA(System
+                      Global Area).
                     type: number
                   timeZone:
-                    description: The time zone to use for the Autonomous VM cluster.
-                      For details, see DB System Time Zones.
+                    description: (Updatable) The time zone to use for the Autonomous
+                      VM cluster. For details, see DB System Time Zones.
                     type: string
                   totalContainerDatabases:
                     description: (Updatable) The total number of Autonomous Container
@@ -1016,6 +1032,10 @@ spec:
                     description: The user-friendly name for the Autonomous VM cluster.
                       The name does not need to be unique.
                     type: string
+                  distributionAlgorithm:
+                    description: (Updatable) The distribution algorithm used for the
+                      Autonomous VM cluster.
+                    type: string
                   exadataInfrastructureId:
                     description: The OCID of the Exadata infrastructure.
                     type: string
@@ -1042,8 +1062,8 @@ spec:
                       VM cluster.
                     type: boolean
                   isMtlsEnabled:
-                    description: Enable mutual TLS(mTLS) authentication for database
-                      while provisioning a VMCluster. Default is TLS.
+                    description: (Updatable) Enable mutual TLS(mTLS) authentication
+                      for database while provisioning a VMCluster. Default is TLS.
                     type: boolean
                   lastMaintenanceRunId:
                     description: The OCID of the last maintenance run.
@@ -1251,12 +1271,16 @@ spec:
                     description: The number of CPUs reserved in an Autonomous VM Cluster.
                     type: number
                   scanListenerPortNonTls:
-                    description: The SCAN Listener Non TLS port number. Default value
-                      is 1521.
+                    description: (Updatable) The SCAN Listener Non TLS port number.
+                      Default value is 1521.
                     type: number
                   scanListenerPortTls:
-                    description: The SCAN Listener TLS port number. Default value
-                      is 2484.
+                    description: (Updatable) The SCAN Listener TLS port number. Default
+                      value is 2484.
+                    type: number
+                  sgaPercentage:
+                    description: Percentage of ECPU memory allocated for SGA(System
+                      Global Area).
                     type: number
                   state:
                     description: The current state of the Autonomous VM cluster.
@@ -1280,8 +1304,8 @@ spec:
                     description: The date and time of ORDS certificate expiration.
                     type: string
                   timeZone:
-                    description: The time zone to use for the Autonomous VM cluster.
-                      For details, see DB System Time Zones.
+                    description: (Updatable) The time zone to use for the Autonomous
+                      VM cluster. For details, see DB System Time Zones.
                     type: string
                   totalAutonomousDataStorageInTbs:
                     type: number

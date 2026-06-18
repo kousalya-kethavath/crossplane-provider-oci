@@ -42,3 +42,6 @@ spec:
             operator: ${var.auto_scaling_configuration_policy_details_scale_up_config_metric_threshold_operator}
             value: ${var.auto_scaling_configuration_policy_details_scale_up_config_metric_threshold_value}
         ocpuStepSize: ${var.auto_scaling_configuration_policy_details_scale_up_config_ocpu_step_size}
+    secretIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_secret

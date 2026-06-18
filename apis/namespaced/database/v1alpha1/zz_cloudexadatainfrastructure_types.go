@@ -73,6 +73,9 @@ type CloudExadataInfrastructureInitParameters struct {
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
+	// (Updatable) The preferences for target versions of future maintenance runs.
+	MaintenanceVersionPreferences []MaintenanceVersionPreferencesInitParameters `json:"maintenanceVersionPreferences,omitempty" tf:"maintenance_version_preferences,omitempty"`
+
 	// (Updatable) The scheduling details for the quarterly maintenance window. Patching and system updates take place during the maintenance window.
 	MaintenanceWindow []CloudExadataInfrastructureMaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -316,6 +319,9 @@ type CloudExadataInfrastructureObservation struct {
 	// Additional information about the current lifecycle state.
 	LifecycleDetails *string `json:"lifecycleDetails,omitempty" tf:"lifecycle_details,omitempty"`
 
+	// (Updatable) The preferences for target versions of future maintenance runs.
+	MaintenanceVersionPreferences []MaintenanceVersionPreferencesObservation `json:"maintenanceVersionPreferences,omitempty" tf:"maintenance_version_preferences,omitempty"`
+
 	// (Updatable) The scheduling details for the quarterly maintenance window. Patching and system updates take place during the maintenance window.
 	MaintenanceWindow []CloudExadataInfrastructureMaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -421,6 +427,10 @@ type CloudExadataInfrastructureParameters struct {
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
+	// (Updatable) The preferences for target versions of future maintenance runs.
+	// +kubebuilder:validation:Optional
+	MaintenanceVersionPreferences []MaintenanceVersionPreferencesParameters `json:"maintenanceVersionPreferences,omitempty" tf:"maintenance_version_preferences,omitempty"`
+
 	// (Updatable) The scheduling details for the quarterly maintenance window. Patching and system updates take place during the maintenance window.
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow []CloudExadataInfrastructureMaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
@@ -453,6 +463,9 @@ type DefinedFileSystemConfigurationsObservation struct {
 	// If true, the file system resize is allowed for the Exadata Infrastructure cluster. If false, the file system resize is not allowed.
 	IsResizable *bool `json:"isResizable,omitempty" tf:"is_resizable,omitempty"`
 
+	// The maximum size of file system.
+	MaxSizeGb *float64 `json:"maxSizeGb,omitempty" tf:"max_size_gb,omitempty"`
+
 	// The minimum size of file system.
 	MinSizeGb *float64 `json:"minSizeGb,omitempty" tf:"min_size_gb,omitempty"`
 
@@ -482,6 +495,25 @@ type ExascaleConfigObservation struct {
 }
 
 type ExascaleConfigParameters struct {
+}
+
+type MaintenanceVersionPreferencesInitParameters struct {
+
+	// (Updatable) The OCID of the resource the maintenance run will refer to when trying to fetch target versions.
+	ReferenceResourceIDForImageUpdates *string `json:"referenceResourceIdForImageUpdates,omitempty" tf:"reference_resource_id_for_image_updates,omitempty"`
+}
+
+type MaintenanceVersionPreferencesObservation struct {
+
+	// (Updatable) The OCID of the resource the maintenance run will refer to when trying to fetch target versions.
+	ReferenceResourceIDForImageUpdates *string `json:"referenceResourceIdForImageUpdates,omitempty" tf:"reference_resource_id_for_image_updates,omitempty"`
+}
+
+type MaintenanceVersionPreferencesParameters struct {
+
+	// (Updatable) The OCID of the resource the maintenance run will refer to when trying to fetch target versions.
+	// +kubebuilder:validation:Optional
+	ReferenceResourceIDForImageUpdates *string `json:"referenceResourceIdForImageUpdates,omitempty" tf:"reference_resource_id_for_image_updates,omitempty"`
 }
 
 // CloudExadataInfrastructureSpec defines the desired state of CloudExadataInfrastructure

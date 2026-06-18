@@ -106,6 +106,9 @@ func (tr *DatabaseSnapshotStandby) Hub() {}
 func (tr *DatabaseSoftwareImage) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *DatabaseSoftwareScheduleManagement) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *DatabaseUpgrade) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -409,10 +412,46 @@ func (tr *SchedulingPolicySchedulingWindow) Hub() {}
 func (tr *ToolsDatabaseToolsConnection) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ToolsDatabaseToolsDatabaseApiGatewayConfig) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ToolsDatabaseToolsIdentity) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ToolsDatabaseToolsMcpServer) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ToolsDatabaseToolsMcpToolset) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ToolsDatabaseToolsPrivateEndpoint) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ToolsDatabaseToolsSqlReport) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ToolsRuntimeDatabaseToolsConnectionCredential) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ToolsRuntimeDatabaseToolsConnectionPropertySet) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *VmCluster) Hub() {}

@@ -1890,8 +1890,8 @@ spec:
                     type: string
                   vmFailoverReservation:
                     description: The percentage of CPUs reserved across nodes to support
-                      node failover. Allowed values are 0%, 25%, and 50%, with 50%
-                      being the default option.
+                      node failover. Allowed values are 0%, 25%, 50%, 75%, and 100%,
+                      with 50% being the default option.
                     type: number
                 type: object
               conditions:

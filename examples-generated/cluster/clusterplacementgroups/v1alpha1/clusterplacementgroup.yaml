@@ -11,7 +11,13 @@ spec:
     availabilityDomain: ${var.cluster_placement_group_availability_domain}
     capabilities:
     - items:
-      - name: ${var.cluster_placement_group_capabilities_items_name}
+      - additionalDetails:
+        - clusterPlacementGroupCount: ${var.cluster_placement_group_capabilities_items_additional_details_cluster_placement_group_count}
+          memoryInGbs: ${var.cluster_placement_group_capabilities_items_additional_details_memory_in_gbs}
+          nvmes: ${var.cluster_placement_group_capabilities_items_additional_details_nvmes}
+          ocpus: ${var.cluster_placement_group_capabilities_items_additional_details_ocpus}
+          serviceType: ${var.cluster_placement_group_capabilities_items_additional_details_service_type}
+        name: ${var.cluster_placement_group_capabilities_items_name}
         service: ${var.cluster_placement_group_capabilities_items_service}
     clusterPlacementGroupType: ${var.cluster_placement_group_cluster_placement_group_type}
     compartmentIdSelector:

@@ -86,6 +86,9 @@ type ByolAllocationObservation struct {
 	// The OCID of the BYOL Allocation.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The hyperscaler identifier in Broadcom systems.
+	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
+
 	// The type of VMware software the BYOL applies to.  Supported values:
 	SoftwareType *string `json:"softwareType,omitempty" tf:"software_type,omitempty"`
 

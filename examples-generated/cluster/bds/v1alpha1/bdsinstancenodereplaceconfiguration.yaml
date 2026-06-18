@@ -22,3 +22,6 @@ spec:
       nodeHostName: ${var.bds_instance_node_replace_configuration_level_type_details_node_host_name}
       nodeType: ${var.bds_instance_node_replace_configuration_level_type_details_node_type}
     metricType: ${var.bds_instance_node_replace_configuration_metric_type}
+    secretIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_secret

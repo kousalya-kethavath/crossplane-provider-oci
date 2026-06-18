@@ -925,6 +925,21 @@ spec:
                           type: string
                       type: object
                     type: array
+                  primaryVnic:
+                    description: (Updatable) Details for node's primary VNIC
+                    items:
+                      properties:
+                        securityAttributes:
+                          additionalProperties:
+                            type: string
+                          description: (Updatable) Security attributes are labels
+                            for a resource that can be referenced in a Zero Trust
+                            Packet Routing (ZPR) policy to control access to ZPR-supported
+                            resources.
+                          type: object
+                          x-kubernetes-map-type: granular
+                      type: object
+                    type: array
                   quantityPerSubnet:
                     description: (Updatable) Optional, default to 1. The number of
                       nodes to create in each subnet specified in subnetIds property.
@@ -1015,6 +1030,15 @@ spec:
                                   type: string
                                 type: array
                                 x-kubernetes-list-type: set
+                              securityAttributes:
+                                additionalProperties:
+                                  type: string
+                                description: (Updatable) Security attributes are labels
+                                  for a resource that can be referenced in a Zero
+                                  Trust Packet Routing (ZPR) policy to control access
+                                  to ZPR-supported resources.
+                                type: object
+                                x-kubernetes-map-type: granular
                               skipSourceDestCheck:
                                 description: (Updatable) Whether the source/destination
                                   check is disabled on the VNIC
@@ -2010,6 +2034,21 @@ spec:
                           type: string
                       type: object
                     type: array
+                  primaryVnic:
+                    description: (Updatable) Details for node's primary VNIC
+                    items:
+                      properties:
+                        securityAttributes:
+                          additionalProperties:
+                            type: string
+                          description: (Updatable) Security attributes are labels
+                            for a resource that can be referenced in a Zero Trust
+                            Packet Routing (ZPR) policy to control access to ZPR-supported
+                            resources.
+                          type: object
+                          x-kubernetes-map-type: granular
+                      type: object
+                    type: array
                   quantityPerSubnet:
                     description: (Updatable) Optional, default to 1. The number of
                       nodes to create in each subnet specified in subnetIds property.
@@ -2100,6 +2139,15 @@ spec:
                                   type: string
                                 type: array
                                 x-kubernetes-list-type: set
+                              securityAttributes:
+                                additionalProperties:
+                                  type: string
+                                description: (Updatable) Security attributes are labels
+                                  for a resource that can be referenced in a Zero
+                                  Trust Packet Routing (ZPR) policy to control access
+                                  to ZPR-supported resources.
+                                type: object
+                                x-kubernetes-map-type: granular
                               skipSourceDestCheck:
                                 description: (Updatable) Whether the source/destination
                                   check is disabled on the VNIC
@@ -2689,6 +2737,21 @@ spec:
                           type: string
                       type: object
                     type: array
+                  primaryVnic:
+                    description: (Updatable) Details for node's primary VNIC
+                    items:
+                      properties:
+                        securityAttributes:
+                          additionalProperties:
+                            type: string
+                          description: (Updatable) Security attributes are labels
+                            for a resource that can be referenced in a Zero Trust
+                            Packet Routing (ZPR) policy to control access to ZPR-supported
+                            resources.
+                          type: object
+                          x-kubernetes-map-type: granular
+                      type: object
+                    type: array
                   quantityPerSubnet:
                     description: (Updatable) Optional, default to 1. The number of
                       nodes to create in each subnet specified in subnetIds property.
@@ -2779,6 +2842,15 @@ spec:
                                   type: string
                                 type: array
                                 x-kubernetes-list-type: set
+                              securityAttributes:
+                                additionalProperties:
+                                  type: string
+                                description: (Updatable) Security attributes are labels
+                                  for a resource that can be referenced in a Zero
+                                  Trust Packet Routing (ZPR) policy to control access
+                                  to ZPR-supported resources.
+                                type: object
+                                x-kubernetes-map-type: granular
                               skipSourceDestCheck:
                                 description: (Updatable) Whether the source/destination
                                   check is disabled on the VNIC

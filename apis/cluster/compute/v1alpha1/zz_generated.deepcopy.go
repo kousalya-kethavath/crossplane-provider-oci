@@ -1881,6 +1881,11 @@ func (in *CapacityBinsObservation) DeepCopyInto(out *CapacityBinsObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.RemainingLocalVolumeInGbs != nil {
+		in, out := &in.RemainingLocalVolumeInGbs, &out.RemainingLocalVolumeInGbs
+		*out = new(float64)
+		**out = **in
+	}
 	if in.RemainingMemoryInGbs != nil {
 		in, out := &in.RemainingMemoryInGbs, &out.RemainingMemoryInGbs
 		*out = new(float64)
@@ -1901,6 +1906,11 @@ func (in *CapacityBinsObservation) DeepCopyInto(out *CapacityBinsObservation) {
 				**out = **in
 			}
 		}
+	}
+	if in.TotalLocalVolumeInGbs != nil {
+		in, out := &in.TotalLocalVolumeInGbs, &out.TotalLocalVolumeInGbs
+		*out = new(float64)
+		**out = **in
 	}
 	if in.TotalMemoryInGbs != nil {
 		in, out := &in.TotalMemoryInGbs, &out.TotalMemoryInGbs
@@ -4552,6 +4562,17 @@ func (in *ComputeGpuMemoryFabricObservation) DeepCopyInto(out *ComputeGpuMemoryF
 		in, out := &in.CompartmentID, &out.CompartmentID
 		*out = new(string)
 		**out = **in
+	}
+	if in.ComputeGpuMemoryClusters != nil {
+		in, out := &in.ComputeGpuMemoryClusters, &out.ComputeGpuMemoryClusters
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.ComputeGpuMemoryFabricID != nil {
 		in, out := &in.ComputeGpuMemoryFabricID, &out.ComputeGpuMemoryFabricID
@@ -7920,6 +7941,11 @@ func (in *DedicatedVmHostObservation) DeepCopyInto(out *DedicatedVmHostObservati
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.RemainingLocalVolumeInGbs != nil {
+		in, out := &in.RemainingLocalVolumeInGbs, &out.RemainingLocalVolumeInGbs
+		*out = new(float64)
+		**out = **in
+	}
 	if in.RemainingMemoryInGbs != nil {
 		in, out := &in.RemainingMemoryInGbs, &out.RemainingMemoryInGbs
 		*out = new(float64)
@@ -7938,6 +7964,11 @@ func (in *DedicatedVmHostObservation) DeepCopyInto(out *DedicatedVmHostObservati
 	if in.TimeCreated != nil {
 		in, out := &in.TimeCreated, &out.TimeCreated
 		*out = new(string)
+		**out = **in
+	}
+	if in.TotalLocalVolumeInGbs != nil {
+		in, out := &in.TotalLocalVolumeInGbs, &out.TotalLocalVolumeInGbs
+		*out = new(float64)
 		**out = **in
 	}
 	if in.TotalMemoryInGbs != nil {
@@ -16561,6 +16592,11 @@ func (in *LaunchDetailsShapeConfigInitParameters) DeepCopyInto(out *LaunchDetail
 		*out = new(string)
 		**out = **in
 	}
+	if in.LocalVolumeSizeInGbs != nil {
+		in, out := &in.LocalVolumeSizeInGbs, &out.LocalVolumeSizeInGbs
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MemoryInGbs != nil {
 		in, out := &in.MemoryInGbs, &out.MemoryInGbs
 		*out = new(float64)
@@ -16606,6 +16642,11 @@ func (in *LaunchDetailsShapeConfigObservation) DeepCopyInto(out *LaunchDetailsSh
 		*out = new(string)
 		**out = **in
 	}
+	if in.LocalVolumeSizeInGbs != nil {
+		in, out := &in.LocalVolumeSizeInGbs, &out.LocalVolumeSizeInGbs
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MemoryInGbs != nil {
 		in, out := &in.MemoryInGbs, &out.MemoryInGbs
 		*out = new(float64)
@@ -16649,6 +16690,11 @@ func (in *LaunchDetailsShapeConfigParameters) DeepCopyInto(out *LaunchDetailsSha
 	if in.BaselineOcpuUtilization != nil {
 		in, out := &in.BaselineOcpuUtilization, &out.BaselineOcpuUtilization
 		*out = new(string)
+		**out = **in
+	}
+	if in.LocalVolumeSizeInGbs != nil {
+		in, out := &in.LocalVolumeSizeInGbs, &out.LocalVolumeSizeInGbs
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MemoryInGbs != nil {
@@ -20187,6 +20233,11 @@ func (in *OptionsLaunchDetailsShapeConfigInitParameters) DeepCopyInto(out *Optio
 		*out = new(string)
 		**out = **in
 	}
+	if in.LocalVolumeSizeInGbs != nil {
+		in, out := &in.LocalVolumeSizeInGbs, &out.LocalVolumeSizeInGbs
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MemoryInGbs != nil {
 		in, out := &in.MemoryInGbs, &out.MemoryInGbs
 		*out = new(float64)
@@ -20232,6 +20283,11 @@ func (in *OptionsLaunchDetailsShapeConfigObservation) DeepCopyInto(out *OptionsL
 		*out = new(string)
 		**out = **in
 	}
+	if in.LocalVolumeSizeInGbs != nil {
+		in, out := &in.LocalVolumeSizeInGbs, &out.LocalVolumeSizeInGbs
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MemoryInGbs != nil {
 		in, out := &in.MemoryInGbs, &out.MemoryInGbs
 		*out = new(float64)
@@ -20275,6 +20331,11 @@ func (in *OptionsLaunchDetailsShapeConfigParameters) DeepCopyInto(out *OptionsLa
 	if in.BaselineOcpuUtilization != nil {
 		in, out := &in.BaselineOcpuUtilization, &out.BaselineOcpuUtilization
 		*out = new(string)
+		**out = **in
+	}
+	if in.LocalVolumeSizeInGbs != nil {
+		in, out := &in.LocalVolumeSizeInGbs, &out.LocalVolumeSizeInGbs
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MemoryInGbs != nil {
@@ -23240,6 +23301,11 @@ func (in *ShapeConfigInitParameters) DeepCopyInto(out *ShapeConfigInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.LocalVolumeSizeInGbs != nil {
+		in, out := &in.LocalVolumeSizeInGbs, &out.LocalVolumeSizeInGbs
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MemoryInGbs != nil {
 		in, out := &in.MemoryInGbs, &out.MemoryInGbs
 		*out = new(float64)
@@ -23310,6 +23376,11 @@ func (in *ShapeConfigObservation) DeepCopyInto(out *ShapeConfigObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.LocalVolumeSizeInGbs != nil {
+		in, out := &in.LocalVolumeSizeInGbs, &out.LocalVolumeSizeInGbs
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MaxVnicAttachments != nil {
 		in, out := &in.MaxVnicAttachments, &out.MaxVnicAttachments
 		*out = new(float64)
@@ -23368,6 +23439,11 @@ func (in *ShapeConfigParameters) DeepCopyInto(out *ShapeConfigParameters) {
 	if in.BaselineOcpuUtilization != nil {
 		in, out := &in.BaselineOcpuUtilization, &out.BaselineOcpuUtilization
 		*out = new(string)
+		**out = **in
+	}
+	if in.LocalVolumeSizeInGbs != nil {
+		in, out := &in.LocalVolumeSizeInGbs, &out.LocalVolumeSizeInGbs
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MemoryInGbs != nil {

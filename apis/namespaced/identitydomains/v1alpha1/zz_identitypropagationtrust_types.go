@@ -14,6 +14,64 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
+type CACertChainInitParameters struct {
+
+	// (Updatable) A list of PEM-encoded intermediate CA certificates.
+	IntermediateCas []*string `json:"intermediateCas,omitempty" tf:"intermediate_cas,omitempty"`
+
+	// (Updatable) A list of PEM-encoded root CA certificates.
+	RootCas []*string `json:"rootCas,omitempty" tf:"root_cas,omitempty"`
+}
+
+type CACertChainObservation struct {
+
+	// (Updatable) A list of PEM-encoded intermediate CA certificates.
+	IntermediateCas []*string `json:"intermediateCas,omitempty" tf:"intermediate_cas,omitempty"`
+
+	// (Updatable) A list of PEM-encoded root CA certificates.
+	RootCas []*string `json:"rootCas,omitempty" tf:"root_cas,omitempty"`
+}
+
+type CACertChainParameters struct {
+
+	// (Updatable) A list of PEM-encoded intermediate CA certificates.
+	// +kubebuilder:validation:Optional
+	IntermediateCas []*string `json:"intermediateCas,omitempty" tf:"intermediate_cas,omitempty"`
+
+	// (Updatable) A list of PEM-encoded root CA certificates.
+	// +kubebuilder:validation:Optional
+	RootCas []*string `json:"rootCas" tf:"root_cas,omitempty"`
+}
+
+type ClaimValidationsInitParameters struct {
+
+	// Claim Name
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Updatable) Claim Value
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ClaimValidationsObservation struct {
+
+	// Claim Name
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Updatable) Claim Value
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ClaimValidationsParameters struct {
+
+	// Claim Name
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// (Updatable) Claim Value
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
 type IdentityPropagationTrustIdcsCreatedByInitParameters struct {
 }
 
@@ -30,7 +88,7 @@ type IdentityPropagationTrustIdcsCreatedByObservation struct {
 	// (Updatable) The type of resource, User or App, that created this Resource
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// (Updatable) The ID of the SCIM resource that represents the User or App who created this Resource
+	// (Updatable) Claim Value
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -53,7 +111,7 @@ type IdentityPropagationTrustIdcsLastModifiedByObservation struct {
 	// (Updatable) The type of resource, User or App, that created this Resource
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// (Updatable) The ID of the SCIM resource that represents the User or App who created this Resource
+	// (Updatable) Claim Value
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -80,6 +138,15 @@ type IdentityPropagationTrustInitParameters struct {
 	// (Updatable) The Authorization field value consists of credentials containing the authentication information of the user agent for the realm of the resource being requested.
 	Authorization *string `json:"authorization,omitempty" tf:"authorization,omitempty"`
 
+	// (Updatable) Certificate trust store. This is required if identity propagation type is X509.
+	CACertChain []CACertChainInitParameters `json:"caCertChain,omitempty" tf:"ca_cert_chain,omitempty"`
+
+	// (Updatable) A list of claims to propagate in RPST
+	ClaimPropagations []*string `json:"claimPropagations,omitempty" tf:"claim_propagations,omitempty"`
+
+	// (Updatable) A list of claim validations
+	ClaimValidations []ClaimValidationsInitParameters `json:"claimValidations,omitempty" tf:"claim_validations,omitempty"`
+
 	// (Updatable) The claim name that identifies to whom the JWT/SAML token is issued. If AWS, then "aud" or "client_id". If Azure, then "appid". If GCP, then "aud".
 	ClientClaimName *string `json:"clientClaimName,omitempty" tf:"client_claim_name,omitempty"`
 
@@ -96,6 +163,9 @@ type IdentityPropagationTrustInitParameters struct {
 	// The basic endpoint for the identity domain
 	IdcsEndpoint *string `json:"idcsEndpoint,omitempty" tf:"idcs_endpoint,omitempty"`
 
+	// (Updatable) Defines the external workload that acts as impersonating resource principal.
+	ImpersonatingResource *string `json:"impersonatingResource,omitempty" tf:"impersonating_resource,omitempty"`
+
 	// (Updatable) The Impersonating Principal.
 	ImpersonationServiceUsers []ImpersonationServiceUsersInitParameters `json:"impersonationServiceUsers,omitempty" tf:"impersonation_service_users,omitempty"`
 
@@ -105,7 +175,7 @@ type IdentityPropagationTrustInitParameters struct {
 	// (Updatable) The keytab stored in the tenancy's Vault. This is required if the identity propagation type is 'SPNEGO'.
 	Keytab []KeytabInitParameters `json:"keytab,omitempty" tf:"keytab,omitempty"`
 
-	// The name of the the Identity Propagation Trust.
+	// Claim Name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Updatable) The value of all the authorized OAuth Clients.
@@ -187,6 +257,15 @@ type IdentityPropagationTrustObservation struct {
 	// (Updatable) The Authorization field value consists of credentials containing the authentication information of the user agent for the realm of the resource being requested.
 	Authorization *string `json:"authorization,omitempty" tf:"authorization,omitempty"`
 
+	// (Updatable) Certificate trust store. This is required if identity propagation type is X509.
+	CACertChain []CACertChainObservation `json:"caCertChain,omitempty" tf:"ca_cert_chain,omitempty"`
+
+	// (Updatable) A list of claims to propagate in RPST
+	ClaimPropagations []*string `json:"claimPropagations,omitempty" tf:"claim_propagations,omitempty"`
+
+	// (Updatable) A list of claim validations
+	ClaimValidations []ClaimValidationsObservation `json:"claimValidations,omitempty" tf:"claim_validations,omitempty"`
+
 	// (Updatable) The claim name that identifies to whom the JWT/SAML token is issued. If AWS, then "aud" or "client_id". If Azure, then "appid". If GCP, then "aud".
 	ClientClaimName *string `json:"clientClaimName,omitempty" tf:"client_claim_name,omitempty"`
 
@@ -227,6 +306,9 @@ type IdentityPropagationTrustObservation struct {
 	// (Updatable) Each value of this attribute specifies an operation that only an internal client may perform on this particular resource.
 	IdcsPreventedOperations []*string `json:"idcsPreventedOperations,omitempty" tf:"idcs_prevented_operations,omitempty"`
 
+	// (Updatable) Defines the external workload that acts as impersonating resource principal.
+	ImpersonatingResource *string `json:"impersonatingResource,omitempty" tf:"impersonating_resource,omitempty"`
+
 	// (Updatable) The Impersonating Principal.
 	ImpersonationServiceUsers []ImpersonationServiceUsersObservation `json:"impersonationServiceUsers,omitempty" tf:"impersonation_service_users,omitempty"`
 
@@ -239,7 +321,7 @@ type IdentityPropagationTrustObservation struct {
 	// (Updatable) A complex attribute that contains resource metadata. All sub-attributes are OPTIONAL.
 	Meta []IdentityPropagationTrustMetaObservation `json:"meta,omitempty" tf:"meta,omitempty"`
 
-	// The name of the the Identity Propagation Trust.
+	// Claim Name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Updatable) The value of all the authorized OAuth Clients.
@@ -306,6 +388,18 @@ type IdentityPropagationTrustParameters struct {
 	// +kubebuilder:validation:Optional
 	Authorization *string `json:"authorization,omitempty" tf:"authorization,omitempty"`
 
+	// (Updatable) Certificate trust store. This is required if identity propagation type is X509.
+	// +kubebuilder:validation:Optional
+	CACertChain []CACertChainParameters `json:"caCertChain,omitempty" tf:"ca_cert_chain,omitempty"`
+
+	// (Updatable) A list of claims to propagate in RPST
+	// +kubebuilder:validation:Optional
+	ClaimPropagations []*string `json:"claimPropagations,omitempty" tf:"claim_propagations,omitempty"`
+
+	// (Updatable) A list of claim validations
+	// +kubebuilder:validation:Optional
+	ClaimValidations []ClaimValidationsParameters `json:"claimValidations,omitempty" tf:"claim_validations,omitempty"`
+
 	// (Updatable) The claim name that identifies to whom the JWT/SAML token is issued. If AWS, then "aud" or "client_id". If Azure, then "appid". If GCP, then "aud".
 	// +kubebuilder:validation:Optional
 	ClientClaimName *string `json:"clientClaimName,omitempty" tf:"client_claim_name,omitempty"`
@@ -327,6 +421,10 @@ type IdentityPropagationTrustParameters struct {
 	// +kubebuilder:validation:Optional
 	IdcsEndpoint *string `json:"idcsEndpoint,omitempty" tf:"idcs_endpoint,omitempty"`
 
+	// (Updatable) Defines the external workload that acts as impersonating resource principal.
+	// +kubebuilder:validation:Optional
+	ImpersonatingResource *string `json:"impersonatingResource,omitempty" tf:"impersonating_resource,omitempty"`
+
 	// (Updatable) The Impersonating Principal.
 	// +kubebuilder:validation:Optional
 	ImpersonationServiceUsers []ImpersonationServiceUsersParameters `json:"impersonationServiceUsers,omitempty" tf:"impersonation_service_users,omitempty"`
@@ -339,7 +437,7 @@ type IdentityPropagationTrustParameters struct {
 	// +kubebuilder:validation:Optional
 	Keytab []KeytabParameters `json:"keytab,omitempty" tf:"keytab,omitempty"`
 
-	// The name of the the Identity Propagation Trust.
+	// Claim Name
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -394,7 +492,7 @@ type IdentityPropagationTrustTagsInitParameters struct {
 	// (Updatable) Key or name of the tag.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// (Updatable) The ID of the SCIM resource that represents the User or App who created this Resource
+	// (Updatable) Claim Value
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -403,7 +501,7 @@ type IdentityPropagationTrustTagsObservation struct {
 	// (Updatable) Key or name of the tag.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// (Updatable) The ID of the SCIM resource that represents the User or App who created this Resource
+	// (Updatable) Claim Value
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -413,7 +511,7 @@ type IdentityPropagationTrustTagsParameters struct {
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// (Updatable) The ID of the SCIM resource that represents the User or App who created this Resource
+	// (Updatable) Claim Value
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -426,7 +524,7 @@ type ImpersonationServiceUsersInitParameters struct {
 	// (Updatable) The rule expression to be used for matching the inbound token for impersonation.
 	Rule *string `json:"rule,omitempty" tf:"rule,omitempty"`
 
-	// (Updatable) The ID of the SCIM resource that represents the User or App who created this Resource
+	// (Updatable) Claim Value
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/identitydomains/v1alpha1.User
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
@@ -450,7 +548,7 @@ type ImpersonationServiceUsersObservation struct {
 	// (Updatable) The rule expression to be used for matching the inbound token for impersonation.
 	Rule *string `json:"rule,omitempty" tf:"rule,omitempty"`
 
-	// (Updatable) The ID of the SCIM resource that represents the User or App who created this Resource
+	// (Updatable) Claim Value
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -464,7 +562,7 @@ type ImpersonationServiceUsersParameters struct {
 	// +kubebuilder:validation:Optional
 	Rule *string `json:"rule" tf:"rule,omitempty"`
 
-	// (Updatable) The ID of the SCIM resource that represents the User or App who created this Resource
+	// (Updatable) Claim Value
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/identitydomains/v1alpha1.User
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

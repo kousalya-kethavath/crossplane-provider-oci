@@ -1,0 +1,18 @@
+apiVersion: database.oci.m.upbound.io/v1alpha1
+kind: ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/toolsruntimedatabasetoolsapigatewayconfigpoolapispec
+  labels:
+    testing.upbound.io/example-name: test_database_tools_database_api_gateway_config_pool_api_spec
+  name: test-database-tools-database-api-gateway-config-pool-api-spec
+  namespace: upbound-system
+spec:
+  forProvider:
+    content: ${var.database_tools_database_api_gateway_config_pool_api_spec_content}
+    databaseToolsDatabaseApiGatewayConfigIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_config
+    displayName: ${var.database_tools_database_api_gateway_config_pool_api_spec_display_name}
+    poolKey: ${var.database_tools_database_api_gateway_config_pool_api_spec_pool_key}
+    type: ${var.database_tools_database_api_gateway_config_pool_api_spec_type}

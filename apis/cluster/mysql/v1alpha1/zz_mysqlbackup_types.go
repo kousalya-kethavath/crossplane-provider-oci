@@ -160,6 +160,9 @@ type DBSystemSnapshotObservation struct {
 	// The IP address the DB System is configured to listen on.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
+	// The IPv6 address the DB System is configured to listen on.
+	Ipv6Address *string `json:"ipv6address,omitempty" tf:"ipv6address,omitempty"`
+
 	// Specifies if the DB System is highly available.
 	IsHighlyAvailable *bool `json:"isHighlyAvailable,omitempty" tf:"is_highly_available,omitempty"`
 
@@ -344,6 +347,9 @@ type EndpointsObservation struct {
 
 	// The IP address the DB System is configured to listen on.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The internet protocol (IP) version of the IP address.
+	IPAddressVersion *string `json:"ipAddressVersion,omitempty" tf:"ip_address_version,omitempty"`
 
 	// The access modes from the client that this endpoint supports.
 	Modes []*string `json:"modes,omitempty" tf:"modes,omitempty"`
@@ -726,6 +732,21 @@ type PreparedBackupDetailsParameters struct {
 type ReadEndpointInitParameters struct {
 }
 
+type ReadEndpointIpv6AddressIpv6SubnetCidrPairDetailsInitParameters struct {
+}
+
+type ReadEndpointIpv6AddressIpv6SubnetCidrPairDetailsObservation struct {
+
+	// The IPv6 address the DB System is configured to listen on.
+	Ipv6Address *string `json:"ipv6address,omitempty" tf:"ipv6address,omitempty"`
+
+	// The IPv6 prefix allocated to the subnet.
+	Ipv6SubnetCidr *string `json:"ipv6subnetCidr,omitempty" tf:"ipv6subnet_cidr,omitempty"`
+}
+
+type ReadEndpointIpv6AddressIpv6SubnetCidrPairDetailsParameters struct {
+}
+
 type ReadEndpointObservation struct {
 
 	// A list of IP addresses of read replicas that are excluded from serving read requests.
@@ -739,6 +760,9 @@ type ReadEndpointObservation struct {
 
 	// The IP address the DB System read endpoint is configured to listen on. A private IP address of your choice to assign to the read endpoint of the DB System. Must be an available IP address within the subnet's CIDR. If you don't specify a value, Oracle automatically assigns a private IP address from the subnet. This should be a "dotted-quad" style IPv4 address.
 	ReadEndpointIPAddress *string `json:"readEndpointIpAddress,omitempty" tf:"read_endpoint_ip_address,omitempty"`
+
+	// Details to assign an IPv6 subnet prefix or IPv6 address to a resource.
+	ReadEndpointIpv6AddressIpv6SubnetCidrPairDetails []ReadEndpointIpv6AddressIpv6SubnetCidrPairDetailsObservation `json:"readEndpointIpv6AddressIpv6SubnetCidrPairDetails,omitempty" tf:"read_endpoint_ipv6address_ipv6subnet_cidr_pair_details,omitempty"`
 }
 
 type ReadEndpointParameters struct {

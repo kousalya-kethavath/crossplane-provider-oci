@@ -861,6 +861,8 @@ spec:
                                               and backups hosted on recovery Appliance
                                               backup destination.
                                             type: boolean
+                                          isZeroDataLossEnabled:
+                                            type: boolean
                                           remoteRegion:
                                             description: (Applicable when source=DATAGUARD
                                               | DB_SYSTEM | NONE) The name of the
@@ -1736,8 +1738,8 @@ spec:
                             120 (inclusive).
                           type: number
                         daysOfWeek:
-                          description: (Applicable when source=NONE) (Updatable) Days
-                            during the week when maintenance should be performed.
+                          description: The update should be applied on the database
+                            for the selected days of the week.
                           items:
                             properties:
                               name:
@@ -1956,11 +1958,8 @@ spec:
                       determines resources allocated to the DB system.
                     type: string
                   source:
-                    description: 'The source of the database: Use NONE for creating
-                      a new database. Use DB_BACKUP for creating a new database by
-                      restoring from a backup. Use DATABASE for creating a new database
-                      from an existing database, including archive redo log data.
-                      The default is NONE.'
+                    description: The update should be applied on the database for
+                      the selected version scheme.
                     type: string
                   sourceDbSystemId:
                     description: The OCID of the DB system.
@@ -2972,6 +2971,8 @@ spec:
                                               and backups hosted on recovery Appliance
                                               backup destination.
                                             type: boolean
+                                          isZeroDataLossEnabled:
+                                            type: boolean
                                           remoteRegion:
                                             description: (Applicable when source=DATAGUARD
                                               | DB_SYSTEM | NONE) The name of the
@@ -3849,8 +3850,8 @@ spec:
                             120 (inclusive).
                           type: number
                         daysOfWeek:
-                          description: (Applicable when source=NONE) (Updatable) Days
-                            during the week when maintenance should be performed.
+                          description: The update should be applied on the database
+                            for the selected days of the week.
                           items:
                             properties:
                               name:
@@ -4069,11 +4070,8 @@ spec:
                       determines resources allocated to the DB system.
                     type: string
                   source:
-                    description: 'The source of the database: Use NONE for creating
-                      a new database. Use DB_BACKUP for creating a new database by
-                      restoring from a backup. Use DATABASE for creating a new database
-                      from an existing database, including archive redo log data.
-                      The default is NONE.'
+                    description: The update should be applied on the database for
+                      the selected version scheme.
                     type: string
                   sourceDbSystemId:
                     description: The OCID of the DB system.
@@ -4651,6 +4649,8 @@ spec:
                                               and backups hosted on recovery Appliance
                                               backup destination.
                                             type: boolean
+                                          isZeroDataLossEnabled:
+                                            type: boolean
                                           remoteRegion:
                                             description: (Applicable when source=DATAGUARD
                                               | DB_SYSTEM | NONE) The name of the
@@ -5036,8 +5036,8 @@ spec:
                             120 (inclusive).
                           type: number
                         daysOfWeek:
-                          description: (Applicable when source=NONE) (Updatable) Days
-                            during the week when maintenance should be performed.
+                          description: The update should be applied on the database
+                            for the selected days of the week.
                           items:
                             properties:
                               name:
@@ -5132,8 +5132,8 @@ spec:
                             120 (inclusive).
                           type: number
                         daysOfWeek:
-                          description: (Applicable when source=NONE) (Updatable) Days
-                            during the week when maintenance should be performed.
+                          description: The update should be applied on the database
+                            for the selected days of the week.
                           items:
                             properties:
                               name:
@@ -5313,11 +5313,8 @@ spec:
                       determines resources allocated to the DB system.
                     type: string
                   source:
-                    description: 'The source of the database: Use NONE for creating
-                      a new database. Use DB_BACKUP for creating a new database by
-                      restoring from a backup. Use DATABASE for creating a new database
-                      from an existing database, including archive redo log data.
-                      The default is NONE.'
+                    description: The update should be applied on the database for
+                      the selected version scheme.
                     type: string
                   sourceDbSystemId:
                     description: The OCID of the DB system.

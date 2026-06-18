@@ -32,6 +32,7 @@ spec:
         testing.upbound.io/example-name: test_deployment_backup
     deploymentType: ${var.deployment_deployment_type}
     description: ${var.deployment_description}
+    disasterRecoveryStatus: ${var.deployment_disaster_recovery_status}
     displayName: ${var.deployment_display_name}
     environmentType: ${var.deployment_environment_type}
     faultDomain: ${var.deployment_fault_domain}
@@ -85,6 +86,9 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: test_domain
       key: ${var.deployment_ogg_data_key}
+      keySecretIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test_secret
       oggVersion: ${var.deployment_ogg_data_ogg_version}
       passwordSecretIdSecretRef:
         key: attribute.id

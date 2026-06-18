@@ -16,10 +16,30 @@ import (
 type AccessInitParameters struct {
 
 	// (Updatable) The OCID of a log group to work with.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/logging/v1alpha1.LogGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
+	// Reference to a LogGroup in logging to populate logGroupId.
+	// +kubebuilder:validation:Optional
+	LogGroupIDRef *v1.Reference `json:"logGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a LogGroup in logging to populate logGroupId.
+	// +kubebuilder:validation:Optional
+	LogGroupIDSelector *v1.Selector `json:"logGroupIdSelector,omitempty" tf:"-"`
+
 	// (Updatable) The OCID of a log to work with.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/logging/v1alpha1.Log
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogID *string `json:"logId,omitempty" tf:"log_id,omitempty"`
+
+	// Reference to a Log in logging to populate logId.
+	// +kubebuilder:validation:Optional
+	LogIDRef *v1.Reference `json:"logIdRef,omitempty" tf:"-"`
+
+	// Selector for a Log in logging to populate logId.
+	// +kubebuilder:validation:Optional
+	LogIDSelector *v1.Selector `json:"logIdSelector,omitempty" tf:"-"`
 }
 
 type AccessObservation struct {
@@ -34,71 +54,32 @@ type AccessObservation struct {
 type AccessParameters struct {
 
 	// (Updatable) The OCID of a log group to work with.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/logging/v1alpha1.LogGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	LogGroupID *string `json:"logGroupId" tf:"log_group_id,omitempty"`
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
+
+	// Reference to a LogGroup in logging to populate logGroupId.
+	// +kubebuilder:validation:Optional
+	LogGroupIDRef *v1.Reference `json:"logGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a LogGroup in logging to populate logGroupId.
+	// +kubebuilder:validation:Optional
+	LogGroupIDSelector *v1.Selector `json:"logGroupIdSelector,omitempty" tf:"-"`
 
 	// (Updatable) The OCID of a log to work with.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/logging/v1alpha1.Log
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	LogID *string `json:"logId" tf:"log_id,omitempty"`
-}
+	LogID *string `json:"logId,omitempty" tf:"log_id,omitempty"`
 
-type AutoScalingPoliciesInitParameters struct {
-
-	// (Updatable) The type of autoscaling policy.
-	AutoScalingPolicyType *string `json:"autoScalingPolicyType,omitempty" tf:"auto_scaling_policy_type,omitempty"`
-
-	// (Updatable) For a threshold-based autoscaling policy, this value is the initial number of instances to launch in the model deployment immediately after autoscaling is enabled. Note that anytime this value is updated, the number of instances will be reset to this value. After autoscaling retrieves performance metrics, the number of instances is automatically adjusted from this initial number to a number that is based on the limits that you set.
-	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
-
-	// (Updatable) For a threshold-based autoscaling policy, this value is the maximum number of instances the model deployment is allowed to increase to (scale out).
-	MaximumInstanceCount *float64 `json:"maximumInstanceCount,omitempty" tf:"maximum_instance_count,omitempty"`
-
-	// (Updatable) For a threshold-based autoscaling policy, this value is the minimum number of instances the model deployment is allowed to decrease to (scale in).
-	MinimumInstanceCount *float64 `json:"minimumInstanceCount,omitempty" tf:"minimum_instance_count,omitempty"`
-
-	// (Updatable) The list of autoscaling policy rules.
-	Rules []RulesInitParameters `json:"rules,omitempty" tf:"rules,omitempty"`
-}
-
-type AutoScalingPoliciesObservation struct {
-
-	// (Updatable) The type of autoscaling policy.
-	AutoScalingPolicyType *string `json:"autoScalingPolicyType,omitempty" tf:"auto_scaling_policy_type,omitempty"`
-
-	// (Updatable) For a threshold-based autoscaling policy, this value is the initial number of instances to launch in the model deployment immediately after autoscaling is enabled. Note that anytime this value is updated, the number of instances will be reset to this value. After autoscaling retrieves performance metrics, the number of instances is automatically adjusted from this initial number to a number that is based on the limits that you set.
-	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
-
-	// (Updatable) For a threshold-based autoscaling policy, this value is the maximum number of instances the model deployment is allowed to increase to (scale out).
-	MaximumInstanceCount *float64 `json:"maximumInstanceCount,omitempty" tf:"maximum_instance_count,omitempty"`
-
-	// (Updatable) For a threshold-based autoscaling policy, this value is the minimum number of instances the model deployment is allowed to decrease to (scale in).
-	MinimumInstanceCount *float64 `json:"minimumInstanceCount,omitempty" tf:"minimum_instance_count,omitempty"`
-
-	// (Updatable) The list of autoscaling policy rules.
-	Rules []RulesObservation `json:"rules,omitempty" tf:"rules,omitempty"`
-}
-
-type AutoScalingPoliciesParameters struct {
-
-	// (Updatable) The type of autoscaling policy.
+	// Reference to a Log in logging to populate logId.
 	// +kubebuilder:validation:Optional
-	AutoScalingPolicyType *string `json:"autoScalingPolicyType" tf:"auto_scaling_policy_type,omitempty"`
+	LogIDRef *v1.Reference `json:"logIdRef,omitempty" tf:"-"`
 
-	// (Updatable) For a threshold-based autoscaling policy, this value is the initial number of instances to launch in the model deployment immediately after autoscaling is enabled. Note that anytime this value is updated, the number of instances will be reset to this value. After autoscaling retrieves performance metrics, the number of instances is automatically adjusted from this initial number to a number that is based on the limits that you set.
+	// Selector for a Log in logging to populate logId.
 	// +kubebuilder:validation:Optional
-	InitialInstanceCount *float64 `json:"initialInstanceCount" tf:"initial_instance_count,omitempty"`
-
-	// (Updatable) For a threshold-based autoscaling policy, this value is the maximum number of instances the model deployment is allowed to increase to (scale out).
-	// +kubebuilder:validation:Optional
-	MaximumInstanceCount *float64 `json:"maximumInstanceCount" tf:"maximum_instance_count,omitempty"`
-
-	// (Updatable) For a threshold-based autoscaling policy, this value is the minimum number of instances the model deployment is allowed to decrease to (scale in).
-	// +kubebuilder:validation:Optional
-	MinimumInstanceCount *float64 `json:"minimumInstanceCount" tf:"minimum_instance_count,omitempty"`
-
-	// (Updatable) The list of autoscaling policy rules.
-	// +kubebuilder:validation:Optional
-	Rules []RulesParameters `json:"rules" tf:"rules,omitempty"`
+	LogIDSelector *v1.Selector `json:"logIdSelector,omitempty" tf:"-"`
 }
 
 type AutoScalingPoliciesRulesInitParameters struct {
@@ -108,6 +89,9 @@ type AutoScalingPoliciesRulesInitParameters struct {
 
 	// (Updatable) Metric type
 	MetricType *string `json:"metricType,omitempty" tf:"metric_type,omitempty"`
+
+	// The scaling configuration for the target-based workload rule.
+	ScaleConfiguration []ScaleConfigurationInitParameters `json:"scaleConfiguration,omitempty" tf:"scale_configuration,omitempty"`
 
 	// (Updatable) The scaling configuration for the predefined metric expression rule.
 	ScaleInConfiguration []RulesScaleInConfigurationInitParameters `json:"scaleInConfiguration,omitempty" tf:"scale_in_configuration,omitempty"`
@@ -123,6 +107,9 @@ type AutoScalingPoliciesRulesObservation struct {
 
 	// (Updatable) Metric type
 	MetricType *string `json:"metricType,omitempty" tf:"metric_type,omitempty"`
+
+	// The scaling configuration for the target-based workload rule.
+	ScaleConfiguration []ScaleConfigurationObservation `json:"scaleConfiguration,omitempty" tf:"scale_configuration,omitempty"`
 
 	// (Updatable) The scaling configuration for the predefined metric expression rule.
 	ScaleInConfiguration []RulesScaleInConfigurationObservation `json:"scaleInConfiguration,omitempty" tf:"scale_in_configuration,omitempty"`
@@ -141,13 +128,135 @@ type AutoScalingPoliciesRulesParameters struct {
 	// +kubebuilder:validation:Optional
 	MetricType *string `json:"metricType,omitempty" tf:"metric_type,omitempty"`
 
-	// (Updatable) The scaling configuration for the predefined metric expression rule.
+	// The scaling configuration for the target-based workload rule.
 	// +kubebuilder:validation:Optional
-	ScaleInConfiguration []RulesScaleInConfigurationParameters `json:"scaleInConfiguration" tf:"scale_in_configuration,omitempty"`
+	ScaleConfiguration []ScaleConfigurationParameters `json:"scaleConfiguration,omitempty" tf:"scale_configuration,omitempty"`
 
 	// (Updatable) The scaling configuration for the predefined metric expression rule.
 	// +kubebuilder:validation:Optional
-	ScaleOutConfiguration []RulesScaleOutConfigurationParameters `json:"scaleOutConfiguration" tf:"scale_out_configuration,omitempty"`
+	ScaleInConfiguration []RulesScaleInConfigurationParameters `json:"scaleInConfiguration,omitempty" tf:"scale_in_configuration,omitempty"`
+
+	// (Updatable) The scaling configuration for the predefined metric expression rule.
+	// +kubebuilder:validation:Optional
+	ScaleOutConfiguration []RulesScaleOutConfigurationParameters `json:"scaleOutConfiguration,omitempty" tf:"scale_out_configuration,omitempty"`
+}
+
+type AutoScalingPoliciesRulesScaleInConfigurationInitParameters struct {
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The value is used for adjusting the count of instances by.
+	InstanceCountAdjustment *float64 `json:"instanceCountAdjustment,omitempty" tf:"instance_count_adjustment,omitempty"`
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The period of time that the condition defined in the alarm must persist before the alarm state changes from "OK" to "FIRING" or vice versa. For example, a value of 5 minutes means that the alarm must persist in breaching the condition for five minutes before the alarm updates its state to "FIRING"; likewise, the alarm must persist in not breaching the condition for five minutes before the alarm updates its state to "OK."
+	PendingDuration *string `json:"pendingDuration,omitempty" tf:"pending_duration,omitempty"`
+
+	// (Updatable) The Monitoring Query Language (MQL) expression to evaluate for the alarm. The Alarms feature of the Monitoring service interprets results for each returned time series as Boolean values, where zero represents false and a non-zero value represents true. A true value means that the trigger rule condition has been met. The query must specify a metric, statistic, interval, and trigger rule (threshold or absence). Supported values for interval: 1m-60m (also 1h). You can optionally specify dimensions and grouping functions. Supported grouping functions: grouping(), groupBy().
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+
+	// (Updatable) The type of scaling configuration.
+	ScalingConfigurationType *string `json:"scalingConfigurationType,omitempty" tf:"scaling_configuration_type,omitempty"`
+
+	// (Updatable) A metric value at which the scaling operation will be triggered.
+	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+}
+
+type AutoScalingPoliciesRulesScaleInConfigurationObservation struct {
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The value is used for adjusting the count of instances by.
+	InstanceCountAdjustment *float64 `json:"instanceCountAdjustment,omitempty" tf:"instance_count_adjustment,omitempty"`
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The period of time that the condition defined in the alarm must persist before the alarm state changes from "OK" to "FIRING" or vice versa. For example, a value of 5 minutes means that the alarm must persist in breaching the condition for five minutes before the alarm updates its state to "FIRING"; likewise, the alarm must persist in not breaching the condition for five minutes before the alarm updates its state to "OK."
+	PendingDuration *string `json:"pendingDuration,omitempty" tf:"pending_duration,omitempty"`
+
+	// (Updatable) The Monitoring Query Language (MQL) expression to evaluate for the alarm. The Alarms feature of the Monitoring service interprets results for each returned time series as Boolean values, where zero represents false and a non-zero value represents true. A true value means that the trigger rule condition has been met. The query must specify a metric, statistic, interval, and trigger rule (threshold or absence). Supported values for interval: 1m-60m (also 1h). You can optionally specify dimensions and grouping functions. Supported grouping functions: grouping(), groupBy().
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+
+	// (Updatable) The type of scaling configuration.
+	ScalingConfigurationType *string `json:"scalingConfigurationType,omitempty" tf:"scaling_configuration_type,omitempty"`
+
+	// (Updatable) A metric value at which the scaling operation will be triggered.
+	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+}
+
+type AutoScalingPoliciesRulesScaleInConfigurationParameters struct {
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The value is used for adjusting the count of instances by.
+	// +kubebuilder:validation:Optional
+	InstanceCountAdjustment *float64 `json:"instanceCountAdjustment,omitempty" tf:"instance_count_adjustment,omitempty"`
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The period of time that the condition defined in the alarm must persist before the alarm state changes from "OK" to "FIRING" or vice versa. For example, a value of 5 minutes means that the alarm must persist in breaching the condition for five minutes before the alarm updates its state to "FIRING"; likewise, the alarm must persist in not breaching the condition for five minutes before the alarm updates its state to "OK."
+	// +kubebuilder:validation:Optional
+	PendingDuration *string `json:"pendingDuration,omitempty" tf:"pending_duration,omitempty"`
+
+	// (Updatable) The Monitoring Query Language (MQL) expression to evaluate for the alarm. The Alarms feature of the Monitoring service interprets results for each returned time series as Boolean values, where zero represents false and a non-zero value represents true. A true value means that the trigger rule condition has been met. The query must specify a metric, statistic, interval, and trigger rule (threshold or absence). Supported values for interval: 1m-60m (also 1h). You can optionally specify dimensions and grouping functions. Supported grouping functions: grouping(), groupBy().
+	// +kubebuilder:validation:Optional
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+
+	// (Updatable) The type of scaling configuration.
+	// +kubebuilder:validation:Optional
+	ScalingConfigurationType *string `json:"scalingConfigurationType,omitempty" tf:"scaling_configuration_type,omitempty"`
+
+	// (Updatable) A metric value at which the scaling operation will be triggered.
+	// +kubebuilder:validation:Optional
+	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+}
+
+type AutoScalingPoliciesRulesScaleOutConfigurationInitParameters struct {
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The value is used for adjusting the count of instances by.
+	InstanceCountAdjustment *float64 `json:"instanceCountAdjustment,omitempty" tf:"instance_count_adjustment,omitempty"`
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The period of time that the condition defined in the alarm must persist before the alarm state changes from "OK" to "FIRING" or vice versa. For example, a value of 5 minutes means that the alarm must persist in breaching the condition for five minutes before the alarm updates its state to "FIRING"; likewise, the alarm must persist in not breaching the condition for five minutes before the alarm updates its state to "OK."
+	PendingDuration *string `json:"pendingDuration,omitempty" tf:"pending_duration,omitempty"`
+
+	// (Updatable) The Monitoring Query Language (MQL) expression to evaluate for the alarm. The Alarms feature of the Monitoring service interprets results for each returned time series as Boolean values, where zero represents false and a non-zero value represents true. A true value means that the trigger rule condition has been met. The query must specify a metric, statistic, interval, and trigger rule (threshold or absence). Supported values for interval: 1m-60m (also 1h). You can optionally specify dimensions and grouping functions. Supported grouping functions: grouping(), groupBy().
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+
+	// (Updatable) The type of scaling configuration.
+	ScalingConfigurationType *string `json:"scalingConfigurationType,omitempty" tf:"scaling_configuration_type,omitempty"`
+
+	// (Updatable) A metric value at which the scaling operation will be triggered.
+	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+}
+
+type AutoScalingPoliciesRulesScaleOutConfigurationObservation struct {
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The value is used for adjusting the count of instances by.
+	InstanceCountAdjustment *float64 `json:"instanceCountAdjustment,omitempty" tf:"instance_count_adjustment,omitempty"`
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The period of time that the condition defined in the alarm must persist before the alarm state changes from "OK" to "FIRING" or vice versa. For example, a value of 5 minutes means that the alarm must persist in breaching the condition for five minutes before the alarm updates its state to "FIRING"; likewise, the alarm must persist in not breaching the condition for five minutes before the alarm updates its state to "OK."
+	PendingDuration *string `json:"pendingDuration,omitempty" tf:"pending_duration,omitempty"`
+
+	// (Updatable) The Monitoring Query Language (MQL) expression to evaluate for the alarm. The Alarms feature of the Monitoring service interprets results for each returned time series as Boolean values, where zero represents false and a non-zero value represents true. A true value means that the trigger rule condition has been met. The query must specify a metric, statistic, interval, and trigger rule (threshold or absence). Supported values for interval: 1m-60m (also 1h). You can optionally specify dimensions and grouping functions. Supported grouping functions: grouping(), groupBy().
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+
+	// (Updatable) The type of scaling configuration.
+	ScalingConfigurationType *string `json:"scalingConfigurationType,omitempty" tf:"scaling_configuration_type,omitempty"`
+
+	// (Updatable) A metric value at which the scaling operation will be triggered.
+	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+}
+
+type AutoScalingPoliciesRulesScaleOutConfigurationParameters struct {
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The value is used for adjusting the count of instances by.
+	// +kubebuilder:validation:Optional
+	InstanceCountAdjustment *float64 `json:"instanceCountAdjustment,omitempty" tf:"instance_count_adjustment,omitempty"`
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The period of time that the condition defined in the alarm must persist before the alarm state changes from "OK" to "FIRING" or vice versa. For example, a value of 5 minutes means that the alarm must persist in breaching the condition for five minutes before the alarm updates its state to "FIRING"; likewise, the alarm must persist in not breaching the condition for five minutes before the alarm updates its state to "OK."
+	// +kubebuilder:validation:Optional
+	PendingDuration *string `json:"pendingDuration,omitempty" tf:"pending_duration,omitempty"`
+
+	// (Updatable) The Monitoring Query Language (MQL) expression to evaluate for the alarm. The Alarms feature of the Monitoring service interprets results for each returned time series as Boolean values, where zero represents false and a non-zero value represents true. A true value means that the trigger rule condition has been met. The query must specify a metric, statistic, interval, and trigger rule (threshold or absence). Supported values for interval: 1m-60m (also 1h). You can optionally specify dimensions and grouping functions. Supported grouping functions: grouping(), groupBy().
+	// +kubebuilder:validation:Optional
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+
+	// (Updatable) The type of scaling configuration.
+	// +kubebuilder:validation:Optional
+	ScalingConfigurationType *string `json:"scalingConfigurationType,omitempty" tf:"scaling_configuration_type,omitempty"`
+
+	// (Updatable) A metric value at which the scaling operation will be triggered.
+	// +kubebuilder:validation:Optional
+	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 }
 
 type CategoryLogDetailsInitParameters struct {
@@ -179,10 +288,42 @@ type CategoryLogDetailsParameters struct {
 	Predict []PredictParameters `json:"predict,omitempty" tf:"predict,omitempty"`
 }
 
+type CustomHTTPEndpointsInitParameters struct {
+
+	// (Updatable) The suffix part of the endpoint that will be allowed for invocation.
+	EndpointURISuffix *string `json:"endpointUriSuffix,omitempty" tf:"endpoint_uri_suffix,omitempty"`
+
+	// (Updatable) List of HTTP methods acceptable by the URI.
+	HTTPMethods []*string `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
+}
+
+type CustomHTTPEndpointsObservation struct {
+
+	// (Updatable) The suffix part of the endpoint that will be allowed for invocation.
+	EndpointURISuffix *string `json:"endpointUriSuffix,omitempty" tf:"endpoint_uri_suffix,omitempty"`
+
+	// (Updatable) List of HTTP methods acceptable by the URI.
+	HTTPMethods []*string `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
+}
+
+type CustomHTTPEndpointsParameters struct {
+
+	// (Updatable) The suffix part of the endpoint that will be allowed for invocation.
+	// +kubebuilder:validation:Optional
+	EndpointURISuffix *string `json:"endpointUriSuffix,omitempty" tf:"endpoint_uri_suffix,omitempty"`
+
+	// (Updatable) List of HTTP methods acceptable by the URI.
+	// +kubebuilder:validation:Optional
+	HTTPMethods []*string `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
+}
+
 type EnvironmentConfigurationDetailsInitParameters struct {
 
 	// (Applicable when environment_configuration_type=OCIR_CONTAINER) (Updatable) The container image run CMD as a list of strings. Use CMD as arguments to the ENTRYPOINT or the only command to run in the absence of an ENTRYPOINT. The combined size of CMD and ENTRYPOINT must be less than 2048 bytes.
 	Cmd []*string `json:"cmd,omitempty" tf:"cmd,omitempty"`
+
+	// (Applicable when environment_configuration_type=OCIR_CONTAINER) (Updatable) List of custom inference HTTP endpoints configured on the model deployment instance for inferencing.
+	CustomHTTPEndpoints []CustomHTTPEndpointsInitParameters `json:"customHttpEndpoints,omitempty" tf:"custom_http_endpoints,omitempty"`
 
 	// (Applicable when environment_configuration_type=OCIR_CONTAINER) Service injected Environment variables set for the web server container and can not be set or modified by user.
 	// +mapType=granular
@@ -209,6 +350,9 @@ type EnvironmentConfigurationDetailsInitParameters struct {
 
 	// (Applicable when environment_configuration_type=OCIR_CONTAINER) (Updatable) OCID of the container image signature
 	ImageSignatureID *string `json:"imageSignatureId,omitempty" tf:"image_signature_id,omitempty"`
+
+	// (Applicable when environment_configuration_type=OCIR_CONTAINER) (Updatable) The chosen specification from predefined set of endpoints a user can access.  For example, if the value is 'openai', the user can access OpenAI-compliant endpoints  like /v1/completions, /v1/chat/completions, /v1/models, etc., for inference.
+	PredictAPISpecification *string `json:"predictApiSpecification,omitempty" tf:"predict_api_specification,omitempty"`
 
 	// (Applicable when environment_configuration_type=OCIR_CONTAINER) (Updatable) The port on which the web server serving the inference is running. The port can be anything between 1024 and 65535. The following ports cannot be used 24224, 8446, 8447.
 	ServerPort *float64 `json:"serverPort,omitempty" tf:"server_port,omitempty"`
@@ -219,6 +363,9 @@ type EnvironmentConfigurationDetailsObservation struct {
 	// (Applicable when environment_configuration_type=OCIR_CONTAINER) (Updatable) The container image run CMD as a list of strings. Use CMD as arguments to the ENTRYPOINT or the only command to run in the absence of an ENTRYPOINT. The combined size of CMD and ENTRYPOINT must be less than 2048 bytes.
 	Cmd []*string `json:"cmd,omitempty" tf:"cmd,omitempty"`
 
+	// (Applicable when environment_configuration_type=OCIR_CONTAINER) (Updatable) List of custom inference HTTP endpoints configured on the model deployment instance for inferencing.
+	CustomHTTPEndpoints []CustomHTTPEndpointsObservation `json:"customHttpEndpoints,omitempty" tf:"custom_http_endpoints,omitempty"`
+
 	// (Applicable when environment_configuration_type=OCIR_CONTAINER) Service injected Environment variables set for the web server container and can not be set or modified by user.
 	// +mapType=granular
 	DefaultEnvironmentVariables map[string]*string `json:"defaultEnvironmentVariables,omitempty" tf:"default_environment_variables,omitempty"`
@@ -245,6 +392,9 @@ type EnvironmentConfigurationDetailsObservation struct {
 	// (Applicable when environment_configuration_type=OCIR_CONTAINER) (Updatable) OCID of the container image signature
 	ImageSignatureID *string `json:"imageSignatureId,omitempty" tf:"image_signature_id,omitempty"`
 
+	// (Applicable when environment_configuration_type=OCIR_CONTAINER) (Updatable) The chosen specification from predefined set of endpoints a user can access.  For example, if the value is 'openai', the user can access OpenAI-compliant endpoints  like /v1/completions, /v1/chat/completions, /v1/models, etc., for inference.
+	PredictAPISpecification *string `json:"predictApiSpecification,omitempty" tf:"predict_api_specification,omitempty"`
+
 	// (Applicable when environment_configuration_type=OCIR_CONTAINER) (Updatable) The port on which the web server serving the inference is running. The port can be anything between 1024 and 65535. The following ports cannot be used 24224, 8446, 8447.
 	ServerPort *float64 `json:"serverPort,omitempty" tf:"server_port,omitempty"`
 }
@@ -254,6 +404,10 @@ type EnvironmentConfigurationDetailsParameters struct {
 	// (Applicable when environment_configuration_type=OCIR_CONTAINER) (Updatable) The container image run CMD as a list of strings. Use CMD as arguments to the ENTRYPOINT or the only command to run in the absence of an ENTRYPOINT. The combined size of CMD and ENTRYPOINT must be less than 2048 bytes.
 	// +kubebuilder:validation:Optional
 	Cmd []*string `json:"cmd,omitempty" tf:"cmd,omitempty"`
+
+	// (Applicable when environment_configuration_type=OCIR_CONTAINER) (Updatable) List of custom inference HTTP endpoints configured on the model deployment instance for inferencing.
+	// +kubebuilder:validation:Optional
+	CustomHTTPEndpoints []CustomHTTPEndpointsParameters `json:"customHttpEndpoints,omitempty" tf:"custom_http_endpoints,omitempty"`
 
 	// (Applicable when environment_configuration_type=OCIR_CONTAINER) Service injected Environment variables set for the web server container and can not be set or modified by user.
 	// +kubebuilder:validation:Optional
@@ -289,6 +443,10 @@ type EnvironmentConfigurationDetailsParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageSignatureID *string `json:"imageSignatureId,omitempty" tf:"image_signature_id,omitempty"`
 
+	// (Applicable when environment_configuration_type=OCIR_CONTAINER) (Updatable) The chosen specification from predefined set of endpoints a user can access.  For example, if the value is 'openai', the user can access OpenAI-compliant endpoints  like /v1/completions, /v1/chat/completions, /v1/models, etc., for inference.
+	// +kubebuilder:validation:Optional
+	PredictAPISpecification *string `json:"predictApiSpecification,omitempty" tf:"predict_api_specification,omitempty"`
+
 	// (Applicable when environment_configuration_type=OCIR_CONTAINER) (Updatable) The port on which the web server serving the inference is running. The port can be anything between 1024 and 65535. The following ports cannot be used 24224, 8446, 8447.
 	// +kubebuilder:validation:Optional
 	ServerPort *float64 `json:"serverPort,omitempty" tf:"server_port,omitempty"`
@@ -299,61 +457,36 @@ type InfrastructureConfigurationDetailsInitParameters struct {
 	// (Updatable) The minimum network bandwidth for the model deployment.
 	BandwidthMbps *float64 `json:"bandwidthMbps,omitempty" tf:"bandwidth_mbps,omitempty"`
 
-	// The type of the model deployment infrastructure.
-	InfrastructureType *string `json:"infrastructureType,omitempty" tf:"infrastructure_type,omitempty"`
+	// The OCID of a Compute Target.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/datascience/v1alpha1.ComputeTarget
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	ComputeTargetID *string `json:"computeTargetId,omitempty" tf:"compute_target_id,omitempty"`
 
-	// (Updatable) The model deployment instance configuration.
-	InstanceConfiguration []InstanceConfigurationInitParameters `json:"instanceConfiguration,omitempty" tf:"instance_configuration,omitempty"`
+	// Reference to a ComputeTarget in datascience to populate computeTargetId.
+	// +kubebuilder:validation:Optional
+	ComputeTargetIDRef *v1.Reference `json:"computeTargetIdRef,omitempty" tf:"-"`
 
-	// (Updatable) The maximum network bandwidth for the model deployment.
-	MaximumBandwidthMbps *float64 `json:"maximumBandwidthMbps,omitempty" tf:"maximum_bandwidth_mbps,omitempty"`
-
-	// (Updatable) The scaling policy to apply to each model of the deployment.
-	ScalingPolicy []ScalingPolicyInitParameters `json:"scalingPolicy,omitempty" tf:"scaling_policy,omitempty"`
-}
-
-type InfrastructureConfigurationDetailsObservation struct {
-
-	// (Updatable) The minimum network bandwidth for the model deployment.
-	BandwidthMbps *float64 `json:"bandwidthMbps,omitempty" tf:"bandwidth_mbps,omitempty"`
+	// Selector for a ComputeTarget in datascience to populate computeTargetId.
+	// +kubebuilder:validation:Optional
+	ComputeTargetIDSelector *v1.Selector `json:"computeTargetIdSelector,omitempty" tf:"-"`
 
 	// The type of the model deployment infrastructure.
 	InfrastructureType *string `json:"infrastructureType,omitempty" tf:"infrastructure_type,omitempty"`
 
 	// (Updatable) The model deployment instance configuration.
-	InstanceConfiguration []InstanceConfigurationObservation `json:"instanceConfiguration,omitempty" tf:"instance_configuration,omitempty"`
+	InstanceConfiguration []InfrastructureConfigurationDetailsInstanceConfigurationInitParameters `json:"instanceConfiguration,omitempty" tf:"instance_configuration,omitempty"`
 
 	// (Updatable) The maximum network bandwidth for the model deployment.
 	MaximumBandwidthMbps *float64 `json:"maximumBandwidthMbps,omitempty" tf:"maximum_bandwidth_mbps,omitempty"`
 
-	// (Updatable) The scaling policy to apply to each model of the deployment.
-	ScalingPolicy []ScalingPolicyObservation `json:"scalingPolicy,omitempty" tf:"scaling_policy,omitempty"`
-}
-
-type InfrastructureConfigurationDetailsParameters struct {
-
-	// (Updatable) The minimum network bandwidth for the model deployment.
-	// +kubebuilder:validation:Optional
-	BandwidthMbps *float64 `json:"bandwidthMbps,omitempty" tf:"bandwidth_mbps,omitempty"`
-
-	// The type of the model deployment infrastructure.
-	// +kubebuilder:validation:Optional
-	InfrastructureType *string `json:"infrastructureType" tf:"infrastructure_type,omitempty"`
-
-	// (Updatable) The model deployment instance configuration.
-	// +kubebuilder:validation:Optional
-	InstanceConfiguration []InstanceConfigurationParameters `json:"instanceConfiguration" tf:"instance_configuration,omitempty"`
-
-	// (Updatable) The maximum network bandwidth for the model deployment.
-	// +kubebuilder:validation:Optional
-	MaximumBandwidthMbps *float64 `json:"maximumBandwidthMbps,omitempty" tf:"maximum_bandwidth_mbps,omitempty"`
+	// Resource configuration details for model deploy on managed compute cluster type compute target.
+	ModelDeploymentResourceConfiguration []ModelDeploymentResourceConfigurationInitParameters `json:"modelDeploymentResourceConfiguration,omitempty" tf:"model_deployment_resource_configuration,omitempty"`
 
 	// (Updatable) The scaling policy to apply to each model of the deployment.
-	// +kubebuilder:validation:Optional
-	ScalingPolicy []ScalingPolicyParameters `json:"scalingPolicy,omitempty" tf:"scaling_policy,omitempty"`
+	ScalingPolicy []InfrastructureConfigurationDetailsScalingPolicyInitParameters `json:"scalingPolicy,omitempty" tf:"scaling_policy,omitempty"`
 }
 
-type InstanceConfigurationInitParameters struct {
+type InfrastructureConfigurationDetailsInstanceConfigurationInitParameters struct {
 
 	// (Updatable) The shape used to launch the model deployment instances.  When using service managed open source foundation model, the supported shapes can be retrieved using get model api /models/{modelId}/definedMetadata/deploymentConfiguration/artifact/content.
 	InstanceShapeName *string `json:"instanceShapeName,omitempty" tf:"instance_shape_name,omitempty"`
@@ -369,6 +502,171 @@ type InstanceConfigurationInitParameters struct {
 
 	// (Updatable) A model deployment instance is provided with a VNIC for network access.  This specifies the OCID of the subnet to create a VNIC in.  The subnet should be in a VCN with a NAT/SGW gateway for egress.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type InfrastructureConfigurationDetailsInstanceConfigurationObservation struct {
+
+	// (Updatable) The shape used to launch the model deployment instances.  When using service managed open source foundation model, the supported shapes can be retrieved using get model api /models/{modelId}/definedMetadata/deploymentConfiguration/artifact/content.
+	InstanceShapeName *string `json:"instanceShapeName,omitempty" tf:"instance_shape_name,omitempty"`
+
+	// (Updatable) Details for the model-deployment instance shape configuration.
+	ModelDeploymentInstanceShapeConfigDetails []ModelDeploymentInstanceShapeConfigDetailsObservation `json:"modelDeploymentInstanceShapeConfigDetails,omitempty" tf:"model_deployment_instance_shape_config_details,omitempty"`
+
+	// (Updatable) Network Access type of model deployment.
+	NetworkAccessType *string `json:"networkAccessType,omitempty" tf:"network_access_type,omitempty"`
+
+	// (Updatable) The OCID of a Data Science private endpoint.
+	PrivateEndpointID *string `json:"privateEndpointId,omitempty" tf:"private_endpoint_id,omitempty"`
+
+	// (Updatable) A model deployment instance is provided with a VNIC for network access.  This specifies the OCID of the subnet to create a VNIC in.  The subnet should be in a VCN with a NAT/SGW gateway for egress.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type InfrastructureConfigurationDetailsInstanceConfigurationParameters struct {
+
+	// (Updatable) The shape used to launch the model deployment instances.  When using service managed open source foundation model, the supported shapes can be retrieved using get model api /models/{modelId}/definedMetadata/deploymentConfiguration/artifact/content.
+	// +kubebuilder:validation:Optional
+	InstanceShapeName *string `json:"instanceShapeName" tf:"instance_shape_name,omitempty"`
+
+	// (Updatable) Details for the model-deployment instance shape configuration.
+	// +kubebuilder:validation:Optional
+	ModelDeploymentInstanceShapeConfigDetails []ModelDeploymentInstanceShapeConfigDetailsParameters `json:"modelDeploymentInstanceShapeConfigDetails,omitempty" tf:"model_deployment_instance_shape_config_details,omitempty"`
+
+	// (Updatable) Network Access type of model deployment.
+	// +kubebuilder:validation:Optional
+	NetworkAccessType *string `json:"networkAccessType,omitempty" tf:"network_access_type,omitempty"`
+
+	// (Updatable) The OCID of a Data Science private endpoint.
+	// +kubebuilder:validation:Optional
+	PrivateEndpointID *string `json:"privateEndpointId,omitempty" tf:"private_endpoint_id,omitempty"`
+
+	// (Updatable) A model deployment instance is provided with a VNIC for network access.  This specifies the OCID of the subnet to create a VNIC in.  The subnet should be in a VCN with a NAT/SGW gateway for egress.
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type InfrastructureConfigurationDetailsObservation struct {
+
+	// (Updatable) The minimum network bandwidth for the model deployment.
+	BandwidthMbps *float64 `json:"bandwidthMbps,omitempty" tf:"bandwidth_mbps,omitempty"`
+
+	// The OCID of a Compute Target.
+	ComputeTargetID *string `json:"computeTargetId,omitempty" tf:"compute_target_id,omitempty"`
+
+	// The type of the model deployment infrastructure.
+	InfrastructureType *string `json:"infrastructureType,omitempty" tf:"infrastructure_type,omitempty"`
+
+	// (Updatable) The model deployment instance configuration.
+	InstanceConfiguration []InfrastructureConfigurationDetailsInstanceConfigurationObservation `json:"instanceConfiguration,omitempty" tf:"instance_configuration,omitempty"`
+
+	// (Updatable) The maximum network bandwidth for the model deployment.
+	MaximumBandwidthMbps *float64 `json:"maximumBandwidthMbps,omitempty" tf:"maximum_bandwidth_mbps,omitempty"`
+
+	// Resource configuration details for model deploy on managed compute cluster type compute target.
+	ModelDeploymentResourceConfiguration []ModelDeploymentResourceConfigurationObservation `json:"modelDeploymentResourceConfiguration,omitempty" tf:"model_deployment_resource_configuration,omitempty"`
+
+	// (Updatable) The scaling policy to apply to each model of the deployment.
+	ScalingPolicy []InfrastructureConfigurationDetailsScalingPolicyObservation `json:"scalingPolicy,omitempty" tf:"scaling_policy,omitempty"`
+}
+
+type InfrastructureConfigurationDetailsParameters struct {
+
+	// (Updatable) The minimum network bandwidth for the model deployment.
+	// +kubebuilder:validation:Optional
+	BandwidthMbps *float64 `json:"bandwidthMbps,omitempty" tf:"bandwidth_mbps,omitempty"`
+
+	// The OCID of a Compute Target.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/datascience/v1alpha1.ComputeTarget
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	ComputeTargetID *string `json:"computeTargetId,omitempty" tf:"compute_target_id,omitempty"`
+
+	// Reference to a ComputeTarget in datascience to populate computeTargetId.
+	// +kubebuilder:validation:Optional
+	ComputeTargetIDRef *v1.Reference `json:"computeTargetIdRef,omitempty" tf:"-"`
+
+	// Selector for a ComputeTarget in datascience to populate computeTargetId.
+	// +kubebuilder:validation:Optional
+	ComputeTargetIDSelector *v1.Selector `json:"computeTargetIdSelector,omitempty" tf:"-"`
+
+	// The type of the model deployment infrastructure.
+	// +kubebuilder:validation:Optional
+	InfrastructureType *string `json:"infrastructureType" tf:"infrastructure_type,omitempty"`
+
+	// (Updatable) The model deployment instance configuration.
+	// +kubebuilder:validation:Optional
+	InstanceConfiguration []InfrastructureConfigurationDetailsInstanceConfigurationParameters `json:"instanceConfiguration,omitempty" tf:"instance_configuration,omitempty"`
+
+	// (Updatable) The maximum network bandwidth for the model deployment.
+	// +kubebuilder:validation:Optional
+	MaximumBandwidthMbps *float64 `json:"maximumBandwidthMbps,omitempty" tf:"maximum_bandwidth_mbps,omitempty"`
+
+	// Resource configuration details for model deploy on managed compute cluster type compute target.
+	// +kubebuilder:validation:Optional
+	ModelDeploymentResourceConfiguration []ModelDeploymentResourceConfigurationParameters `json:"modelDeploymentResourceConfiguration,omitempty" tf:"model_deployment_resource_configuration,omitempty"`
+
+	// (Updatable) The scaling policy to apply to each model of the deployment.
+	// +kubebuilder:validation:Optional
+	ScalingPolicy []InfrastructureConfigurationDetailsScalingPolicyParameters `json:"scalingPolicy,omitempty" tf:"scaling_policy,omitempty"`
+}
+
+type InfrastructureConfigurationDetailsScalingPolicyInitParameters struct {
+
+	// (Updatable) The list of autoscaling policy details.
+	AutoScalingPolicies []ScalingPolicyAutoScalingPoliciesInitParameters `json:"autoScalingPolicies,omitempty" tf:"auto_scaling_policies,omitempty"`
+
+	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 300 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
+	CoolDownInSeconds *float64 `json:"coolDownInSeconds,omitempty" tf:"cool_down_in_seconds,omitempty"`
+
+	// (Updatable) The number of instances for the model deployment.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// (Applicable when policy_type=AUTOSCALING) (Updatable) Whether the autoscaling policy is enabled.
+	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
+
+	// (Updatable) The type of scaling policy.
+	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
+}
+
+type InfrastructureConfigurationDetailsScalingPolicyObservation struct {
+
+	// (Updatable) The list of autoscaling policy details.
+	AutoScalingPolicies []ScalingPolicyAutoScalingPoliciesObservation `json:"autoScalingPolicies,omitempty" tf:"auto_scaling_policies,omitempty"`
+
+	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 300 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
+	CoolDownInSeconds *float64 `json:"coolDownInSeconds,omitempty" tf:"cool_down_in_seconds,omitempty"`
+
+	// (Updatable) The number of instances for the model deployment.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// (Applicable when policy_type=AUTOSCALING) (Updatable) Whether the autoscaling policy is enabled.
+	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
+
+	// (Updatable) The type of scaling policy.
+	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
+}
+
+type InfrastructureConfigurationDetailsScalingPolicyParameters struct {
+
+	// (Updatable) The list of autoscaling policy details.
+	// +kubebuilder:validation:Optional
+	AutoScalingPolicies []ScalingPolicyAutoScalingPoliciesParameters `json:"autoScalingPolicies,omitempty" tf:"auto_scaling_policies,omitempty"`
+
+	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 300 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
+	// +kubebuilder:validation:Optional
+	CoolDownInSeconds *float64 `json:"coolDownInSeconds,omitempty" tf:"cool_down_in_seconds,omitempty"`
+
+	// (Updatable) The number of instances for the model deployment.
+	// +kubebuilder:validation:Optional
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// (Applicable when policy_type=AUTOSCALING) (Updatable) Whether the autoscaling policy is enabled.
+	// +kubebuilder:validation:Optional
+	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
+
+	// (Updatable) The type of scaling policy.
+	// +kubebuilder:validation:Optional
+	PolicyType *string `json:"policyType" tf:"policy_type,omitempty"`
 }
 
 type InstanceConfigurationModelDeploymentInstanceShapeConfigDetailsInitParameters struct {
@@ -410,47 +708,6 @@ type InstanceConfigurationModelDeploymentInstanceShapeConfigDetailsParameters st
 	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
 }
 
-type InstanceConfigurationObservation struct {
-
-	// (Updatable) The shape used to launch the model deployment instances.  When using service managed open source foundation model, the supported shapes can be retrieved using get model api /models/{modelId}/definedMetadata/deploymentConfiguration/artifact/content.
-	InstanceShapeName *string `json:"instanceShapeName,omitempty" tf:"instance_shape_name,omitempty"`
-
-	// (Updatable) Details for the model-deployment instance shape configuration.
-	ModelDeploymentInstanceShapeConfigDetails []ModelDeploymentInstanceShapeConfigDetailsObservation `json:"modelDeploymentInstanceShapeConfigDetails,omitempty" tf:"model_deployment_instance_shape_config_details,omitempty"`
-
-	// (Updatable) Network Access type of model deployment.
-	NetworkAccessType *string `json:"networkAccessType,omitempty" tf:"network_access_type,omitempty"`
-
-	// (Updatable) The OCID of a Data Science private endpoint.
-	PrivateEndpointID *string `json:"privateEndpointId,omitempty" tf:"private_endpoint_id,omitempty"`
-
-	// (Updatable) A model deployment instance is provided with a VNIC for network access.  This specifies the OCID of the subnet to create a VNIC in.  The subnet should be in a VCN with a NAT/SGW gateway for egress.
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
-}
-
-type InstanceConfigurationParameters struct {
-
-	// (Updatable) The shape used to launch the model deployment instances.  When using service managed open source foundation model, the supported shapes can be retrieved using get model api /models/{modelId}/definedMetadata/deploymentConfiguration/artifact/content.
-	// +kubebuilder:validation:Optional
-	InstanceShapeName *string `json:"instanceShapeName" tf:"instance_shape_name,omitempty"`
-
-	// (Updatable) Details for the model-deployment instance shape configuration.
-	// +kubebuilder:validation:Optional
-	ModelDeploymentInstanceShapeConfigDetails []ModelDeploymentInstanceShapeConfigDetailsParameters `json:"modelDeploymentInstanceShapeConfigDetails,omitempty" tf:"model_deployment_instance_shape_config_details,omitempty"`
-
-	// (Updatable) Network Access type of model deployment.
-	// +kubebuilder:validation:Optional
-	NetworkAccessType *string `json:"networkAccessType,omitempty" tf:"network_access_type,omitempty"`
-
-	// (Updatable) The OCID of a Data Science private endpoint.
-	// +kubebuilder:validation:Optional
-	PrivateEndpointID *string `json:"privateEndpointId,omitempty" tf:"private_endpoint_id,omitempty"`
-
-	// (Updatable) A model deployment instance is provided with a VNIC for network access.  This specifies the OCID of the subnet to create a VNIC in.  The subnet should be in a VCN with a NAT/SGW gateway for egress.
-	// +kubebuilder:validation:Optional
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
-}
-
 type ModelConfigurationDetailsInitParameters struct {
 
 	// (Updatable) The minimum network bandwidth for the model deployment.
@@ -463,7 +720,17 @@ type ModelConfigurationDetailsInitParameters struct {
 	MaximumBandwidthMbps *float64 `json:"maximumBandwidthMbps,omitempty" tf:"maximum_bandwidth_mbps,omitempty"`
 
 	// (Updatable) The OCID of the model you want to deploy.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/datascience/v1alpha1.Model
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
+
+	// Reference to a Model in datascience to populate modelId.
+	// +kubebuilder:validation:Optional
+	ModelIDRef *v1.Reference `json:"modelIdRef,omitempty" tf:"-"`
+
+	// Selector for a Model in datascience to populate modelId.
+	// +kubebuilder:validation:Optional
+	ModelIDSelector *v1.Selector `json:"modelIdSelector,omitempty" tf:"-"`
 
 	// (Updatable) The scaling policy to apply to each model of the deployment.
 	ScalingPolicy []ModelConfigurationDetailsScalingPolicyInitParameters `json:"scalingPolicy,omitempty" tf:"scaling_policy,omitempty"`
@@ -561,20 +828,89 @@ type ModelConfigurationDetailsParameters struct {
 	MaximumBandwidthMbps *float64 `json:"maximumBandwidthMbps,omitempty" tf:"maximum_bandwidth_mbps,omitempty"`
 
 	// (Updatable) The OCID of the model you want to deploy.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/datascience/v1alpha1.Model
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ModelID *string `json:"modelId,omitempty" tf:"model_id,omitempty"`
+
+	// Reference to a Model in datascience to populate modelId.
+	// +kubebuilder:validation:Optional
+	ModelIDRef *v1.Reference `json:"modelIdRef,omitempty" tf:"-"`
+
+	// Selector for a Model in datascience to populate modelId.
+	// +kubebuilder:validation:Optional
+	ModelIDSelector *v1.Selector `json:"modelIdSelector,omitempty" tf:"-"`
 
 	// (Updatable) The scaling policy to apply to each model of the deployment.
 	// +kubebuilder:validation:Optional
 	ScalingPolicy []ModelConfigurationDetailsScalingPolicyParameters `json:"scalingPolicy,omitempty" tf:"scaling_policy,omitempty"`
 }
 
+type ModelConfigurationDetailsScalingPolicyAutoScalingPoliciesInitParameters struct {
+
+	// (Updatable) The type of autoscaling policy.
+	AutoScalingPolicyType *string `json:"autoScalingPolicyType,omitempty" tf:"auto_scaling_policy_type,omitempty"`
+
+	// (Updatable) For a threshold-based autoscaling policy, this value is the initial number of instances to launch in the model deployment immediately after autoscaling is enabled. Note that anytime this value is updated, the number of instances will be reset to this value. After autoscaling retrieves performance metrics, the number of instances is automatically adjusted from this initial number to a number that is based on the limits that you set.
+	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
+
+	// (Updatable) For a threshold-based autoscaling policy, this value is the maximum number of instances the model deployment is allowed to increase to (scale out).
+	MaximumInstanceCount *float64 `json:"maximumInstanceCount,omitempty" tf:"maximum_instance_count,omitempty"`
+
+	// (Updatable) For a threshold-based autoscaling policy, this value is the minimum number of instances the model deployment is allowed to decrease to (scale in).
+	MinimumInstanceCount *float64 `json:"minimumInstanceCount,omitempty" tf:"minimum_instance_count,omitempty"`
+
+	// (Updatable) The list of autoscaling policy rules.
+	Rules []ScalingPolicyAutoScalingPoliciesRulesInitParameters `json:"rules,omitempty" tf:"rules,omitempty"`
+}
+
+type ModelConfigurationDetailsScalingPolicyAutoScalingPoliciesObservation struct {
+
+	// (Updatable) The type of autoscaling policy.
+	AutoScalingPolicyType *string `json:"autoScalingPolicyType,omitempty" tf:"auto_scaling_policy_type,omitempty"`
+
+	// (Updatable) For a threshold-based autoscaling policy, this value is the initial number of instances to launch in the model deployment immediately after autoscaling is enabled. Note that anytime this value is updated, the number of instances will be reset to this value. After autoscaling retrieves performance metrics, the number of instances is automatically adjusted from this initial number to a number that is based on the limits that you set.
+	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
+
+	// (Updatable) For a threshold-based autoscaling policy, this value is the maximum number of instances the model deployment is allowed to increase to (scale out).
+	MaximumInstanceCount *float64 `json:"maximumInstanceCount,omitempty" tf:"maximum_instance_count,omitempty"`
+
+	// (Updatable) For a threshold-based autoscaling policy, this value is the minimum number of instances the model deployment is allowed to decrease to (scale in).
+	MinimumInstanceCount *float64 `json:"minimumInstanceCount,omitempty" tf:"minimum_instance_count,omitempty"`
+
+	// (Updatable) The list of autoscaling policy rules.
+	Rules []ScalingPolicyAutoScalingPoliciesRulesObservation `json:"rules,omitempty" tf:"rules,omitempty"`
+}
+
+type ModelConfigurationDetailsScalingPolicyAutoScalingPoliciesParameters struct {
+
+	// (Updatable) The type of autoscaling policy.
+	// +kubebuilder:validation:Optional
+	AutoScalingPolicyType *string `json:"autoScalingPolicyType" tf:"auto_scaling_policy_type,omitempty"`
+
+	// (Updatable) For a threshold-based autoscaling policy, this value is the initial number of instances to launch in the model deployment immediately after autoscaling is enabled. Note that anytime this value is updated, the number of instances will be reset to this value. After autoscaling retrieves performance metrics, the number of instances is automatically adjusted from this initial number to a number that is based on the limits that you set.
+	// +kubebuilder:validation:Optional
+	InitialInstanceCount *float64 `json:"initialInstanceCount" tf:"initial_instance_count,omitempty"`
+
+	// (Updatable) For a threshold-based autoscaling policy, this value is the maximum number of instances the model deployment is allowed to increase to (scale out).
+	// +kubebuilder:validation:Optional
+	MaximumInstanceCount *float64 `json:"maximumInstanceCount" tf:"maximum_instance_count,omitempty"`
+
+	// (Updatable) For a threshold-based autoscaling policy, this value is the minimum number of instances the model deployment is allowed to decrease to (scale in).
+	// +kubebuilder:validation:Optional
+	MinimumInstanceCount *float64 `json:"minimumInstanceCount" tf:"minimum_instance_count,omitempty"`
+
+	// (Updatable) The list of autoscaling policy rules.
+	// +kubebuilder:validation:Optional
+	Rules []ScalingPolicyAutoScalingPoliciesRulesParameters `json:"rules" tf:"rules,omitempty"`
+}
+
 type ModelConfigurationDetailsScalingPolicyInitParameters struct {
 
 	// (Updatable) The list of autoscaling policy details.
-	AutoScalingPolicies []ScalingPolicyAutoScalingPoliciesInitParameters `json:"autoScalingPolicies,omitempty" tf:"auto_scaling_policies,omitempty"`
+	AutoScalingPolicies []ModelConfigurationDetailsScalingPolicyAutoScalingPoliciesInitParameters `json:"autoScalingPolicies,omitempty" tf:"auto_scaling_policies,omitempty"`
 
-	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 600 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
+	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 300 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
 	CoolDownInSeconds *float64 `json:"coolDownInSeconds,omitempty" tf:"cool_down_in_seconds,omitempty"`
 
 	// (Updatable) The number of instances for the model deployment.
@@ -590,9 +926,9 @@ type ModelConfigurationDetailsScalingPolicyInitParameters struct {
 type ModelConfigurationDetailsScalingPolicyObservation struct {
 
 	// (Updatable) The list of autoscaling policy details.
-	AutoScalingPolicies []ScalingPolicyAutoScalingPoliciesObservation `json:"autoScalingPolicies,omitempty" tf:"auto_scaling_policies,omitempty"`
+	AutoScalingPolicies []ModelConfigurationDetailsScalingPolicyAutoScalingPoliciesObservation `json:"autoScalingPolicies,omitempty" tf:"auto_scaling_policies,omitempty"`
 
-	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 600 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
+	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 300 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
 	CoolDownInSeconds *float64 `json:"coolDownInSeconds,omitempty" tf:"cool_down_in_seconds,omitempty"`
 
 	// (Updatable) The number of instances for the model deployment.
@@ -609,9 +945,9 @@ type ModelConfigurationDetailsScalingPolicyParameters struct {
 
 	// (Updatable) The list of autoscaling policy details.
 	// +kubebuilder:validation:Optional
-	AutoScalingPolicies []ScalingPolicyAutoScalingPoliciesParameters `json:"autoScalingPolicies,omitempty" tf:"auto_scaling_policies,omitempty"`
+	AutoScalingPolicies []ModelConfigurationDetailsScalingPolicyAutoScalingPoliciesParameters `json:"autoScalingPolicies,omitempty" tf:"auto_scaling_policies,omitempty"`
 
-	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 600 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
+	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 300 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
 	// +kubebuilder:validation:Optional
 	CoolDownInSeconds *float64 `json:"coolDownInSeconds,omitempty" tf:"cool_down_in_seconds,omitempty"`
 
@@ -725,7 +1061,17 @@ type ModelDeploymentInitParameters struct {
 	OpcParentRptURL *string `json:"opcParentRptUrl,omitempty" tf:"opc_parent_rpt_url,omitempty"`
 
 	// The OCID of the project to associate with the model deployment.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/datascience/v1alpha1.Project
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// Reference to a Project in datascience to populate projectId.
+	// +kubebuilder:validation:Optional
+	ProjectIDRef *v1.Reference `json:"projectIdRef,omitempty" tf:"-"`
+
+	// Selector for a Project in datascience to populate projectId.
+	// +kubebuilder:validation:Optional
+	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
 	// (Updatable) The target state for the Model Deployment. Could be set to ACTIVE or INACTIVE.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -869,12 +1215,119 @@ type ModelDeploymentParameters struct {
 	OpcParentRptURL *string `json:"opcParentRptUrl,omitempty" tf:"opc_parent_rpt_url,omitempty"`
 
 	// The OCID of the project to associate with the model deployment.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/datascience/v1alpha1.Project
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProjectID *string `json:"projectId,omitempty" tf:"project_id,omitempty"`
+
+	// Reference to a Project in datascience to populate projectId.
+	// +kubebuilder:validation:Optional
+	ProjectIDRef *v1.Reference `json:"projectIdRef,omitempty" tf:"-"`
+
+	// Selector for a Project in datascience to populate projectId.
+	// +kubebuilder:validation:Optional
+	ProjectIDSelector *v1.Selector `json:"projectIdSelector,omitempty" tf:"-"`
 
 	// (Updatable) The target state for the Model Deployment. Could be set to ACTIVE or INACTIVE.
 	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+}
+
+type ModelDeploymentResourceConfigurationInitParameters struct {
+
+	// Resource limit configuration details for workload on managed compute cluster type compute target.
+	ResourceLimitConfiguration []ModelDeploymentResourceConfigurationResourceLimitConfigurationInitParameters `json:"resourceLimitConfiguration,omitempty" tf:"resource_limit_configuration,omitempty"`
+
+	// Resource request configuration to run workload on managed compute cluster type compute target compute target.
+	ResourceRequestConfiguration []ModelDeploymentResourceConfigurationResourceRequestConfigurationInitParameters `json:"resourceRequestConfiguration,omitempty" tf:"resource_request_configuration,omitempty"`
+}
+
+type ModelDeploymentResourceConfigurationObservation struct {
+
+	// Resource limit configuration details for workload on managed compute cluster type compute target.
+	ResourceLimitConfiguration []ModelDeploymentResourceConfigurationResourceLimitConfigurationObservation `json:"resourceLimitConfiguration,omitempty" tf:"resource_limit_configuration,omitempty"`
+
+	// Resource request configuration to run workload on managed compute cluster type compute target compute target.
+	ResourceRequestConfiguration []ModelDeploymentResourceConfigurationResourceRequestConfigurationObservation `json:"resourceRequestConfiguration,omitempty" tf:"resource_request_configuration,omitempty"`
+}
+
+type ModelDeploymentResourceConfigurationParameters struct {
+
+	// Resource limit configuration details for workload on managed compute cluster type compute target.
+	// +kubebuilder:validation:Optional
+	ResourceLimitConfiguration []ModelDeploymentResourceConfigurationResourceLimitConfigurationParameters `json:"resourceLimitConfiguration,omitempty" tf:"resource_limit_configuration,omitempty"`
+
+	// Resource request configuration to run workload on managed compute cluster type compute target compute target.
+	// +kubebuilder:validation:Optional
+	ResourceRequestConfiguration []ModelDeploymentResourceConfigurationResourceRequestConfigurationParameters `json:"resourceRequestConfiguration" tf:"resource_request_configuration,omitempty"`
+}
+
+type ModelDeploymentResourceConfigurationResourceLimitConfigurationInitParameters struct {
+
+	// (Updatable) A model-deployment instance of type VM.Standard.E3.Flex or VM.Standard.E4.Flex allows the memory to be specified with in the range of 6 to 1024 GB. VM.Standard3.Flex memory range is between 6 to 512 GB and VM.Optimized3.Flex memory range is between 6 to 256 GB.
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Updatable) A model-deployment instance of type VM.Standard.E3.Flex or VM.Standard.E4.Flex allows the ocpu count to be specified with in the range of 1 to 64 ocpu. VM.Standard3.Flex OCPU range is between 1 to 32 ocpu and for VM.Optimized3.Flex OCPU range is 1 to 18 ocpu.
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
+type ModelDeploymentResourceConfigurationResourceLimitConfigurationObservation struct {
+
+	// (Updatable) A model-deployment instance of type VM.Standard.E3.Flex or VM.Standard.E4.Flex allows the memory to be specified with in the range of 6 to 1024 GB. VM.Standard3.Flex memory range is between 6 to 512 GB and VM.Optimized3.Flex memory range is between 6 to 256 GB.
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Updatable) A model-deployment instance of type VM.Standard.E3.Flex or VM.Standard.E4.Flex allows the ocpu count to be specified with in the range of 1 to 64 ocpu. VM.Standard3.Flex OCPU range is between 1 to 32 ocpu and for VM.Optimized3.Flex OCPU range is 1 to 18 ocpu.
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
+type ModelDeploymentResourceConfigurationResourceLimitConfigurationParameters struct {
+
+	// (Updatable) A model-deployment instance of type VM.Standard.E3.Flex or VM.Standard.E4.Flex allows the memory to be specified with in the range of 6 to 1024 GB. VM.Standard3.Flex memory range is between 6 to 512 GB and VM.Optimized3.Flex memory range is between 6 to 256 GB.
+	// +kubebuilder:validation:Optional
+	MemoryInGbs *float64 `json:"memoryInGbs" tf:"memory_in_gbs,omitempty"`
+
+	// (Updatable) A model-deployment instance of type VM.Standard.E3.Flex or VM.Standard.E4.Flex allows the ocpu count to be specified with in the range of 1 to 64 ocpu. VM.Standard3.Flex OCPU range is between 1 to 32 ocpu and for VM.Optimized3.Flex OCPU range is 1 to 18 ocpu.
+	// +kubebuilder:validation:Optional
+	Ocpus *float64 `json:"ocpus" tf:"ocpus,omitempty"`
+}
+
+type ModelDeploymentResourceConfigurationResourceRequestConfigurationInitParameters struct {
+
+	// The total number of gpus required to be allocated to the workload.
+	Gpus *float64 `json:"gpus,omitempty" tf:"gpus,omitempty"`
+
+	// (Updatable) A model-deployment instance of type VM.Standard.E3.Flex or VM.Standard.E4.Flex allows the memory to be specified with in the range of 6 to 1024 GB. VM.Standard3.Flex memory range is between 6 to 512 GB and VM.Optimized3.Flex memory range is between 6 to 256 GB.
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Updatable) A model-deployment instance of type VM.Standard.E3.Flex or VM.Standard.E4.Flex allows the ocpu count to be specified with in the range of 1 to 64 ocpu. VM.Standard3.Flex OCPU range is between 1 to 32 ocpu and for VM.Optimized3.Flex OCPU range is 1 to 18 ocpu.
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
+type ModelDeploymentResourceConfigurationResourceRequestConfigurationObservation struct {
+
+	// The total number of gpus required to be allocated to the workload.
+	Gpus *float64 `json:"gpus,omitempty" tf:"gpus,omitempty"`
+
+	// (Updatable) A model-deployment instance of type VM.Standard.E3.Flex or VM.Standard.E4.Flex allows the memory to be specified with in the range of 6 to 1024 GB. VM.Standard3.Flex memory range is between 6 to 512 GB and VM.Optimized3.Flex memory range is between 6 to 256 GB.
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Updatable) A model-deployment instance of type VM.Standard.E3.Flex or VM.Standard.E4.Flex allows the ocpu count to be specified with in the range of 1 to 64 ocpu. VM.Standard3.Flex OCPU range is between 1 to 32 ocpu and for VM.Optimized3.Flex OCPU range is 1 to 18 ocpu.
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
+type ModelDeploymentResourceConfigurationResourceRequestConfigurationParameters struct {
+
+	// The total number of gpus required to be allocated to the workload.
+	// +kubebuilder:validation:Optional
+	Gpus *float64 `json:"gpus,omitempty" tf:"gpus,omitempty"`
+
+	// (Updatable) A model-deployment instance of type VM.Standard.E3.Flex or VM.Standard.E4.Flex allows the memory to be specified with in the range of 6 to 1024 GB. VM.Standard3.Flex memory range is between 6 to 512 GB and VM.Optimized3.Flex memory range is between 6 to 256 GB.
+	// +kubebuilder:validation:Optional
+	MemoryInGbs *float64 `json:"memoryInGbs" tf:"memory_in_gbs,omitempty"`
+
+	// (Updatable) A model-deployment instance of type VM.Standard.E3.Flex or VM.Standard.E4.Flex allows the ocpu count to be specified with in the range of 1 to 64 ocpu. VM.Standard3.Flex OCPU range is between 1 to 32 ocpu and for VM.Optimized3.Flex OCPU range is 1 to 18 ocpu.
+	// +kubebuilder:validation:Optional
+	Ocpus *float64 `json:"ocpus" tf:"ocpus,omitempty"`
 }
 
 type ModelDeploymentSystemDataInitParameters struct {
@@ -917,10 +1370,30 @@ type ModelGroupConfigurationDetailsParameters struct {
 type PredictInitParameters struct {
 
 	// (Updatable) The OCID of a log group to work with.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/logging/v1alpha1.LogGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
+	// Reference to a LogGroup in logging to populate logGroupId.
+	// +kubebuilder:validation:Optional
+	LogGroupIDRef *v1.Reference `json:"logGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a LogGroup in logging to populate logGroupId.
+	// +kubebuilder:validation:Optional
+	LogGroupIDSelector *v1.Selector `json:"logGroupIdSelector,omitempty" tf:"-"`
+
 	// (Updatable) The OCID of a log to work with.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/logging/v1alpha1.Log
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	LogID *string `json:"logId,omitempty" tf:"log_id,omitempty"`
+
+	// Reference to a Log in logging to populate logId.
+	// +kubebuilder:validation:Optional
+	LogIDRef *v1.Reference `json:"logIdRef,omitempty" tf:"-"`
+
+	// Selector for a Log in logging to populate logId.
+	// +kubebuilder:validation:Optional
+	LogIDSelector *v1.Selector `json:"logIdSelector,omitempty" tf:"-"`
 }
 
 type PredictObservation struct {
@@ -935,61 +1408,32 @@ type PredictObservation struct {
 type PredictParameters struct {
 
 	// (Updatable) The OCID of a log group to work with.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/logging/v1alpha1.LogGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	LogGroupID *string `json:"logGroupId" tf:"log_group_id,omitempty"`
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
+
+	// Reference to a LogGroup in logging to populate logGroupId.
+	// +kubebuilder:validation:Optional
+	LogGroupIDRef *v1.Reference `json:"logGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a LogGroup in logging to populate logGroupId.
+	// +kubebuilder:validation:Optional
+	LogGroupIDSelector *v1.Selector `json:"logGroupIdSelector,omitempty" tf:"-"`
 
 	// (Updatable) The OCID of a log to work with.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/logging/v1alpha1.Log
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	LogID *string `json:"logId" tf:"log_id,omitempty"`
-}
+	LogID *string `json:"logId,omitempty" tf:"log_id,omitempty"`
 
-type RulesInitParameters struct {
-
-	// (Updatable) The metric expression for creating the alarm used to trigger autoscaling actions on the model deployment.
-	MetricExpressionRuleType *string `json:"metricExpressionRuleType,omitempty" tf:"metric_expression_rule_type,omitempty"`
-
-	// (Updatable) Metric type
-	MetricType *string `json:"metricType,omitempty" tf:"metric_type,omitempty"`
-
-	// (Updatable) The scaling configuration for the predefined metric expression rule.
-	ScaleInConfiguration []ScaleInConfigurationInitParameters `json:"scaleInConfiguration,omitempty" tf:"scale_in_configuration,omitempty"`
-
-	// (Updatable) The scaling configuration for the predefined metric expression rule.
-	ScaleOutConfiguration []ScaleOutConfigurationInitParameters `json:"scaleOutConfiguration,omitempty" tf:"scale_out_configuration,omitempty"`
-}
-
-type RulesObservation struct {
-
-	// (Updatable) The metric expression for creating the alarm used to trigger autoscaling actions on the model deployment.
-	MetricExpressionRuleType *string `json:"metricExpressionRuleType,omitempty" tf:"metric_expression_rule_type,omitempty"`
-
-	// (Updatable) Metric type
-	MetricType *string `json:"metricType,omitempty" tf:"metric_type,omitempty"`
-
-	// (Updatable) The scaling configuration for the predefined metric expression rule.
-	ScaleInConfiguration []ScaleInConfigurationObservation `json:"scaleInConfiguration,omitempty" tf:"scale_in_configuration,omitempty"`
-
-	// (Updatable) The scaling configuration for the predefined metric expression rule.
-	ScaleOutConfiguration []ScaleOutConfigurationObservation `json:"scaleOutConfiguration,omitempty" tf:"scale_out_configuration,omitempty"`
-}
-
-type RulesParameters struct {
-
-	// (Updatable) The metric expression for creating the alarm used to trigger autoscaling actions on the model deployment.
+	// Reference to a Log in logging to populate logId.
 	// +kubebuilder:validation:Optional
-	MetricExpressionRuleType *string `json:"metricExpressionRuleType" tf:"metric_expression_rule_type,omitempty"`
+	LogIDRef *v1.Reference `json:"logIdRef,omitempty" tf:"-"`
 
-	// (Updatable) Metric type
+	// Selector for a Log in logging to populate logId.
 	// +kubebuilder:validation:Optional
-	MetricType *string `json:"metricType,omitempty" tf:"metric_type,omitempty"`
-
-	// (Updatable) The scaling configuration for the predefined metric expression rule.
-	// +kubebuilder:validation:Optional
-	ScaleInConfiguration []ScaleInConfigurationParameters `json:"scaleInConfiguration" tf:"scale_in_configuration,omitempty"`
-
-	// (Updatable) The scaling configuration for the predefined metric expression rule.
-	// +kubebuilder:validation:Optional
-	ScaleOutConfiguration []ScaleOutConfigurationParameters `json:"scaleOutConfiguration" tf:"scale_out_configuration,omitempty"`
+	LogIDSelector *v1.Selector `json:"logIdSelector,omitempty" tf:"-"`
 }
 
 type RulesScaleInConfigurationInitParameters struct {
@@ -1110,102 +1554,84 @@ type RulesScaleOutConfigurationParameters struct {
 	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 }
 
-type ScaleInConfigurationInitParameters struct {
+type ScaleConfigurationInitParameters struct {
 
-	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The value is used for adjusting the count of instances by.
-	InstanceCountAdjustment *float64 `json:"instanceCountAdjustment,omitempty" tf:"instance_count_adjustment,omitempty"`
-
-	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The period of time that the condition defined in the alarm must persist before the alarm state changes from "OK" to "FIRING" or vice versa. For example, a value of 5 minutes means that the alarm must persist in breaching the condition for five minutes before the alarm updates its state to "FIRING"; likewise, the alarm must persist in not breaching the condition for five minutes before the alarm updates its state to "OK."
-	PendingDuration *string `json:"pendingDuration,omitempty" tf:"pending_duration,omitempty"`
+	// Returned for TARGET_CUSTOM_EXPRESSION. Namespace to read the metrics from.
+	MetricNamespace *string `json:"metricNamespace,omitempty" tf:"metric_namespace,omitempty"`
 
 	// (Updatable) The Monitoring Query Language (MQL) expression to evaluate for the alarm. The Alarms feature of the Monitoring service interprets results for each returned time series as Boolean values, where zero represents false and a non-zero value represents true. A true value means that the trigger rule condition has been met. The query must specify a metric, statistic, interval, and trigger rule (threshold or absence). Supported values for interval: 1m-60m (also 1h). You can optionally specify dimensions and grouping functions. Supported grouping functions: grouping(), groupBy().
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
-	// (Updatable) The type of scaling configuration.
-	ScalingConfigurationType *string `json:"scalingConfigurationType,omitempty" tf:"scaling_configuration_type,omitempty"`
+	// The type of target scaling configuration. Supported values are THRESHOLD and QUERY.
+	TargetScalingConfigurationType *string `json:"targetScalingConfigurationType,omitempty" tf:"target_scaling_configuration_type,omitempty"`
 
 	// (Updatable) A metric value at which the scaling operation will be triggered.
 	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 }
 
-type ScaleInConfigurationObservation struct {
+type ScaleConfigurationObservation struct {
 
-	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The value is used for adjusting the count of instances by.
-	InstanceCountAdjustment *float64 `json:"instanceCountAdjustment,omitempty" tf:"instance_count_adjustment,omitempty"`
-
-	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The period of time that the condition defined in the alarm must persist before the alarm state changes from "OK" to "FIRING" or vice versa. For example, a value of 5 minutes means that the alarm must persist in breaching the condition for five minutes before the alarm updates its state to "FIRING"; likewise, the alarm must persist in not breaching the condition for five minutes before the alarm updates its state to "OK."
-	PendingDuration *string `json:"pendingDuration,omitempty" tf:"pending_duration,omitempty"`
+	// Returned for TARGET_CUSTOM_EXPRESSION. Namespace to read the metrics from.
+	MetricNamespace *string `json:"metricNamespace,omitempty" tf:"metric_namespace,omitempty"`
 
 	// (Updatable) The Monitoring Query Language (MQL) expression to evaluate for the alarm. The Alarms feature of the Monitoring service interprets results for each returned time series as Boolean values, where zero represents false and a non-zero value represents true. A true value means that the trigger rule condition has been met. The query must specify a metric, statistic, interval, and trigger rule (threshold or absence). Supported values for interval: 1m-60m (also 1h). You can optionally specify dimensions and grouping functions. Supported grouping functions: grouping(), groupBy().
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
-	// (Updatable) The type of scaling configuration.
-	ScalingConfigurationType *string `json:"scalingConfigurationType,omitempty" tf:"scaling_configuration_type,omitempty"`
+	// The type of target scaling configuration. Supported values are THRESHOLD and QUERY.
+	TargetScalingConfigurationType *string `json:"targetScalingConfigurationType,omitempty" tf:"target_scaling_configuration_type,omitempty"`
 
 	// (Updatable) A metric value at which the scaling operation will be triggered.
 	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 }
 
-type ScaleInConfigurationParameters struct {
+type ScaleConfigurationParameters struct {
 
-	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The value is used for adjusting the count of instances by.
+	// Returned for TARGET_CUSTOM_EXPRESSION. Namespace to read the metrics from.
 	// +kubebuilder:validation:Optional
-	InstanceCountAdjustment *float64 `json:"instanceCountAdjustment,omitempty" tf:"instance_count_adjustment,omitempty"`
-
-	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The period of time that the condition defined in the alarm must persist before the alarm state changes from "OK" to "FIRING" or vice versa. For example, a value of 5 minutes means that the alarm must persist in breaching the condition for five minutes before the alarm updates its state to "FIRING"; likewise, the alarm must persist in not breaching the condition for five minutes before the alarm updates its state to "OK."
-	// +kubebuilder:validation:Optional
-	PendingDuration *string `json:"pendingDuration,omitempty" tf:"pending_duration,omitempty"`
+	MetricNamespace *string `json:"metricNamespace,omitempty" tf:"metric_namespace,omitempty"`
 
 	// (Updatable) The Monitoring Query Language (MQL) expression to evaluate for the alarm. The Alarms feature of the Monitoring service interprets results for each returned time series as Boolean values, where zero represents false and a non-zero value represents true. A true value means that the trigger rule condition has been met. The query must specify a metric, statistic, interval, and trigger rule (threshold or absence). Supported values for interval: 1m-60m (also 1h). You can optionally specify dimensions and grouping functions. Supported grouping functions: grouping(), groupBy().
 	// +kubebuilder:validation:Optional
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
-	// (Updatable) The type of scaling configuration.
+	// The type of target scaling configuration. Supported values are THRESHOLD and QUERY.
 	// +kubebuilder:validation:Optional
-	ScalingConfigurationType *string `json:"scalingConfigurationType,omitempty" tf:"scaling_configuration_type,omitempty"`
+	TargetScalingConfigurationType *string `json:"targetScalingConfigurationType,omitempty" tf:"target_scaling_configuration_type,omitempty"`
 
 	// (Updatable) A metric value at which the scaling operation will be triggered.
 	// +kubebuilder:validation:Optional
 	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 }
 
-type ScaleOutConfigurationInitParameters struct {
+type ScaleInPolicyInitParameters struct {
+
+	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 300 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
+	CoolDownInSeconds *float64 `json:"coolDownInSeconds,omitempty" tf:"cool_down_in_seconds,omitempty"`
 
 	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The value is used for adjusting the count of instances by.
 	InstanceCountAdjustment *float64 `json:"instanceCountAdjustment,omitempty" tf:"instance_count_adjustment,omitempty"`
 
 	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The period of time that the condition defined in the alarm must persist before the alarm state changes from "OK" to "FIRING" or vice versa. For example, a value of 5 minutes means that the alarm must persist in breaching the condition for five minutes before the alarm updates its state to "FIRING"; likewise, the alarm must persist in not breaching the condition for five minutes before the alarm updates its state to "OK."
 	PendingDuration *string `json:"pendingDuration,omitempty" tf:"pending_duration,omitempty"`
-
-	// (Updatable) The Monitoring Query Language (MQL) expression to evaluate for the alarm. The Alarms feature of the Monitoring service interprets results for each returned time series as Boolean values, where zero represents false and a non-zero value represents true. A true value means that the trigger rule condition has been met. The query must specify a metric, statistic, interval, and trigger rule (threshold or absence). Supported values for interval: 1m-60m (also 1h). You can optionally specify dimensions and grouping functions. Supported grouping functions: grouping(), groupBy().
-	Query *string `json:"query,omitempty" tf:"query,omitempty"`
-
-	// (Updatable) The type of scaling configuration.
-	ScalingConfigurationType *string `json:"scalingConfigurationType,omitempty" tf:"scaling_configuration_type,omitempty"`
-
-	// (Updatable) A metric value at which the scaling operation will be triggered.
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 }
 
-type ScaleOutConfigurationObservation struct {
+type ScaleInPolicyObservation struct {
+
+	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 300 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
+	CoolDownInSeconds *float64 `json:"coolDownInSeconds,omitempty" tf:"cool_down_in_seconds,omitempty"`
 
 	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The value is used for adjusting the count of instances by.
 	InstanceCountAdjustment *float64 `json:"instanceCountAdjustment,omitempty" tf:"instance_count_adjustment,omitempty"`
 
 	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The period of time that the condition defined in the alarm must persist before the alarm state changes from "OK" to "FIRING" or vice versa. For example, a value of 5 minutes means that the alarm must persist in breaching the condition for five minutes before the alarm updates its state to "FIRING"; likewise, the alarm must persist in not breaching the condition for five minutes before the alarm updates its state to "OK."
 	PendingDuration *string `json:"pendingDuration,omitempty" tf:"pending_duration,omitempty"`
-
-	// (Updatable) The Monitoring Query Language (MQL) expression to evaluate for the alarm. The Alarms feature of the Monitoring service interprets results for each returned time series as Boolean values, where zero represents false and a non-zero value represents true. A true value means that the trigger rule condition has been met. The query must specify a metric, statistic, interval, and trigger rule (threshold or absence). Supported values for interval: 1m-60m (also 1h). You can optionally specify dimensions and grouping functions. Supported grouping functions: grouping(), groupBy().
-	Query *string `json:"query,omitempty" tf:"query,omitempty"`
-
-	// (Updatable) The type of scaling configuration.
-	ScalingConfigurationType *string `json:"scalingConfigurationType,omitempty" tf:"scaling_configuration_type,omitempty"`
-
-	// (Updatable) A metric value at which the scaling operation will be triggered.
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 }
 
-type ScaleOutConfigurationParameters struct {
+type ScaleInPolicyParameters struct {
+
+	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 300 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
+	// +kubebuilder:validation:Optional
+	CoolDownInSeconds *float64 `json:"coolDownInSeconds,omitempty" tf:"cool_down_in_seconds,omitempty"`
 
 	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The value is used for adjusting the count of instances by.
 	// +kubebuilder:validation:Optional
@@ -1214,18 +1640,45 @@ type ScaleOutConfigurationParameters struct {
 	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The period of time that the condition defined in the alarm must persist before the alarm state changes from "OK" to "FIRING" or vice versa. For example, a value of 5 minutes means that the alarm must persist in breaching the condition for five minutes before the alarm updates its state to "FIRING"; likewise, the alarm must persist in not breaching the condition for five minutes before the alarm updates its state to "OK."
 	// +kubebuilder:validation:Optional
 	PendingDuration *string `json:"pendingDuration,omitempty" tf:"pending_duration,omitempty"`
+}
 
-	// (Updatable) The Monitoring Query Language (MQL) expression to evaluate for the alarm. The Alarms feature of the Monitoring service interprets results for each returned time series as Boolean values, where zero represents false and a non-zero value represents true. A true value means that the trigger rule condition has been met. The query must specify a metric, statistic, interval, and trigger rule (threshold or absence). Supported values for interval: 1m-60m (also 1h). You can optionally specify dimensions and grouping functions. Supported grouping functions: grouping(), groupBy().
-	// +kubebuilder:validation:Optional
-	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+type ScaleOutPolicyInitParameters struct {
 
-	// (Updatable) The type of scaling configuration.
-	// +kubebuilder:validation:Optional
-	ScalingConfigurationType *string `json:"scalingConfigurationType,omitempty" tf:"scaling_configuration_type,omitempty"`
+	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 300 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
+	CoolDownInSeconds *float64 `json:"coolDownInSeconds,omitempty" tf:"cool_down_in_seconds,omitempty"`
 
-	// (Updatable) A metric value at which the scaling operation will be triggered.
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The value is used for adjusting the count of instances by.
+	InstanceCountAdjustment *float64 `json:"instanceCountAdjustment,omitempty" tf:"instance_count_adjustment,omitempty"`
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The period of time that the condition defined in the alarm must persist before the alarm state changes from "OK" to "FIRING" or vice versa. For example, a value of 5 minutes means that the alarm must persist in breaching the condition for five minutes before the alarm updates its state to "FIRING"; likewise, the alarm must persist in not breaching the condition for five minutes before the alarm updates its state to "OK."
+	PendingDuration *string `json:"pendingDuration,omitempty" tf:"pending_duration,omitempty"`
+}
+
+type ScaleOutPolicyObservation struct {
+
+	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 300 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
+	CoolDownInSeconds *float64 `json:"coolDownInSeconds,omitempty" tf:"cool_down_in_seconds,omitempty"`
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The value is used for adjusting the count of instances by.
+	InstanceCountAdjustment *float64 `json:"instanceCountAdjustment,omitempty" tf:"instance_count_adjustment,omitempty"`
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The period of time that the condition defined in the alarm must persist before the alarm state changes from "OK" to "FIRING" or vice versa. For example, a value of 5 minutes means that the alarm must persist in breaching the condition for five minutes before the alarm updates its state to "FIRING"; likewise, the alarm must persist in not breaching the condition for five minutes before the alarm updates its state to "OK."
+	PendingDuration *string `json:"pendingDuration,omitempty" tf:"pending_duration,omitempty"`
+}
+
+type ScaleOutPolicyParameters struct {
+
+	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 300 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
 	// +kubebuilder:validation:Optional
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+	CoolDownInSeconds *float64 `json:"coolDownInSeconds,omitempty" tf:"cool_down_in_seconds,omitempty"`
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The value is used for adjusting the count of instances by.
+	// +kubebuilder:validation:Optional
+	InstanceCountAdjustment *float64 `json:"instanceCountAdjustment,omitempty" tf:"instance_count_adjustment,omitempty"`
+
+	// (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION | PREDEFINED_EXPRESSION) (Updatable) The period of time that the condition defined in the alarm must persist before the alarm state changes from "OK" to "FIRING" or vice versa. For example, a value of 5 minutes means that the alarm must persist in breaching the condition for five minutes before the alarm updates its state to "FIRING"; likewise, the alarm must persist in not breaching the condition for five minutes before the alarm updates its state to "OK."
+	// +kubebuilder:validation:Optional
+	PendingDuration *string `json:"pendingDuration,omitempty" tf:"pending_duration,omitempty"`
 }
 
 type ScalingPolicyAutoScalingPoliciesInitParameters struct {
@@ -1244,6 +1697,12 @@ type ScalingPolicyAutoScalingPoliciesInitParameters struct {
 
 	// (Updatable) The list of autoscaling policy rules.
 	Rules []AutoScalingPoliciesRulesInitParameters `json:"rules,omitempty" tf:"rules,omitempty"`
+
+	// Workload scaling policy configuration for workloads on managed compute cluster type compute target.
+	ScaleInPolicy []ScaleInPolicyInitParameters `json:"scaleInPolicy,omitempty" tf:"scale_in_policy,omitempty"`
+
+	// Workload scaling policy configuration for workloads on managed compute cluster type compute target.
+	ScaleOutPolicy []ScaleOutPolicyInitParameters `json:"scaleOutPolicy,omitempty" tf:"scale_out_policy,omitempty"`
 }
 
 type ScalingPolicyAutoScalingPoliciesObservation struct {
@@ -1262,6 +1721,12 @@ type ScalingPolicyAutoScalingPoliciesObservation struct {
 
 	// (Updatable) The list of autoscaling policy rules.
 	Rules []AutoScalingPoliciesRulesObservation `json:"rules,omitempty" tf:"rules,omitempty"`
+
+	// Workload scaling policy configuration for workloads on managed compute cluster type compute target.
+	ScaleInPolicy []ScaleInPolicyObservation `json:"scaleInPolicy,omitempty" tf:"scale_in_policy,omitempty"`
+
+	// Workload scaling policy configuration for workloads on managed compute cluster type compute target.
+	ScaleOutPolicy []ScaleOutPolicyObservation `json:"scaleOutPolicy,omitempty" tf:"scale_out_policy,omitempty"`
 }
 
 type ScalingPolicyAutoScalingPoliciesParameters struct {
@@ -1285,65 +1750,63 @@ type ScalingPolicyAutoScalingPoliciesParameters struct {
 	// (Updatable) The list of autoscaling policy rules.
 	// +kubebuilder:validation:Optional
 	Rules []AutoScalingPoliciesRulesParameters `json:"rules" tf:"rules,omitempty"`
+
+	// Workload scaling policy configuration for workloads on managed compute cluster type compute target.
+	// +kubebuilder:validation:Optional
+	ScaleInPolicy []ScaleInPolicyParameters `json:"scaleInPolicy,omitempty" tf:"scale_in_policy,omitempty"`
+
+	// Workload scaling policy configuration for workloads on managed compute cluster type compute target.
+	// +kubebuilder:validation:Optional
+	ScaleOutPolicy []ScaleOutPolicyParameters `json:"scaleOutPolicy,omitempty" tf:"scale_out_policy,omitempty"`
 }
 
-type ScalingPolicyInitParameters struct {
+type ScalingPolicyAutoScalingPoliciesRulesInitParameters struct {
 
-	// (Updatable) The list of autoscaling policy details.
-	AutoScalingPolicies []AutoScalingPoliciesInitParameters `json:"autoScalingPolicies,omitempty" tf:"auto_scaling_policies,omitempty"`
+	// (Updatable) The metric expression for creating the alarm used to trigger autoscaling actions on the model deployment.
+	MetricExpressionRuleType *string `json:"metricExpressionRuleType,omitempty" tf:"metric_expression_rule_type,omitempty"`
 
-	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 600 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
-	CoolDownInSeconds *float64 `json:"coolDownInSeconds,omitempty" tf:"cool_down_in_seconds,omitempty"`
+	// (Updatable) Metric type
+	MetricType *string `json:"metricType,omitempty" tf:"metric_type,omitempty"`
 
-	// (Updatable) The number of instances for the model deployment.
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	// (Updatable) The scaling configuration for the predefined metric expression rule.
+	ScaleInConfiguration []AutoScalingPoliciesRulesScaleInConfigurationInitParameters `json:"scaleInConfiguration,omitempty" tf:"scale_in_configuration,omitempty"`
 
-	// (Applicable when policy_type=AUTOSCALING) (Updatable) Whether the autoscaling policy is enabled.
-	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
-
-	// (Updatable) The type of scaling policy.
-	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
+	// (Updatable) The scaling configuration for the predefined metric expression rule.
+	ScaleOutConfiguration []AutoScalingPoliciesRulesScaleOutConfigurationInitParameters `json:"scaleOutConfiguration,omitempty" tf:"scale_out_configuration,omitempty"`
 }
 
-type ScalingPolicyObservation struct {
+type ScalingPolicyAutoScalingPoliciesRulesObservation struct {
 
-	// (Updatable) The list of autoscaling policy details.
-	AutoScalingPolicies []AutoScalingPoliciesObservation `json:"autoScalingPolicies,omitempty" tf:"auto_scaling_policies,omitempty"`
+	// (Updatable) The metric expression for creating the alarm used to trigger autoscaling actions on the model deployment.
+	MetricExpressionRuleType *string `json:"metricExpressionRuleType,omitempty" tf:"metric_expression_rule_type,omitempty"`
 
-	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 600 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
-	CoolDownInSeconds *float64 `json:"coolDownInSeconds,omitempty" tf:"cool_down_in_seconds,omitempty"`
+	// (Updatable) Metric type
+	MetricType *string `json:"metricType,omitempty" tf:"metric_type,omitempty"`
 
-	// (Updatable) The number of instances for the model deployment.
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	// (Updatable) The scaling configuration for the predefined metric expression rule.
+	ScaleInConfiguration []AutoScalingPoliciesRulesScaleInConfigurationObservation `json:"scaleInConfiguration,omitempty" tf:"scale_in_configuration,omitempty"`
 
-	// (Applicable when policy_type=AUTOSCALING) (Updatable) Whether the autoscaling policy is enabled.
-	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
-
-	// (Updatable) The type of scaling policy.
-	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
+	// (Updatable) The scaling configuration for the predefined metric expression rule.
+	ScaleOutConfiguration []AutoScalingPoliciesRulesScaleOutConfigurationObservation `json:"scaleOutConfiguration,omitempty" tf:"scale_out_configuration,omitempty"`
 }
 
-type ScalingPolicyParameters struct {
+type ScalingPolicyAutoScalingPoliciesRulesParameters struct {
 
-	// (Updatable) The list of autoscaling policy details.
+	// (Updatable) The metric expression for creating the alarm used to trigger autoscaling actions on the model deployment.
 	// +kubebuilder:validation:Optional
-	AutoScalingPolicies []AutoScalingPoliciesParameters `json:"autoScalingPolicies,omitempty" tf:"auto_scaling_policies,omitempty"`
+	MetricExpressionRuleType *string `json:"metricExpressionRuleType" tf:"metric_expression_rule_type,omitempty"`
 
-	// (Applicable when policy_type=AUTOSCALING) (Updatable) For threshold-based autoscaling policies, this value is the minimum period of time to wait between scaling actions. The cooldown period gives the system time to stabilize before rescaling. The minimum value is 600 seconds, which is also the default. The cooldown period starts when the model deployment becomes ACTIVE after the scaling operation.
+	// (Updatable) Metric type
 	// +kubebuilder:validation:Optional
-	CoolDownInSeconds *float64 `json:"coolDownInSeconds,omitempty" tf:"cool_down_in_seconds,omitempty"`
+	MetricType *string `json:"metricType,omitempty" tf:"metric_type,omitempty"`
 
-	// (Updatable) The number of instances for the model deployment.
+	// (Updatable) The scaling configuration for the predefined metric expression rule.
 	// +kubebuilder:validation:Optional
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	ScaleInConfiguration []AutoScalingPoliciesRulesScaleInConfigurationParameters `json:"scaleInConfiguration" tf:"scale_in_configuration,omitempty"`
 
-	// (Applicable when policy_type=AUTOSCALING) (Updatable) Whether the autoscaling policy is enabled.
+	// (Updatable) The scaling configuration for the predefined metric expression rule.
 	// +kubebuilder:validation:Optional
-	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
-
-	// (Updatable) The type of scaling policy.
-	// +kubebuilder:validation:Optional
-	PolicyType *string `json:"policyType" tf:"policy_type,omitempty"`
+	ScaleOutConfiguration []AutoScalingPoliciesRulesScaleOutConfigurationParameters `json:"scaleOutConfiguration" tf:"scale_out_configuration,omitempty"`
 }
 
 // ModelDeploymentSpec defines the desired state of ModelDeployment
@@ -1383,7 +1846,6 @@ type ModelDeployment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.modelDeploymentConfigurationDetails) || (has(self.initProvider) && has(self.initProvider.modelDeploymentConfigurationDetails))",message="spec.forProvider.modelDeploymentConfigurationDetails is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.projectId) || (has(self.initProvider) && has(self.initProvider.projectId))",message="spec.forProvider.projectId is a required parameter"
 	Spec   ModelDeploymentSpec   `json:"spec"`
 	Status ModelDeploymentStatus `json:"status,omitempty"`
 }

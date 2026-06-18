@@ -572,6 +572,12 @@ spec:
                     description: (Updatable) The OCID for the compartment. This should
                       always be the root compartment.
                     type: string
+                  computeGpuMemoryClusters:
+                    description: List of GPU memory cluster OCIDs within this GPU
+                      memory fabric.
+                    items:
+                      type: string
+                    type: array
                   computeGpuMemoryFabricId:
                     description: The OCID of the compute GPU memory fabric.
                     type: string

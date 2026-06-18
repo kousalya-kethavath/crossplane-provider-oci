@@ -313,6 +313,10 @@ type EndpointConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NsgIdsSelector *v1.Selector `json:"nsgIdsSelector,omitempty" tf:"-"`
 
+	// Security attributes are labels for a resource that can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
 	// The OCID of the regional subnet in which to place the Cluster endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/networking/v1alpha1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -334,6 +338,10 @@ type EndpointConfigObservation struct {
 	// A list of the OCIDs of the network security groups (NSGs) to apply to the cluster endpoint. For more information about NSGs, see NetworkSecurityGroup.
 	// +listType=set
 	NsgIds []*string `json:"nsgIds,omitempty" tf:"nsg_ids,omitempty"`
+
+	// Security attributes are labels for a resource that can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 
 	// The OCID of the regional subnet in which to place the Cluster endpoint.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -358,6 +366,11 @@ type EndpointConfigParameters struct {
 	// Selector for a list of NetworkSecurityGroup in networking to populate nsgIds.
 	// +kubebuilder:validation:Optional
 	NsgIdsSelector *v1.Selector `json:"nsgIdsSelector,omitempty" tf:"-"`
+
+	// Security attributes are labels for a resource that can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 
 	// The OCID of the regional subnet in which to place the Cluster endpoint.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/networking/v1alpha1.Subnet

@@ -21,7 +21,7 @@ func (mg *MysqlDbSystem) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this MysqlDbSystem
 func (tr *MysqlDbSystem) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"admin_password": "adminPasswordSecretRef", "source[*].source_url": "source[*].sourceUrlSecretRef"}
+	return map[string]string{"admin_password": "adminPasswordSecretRef", "source[*].channel[*].source_password": "source[*].channel[*].sourcePasswordSecretRef", "source[*].source_url": "source[*].sourceUrlSecretRef"}
 }
 
 // GetObservation of this MysqlDbSystem

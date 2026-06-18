@@ -13,6 +13,65 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type AdditionalDetailsInitParameters struct {
+
+	// The number of instances or size of the resource.
+	ClusterPlacementGroupCount *float64 `json:"clusterPlacementGroupCount,omitempty" tf:"cluster_placement_group_count,omitempty"`
+
+	// The amount of memory (in GBs) needed in the instance.
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// The number of NVMe drives to use for storage.
+	Nvmes *float64 `json:"nvmes,omitempty" tf:"nvmes,omitempty"`
+
+	// The number of OCPUs needed in the instance.
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+
+	// Additional details about what service provides the capability. For example, COMPUTE means that the Oracle Cloud Infrastructure Compute service provides the selected capability.
+	ServiceType *string `json:"serviceType,omitempty" tf:"service_type,omitempty"`
+}
+
+type AdditionalDetailsObservation struct {
+
+	// The number of instances or size of the resource.
+	ClusterPlacementGroupCount *float64 `json:"clusterPlacementGroupCount,omitempty" tf:"cluster_placement_group_count,omitempty"`
+
+	// The amount of memory (in GBs) needed in the instance.
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// The number of NVMe drives to use for storage.
+	Nvmes *float64 `json:"nvmes,omitempty" tf:"nvmes,omitempty"`
+
+	// The number of OCPUs needed in the instance.
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+
+	// Additional details about what service provides the capability. For example, COMPUTE means that the Oracle Cloud Infrastructure Compute service provides the selected capability.
+	ServiceType *string `json:"serviceType,omitempty" tf:"service_type,omitempty"`
+}
+
+type AdditionalDetailsParameters struct {
+
+	// The number of instances or size of the resource.
+	// +kubebuilder:validation:Optional
+	ClusterPlacementGroupCount *float64 `json:"clusterPlacementGroupCount,omitempty" tf:"cluster_placement_group_count,omitempty"`
+
+	// The amount of memory (in GBs) needed in the instance.
+	// +kubebuilder:validation:Optional
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// The number of NVMe drives to use for storage.
+	// +kubebuilder:validation:Optional
+	Nvmes *float64 `json:"nvmes,omitempty" tf:"nvmes,omitempty"`
+
+	// The number of OCPUs needed in the instance.
+	// +kubebuilder:validation:Optional
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+
+	// Additional details about what service provides the capability. For example, COMPUTE means that the Oracle Cloud Infrastructure Compute service provides the selected capability.
+	// +kubebuilder:validation:Optional
+	ServiceType *string `json:"serviceType" tf:"service_type,omitempty"`
+}
+
 type CapabilitiesInitParameters struct {
 
 	// The supported resources.
@@ -193,6 +252,9 @@ type ClusterPlacementGroupParameters struct {
 
 type ItemsInitParameters struct {
 
+	// Additional details describing the selected capability.
+	AdditionalDetails []AdditionalDetailsInitParameters `json:"additionalDetails,omitempty" tf:"additional_details,omitempty"`
+
 	// The type of resource.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -202,6 +264,9 @@ type ItemsInitParameters struct {
 
 type ItemsObservation struct {
 
+	// Additional details describing the selected capability.
+	AdditionalDetails []AdditionalDetailsObservation `json:"additionalDetails,omitempty" tf:"additional_details,omitempty"`
+
 	// The type of resource.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -210,6 +275,10 @@ type ItemsObservation struct {
 }
 
 type ItemsParameters struct {
+
+	// Additional details describing the selected capability.
+	// +kubebuilder:validation:Optional
+	AdditionalDetails []AdditionalDetailsParameters `json:"additionalDetails,omitempty" tf:"additional_details,omitempty"`
 
 	// The type of resource.
 	// +kubebuilder:validation:Optional

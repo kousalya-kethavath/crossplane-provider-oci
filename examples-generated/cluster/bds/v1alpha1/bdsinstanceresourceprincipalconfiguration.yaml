@@ -16,4 +16,7 @@ spec:
       name: example-secret
       namespace: upbound-system
     displayName: ${var.bds_instance_resource_principal_configuration_display_name}
+    secretIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_secret
     sessionTokenLifeSpanDurationInHours: ${var.bds_instance_resource_principal_configuration_session_token_life_span_duration_in_hours}

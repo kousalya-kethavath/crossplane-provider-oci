@@ -87,7 +87,7 @@ type VcnInitParameters struct {
 	// Whether IPv6 is enabled for the VCN. Default is false. If enabled, Oracle will assign the VCN a IPv6 /56 CIDR block. You may skip having Oracle allocate the VCN a IPv6 /56 CIDR block by setting isOracleGuaAllocationEnabled to false. For important details about IPv6 addressing in a VCN, see IPv6 Addresses.  Example: true
 	IsIpv6Enabled *bool `json:"isIpv6Enabled,omitempty" tf:"is_ipv6enabled,omitempty"`
 
-	// Specifies whether to skip Oracle allocated IPv6 GUA. By default, Oracle will allocate one GUA of /56 size for an IPv6 enabled VCN.
+	// Specifies whether Oracle allocates an IPv6 global unicast address (GUA) prefix to the VCN. By default, Oracle allocates one GUA prefix of /56 size for an IPv6-enabled VCN if this value is not explicitly set to false. When this value is changed from true to false on an existing VCN, the provider removes that prefix from the existing VCN.
 	IsOracleGuaAllocationEnabled *bool `json:"isOracleGuaAllocationEnabled,omitempty" tf:"is_oracle_gua_allocation_enabled,omitempty"`
 
 	// (Updatable) Security Attributes for this resource. This is unique to ZPR, and helps identify which resources are allowed to be accessed by what permission controls.  Example: {"Oracle-DataSecurity-ZPR.MaxEgressCount.value": "42", "Oracle-DataSecurity-ZPR.MaxEgressCount.mode": "audit"}
@@ -148,7 +148,7 @@ type VcnObservation struct {
 	// Whether IPv6 is enabled for the VCN. Default is false. If enabled, Oracle will assign the VCN a IPv6 /56 CIDR block. You may skip having Oracle allocate the VCN a IPv6 /56 CIDR block by setting isOracleGuaAllocationEnabled to false. For important details about IPv6 addressing in a VCN, see IPv6 Addresses.  Example: true
 	IsIpv6Enabled *bool `json:"isIpv6Enabled,omitempty" tf:"is_ipv6enabled,omitempty"`
 
-	// Specifies whether to skip Oracle allocated IPv6 GUA. By default, Oracle will allocate one GUA of /56 size for an IPv6 enabled VCN.
+	// Specifies whether Oracle allocates an IPv6 global unicast address (GUA) prefix to the VCN. By default, Oracle allocates one GUA prefix of /56 size for an IPv6-enabled VCN if this value is not explicitly set to false. When this value is changed from true to false on an existing VCN, the provider removes that prefix from the existing VCN.
 	IsOracleGuaAllocationEnabled *bool `json:"isOracleGuaAllocationEnabled,omitempty" tf:"is_oracle_gua_allocation_enabled,omitempty"`
 
 	// (Updatable) Security Attributes for this resource. This is unique to ZPR, and helps identify which resources are allowed to be accessed by what permission controls.  Example: {"Oracle-DataSecurity-ZPR.MaxEgressCount.value": "42", "Oracle-DataSecurity-ZPR.MaxEgressCount.mode": "audit"}
@@ -219,7 +219,7 @@ type VcnParameters struct {
 	// +kubebuilder:validation:Optional
 	IsIpv6Enabled *bool `json:"isIpv6Enabled,omitempty" tf:"is_ipv6enabled,omitempty"`
 
-	// Specifies whether to skip Oracle allocated IPv6 GUA. By default, Oracle will allocate one GUA of /56 size for an IPv6 enabled VCN.
+	// Specifies whether Oracle allocates an IPv6 global unicast address (GUA) prefix to the VCN. By default, Oracle allocates one GUA prefix of /56 size for an IPv6-enabled VCN if this value is not explicitly set to false. When this value is changed from true to false on an existing VCN, the provider removes that prefix from the existing VCN.
 	// +kubebuilder:validation:Optional
 	IsOracleGuaAllocationEnabled *bool `json:"isOracleGuaAllocationEnabled,omitempty" tf:"is_oracle_gua_allocation_enabled,omitempty"`
 

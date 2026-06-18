@@ -15,75 +15,17 @@ import (
 
 type AuthConfigurationInitParameters struct {
 
-	// Name of the IDCS application
-	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/dataflow/v1alpha1.Application
-	ApplicationName *string `json:"applicationName,omitempty" tf:"application_name,omitempty"`
-
-	// Reference to a Application in dataflow to populate applicationName.
-	// +kubebuilder:validation:Optional
-	ApplicationNameRef *v1.Reference `json:"applicationNameRef,omitempty" tf:"-"`
-
-	// Selector for a Application in dataflow to populate applicationName.
-	// +kubebuilder:validation:Optional
-	ApplicationNameSelector *v1.Selector `json:"applicationNameSelector,omitempty" tf:"-"`
-
-	// Identity Domain OCID
-	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/identity/v1alpha1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
-
-	// Reference to a Domain in identity to populate domainId.
-	// +kubebuilder:validation:Optional
-	DomainIDRef *v1.Reference `json:"domainIdRef,omitempty" tf:"-"`
-
-	// Selector for a Domain in identity to populate domainId.
-	// +kubebuilder:validation:Optional
-	DomainIDSelector *v1.Selector `json:"domainIdSelector,omitempty" tf:"-"`
-
 	// Type of AuthN/Z
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type AuthConfigurationObservation struct {
 
-	// Name of the IDCS application
-	ApplicationName *string `json:"applicationName,omitempty" tf:"application_name,omitempty"`
-
-	// Identity Domain OCID
-	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
-
 	// Type of AuthN/Z
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type AuthConfigurationParameters struct {
-
-	// Name of the IDCS application
-	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/dataflow/v1alpha1.Application
-	// +kubebuilder:validation:Optional
-	ApplicationName *string `json:"applicationName,omitempty" tf:"application_name,omitempty"`
-
-	// Reference to a Application in dataflow to populate applicationName.
-	// +kubebuilder:validation:Optional
-	ApplicationNameRef *v1.Reference `json:"applicationNameRef,omitempty" tf:"-"`
-
-	// Selector for a Application in dataflow to populate applicationName.
-	// +kubebuilder:validation:Optional
-	ApplicationNameSelector *v1.Selector `json:"applicationNameSelector,omitempty" tf:"-"`
-
-	// Identity Domain OCID
-	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/identity/v1alpha1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
-
-	// Reference to a Domain in identity to populate domainId.
-	// +kubebuilder:validation:Optional
-	DomainIDRef *v1.Reference `json:"domainIdRef,omitempty" tf:"-"`
-
-	// Selector for a Domain in identity to populate domainId.
-	// +kubebuilder:validation:Optional
-	DomainIDSelector *v1.Selector `json:"domainIdSelector,omitempty" tf:"-"`
 
 	// Type of AuthN/Z
 	// +kubebuilder:validation:Optional

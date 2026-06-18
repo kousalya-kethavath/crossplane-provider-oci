@@ -84,6 +84,9 @@ type ResourceAnalyticsInstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CompartmentIDSelector *v1.NamespacedSelector `json:"compartmentIdSelector,omitempty" tf:"-"`
 
+	// The compute amount (CPUs) available to the Autonomous Database.
+	ComputeCount *float64 `json:"computeCount,omitempty" tf:"compute_count,omitempty"`
+
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Operations.CostCenter": "42"}
 	// +mapType=granular
 	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
@@ -132,6 +135,9 @@ type ResourceAnalyticsInstanceObservation struct {
 
 	// (Updatable) The OCID of the compartment to create the ResourceAnalyticsInstance in.
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
+
+	// The compute amount (CPUs) available to the Autonomous Database.
+	ComputeCount *float64 `json:"computeCount,omitempty" tf:"compute_count,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Operations.CostCenter": "42"}
 	// +mapType=granular
@@ -201,6 +207,10 @@ type ResourceAnalyticsInstanceParameters struct {
 	// Selector for a Compartment in identity to populate compartmentId.
 	// +kubebuilder:validation:Optional
 	CompartmentIDSelector *v1.NamespacedSelector `json:"compartmentIdSelector,omitempty" tf:"-"`
+
+	// The compute amount (CPUs) available to the Autonomous Database.
+	// +kubebuilder:validation:Optional
+	ComputeCount *float64 `json:"computeCount,omitempty" tf:"compute_count,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Operations.CostCenter": "42"}
 	// +kubebuilder:validation:Optional

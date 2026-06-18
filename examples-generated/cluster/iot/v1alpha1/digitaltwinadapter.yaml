@@ -20,7 +20,9 @@ spec:
       Department: Finance
     inboundEnvelope:
     - envelopeMapping:
-      - timeObserved: ${var.digital_twin_adapter_inbound_envelope_envelope_mapping_time_observed}
+      - contentRoot: ${var.digital_twin_adapter_inbound_envelope_envelope_mapping_content_root}
+        target: ${var.digital_twin_adapter_inbound_envelope_envelope_mapping_target}
+        timeObserved: ${var.digital_twin_adapter_inbound_envelope_envelope_mapping_time_observed}
       referenceEndpoint: ${var.digital_twin_adapter_inbound_envelope_reference_endpoint}
       referencePayload:
       - data: ${var.digital_twin_adapter_inbound_envelope_reference_payload_data}

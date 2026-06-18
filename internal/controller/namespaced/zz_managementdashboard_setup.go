@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	managementdashboardsimport "github.com/oracle/provider-oci/internal/controller/namespaced/managementdashboard/managementdashboardsimport"
+	managementsavedsearch "github.com/oracle/provider-oci/internal/controller/namespaced/managementdashboard/managementsavedsearch"
 )
 
 // Setup_managementdashboard creates all controllers with the supplied logger and adds them to
@@ -17,6 +18,7 @@ import (
 func Setup_managementdashboard(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		managementdashboardsimport.Setup,
+		managementsavedsearch.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -30,6 +32,7 @@ func Setup_managementdashboard(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_managementdashboard(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		managementdashboardsimport.SetupGated,
+		managementsavedsearch.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

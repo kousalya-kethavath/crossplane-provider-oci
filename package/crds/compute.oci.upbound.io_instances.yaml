@@ -1680,6 +1680,14 @@ spec:
                             blank for a non-burstable instance, or explicitly specify
                             non-burstable with BASELINE_1_1.
                           type: string
+                        localVolumeSizeInGbs:
+                          description: (Updatable) The NVMe-backed local storage capacity,
+                            in GB, for flexible dense (DenseLV) VM shapes. If the
+                            selected shape  is DenseLV, the value must be greater
+                            than 0. For all other shapes, the value must be null (if
+                            specified);  any non-null value for a non-DenseLV shape
+                            results in an error.
+                          type: number
                         memoryInGbs:
                           description: (Updatable) The total amount of memory available
                             to the instance, in gigabytes.
@@ -3556,6 +3564,14 @@ spec:
                             blank for a non-burstable instance, or explicitly specify
                             non-burstable with BASELINE_1_1.
                           type: string
+                        localVolumeSizeInGbs:
+                          description: (Updatable) The NVMe-backed local storage capacity,
+                            in GB, for flexible dense (DenseLV) VM shapes. If the
+                            selected shape  is DenseLV, the value must be greater
+                            than 0. For all other shapes, the value must be null (if
+                            specified);  any non-null value for a non-DenseLV shape
+                            results in an error.
+                          type: number
                         memoryInGbs:
                           description: (Updatable) The total amount of memory available
                             to the instance, in gigabytes.
@@ -4582,6 +4598,14 @@ spec:
                           type: number
                         localDisksTotalSizeInGbs:
                           description: The aggregate size of all local disks, in gigabytes.
+                          type: number
+                        localVolumeSizeInGbs:
+                          description: (Updatable) The NVMe-backed local storage capacity,
+                            in GB, for flexible dense (DenseLV) VM shapes. If the
+                            selected shape  is DenseLV, the value must be greater
+                            than 0. For all other shapes, the value must be null (if
+                            specified);  any non-null value for a non-DenseLV shape
+                            results in an error.
                           type: number
                         maxVnicAttachments:
                           description: The maximum number of VNIC attachments for

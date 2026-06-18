@@ -51,6 +51,10 @@ type OperationsInsightsPrivateEndpointInitParameters struct {
 	// A message describing the status of the private endpoint connection of this resource. For example, it can be used to provide actionable information about the validity of the private endpoint connection.
 	PrivateEndpointStatusDetails *string `json:"privateEndpointStatusDetails,omitempty" tf:"private_endpoint_status_details,omitempty"`
 
+	// (Updatable) Security attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
 	// The Subnet OCID of the Private service accessed database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/networking/v1alpha1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -116,6 +120,10 @@ type OperationsInsightsPrivateEndpointObservation struct {
 	// The private IP addresses assigned to the private endpoint. All IP addresses will be concatenated if it is RAC DBs.
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
+	// (Updatable) Security attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
 	// The current state of the private endpoint.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
@@ -178,6 +186,11 @@ type OperationsInsightsPrivateEndpointParameters struct {
 	// A message describing the status of the private endpoint connection of this resource. For example, it can be used to provide actionable information about the validity of the private endpoint connection.
 	// +kubebuilder:validation:Optional
 	PrivateEndpointStatusDetails *string `json:"privateEndpointStatusDetails,omitempty" tf:"private_endpoint_status_details,omitempty"`
+
+	// (Updatable) Security attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 
 	// The Subnet OCID of the Private service accessed database.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/networking/v1alpha1.Subnet

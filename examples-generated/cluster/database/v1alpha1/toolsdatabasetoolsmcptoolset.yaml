@@ -1,0 +1,52 @@
+apiVersion: database.oci.upbound.io/v1alpha1
+kind: ToolsDatabaseToolsMcpToolset
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/toolsdatabasetoolsmcptoolset
+  labels:
+    testing.upbound.io/example-name: test_database_tools_mcp_toolset
+  name: test-database-tools-mcp-toolset
+spec:
+  forProvider:
+    allowedRoles: ${var.database_tools_mcp_toolset_allowed_roles}
+    compartmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    databaseToolsMcpServerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_database_tools_mcp_server
+    defaultExecutionType: ${var.database_tools_mcp_toolset_default_execution_type}
+    definedTags:
+      foo-namespace.bar-key: value
+    description: ${var.database_tools_mcp_toolset_description}
+    displayName: ${var.database_tools_mcp_toolset_display_name}
+    freeformTags:
+      bar-key: value
+    generativeAiSemanticStoreId: ${oci_database_tools_generative_ai_semantic_store.test_generative_ai_semantic_store.id}
+    locks:
+    - message: ${var.database_tools_mcp_toolset_locks_message}
+      relatedResourceId: ${oci_cloud_guard_resource.test_resource.id}
+      timeCreated: ${var.database_tools_mcp_toolset_locks_time_created}
+      type: ${var.database_tools_mcp_toolset_locks_type}
+    reports:
+    - allowedRoles: ${var.database_tools_mcp_toolset_reports_allowed_roles}
+      databaseToolsSqlReportIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test_database_tools_sql_report
+    source:
+    - type: ${var.database_tools_mcp_toolset_source_type}
+      value: ${var.database_tools_mcp_toolset_source_value}
+    toolDescription: ${var.database_tools_mcp_toolset_tool_description}
+    toolNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_tool
+    tools:
+    - allowedRoles: ${var.database_tools_mcp_toolset_tools_allowed_roles}
+      name: ${var.database_tools_mcp_toolset_tools_name}
+      status: ${var.database_tools_mcp_toolset_tools_status}
+    type: ${var.database_tools_mcp_toolset_type}
+    variables:
+    - description: ${var.database_tools_mcp_toolset_variables_description}
+      name: ${var.database_tools_mcp_toolset_variables_name}
+      type: ${var.database_tools_mcp_toolset_variables_type}
+    version: ${var.database_tools_mcp_toolset_version}

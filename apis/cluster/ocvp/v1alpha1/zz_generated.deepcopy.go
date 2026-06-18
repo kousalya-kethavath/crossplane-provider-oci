@@ -378,6 +378,11 @@ func (in *ByolAllocationObservation) DeepCopyInto(out *ByolAllocationObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.SiteID != nil {
+		in, out := &in.SiteID, &out.SiteID
+		*out = new(string)
+		**out = **in
+	}
 	if in.SoftwareType != nil {
 		in, out := &in.SoftwareType, &out.SoftwareType
 		*out = new(string)
@@ -623,6 +628,11 @@ func (in *ByolInitParameters) DeepCopyInto(out *ByolInitParameters) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.SiteID != nil {
+		in, out := &in.SiteID, &out.SiteID
+		*out = new(string)
+		**out = **in
+	}
 	if in.SoftwareType != nil {
 		in, out := &in.SoftwareType, &out.SoftwareType
 		*out = new(string)
@@ -749,6 +759,11 @@ func (in *ByolObservation) DeepCopyInto(out *ByolObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SiteID != nil {
+		in, out := &in.SiteID, &out.SiteID
 		*out = new(string)
 		**out = **in
 	}
@@ -879,6 +894,11 @@ func (in *ByolParameters) DeepCopyInto(out *ByolParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.SiteID != nil {
+		in, out := &in.SiteID, &out.SiteID
+		*out = new(string)
+		**out = **in
 	}
 	if in.SoftwareType != nil {
 		in, out := &in.SoftwareType, &out.SoftwareType
@@ -3052,6 +3072,11 @@ func (in *EsxiHostInitParameters) DeepCopyInto(out *EsxiHostInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CurrentCommitment != nil {
+		in, out := &in.CurrentCommitment, &out.CurrentCommitment
+		*out = new(string)
+		**out = **in
+	}
 	if in.CurrentSku != nil {
 		in, out := &in.CurrentSku, &out.CurrentSku
 		*out = new(string)
@@ -3128,6 +3153,11 @@ func (in *EsxiHostInitParameters) DeepCopyInto(out *EsxiHostInitParameters) {
 	if in.IsVsanByolEnabled != nil {
 		in, out := &in.IsVsanByolEnabled, &out.IsVsanByolEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.NextCommitment != nil {
+		in, out := &in.NextCommitment, &out.NextCommitment
+		*out = new(string)
 		**out = **in
 	}
 	if in.NextSku != nil {
@@ -3527,6 +3557,11 @@ func (in *EsxiHostParameters) DeepCopyInto(out *EsxiHostParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CurrentCommitment != nil {
+		in, out := &in.CurrentCommitment, &out.CurrentCommitment
+		*out = new(string)
+		**out = **in
+	}
 	if in.CurrentSku != nil {
 		in, out := &in.CurrentSku, &out.CurrentSku
 		*out = new(string)
@@ -3603,6 +3638,11 @@ func (in *EsxiHostParameters) DeepCopyInto(out *EsxiHostParameters) {
 	if in.IsVsanByolEnabled != nil {
 		in, out := &in.IsVsanByolEnabled, &out.IsVsanByolEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.NextCommitment != nil {
+		in, out := &in.NextCommitment, &out.NextCommitment
+		*out = new(string)
 		**out = **in
 	}
 	if in.NextSku != nil {

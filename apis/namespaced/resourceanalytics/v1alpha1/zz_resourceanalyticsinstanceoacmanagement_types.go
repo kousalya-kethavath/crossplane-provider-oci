@@ -16,6 +16,12 @@ import (
 
 type AttachmentDetailsInitParameters struct {
 
+	// The capacity model to use for the Analytics Instance.
+	CapacityType *string `json:"capacityType,omitempty" tf:"capacity_type,omitempty"`
+
+	// The capacity value selected, either the number of OCPUs (OLPU_COUNT) or the number of users (USER_COUNT). This parameter affects the number of OCPUs, amount of memory, and other resources allocated to the Analytics Instance.
+	CapacityValue *float64 `json:"capacityValue,omitempty" tf:"capacity_value,omitempty"`
+
 	// IDCS domain OCID identifying a stripe and service administrator user.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/identity/v1alpha1.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -45,6 +51,12 @@ type AttachmentDetailsInitParameters struct {
 
 type AttachmentDetailsObservation struct {
 
+	// The capacity model to use for the Analytics Instance.
+	CapacityType *string `json:"capacityType,omitempty" tf:"capacity_type,omitempty"`
+
+	// The capacity value selected, either the number of OCPUs (OLPU_COUNT) or the number of users (USER_COUNT). This parameter affects the number of OCPUs, amount of memory, and other resources allocated to the Analytics Instance.
+	CapacityValue *float64 `json:"capacityValue,omitempty" tf:"capacity_value,omitempty"`
+
 	// IDCS domain OCID identifying a stripe and service administrator user.
 	IdcsDomainID *string `json:"idcsDomainId,omitempty" tf:"idcs_domain_id,omitempty"`
 
@@ -63,6 +75,14 @@ type AttachmentDetailsObservation struct {
 }
 
 type AttachmentDetailsParameters struct {
+
+	// The capacity model to use for the Analytics Instance.
+	// +kubebuilder:validation:Optional
+	CapacityType *string `json:"capacityType,omitempty" tf:"capacity_type,omitempty"`
+
+	// The capacity value selected, either the number of OCPUs (OLPU_COUNT) or the number of users (USER_COUNT). This parameter affects the number of OCPUs, amount of memory, and other resources allocated to the Analytics Instance.
+	// +kubebuilder:validation:Optional
+	CapacityValue *float64 `json:"capacityValue,omitempty" tf:"capacity_value,omitempty"`
 
 	// IDCS domain OCID identifying a stripe and service administrator user.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/identity/v1alpha1.Domain
@@ -153,7 +173,7 @@ type ResourceAnalyticsInstanceOacManagementInitParameters struct {
 	// Additional details needed when attaching the OAC instance.  Example: {"idcsDomainId":"ocid...","networkDetails":{...}, ...}
 	AttachmentDetails []AttachmentDetailsInitParameters `json:"attachmentDetails,omitempty" tf:"attachment_details,omitempty"`
 
-	// The type of attachment the OAC instance is using.
+	// The type of attachment the OAC instance is using. Example: MANAGED
 	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`
 
 	// (Updatable) A required field when set to true calls enable action and when set to false calls disable action.
@@ -178,17 +198,19 @@ type ResourceAnalyticsInstanceOacManagementObservation struct {
 	// Additional details needed when attaching the OAC instance.  Example: {"idcsDomainId":"ocid...","networkDetails":{...}, ...}
 	AttachmentDetails []AttachmentDetailsObservation `json:"attachmentDetails,omitempty" tf:"attachment_details,omitempty"`
 
-	// The type of attachment the OAC instance is using.
+	// The type of attachment the OAC instance is using. Example: MANAGED
 	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`
 
 	// (Updatable) A required field when set to true calls enable action and when set to false calls disable action.
 	EnableOac *bool `json:"enableOac,omitempty" tf:"enable_oac,omitempty"`
 
+	// The OCID of the ResourceAnalyticsInstance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The OCID of the ResourceAnalyticsInstance.
 	ResourceAnalyticsInstanceID *string `json:"resourceAnalyticsInstanceId,omitempty" tf:"resource_analytics_instance_id,omitempty"`
 
+	// The current state of the ResourceAnalyticsInstance.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
@@ -198,7 +220,7 @@ type ResourceAnalyticsInstanceOacManagementParameters struct {
 	// +kubebuilder:validation:Optional
 	AttachmentDetails []AttachmentDetailsParameters `json:"attachmentDetails,omitempty" tf:"attachment_details,omitempty"`
 
-	// The type of attachment the OAC instance is using.
+	// The type of attachment the OAC instance is using. Example: MANAGED
 	// +kubebuilder:validation:Optional
 	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`
 

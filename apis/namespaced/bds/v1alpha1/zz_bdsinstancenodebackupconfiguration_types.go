@@ -98,7 +98,7 @@ type BdsInstanceNodeBackupConfigurationObservation struct {
 	// (Updatable) A user-friendly name. Only ASCII alphanumeric characters with no spaces allowed. The name does not have to be unique, and it may be changed. Avoid entering confidential information.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// The unique identifier for the NodeBackupConfiguration.
+	// The id of the NodeBackupConfiguration defined under BDS resources, not OCID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// (Updatable) Details of the type of level used to trigger the creation of a new node backup configuration or node replacement configuration.

@@ -291,6 +291,91 @@ spec:
                           description: (Updatable) The size of the block storage volume
                             to attach to the instance running the job
                           type: number
+                        computeTargetId:
+                          description: (Updatable) The OCID of the compute target.
+                          type: string
+                        computeTargetIdRef:
+                          description: Reference to a ComputeTarget in datascience
+                            to populate computeTargetId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            namespace:
+                              description: Namespace of the referenced object
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        computeTargetIdSelector:
+                          description: Selector for a ComputeTarget in datascience
+                            to populate computeTargetId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            namespace:
+                              description: Namespace for the selector
+                              type: string
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         jobInfrastructureType:
                           description: (Updatable) The infrastructure type used for
                             job run.
@@ -324,6 +409,59 @@ spec:
                                   | MULTI_NODE | STANDALONE) (Updatable) The total
                                   number of OCPUs available to the job run instance.
                                 type: number
+                            type: object
+                          type: array
+                        resourceConfiguration:
+                          description: (Updatable) Details for the compute target
+                            job resource configuration.
+                          items:
+                            properties:
+                              resourceLimitConfiguration:
+                                description: (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER)
+                                  (Updatable) Resource limit configuration details
+                                  for workload on managed compute cluster type compute
+                                  target
+                                items:
+                                  properties:
+                                    memoryInGbs:
+                                      description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                        | MULTI_NODE | STANDALONE) (Updatable) The
+                                        total amount of memory available to the job
+                                        run instance, in gigabytes.
+                                      type: number
+                                    ocpus:
+                                      description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                        | MULTI_NODE | STANDALONE) (Updatable) The
+                                        total number of OCPUs available to the job
+                                        run instance.
+                                      type: number
+                                  type: object
+                                type: array
+                              resourceRequestConfiguration:
+                                description: (Updatable) Resource request configuration
+                                  to run workload on managed compute cluster type
+                                  compute target compute target.
+                                items:
+                                  properties:
+                                    gpus:
+                                      description: (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER)
+                                        (Updatable) The total number of gpus required
+                                        to be allocated to the workload.
+                                      type: number
+                                    memoryInGbs:
+                                      description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                        | MULTI_NODE | STANDALONE) (Updatable) The
+                                        total amount of memory available to the job
+                                        run instance, in gigabytes.
+                                      type: number
+                                    ocpus:
+                                      description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                        | MULTI_NODE | STANDALONE) (Updatable) The
+                                        total number of OCPUs available to the job
+                                        run instance.
+                                      type: number
+                                  type: object
+                                type: array
                             type: object
                           type: array
                         shapeName:
@@ -816,6 +954,93 @@ spec:
                                         storage volume to attach to the instance running
                                         the job
                                       type: number
+                                    computeTargetId:
+                                      description: (Updatable) The OCID of the compute
+                                        target.
+                                      type: string
+                                    computeTargetIdRef:
+                                      description: Reference to a ComputeTarget in
+                                        datascience to populate computeTargetId.
+                                      properties:
+                                        name:
+                                          description: Name of the referenced object.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the referenced
+                                            object
+                                          type: string
+                                        policy:
+                                          description: Policies for referencing.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: |-
+                                                Resolution specifies whether resolution of this reference is required.
+                                                The default is 'Required', which means the reconcile will fail if the
+                                                reference cannot be resolved. 'Optional' means this reference will be
+                                                a no-op if it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: |-
+                                                Resolve specifies when this reference should be resolved. The default
+                                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                                the corresponding field is not present. Use 'Always' to resolve the
+                                                reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      required:
+                                      - name
+                                      type: object
+                                    computeTargetIdSelector:
+                                      description: Selector for a ComputeTarget in
+                                        datascience to populate computeTargetId.
+                                      properties:
+                                        matchControllerRef:
+                                          description: |-
+                                            MatchControllerRef ensures an object with the same controller reference
+                                            as the selecting object is selected.
+                                          type: boolean
+                                        matchLabels:
+                                          additionalProperties:
+                                            type: string
+                                          description: MatchLabels ensures an object
+                                            with matching labels is selected.
+                                          type: object
+                                        namespace:
+                                          description: Namespace for the selector
+                                          type: string
+                                        policy:
+                                          description: Policies for selection.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: |-
+                                                Resolution specifies whether resolution of this reference is required.
+                                                The default is 'Required', which means the reconcile will fail if the
+                                                reference cannot be resolved. 'Optional' means this reference will be
+                                                a no-op if it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: |-
+                                                Resolve specifies when this reference should be resolved. The default
+                                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                                the corresponding field is not present. Use 'Always' to resolve the
+                                                reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      type: object
                                     jobInfrastructureType:
                                       description: (Updatable) The infrastructure
                                         type used for job run.
@@ -852,6 +1077,61 @@ spec:
                                               The total number of OCPUs available
                                               to the job run instance.
                                             type: number
+                                        type: object
+                                      type: array
+                                    resourceConfiguration:
+                                      description: (Updatable) Details for the compute
+                                        target job resource configuration.
+                                      items:
+                                        properties:
+                                          resourceLimitConfiguration:
+                                            description: (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER)
+                                              (Updatable) Resource limit configuration
+                                              details for workload on managed compute
+                                              cluster type compute target
+                                            items:
+                                              properties:
+                                                memoryInGbs:
+                                                  description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                                    | MULTI_NODE | STANDALONE) (Updatable)
+                                                    The total amount of memory available
+                                                    to the job run instance, in gigabytes.
+                                                  type: number
+                                                ocpus:
+                                                  description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                                    | MULTI_NODE | STANDALONE) (Updatable)
+                                                    The total number of OCPUs available
+                                                    to the job run instance.
+                                                  type: number
+                                              type: object
+                                            type: array
+                                          resourceRequestConfiguration:
+                                            description: (Updatable) Resource request
+                                              configuration to run workload on managed
+                                              compute cluster type compute target
+                                              compute target.
+                                            items:
+                                              properties:
+                                                gpus:
+                                                  description: (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER)
+                                                    (Updatable) The total number of
+                                                    gpus required to be allocated
+                                                    to the workload.
+                                                  type: number
+                                                memoryInGbs:
+                                                  description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                                    | MULTI_NODE | STANDALONE) (Updatable)
+                                                    The total amount of memory available
+                                                    to the job run instance, in gigabytes.
+                                                  type: number
+                                                ocpus:
+                                                  description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                                    | MULTI_NODE | STANDALONE) (Updatable)
+                                                    The total number of OCPUs available
+                                                    to the job run instance.
+                                                  type: number
+                                              type: object
+                                            type: array
                                         type: object
                                       type: array
                                     shapeName:
@@ -1503,6 +1783,91 @@ spec:
                           description: (Updatable) The size of the block storage volume
                             to attach to the instance running the job
                           type: number
+                        computeTargetId:
+                          description: (Updatable) The OCID of the compute target.
+                          type: string
+                        computeTargetIdRef:
+                          description: Reference to a ComputeTarget in datascience
+                            to populate computeTargetId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            namespace:
+                              description: Namespace of the referenced object
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        computeTargetIdSelector:
+                          description: Selector for a ComputeTarget in datascience
+                            to populate computeTargetId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            namespace:
+                              description: Namespace for the selector
+                              type: string
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         jobInfrastructureType:
                           description: (Updatable) The infrastructure type used for
                             job run.
@@ -1536,6 +1901,59 @@ spec:
                                   | MULTI_NODE | STANDALONE) (Updatable) The total
                                   number of OCPUs available to the job run instance.
                                 type: number
+                            type: object
+                          type: array
+                        resourceConfiguration:
+                          description: (Updatable) Details for the compute target
+                            job resource configuration.
+                          items:
+                            properties:
+                              resourceLimitConfiguration:
+                                description: (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER)
+                                  (Updatable) Resource limit configuration details
+                                  for workload on managed compute cluster type compute
+                                  target
+                                items:
+                                  properties:
+                                    memoryInGbs:
+                                      description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                        | MULTI_NODE | STANDALONE) (Updatable) The
+                                        total amount of memory available to the job
+                                        run instance, in gigabytes.
+                                      type: number
+                                    ocpus:
+                                      description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                        | MULTI_NODE | STANDALONE) (Updatable) The
+                                        total number of OCPUs available to the job
+                                        run instance.
+                                      type: number
+                                  type: object
+                                type: array
+                              resourceRequestConfiguration:
+                                description: (Updatable) Resource request configuration
+                                  to run workload on managed compute cluster type
+                                  compute target compute target.
+                                items:
+                                  properties:
+                                    gpus:
+                                      description: (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER)
+                                        (Updatable) The total number of gpus required
+                                        to be allocated to the workload.
+                                      type: number
+                                    memoryInGbs:
+                                      description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                        | MULTI_NODE | STANDALONE) (Updatable) The
+                                        total amount of memory available to the job
+                                        run instance, in gigabytes.
+                                      type: number
+                                    ocpus:
+                                      description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                        | MULTI_NODE | STANDALONE) (Updatable) The
+                                        total number of OCPUs available to the job
+                                        run instance.
+                                      type: number
+                                  type: object
+                                type: array
                             type: object
                           type: array
                         shapeName:
@@ -2028,6 +2446,93 @@ spec:
                                         storage volume to attach to the instance running
                                         the job
                                       type: number
+                                    computeTargetId:
+                                      description: (Updatable) The OCID of the compute
+                                        target.
+                                      type: string
+                                    computeTargetIdRef:
+                                      description: Reference to a ComputeTarget in
+                                        datascience to populate computeTargetId.
+                                      properties:
+                                        name:
+                                          description: Name of the referenced object.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the referenced
+                                            object
+                                          type: string
+                                        policy:
+                                          description: Policies for referencing.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: |-
+                                                Resolution specifies whether resolution of this reference is required.
+                                                The default is 'Required', which means the reconcile will fail if the
+                                                reference cannot be resolved. 'Optional' means this reference will be
+                                                a no-op if it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: |-
+                                                Resolve specifies when this reference should be resolved. The default
+                                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                                the corresponding field is not present. Use 'Always' to resolve the
+                                                reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      required:
+                                      - name
+                                      type: object
+                                    computeTargetIdSelector:
+                                      description: Selector for a ComputeTarget in
+                                        datascience to populate computeTargetId.
+                                      properties:
+                                        matchControllerRef:
+                                          description: |-
+                                            MatchControllerRef ensures an object with the same controller reference
+                                            as the selecting object is selected.
+                                          type: boolean
+                                        matchLabels:
+                                          additionalProperties:
+                                            type: string
+                                          description: MatchLabels ensures an object
+                                            with matching labels is selected.
+                                          type: object
+                                        namespace:
+                                          description: Namespace for the selector
+                                          type: string
+                                        policy:
+                                          description: Policies for selection.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: |-
+                                                Resolution specifies whether resolution of this reference is required.
+                                                The default is 'Required', which means the reconcile will fail if the
+                                                reference cannot be resolved. 'Optional' means this reference will be
+                                                a no-op if it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: |-
+                                                Resolve specifies when this reference should be resolved. The default
+                                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                                the corresponding field is not present. Use 'Always' to resolve the
+                                                reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      type: object
                                     jobInfrastructureType:
                                       description: (Updatable) The infrastructure
                                         type used for job run.
@@ -2064,6 +2569,61 @@ spec:
                                               The total number of OCPUs available
                                               to the job run instance.
                                             type: number
+                                        type: object
+                                      type: array
+                                    resourceConfiguration:
+                                      description: (Updatable) Details for the compute
+                                        target job resource configuration.
+                                      items:
+                                        properties:
+                                          resourceLimitConfiguration:
+                                            description: (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER)
+                                              (Updatable) Resource limit configuration
+                                              details for workload on managed compute
+                                              cluster type compute target
+                                            items:
+                                              properties:
+                                                memoryInGbs:
+                                                  description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                                    | MULTI_NODE | STANDALONE) (Updatable)
+                                                    The total amount of memory available
+                                                    to the job run instance, in gigabytes.
+                                                  type: number
+                                                ocpus:
+                                                  description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                                    | MULTI_NODE | STANDALONE) (Updatable)
+                                                    The total number of OCPUs available
+                                                    to the job run instance.
+                                                  type: number
+                                              type: object
+                                            type: array
+                                          resourceRequestConfiguration:
+                                            description: (Updatable) Resource request
+                                              configuration to run workload on managed
+                                              compute cluster type compute target
+                                              compute target.
+                                            items:
+                                              properties:
+                                                gpus:
+                                                  description: (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER)
+                                                    (Updatable) The total number of
+                                                    gpus required to be allocated
+                                                    to the workload.
+                                                  type: number
+                                                memoryInGbs:
+                                                  description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                                    | MULTI_NODE | STANDALONE) (Updatable)
+                                                    The total amount of memory available
+                                                    to the job run instance, in gigabytes.
+                                                  type: number
+                                                ocpus:
+                                                  description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                                    | MULTI_NODE | STANDALONE) (Updatable)
+                                                    The total number of OCPUs available
+                                                    to the job run instance.
+                                                  type: number
+                                              type: object
+                                            type: array
                                         type: object
                                       type: array
                                     shapeName:
@@ -2697,6 +3257,9 @@ spec:
                           description: (Updatable) The size of the block storage volume
                             to attach to the instance running the job
                           type: number
+                        computeTargetId:
+                          description: (Updatable) The OCID of the compute target.
+                          type: string
                         jobInfrastructureType:
                           description: (Updatable) The infrastructure type used for
                             job run.
@@ -2730,6 +3293,59 @@ spec:
                                   | MULTI_NODE | STANDALONE) (Updatable) The total
                                   number of OCPUs available to the job run instance.
                                 type: number
+                            type: object
+                          type: array
+                        resourceConfiguration:
+                          description: (Updatable) Details for the compute target
+                            job resource configuration.
+                          items:
+                            properties:
+                              resourceLimitConfiguration:
+                                description: (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER)
+                                  (Updatable) Resource limit configuration details
+                                  for workload on managed compute cluster type compute
+                                  target
+                                items:
+                                  properties:
+                                    memoryInGbs:
+                                      description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                        | MULTI_NODE | STANDALONE) (Updatable) The
+                                        total amount of memory available to the job
+                                        run instance, in gigabytes.
+                                      type: number
+                                    ocpus:
+                                      description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                        | MULTI_NODE | STANDALONE) (Updatable) The
+                                        total number of OCPUs available to the job
+                                        run instance.
+                                      type: number
+                                  type: object
+                                type: array
+                              resourceRequestConfiguration:
+                                description: (Updatable) Resource request configuration
+                                  to run workload on managed compute cluster type
+                                  compute target compute target.
+                                items:
+                                  properties:
+                                    gpus:
+                                      description: (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER)
+                                        (Updatable) The total number of gpus required
+                                        to be allocated to the workload.
+                                      type: number
+                                    memoryInGbs:
+                                      description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                        | MULTI_NODE | STANDALONE) (Updatable) The
+                                        total amount of memory available to the job
+                                        run instance, in gigabytes.
+                                      type: number
+                                    ocpus:
+                                      description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                        | MULTI_NODE | STANDALONE) (Updatable) The
+                                        total number of OCPUs available to the job
+                                        run instance.
+                                      type: number
+                                  type: object
+                                type: array
                             type: object
                           type: array
                         shapeName:
@@ -2896,6 +3512,10 @@ spec:
                                         storage volume to attach to the instance running
                                         the job
                                       type: number
+                                    computeTargetId:
+                                      description: (Updatable) The OCID of the compute
+                                        target.
+                                      type: string
                                     jobInfrastructureType:
                                       description: (Updatable) The infrastructure
                                         type used for job run.
@@ -2932,6 +3552,61 @@ spec:
                                               The total number of OCPUs available
                                               to the job run instance.
                                             type: number
+                                        type: object
+                                      type: array
+                                    resourceConfiguration:
+                                      description: (Updatable) Details for the compute
+                                        target job resource configuration.
+                                      items:
+                                        properties:
+                                          resourceLimitConfiguration:
+                                            description: (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER)
+                                              (Updatable) Resource limit configuration
+                                              details for workload on managed compute
+                                              cluster type compute target
+                                            items:
+                                              properties:
+                                                memoryInGbs:
+                                                  description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                                    | MULTI_NODE | STANDALONE) (Updatable)
+                                                    The total amount of memory available
+                                                    to the job run instance, in gigabytes.
+                                                  type: number
+                                                ocpus:
+                                                  description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                                    | MULTI_NODE | STANDALONE) (Updatable)
+                                                    The total number of OCPUs available
+                                                    to the job run instance.
+                                                  type: number
+                                              type: object
+                                            type: array
+                                          resourceRequestConfiguration:
+                                            description: (Updatable) Resource request
+                                              configuration to run workload on managed
+                                              compute cluster type compute target
+                                              compute target.
+                                            items:
+                                              properties:
+                                                gpus:
+                                                  description: (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER)
+                                                    (Updatable) The total number of
+                                                    gpus required to be allocated
+                                                    to the workload.
+                                                  type: number
+                                                memoryInGbs:
+                                                  description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                                    | MULTI_NODE | STANDALONE) (Updatable)
+                                                    The total amount of memory available
+                                                    to the job run instance, in gigabytes.
+                                                  type: number
+                                                ocpus:
+                                                  description: (Applicable when job_infrastructure_type=ME_STANDALONE
+                                                    | MULTI_NODE | STANDALONE) (Updatable)
+                                                    The total number of OCPUs available
+                                                    to the job run instance.
+                                                  type: number
+                                              type: object
+                                            type: array
                                         type: object
                                       type: array
                                     shapeName:

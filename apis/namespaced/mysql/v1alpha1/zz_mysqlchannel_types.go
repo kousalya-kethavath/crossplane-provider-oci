@@ -260,6 +260,9 @@ type SourceInitParameters struct {
 	// (Updatable) The network address of the MySQL instance.
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
+	// (Updatable) Whether the connection of the channel will be requested using the IPv6 address of the dual stack DB system or not. Default: False.
+	MustUseIpv6OnDualStack *bool `json:"mustUseIpv6OnDualStack,omitempty" tf:"must_use_ipv6on_dual_stack,omitempty"`
+
 	// (Updatable) The password for the replication user. The password must be between 8 and 32 characters long, and must contain at least 1 numeric character, 1 lowercase character, 1 uppercase character, and 1 special (nonalphanumeric) character.
 	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
@@ -287,6 +290,9 @@ type SourceObservation struct {
 	// (Updatable) The network address of the MySQL instance.
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
+	// (Updatable) Whether the connection of the channel will be requested using the IPv6 address of the dual stack DB system or not. Default: False.
+	MustUseIpv6OnDualStack *bool `json:"mustUseIpv6OnDualStack,omitempty" tf:"must_use_ipv6on_dual_stack,omitempty"`
+
 	// (Updatable) The port the source MySQL instance listens on.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -312,6 +318,10 @@ type SourceParameters struct {
 	// (Updatable) The network address of the MySQL instance.
 	// +kubebuilder:validation:Optional
 	Hostname *string `json:"hostname" tf:"hostname,omitempty"`
+
+	// (Updatable) Whether the connection of the channel will be requested using the IPv6 address of the dual stack DB system or not. Default: False.
+	// +kubebuilder:validation:Optional
+	MustUseIpv6OnDualStack *bool `json:"mustUseIpv6OnDualStack,omitempty" tf:"must_use_ipv6on_dual_stack,omitempty"`
 
 	// (Updatable) The password for the replication user. The password must be between 8 and 32 characters long, and must contain at least 1 numeric character, 1 lowercase character, 1 uppercase character, and 1 special (nonalphanumeric) character.
 	// +kubebuilder:validation:Optional

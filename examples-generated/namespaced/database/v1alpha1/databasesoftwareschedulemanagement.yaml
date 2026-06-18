@@ -1,0 +1,14 @@
+apiVersion: database.oci.m.upbound.io/v1alpha1
+kind: DatabaseSoftwareScheduleManagement
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/databasesoftwareschedulemanagement
+  labels:
+    testing.upbound.io/example-name: test_database_software_schedule_management
+  name: test-database-software-schedule-management
+  namespace: upbound-system
+spec:
+  forProvider:
+    databaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_database

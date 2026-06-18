@@ -549,9 +549,32 @@ spec:
                       assigns a private IP address from the subnet. This should be
                       a "dotted-quad" style IPv4 address.
                     type: string
+                  ipv6addressIpv6SubnetCidrPairDetails:
+                    description: (Updatable) Details to assign an IPv6 subnet prefix
+                      or IPv6 address to a resource.
+                    items:
+                      properties:
+                        ipv6address:
+                          description: (Updatable) An IPv6 address of your choice.
+                            Must be an available IPv6 address within the subnet's
+                            prefix.
+                          type: string
+                        ipv6subnetCidr:
+                          description: (Updatable) The IPv6 prefix allocated to the
+                            subnet.
+                          type: string
+                      type: object
+                    type: array
                   isHighlyAvailable:
                     description: (Updatable) Specifies if the DB System is highly
                       available.
+                    type: boolean
+                  isIpv6Enabled:
+                    description: (Updatable) Whether to allocate an IPv6 address at
+                      DB system creation from an IPv6 enabled subnet. When provided
+                      you may optionally provide an IPv6 prefix (ipv6AddressIpv6SubnetCidrPairDetails)
+                      of your choice to assign the IPv6 address from. If ipv6AddressIpv6SubnetCidrPairDetails
+                      is not provided then an IPv6 prefix is chosen for you.
                     type: boolean
                   maintenance:
                     description: (Updatable) The Maintenance Policy for the DB System
@@ -652,6 +675,22 @@ spec:
                             assigns a private IP address from the subnet. This should
                             be a "dotted-quad" style IPv4 address.
                           type: string
+                        readEndpointIpv6AddressIpv6SubnetCidrPairDetails:
+                          description: (Updatable) Details to assign an IPv6 subnet
+                            prefix or IPv6 address to a resource.
+                          items:
+                            properties:
+                              ipv6address:
+                                description: (Updatable) An IPv6 address of your choice.
+                                  Must be an available IPv6 address within the subnet's
+                                  prefix.
+                                type: string
+                              ipv6subnetCidr:
+                                description: (Updatable) The IPv6 prefix allocated
+                                  to the subnet.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   rest:
@@ -875,6 +914,59 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        channel:
+                          description: (Applicable when source_type=DBSYSTEM) Properties
+                            to setup a replication channel with the source (cloned)
+                            DB system.
+                          items:
+                            properties:
+                              applierUsername:
+                                description: (Applicable when source_type=DBSYSTEM)
+                                  The username for the replication applier of the
+                                  created MySQL DB System.
+                                type: string
+                              sourcePasswordSecretRef:
+                                description: The password for the replication user.
+                                  The password must be between 8 and 32 characters
+                                  long, and must contain at least 1 numeric character,
+                                  1 lowercase character, 1 uppercase character, and
+                                  1 special (nonalphanumeric) character.
+                                properties:
+                                  key:
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                type: object
+                              sourceUsername:
+                                description: The name of the replication user on the
+                                  source DB system. The username has a maximum length
+                                  of 96 characters. For more information, please see
+                                  the MySQL documentation
+                                type: string
+                              sslCaCertificate:
+                                description: (Applicable when source_type=DBSYSTEM)
+                                  The CA certificate of the server used for VERIFY_IDENTITY
+                                  and VERIFY_CA ssl modes.
+                                items:
+                                  properties:
+                                    certificateType:
+                                      description: The type of CA certificate.
+                                      type: string
+                                    contents:
+                                      description: The string containing the CA certificate
+                                        in PEM format.
+                                      type: string
+                                  type: object
+                                type: array
+                              sslMode:
+                                description: The SSL mode of the Channel.
+                                type: string
+                            type: object
+                          type: array
                         dbSystemId:
                           description: The OCID of the DB System from which a backup
                             shall be selected to be restored when creating the new
@@ -888,6 +980,14 @@ spec:
                             logs from the original DB System. In case no point in
                             time is specified, then this new DB System shall be restored
                             up to the latest change recorded for the original DB System.
+                          type: string
+                        region:
+                          description: (Applicable when source_type=DBSYSTEM) The
+                            region identifier of the source region where the DB system
+                            exists, only if it is in a different region. If the source
+                            DB system is in the same region, then no region must be
+                            specified. For more information, please see Regions and
+                            Availability Domains.
                           type: string
                         sourceType:
                           description: The specific source identifier. Use BACKUP
@@ -1548,9 +1648,32 @@ spec:
                       assigns a private IP address from the subnet. This should be
                       a "dotted-quad" style IPv4 address.
                     type: string
+                  ipv6addressIpv6SubnetCidrPairDetails:
+                    description: (Updatable) Details to assign an IPv6 subnet prefix
+                      or IPv6 address to a resource.
+                    items:
+                      properties:
+                        ipv6address:
+                          description: (Updatable) An IPv6 address of your choice.
+                            Must be an available IPv6 address within the subnet's
+                            prefix.
+                          type: string
+                        ipv6subnetCidr:
+                          description: (Updatable) The IPv6 prefix allocated to the
+                            subnet.
+                          type: string
+                      type: object
+                    type: array
                   isHighlyAvailable:
                     description: (Updatable) Specifies if the DB System is highly
                       available.
+                    type: boolean
+                  isIpv6Enabled:
+                    description: (Updatable) Whether to allocate an IPv6 address at
+                      DB system creation from an IPv6 enabled subnet. When provided
+                      you may optionally provide an IPv6 prefix (ipv6AddressIpv6SubnetCidrPairDetails)
+                      of your choice to assign the IPv6 address from. If ipv6AddressIpv6SubnetCidrPairDetails
+                      is not provided then an IPv6 prefix is chosen for you.
                     type: boolean
                   maintenance:
                     description: (Updatable) The Maintenance Policy for the DB System
@@ -1651,6 +1774,22 @@ spec:
                             assigns a private IP address from the subnet. This should
                             be a "dotted-quad" style IPv4 address.
                           type: string
+                        readEndpointIpv6AddressIpv6SubnetCidrPairDetails:
+                          description: (Updatable) Details to assign an IPv6 subnet
+                            prefix or IPv6 address to a resource.
+                          items:
+                            properties:
+                              ipv6address:
+                                description: (Updatable) An IPv6 address of your choice.
+                                  Must be an available IPv6 address within the subnet's
+                                  prefix.
+                                type: string
+                              ipv6subnetCidr:
+                                description: (Updatable) The IPv6 prefix allocated
+                                  to the subnet.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   rest:
@@ -1874,6 +2013,59 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        channel:
+                          description: (Applicable when source_type=DBSYSTEM) Properties
+                            to setup a replication channel with the source (cloned)
+                            DB system.
+                          items:
+                            properties:
+                              applierUsername:
+                                description: (Applicable when source_type=DBSYSTEM)
+                                  The username for the replication applier of the
+                                  created MySQL DB System.
+                                type: string
+                              sourcePasswordSecretRef:
+                                description: The password for the replication user.
+                                  The password must be between 8 and 32 characters
+                                  long, and must contain at least 1 numeric character,
+                                  1 lowercase character, 1 uppercase character, and
+                                  1 special (nonalphanumeric) character.
+                                properties:
+                                  key:
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                type: object
+                              sourceUsername:
+                                description: The name of the replication user on the
+                                  source DB system. The username has a maximum length
+                                  of 96 characters. For more information, please see
+                                  the MySQL documentation
+                                type: string
+                              sslCaCertificate:
+                                description: (Applicable when source_type=DBSYSTEM)
+                                  The CA certificate of the server used for VERIFY_IDENTITY
+                                  and VERIFY_CA ssl modes.
+                                items:
+                                  properties:
+                                    certificateType:
+                                      description: The type of CA certificate.
+                                      type: string
+                                    contents:
+                                      description: The string containing the CA certificate
+                                        in PEM format.
+                                      type: string
+                                  type: object
+                                type: array
+                              sslMode:
+                                description: The SSL mode of the Channel.
+                                type: string
+                            type: object
+                          type: array
                         dbSystemId:
                           description: The OCID of the DB System from which a backup
                             shall be selected to be restored when creating the new
@@ -1887,6 +2079,14 @@ spec:
                             logs from the original DB System. In case no point in
                             time is specified, then this new DB System shall be restored
                             up to the latest change recorded for the original DB System.
+                          type: string
+                        region:
+                          description: (Applicable when source_type=DBSYSTEM) The
+                            region identifier of the source region where the DB system
+                            exists, only if it is in a different region. If the source
+                            DB system is in the same region, then no region must be
+                            specified. For more information, please see Regions and
+                            Availability Domains.
                           type: string
                         sourceType:
                           description: The specific source identifier. Use BACKUP
@@ -2277,6 +2477,11 @@ spec:
                               hostname:
                                 description: The network address of the MySQL instance.
                                 type: string
+                              mustUseIpv6OnDualStack:
+                                description: 'Whether the connection of the channel
+                                  will be requested using the IPv6 address of the
+                                  dual stack DB system or not. Default: False.'
+                                type: boolean
                               port:
                                 description: (Updatable) The port on which the database
                                   console can be accessed. Supported port numbers
@@ -2289,8 +2494,9 @@ spec:
                                   from a URL Object Storage PAR.
                                 type: string
                               sslCaCertificate:
-                                description: The CA certificate of the server used
-                                  for VERIFY_IDENTITY and VERIFY_CA ssl modes.
+                                description: (Applicable when source_type=DBSYSTEM)
+                                  The CA certificate of the server used for VERIFY_IDENTITY
+                                  and VERIFY_CA ssl modes.
                                 items:
                                   properties:
                                     certificateType:
@@ -2330,8 +2536,9 @@ spec:
                           items:
                             properties:
                               applierUsername:
-                                description: The username for the replication applier
-                                  of the target MySQL DB System.
+                                description: (Applicable when source_type=DBSYSTEM)
+                                  The username for the replication applier of the
+                                  created MySQL DB System.
                                 type: string
                               channelName:
                                 description: The case-insensitive name that identifies
@@ -2569,6 +2776,10 @@ spec:
                             from the subnet. This should be a "dotted-quad" style
                             IPv4 address.
                           type: string
+                        ipAddressVersion:
+                          description: The internet protocol (IP) version of the IP
+                            address.
+                          type: string
                         modes:
                           description: The access modes from the client that this
                             endpoint supports.
@@ -2658,12 +2869,35 @@ spec:
                       assigns a private IP address from the subnet. This should be
                       a "dotted-quad" style IPv4 address.
                     type: string
+                  ipv6addressIpv6SubnetCidrPairDetails:
+                    description: (Updatable) Details to assign an IPv6 subnet prefix
+                      or IPv6 address to a resource.
+                    items:
+                      properties:
+                        ipv6address:
+                          description: (Updatable) An IPv6 address of your choice.
+                            Must be an available IPv6 address within the subnet's
+                            prefix.
+                          type: string
+                        ipv6subnetCidr:
+                          description: (Updatable) The IPv6 prefix allocated to the
+                            subnet.
+                          type: string
+                      type: object
+                    type: array
                   isHeatWaveClusterAttached:
                     description: If the DB System has a HeatWave Cluster attached.
                     type: boolean
                   isHighlyAvailable:
                     description: (Updatable) Specifies if the DB System is highly
                       available.
+                    type: boolean
+                  isIpv6Enabled:
+                    description: (Updatable) Whether to allocate an IPv6 address at
+                      DB system creation from an IPv6 enabled subnet. When provided
+                      you may optionally provide an IPv6 prefix (ipv6AddressIpv6SubnetCidrPairDetails)
+                      of your choice to assign the IPv6 address from. If ipv6AddressIpv6SubnetCidrPairDetails
+                      is not provided then an IPv6 prefix is chosen for you.
                     type: boolean
                   lifecycleDetails:
                     description: A message describing the state of the Channel.
@@ -2790,6 +3024,22 @@ spec:
                             assigns a private IP address from the subnet. This should
                             be a "dotted-quad" style IPv4 address.
                           type: string
+                        readEndpointIpv6AddressIpv6SubnetCidrPairDetails:
+                          description: (Updatable) Details to assign an IPv6 subnet
+                            prefix or IPv6 address to a resource.
+                          items:
+                            properties:
+                              ipv6address:
+                                description: (Updatable) An IPv6 address of your choice.
+                                  Must be an available IPv6 address within the subnet's
+                                  prefix.
+                                type: string
+                              ipv6subnetCidr:
+                                description: (Updatable) The IPv6 prefix allocated
+                                  to the subnet.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   rest:
@@ -2849,6 +3099,43 @@ spec:
                           description: The OCID of the backup to be used as the source
                             for the new DB System.
                           type: string
+                        channel:
+                          description: (Applicable when source_type=DBSYSTEM) Properties
+                            to setup a replication channel with the source (cloned)
+                            DB system.
+                          items:
+                            properties:
+                              applierUsername:
+                                description: (Applicable when source_type=DBSYSTEM)
+                                  The username for the replication applier of the
+                                  created MySQL DB System.
+                                type: string
+                              sourceUsername:
+                                description: The name of the replication user on the
+                                  source DB system. The username has a maximum length
+                                  of 96 characters. For more information, please see
+                                  the MySQL documentation
+                                type: string
+                              sslCaCertificate:
+                                description: (Applicable when source_type=DBSYSTEM)
+                                  The CA certificate of the server used for VERIFY_IDENTITY
+                                  and VERIFY_CA ssl modes.
+                                items:
+                                  properties:
+                                    certificateType:
+                                      description: The type of CA certificate.
+                                      type: string
+                                    contents:
+                                      description: The string containing the CA certificate
+                                        in PEM format.
+                                      type: string
+                                  type: object
+                                type: array
+                              sslMode:
+                                description: The SSL mode of the Channel.
+                                type: string
+                            type: object
+                          type: array
                         dbSystemId:
                           description: The OCID of the DB System from which a backup
                             shall be selected to be restored when creating the new
@@ -2862,6 +3149,14 @@ spec:
                             logs from the original DB System. In case no point in
                             time is specified, then this new DB System shall be restored
                             up to the latest change recorded for the original DB System.
+                          type: string
+                        region:
+                          description: (Applicable when source_type=DBSYSTEM) The
+                            region identifier of the source region where the DB system
+                            exists, only if it is in a different region. If the source
+                            DB system is in the same region, then no region must be
+                            specified. For more information, please see Regions and
+                            Availability Domains.
                           type: string
                         sourceType:
                           description: The specific source identifier. Use BACKUP

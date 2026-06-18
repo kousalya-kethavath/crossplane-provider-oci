@@ -1,0 +1,54 @@
+apiVersion: datascience.oci.m.upbound.io/v1alpha1
+kind: ComputeTarget
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datascience/v1alpha1/computetarget
+  labels:
+    testing.upbound.io/example-name: test_compute_target
+  name: test-compute-target
+  namespace: upbound-system
+spec:
+  forProvider:
+    compartmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    computeConfigurationDetails:
+    - computeType: ${var.compute_target_compute_configuration_details_compute_type}
+      instanceConfiguration:
+      - bootVolumeSizeInGbs: ${var.compute_target_compute_configuration_details_instance_configuration_boot_volume_size_in_gbs}
+        instanceShape: ${var.compute_target_compute_configuration_details_instance_configuration_instance_shape}
+        instanceShapeDetails:
+        - memoryInGbs: ${var.compute_target_compute_configuration_details_instance_configuration_instance_shape_details_memory_in_gbs}
+          ocpus: ${var.compute_target_compute_configuration_details_instance_configuration_instance_shape_details_ocpus}
+      scalingPolicy:
+      - autoScalingPolicies:
+        - autoScalingPolicyType: ${var.compute_target_compute_configuration_details_scaling_policy_auto_scaling_policies_auto_scaling_policy_type}
+          initialInstanceCount: ${var.compute_target_compute_configuration_details_scaling_policy_auto_scaling_policies_initial_instance_count}
+          maximumInstanceCount: ${var.compute_target_compute_configuration_details_scaling_policy_auto_scaling_policies_maximum_instance_count}
+          minimumInstanceCount: ${var.compute_target_compute_configuration_details_scaling_policy_auto_scaling_policies_minimum_instance_count}
+          rules:
+          - metricExpressionRuleType: ${var.compute_target_compute_configuration_details_scaling_policy_auto_scaling_policies_rules_metric_expression_rule_type}
+            metricType: ${var.compute_target_compute_configuration_details_scaling_policy_auto_scaling_policies_rules_metric_type}
+            scaleInConfiguration:
+            - instanceCountAdjustment: ${var.compute_target_compute_configuration_details_scaling_policy_auto_scaling_policies_rules_scale_in_configuration_instance_count_adjustment}
+              pendingDuration: ${var.compute_target_compute_configuration_details_scaling_policy_auto_scaling_policies_rules_scale_in_configuration_pending_duration}
+              query: ${var.compute_target_compute_configuration_details_scaling_policy_auto_scaling_policies_rules_scale_in_configuration_query}
+              scalingConfigurationType: ${var.compute_target_compute_configuration_details_scaling_policy_auto_scaling_policies_rules_scale_in_configuration_scaling_configuration_type}
+              threshold: ${var.compute_target_compute_configuration_details_scaling_policy_auto_scaling_policies_rules_scale_in_configuration_threshold}
+            scaleOutConfiguration:
+            - instanceCountAdjustment: ${var.compute_target_compute_configuration_details_scaling_policy_auto_scaling_policies_rules_scale_out_configuration_instance_count_adjustment}
+              pendingDuration: ${var.compute_target_compute_configuration_details_scaling_policy_auto_scaling_policies_rules_scale_out_configuration_pending_duration}
+              query: ${var.compute_target_compute_configuration_details_scaling_policy_auto_scaling_policies_rules_scale_out_configuration_query}
+              scalingConfigurationType: ${var.compute_target_compute_configuration_details_scaling_policy_auto_scaling_policies_rules_scale_out_configuration_scaling_configuration_type}
+              threshold: ${var.compute_target_compute_configuration_details_scaling_policy_auto_scaling_policies_rules_scale_out_configuration_threshold}
+        coolDownInSeconds: ${var.compute_target_compute_configuration_details_scaling_policy_cool_down_in_seconds}
+        instanceCount: ${var.compute_target_compute_configuration_details_scaling_policy_instance_count}
+        isEnabled: ${var.compute_target_compute_configuration_details_scaling_policy_is_enabled}
+        policyType: ${var.compute_target_compute_configuration_details_scaling_policy_policy_type}
+    definedTags:
+      Operations.CostCenter: "42"
+    description: ${var.compute_target_description}
+    displayName: ${var.compute_target_display_name}
+    freeformTags:
+      Department: Finance
+    metadata: ${var.compute_target_metadata}

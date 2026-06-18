@@ -75,6 +75,16 @@ spec:
       kmsKeyVersionIdSelector:
         matchLabels:
           testing.upbound.io/example-name: test_key_version
+      managedSoftwareUpdateDetails:
+      - isEnrolled: ${var.database_database_managed_software_update_details_is_enrolled}
+        preferenceDetails:
+        - daysOfWeek: ${var.database_database_managed_software_update_details_preference_details_days_of_week}
+          hourOfDay: ${var.database_database_managed_software_update_details_preference_details_hour_of_day}
+          updateMode: ${var.database_database_managed_software_update_details_preference_details_update_mode}
+          versionSchemeDetails:
+          - majorVersion: ${var.database_database_managed_software_update_details_preference_details_version_scheme_details_major_version}
+            source: ${var.database_database_managed_software_update_details_preference_details_version_scheme_details_source}
+            versionPreference: ${var.database_database_managed_software_update_details_preference_details_version_scheme_details_version_preference}
       ncharacterSet: ${var.database_database_ncharacter_set}
       patchOptions:
       - shouldSkipClosedPdbs: true
@@ -110,6 +120,9 @@ spec:
       vaultIdSelector:
         matchLabels:
           testing.upbound.io/example-name: test_vault
+      vmClusterIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test_vm_cluster
     dbHomeIdSelector:
       matchLabels:
         testing.upbound.io/example-name: test_db_home

@@ -328,7 +328,7 @@ type UpstConfigurationObservation struct {
 	// (Updatable) OCID of the master encryption key in vault for encrypting token exchange service principal keytab, required for activating UPST config
 	MasterEncryptionKeyID *string `json:"masterEncryptionKeyId,omitempty" tf:"master_encryption_key_id,omitempty"`
 
-	// Secret ID for token exchange keytab
+	// (Updatable) The secretId for the clusterAdminPassword.
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
 	// Lifecycle state of the IAM user sync config

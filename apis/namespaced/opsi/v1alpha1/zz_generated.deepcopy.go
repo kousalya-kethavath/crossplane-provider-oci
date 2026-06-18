@@ -7700,6 +7700,22 @@ func (in *OperationsInsightsPrivateEndpointInitParameters) DeepCopyInto(out *Ope
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityAttributes != nil {
+		in, out := &in.SecurityAttributes, &out.SecurityAttributes
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.SubnetID != nil {
 		in, out := &in.SubnetID, &out.SubnetID
 		*out = new(string)
@@ -7860,6 +7876,22 @@ func (in *OperationsInsightsPrivateEndpointObservation) DeepCopyInto(out *Operat
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityAttributes != nil {
+		in, out := &in.SecurityAttributes, &out.SecurityAttributes
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.State != nil {
 		in, out := &in.State, &out.State
 		*out = new(string)
@@ -7988,6 +8020,22 @@ func (in *OperationsInsightsPrivateEndpointParameters) DeepCopyInto(out *Operati
 		in, out := &in.PrivateEndpointStatusDetails, &out.PrivateEndpointStatusDetails
 		*out = new(string)
 		**out = **in
+	}
+	if in.SecurityAttributes != nil {
+		in, out := &in.SecurityAttributes, &out.SecurityAttributes
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.SubnetID != nil {
 		in, out := &in.SubnetID, &out.SubnetID

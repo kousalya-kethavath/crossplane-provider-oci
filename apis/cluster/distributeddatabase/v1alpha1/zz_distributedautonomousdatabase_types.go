@@ -637,6 +637,9 @@ type DistributedAutonomousDatabaseObservation struct {
 	// (Updatable) An optional property when incremented triggers Download Gsm Certificate Signing Request. Could be set to any integer value.
 	DownloadGsmCertificateSigningRequestTrigger *float64 `json:"downloadGsmCertificateSigningRequestTrigger,omitempty" tf:"download_gsm_certificate_signing_request_trigger,omitempty"`
 
+	// The replication unit count for RAFT based distributed autonomous database. For RAFT replication based Globally distributed autonomous database, the value should be at least twice the number of shards.
+	EffectiveReplicationUnit *float64 `json:"effectiveReplicationUnit,omitempty" tf:"effective_replication_unit,omitempty"`
+
 	// (Updatable) Simple key-value pair that is applied without any predefined name, type or scope. Exists for cross-compatibility only. Example: {"bar-key": "value"}
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`

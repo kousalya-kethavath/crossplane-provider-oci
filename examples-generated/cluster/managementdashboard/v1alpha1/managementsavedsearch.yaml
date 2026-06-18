@@ -1,0 +1,33 @@
+apiVersion: managementdashboard.oci.upbound.io/v1alpha1
+kind: ManagementSavedSearch
+metadata:
+  annotations:
+    meta.upbound.io/example-id: managementdashboard/v1alpha1/managementsavedsearch
+  labels:
+    testing.upbound.io/example-name: test_management_saved_search
+  name: test-management-saved-search
+spec:
+  forProvider:
+    compartmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    dataConfig: ${var.management_saved_search_data_config}
+    definedTags:
+      foo-namespace.bar-key: value
+    description: ${var.management_saved_search_description}
+    displayName: ${var.management_saved_search_display_name}
+    drilldownConfig: ${var.management_saved_search_drilldown_config}
+    freeformTags:
+      bar-key: value
+    isOobSavedSearch: ${var.management_saved_search_is_oob_saved_search}
+    metadataVersion: ${var.management_saved_search_metadata_version}
+    nls: ${var.management_saved_search_nls}
+    parametersConfig: ${var.management_saved_search_parameters_config}
+    providerId: ${oci_management_dashboard_provider.test_provider.id}
+    providerName: ${var.management_saved_search_provider_name}
+    providerVersion: ${var.management_saved_search_provider_version}
+    screenImage: ${var.management_saved_search_screen_image}
+    type: ${var.management_saved_search_type}
+    uiConfig: ${var.management_saved_search_ui_config}
+    widgetTemplate: ${var.management_saved_search_widget_template}
+    widgetVm: ${var.management_saved_search_widget_vm}

@@ -15,31 +15,31 @@ import (
 
 type NetworkFirewallPolicyNatRuleConditionInitParameters struct {
 
-	// (Updatable) An array of IP address list names to be evaluated against the traffic destination address.
+	// (Updatable) An array of address list names to be evaluated against the traffic destination address.
 	DestinationAddress []*string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
 
 	// (Updatable) A Service name to be evaluated against the traffic protocol and protocol-specific parameters.
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 
-	// (Updatable) An array of IP address list names to be evaluated against the traffic source address.
+	// (Updatable) An array of address list names to be evaluated against the traffic source address.
 	SourceAddress []*string `json:"sourceAddress,omitempty" tf:"source_address,omitempty"`
 }
 
 type NetworkFirewallPolicyNatRuleConditionObservation struct {
 
-	// (Updatable) An array of IP address list names to be evaluated against the traffic destination address.
+	// (Updatable) An array of address list names to be evaluated against the traffic destination address.
 	DestinationAddress []*string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
 
 	// (Updatable) A Service name to be evaluated against the traffic protocol and protocol-specific parameters.
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 
-	// (Updatable) An array of IP address list names to be evaluated against the traffic source address.
+	// (Updatable) An array of address list names to be evaluated against the traffic source address.
 	SourceAddress []*string `json:"sourceAddress,omitempty" tf:"source_address,omitempty"`
 }
 
 type NetworkFirewallPolicyNatRuleConditionParameters struct {
 
-	// (Updatable) An array of IP address list names to be evaluated against the traffic destination address.
+	// (Updatable) An array of address list names to be evaluated against the traffic destination address.
 	// +kubebuilder:validation:Optional
 	DestinationAddress []*string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
 
@@ -47,7 +47,7 @@ type NetworkFirewallPolicyNatRuleConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 
-	// (Updatable) An array of IP address list names to be evaluated against the traffic source address.
+	// (Updatable) An array of address list names to be evaluated against the traffic source address.
 	// +kubebuilder:validation:Optional
 	SourceAddress []*string `json:"sourceAddress,omitempty" tf:"source_address,omitempty"`
 }

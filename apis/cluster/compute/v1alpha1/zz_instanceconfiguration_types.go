@@ -2455,6 +2455,9 @@ type LaunchDetailsShapeConfigInitParameters struct {
 	// (Applicable when instance_type=compute) The baseline OCPU utilization for a subcore burstable VM instance. Leave this attribute blank for a non-burstable instance, or explicitly specify non-burstable with BASELINE_1_1.
 	BaselineOcpuUtilization *string `json:"baselineOcpuUtilization,omitempty" tf:"baseline_ocpu_utilization,omitempty"`
 
+	// (Applicable when instance_type=compute) The NVMe-backed local storage capacity, in GB, for flexible dense (DenseLV) VM shapes. If the selected shape  is DenseLV, the value must be greater than 0. For all other shapes, the value must be null (if specified);  any non-null value for a non-DenseLV shape results in an error.
+	LocalVolumeSizeInGbs *float64 `json:"localVolumeSizeInGbs,omitempty" tf:"local_volume_size_in_gbs,omitempty"`
+
 	// (Applicable when instance_type=compute) The total amount of memory available to the instance, in gigabytes.
 	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
 
@@ -2475,6 +2478,9 @@ type LaunchDetailsShapeConfigObservation struct {
 
 	// (Applicable when instance_type=compute) The baseline OCPU utilization for a subcore burstable VM instance. Leave this attribute blank for a non-burstable instance, or explicitly specify non-burstable with BASELINE_1_1.
 	BaselineOcpuUtilization *string `json:"baselineOcpuUtilization,omitempty" tf:"baseline_ocpu_utilization,omitempty"`
+
+	// (Applicable when instance_type=compute) The NVMe-backed local storage capacity, in GB, for flexible dense (DenseLV) VM shapes. If the selected shape  is DenseLV, the value must be greater than 0. For all other shapes, the value must be null (if specified);  any non-null value for a non-DenseLV shape results in an error.
+	LocalVolumeSizeInGbs *float64 `json:"localVolumeSizeInGbs,omitempty" tf:"local_volume_size_in_gbs,omitempty"`
 
 	// (Applicable when instance_type=compute) The total amount of memory available to the instance, in gigabytes.
 	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
@@ -2497,6 +2503,10 @@ type LaunchDetailsShapeConfigParameters struct {
 	// (Applicable when instance_type=compute) The baseline OCPU utilization for a subcore burstable VM instance. Leave this attribute blank for a non-burstable instance, or explicitly specify non-burstable with BASELINE_1_1.
 	// +kubebuilder:validation:Optional
 	BaselineOcpuUtilization *string `json:"baselineOcpuUtilization,omitempty" tf:"baseline_ocpu_utilization,omitempty"`
+
+	// (Applicable when instance_type=compute) The NVMe-backed local storage capacity, in GB, for flexible dense (DenseLV) VM shapes. If the selected shape  is DenseLV, the value must be greater than 0. For all other shapes, the value must be null (if specified);  any non-null value for a non-DenseLV shape results in an error.
+	// +kubebuilder:validation:Optional
+	LocalVolumeSizeInGbs *float64 `json:"localVolumeSizeInGbs,omitempty" tf:"local_volume_size_in_gbs,omitempty"`
 
 	// (Applicable when instance_type=compute) The total amount of memory available to the instance, in gigabytes.
 	// +kubebuilder:validation:Optional
@@ -3823,6 +3833,9 @@ type OptionsLaunchDetailsShapeConfigInitParameters struct {
 	// (Applicable when instance_type=compute) The baseline OCPU utilization for a subcore burstable VM instance. Leave this attribute blank for a non-burstable instance, or explicitly specify non-burstable with BASELINE_1_1.
 	BaselineOcpuUtilization *string `json:"baselineOcpuUtilization,omitempty" tf:"baseline_ocpu_utilization,omitempty"`
 
+	// (Applicable when instance_type=compute) The NVMe-backed local storage capacity, in GB, for flexible dense (DenseLV) VM shapes. If the selected shape  is DenseLV, the value must be greater than 0. For all other shapes, the value must be null (if specified);  any non-null value for a non-DenseLV shape results in an error.
+	LocalVolumeSizeInGbs *float64 `json:"localVolumeSizeInGbs,omitempty" tf:"local_volume_size_in_gbs,omitempty"`
+
 	// (Applicable when instance_type=compute) The total amount of memory available to the instance, in gigabytes.
 	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
 
@@ -3843,6 +3856,9 @@ type OptionsLaunchDetailsShapeConfigObservation struct {
 
 	// (Applicable when instance_type=compute) The baseline OCPU utilization for a subcore burstable VM instance. Leave this attribute blank for a non-burstable instance, or explicitly specify non-burstable with BASELINE_1_1.
 	BaselineOcpuUtilization *string `json:"baselineOcpuUtilization,omitempty" tf:"baseline_ocpu_utilization,omitempty"`
+
+	// (Applicable when instance_type=compute) The NVMe-backed local storage capacity, in GB, for flexible dense (DenseLV) VM shapes. If the selected shape  is DenseLV, the value must be greater than 0. For all other shapes, the value must be null (if specified);  any non-null value for a non-DenseLV shape results in an error.
+	LocalVolumeSizeInGbs *float64 `json:"localVolumeSizeInGbs,omitempty" tf:"local_volume_size_in_gbs,omitempty"`
 
 	// (Applicable when instance_type=compute) The total amount of memory available to the instance, in gigabytes.
 	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
@@ -3865,6 +3881,10 @@ type OptionsLaunchDetailsShapeConfigParameters struct {
 	// (Applicable when instance_type=compute) The baseline OCPU utilization for a subcore burstable VM instance. Leave this attribute blank for a non-burstable instance, or explicitly specify non-burstable with BASELINE_1_1.
 	// +kubebuilder:validation:Optional
 	BaselineOcpuUtilization *string `json:"baselineOcpuUtilization,omitempty" tf:"baseline_ocpu_utilization,omitempty"`
+
+	// (Applicable when instance_type=compute) The NVMe-backed local storage capacity, in GB, for flexible dense (DenseLV) VM shapes. If the selected shape  is DenseLV, the value must be greater than 0. For all other shapes, the value must be null (if specified);  any non-null value for a non-DenseLV shape results in an error.
+	// +kubebuilder:validation:Optional
+	LocalVolumeSizeInGbs *float64 `json:"localVolumeSizeInGbs,omitempty" tf:"local_volume_size_in_gbs,omitempty"`
 
 	// (Applicable when instance_type=compute) The total amount of memory available to the instance, in gigabytes.
 	// +kubebuilder:validation:Optional

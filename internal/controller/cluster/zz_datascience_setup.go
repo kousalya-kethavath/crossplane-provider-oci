@@ -9,6 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
+	computetarget "github.com/oracle/provider-oci/internal/controller/cluster/datascience/computetarget"
 	job "github.com/oracle/provider-oci/internal/controller/cluster/datascience/job"
 	jobrun "github.com/oracle/provider-oci/internal/controller/cluster/datascience/jobrun"
 	mlapplication "github.com/oracle/provider-oci/internal/controller/cluster/datascience/mlapplication"
@@ -37,6 +38,7 @@ import (
 // the supplied manager.
 func Setup_datascience(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		computetarget.Setup,
 		job.Setup,
 		jobrun.Setup,
 		mlapplication.Setup,
@@ -71,6 +73,7 @@ func Setup_datascience(mgr ctrl.Manager, o controller.Options) error {
 // the supplied manager gated.
 func SetupGated_datascience(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		computetarget.SetupGated,
 		job.SetupGated,
 		jobrun.SetupGated,
 		mlapplication.SetupGated,

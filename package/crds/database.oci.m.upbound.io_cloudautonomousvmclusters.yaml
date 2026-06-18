@@ -151,8 +151,8 @@ spec:
                         type: object
                     type: object
                   clusterTimeZone:
-                    description: The time zone to use for the Cloud Autonomous VM
-                      cluster. For details, see DB System Time Zones.
+                    description: (Updatable) The time zone to use for the Cloud Autonomous
+                      VM cluster. For details, see DB System Time Zones.
                     type: string
                   compartmentId:
                     description: (Updatable) The OCID of the compartment.
@@ -269,6 +269,10 @@ spec:
                     description: (Updatable) The user-friendly name for the cloud
                       Autonomous VM cluster. The name does not need to be unique.
                     type: string
+                  distributionAlgorithm:
+                    description: (Updatable) The distribution algorithm used for the
+                      Autonomous VM cluster.
+                    type: string
                   freeformTags:
                     additionalProperties:
                       type: string
@@ -279,9 +283,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   isMtlsEnabledVmCluster:
-                    description: Enable mutual TLS(mTLS) authentication for database
-                      at time of provisioning a VMCluster. This is applicable to database
-                      TLS Certificates only. Default is TLS
+                    description: (Updatable) Enable mutual TLS(mTLS) authentication
+                      for database at time of provisioning a VMCluster. This is applicable
+                      to database TLS Certificates only. Default is TLS
                     type: boolean
                   licenseModel:
                     description: (Updatable) The Oracle license model that applies
@@ -412,10 +416,12 @@ spec:
                       triggers Register Pkcs. Could be set to any integer value.
                     type: number
                   scanListenerPortNonTls:
-                    description: The SCAN Listener Non TLS port. Default is 1521.
+                    description: (Updatable) The SCAN Listener Non TLS port. Default
+                      is 1521.
                     type: number
                   scanListenerPortTls:
-                    description: The SCAN Listener TLS port. Default is 2484.
+                    description: (Updatable) The SCAN Listener TLS port. Default is
+                      2484.
                     type: number
                   securityAttributes:
                     additionalProperties:
@@ -426,6 +432,10 @@ spec:
                       {"value": "42", "mode": "audit"}}}'
                     type: object
                     x-kubernetes-map-type: granular
+                  sgaPercentage:
+                    description: Percentage of ECPU memory allocated for SGA(System
+                      Global Area).
+                    type: number
                   subnetId:
                     description: The OCID of the subnet the cloud Autonomous VM Cluster
                       is associated with.
@@ -633,8 +643,8 @@ spec:
                         type: object
                     type: object
                   clusterTimeZone:
-                    description: The time zone to use for the Cloud Autonomous VM
-                      cluster. For details, see DB System Time Zones.
+                    description: (Updatable) The time zone to use for the Cloud Autonomous
+                      VM cluster. For details, see DB System Time Zones.
                     type: string
                   compartmentId:
                     description: (Updatable) The OCID of the compartment.
@@ -751,6 +761,10 @@ spec:
                     description: (Updatable) The user-friendly name for the cloud
                       Autonomous VM cluster. The name does not need to be unique.
                     type: string
+                  distributionAlgorithm:
+                    description: (Updatable) The distribution algorithm used for the
+                      Autonomous VM cluster.
+                    type: string
                   freeformTags:
                     additionalProperties:
                       type: string
@@ -761,9 +775,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   isMtlsEnabledVmCluster:
-                    description: Enable mutual TLS(mTLS) authentication for database
-                      at time of provisioning a VMCluster. This is applicable to database
-                      TLS Certificates only. Default is TLS
+                    description: (Updatable) Enable mutual TLS(mTLS) authentication
+                      for database at time of provisioning a VMCluster. This is applicable
+                      to database TLS Certificates only. Default is TLS
                     type: boolean
                   licenseModel:
                     description: (Updatable) The Oracle license model that applies
@@ -894,10 +908,12 @@ spec:
                       triggers Register Pkcs. Could be set to any integer value.
                     type: number
                   scanListenerPortNonTls:
-                    description: The SCAN Listener Non TLS port. Default is 1521.
+                    description: (Updatable) The SCAN Listener Non TLS port. Default
+                      is 1521.
                     type: number
                   scanListenerPortTls:
-                    description: The SCAN Listener TLS port. Default is 2484.
+                    description: (Updatable) The SCAN Listener TLS port. Default is
+                      2484.
                     type: number
                   securityAttributes:
                     additionalProperties:
@@ -908,6 +924,10 @@ spec:
                       {"value": "42", "mode": "audit"}}}'
                     type: object
                     x-kubernetes-map-type: granular
+                  sgaPercentage:
+                    description: Percentage of ECPU memory allocated for SGA(System
+                      Global Area).
+                    type: number
                   subnetId:
                     description: The OCID of the subnet the cloud Autonomous VM Cluster
                       is associated with.
@@ -1111,8 +1131,8 @@ spec:
                     description: The OCID of the cloud Exadata infrastructure.
                     type: string
                   clusterTimeZone:
-                    description: The time zone to use for the Cloud Autonomous VM
-                      cluster. For details, see DB System Time Zones.
+                    description: (Updatable) The time zone to use for the Cloud Autonomous
+                      VM cluster. For details, see DB System Time Zones.
                     type: string
                   compartmentId:
                     description: (Updatable) The OCID of the compartment.
@@ -1164,6 +1184,10 @@ spec:
                     description: (Updatable) The user-friendly name for the cloud
                       Autonomous VM cluster. The name does not need to be unique.
                     type: string
+                  distributionAlgorithm:
+                    description: (Updatable) The distribution algorithm used for the
+                      Autonomous VM cluster.
+                    type: string
                   domain:
                     description: The domain name for the cloud Autonomous VM cluster.
                     type: string
@@ -1187,9 +1211,9 @@ spec:
                     description: The OCID of the Cloud Autonomous VM cluster.
                     type: string
                   isMtlsEnabledVmCluster:
-                    description: Enable mutual TLS(mTLS) authentication for database
-                      at time of provisioning a VMCluster. This is applicable to database
-                      TLS Certificates only. Default is TLS
+                    description: (Updatable) Enable mutual TLS(mTLS) authentication
+                      for database at time of provisioning a VMCluster. This is applicable
+                      to database TLS Certificates only. Default is TLS
                     type: boolean
                   lastMaintenanceRunId:
                     description: The OCID of the last maintenance run.
@@ -1484,10 +1508,12 @@ spec:
                     description: The number of CPUs reserved in an Autonomous VM Cluster.
                     type: number
                   scanListenerPortNonTls:
-                    description: The SCAN Listener Non TLS port. Default is 1521.
+                    description: (Updatable) The SCAN Listener Non TLS port. Default
+                      is 1521.
                     type: number
                   scanListenerPortTls:
-                    description: The SCAN Listener TLS port. Default is 2484.
+                    description: (Updatable) The SCAN Listener TLS port. Default is
+                      2484.
                     type: number
                   securityAttributes:
                     additionalProperties:
@@ -1498,6 +1524,10 @@ spec:
                       {"value": "42", "mode": "audit"}}}'
                     type: object
                     x-kubernetes-map-type: granular
+                  sgaPercentage:
+                    description: Percentage of ECPU memory allocated for SGA(System
+                      Global Area).
+                    type: number
                   shape:
                     description: The model name of the Exadata hardware running the
                       cloud Autonomous VM cluster.

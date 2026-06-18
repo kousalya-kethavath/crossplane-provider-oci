@@ -68,6 +68,11 @@ spec:
                       pair (e.g., oracle.net.ssl_server_dn_match).
                     type: object
                     x-kubernetes-map-type: granular
+                  authenticationType:
+                    description: (Applicable when type=ORACLE_DATABASE) Specifies
+                      the authentication type used by the Database Tools service to
+                      authenticate with the database.
+                    type: string
                   compartmentId:
                     description: (Updatable) The OCID of the compartment containing
                       the Database Tools connection.
@@ -501,10 +506,10 @@ spec:
                           description: (Updatable) The proxy authentication type.
                           type: string
                         roles:
-                          description: (Applicable when proxy_authentication_type=USER_NAME)
-                            (Updatable) A list of database roles for the client. These
-                            roles are enabled if the proxy is authorized to use the
-                            roles on behalf of the client.
+                          description: (Applicable when proxy_authentication_type=USER_NAME
+                            | USER_NAME_AUTO_DETECT) (Updatable) A list of database
+                            roles for the client. These roles are enabled if the proxy
+                            is authorized to use the roles on behalf of the client.
                           items:
                             type: string
                           type: array
@@ -706,9 +711,10 @@ spec:
                       type: object
                     type: array
                   runtimeIdentity:
-                    description: Specifies the identity used by the Database Tools
-                      service to issue requests to other Oracle Cloud Infrastructure
-                      services (e.g., Secrets in Vault).
+                    description: Specifies the identity used when accessing Oracle
+                      Cloud Infrastructure resources at runtime. AUTHENTICATED_PRINCIPAL
+                      to use the caller’s identity (On-Behalf-Of token), or RESOURCE_PRINCIPAL
+                      to use the connection’s resource principal (RPST).
                     type: string
                   runtimeSupport:
                     description: Specifies whether this connection is supported by
@@ -922,6 +928,11 @@ spec:
                       pair (e.g., oracle.net.ssl_server_dn_match).
                     type: object
                     x-kubernetes-map-type: granular
+                  authenticationType:
+                    description: (Applicable when type=ORACLE_DATABASE) Specifies
+                      the authentication type used by the Database Tools service to
+                      authenticate with the database.
+                    type: string
                   compartmentId:
                     description: (Updatable) The OCID of the compartment containing
                       the Database Tools connection.
@@ -1355,10 +1366,10 @@ spec:
                           description: (Updatable) The proxy authentication type.
                           type: string
                         roles:
-                          description: (Applicable when proxy_authentication_type=USER_NAME)
-                            (Updatable) A list of database roles for the client. These
-                            roles are enabled if the proxy is authorized to use the
-                            roles on behalf of the client.
+                          description: (Applicable when proxy_authentication_type=USER_NAME
+                            | USER_NAME_AUTO_DETECT) (Updatable) A list of database
+                            roles for the client. These roles are enabled if the proxy
+                            is authorized to use the roles on behalf of the client.
                           items:
                             type: string
                           type: array
@@ -1560,9 +1571,10 @@ spec:
                       type: object
                     type: array
                   runtimeIdentity:
-                    description: Specifies the identity used by the Database Tools
-                      service to issue requests to other Oracle Cloud Infrastructure
-                      services (e.g., Secrets in Vault).
+                    description: Specifies the identity used when accessing Oracle
+                      Cloud Infrastructure resources at runtime. AUTHENTICATED_PRINCIPAL
+                      to use the caller’s identity (On-Behalf-Of token), or RESOURCE_PRINCIPAL
+                      to use the connection’s resource principal (RPST).
                     type: string
                   runtimeSupport:
                     description: Specifies whether this connection is supported by
@@ -1825,10 +1837,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
                 || (has(self.initProvider) && has(self.initProvider.type))'
-            - message: spec.forProvider.userPassword is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.userPassword)
-                || (has(self.initProvider) && has(self.initProvider.userPassword))'
           status:
             description: ToolsDatabaseToolsConnectionStatus defines the observed state
               of ToolsDatabaseToolsConnection.
@@ -1842,6 +1850,11 @@ spec:
                       pair (e.g., oracle.net.ssl_server_dn_match).
                     type: object
                     x-kubernetes-map-type: granular
+                  authenticationType:
+                    description: (Applicable when type=ORACLE_DATABASE) Specifies
+                      the authentication type used by the Database Tools service to
+                      authenticate with the database.
+                    type: string
                   compartmentId:
                     description: (Updatable) The OCID of the compartment containing
                       the Database Tools connection.
@@ -1955,10 +1968,10 @@ spec:
                           description: (Updatable) The proxy authentication type.
                           type: string
                         roles:
-                          description: (Applicable when proxy_authentication_type=USER_NAME)
-                            (Updatable) A list of database roles for the client. These
-                            roles are enabled if the proxy is authorized to use the
-                            roles on behalf of the client.
+                          description: (Applicable when proxy_authentication_type=USER_NAME
+                            | USER_NAME_AUTO_DETECT) (Updatable) A list of database
+                            roles for the client. These roles are enabled if the proxy
+                            is authorized to use the roles on behalf of the client.
                           items:
                             type: string
                           type: array
@@ -1999,9 +2012,10 @@ spec:
                     description: Specifies the Database Tools Runtime endpoint.
                     type: string
                   runtimeIdentity:
-                    description: Specifies the identity used by the Database Tools
-                      service to issue requests to other Oracle Cloud Infrastructure
-                      services (e.g., Secrets in Vault).
+                    description: Specifies the identity used when accessing Oracle
+                      Cloud Infrastructure resources at runtime. AUTHENTICATED_PRINCIPAL
+                      to use the caller’s identity (On-Behalf-Of token), or RESOURCE_PRINCIPAL
+                      to use the connection’s resource principal (RPST).
                     type: string
                   runtimeSupport:
                     description: Specifies whether this connection is supported by

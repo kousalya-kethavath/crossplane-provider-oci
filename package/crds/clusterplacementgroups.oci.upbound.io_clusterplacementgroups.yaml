@@ -87,6 +87,35 @@ spec:
                           description: The supported resources.
                           items:
                             properties:
+                              additionalDetails:
+                                description: Additional details describing the selected
+                                  capability.
+                                items:
+                                  properties:
+                                    clusterPlacementGroupCount:
+                                      description: The number of instances or size
+                                        of the resource.
+                                      type: number
+                                    memoryInGbs:
+                                      description: The amount of memory (in GBs) needed
+                                        in the instance.
+                                      type: number
+                                    nvmes:
+                                      description: The number of NVMe drives to use
+                                        for storage.
+                                      type: number
+                                    ocpus:
+                                      description: The number of OCPUs needed in the
+                                        instance.
+                                      type: number
+                                    serviceType:
+                                      description: Additional details about what service
+                                        provides the capability. For example, COMPUTE
+                                        means that the Oracle Cloud Infrastructure
+                                        Compute service provides the selected capability.
+                                      type: string
+                                  type: object
+                                type: array
                               name:
                                 description: The type of resource.
                                 type: string
@@ -252,6 +281,35 @@ spec:
                           description: The supported resources.
                           items:
                             properties:
+                              additionalDetails:
+                                description: Additional details describing the selected
+                                  capability.
+                                items:
+                                  properties:
+                                    clusterPlacementGroupCount:
+                                      description: The number of instances or size
+                                        of the resource.
+                                      type: number
+                                    memoryInGbs:
+                                      description: The amount of memory (in GBs) needed
+                                        in the instance.
+                                      type: number
+                                    nvmes:
+                                      description: The number of NVMe drives to use
+                                        for storage.
+                                      type: number
+                                    ocpus:
+                                      description: The number of OCPUs needed in the
+                                        instance.
+                                      type: number
+                                    serviceType:
+                                      description: Additional details about what service
+                                        provides the capability. For example, COMPUTE
+                                        means that the Oracle Cloud Infrastructure
+                                        Compute service provides the selected capability.
+                                      type: string
+                                  type: object
+                                type: array
                               name:
                                 description: The type of resource.
                                 type: string
@@ -515,6 +573,35 @@ spec:
                           description: The supported resources.
                           items:
                             properties:
+                              additionalDetails:
+                                description: Additional details describing the selected
+                                  capability.
+                                items:
+                                  properties:
+                                    clusterPlacementGroupCount:
+                                      description: The number of instances or size
+                                        of the resource.
+                                      type: number
+                                    memoryInGbs:
+                                      description: The amount of memory (in GBs) needed
+                                        in the instance.
+                                      type: number
+                                    nvmes:
+                                      description: The number of NVMe drives to use
+                                        for storage.
+                                      type: number
+                                    ocpus:
+                                      description: The number of OCPUs needed in the
+                                        instance.
+                                      type: number
+                                    serviceType:
+                                      description: Additional details about what service
+                                        provides the capability. For example, COMPUTE
+                                        means that the Oracle Cloud Infrastructure
+                                        Compute service provides the selected capability.
+                                      type: string
+                                  type: object
+                                type: array
                               name:
                                 description: The type of resource.
                                 type: string

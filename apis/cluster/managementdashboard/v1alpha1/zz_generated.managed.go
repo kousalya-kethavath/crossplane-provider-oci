@@ -56,3 +56,53 @@ func (mg *ManagementDashboardsImport) SetProviderConfigReference(r *xpv1.Referen
 func (mg *ManagementDashboardsImport) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ManagementSavedSearch.
+func (mg *ManagementSavedSearch) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}

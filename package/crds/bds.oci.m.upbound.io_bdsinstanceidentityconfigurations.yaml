@@ -1202,7 +1202,7 @@ spec:
                             keytab, required for activating UPST config
                           type: string
                         secretId:
-                          description: Secret ID for token exchange keytab
+                          description: (Updatable) The secretId for the clusterAdminPassword.
                           type: string
                         state:
                           description: Lifecycle state of the IAM user sync config

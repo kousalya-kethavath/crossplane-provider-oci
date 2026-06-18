@@ -46,6 +46,9 @@ type AutonomousVmClusterInitParameters struct {
 	// The user-friendly name for the Autonomous VM cluster. The name does not need to be unique.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// (Updatable) The distribution algorithm used for the Autonomous VM cluster.
+	DistributionAlgorithm *string `json:"distributionAlgorithm,omitempty" tf:"distribution_algorithm,omitempty"`
+
 	// The OCID of the Exadata infrastructure.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/database/v1alpha1.ExadataInfrastructure
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -66,7 +69,7 @@ type AutonomousVmClusterInitParameters struct {
 	// If true, database backup on local Exadata storage is configured for the Autonomous VM cluster. If false, database backup on local Exadata storage is not available in the Autonomous VM cluster.
 	IsLocalBackupEnabled *bool `json:"isLocalBackupEnabled,omitempty" tf:"is_local_backup_enabled,omitempty"`
 
-	// Enable mutual TLS(mTLS) authentication for database while provisioning a VMCluster. Default is TLS.
+	// (Updatable) Enable mutual TLS(mTLS) authentication for database while provisioning a VMCluster. Default is TLS.
 	IsMtlsEnabled *bool `json:"isMtlsEnabled,omitempty" tf:"is_mtls_enabled,omitempty"`
 
 	// (Updatable) The Oracle license model that applies to the Autonomous VM cluster. The default is BRING_YOUR_OWN_LICENSE.
@@ -78,13 +81,16 @@ type AutonomousVmClusterInitParameters struct {
 	// The amount of memory (in GBs) to be enabled per OCPU or ECPU.
 	MemoryPerOracleComputeUnitInGbs *float64 `json:"memoryPerOracleComputeUnitInGbs,omitempty" tf:"memory_per_oracle_compute_unit_in_gbs,omitempty"`
 
-	// The SCAN Listener Non TLS port number. Default value is 1521.
+	// (Updatable) The SCAN Listener Non TLS port number. Default value is 1521.
 	ScanListenerPortNonTLS *float64 `json:"scanListenerPortNonTls,omitempty" tf:"scan_listener_port_non_tls,omitempty"`
 
-	// The SCAN Listener TLS port number. Default value is 2484.
+	// (Updatable) The SCAN Listener TLS port number. Default value is 2484.
 	ScanListenerPortTLS *float64 `json:"scanListenerPortTls,omitempty" tf:"scan_listener_port_tls,omitempty"`
 
-	// The time zone to use for the Autonomous VM cluster. For details, see DB System Time Zones.
+	// Percentage of ECPU memory allocated for SGA(System Global Area).
+	SgaPercentage *float64 `json:"sgaPercentage,omitempty" tf:"sga_percentage,omitempty"`
+
+	// (Updatable) The time zone to use for the Autonomous VM cluster. For details, see DB System Time Zones.
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 
 	// (Updatable) The total number of Autonomous Container Databases that can be created.
@@ -360,6 +366,9 @@ type AutonomousVmClusterObservation struct {
 	// The user-friendly name for the Autonomous VM cluster. The name does not need to be unique.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// (Updatable) The distribution algorithm used for the Autonomous VM cluster.
+	DistributionAlgorithm *string `json:"distributionAlgorithm,omitempty" tf:"distribution_algorithm,omitempty"`
+
 	// The OCID of the Exadata infrastructure.
 	ExadataInfrastructureID *string `json:"exadataInfrastructureId,omitempty" tf:"exadata_infrastructure_id,omitempty"`
 
@@ -376,7 +385,7 @@ type AutonomousVmClusterObservation struct {
 	// If true, database backup on local Exadata storage is configured for the Autonomous VM cluster. If false, database backup on local Exadata storage is not available in the Autonomous VM cluster.
 	IsLocalBackupEnabled *bool `json:"isLocalBackupEnabled,omitempty" tf:"is_local_backup_enabled,omitempty"`
 
-	// Enable mutual TLS(mTLS) authentication for database while provisioning a VMCluster. Default is TLS.
+	// (Updatable) Enable mutual TLS(mTLS) authentication for database while provisioning a VMCluster. Default is TLS.
 	IsMtlsEnabled *bool `json:"isMtlsEnabled,omitempty" tf:"is_mtls_enabled,omitempty"`
 
 	// The OCID of the last maintenance run.
@@ -433,11 +442,14 @@ type AutonomousVmClusterObservation struct {
 	// The number of CPUs reserved in an Autonomous VM Cluster.
 	ReservedCpus *float64 `json:"reservedCpus,omitempty" tf:"reserved_cpus,omitempty"`
 
-	// The SCAN Listener Non TLS port number. Default value is 1521.
+	// (Updatable) The SCAN Listener Non TLS port number. Default value is 1521.
 	ScanListenerPortNonTLS *float64 `json:"scanListenerPortNonTls,omitempty" tf:"scan_listener_port_non_tls,omitempty"`
 
-	// The SCAN Listener TLS port number. Default value is 2484.
+	// (Updatable) The SCAN Listener TLS port number. Default value is 2484.
 	ScanListenerPortTLS *float64 `json:"scanListenerPortTls,omitempty" tf:"scan_listener_port_tls,omitempty"`
+
+	// Percentage of ECPU memory allocated for SGA(System Global Area).
+	SgaPercentage *float64 `json:"sgaPercentage,omitempty" tf:"sga_percentage,omitempty"`
 
 	// The current state of the Autonomous VM cluster.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -455,7 +467,7 @@ type AutonomousVmClusterObservation struct {
 	// The date and time of ORDS certificate expiration.
 	TimeOrdsCertificateExpires *string `json:"timeOrdsCertificateExpires,omitempty" tf:"time_ords_certificate_expires,omitempty"`
 
-	// The time zone to use for the Autonomous VM cluster. For details, see DB System Time Zones.
+	// (Updatable) The time zone to use for the Autonomous VM cluster. For details, see DB System Time Zones.
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 
 	TotalAutonomousDataStorageInTbs *float64 `json:"totalAutonomousDataStorageInTbs,omitempty" tf:"total_autonomous_data_storage_in_tbs,omitempty"`
@@ -507,6 +519,10 @@ type AutonomousVmClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// (Updatable) The distribution algorithm used for the Autonomous VM cluster.
+	// +kubebuilder:validation:Optional
+	DistributionAlgorithm *string `json:"distributionAlgorithm,omitempty" tf:"distribution_algorithm,omitempty"`
+
 	// The OCID of the Exadata infrastructure.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/database/v1alpha1.ExadataInfrastructure
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -530,7 +546,7 @@ type AutonomousVmClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	IsLocalBackupEnabled *bool `json:"isLocalBackupEnabled,omitempty" tf:"is_local_backup_enabled,omitempty"`
 
-	// Enable mutual TLS(mTLS) authentication for database while provisioning a VMCluster. Default is TLS.
+	// (Updatable) Enable mutual TLS(mTLS) authentication for database while provisioning a VMCluster. Default is TLS.
 	// +kubebuilder:validation:Optional
 	IsMtlsEnabled *bool `json:"isMtlsEnabled,omitempty" tf:"is_mtls_enabled,omitempty"`
 
@@ -546,15 +562,19 @@ type AutonomousVmClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	MemoryPerOracleComputeUnitInGbs *float64 `json:"memoryPerOracleComputeUnitInGbs,omitempty" tf:"memory_per_oracle_compute_unit_in_gbs,omitempty"`
 
-	// The SCAN Listener Non TLS port number. Default value is 1521.
+	// (Updatable) The SCAN Listener Non TLS port number. Default value is 1521.
 	// +kubebuilder:validation:Optional
 	ScanListenerPortNonTLS *float64 `json:"scanListenerPortNonTls,omitempty" tf:"scan_listener_port_non_tls,omitempty"`
 
-	// The SCAN Listener TLS port number. Default value is 2484.
+	// (Updatable) The SCAN Listener TLS port number. Default value is 2484.
 	// +kubebuilder:validation:Optional
 	ScanListenerPortTLS *float64 `json:"scanListenerPortTls,omitempty" tf:"scan_listener_port_tls,omitempty"`
 
-	// The time zone to use for the Autonomous VM cluster. For details, see DB System Time Zones.
+	// Percentage of ECPU memory allocated for SGA(System Global Area).
+	// +kubebuilder:validation:Optional
+	SgaPercentage *float64 `json:"sgaPercentage,omitempty" tf:"sga_percentage,omitempty"`
+
+	// (Updatable) The time zone to use for the Autonomous VM cluster. For details, see DB System Time Zones.
 	// +kubebuilder:validation:Optional
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 

@@ -49,6 +49,7 @@ spec:
     freeformTags: ${var.bds_instance_freeform_tags}
     ignoreExistingNodesShape: ${var.ignore_existing_nodes_shape}
     isHighAvailability: ${var.bds_instance_is_high_availability}
+    isSecretReused: ${var.bds_instance_is_secret_reused}
     isSecure: ${var.bds_instance_is_secure}
     kafkaBrokerNode:
     - blockVolumeSizeInGbs: ${var.bds_instance_nodes_block_volume_size_in_gbs}
@@ -77,6 +78,9 @@ spec:
     networkConfig:
     - cidrBlock: ${var.bds_instance_network_config_cidr_block}
       isNatGatewayRequired: ${var.bds_instance_network_config_is_nat_gateway_required}
+    secretIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_secret
     utilNode:
     - blockVolumeSizeInGbs: ${var.bds_instance_nodes_block_volume_size_in_gbs}
       numberOfNodes: ${var.bds_instance_number_of_nodes}

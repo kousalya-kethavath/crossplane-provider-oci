@@ -104,6 +104,9 @@ type MysqlReplicaObservation struct {
 	// The IP address the read replica is configured to listen on.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
+	// The IPv6 address the read replica is configured to listen on.
+	Ipv6Address *string `json:"ipv6address,omitempty" tf:"ipv6address,omitempty"`
+
 	// (Updatable) Specifies whether the read replica can be deleted. Set to true to prevent deletion, false (default) to allow. Note that if a read replica is delete protected it also prevents the entire DB System from being deleted. If the DB System is delete protected, read replicas can still be deleted individually if they are not delete  protected themselves.
 	IsDeleteProtected *bool `json:"isDeleteProtected,omitempty" tf:"is_delete_protected,omitempty"`
 

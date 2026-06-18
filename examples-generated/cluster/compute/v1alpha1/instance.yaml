@@ -143,6 +143,7 @@ spec:
     shape: ${var.instance_shape}
     shapeConfig:
     - baselineOcpuUtilization: ${var.instance_shape_config_baseline_ocpu_utilization}
+      localVolumeSizeInGbs: ${var.instance_shape_config_local_volume_size_in_gbs}
       memoryInGbs: ${var.instance_shape_config_memory_in_gbs}
       nvmes: ${var.instance_shape_config_nvmes}
       ocpus: ${var.instance_shape_config_ocpus}

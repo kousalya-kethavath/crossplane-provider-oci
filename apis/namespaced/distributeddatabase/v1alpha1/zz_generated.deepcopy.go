@@ -2231,6 +2231,11 @@ func (in *DistributedAutonomousDatabaseObservation) DeepCopyInto(out *Distribute
 		*out = new(float64)
 		**out = **in
 	}
+	if in.EffectiveReplicationUnit != nil {
+		in, out := &in.EffectiveReplicationUnit, &out.EffectiveReplicationUnit
+		*out = new(float64)
+		**out = **in
+	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
 		*out = make(map[string]*string, len(*in))
@@ -4058,6 +4063,11 @@ func (in *DistributedDatabaseObservation) DeepCopyInto(out *DistributedDatabaseO
 	}
 	if in.DownloadGsmCertificateSigningRequestTrigger != nil {
 		in, out := &in.DownloadGsmCertificateSigningRequestTrigger, &out.DownloadGsmCertificateSigningRequestTrigger
+		*out = new(float64)
+		**out = **in
+	}
+	if in.EffectiveReplicationUnit != nil {
+		in, out := &in.EffectiveReplicationUnit, &out.EffectiveReplicationUnit
 		*out = new(float64)
 		**out = **in
 	}

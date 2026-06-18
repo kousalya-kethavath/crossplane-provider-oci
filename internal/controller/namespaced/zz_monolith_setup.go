@@ -66,8 +66,10 @@ import (
 	batchtaskprofile "github.com/oracle/provider-oci/internal/controller/namespaced/batch/batchtaskprofile"
 	autoscalingconfigurationbds "github.com/oracle/provider-oci/internal/controller/namespaced/bds/autoscalingconfiguration"
 	bdscapacityreport "github.com/oracle/provider-oci/internal/controller/namespaced/bds/bdscapacityreport"
+	bdsclusteradminpasswordresetaction "github.com/oracle/provider-oci/internal/controller/namespaced/bds/bdsclusteradminpasswordresetaction"
 	bdsinstance "github.com/oracle/provider-oci/internal/controller/namespaced/bds/bdsinstance"
 	bdsinstanceapikey "github.com/oracle/provider-oci/internal/controller/namespaced/bds/bdsinstanceapikey"
+	bdsinstancebdscertificateconfiguration "github.com/oracle/provider-oci/internal/controller/namespaced/bds/bdsinstancebdscertificateconfiguration"
 	bdsinstanceexecutebootstrapscriptaction "github.com/oracle/provider-oci/internal/controller/namespaced/bds/bdsinstanceexecutebootstrapscriptaction"
 	bdsinstanceidentityconfiguration "github.com/oracle/provider-oci/internal/controller/namespaced/bds/bdsinstanceidentityconfiguration"
 	bdsinstancemetastoreconfig "github.com/oracle/provider-oci/internal/controller/namespaced/bds/bdsinstancemetastoreconfig"
@@ -171,6 +173,10 @@ import (
 	byoasn "github.com/oracle/provider-oci/internal/controller/namespaced/core/byoasn"
 	listingresourceversionagreement "github.com/oracle/provider-oci/internal/controller/namespaced/core/listingresourceversionagreement"
 	virtualnetwork "github.com/oracle/provider-oci/internal/controller/namespaced/core/virtualnetwork"
+	costalertsubscriptioncostad "github.com/oracle/provider-oci/internal/controller/namespaced/costad/costalertsubscription"
+	costanomalyeventcostad "github.com/oracle/provider-oci/internal/controller/namespaced/costad/costanomalyevent"
+	costanomalymonitorcostad "github.com/oracle/provider-oci/internal/controller/namespaced/costad/costanomalymonitor"
+	costanomalymonitorcostanomalymonitorenabletogglesmanagementcostad "github.com/oracle/provider-oci/internal/controller/namespaced/costad/costanomalymonitorcostanomalymonitorenabletogglesmanagement"
 	advancedclusterfilesystem "github.com/oracle/provider-oci/internal/controller/namespaced/database/advancedclusterfilesystem"
 	advancedclusterfilesystemmount "github.com/oracle/provider-oci/internal/controller/namespaced/database/advancedclusterfilesystemmount"
 	advancedclusterfilesystemunmount "github.com/oracle/provider-oci/internal/controller/namespaced/database/advancedclusterfilesystemunmount"
@@ -204,6 +210,7 @@ import (
 	database "github.com/oracle/provider-oci/internal/controller/namespaced/database/database"
 	databasesnapshotstandby "github.com/oracle/provider-oci/internal/controller/namespaced/database/databasesnapshotstandby"
 	databasesoftwareimage "github.com/oracle/provider-oci/internal/controller/namespaced/database/databasesoftwareimage"
+	databasesoftwareschedulemanagement "github.com/oracle/provider-oci/internal/controller/namespaced/database/databasesoftwareschedulemanagement"
 	databaseupgrade "github.com/oracle/provider-oci/internal/controller/namespaced/database/databaseupgrade"
 	dataguardassociation "github.com/oracle/provider-oci/internal/controller/namespaced/database/dataguardassociation"
 	datapatch "github.com/oracle/provider-oci/internal/controller/namespaced/database/datapatch"
@@ -305,8 +312,20 @@ import (
 	schedulingpolicy "github.com/oracle/provider-oci/internal/controller/namespaced/database/schedulingpolicy"
 	schedulingpolicyschedulingwindow "github.com/oracle/provider-oci/internal/controller/namespaced/database/schedulingpolicyschedulingwindow"
 	toolsdatabasetoolsconnection "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsdatabasetoolsconnection"
+	toolsdatabasetoolsdatabaseapigatewayconfig "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsdatabasetoolsdatabaseapigatewayconfig"
 	toolsdatabasetoolsidentity "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsdatabasetoolsidentity"
+	toolsdatabasetoolsmcpserver "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsdatabasetoolsmcpserver"
+	toolsdatabasetoolsmcptoolset "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsdatabasetoolsmcptoolset"
 	toolsdatabasetoolsprivateendpoint "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsdatabasetoolsprivateendpoint"
+	toolsdatabasetoolssqlreport "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsdatabasetoolssqlreport"
+	toolsruntimedatabasetoolsapigatewayconfigpoolapispec "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsruntimedatabasetoolsapigatewayconfigpoolapispec"
+	toolsruntimedatabasetoolsapigatewayconfigpoolautoapispec "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsruntimedatabasetoolsapigatewayconfigpoolautoapispec"
+	toolsruntimedatabasetoolsconnectioncredential "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsruntimedatabasetoolsconnectioncredential"
+	toolsruntimedatabasetoolsconnectioncredentialexecutegrantee "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsruntimedatabasetoolsconnectioncredentialexecutegrantee"
+	toolsruntimedatabasetoolsconnectioncredentialpublicsynonym "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsruntimedatabasetoolsconnectioncredentialpublicsynonym"
+	toolsruntimedatabasetoolsconnectionpropertyset "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsruntimedatabasetoolsconnectionpropertyset"
+	toolsruntimedatabasetoolsdatabaseapigatewayconfigglobal "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsruntimedatabasetoolsdatabaseapigatewayconfigglobal"
+	toolsruntimedatabasetoolsdatabaseapigatewayconfigpool "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsruntimedatabasetoolsdatabaseapigatewayconfigpool"
 	vmcluster "github.com/oracle/provider-oci/internal/controller/namespaced/database/vmcluster"
 	vmclusteraddvirtualmachine "github.com/oracle/provider-oci/internal/controller/namespaced/database/vmclusteraddvirtualmachine"
 	vmclusternetwork "github.com/oracle/provider-oci/internal/controller/namespaced/database/vmclusternetwork"
@@ -401,6 +420,7 @@ import (
 	unsetuserassessmentbaseline "github.com/oracle/provider-oci/internal/controller/namespaced/datasafe/unsetuserassessmentbaseline"
 	unsetuserassessmentbaselinemanagement "github.com/oracle/provider-oci/internal/controller/namespaced/datasafe/unsetuserassessmentbaselinemanagement"
 	userassessment "github.com/oracle/provider-oci/internal/controller/namespaced/datasafe/userassessment"
+	computetarget "github.com/oracle/provider-oci/internal/controller/namespaced/datascience/computetarget"
 	jobdatascience "github.com/oracle/provider-oci/internal/controller/namespaced/datascience/job"
 	jobrun "github.com/oracle/provider-oci/internal/controller/namespaced/datascience/jobrun"
 	mlapplication "github.com/oracle/provider-oci/internal/controller/namespaced/datascience/mlapplication"
@@ -691,6 +711,7 @@ import (
 	lustrefilesystem "github.com/oracle/provider-oci/internal/controller/namespaced/lustrefilestorage/lustrefilesystem"
 	objectstoragelink "github.com/oracle/provider-oci/internal/controller/namespaced/lustrefilestorage/objectstoragelink"
 	kafkacluster "github.com/oracle/provider-oci/internal/controller/namespaced/managedkafka/kafkacluster"
+	kafkaclusteraddon "github.com/oracle/provider-oci/internal/controller/namespaced/managedkafka/kafkaclusteraddon"
 	kafkaclusterconfig "github.com/oracle/provider-oci/internal/controller/namespaced/managedkafka/kafkaclusterconfig"
 	kafkaclustersuperusersmanagement "github.com/oracle/provider-oci/internal/controller/namespaced/managedkafka/kafkaclustersuperusersmanagement"
 	managementagent "github.com/oracle/provider-oci/internal/controller/namespaced/managementagent/managementagent"
@@ -698,6 +719,7 @@ import (
 	managementagentinstallkey "github.com/oracle/provider-oci/internal/controller/namespaced/managementagent/managementagentinstallkey"
 	namedcredential "github.com/oracle/provider-oci/internal/controller/namespaced/managementagent/namedcredential"
 	managementdashboardsimport "github.com/oracle/provider-oci/internal/controller/namespaced/managementdashboard/managementdashboardsimport"
+	managementsavedsearch "github.com/oracle/provider-oci/internal/controller/namespaced/managementdashboard/managementsavedsearch"
 	acceptedagreement "github.com/oracle/provider-oci/internal/controller/namespaced/marketplace/acceptedagreement"
 	listingpackageagreement "github.com/oracle/provider-oci/internal/controller/namespaced/marketplace/listingpackageagreement"
 	marketplaceexternalattestedmetadata "github.com/oracle/provider-oci/internal/controller/namespaced/marketplace/marketplaceexternalattestedmetadata"
@@ -1034,8 +1056,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		batchtaskprofile.Setup,
 		autoscalingconfigurationbds.Setup,
 		bdscapacityreport.Setup,
+		bdsclusteradminpasswordresetaction.Setup,
 		bdsinstance.Setup,
 		bdsinstanceapikey.Setup,
+		bdsinstancebdscertificateconfiguration.Setup,
 		bdsinstanceexecutebootstrapscriptaction.Setup,
 		bdsinstanceidentityconfiguration.Setup,
 		bdsinstancemetastoreconfig.Setup,
@@ -1139,6 +1163,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		byoasn.Setup,
 		listingresourceversionagreement.Setup,
 		virtualnetwork.Setup,
+		costalertsubscriptioncostad.Setup,
+		costanomalyeventcostad.Setup,
+		costanomalymonitorcostad.Setup,
+		costanomalymonitorcostanomalymonitorenabletogglesmanagementcostad.Setup,
 		advancedclusterfilesystem.Setup,
 		advancedclusterfilesystemmount.Setup,
 		advancedclusterfilesystemunmount.Setup,
@@ -1172,6 +1200,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		database.Setup,
 		databasesnapshotstandby.Setup,
 		databasesoftwareimage.Setup,
+		databasesoftwareschedulemanagement.Setup,
 		databaseupgrade.Setup,
 		dataguardassociation.Setup,
 		datapatch.Setup,
@@ -1273,8 +1302,20 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		schedulingpolicy.Setup,
 		schedulingpolicyschedulingwindow.Setup,
 		toolsdatabasetoolsconnection.Setup,
+		toolsdatabasetoolsdatabaseapigatewayconfig.Setup,
 		toolsdatabasetoolsidentity.Setup,
+		toolsdatabasetoolsmcpserver.Setup,
+		toolsdatabasetoolsmcptoolset.Setup,
 		toolsdatabasetoolsprivateendpoint.Setup,
+		toolsdatabasetoolssqlreport.Setup,
+		toolsruntimedatabasetoolsapigatewayconfigpoolapispec.Setup,
+		toolsruntimedatabasetoolsapigatewayconfigpoolautoapispec.Setup,
+		toolsruntimedatabasetoolsconnectioncredential.Setup,
+		toolsruntimedatabasetoolsconnectioncredentialexecutegrantee.Setup,
+		toolsruntimedatabasetoolsconnectioncredentialpublicsynonym.Setup,
+		toolsruntimedatabasetoolsconnectionpropertyset.Setup,
+		toolsruntimedatabasetoolsdatabaseapigatewayconfigglobal.Setup,
+		toolsruntimedatabasetoolsdatabaseapigatewayconfigpool.Setup,
 		vmcluster.Setup,
 		vmclusteraddvirtualmachine.Setup,
 		vmclusternetwork.Setup,
@@ -1369,6 +1410,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		unsetuserassessmentbaseline.Setup,
 		unsetuserassessmentbaselinemanagement.Setup,
 		userassessment.Setup,
+		computetarget.Setup,
 		jobdatascience.Setup,
 		jobrun.Setup,
 		mlapplication.Setup,
@@ -1659,6 +1701,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		lustrefilesystem.Setup,
 		objectstoragelink.Setup,
 		kafkacluster.Setup,
+		kafkaclusteraddon.Setup,
 		kafkaclusterconfig.Setup,
 		kafkaclustersuperusersmanagement.Setup,
 		managementagent.Setup,
@@ -1666,6 +1709,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		managementagentinstallkey.Setup,
 		namedcredential.Setup,
 		managementdashboardsimport.Setup,
+		managementsavedsearch.Setup,
 		acceptedagreement.Setup,
 		listingpackageagreement.Setup,
 		marketplaceexternalattestedmetadata.Setup,
@@ -2008,8 +2052,10 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		batchtaskprofile.SetupGated,
 		autoscalingconfigurationbds.SetupGated,
 		bdscapacityreport.SetupGated,
+		bdsclusteradminpasswordresetaction.SetupGated,
 		bdsinstance.SetupGated,
 		bdsinstanceapikey.SetupGated,
+		bdsinstancebdscertificateconfiguration.SetupGated,
 		bdsinstanceexecutebootstrapscriptaction.SetupGated,
 		bdsinstanceidentityconfiguration.SetupGated,
 		bdsinstancemetastoreconfig.SetupGated,
@@ -2113,6 +2159,10 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		byoasn.SetupGated,
 		listingresourceversionagreement.SetupGated,
 		virtualnetwork.SetupGated,
+		costalertsubscriptioncostad.SetupGated,
+		costanomalyeventcostad.SetupGated,
+		costanomalymonitorcostad.SetupGated,
+		costanomalymonitorcostanomalymonitorenabletogglesmanagementcostad.SetupGated,
 		advancedclusterfilesystem.SetupGated,
 		advancedclusterfilesystemmount.SetupGated,
 		advancedclusterfilesystemunmount.SetupGated,
@@ -2146,6 +2196,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		database.SetupGated,
 		databasesnapshotstandby.SetupGated,
 		databasesoftwareimage.SetupGated,
+		databasesoftwareschedulemanagement.SetupGated,
 		databaseupgrade.SetupGated,
 		dataguardassociation.SetupGated,
 		datapatch.SetupGated,
@@ -2247,8 +2298,20 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		schedulingpolicy.SetupGated,
 		schedulingpolicyschedulingwindow.SetupGated,
 		toolsdatabasetoolsconnection.SetupGated,
+		toolsdatabasetoolsdatabaseapigatewayconfig.SetupGated,
 		toolsdatabasetoolsidentity.SetupGated,
+		toolsdatabasetoolsmcpserver.SetupGated,
+		toolsdatabasetoolsmcptoolset.SetupGated,
 		toolsdatabasetoolsprivateendpoint.SetupGated,
+		toolsdatabasetoolssqlreport.SetupGated,
+		toolsruntimedatabasetoolsapigatewayconfigpoolapispec.SetupGated,
+		toolsruntimedatabasetoolsapigatewayconfigpoolautoapispec.SetupGated,
+		toolsruntimedatabasetoolsconnectioncredential.SetupGated,
+		toolsruntimedatabasetoolsconnectioncredentialexecutegrantee.SetupGated,
+		toolsruntimedatabasetoolsconnectioncredentialpublicsynonym.SetupGated,
+		toolsruntimedatabasetoolsconnectionpropertyset.SetupGated,
+		toolsruntimedatabasetoolsdatabaseapigatewayconfigglobal.SetupGated,
+		toolsruntimedatabasetoolsdatabaseapigatewayconfigpool.SetupGated,
 		vmcluster.SetupGated,
 		vmclusteraddvirtualmachine.SetupGated,
 		vmclusternetwork.SetupGated,
@@ -2343,6 +2406,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		unsetuserassessmentbaseline.SetupGated,
 		unsetuserassessmentbaselinemanagement.SetupGated,
 		userassessment.SetupGated,
+		computetarget.SetupGated,
 		jobdatascience.SetupGated,
 		jobrun.SetupGated,
 		mlapplication.SetupGated,
@@ -2633,6 +2697,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		lustrefilesystem.SetupGated,
 		objectstoragelink.SetupGated,
 		kafkacluster.SetupGated,
+		kafkaclusteraddon.SetupGated,
 		kafkaclusterconfig.SetupGated,
 		kafkaclustersuperusersmanagement.SetupGated,
 		managementagent.SetupGated,
@@ -2640,6 +2705,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		managementagentinstallkey.SetupGated,
 		namedcredential.SetupGated,
 		managementdashboardsimport.SetupGated,
+		managementsavedsearch.SetupGated,
 		acceptedagreement.SetupGated,
 		listingpackageagreement.SetupGated,
 		marketplaceexternalattestedmetadata.SetupGated,

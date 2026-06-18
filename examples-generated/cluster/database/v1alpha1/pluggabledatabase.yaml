@@ -44,7 +44,7 @@ spec:
           testing.upbound.io/example-name: test_pluggable_database
       sourcePluggableDatabaseSnapshotIdSelector:
         matchLabels:
-          testing.upbound.io/example-name: test_pluggable_database_snapshot
+          testing.upbound.io/example-name: test_snapshot
     pdbName: ${var.pluggable_database_pdb_name}
     shouldCreatePdbBackup: ${var.pluggable_database_should_create_pdb_backup}
     shouldPdbAdminAccountBeLocked: ${var.pluggable_database_should_pdb_admin_account_be_locked}

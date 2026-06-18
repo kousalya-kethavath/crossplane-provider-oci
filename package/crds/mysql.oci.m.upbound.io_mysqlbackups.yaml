@@ -946,6 +946,10 @@ spec:
                                 description: The IP address the DB System is configured
                                   to listen on.
                                 type: string
+                              ipAddressVersion:
+                                description: The internet protocol (IP) version of
+                                  the IP address.
+                                type: string
                               modes:
                                 description: The access modes from the client that
                                   this endpoint supports.
@@ -1004,6 +1008,10 @@ spec:
                           type: string
                         ipAddress:
                           description: The IP address the DB System is configured
+                            to listen on.
+                          type: string
+                        ipv6address:
+                          description: The IPv6 address the DB System is configured
                             to listen on.
                           type: string
                         isHighlyAvailable:
@@ -1116,6 +1124,21 @@ spec:
                                   from the subnet. This should be a "dotted-quad"
                                   style IPv4 address.
                                 type: string
+                              readEndpointIpv6AddressIpv6SubnetCidrPairDetails:
+                                description: Details to assign an IPv6 subnet prefix
+                                  or IPv6 address to a resource.
+                                items:
+                                  properties:
+                                    ipv6address:
+                                      description: The IPv6 address the DB System
+                                        is configured to listen on.
+                                      type: string
+                                    ipv6subnetCidr:
+                                      description: The IPv6 prefix allocated to the
+                                        subnet.
+                                      type: string
+                                  type: object
+                                type: array
                             type: object
                           type: array
                         region:

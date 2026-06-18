@@ -25,6 +25,7 @@ spec:
         policy: ${var.channel_source_anonymous_transactions_handling_policy}
         uuid: ${var.channel_source_anonymous_transactions_handling_uuid}
       hostname: ${var.channel_source_hostname}
+      mustUseIpv6OnDualStack: ${var.channel_source_must_use_ipv6on_dual_stack}
       passwordSecretRef:
         key: example-key
         name: example-secret

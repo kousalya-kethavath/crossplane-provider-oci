@@ -144,6 +144,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  cpuCoreCount:
+                    description: (Updatable) The Minimum number of OCPUs to be made
+                      available for this Deployment.
+                    type: number
                   definedTags:
                     additionalProperties:
                       type: string
@@ -166,6 +170,10 @@ spec:
                       only.  Example: {"bar-key": "value"}'
                     type: object
                     x-kubernetes-map-type: granular
+                  isAutoScalingEnabled:
+                    description: (Updatable) Indicates if auto scaling is enabled
+                      for the Deployment's CPU core count.
+                    type: boolean
                   licenseModel:
                     description: (Updatable) The Oracle license model that applies
                       to a Deployment.
@@ -207,10 +215,43 @@ spec:
                                 description: (Updatable) Action upon existing tables
                                   in target when initial Data Load is set i.e., isInitialLoad=true.
                                 type: string
+                              adbWalletPath:
+                                description: (Updatable) Directory path of ADB wallet
+                                  locally available in Non-ADB target DB. Required
+                                  for ADB to non-ADB DBLink type initial load only.
+                                  If not provided the default wallet path "/u01/targetwallet"
+                                  will be used.
+                                type: string
+                              bucket:
+                                description: (Updatable) Name of the ObjectStorage
+                                  bucket. Required only for Objectstorage Initial
+                                  load.
+                                type: string
+                              initialLoadType:
+                                description: (Updatable) Type of Initial load, which
+                                  can be objectStorage or dbLink.
+                                type: string
                               isInitialLoad:
                                 description: (Updatable) If ENABLED, then existing
                                   source data is also synchronized to the target when
                                   creating or updating the pipeline.
+                                type: string
+                              namespace:
+                                description: (Updatable) Namespace that serves as
+                                  a container of the ObjectStorage bucket. Required
+                                  only for Objectstorage Initial load.
+                                type: string
+                              sourceWalletPath:
+                                description: (Updatable) Directory path of ObjectStorage
+                                  wallet locally available in Non-ADB source DB. Required
+                                  for Object Storage type initial load only if source
+                                  DB is Non-ADB type.
+                                type: string
+                              targetWalletPath:
+                                description: (Updatable) Directory path of ObjectStorage
+                                  wallet locally available in Non-ADB target DB. Required
+                                  for Object Storage type initial load only if target
+                                  DB is Non-ADB type.
                                 type: string
                             type: object
                           type: array
@@ -619,6 +660,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  cpuCoreCount:
+                    description: (Updatable) The Minimum number of OCPUs to be made
+                      available for this Deployment.
+                    type: number
                   definedTags:
                     additionalProperties:
                       type: string
@@ -641,6 +686,10 @@ spec:
                       only.  Example: {"bar-key": "value"}'
                     type: object
                     x-kubernetes-map-type: granular
+                  isAutoScalingEnabled:
+                    description: (Updatable) Indicates if auto scaling is enabled
+                      for the Deployment's CPU core count.
+                    type: boolean
                   licenseModel:
                     description: (Updatable) The Oracle license model that applies
                       to a Deployment.
@@ -682,10 +731,43 @@ spec:
                                 description: (Updatable) Action upon existing tables
                                   in target when initial Data Load is set i.e., isInitialLoad=true.
                                 type: string
+                              adbWalletPath:
+                                description: (Updatable) Directory path of ADB wallet
+                                  locally available in Non-ADB target DB. Required
+                                  for ADB to non-ADB DBLink type initial load only.
+                                  If not provided the default wallet path "/u01/targetwallet"
+                                  will be used.
+                                type: string
+                              bucket:
+                                description: (Updatable) Name of the ObjectStorage
+                                  bucket. Required only for Objectstorage Initial
+                                  load.
+                                type: string
+                              initialLoadType:
+                                description: (Updatable) Type of Initial load, which
+                                  can be objectStorage or dbLink.
+                                type: string
                               isInitialLoad:
                                 description: (Updatable) If ENABLED, then existing
                                   source data is also synchronized to the target when
                                   creating or updating the pipeline.
+                                type: string
+                              namespace:
+                                description: (Updatable) Namespace that serves as
+                                  a container of the ObjectStorage bucket. Required
+                                  only for Objectstorage Initial load.
+                                type: string
+                              sourceWalletPath:
+                                description: (Updatable) Directory path of ObjectStorage
+                                  wallet locally available in Non-ADB source DB. Required
+                                  for Object Storage type initial load only if source
+                                  DB is Non-ADB type.
+                                type: string
+                              targetWalletPath:
+                                description: (Updatable) Directory path of ObjectStorage
+                                  wallet locally available in Non-ADB target DB. Required
+                                  for Object Storage type initial load only if target
+                                  DB is Non-ADB type.
                                 type: string
                             type: object
                           type: array
@@ -1086,8 +1168,8 @@ spec:
                     description: (Updatable) The OCID of the compartment being referenced.
                     type: string
                   cpuCoreCount:
-                    description: The Minimum number of OCPUs to be made available
-                      for this Deployment.
+                    description: (Updatable) The Minimum number of OCPUs to be made
+                      available for this Deployment.
                     type: number
                   definedTags:
                     additionalProperties:
@@ -1129,8 +1211,8 @@ spec:
                       type: object
                     type: array
                   isAutoScalingEnabled:
-                    description: Indicates if auto scaling is enabled for the Deployment's
-                      CPU core count.
+                    description: (Updatable) Indicates if auto scaling is enabled
+                      for the Deployment's CPU core count.
                     type: boolean
                   licenseModel:
                     description: (Updatable) The Oracle license model that applies
@@ -1192,15 +1274,16 @@ spec:
                     items:
                       properties:
                         bucket:
-                          description: Name of the bucket where the object is to be
-                            uploaded in the object storage
+                          description: (Updatable) Name of the ObjectStorage bucket.
+                            Required only for Objectstorage Initial load.
                           type: string
                         diagnosticState:
                           description: The state of the pipeline diagnostics collection.
                           type: string
                         namespace:
-                          description: Name of namespace that serves as a container
-                            for all of your buckets
+                          description: (Updatable) Namespace that serves as a container
+                            of the ObjectStorage bucket. Required only for Objectstorage
+                            Initial load.
                           type: string
                         object:
                           description: Name of the diagnostic collected and uploaded
@@ -1228,10 +1311,43 @@ spec:
                                 description: (Updatable) Action upon existing tables
                                   in target when initial Data Load is set i.e., isInitialLoad=true.
                                 type: string
+                              adbWalletPath:
+                                description: (Updatable) Directory path of ADB wallet
+                                  locally available in Non-ADB target DB. Required
+                                  for ADB to non-ADB DBLink type initial load only.
+                                  If not provided the default wallet path "/u01/targetwallet"
+                                  will be used.
+                                type: string
+                              bucket:
+                                description: (Updatable) Name of the ObjectStorage
+                                  bucket. Required only for Objectstorage Initial
+                                  load.
+                                type: string
+                              initialLoadType:
+                                description: (Updatable) Type of Initial load, which
+                                  can be objectStorage or dbLink.
+                                type: string
                               isInitialLoad:
                                 description: (Updatable) If ENABLED, then existing
                                   source data is also synchronized to the target when
                                   creating or updating the pipeline.
+                                type: string
+                              namespace:
+                                description: (Updatable) Namespace that serves as
+                                  a container of the ObjectStorage bucket. Required
+                                  only for Objectstorage Initial load.
+                                type: string
+                              sourceWalletPath:
+                                description: (Updatable) Directory path of ObjectStorage
+                                  wallet locally available in Non-ADB source DB. Required
+                                  for Object Storage type initial load only if source
+                                  DB is Non-ADB type.
+                                type: string
+                              targetWalletPath:
+                                description: (Updatable) Directory path of ObjectStorage
+                                  wallet locally available in Non-ADB target DB. Required
+                                  for Object Storage type initial load only if target
+                                  DB is Non-ADB type.
                                 type: string
                             type: object
                           type: array

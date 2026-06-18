@@ -393,7 +393,7 @@ spec:
                       name does not have to be unique.
                     type: string
                   domainName:
-                    description: Name of the domain.
+                    description: The name of the domain.
                     type: string
                   freeformTags:
                     additionalProperties:

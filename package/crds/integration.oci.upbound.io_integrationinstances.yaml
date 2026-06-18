@@ -643,6 +643,14 @@ spec:
                     description: (Updatable) The target state for the instance. Could
                       be set to ACTIVE or INACTIVE
                     type: string
+                  systemTags:
+                    additionalProperties:
+                      type: string
+                    description: 'Usage of system tag keys. These predefined keys
+                      are scoped to namespaces. Example: {"orcl-cloud.free-tier-retained":
+                      "true"}'
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: |-
@@ -1226,6 +1234,14 @@ spec:
                     description: (Updatable) The target state for the instance. Could
                       be set to ACTIVE or INACTIVE
                     type: string
+                  systemTags:
+                    additionalProperties:
+                      type: string
+                    description: 'Usage of system tag keys. These predefined keys
+                      are scoped to namespaces. Example: {"orcl-cloud.free-tier-retained":
+                      "true"}'
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:

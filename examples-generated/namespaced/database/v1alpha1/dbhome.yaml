@@ -65,6 +65,16 @@ spec:
       kmsKeyVersionIdSelector:
         matchLabels:
           testing.upbound.io/example-name: test_key_version
+      managed_software_update_details:
+      - is_enrolled: ${var.db_home_database_managed_software_update_details_is_enrolled}
+        preference_details:
+        - days_of_week: ${var.db_home_database_managed_software_update_details_preference_details_days_of_week}
+          hour_of_day: ${var.db_home_database_managed_software_update_details_preference_details_hour_of_day}
+          update_mode: ${var.db_home_database_managed_software_update_details_preference_details_update_mode}
+          version_scheme_details:
+          - major_version: ${var.db_home_database_managed_software_update_details_preference_details_version_scheme_details_major_version}
+            source: ${var.db_home_database_managed_software_update_details_preference_details_version_scheme_details_source}
+            version_preference: ${var.db_home_database_managed_software_update_details_preference_details_version_scheme_details_version_preference}
       ncharacterSet: ${var.db_home_database_ncharacter_set}
       pdbName: ${var.db_home_database_pdb_name}
       pluggableDatabases: ${var.db_home_database_pluggable_databases}
@@ -82,6 +92,9 @@ spec:
       vaultIdSelector:
         matchLabels:
           testing.upbound.io/example-name: test_vault
+      vmClusterIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test_vm_cluster
     databaseSoftwareImageIdSelector:
       matchLabels:
         testing.upbound.io/example-name: test_database_software_image
@@ -92,7 +105,6 @@ spec:
     - {}
     definedTags: ${var.db_home_defined_tags}
     displayName: ${var.db_home_display_name}
-    enableDatabaseDelete: false
     freeformTags:
       Department: Finance
     isDesupportedVersion: ${var.db_home_is_desupported_version}

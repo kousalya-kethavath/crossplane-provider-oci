@@ -10,8 +10,8 @@ metadata:
 spec:
   forProvider:
     certificateConfig:
-    - cert_chain_pem: ${var.certificate_certificate_config_cert_chain_pem}
-      certificate_pem: ${var.certificate_certificate_config_certificate_pem}
+    - certChainPem: ${var.certificate_certificate_config_cert_chain_pem}
+      certificatePem: ${var.certificate_certificate_config_certificate_pem}
       certificateProfileType: ${var.certificate_certificate_config_certificate_profile_type}
       configType: ${var.certificate_certificate_config_config_type}
       csrPem: ${var.certificate_certificate_config_csr_pem}
@@ -19,9 +19,14 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: test_certificate_authority
       keyAlgorithm: ${var.certificate_certificate_config_key_algorithm}
-      private_key_pem: ${var.certificate_certificate_config_private_key_pem}
-      private_key_pem_passphrase: ${var.certificate_certificate_config_private_key_pem_passphrase}
+      privateKeyPemPassphraseSecretRef:
+        key: example-key
+        name: example-secret
+      privateKeyPemSecretRef:
+        key: example-key
+        name: example-secret
       signatureAlgorithm: ${var.certificate_certificate_config_signature_algorithm}
+      stage: ${var.certificate_certificate_config_stage}
       subject:
       - commonName: ${var.certificate_certificate_config_subject_common_name}
         country: ${var.certificate_certificate_config_subject_country}

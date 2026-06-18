@@ -330,7 +330,7 @@ type DiscoveredComponentsObservation struct {
 	// The directory that stores tracing and logging incidents when Automatic Diagnostic Repository (ADR) is enabled.
 	AdrHomeDirectory *string `json:"adrHomeDirectory,omitempty" tf:"adr_home_directory,omitempty"`
 
-	// The list of asm instances for the cloud Asm.
+	// The list of ASM instances for the cloud Asm.
 	AsmInstances []AsmInstancesObservation `json:"asmInstances,omitempty" tf:"asm_instances,omitempty"`
 
 	// The list of associated components.
@@ -396,7 +396,7 @@ type DiscoveredComponentsObservation struct {
 	// The Oracle Database version.
 	DBVersion *string `json:"dbVersion,omitempty" tf:"db_version,omitempty"`
 
-	// The OCID of the existing Dbaas Oracle Cloud Infrastructure resource matching the discovered DB system component.
+	// The OCID of the existing DBaas Oracle Cloud Infrastructure resource matching the discovered DB system component.
 	DbaasID *string `json:"dbaasId,omitempty" tf:"dbaas_id,omitempty"`
 
 	// (Updatable) The user-friendly name for the DB system. The name does not have to be unique.
@@ -577,14 +577,14 @@ type ManagementCloudDbSystemDiscoveryInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CompartmentIDSelector *v1.Selector `json:"compartmentIdSelector,omitempty" tf:"-"`
 
-	// The OCID of the parent cloud DB Infrastructure. For VM Dbsystems , it will be the DBSystem Id. For ExaCS and ExaCC,  it will be the cloudVmClusterId and vmClusterId respectively.
+	// The OCID of the parent cloud DB Infrastructure. For VM DB systems, it will be the DBSystem ID. For ExaCS and ExaCC,  it will be the cloudVmClusterId and vmClusterId respectively.
 	DbaasParentInfrastructureID *string `json:"dbaasParentInfrastructureId,omitempty" tf:"dbaas_parent_infrastructure_id,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
 	// +mapType=granular
 	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
-	// The deployment type of cloud dbsystem.
+	// The deployment type of cloud DB system.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
 	// (Updatable) The user-friendly name for the DB system. The name does not have to be unique.
@@ -608,14 +608,14 @@ type ManagementCloudDbSystemDiscoveryObservation struct {
 	// The OCID of the compartment in which the cloud DB system resides.
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
 
-	// The OCID of the parent cloud DB Infrastructure. For VM Dbsystems , it will be the DBSystem Id. For ExaCS and ExaCC,  it will be the cloudVmClusterId and vmClusterId respectively.
+	// The OCID of the parent cloud DB Infrastructure. For VM DB systems, it will be the DBSystem ID. For ExaCS and ExaCC,  it will be the cloudVmClusterId and vmClusterId respectively.
 	DbaasParentInfrastructureID *string `json:"dbaasParentInfrastructureId,omitempty" tf:"dbaas_parent_infrastructure_id,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
 	// +mapType=granular
 	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
-	// The deployment type of cloud dbsystem.
+	// The deployment type of cloud DB system.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
 	// The list of DB system components that were found in the DB system discovery.
@@ -686,7 +686,7 @@ type ManagementCloudDbSystemDiscoveryParameters struct {
 	// +kubebuilder:validation:Optional
 	CompartmentIDSelector *v1.Selector `json:"compartmentIdSelector,omitempty" tf:"-"`
 
-	// The OCID of the parent cloud DB Infrastructure. For VM Dbsystems , it will be the DBSystem Id. For ExaCS and ExaCC,  it will be the cloudVmClusterId and vmClusterId respectively.
+	// The OCID of the parent cloud DB Infrastructure. For VM DB systems, it will be the DBSystem ID. For ExaCS and ExaCC,  it will be the cloudVmClusterId and vmClusterId respectively.
 	// +kubebuilder:validation:Optional
 	DbaasParentInfrastructureID *string `json:"dbaasParentInfrastructureId,omitempty" tf:"dbaas_parent_infrastructure_id,omitempty"`
 
@@ -695,7 +695,7 @@ type ManagementCloudDbSystemDiscoveryParameters struct {
 	// +mapType=granular
 	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
-	// The deployment type of cloud dbsystem.
+	// The deployment type of cloud DB system.
 	// +kubebuilder:validation:Optional
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 

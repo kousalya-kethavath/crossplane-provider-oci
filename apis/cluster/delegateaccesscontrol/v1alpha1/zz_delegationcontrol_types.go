@@ -75,7 +75,7 @@ type DelegationControlInitParameters struct {
 	// Resource type for which the Delegation Control is applicable to.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
-	// The OCID of the Oracle Cloud Infrastructure Vault that will store the secrets containing the SSH keys to access the resource governed by this Delegation Control by Delegate Access Control Service. This property is required when resourceType is CLOUDVMCLUSTER. Delegate Access Control Service will generate the SSH keys and store them as secrets in the Oracle Cloud Infrastructure Vault.
+	// The OCID of the Oracle Cloud Infrastructure Vault that will store the secrets containing the SSH keys to access the resource governed by this Delegation Control by Delegate Access Control Service. Delegate Access Control Service will generate the SSH keys and store them as secrets in the Oracle Cloud Infrastructure Vault. This property is optional when the Delegation Control is created for Oracle Managed Software Updates. Otherwise, it is required when resourceType is CLOUDVMCLUSTER or EXADBVMCLUSTER.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/kms/v1alpha1.Vault
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
@@ -88,7 +88,7 @@ type DelegationControlInitParameters struct {
 	// +kubebuilder:validation:Optional
 	VaultIDSelector *v1.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
 
-	// The OCID of the Master Encryption Key in the Oracle Cloud Infrastructure Vault specified by vaultId. This key will be used to encrypt the SSH keys to access the resource governed by this Delegation Control by Delegate Access Control Service. This property is required when resourceType is CLOUDVMCLUSTER.
+	// The OCID of the Master Encryption Key in the Oracle Cloud Infrastructure Vault specified by vaultId. This key will be used to encrypt the SSH keys to access the resource governed by this Delegation Control by Delegate Access Control Service. This property is optional when the Delegation Control is created for Oracle Managed Software Updates. Otherwise, it is required when resourceType is CLOUDVMCLUSTER or EXADBVMCLUSTER.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/kms/v1alpha1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VaultKeyID *string `json:"vaultKeyId,omitempty" tf:"vault_key_id,omitempty"`
@@ -167,10 +167,10 @@ type DelegationControlObservation struct {
 	// Time when the Delegation Control was last modified expressed in RFC 3339 timestamp format, e.g. '2020-05-22T21:10:29.600Z'
 	TimeUpdated *string `json:"timeUpdated,omitempty" tf:"time_updated,omitempty"`
 
-	// The OCID of the Oracle Cloud Infrastructure Vault that will store the secrets containing the SSH keys to access the resource governed by this Delegation Control by Delegate Access Control Service. This property is required when resourceType is CLOUDVMCLUSTER. Delegate Access Control Service will generate the SSH keys and store them as secrets in the Oracle Cloud Infrastructure Vault.
+	// The OCID of the Oracle Cloud Infrastructure Vault that will store the secrets containing the SSH keys to access the resource governed by this Delegation Control by Delegate Access Control Service. Delegate Access Control Service will generate the SSH keys and store them as secrets in the Oracle Cloud Infrastructure Vault. This property is optional when the Delegation Control is created for Oracle Managed Software Updates. Otherwise, it is required when resourceType is CLOUDVMCLUSTER or EXADBVMCLUSTER.
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
-	// The OCID of the Master Encryption Key in the Oracle Cloud Infrastructure Vault specified by vaultId. This key will be used to encrypt the SSH keys to access the resource governed by this Delegation Control by Delegate Access Control Service. This property is required when resourceType is CLOUDVMCLUSTER.
+	// The OCID of the Master Encryption Key in the Oracle Cloud Infrastructure Vault specified by vaultId. This key will be used to encrypt the SSH keys to access the resource governed by this Delegation Control by Delegate Access Control Service. This property is optional when the Delegation Control is created for Oracle Managed Software Updates. Otherwise, it is required when resourceType is CLOUDVMCLUSTER or EXADBVMCLUSTER.
 	VaultKeyID *string `json:"vaultKeyId,omitempty" tf:"vault_key_id,omitempty"`
 }
 
@@ -249,7 +249,7 @@ type DelegationControlParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
-	// The OCID of the Oracle Cloud Infrastructure Vault that will store the secrets containing the SSH keys to access the resource governed by this Delegation Control by Delegate Access Control Service. This property is required when resourceType is CLOUDVMCLUSTER. Delegate Access Control Service will generate the SSH keys and store them as secrets in the Oracle Cloud Infrastructure Vault.
+	// The OCID of the Oracle Cloud Infrastructure Vault that will store the secrets containing the SSH keys to access the resource governed by this Delegation Control by Delegate Access Control Service. Delegate Access Control Service will generate the SSH keys and store them as secrets in the Oracle Cloud Infrastructure Vault. This property is optional when the Delegation Control is created for Oracle Managed Software Updates. Otherwise, it is required when resourceType is CLOUDVMCLUSTER or EXADBVMCLUSTER.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/kms/v1alpha1.Vault
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -263,7 +263,7 @@ type DelegationControlParameters struct {
 	// +kubebuilder:validation:Optional
 	VaultIDSelector *v1.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
 
-	// The OCID of the Master Encryption Key in the Oracle Cloud Infrastructure Vault specified by vaultId. This key will be used to encrypt the SSH keys to access the resource governed by this Delegation Control by Delegate Access Control Service. This property is required when resourceType is CLOUDVMCLUSTER.
+	// The OCID of the Master Encryption Key in the Oracle Cloud Infrastructure Vault specified by vaultId. This key will be used to encrypt the SSH keys to access the resource governed by this Delegation Control by Delegate Access Control Service. This property is optional when the Delegation Control is created for Oracle Managed Software Updates. Otherwise, it is required when resourceType is CLOUDVMCLUSTER or EXADBVMCLUSTER.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/kms/v1alpha1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

@@ -34,6 +34,8 @@ spec:
     infiniBandNetworkCidr: ${var.exadata_infrastructure_infini_band_network_cidr}
     isCpsOfflineReportEnabled: ${var.exadata_infrastructure_is_cps_offline_report_enabled}
     isMultiRackDeployment: ${var.exadata_infrastructure_is_multi_rack_deployment}
+    maintenanceVersionPreferences:
+    - referenceResourceIdForImageUpdates: ${var.exadata_infrastructure_maintenance_version_preferences_reference_resource_id_for_image_updates}
     maintenanceWindow:
     - customActionTimeoutInMins: ${var.exadata_infrastructure_maintenance_window_custom_action_timeout_in_mins}
       daysOfWeek:

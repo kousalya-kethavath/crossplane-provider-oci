@@ -1,0 +1,26 @@
+apiVersion: database.oci.upbound.io/v1alpha1
+kind: ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/toolsruntimedatabasetoolsapigatewayconfigpoolautoapispec
+  labels:
+    testing.upbound.io/example-name: test_database_tools_database_api_gateway_config_pool_auto_api_spec
+  name: test-database-tools-database-api-gateway-config-pool-auto-api-spec
+spec:
+  forProvider:
+    alias: ${var.database_tools_database_api_gateway_config_pool_auto_api_spec_alias}
+    databaseObjectNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_object
+    databaseObjectType: ${var.database_tools_database_api_gateway_config_pool_auto_api_spec_database_object_type}
+    databaseToolsDatabaseApiGatewayConfigIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_config
+    description: ${var.database_tools_database_api_gateway_config_pool_auto_api_spec_description}
+    displayName: ${var.database_tools_database_api_gateway_config_pool_auto_api_spec_display_name}
+    operations: ${var.database_tools_database_api_gateway_config_pool_auto_api_spec_operations}
+    poolKey: ${var.database_tools_database_api_gateway_config_pool_auto_api_spec_pool_key}
+    roles: ${var.database_tools_database_api_gateway_config_pool_auto_api_spec_roles}
+    scope: ${var.database_tools_database_api_gateway_config_pool_auto_api_spec_scope}
+    securitySchemes: ${var.database_tools_database_api_gateway_config_pool_auto_api_spec_security_schemes}
+    type: ${var.database_tools_database_api_gateway_config_pool_auto_api_spec_type}

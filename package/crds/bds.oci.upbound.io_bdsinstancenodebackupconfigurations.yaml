@@ -458,7 +458,8 @@ spec:
                       information.
                     type: string
                   id:
-                    description: The unique identifier for the NodeBackupConfiguration.
+                    description: The id of the NodeBackupConfiguration defined under
+                      BDS resources, not OCID.
                     type: string
                   levelTypeDetails:
                     description: (Updatable) Details of the type of level used to

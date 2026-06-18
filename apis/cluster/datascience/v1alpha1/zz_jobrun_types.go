@@ -203,16 +203,65 @@ type JobEnvironmentConfigurationOverrideDetailsParameters struct {
 	JobEnvironmentType *string `json:"jobEnvironmentType" tf:"job_environment_type,omitempty"`
 }
 
+type JobInfrastructureConfigurationDetailsResourceConfigurationResourceLimitConfigurationInitParameters struct {
+}
+
+type JobInfrastructureConfigurationDetailsResourceConfigurationResourceLimitConfigurationObservation struct {
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total amount of memory available to the job run instance, in gigabytes.
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total number of OCPUs available to the job run instance.
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
+type JobInfrastructureConfigurationDetailsResourceConfigurationResourceLimitConfigurationParameters struct {
+}
+
+type JobInfrastructureConfigurationDetailsResourceConfigurationResourceRequestConfigurationInitParameters struct {
+}
+
+type JobInfrastructureConfigurationDetailsResourceConfigurationResourceRequestConfigurationObservation struct {
+
+	// (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER) The total number of gpus required to be allocated to the workload.
+	Gpus *float64 `json:"gpus,omitempty" tf:"gpus,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total amount of memory available to the job run instance, in gigabytes.
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total number of OCPUs available to the job run instance.
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
+type JobInfrastructureConfigurationDetailsResourceConfigurationResourceRequestConfigurationParameters struct {
+}
+
 type JobInfrastructureConfigurationOverrideDetailsInitParameters struct {
 
 	// The size of the block storage volume to attach to the instance running the job
 	BlockStorageSizeInGbs *float64 `json:"blockStorageSizeInGbs,omitempty" tf:"block_storage_size_in_gbs,omitempty"`
+
+	// The OCID of the compute target.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/datascience/v1alpha1.ComputeTarget
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	ComputeTargetID *string `json:"computeTargetId,omitempty" tf:"compute_target_id,omitempty"`
+
+	// Reference to a ComputeTarget in datascience to populate computeTargetId.
+	// +kubebuilder:validation:Optional
+	ComputeTargetIDRef *v1.Reference `json:"computeTargetIdRef,omitempty" tf:"-"`
+
+	// Selector for a ComputeTarget in datascience to populate computeTargetId.
+	// +kubebuilder:validation:Optional
+	ComputeTargetIDSelector *v1.Selector `json:"computeTargetIdSelector,omitempty" tf:"-"`
 
 	// The infrastructure type used for job run.
 	JobInfrastructureType *string `json:"jobInfrastructureType,omitempty" tf:"job_infrastructure_type,omitempty"`
 
 	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) Details for the job run shape configuration. Specify only when a flex shape is selected.
 	JobShapeConfigDetails []JobInfrastructureConfigurationOverrideDetailsJobShapeConfigDetailsInitParameters `json:"jobShapeConfigDetails,omitempty" tf:"job_shape_config_details,omitempty"`
+
+	// Details for the compute target job resource configuration.
+	ResourceConfiguration []JobInfrastructureConfigurationOverrideDetailsResourceConfigurationInitParameters `json:"resourceConfiguration,omitempty" tf:"resource_configuration,omitempty"`
 
 	// The name that corresponds to the JobShapeSummary to use for the job node
 	ShapeName *string `json:"shapeName,omitempty" tf:"shape_name,omitempty"`
@@ -265,11 +314,17 @@ type JobInfrastructureConfigurationOverrideDetailsObservation struct {
 	// The size of the block storage volume to attach to the instance running the job
 	BlockStorageSizeInGbs *float64 `json:"blockStorageSizeInGbs,omitempty" tf:"block_storage_size_in_gbs,omitempty"`
 
+	// The OCID of the compute target.
+	ComputeTargetID *string `json:"computeTargetId,omitempty" tf:"compute_target_id,omitempty"`
+
 	// The infrastructure type used for job run.
 	JobInfrastructureType *string `json:"jobInfrastructureType,omitempty" tf:"job_infrastructure_type,omitempty"`
 
 	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) Details for the job run shape configuration. Specify only when a flex shape is selected.
 	JobShapeConfigDetails []JobInfrastructureConfigurationOverrideDetailsJobShapeConfigDetailsObservation `json:"jobShapeConfigDetails,omitempty" tf:"job_shape_config_details,omitempty"`
+
+	// Details for the compute target job resource configuration.
+	ResourceConfiguration []JobInfrastructureConfigurationOverrideDetailsResourceConfigurationObservation `json:"resourceConfiguration,omitempty" tf:"resource_configuration,omitempty"`
 
 	// The name that corresponds to the JobShapeSummary to use for the job node
 	ShapeName *string `json:"shapeName,omitempty" tf:"shape_name,omitempty"`
@@ -284,6 +339,20 @@ type JobInfrastructureConfigurationOverrideDetailsParameters struct {
 	// +kubebuilder:validation:Optional
 	BlockStorageSizeInGbs *float64 `json:"blockStorageSizeInGbs,omitempty" tf:"block_storage_size_in_gbs,omitempty"`
 
+	// The OCID of the compute target.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/datascience/v1alpha1.ComputeTarget
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	ComputeTargetID *string `json:"computeTargetId,omitempty" tf:"compute_target_id,omitempty"`
+
+	// Reference to a ComputeTarget in datascience to populate computeTargetId.
+	// +kubebuilder:validation:Optional
+	ComputeTargetIDRef *v1.Reference `json:"computeTargetIdRef,omitempty" tf:"-"`
+
+	// Selector for a ComputeTarget in datascience to populate computeTargetId.
+	// +kubebuilder:validation:Optional
+	ComputeTargetIDSelector *v1.Selector `json:"computeTargetIdSelector,omitempty" tf:"-"`
+
 	// The infrastructure type used for job run.
 	// +kubebuilder:validation:Optional
 	JobInfrastructureType *string `json:"jobInfrastructureType" tf:"job_infrastructure_type,omitempty"`
@@ -291,6 +360,10 @@ type JobInfrastructureConfigurationOverrideDetailsParameters struct {
 	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) Details for the job run shape configuration. Specify only when a flex shape is selected.
 	// +kubebuilder:validation:Optional
 	JobShapeConfigDetails []JobInfrastructureConfigurationOverrideDetailsJobShapeConfigDetailsParameters `json:"jobShapeConfigDetails,omitempty" tf:"job_shape_config_details,omitempty"`
+
+	// Details for the compute target job resource configuration.
+	// +kubebuilder:validation:Optional
+	ResourceConfiguration []JobInfrastructureConfigurationOverrideDetailsResourceConfigurationParameters `json:"resourceConfiguration,omitempty" tf:"resource_configuration,omitempty"`
 
 	// The name that corresponds to the JobShapeSummary to use for the job node
 	// +kubebuilder:validation:Optional
@@ -309,6 +382,103 @@ type JobInfrastructureConfigurationOverrideDetailsParameters struct {
 	// Selector for a Subnet in networking to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
+type JobInfrastructureConfigurationOverrideDetailsResourceConfigurationInitParameters struct {
+
+	// (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER) Resource limit configuration details for workload on managed compute cluster type compute target
+	ResourceLimitConfiguration []JobInfrastructureConfigurationOverrideDetailsResourceConfigurationResourceLimitConfigurationInitParameters `json:"resourceLimitConfiguration,omitempty" tf:"resource_limit_configuration,omitempty"`
+
+	// Resource request configuration to run workload on managed compute cluster type compute target compute target.
+	ResourceRequestConfiguration []JobInfrastructureConfigurationOverrideDetailsResourceConfigurationResourceRequestConfigurationInitParameters `json:"resourceRequestConfiguration,omitempty" tf:"resource_request_configuration,omitempty"`
+}
+
+type JobInfrastructureConfigurationOverrideDetailsResourceConfigurationObservation struct {
+
+	// (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER) Resource limit configuration details for workload on managed compute cluster type compute target
+	ResourceLimitConfiguration []JobInfrastructureConfigurationOverrideDetailsResourceConfigurationResourceLimitConfigurationObservation `json:"resourceLimitConfiguration,omitempty" tf:"resource_limit_configuration,omitempty"`
+
+	// Resource request configuration to run workload on managed compute cluster type compute target compute target.
+	ResourceRequestConfiguration []JobInfrastructureConfigurationOverrideDetailsResourceConfigurationResourceRequestConfigurationObservation `json:"resourceRequestConfiguration,omitempty" tf:"resource_request_configuration,omitempty"`
+}
+
+type JobInfrastructureConfigurationOverrideDetailsResourceConfigurationParameters struct {
+
+	// (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER) Resource limit configuration details for workload on managed compute cluster type compute target
+	// +kubebuilder:validation:Optional
+	ResourceLimitConfiguration []JobInfrastructureConfigurationOverrideDetailsResourceConfigurationResourceLimitConfigurationParameters `json:"resourceLimitConfiguration,omitempty" tf:"resource_limit_configuration,omitempty"`
+
+	// Resource request configuration to run workload on managed compute cluster type compute target compute target.
+	// +kubebuilder:validation:Optional
+	ResourceRequestConfiguration []JobInfrastructureConfigurationOverrideDetailsResourceConfigurationResourceRequestConfigurationParameters `json:"resourceRequestConfiguration,omitempty" tf:"resource_request_configuration,omitempty"`
+}
+
+type JobInfrastructureConfigurationOverrideDetailsResourceConfigurationResourceLimitConfigurationInitParameters struct {
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total amount of memory available to the job run instance, in gigabytes.
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total number of OCPUs available to the job run instance.
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
+type JobInfrastructureConfigurationOverrideDetailsResourceConfigurationResourceLimitConfigurationObservation struct {
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total amount of memory available to the job run instance, in gigabytes.
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total number of OCPUs available to the job run instance.
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
+type JobInfrastructureConfigurationOverrideDetailsResourceConfigurationResourceLimitConfigurationParameters struct {
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total amount of memory available to the job run instance, in gigabytes.
+	// +kubebuilder:validation:Optional
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total number of OCPUs available to the job run instance.
+	// +kubebuilder:validation:Optional
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
+type JobInfrastructureConfigurationOverrideDetailsResourceConfigurationResourceRequestConfigurationInitParameters struct {
+
+	// (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER) The total number of gpus required to be allocated to the workload.
+	Gpus *float64 `json:"gpus,omitempty" tf:"gpus,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total amount of memory available to the job run instance, in gigabytes.
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total number of OCPUs available to the job run instance.
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
+type JobInfrastructureConfigurationOverrideDetailsResourceConfigurationResourceRequestConfigurationObservation struct {
+
+	// (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER) The total number of gpus required to be allocated to the workload.
+	Gpus *float64 `json:"gpus,omitempty" tf:"gpus,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total amount of memory available to the job run instance, in gigabytes.
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total number of OCPUs available to the job run instance.
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
+type JobInfrastructureConfigurationOverrideDetailsResourceConfigurationResourceRequestConfigurationParameters struct {
+
+	// (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER) The total number of gpus required to be allocated to the workload.
+	// +kubebuilder:validation:Optional
+	Gpus *float64 `json:"gpus,omitempty" tf:"gpus,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total amount of memory available to the job run instance, in gigabytes.
+	// +kubebuilder:validation:Optional
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total number of OCPUs available to the job run instance.
+	// +kubebuilder:validation:Optional
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
 }
 
 type JobLogConfigurationOverrideDetailsInitParameters struct {
@@ -624,11 +794,27 @@ type JobNodeConfigurationOverrideDetailsJobNodeGroupConfigurationDetailsListJobI
 	// The size of the block storage volume to attach to the instance running the job
 	BlockStorageSizeInGbs *float64 `json:"blockStorageSizeInGbs,omitempty" tf:"block_storage_size_in_gbs,omitempty"`
 
+	// The OCID of the compute target.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/datascience/v1alpha1.ComputeTarget
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	ComputeTargetID *string `json:"computeTargetId,omitempty" tf:"compute_target_id,omitempty"`
+
+	// Reference to a ComputeTarget in datascience to populate computeTargetId.
+	// +kubebuilder:validation:Optional
+	ComputeTargetIDRef *v1.Reference `json:"computeTargetIdRef,omitempty" tf:"-"`
+
+	// Selector for a ComputeTarget in datascience to populate computeTargetId.
+	// +kubebuilder:validation:Optional
+	ComputeTargetIDSelector *v1.Selector `json:"computeTargetIdSelector,omitempty" tf:"-"`
+
 	// The infrastructure type used for job run.
 	JobInfrastructureType *string `json:"jobInfrastructureType,omitempty" tf:"job_infrastructure_type,omitempty"`
 
 	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) Details for the job run shape configuration. Specify only when a flex shape is selected.
 	JobShapeConfigDetails []JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsJobShapeConfigDetailsInitParameters `json:"jobShapeConfigDetails,omitempty" tf:"job_shape_config_details,omitempty"`
+
+	// Details for the compute target job resource configuration.
+	ResourceConfiguration []JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationInitParameters `json:"resourceConfiguration,omitempty" tf:"resource_configuration,omitempty"`
 
 	// The name that corresponds to the JobShapeSummary to use for the job node
 	ShapeName *string `json:"shapeName,omitempty" tf:"shape_name,omitempty"`
@@ -652,11 +838,17 @@ type JobNodeConfigurationOverrideDetailsJobNodeGroupConfigurationDetailsListJobI
 	// The size of the block storage volume to attach to the instance running the job
 	BlockStorageSizeInGbs *float64 `json:"blockStorageSizeInGbs,omitempty" tf:"block_storage_size_in_gbs,omitempty"`
 
+	// The OCID of the compute target.
+	ComputeTargetID *string `json:"computeTargetId,omitempty" tf:"compute_target_id,omitempty"`
+
 	// The infrastructure type used for job run.
 	JobInfrastructureType *string `json:"jobInfrastructureType,omitempty" tf:"job_infrastructure_type,omitempty"`
 
 	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) Details for the job run shape configuration. Specify only when a flex shape is selected.
 	JobShapeConfigDetails []JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsJobShapeConfigDetailsObservation `json:"jobShapeConfigDetails,omitempty" tf:"job_shape_config_details,omitempty"`
+
+	// Details for the compute target job resource configuration.
+	ResourceConfiguration []JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationObservation `json:"resourceConfiguration,omitempty" tf:"resource_configuration,omitempty"`
 
 	// The name that corresponds to the JobShapeSummary to use for the job node
 	ShapeName *string `json:"shapeName,omitempty" tf:"shape_name,omitempty"`
@@ -671,6 +863,20 @@ type JobNodeConfigurationOverrideDetailsJobNodeGroupConfigurationDetailsListJobI
 	// +kubebuilder:validation:Optional
 	BlockStorageSizeInGbs *float64 `json:"blockStorageSizeInGbs,omitempty" tf:"block_storage_size_in_gbs,omitempty"`
 
+	// The OCID of the compute target.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/datascience/v1alpha1.ComputeTarget
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	ComputeTargetID *string `json:"computeTargetId,omitempty" tf:"compute_target_id,omitempty"`
+
+	// Reference to a ComputeTarget in datascience to populate computeTargetId.
+	// +kubebuilder:validation:Optional
+	ComputeTargetIDRef *v1.Reference `json:"computeTargetIdRef,omitempty" tf:"-"`
+
+	// Selector for a ComputeTarget in datascience to populate computeTargetId.
+	// +kubebuilder:validation:Optional
+	ComputeTargetIDSelector *v1.Selector `json:"computeTargetIdSelector,omitempty" tf:"-"`
+
 	// The infrastructure type used for job run.
 	// +kubebuilder:validation:Optional
 	JobInfrastructureType *string `json:"jobInfrastructureType" tf:"job_infrastructure_type,omitempty"`
@@ -678,6 +884,10 @@ type JobNodeConfigurationOverrideDetailsJobNodeGroupConfigurationDetailsListJobI
 	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) Details for the job run shape configuration. Specify only when a flex shape is selected.
 	// +kubebuilder:validation:Optional
 	JobShapeConfigDetails []JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsJobShapeConfigDetailsParameters `json:"jobShapeConfigDetails,omitempty" tf:"job_shape_config_details,omitempty"`
+
+	// Details for the compute target job resource configuration.
+	// +kubebuilder:validation:Optional
+	ResourceConfiguration []JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationParameters `json:"resourceConfiguration,omitempty" tf:"resource_configuration,omitempty"`
 
 	// The name that corresponds to the JobShapeSummary to use for the job node
 	// +kubebuilder:validation:Optional
@@ -875,6 +1085,103 @@ type JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsJo
 	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
 }
 
+type JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationInitParameters struct {
+
+	// (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER) Resource limit configuration details for workload on managed compute cluster type compute target
+	ResourceLimitConfiguration []JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationResourceLimitConfigurationInitParameters `json:"resourceLimitConfiguration,omitempty" tf:"resource_limit_configuration,omitempty"`
+
+	// Resource request configuration to run workload on managed compute cluster type compute target compute target.
+	ResourceRequestConfiguration []JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationResourceRequestConfigurationInitParameters `json:"resourceRequestConfiguration,omitempty" tf:"resource_request_configuration,omitempty"`
+}
+
+type JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationObservation struct {
+
+	// (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER) Resource limit configuration details for workload on managed compute cluster type compute target
+	ResourceLimitConfiguration []JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationResourceLimitConfigurationObservation `json:"resourceLimitConfiguration,omitempty" tf:"resource_limit_configuration,omitempty"`
+
+	// Resource request configuration to run workload on managed compute cluster type compute target compute target.
+	ResourceRequestConfiguration []JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationResourceRequestConfigurationObservation `json:"resourceRequestConfiguration,omitempty" tf:"resource_request_configuration,omitempty"`
+}
+
+type JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationParameters struct {
+
+	// (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER) Resource limit configuration details for workload on managed compute cluster type compute target
+	// +kubebuilder:validation:Optional
+	ResourceLimitConfiguration []JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationResourceLimitConfigurationParameters `json:"resourceLimitConfiguration,omitempty" tf:"resource_limit_configuration,omitempty"`
+
+	// Resource request configuration to run workload on managed compute cluster type compute target compute target.
+	// +kubebuilder:validation:Optional
+	ResourceRequestConfiguration []JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationResourceRequestConfigurationParameters `json:"resourceRequestConfiguration,omitempty" tf:"resource_request_configuration,omitempty"`
+}
+
+type JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationResourceLimitConfigurationInitParameters struct {
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total amount of memory available to the job run instance, in gigabytes.
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total number of OCPUs available to the job run instance.
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
+type JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationResourceLimitConfigurationObservation struct {
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total amount of memory available to the job run instance, in gigabytes.
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total number of OCPUs available to the job run instance.
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
+type JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationResourceLimitConfigurationParameters struct {
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total amount of memory available to the job run instance, in gigabytes.
+	// +kubebuilder:validation:Optional
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total number of OCPUs available to the job run instance.
+	// +kubebuilder:validation:Optional
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
+type JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationResourceRequestConfigurationInitParameters struct {
+
+	// (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER) The total number of gpus required to be allocated to the workload.
+	Gpus *float64 `json:"gpus,omitempty" tf:"gpus,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total amount of memory available to the job run instance, in gigabytes.
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total number of OCPUs available to the job run instance.
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
+type JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationResourceRequestConfigurationObservation struct {
+
+	// (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER) The total number of gpus required to be allocated to the workload.
+	Gpus *float64 `json:"gpus,omitempty" tf:"gpus,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total amount of memory available to the job run instance, in gigabytes.
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total number of OCPUs available to the job run instance.
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
+type JobNodeGroupConfigurationDetailsListJobInfrastructureConfigurationDetailsResourceConfigurationResourceRequestConfigurationParameters struct {
+
+	// (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER) The total number of gpus required to be allocated to the workload.
+	// +kubebuilder:validation:Optional
+	Gpus *float64 `json:"gpus,omitempty" tf:"gpus,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total amount of memory available to the job run instance, in gigabytes.
+	// +kubebuilder:validation:Optional
+	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
+
+	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) The total number of OCPUs available to the job run instance.
+	// +kubebuilder:validation:Optional
+	Ocpus *float64 `json:"ocpus,omitempty" tf:"ocpus,omitempty"`
+}
+
 type JobRunInitParameters struct {
 
 	// If set to true, do not wait for the JobRun to reach completion prior to returning. Can be useful for JobRuns with a long duration.
@@ -974,11 +1281,17 @@ type JobRunJobInfrastructureConfigurationDetailsObservation struct {
 	// The size of the block storage volume to attach to the instance running the job
 	BlockStorageSizeInGbs *float64 `json:"blockStorageSizeInGbs,omitempty" tf:"block_storage_size_in_gbs,omitempty"`
 
+	// The OCID of the compute target.
+	ComputeTargetID *string `json:"computeTargetId,omitempty" tf:"compute_target_id,omitempty"`
+
 	// The infrastructure type used for job run.
 	JobInfrastructureType *string `json:"jobInfrastructureType,omitempty" tf:"job_infrastructure_type,omitempty"`
 
 	// (Applicable when job_infrastructure_type=ME_STANDALONE | MULTI_NODE | STANDALONE) Details for the job run shape configuration. Specify only when a flex shape is selected.
 	JobShapeConfigDetails []JobRunJobInfrastructureConfigurationDetailsJobShapeConfigDetailsObservation `json:"jobShapeConfigDetails,omitempty" tf:"job_shape_config_details,omitempty"`
+
+	// Details for the compute target job resource configuration.
+	ResourceConfiguration []JobRunJobInfrastructureConfigurationDetailsResourceConfigurationObservation `json:"resourceConfiguration,omitempty" tf:"resource_configuration,omitempty"`
 
 	// The name that corresponds to the JobShapeSummary to use for the job node
 	ShapeName *string `json:"shapeName,omitempty" tf:"shape_name,omitempty"`
@@ -988,6 +1301,21 @@ type JobRunJobInfrastructureConfigurationDetailsObservation struct {
 }
 
 type JobRunJobInfrastructureConfigurationDetailsParameters struct {
+}
+
+type JobRunJobInfrastructureConfigurationDetailsResourceConfigurationInitParameters struct {
+}
+
+type JobRunJobInfrastructureConfigurationDetailsResourceConfigurationObservation struct {
+
+	// (Applicable when job_infrastructure_type=MANAGED_COMPUTE_CLUSTER) Resource limit configuration details for workload on managed compute cluster type compute target
+	ResourceLimitConfiguration []JobInfrastructureConfigurationDetailsResourceConfigurationResourceLimitConfigurationObservation `json:"resourceLimitConfiguration,omitempty" tf:"resource_limit_configuration,omitempty"`
+
+	// Resource request configuration to run workload on managed compute cluster type compute target compute target.
+	ResourceRequestConfiguration []JobInfrastructureConfigurationDetailsResourceConfigurationResourceRequestConfigurationObservation `json:"resourceRequestConfiguration,omitempty" tf:"resource_request_configuration,omitempty"`
+}
+
+type JobRunJobInfrastructureConfigurationDetailsResourceConfigurationParameters struct {
 }
 
 type JobRunJobStorageMountConfigurationDetailsListInitParameters struct {

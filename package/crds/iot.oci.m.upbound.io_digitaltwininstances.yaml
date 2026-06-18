@@ -65,6 +65,9 @@ spec:
                       ClientCertificate etc.,) used to authenticate the digital twin
                       instance.
                     type: string
+                  connectivityType:
+                    description: Connectivity type of the digital twin instance
+                    type: string
                   definedTags:
                     additionalProperties:
                       type: string
@@ -270,6 +273,12 @@ spec:
                       {"Department": "Finance"}'
                     type: object
                     x-kubernetes-map-type: granular
+                  gateways:
+                    description: (Updatable) An array of unique ids (OCIDs) of the
+                      IoT digital twin instances with connectivityType equals to GATEWAY.
+                    items:
+                      type: string
+                    type: array
                   iotDomainId:
                     description: The OCID of the IoT domain.
                     type: string
@@ -372,6 +381,9 @@ spec:
                       ClientCertificate etc.,) used to authenticate the digital twin
                       instance.
                     type: string
+                  connectivityType:
+                    description: Connectivity type of the digital twin instance
+                    type: string
                   definedTags:
                     additionalProperties:
                       type: string
@@ -577,6 +589,12 @@ spec:
                       {"Department": "Finance"}'
                     type: object
                     x-kubernetes-map-type: granular
+                  gateways:
+                    description: (Updatable) An array of unique ids (OCIDs) of the
+                      IoT digital twin instances with connectivityType equals to GATEWAY.
+                    items:
+                      type: string
+                    type: array
                   iotDomainId:
                     description: The OCID of the IoT domain.
                     type: string
@@ -731,6 +749,9 @@ spec:
                       ClientCertificate etc.,) used to authenticate the digital twin
                       instance.
                     type: string
+                  connectivityType:
+                    description: Connectivity type of the digital twin instance
+                    type: string
                   definedTags:
                     additionalProperties:
                       type: string
@@ -772,6 +793,12 @@ spec:
                       {"Department": "Finance"}'
                     type: object
                     x-kubernetes-map-type: granular
+                  gateways:
+                    description: (Updatable) An array of unique ids (OCIDs) of the
+                      IoT digital twin instances with connectivityType equals to GATEWAY.
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: The OCID of the resource.
                     type: string

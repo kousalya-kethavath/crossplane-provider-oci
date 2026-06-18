@@ -278,6 +278,9 @@ type DatabaseDBBackupConfigBackupDestinationDetailsObservation struct {
 	// (Applicable when source=NONE) Indicates if backup retention is locked for all the database backups in the Autonomous Container Database (ACD). The retention window cannot be decreased if the backup retention lock is enabled. Once applied on the Autonomous Container Database, the retention lock cannot be removed, or the retention period cannot be decreased after a 14-day period. If the backup is a Long Term Backup and retention lock is enabled, the backup cannot be deleted and must expire. The retention lock set on the Autonomous Container Database is not applicable for cross region remote backups and backups hosted on recovery Appliance backup destination.
 	IsRetentionLockEnabled *bool `json:"isRetentionLockEnabled,omitempty" tf:"is_retention_lock_enabled,omitempty"`
 
+	// (Applicable when source=NONE) Indicates whether Zero Data Loss functionality is enabled for a Recovery Appliance backup destination in an Autonomous Container Database. When enabled, the database automatically ships all redo logs in real-time to the Recovery Appliance for a Zero Data Loss recovery setup (sub-second RPO). Defaults to TRUE if no value is given.
+	IsZeroDataLossEnabled *bool `json:"isZeroDataLossEnabled,omitempty" tf:"is_zero_data_loss_enabled,omitempty"`
+
 	// (Applicable when source=NONE) The name of the remote region where the remote automatic incremental backups will be stored.           For information about valid region names, see Regions and Availability Domains.
 	RemoteRegion *string `json:"remoteRegion,omitempty" tf:"remote_region,omitempty"`
 
@@ -420,6 +423,9 @@ type DatabaseDatabaseInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyVersionIDSelector *v1.NamespacedSelector `json:"kmsKeyVersionIdSelector,omitempty" tf:"-"`
 
+	// (Applicable when source=DB_BACKUP | NONE) The database registered for Oracle Managed Database Software Updates.
+	ManagedSoftwareUpdateDetails []ManagedSoftwareUpdateDetailsInitParameters `json:"managedSoftwareUpdateDetails,omitempty" tf:"managed_software_update_details,omitempty"`
+
 	// (Applicable when source=NONE) The national character set for the database.  The default is AL16UTF16. Allowed values are: AL16UTF16 or UTF8.
 	NcharacterSet *string `json:"ncharacterSet,omitempty" tf:"ncharacter_set,omitempty"`
 
@@ -468,8 +474,18 @@ type DatabaseDatabaseInitParameters struct {
 	// The redo transport type to use for this Data Guard association.  Valid values depend on the specified protectionMode:
 	TransportType *string `json:"transportType,omitempty" tf:"transport_type,omitempty"`
 
-	// The OCID of the VM cluster.
+	// (Applicable when source=DB_BACKUP | NONE) The OCID of the VM cluster.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/database/v1alpha1.VmCluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VMClusterID *string `json:"vmClusterId,omitempty" tf:"vm_cluster_id,omitempty"`
+
+	// Reference to a VmCluster in database to populate vmClusterId.
+	// +kubebuilder:validation:Optional
+	VMClusterIDRef *v1.NamespacedReference `json:"vmClusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a VmCluster in database to populate vmClusterId.
+	// +kubebuilder:validation:Optional
+	VMClusterIDSelector *v1.NamespacedSelector `json:"vmClusterIdSelector,omitempty" tf:"-"`
 
 	// (Applicable when source=NONE) The OCID of the Oracle Cloud Infrastructure vault. This parameter and secretId are required for Customer Managed Keys.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/kms/v1alpha1.Vault
@@ -531,6 +547,9 @@ type DatabaseDatabaseObservation struct {
 	// (Applicable when source=NONE) The OCID of the key container version that is used in database transparent data encryption (TDE) operations KMS Key can have multiple key versions. If none is specified, the current key version (latest) of the Key Id is used for the operation. Autonomous Database Serverless does not use key versions, hence is not applicable for Autonomous Database Serverless instances.
 	KMSKeyVersionID *string `json:"kmsKeyVersionId,omitempty" tf:"kms_key_version_id,omitempty"`
 
+	// (Applicable when source=DB_BACKUP | NONE) The database registered for Oracle Managed Database Software Updates.
+	ManagedSoftwareUpdateDetails []ManagedSoftwareUpdateDetailsObservation `json:"managedSoftwareUpdateDetails,omitempty" tf:"managed_software_update_details,omitempty"`
+
 	// (Applicable when source=NONE) The national character set for the database.  The default is AL16UTF16. Allowed values are: AL16UTF16 or UTF8.
 	NcharacterSet *string `json:"ncharacterSet,omitempty" tf:"ncharacter_set,omitempty"`
 
@@ -563,7 +582,7 @@ type DatabaseDatabaseObservation struct {
 	// The redo transport type to use for this Data Guard association.  Valid values depend on the specified protectionMode:
 	TransportType *string `json:"transportType,omitempty" tf:"transport_type,omitempty"`
 
-	// The OCID of the VM cluster.
+	// (Applicable when source=DB_BACKUP | NONE) The OCID of the VM cluster.
 	VMClusterID *string `json:"vmClusterId,omitempty" tf:"vm_cluster_id,omitempty"`
 
 	// (Applicable when source=NONE) The OCID of the Oracle Cloud Infrastructure vault. This parameter and secretId are required for Customer Managed Keys.
@@ -682,6 +701,10 @@ type DatabaseDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyVersionIDSelector *v1.NamespacedSelector `json:"kmsKeyVersionIdSelector,omitempty" tf:"-"`
 
+	// (Applicable when source=DB_BACKUP | NONE) The database registered for Oracle Managed Database Software Updates.
+	// +kubebuilder:validation:Optional
+	ManagedSoftwareUpdateDetails []ManagedSoftwareUpdateDetailsParameters `json:"managedSoftwareUpdateDetails,omitempty" tf:"managed_software_update_details,omitempty"`
+
 	// (Applicable when source=NONE) The national character set for the database.  The default is AL16UTF16. Allowed values are: AL16UTF16 or UTF8.
 	// +kubebuilder:validation:Optional
 	NcharacterSet *string `json:"ncharacterSet,omitempty" tf:"ncharacter_set,omitempty"`
@@ -743,9 +766,19 @@ type DatabaseDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	TransportType *string `json:"transportType,omitempty" tf:"transport_type,omitempty"`
 
-	// The OCID of the VM cluster.
+	// (Applicable when source=DB_BACKUP | NONE) The OCID of the VM cluster.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/database/v1alpha1.VmCluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VMClusterID *string `json:"vmClusterId,omitempty" tf:"vm_cluster_id,omitempty"`
+
+	// Reference to a VmCluster in database to populate vmClusterId.
+	// +kubebuilder:validation:Optional
+	VMClusterIDRef *v1.NamespacedReference `json:"vmClusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a VmCluster in database to populate vmClusterId.
+	// +kubebuilder:validation:Optional
+	VMClusterIDSelector *v1.NamespacedSelector `json:"vmClusterIdSelector,omitempty" tf:"-"`
 
 	// (Applicable when source=NONE) The OCID of the Oracle Cloud Infrastructure vault. This parameter and secretId are required for Customer Managed Keys.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/kms/v1alpha1.Vault
@@ -935,11 +968,56 @@ type DatabaseInitParameters struct {
 	// (Applicable when source=NONE) The OCID of the key store of Oracle Vault.
 	KeyStoreID *string `json:"keyStoreId,omitempty" tf:"key_store_id,omitempty"`
 
-	// The source of the database: Use NONE for creating a new database. Use DB_BACKUP for creating a new database by restoring from a backup. Use DATAGUARD for creating a new STANDBY database for a Data Guard setup.. The default is NONE.
+	// (Applicable when source=DB_BACKUP | NONE) The database registered for Oracle Managed Database Software Updates.
+	ManagedSoftwareUpdateDetails []DatabaseManagedSoftwareUpdateDetailsInitParameters `json:"managedSoftwareUpdateDetails,omitempty" tf:"managed_software_update_details,omitempty"`
+
+	// The update should be applied on the database for the selected version scheme.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) The OCID of the VM cluster.
+	VMClusterID *string `json:"vmClusterId,omitempty" tf:"vm_cluster_id,omitempty"`
 
 	// (Applicable when source=NONE) The OCID of the Oracle Cloud Infrastructure vault. This parameter and secretId are required for Customer Managed Keys.
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
+}
+
+type DatabaseManagedSoftwareUpdateDetailsInitParameters struct {
+
+	// If true, database is registered for Oracle Managed Database Software Updates otherwise database is not registered for Oracle Managed Database Software Updates
+	IsEnrolled *bool `json:"isEnrolled,omitempty" tf:"is_enrolled,omitempty"`
+
+	// Provides details about actual Oracle Managed Database Software Updates scheduled time and version.
+	MaintenanceDetails []ManagedSoftwareUpdateDetailsMaintenanceDetailsInitParameters `json:"maintenanceDetails,omitempty" tf:"maintenance_details,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software Updates schedule will be created based on the provided update preferences
+	PreferenceDetails []ManagedSoftwareUpdateDetailsPreferenceDetailsInitParameters `json:"preferenceDetails,omitempty" tf:"preference_details,omitempty"`
+}
+
+type DatabaseManagedSoftwareUpdateDetailsObservation struct {
+
+	// If true, database is registered for Oracle Managed Database Software Updates otherwise database is not registered for Oracle Managed Database Software Updates
+	IsEnrolled *bool `json:"isEnrolled,omitempty" tf:"is_enrolled,omitempty"`
+
+	// Provides details about actual Oracle Managed Database Software Updates scheduled time and version.
+	MaintenanceDetails []ManagedSoftwareUpdateDetailsMaintenanceDetailsObservation `json:"maintenanceDetails,omitempty" tf:"maintenance_details,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software Updates schedule will be created based on the provided update preferences
+	PreferenceDetails []ManagedSoftwareUpdateDetailsPreferenceDetailsObservation `json:"preferenceDetails,omitempty" tf:"preference_details,omitempty"`
+}
+
+type DatabaseManagedSoftwareUpdateDetailsParameters struct {
+
+	// If true, database is registered for Oracle Managed Database Software Updates otherwise database is not registered for Oracle Managed Database Software Updates
+	// +kubebuilder:validation:Optional
+	IsEnrolled *bool `json:"isEnrolled,omitempty" tf:"is_enrolled,omitempty"`
+
+	// Provides details about actual Oracle Managed Database Software Updates scheduled time and version.
+	// +kubebuilder:validation:Optional
+	MaintenanceDetails []ManagedSoftwareUpdateDetailsMaintenanceDetailsParameters `json:"maintenanceDetails,omitempty" tf:"maintenance_details,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software Updates schedule will be created based on the provided update preferences
+	// +kubebuilder:validation:Optional
+	PreferenceDetails []ManagedSoftwareUpdateDetailsPreferenceDetailsParameters `json:"preferenceDetails,omitempty" tf:"preference_details,omitempty"`
 }
 
 type DatabaseManagementConfigInitParameters struct {
@@ -1046,6 +1124,9 @@ type DatabaseObservation struct {
 	// Additional information about the current lifecycle state.
 	LifecycleDetails *string `json:"lifecycleDetails,omitempty" tf:"lifecycle_details,omitempty"`
 
+	// (Applicable when source=DB_BACKUP | NONE) The database registered for Oracle Managed Database Software Updates.
+	ManagedSoftwareUpdateDetails []DatabaseManagedSoftwareUpdateDetailsObservation `json:"managedSoftwareUpdateDetails,omitempty" tf:"managed_software_update_details,omitempty"`
+
 	// (Applicable when source=NONE) The national character set for the database.  The default is AL16UTF16. Allowed values are: AL16UTF16 or UTF8.
 	NcharacterSet *string `json:"ncharacterSet,omitempty" tf:"ncharacter_set,omitempty"`
 
@@ -1058,7 +1139,7 @@ type DatabaseObservation struct {
 	// Specifies a prefix for the Oracle SID of the database to be created.
 	SidPrefix *string `json:"sidPrefix,omitempty" tf:"sid_prefix,omitempty"`
 
-	// The source of the database: Use NONE for creating a new database. Use DB_BACKUP for creating a new database by restoring from a backup. Use DATAGUARD for creating a new STANDBY database for a Data Guard setup.. The default is NONE.
+	// The update should be applied on the database for the selected version scheme.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
 	// Point in time recovery timeStamp of the source database at which cloned database system is cloned from the source database system, as described in RFC 3339
@@ -1077,7 +1158,7 @@ type DatabaseObservation struct {
 	// The date and time the database was created.
 	TimeCreated *string `json:"timeCreated,omitempty" tf:"time_created,omitempty"`
 
-	// The OCID of the VM cluster.
+	// (Applicable when source=DB_BACKUP | NONE) The OCID of the VM cluster.
 	VMClusterID *string `json:"vmClusterId,omitempty" tf:"vm_cluster_id,omitempty"`
 
 	// (Applicable when source=NONE) The OCID of the Oracle Cloud Infrastructure vault. This parameter and secretId are required for Customer Managed Keys.
@@ -1152,9 +1233,17 @@ type DatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyStoreID *string `json:"keyStoreId,omitempty" tf:"key_store_id,omitempty"`
 
-	// The source of the database: Use NONE for creating a new database. Use DB_BACKUP for creating a new database by restoring from a backup. Use DATAGUARD for creating a new STANDBY database for a Data Guard setup.. The default is NONE.
+	// (Applicable when source=DB_BACKUP | NONE) The database registered for Oracle Managed Database Software Updates.
+	// +kubebuilder:validation:Optional
+	ManagedSoftwareUpdateDetails []DatabaseManagedSoftwareUpdateDetailsParameters `json:"managedSoftwareUpdateDetails,omitempty" tf:"managed_software_update_details,omitempty"`
+
+	// The update should be applied on the database for the selected version scheme.
 	// +kubebuilder:validation:Optional
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) The OCID of the VM cluster.
+	// +kubebuilder:validation:Optional
+	VMClusterID *string `json:"vmClusterId,omitempty" tf:"vm_cluster_id,omitempty"`
 
 	// (Applicable when source=NONE) The OCID of the Oracle Cloud Infrastructure vault. This parameter and secretId are required for Customer Managed Keys.
 	// +kubebuilder:validation:Optional
@@ -1177,6 +1266,252 @@ type DatabaseStorageSizeDetailsObservation struct {
 }
 
 type DatabaseStorageSizeDetailsParameters struct {
+}
+
+type MaintenanceDetailsInitParameters struct {
+
+	// The date and time of the last readiness check.
+	TimeOfLastReadinessCheck *string `json:"timeOfLastReadinessCheck,omitempty" tf:"time_of_last_readiness_check,omitempty"`
+
+	// The date and time of when the status was updated.
+	TimeOfStatusUpdate *string `json:"timeOfStatusUpdate,omitempty" tf:"time_of_status_update,omitempty"`
+
+	// The date and time of the database was scheduled for update.
+	TimeScheduled *string `json:"timeScheduled,omitempty" tf:"time_scheduled,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software update method, either "ROLLING" or "NONROLLING". Default value is ROLLING. IMPORTANT: Non-rolling Database Software update update involves system down time.
+	UpdateMode *string `json:"updateMode,omitempty" tf:"update_mode,omitempty"`
+
+	// The managed software update readiness status
+	UpdateReadinessStatus *string `json:"updateReadinessStatus,omitempty" tf:"update_readiness_status,omitempty"`
+
+	// This field will contain actual cause of update readiness state.
+	UpdateReadinessStatusDetails *string `json:"updateReadinessStatusDetails,omitempty" tf:"update_readiness_status_details,omitempty"`
+
+	// The version of the database was scheduled for update.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type MaintenanceDetailsObservation struct {
+
+	// The date and time of the last readiness check.
+	TimeOfLastReadinessCheck *string `json:"timeOfLastReadinessCheck,omitempty" tf:"time_of_last_readiness_check,omitempty"`
+
+	// The date and time of when the status was updated.
+	TimeOfStatusUpdate *string `json:"timeOfStatusUpdate,omitempty" tf:"time_of_status_update,omitempty"`
+
+	// The date and time of the database was scheduled for update.
+	TimeScheduled *string `json:"timeScheduled,omitempty" tf:"time_scheduled,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software update method, either "ROLLING" or "NONROLLING". Default value is ROLLING. IMPORTANT: Non-rolling Database Software update update involves system down time.
+	UpdateMode *string `json:"updateMode,omitempty" tf:"update_mode,omitempty"`
+
+	// The managed software update readiness status
+	UpdateReadinessStatus *string `json:"updateReadinessStatus,omitempty" tf:"update_readiness_status,omitempty"`
+
+	// This field will contain actual cause of update readiness state.
+	UpdateReadinessStatusDetails *string `json:"updateReadinessStatusDetails,omitempty" tf:"update_readiness_status_details,omitempty"`
+
+	// The version of the database was scheduled for update.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type MaintenanceDetailsParameters struct {
+
+	// The date and time of the last readiness check.
+	// +kubebuilder:validation:Optional
+	TimeOfLastReadinessCheck *string `json:"timeOfLastReadinessCheck,omitempty" tf:"time_of_last_readiness_check,omitempty"`
+
+	// The date and time of when the status was updated.
+	// +kubebuilder:validation:Optional
+	TimeOfStatusUpdate *string `json:"timeOfStatusUpdate,omitempty" tf:"time_of_status_update,omitempty"`
+
+	// The date and time of the database was scheduled for update.
+	// +kubebuilder:validation:Optional
+	TimeScheduled *string `json:"timeScheduled,omitempty" tf:"time_scheduled,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software update method, either "ROLLING" or "NONROLLING". Default value is ROLLING. IMPORTANT: Non-rolling Database Software update update involves system down time.
+	// +kubebuilder:validation:Optional
+	UpdateMode *string `json:"updateMode,omitempty" tf:"update_mode,omitempty"`
+
+	// The managed software update readiness status
+	// +kubebuilder:validation:Optional
+	UpdateReadinessStatus *string `json:"updateReadinessStatus,omitempty" tf:"update_readiness_status,omitempty"`
+
+	// This field will contain actual cause of update readiness state.
+	// +kubebuilder:validation:Optional
+	UpdateReadinessStatusDetails *string `json:"updateReadinessStatusDetails,omitempty" tf:"update_readiness_status_details,omitempty"`
+
+	// The version of the database was scheduled for update.
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type ManagedSoftwareUpdateDetailsInitParameters struct {
+
+	// If true, database is registered for Oracle Managed Database Software Updates otherwise database is not registered for Oracle Managed Database Software Updates
+	IsEnrolled *bool `json:"isEnrolled,omitempty" tf:"is_enrolled,omitempty"`
+
+	// Provides details about actual Oracle Managed Database Software Updates scheduled time and version.
+	MaintenanceDetails []MaintenanceDetailsInitParameters `json:"maintenanceDetails,omitempty" tf:"maintenance_details,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software Updates schedule will be created based on the provided update preferences
+	PreferenceDetails []PreferenceDetailsInitParameters `json:"preferenceDetails,omitempty" tf:"preference_details,omitempty"`
+}
+
+type ManagedSoftwareUpdateDetailsMaintenanceDetailsInitParameters struct {
+
+	// The date and time of the last readiness check.
+	TimeOfLastReadinessCheck *string `json:"timeOfLastReadinessCheck,omitempty" tf:"time_of_last_readiness_check,omitempty"`
+
+	// The date and time of when the status was updated.
+	TimeOfStatusUpdate *string `json:"timeOfStatusUpdate,omitempty" tf:"time_of_status_update,omitempty"`
+
+	// The date and time of the database was scheduled for update.
+	TimeScheduled *string `json:"timeScheduled,omitempty" tf:"time_scheduled,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software update method, either "ROLLING" or "NONROLLING". Default value is ROLLING. IMPORTANT: Non-rolling Database Software update update involves system down time.
+	UpdateMode *string `json:"updateMode,omitempty" tf:"update_mode,omitempty"`
+
+	// The managed software update readiness status
+	UpdateReadinessStatus *string `json:"updateReadinessStatus,omitempty" tf:"update_readiness_status,omitempty"`
+
+	// This field will contain actual cause of update readiness state.
+	UpdateReadinessStatusDetails *string `json:"updateReadinessStatusDetails,omitempty" tf:"update_readiness_status_details,omitempty"`
+
+	// The version of the database was scheduled for update.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type ManagedSoftwareUpdateDetailsMaintenanceDetailsObservation struct {
+
+	// The date and time of the last readiness check.
+	TimeOfLastReadinessCheck *string `json:"timeOfLastReadinessCheck,omitempty" tf:"time_of_last_readiness_check,omitempty"`
+
+	// The date and time of when the status was updated.
+	TimeOfStatusUpdate *string `json:"timeOfStatusUpdate,omitempty" tf:"time_of_status_update,omitempty"`
+
+	// The date and time of the database was scheduled for update.
+	TimeScheduled *string `json:"timeScheduled,omitempty" tf:"time_scheduled,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software update method, either "ROLLING" or "NONROLLING". Default value is ROLLING. IMPORTANT: Non-rolling Database Software update update involves system down time.
+	UpdateMode *string `json:"updateMode,omitempty" tf:"update_mode,omitempty"`
+
+	// The managed software update readiness status
+	UpdateReadinessStatus *string `json:"updateReadinessStatus,omitempty" tf:"update_readiness_status,omitempty"`
+
+	// This field will contain actual cause of update readiness state.
+	UpdateReadinessStatusDetails *string `json:"updateReadinessStatusDetails,omitempty" tf:"update_readiness_status_details,omitempty"`
+
+	// The version of the database was scheduled for update.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type ManagedSoftwareUpdateDetailsMaintenanceDetailsParameters struct {
+
+	// The date and time of the last readiness check.
+	// +kubebuilder:validation:Optional
+	TimeOfLastReadinessCheck *string `json:"timeOfLastReadinessCheck,omitempty" tf:"time_of_last_readiness_check,omitempty"`
+
+	// The date and time of when the status was updated.
+	// +kubebuilder:validation:Optional
+	TimeOfStatusUpdate *string `json:"timeOfStatusUpdate,omitempty" tf:"time_of_status_update,omitempty"`
+
+	// The date and time of the database was scheduled for update.
+	// +kubebuilder:validation:Optional
+	TimeScheduled *string `json:"timeScheduled,omitempty" tf:"time_scheduled,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software update method, either "ROLLING" or "NONROLLING". Default value is ROLLING. IMPORTANT: Non-rolling Database Software update update involves system down time.
+	// +kubebuilder:validation:Optional
+	UpdateMode *string `json:"updateMode,omitempty" tf:"update_mode,omitempty"`
+
+	// The managed software update readiness status
+	// +kubebuilder:validation:Optional
+	UpdateReadinessStatus *string `json:"updateReadinessStatus,omitempty" tf:"update_readiness_status,omitempty"`
+
+	// This field will contain actual cause of update readiness state.
+	// +kubebuilder:validation:Optional
+	UpdateReadinessStatusDetails *string `json:"updateReadinessStatusDetails,omitempty" tf:"update_readiness_status_details,omitempty"`
+
+	// The version of the database was scheduled for update.
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type ManagedSoftwareUpdateDetailsObservation struct {
+
+	// If true, database is registered for Oracle Managed Database Software Updates otherwise database is not registered for Oracle Managed Database Software Updates
+	IsEnrolled *bool `json:"isEnrolled,omitempty" tf:"is_enrolled,omitempty"`
+
+	// Provides details about actual Oracle Managed Database Software Updates scheduled time and version.
+	MaintenanceDetails []MaintenanceDetailsObservation `json:"maintenanceDetails,omitempty" tf:"maintenance_details,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software Updates schedule will be created based on the provided update preferences
+	PreferenceDetails []PreferenceDetailsObservation `json:"preferenceDetails,omitempty" tf:"preference_details,omitempty"`
+}
+
+type ManagedSoftwareUpdateDetailsParameters struct {
+
+	// If true, database is registered for Oracle Managed Database Software Updates otherwise database is not registered for Oracle Managed Database Software Updates
+	// +kubebuilder:validation:Optional
+	IsEnrolled *bool `json:"isEnrolled,omitempty" tf:"is_enrolled,omitempty"`
+
+	// Provides details about actual Oracle Managed Database Software Updates scheduled time and version.
+	// +kubebuilder:validation:Optional
+	MaintenanceDetails []MaintenanceDetailsParameters `json:"maintenanceDetails,omitempty" tf:"maintenance_details,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software Updates schedule will be created based on the provided update preferences
+	// +kubebuilder:validation:Optional
+	PreferenceDetails []PreferenceDetailsParameters `json:"preferenceDetails,omitempty" tf:"preference_details,omitempty"`
+}
+
+type ManagedSoftwareUpdateDetailsPreferenceDetailsInitParameters struct {
+
+	// The update should be applied on the database for the selected days of the week.
+	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
+
+	// The update should be applied on the database for the selected hour of the day.
+	HourOfDay *float64 `json:"hourOfDay,omitempty" tf:"hour_of_day,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software update method, either "ROLLING" or "NONROLLING". Default value is ROLLING. IMPORTANT: Non-rolling Database Software update update involves system down time.
+	UpdateMode *string `json:"updateMode,omitempty" tf:"update_mode,omitempty"`
+
+	// The update should be applied on the database for the selected version scheme.
+	VersionSchemeDetails []PreferenceDetailsVersionSchemeDetailsInitParameters `json:"versionSchemeDetails,omitempty" tf:"version_scheme_details,omitempty"`
+}
+
+type ManagedSoftwareUpdateDetailsPreferenceDetailsObservation struct {
+
+	// The update should be applied on the database for the selected days of the week.
+	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
+
+	// The update should be applied on the database for the selected hour of the day.
+	HourOfDay *float64 `json:"hourOfDay,omitempty" tf:"hour_of_day,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software update method, either "ROLLING" or "NONROLLING". Default value is ROLLING. IMPORTANT: Non-rolling Database Software update update involves system down time.
+	UpdateMode *string `json:"updateMode,omitempty" tf:"update_mode,omitempty"`
+
+	// The update should be applied on the database for the selected version scheme.
+	VersionSchemeDetails []PreferenceDetailsVersionSchemeDetailsObservation `json:"versionSchemeDetails,omitempty" tf:"version_scheme_details,omitempty"`
+}
+
+type ManagedSoftwareUpdateDetailsPreferenceDetailsParameters struct {
+
+	// The update should be applied on the database for the selected days of the week.
+	// +kubebuilder:validation:Optional
+	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
+
+	// The update should be applied on the database for the selected hour of the day.
+	// +kubebuilder:validation:Optional
+	HourOfDay *float64 `json:"hourOfDay,omitempty" tf:"hour_of_day,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software update method, either "ROLLING" or "NONROLLING". Default value is ROLLING. IMPORTANT: Non-rolling Database Software update update involves system down time.
+	// +kubebuilder:validation:Optional
+	UpdateMode *string `json:"updateMode,omitempty" tf:"update_mode,omitempty"`
+
+	// The update should be applied on the database for the selected version scheme.
+	// +kubebuilder:validation:Optional
+	VersionSchemeDetails []PreferenceDetailsVersionSchemeDetailsParameters `json:"versionSchemeDetails,omitempty" tf:"version_scheme_details,omitempty"`
 }
 
 type MembersInitParameters struct {
@@ -1262,6 +1597,94 @@ type PatchOptionsParameters struct {
 	ShouldSkipDataPatch *bool `json:"shouldSkipDataPatch,omitempty" tf:"should_skip_data_patch,omitempty"`
 }
 
+type PreferenceDetailsInitParameters struct {
+
+	// The update should be applied on the database for the selected days of the week.
+	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
+
+	// The update should be applied on the database for the selected hour of the day.
+	HourOfDay *float64 `json:"hourOfDay,omitempty" tf:"hour_of_day,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software update method, either "ROLLING" or "NONROLLING". Default value is ROLLING. IMPORTANT: Non-rolling Database Software update update involves system down time.
+	UpdateMode *string `json:"updateMode,omitempty" tf:"update_mode,omitempty"`
+
+	// The update should be applied on the database for the selected version scheme.
+	VersionSchemeDetails []VersionSchemeDetailsInitParameters `json:"versionSchemeDetails,omitempty" tf:"version_scheme_details,omitempty"`
+}
+
+type PreferenceDetailsObservation struct {
+
+	// The update should be applied on the database for the selected days of the week.
+	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
+
+	// The update should be applied on the database for the selected hour of the day.
+	HourOfDay *float64 `json:"hourOfDay,omitempty" tf:"hour_of_day,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software update method, either "ROLLING" or "NONROLLING". Default value is ROLLING. IMPORTANT: Non-rolling Database Software update update involves system down time.
+	UpdateMode *string `json:"updateMode,omitempty" tf:"update_mode,omitempty"`
+
+	// The update should be applied on the database for the selected version scheme.
+	VersionSchemeDetails []VersionSchemeDetailsObservation `json:"versionSchemeDetails,omitempty" tf:"version_scheme_details,omitempty"`
+}
+
+type PreferenceDetailsParameters struct {
+
+	// The update should be applied on the database for the selected days of the week.
+	// +kubebuilder:validation:Optional
+	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
+
+	// The update should be applied on the database for the selected hour of the day.
+	// +kubebuilder:validation:Optional
+	HourOfDay *float64 `json:"hourOfDay,omitempty" tf:"hour_of_day,omitempty"`
+
+	// (Applicable when source=DB_BACKUP | NONE) Oracle Managed Database Software update method, either "ROLLING" or "NONROLLING". Default value is ROLLING. IMPORTANT: Non-rolling Database Software update update involves system down time.
+	// +kubebuilder:validation:Optional
+	UpdateMode *string `json:"updateMode,omitempty" tf:"update_mode,omitempty"`
+
+	// The update should be applied on the database for the selected version scheme.
+	// +kubebuilder:validation:Optional
+	VersionSchemeDetails []VersionSchemeDetailsParameters `json:"versionSchemeDetails,omitempty" tf:"version_scheme_details,omitempty"`
+}
+
+type PreferenceDetailsVersionSchemeDetailsInitParameters struct {
+
+	// The update should be applied on the database for the selected major version series.  The value can be provided as 23.X.X.X then 23 major version series will be considered.
+	MajorVersion *string `json:"majorVersion,omitempty" tf:"major_version,omitempty"`
+
+	// The update should be applied on the database for the selected version scheme.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// The update should be applied on the database for the selected version preference. *_N represents the LATEST version
+	VersionPreference *string `json:"versionPreference,omitempty" tf:"version_preference,omitempty"`
+}
+
+type PreferenceDetailsVersionSchemeDetailsObservation struct {
+
+	// The update should be applied on the database for the selected major version series.  The value can be provided as 23.X.X.X then 23 major version series will be considered.
+	MajorVersion *string `json:"majorVersion,omitempty" tf:"major_version,omitempty"`
+
+	// The update should be applied on the database for the selected version scheme.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// The update should be applied on the database for the selected version preference. *_N represents the LATEST version
+	VersionPreference *string `json:"versionPreference,omitempty" tf:"version_preference,omitempty"`
+}
+
+type PreferenceDetailsVersionSchemeDetailsParameters struct {
+
+	// The update should be applied on the database for the selected major version series.  The value can be provided as 23.X.X.X then 23 major version series will be considered.
+	// +kubebuilder:validation:Optional
+	MajorVersion *string `json:"majorVersion,omitempty" tf:"major_version,omitempty"`
+
+	// The update should be applied on the database for the selected version scheme.
+	// +kubebuilder:validation:Optional
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// The update should be applied on the database for the selected version preference. *_N represents the LATEST version
+	// +kubebuilder:validation:Optional
+	VersionPreference *string `json:"versionPreference,omitempty" tf:"version_preference,omitempty"`
+}
+
 type SourceEncryptionKeyLocationDetailsInitParameters struct {
 
 	// Provide the HSM password as you would in RDBMS for External HSM.
@@ -1318,6 +1741,45 @@ type StorageSizeDetailsParameters struct {
 	// The RECO storage size, in gigabytes, that is applicable for the database.
 	// +kubebuilder:validation:Optional
 	RecoStorageSizeInGbs *float64 `json:"recoStorageSizeInGbs" tf:"reco_storage_size_in_gbs,omitempty"`
+}
+
+type VersionSchemeDetailsInitParameters struct {
+
+	// The update should be applied on the database for the selected major version series.  The value can be provided as 23.X.X.X then 23 major version series will be considered.
+	MajorVersion *string `json:"majorVersion,omitempty" tf:"major_version,omitempty"`
+
+	// The update should be applied on the database for the selected version scheme.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// The update should be applied on the database for the selected version preference. *_N represents the LATEST version
+	VersionPreference *string `json:"versionPreference,omitempty" tf:"version_preference,omitempty"`
+}
+
+type VersionSchemeDetailsObservation struct {
+
+	// The update should be applied on the database for the selected major version series.  The value can be provided as 23.X.X.X then 23 major version series will be considered.
+	MajorVersion *string `json:"majorVersion,omitempty" tf:"major_version,omitempty"`
+
+	// The update should be applied on the database for the selected version scheme.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// The update should be applied on the database for the selected version preference. *_N represents the LATEST version
+	VersionPreference *string `json:"versionPreference,omitempty" tf:"version_preference,omitempty"`
+}
+
+type VersionSchemeDetailsParameters struct {
+
+	// The update should be applied on the database for the selected major version series.  The value can be provided as 23.X.X.X then 23 major version series will be considered.
+	// +kubebuilder:validation:Optional
+	MajorVersion *string `json:"majorVersion,omitempty" tf:"major_version,omitempty"`
+
+	// The update should be applied on the database for the selected version scheme.
+	// +kubebuilder:validation:Optional
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// The update should be applied on the database for the selected version preference. *_N represents the LATEST version
+	// +kubebuilder:validation:Optional
+	VersionPreference *string `json:"versionPreference,omitempty" tf:"version_preference,omitempty"`
 }
 
 // DatabaseSpec defines the desired state of Database

@@ -1696,6 +1696,16 @@ spec:
                                         blank for a non-burstable instance, or explicitly
                                         specify non-burstable with BASELINE_1_1.
                                       type: string
+                                    localVolumeSizeInGbs:
+                                      description: (Applicable when instance_type=compute)
+                                        The NVMe-backed local storage capacity, in
+                                        GB, for flexible dense (DenseLV) VM shapes.
+                                        If the selected shape  is DenseLV, the value
+                                        must be greater than 0. For all other shapes,
+                                        the value must be null (if specified);  any
+                                        non-null value for a non-DenseLV shape results
+                                        in an error.
+                                      type: number
                                     memoryInGbs:
                                       description: (Applicable when instance_type=compute)
                                         The total amount of memory available to the
@@ -3591,6 +3601,17 @@ spec:
                                               instance, or explicitly specify non-burstable
                                               with BASELINE_1_1.
                                             type: string
+                                          localVolumeSizeInGbs:
+                                            description: (Applicable when instance_type=compute)
+                                              The NVMe-backed local storage capacity,
+                                              in GB, for flexible dense (DenseLV)
+                                              VM shapes. If the selected shape  is
+                                              DenseLV, the value must be greater than
+                                              0. For all other shapes, the value must
+                                              be null (if specified);  any non-null
+                                              value for a non-DenseLV shape results
+                                              in an error.
+                                            type: number
                                           memoryInGbs:
                                             description: (Applicable when instance_type=compute)
                                               The total amount of memory available
@@ -6399,6 +6420,16 @@ spec:
                                         blank for a non-burstable instance, or explicitly
                                         specify non-burstable with BASELINE_1_1.
                                       type: string
+                                    localVolumeSizeInGbs:
+                                      description: (Applicable when instance_type=compute)
+                                        The NVMe-backed local storage capacity, in
+                                        GB, for flexible dense (DenseLV) VM shapes.
+                                        If the selected shape  is DenseLV, the value
+                                        must be greater than 0. For all other shapes,
+                                        the value must be null (if specified);  any
+                                        non-null value for a non-DenseLV shape results
+                                        in an error.
+                                      type: number
                                     memoryInGbs:
                                       description: (Applicable when instance_type=compute)
                                         The total amount of memory available to the
@@ -8294,6 +8325,17 @@ spec:
                                               instance, or explicitly specify non-burstable
                                               with BASELINE_1_1.
                                             type: string
+                                          localVolumeSizeInGbs:
+                                            description: (Applicable when instance_type=compute)
+                                              The NVMe-backed local storage capacity,
+                                              in GB, for flexible dense (DenseLV)
+                                              VM shapes. If the selected shape  is
+                                              DenseLV, the value must be greater than
+                                              0. For all other shapes, the value must
+                                              be null (if specified);  any non-null
+                                              value for a non-DenseLV shape results
+                                              in an error.
+                                            type: number
                                           memoryInGbs:
                                             description: (Applicable when instance_type=compute)
                                               The total amount of memory available
@@ -10357,6 +10399,16 @@ spec:
                                         blank for a non-burstable instance, or explicitly
                                         specify non-burstable with BASELINE_1_1.
                                       type: string
+                                    localVolumeSizeInGbs:
+                                      description: (Applicable when instance_type=compute)
+                                        The NVMe-backed local storage capacity, in
+                                        GB, for flexible dense (DenseLV) VM shapes.
+                                        If the selected shape  is DenseLV, the value
+                                        must be greater than 0. For all other shapes,
+                                        the value must be null (if specified);  any
+                                        non-null value for a non-DenseLV shape results
+                                        in an error.
+                                      type: number
                                     memoryInGbs:
                                       description: (Applicable when instance_type=compute)
                                         The total amount of memory available to the
@@ -11257,6 +11309,17 @@ spec:
                                               instance, or explicitly specify non-burstable
                                               with BASELINE_1_1.
                                             type: string
+                                          localVolumeSizeInGbs:
+                                            description: (Applicable when instance_type=compute)
+                                              The NVMe-backed local storage capacity,
+                                              in GB, for flexible dense (DenseLV)
+                                              VM shapes. If the selected shape  is
+                                              DenseLV, the value must be greater than
+                                              0. For all other shapes, the value must
+                                              be null (if specified);  any non-null
+                                              value for a non-DenseLV shape results
+                                              in an error.
+                                            type: number
                                           memoryInGbs:
                                             description: (Applicable when instance_type=compute)
                                               The total amount of memory available

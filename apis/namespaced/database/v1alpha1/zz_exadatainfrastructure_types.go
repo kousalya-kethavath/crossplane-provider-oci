@@ -84,6 +84,9 @@ type ExadataInfrastructureDefinedFileSystemConfigurationsObservation struct {
 	// If true, the file system resize is allowed for the Exadata Infrastructure cluster. If false, the file system resize is not allowed.
 	IsResizable *bool `json:"isResizable,omitempty" tf:"is_resizable,omitempty"`
 
+	// The maximum size of file system.
+	MaxSizeGb *float64 `json:"maxSizeGb,omitempty" tf:"max_size_gb,omitempty"`
+
 	// The minimum size of file system.
 	MinSizeGb *float64 `json:"minSizeGb,omitempty" tf:"min_size_gb,omitempty"`
 
@@ -184,6 +187,10 @@ type ExadataInfrastructureInitParameters struct {
 	// (Updatable) Indicates if deployment is Multi-Rack or not.
 	IsMultiRackDeployment *bool `json:"isMultiRackDeployment,omitempty" tf:"is_multi_rack_deployment,omitempty"`
 
+	// (Updatable) The preferences for target versions of future maintenance runs.
+	// Currently these preferences are only supported for Monthly maintenance runs created via scheduling plans. If no preferences are specified then the version will be set by default to "Latest". Changing preferences will not change versions for an already existing maintenance run.
+	MaintenanceVersionPreferences []ExadataInfrastructureMaintenanceVersionPreferencesInitParameters `json:"maintenanceVersionPreferences,omitempty" tf:"maintenance_version_preferences,omitempty"`
+
 	// (Updatable) The scheduling details for the quarterly maintenance window. Patching and system updates take place during the maintenance window.
 	MaintenanceWindow []ExadataInfrastructureMaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -210,6 +217,25 @@ type ExadataInfrastructureInitParameters struct {
 
 	// (Updatable) The time zone of the Exadata infrastructure. For details, see Exadata Infrastructure Time Zones.
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
+}
+
+type ExadataInfrastructureMaintenanceVersionPreferencesInitParameters struct {
+
+	// (Updatable) The OCID of the resource the maintenance run will refer to when trying to fetch target versions.
+	ReferenceResourceIDForImageUpdates *string `json:"referenceResourceIdForImageUpdates,omitempty" tf:"reference_resource_id_for_image_updates,omitempty"`
+}
+
+type ExadataInfrastructureMaintenanceVersionPreferencesObservation struct {
+
+	// (Updatable) The OCID of the resource the maintenance run will refer to when trying to fetch target versions.
+	ReferenceResourceIDForImageUpdates *string `json:"referenceResourceIdForImageUpdates,omitempty" tf:"reference_resource_id_for_image_updates,omitempty"`
+}
+
+type ExadataInfrastructureMaintenanceVersionPreferencesParameters struct {
+
+	// (Updatable) The OCID of the resource the maintenance run will refer to when trying to fetch target versions.
+	// +kubebuilder:validation:Optional
+	ReferenceResourceIDForImageUpdates *string `json:"referenceResourceIdForImageUpdates,omitempty" tf:"reference_resource_id_for_image_updates,omitempty"`
 }
 
 type ExadataInfrastructureMaintenanceWindowDaysOfWeekInitParameters struct {
@@ -474,6 +500,10 @@ type ExadataInfrastructureObservation struct {
 	// A field to capture ‘Maintenance SLO Status’ for the Exadata infrastructure with values ‘OK’, ‘DEGRADED’. Default is ‘OK’ when the infrastructure is provisioned.
 	MaintenanceSLOStatus *string `json:"maintenanceSloStatus,omitempty" tf:"maintenance_slo_status,omitempty"`
 
+	// (Updatable) The preferences for target versions of future maintenance runs.
+	// Currently these preferences are only supported for Monthly maintenance runs created via scheduling plans. If no preferences are specified then the version will be set by default to "Latest". Changing preferences will not change versions for an already existing maintenance run.
+	MaintenanceVersionPreferences []ExadataInfrastructureMaintenanceVersionPreferencesObservation `json:"maintenanceVersionPreferences,omitempty" tf:"maintenance_version_preferences,omitempty"`
+
 	// (Updatable) The scheduling details for the quarterly maintenance window. Patching and system updates take place during the maintenance window.
 	MaintenanceWindow []ExadataInfrastructureMaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -623,6 +653,11 @@ type ExadataInfrastructureParameters struct {
 	// (Updatable) Indicates if deployment is Multi-Rack or not.
 	// +kubebuilder:validation:Optional
 	IsMultiRackDeployment *bool `json:"isMultiRackDeployment,omitempty" tf:"is_multi_rack_deployment,omitempty"`
+
+	// (Updatable) The preferences for target versions of future maintenance runs.
+	// Currently these preferences are only supported for Monthly maintenance runs created via scheduling plans. If no preferences are specified then the version will be set by default to "Latest". Changing preferences will not change versions for an already existing maintenance run.
+	// +kubebuilder:validation:Optional
+	MaintenanceVersionPreferences []ExadataInfrastructureMaintenanceVersionPreferencesParameters `json:"maintenanceVersionPreferences,omitempty" tf:"maintenance_version_preferences,omitempty"`
 
 	// (Updatable) The scheduling details for the quarterly maintenance window. Patching and system updates take place during the maintenance window.
 	// +kubebuilder:validation:Optional

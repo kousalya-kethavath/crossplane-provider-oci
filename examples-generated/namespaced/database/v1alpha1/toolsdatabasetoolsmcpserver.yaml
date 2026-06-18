@@ -1,0 +1,43 @@
+apiVersion: database.oci.m.upbound.io/v1alpha1
+kind: ToolsDatabaseToolsMcpServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/toolsdatabasetoolsmcpserver
+  labels:
+    testing.upbound.io/example-name: test_database_tools_mcp_server
+  name: test-database-tools-mcp-server
+  namespace: upbound-system
+spec:
+  forProvider:
+    accessTokenExpiryInSeconds: ${var.database_tools_mcp_server_access_token_expiry_in_seconds}
+    compartmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    customRoles:
+    - description: ${var.database_tools_mcp_server_custom_roles_description}
+      displayName: ${var.database_tools_mcp_server_custom_roles_display_name}
+    databaseToolsConnectionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_database_tools_connection
+    definedTags:
+      foo-namespace.bar-key: value
+    description: ${var.database_tools_mcp_server_description}
+    displayName: ${var.database_tools_mcp_server_display_name}
+    domainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_domain
+    freeformTags:
+      bar-key: value
+    locks:
+    - message: ${var.database_tools_mcp_server_locks_message}
+      relatedResourceId: ${oci_cloud_guard_resource.test_resource.id}
+      timeCreated: ${var.database_tools_mcp_server_locks_time_created}
+      type: ${var.database_tools_mcp_server_locks_type}
+    refreshTokenExpiryInSeconds: ${var.database_tools_mcp_server_refresh_token_expiry_in_seconds}
+    runtimeIdentity: ${var.database_tools_mcp_server_runtime_identity}
+    storage:
+    - bucket:
+      - bucket: ${var.database_tools_mcp_server_storage_bucket_bucket}
+        namespace: ${var.database_tools_mcp_server_storage_bucket_namespace}
+      type: ${var.database_tools_mcp_server_storage_type}
+    type: ${var.database_tools_mcp_server_type}

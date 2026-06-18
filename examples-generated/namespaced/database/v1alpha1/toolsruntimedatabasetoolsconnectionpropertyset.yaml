@@ -1,0 +1,33 @@
+apiVersion: database.oci.m.upbound.io/v1alpha1
+kind: ToolsRuntimeDatabaseToolsConnectionPropertySet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/toolsruntimedatabasetoolsconnectionpropertyset
+  labels:
+    testing.upbound.io/example-name: test_database_tools_connection_property_set
+  name: test-database-tools-connection-property-set
+  namespace: upbound-system
+spec:
+  forProvider:
+    authenticationSubstitutions: ${var.database_tools_connection_property_set_authentication_substitutions}
+    autonomousDatabaseResourcePrincipalStatus: ${var.database_tools_connection_property_set_autonomous_database_resource_principal_status}
+    credentialKey: ${var.database_tools_connection_property_set_credential_key}
+    databaseToolsConnectionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_database_tools_connection
+    functionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_function
+    identityProvider:
+    - configs: ${var.database_tools_connection_property_set_identity_provider_configs}
+      type: ${var.database_tools_connection_property_set_identity_provider_type}
+    instanceDbmsCredentialEnabled: ${var.database_tools_connection_property_set_instance_dbms_credential_enabled}
+    invokeEndpoint: ${var.database_tools_connection_property_set_invoke_endpoint}
+    key: ${var.database_tools_connection_property_set_key}
+    objectStorageBucketCompartmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_compartment
+    objectStorageEndpoint: ${var.database_tools_connection_property_set_object_storage_endpoint}
+    objectStorageNamespace: ${var.database_tools_connection_property_set_object_storage_namespace}
+    printServerType: ${var.database_tools_connection_property_set_print_server_type}
+    propertySetKey: ${var.database_tools_connection_property_set_property_set_key}

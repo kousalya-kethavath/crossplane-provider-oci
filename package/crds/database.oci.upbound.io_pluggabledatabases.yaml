@@ -448,8 +448,8 @@ spec:
                             Snapshot id.
                           type: string
                         sourcePluggableDatabaseSnapshotIdRef:
-                          description: Reference to a PluggableDatabaseSnapshot in
-                            database to populate sourcePluggableDatabaseSnapshotId.
+                          description: Reference to a Snapshot in filestorage to populate
+                            sourcePluggableDatabaseSnapshotId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -483,8 +483,8 @@ spec:
                           - name
                           type: object
                         sourcePluggableDatabaseSnapshotIdSelector:
-                          description: Selector for a PluggableDatabaseSnapshot in
-                            database to populate sourcePluggableDatabaseSnapshotId.
+                          description: Selector for a Snapshot in filestorage to populate
+                            sourcePluggableDatabaseSnapshotId.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -956,8 +956,8 @@ spec:
                             Snapshot id.
                           type: string
                         sourcePluggableDatabaseSnapshotIdRef:
-                          description: Reference to a PluggableDatabaseSnapshot in
-                            database to populate sourcePluggableDatabaseSnapshotId.
+                          description: Reference to a Snapshot in filestorage to populate
+                            sourcePluggableDatabaseSnapshotId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -991,8 +991,8 @@ spec:
                           - name
                           type: object
                         sourcePluggableDatabaseSnapshotIdSelector:
-                          description: Selector for a PluggableDatabaseSnapshot in
-                            database to populate sourcePluggableDatabaseSnapshotId.
+                          description: Selector for a Snapshot in filestorage to populate
+                            sourcePluggableDatabaseSnapshotId.
                           properties:
                             matchControllerRef:
                               description: |-

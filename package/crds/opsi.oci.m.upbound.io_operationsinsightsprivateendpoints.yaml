@@ -190,6 +190,15 @@ spec:
                       provide actionable information about the validity of the private
                       endpoint connection.
                     type: string
+                  securityAttributes:
+                    additionalProperties:
+                      type: string
+                    description: '(Updatable) Security attributes for this resource.
+                      Each key is predefined and scoped to a namespace. For more information,
+                      see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount":
+                      {"value": "42", "mode": "enforce"}}}'
+                    type: object
+                    x-kubernetes-map-type: granular
                   subnetId:
                     description: The Subnet OCID of the Private service accessed database.
                     type: string
@@ -499,6 +508,15 @@ spec:
                       provide actionable information about the validity of the private
                       endpoint connection.
                     type: string
+                  securityAttributes:
+                    additionalProperties:
+                      type: string
+                    description: '(Updatable) Security attributes for this resource.
+                      Each key is predefined and scoped to a namespace. For more information,
+                      see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount":
+                      {"value": "42", "mode": "enforce"}}}'
+                    type: object
+                    x-kubernetes-map-type: granular
                   subnetId:
                     description: The Subnet OCID of the Private service accessed database.
                     type: string
@@ -801,6 +819,15 @@ spec:
                       endpoint. All IP addresses will be concatenated if it is RAC
                       DBs.
                     type: string
+                  securityAttributes:
+                    additionalProperties:
+                      type: string
+                    description: '(Updatable) Security attributes for this resource.
+                      Each key is predefined and scoped to a namespace. For more information,
+                      see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount":
+                      {"value": "42", "mode": "enforce"}}}'
+                    type: object
+                    x-kubernetes-map-type: granular
                   state:
                     description: The current state of the private endpoint.
                     type: string

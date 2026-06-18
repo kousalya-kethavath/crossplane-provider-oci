@@ -257,6 +257,18 @@ spec:
                     description: (Updatable) Indicates if deployment is Multi-Rack
                       or not.
                     type: boolean
+                  maintenanceVersionPreferences:
+                    description: |-
+                      (Updatable) The preferences for target versions of future maintenance runs.
+                      Currently these preferences are only supported for Monthly maintenance runs created via scheduling plans. If no preferences are specified then the version will be set by default to "Latest". Changing preferences will not change versions for an already existing maintenance run.
+                    items:
+                      properties:
+                        referenceResourceIdForImageUpdates:
+                          description: (Updatable) The OCID of the resource the maintenance
+                            run will refer to when trying to fetch target versions.
+                          type: string
+                      type: object
+                    type: array
                   maintenanceWindow:
                     description: (Updatable) The scheduling details for the quarterly
                       maintenance window. Patching and system updates take place during
@@ -601,6 +613,18 @@ spec:
                     description: (Updatable) Indicates if deployment is Multi-Rack
                       or not.
                     type: boolean
+                  maintenanceVersionPreferences:
+                    description: |-
+                      (Updatable) The preferences for target versions of future maintenance runs.
+                      Currently these preferences are only supported for Monthly maintenance runs created via scheduling plans. If no preferences are specified then the version will be set by default to "Latest". Changing preferences will not change versions for an already existing maintenance run.
+                    items:
+                      properties:
+                        referenceResourceIdForImageUpdates:
+                          description: (Updatable) The OCID of the resource the maintenance
+                            run will refer to when trying to fetch target versions.
+                          type: string
+                      type: object
+                    type: array
                   maintenanceWindow:
                     description: (Updatable) The scheduling details for the quarterly
                       maintenance window. Patching and system updates take place during
@@ -968,6 +992,9 @@ spec:
                             for the Exadata Infrastructure cluster. If false, the
                             file system resize is not allowed.
                           type: boolean
+                        maxSizeGb:
+                          description: The maximum size of file system.
+                          type: number
                         minSizeGb:
                           description: The minimum size of file system.
                           type: number
@@ -1063,6 +1090,18 @@ spec:
                       Exadata infrastructure with values ‘OK’, ‘DEGRADED’. Default
                       is ‘OK’ when the infrastructure is provisioned.
                     type: string
+                  maintenanceVersionPreferences:
+                    description: |-
+                      (Updatable) The preferences for target versions of future maintenance runs.
+                      Currently these preferences are only supported for Monthly maintenance runs created via scheduling plans. If no preferences are specified then the version will be set by default to "Latest". Changing preferences will not change versions for an already existing maintenance run.
+                    items:
+                      properties:
+                        referenceResourceIdForImageUpdates:
+                          description: (Updatable) The OCID of the resource the maintenance
+                            run will refer to when trying to fetch target versions.
+                          type: string
+                      type: object
+                    type: array
                   maintenanceWindow:
                     description: (Updatable) The scheduling details for the quarterly
                       maintenance window. Patching and system updates take place during

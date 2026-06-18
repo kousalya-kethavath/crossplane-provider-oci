@@ -1610,6 +1610,9 @@ type ShapeConfigInitParameters struct {
 	// (Updatable) The baseline OCPU utilization for a subcore burstable VM instance. Leave this attribute blank for a non-burstable instance, or explicitly specify non-burstable with BASELINE_1_1.
 	BaselineOcpuUtilization *string `json:"baselineOcpuUtilization,omitempty" tf:"baseline_ocpu_utilization,omitempty"`
 
+	// (Updatable) The NVMe-backed local storage capacity, in GB, for flexible dense (DenseLV) VM shapes. If the selected shape  is DenseLV, the value must be greater than 0. For all other shapes, the value must be null (if specified);  any non-null value for a non-DenseLV shape results in an error.
+	LocalVolumeSizeInGbs *float64 `json:"localVolumeSizeInGbs,omitempty" tf:"local_volume_size_in_gbs,omitempty"`
+
 	// (Updatable) The total amount of memory available to the instance, in gigabytes.
 	MemoryInGbs *float64 `json:"memoryInGbs,omitempty" tf:"memory_in_gbs,omitempty"`
 
@@ -1646,6 +1649,9 @@ type ShapeConfigObservation struct {
 	// The aggregate size of all local disks, in gigabytes.
 	LocalDisksTotalSizeInGbs *float64 `json:"localDisksTotalSizeInGbs,omitempty" tf:"local_disks_total_size_in_gbs,omitempty"`
 
+	// (Updatable) The NVMe-backed local storage capacity, in GB, for flexible dense (DenseLV) VM shapes. If the selected shape  is DenseLV, the value must be greater than 0. For all other shapes, the value must be null (if specified);  any non-null value for a non-DenseLV shape results in an error.
+	LocalVolumeSizeInGbs *float64 `json:"localVolumeSizeInGbs,omitempty" tf:"local_volume_size_in_gbs,omitempty"`
+
 	// The maximum number of VNIC attachments for the instance.
 	MaxVnicAttachments *float64 `json:"maxVnicAttachments,omitempty" tf:"max_vnic_attachments,omitempty"`
 
@@ -1676,6 +1682,10 @@ type ShapeConfigParameters struct {
 	// (Updatable) The baseline OCPU utilization for a subcore burstable VM instance. Leave this attribute blank for a non-burstable instance, or explicitly specify non-burstable with BASELINE_1_1.
 	// +kubebuilder:validation:Optional
 	BaselineOcpuUtilization *string `json:"baselineOcpuUtilization,omitempty" tf:"baseline_ocpu_utilization,omitempty"`
+
+	// (Updatable) The NVMe-backed local storage capacity, in GB, for flexible dense (DenseLV) VM shapes. If the selected shape  is DenseLV, the value must be greater than 0. For all other shapes, the value must be null (if specified);  any non-null value for a non-DenseLV shape results in an error.
+	// +kubebuilder:validation:Optional
+	LocalVolumeSizeInGbs *float64 `json:"localVolumeSizeInGbs,omitempty" tf:"local_volume_size_in_gbs,omitempty"`
 
 	// (Updatable) The total amount of memory available to the instance, in gigabytes.
 	// +kubebuilder:validation:Optional

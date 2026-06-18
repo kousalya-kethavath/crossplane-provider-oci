@@ -62,6 +62,91 @@ type BackupPolicyPitrPolicyParameters struct {
 	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
 }
 
+type ChannelInitParameters struct {
+
+	// (Applicable when source_type=DBSYSTEM) The username for the replication applier of the created MySQL DB System.
+	ApplierUsername *string `json:"applierUsername,omitempty" tf:"applier_username,omitempty"`
+
+	// (Applicable when source_type=DBSYSTEM) The CA certificate of the server used for VERIFY_IDENTITY and VERIFY_CA ssl modes.
+	SSLCACertificate []ChannelSSLCACertificateInitParameters `json:"sslCaCertificate,omitempty" tf:"ssl_ca_certificate,omitempty"`
+
+	// The SSL mode of the Channel.
+	SSLMode *string `json:"sslMode,omitempty" tf:"ssl_mode,omitempty"`
+
+	// The password for the replication user. The password must be between 8 and 32 characters long, and must contain at least 1 numeric character, 1 lowercase character, 1 uppercase character, and 1 special (nonalphanumeric) character.
+	SourcePasswordSecretRef *v1.LocalSecretKeySelector `json:"sourcePasswordSecretRef,omitempty" tf:"-"`
+
+	// The name of the replication user on the source DB system. The username has a maximum length of 96 characters. For more information, please see the MySQL documentation
+	SourceUsername *string `json:"sourceUsername,omitempty" tf:"source_username,omitempty"`
+}
+
+type ChannelObservation struct {
+
+	// (Applicable when source_type=DBSYSTEM) The username for the replication applier of the created MySQL DB System.
+	ApplierUsername *string `json:"applierUsername,omitempty" tf:"applier_username,omitempty"`
+
+	// (Applicable when source_type=DBSYSTEM) The CA certificate of the server used for VERIFY_IDENTITY and VERIFY_CA ssl modes.
+	SSLCACertificate []ChannelSSLCACertificateObservation `json:"sslCaCertificate,omitempty" tf:"ssl_ca_certificate,omitempty"`
+
+	// The SSL mode of the Channel.
+	SSLMode *string `json:"sslMode,omitempty" tf:"ssl_mode,omitempty"`
+
+	// The name of the replication user on the source DB system. The username has a maximum length of 96 characters. For more information, please see the MySQL documentation
+	SourceUsername *string `json:"sourceUsername,omitempty" tf:"source_username,omitempty"`
+}
+
+type ChannelParameters struct {
+
+	// (Applicable when source_type=DBSYSTEM) The username for the replication applier of the created MySQL DB System.
+	// +kubebuilder:validation:Optional
+	ApplierUsername *string `json:"applierUsername,omitempty" tf:"applier_username,omitempty"`
+
+	// (Applicable when source_type=DBSYSTEM) The CA certificate of the server used for VERIFY_IDENTITY and VERIFY_CA ssl modes.
+	// +kubebuilder:validation:Optional
+	SSLCACertificate []ChannelSSLCACertificateParameters `json:"sslCaCertificate,omitempty" tf:"ssl_ca_certificate,omitempty"`
+
+	// The SSL mode of the Channel.
+	// +kubebuilder:validation:Optional
+	SSLMode *string `json:"sslMode,omitempty" tf:"ssl_mode,omitempty"`
+
+	// The password for the replication user. The password must be between 8 and 32 characters long, and must contain at least 1 numeric character, 1 lowercase character, 1 uppercase character, and 1 special (nonalphanumeric) character.
+	// +kubebuilder:validation:Optional
+	SourcePasswordSecretRef *v1.LocalSecretKeySelector `json:"sourcePasswordSecretRef,omitempty" tf:"-"`
+
+	// The name of the replication user on the source DB system. The username has a maximum length of 96 characters. For more information, please see the MySQL documentation
+	// +kubebuilder:validation:Optional
+	SourceUsername *string `json:"sourceUsername,omitempty" tf:"source_username,omitempty"`
+}
+
+type ChannelSSLCACertificateInitParameters struct {
+
+	// The type of CA certificate.
+	CertificateType *string `json:"certificateType,omitempty" tf:"certificate_type,omitempty"`
+
+	// The string containing the CA certificate in PEM format.
+	Contents *string `json:"contents,omitempty" tf:"contents,omitempty"`
+}
+
+type ChannelSSLCACertificateObservation struct {
+
+	// The type of CA certificate.
+	CertificateType *string `json:"certificateType,omitempty" tf:"certificate_type,omitempty"`
+
+	// The string containing the CA certificate in PEM format.
+	Contents *string `json:"contents,omitempty" tf:"contents,omitempty"`
+}
+
+type ChannelSSLCACertificateParameters struct {
+
+	// The type of CA certificate.
+	// +kubebuilder:validation:Optional
+	CertificateType *string `json:"certificateType" tf:"certificate_type,omitempty"`
+
+	// The string containing the CA certificate in PEM format.
+	// +kubebuilder:validation:Optional
+	Contents *string `json:"contents" tf:"contents,omitempty"`
+}
+
 type ChannelsInitParameters struct {
 }
 
@@ -124,10 +209,13 @@ type ChannelsSourceObservation struct {
 	// The network address of the MySQL instance.
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
+	// Whether the connection of the channel will be requested using the IPv6 address of the dual stack DB system or not. Default: False.
+	MustUseIpv6OnDualStack *bool `json:"mustUseIpv6OnDualStack,omitempty" tf:"must_use_ipv6on_dual_stack,omitempty"`
+
 	// (Updatable) The port on which the database console can be accessed. Supported port numbers are 443 and from 1024 to 65535.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The CA certificate of the server used for VERIFY_IDENTITY and VERIFY_CA ssl modes.
+	// (Applicable when source_type=DBSYSTEM) The CA certificate of the server used for VERIFY_IDENTITY and VERIFY_CA ssl modes.
 	SSLCACertificate []SourceSSLCACertificateObservation `json:"sslCaCertificate,omitempty" tf:"ssl_ca_certificate,omitempty"`
 
 	// The SSL mode of the Channel.
@@ -148,7 +236,7 @@ type ChannelsTargetInitParameters struct {
 
 type ChannelsTargetObservation struct {
 
-	// The username for the replication applier of the target MySQL DB System.
+	// (Applicable when source_type=DBSYSTEM) The username for the replication applier of the created MySQL DB System.
 	ApplierUsername *string `json:"applierUsername,omitempty" tf:"applier_username,omitempty"`
 
 	// The case-insensitive name that identifies the replication channel. Channel names must follow the rules defined for MySQL identifiers. The names of non-Deleted Channels must be unique for each DB System.
@@ -232,6 +320,35 @@ type HeatWaveClusterObservation struct {
 }
 
 type HeatWaveClusterParameters struct {
+}
+
+type Ipv6AddressIpv6SubnetCidrPairDetailsInitParameters struct {
+
+	// (Updatable) An IPv6 address of your choice. Must be an available IPv6 address within the subnet's prefix.
+	Ipv6Address *string `json:"ipv6address,omitempty" tf:"ipv6address,omitempty"`
+
+	// (Updatable) The IPv6 prefix allocated to the subnet.
+	Ipv6SubnetCidr *string `json:"ipv6subnetCidr,omitempty" tf:"ipv6subnet_cidr,omitempty"`
+}
+
+type Ipv6AddressIpv6SubnetCidrPairDetailsObservation struct {
+
+	// (Updatable) An IPv6 address of your choice. Must be an available IPv6 address within the subnet's prefix.
+	Ipv6Address *string `json:"ipv6address,omitempty" tf:"ipv6address,omitempty"`
+
+	// (Updatable) The IPv6 prefix allocated to the subnet.
+	Ipv6SubnetCidr *string `json:"ipv6subnetCidr,omitempty" tf:"ipv6subnet_cidr,omitempty"`
+}
+
+type Ipv6AddressIpv6SubnetCidrPairDetailsParameters struct {
+
+	// (Updatable) An IPv6 address of your choice. Must be an available IPv6 address within the subnet's prefix.
+	// +kubebuilder:validation:Optional
+	Ipv6Address *string `json:"ipv6address,omitempty" tf:"ipv6address,omitempty"`
+
+	// (Updatable) The IPv6 prefix allocated to the subnet.
+	// +kubebuilder:validation:Optional
+	Ipv6SubnetCidr *string `json:"ipv6subnetCidr,omitempty" tf:"ipv6subnet_cidr,omitempty"`
 }
 
 type LogsDestinationConfigurationsInitParameters struct {
@@ -553,6 +670,9 @@ type MysqlDbSystemEndpointsObservation struct {
 	// The IP address the DB System is configured to listen on. A private IP address of your choice to assign to the primary endpoint of the DB System. Must be an available IP address within the subnet's CIDR. If you don't specify a value, Oracle automatically assigns a private IP address from the subnet. This should be a "dotted-quad" style IPv4 address.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
+	// The internet protocol (IP) version of the IP address.
+	IPAddressVersion *string `json:"ipAddressVersion,omitempty" tf:"ip_address_version,omitempty"`
+
 	// The access modes from the client that this endpoint supports.
 	Modes []*string `json:"modes,omitempty" tf:"modes,omitempty"`
 
@@ -670,8 +790,14 @@ type MysqlDbSystemInitParameters struct {
 	// The IP address the DB System is configured to listen on. A private IP address of your choice to assign to the primary endpoint of the DB System. Must be an available IP address within the subnet's CIDR. If you don't specify a value, Oracle automatically assigns a private IP address from the subnet. This should be a "dotted-quad" style IPv4 address.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
+	// (Updatable) Details to assign an IPv6 subnet prefix or IPv6 address to a resource.
+	Ipv6AddressIpv6SubnetCidrPairDetails []Ipv6AddressIpv6SubnetCidrPairDetailsInitParameters `json:"ipv6addressIpv6SubnetCidrPairDetails,omitempty" tf:"ipv6address_ipv6subnet_cidr_pair_details,omitempty"`
+
 	// (Updatable) Specifies if the DB System is highly available.
 	IsHighlyAvailable *bool `json:"isHighlyAvailable,omitempty" tf:"is_highly_available,omitempty"`
+
+	// (Updatable) Whether to allocate an IPv6 address at DB system creation from an IPv6 enabled subnet. When provided you may optionally provide an IPv6 prefix (ipv6AddressIpv6SubnetCidrPairDetails) of your choice to assign the IPv6 address from. If ipv6AddressIpv6SubnetCidrPairDetails is not provided then an IPv6 prefix is chosen for you.
+	IsIpv6Enabled *bool `json:"isIpv6Enabled,omitempty" tf:"is_ipv6enabled,omitempty"`
 
 	// (Updatable) The Maintenance Policy for the DB System or Read Replica that this model is included in. maintenance and backup_policy cannot be updated in the same request.
 	Maintenance []MysqlDbSystemMaintenanceInitParameters `json:"maintenance,omitempty" tf:"maintenance,omitempty"`
@@ -880,11 +1006,17 @@ type MysqlDbSystemObservation struct {
 	// The IP address the DB System is configured to listen on. A private IP address of your choice to assign to the primary endpoint of the DB System. Must be an available IP address within the subnet's CIDR. If you don't specify a value, Oracle automatically assigns a private IP address from the subnet. This should be a "dotted-quad" style IPv4 address.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
+	// (Updatable) Details to assign an IPv6 subnet prefix or IPv6 address to a resource.
+	Ipv6AddressIpv6SubnetCidrPairDetails []Ipv6AddressIpv6SubnetCidrPairDetailsObservation `json:"ipv6addressIpv6SubnetCidrPairDetails,omitempty" tf:"ipv6address_ipv6subnet_cidr_pair_details,omitempty"`
+
 	// If the DB System has a HeatWave Cluster attached.
 	IsHeatWaveClusterAttached *bool `json:"isHeatWaveClusterAttached,omitempty" tf:"is_heat_wave_cluster_attached,omitempty"`
 
 	// (Updatable) Specifies if the DB System is highly available.
 	IsHighlyAvailable *bool `json:"isHighlyAvailable,omitempty" tf:"is_highly_available,omitempty"`
+
+	// (Updatable) Whether to allocate an IPv6 address at DB system creation from an IPv6 enabled subnet. When provided you may optionally provide an IPv6 prefix (ipv6AddressIpv6SubnetCidrPairDetails) of your choice to assign the IPv6 address from. If ipv6AddressIpv6SubnetCidrPairDetails is not provided then an IPv6 prefix is chosen for you.
+	IsIpv6Enabled *bool `json:"isIpv6Enabled,omitempty" tf:"is_ipv6enabled,omitempty"`
 
 	// A message describing the state of the Channel.
 	LifecycleDetails *string `json:"lifecycleDetails,omitempty" tf:"lifecycle_details,omitempty"`
@@ -1065,9 +1197,17 @@ type MysqlDbSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
+	// (Updatable) Details to assign an IPv6 subnet prefix or IPv6 address to a resource.
+	// +kubebuilder:validation:Optional
+	Ipv6AddressIpv6SubnetCidrPairDetails []Ipv6AddressIpv6SubnetCidrPairDetailsParameters `json:"ipv6addressIpv6SubnetCidrPairDetails,omitempty" tf:"ipv6address_ipv6subnet_cidr_pair_details,omitempty"`
+
 	// (Updatable) Specifies if the DB System is highly available.
 	// +kubebuilder:validation:Optional
 	IsHighlyAvailable *bool `json:"isHighlyAvailable,omitempty" tf:"is_highly_available,omitempty"`
+
+	// (Updatable) Whether to allocate an IPv6 address at DB system creation from an IPv6 enabled subnet. When provided you may optionally provide an IPv6 prefix (ipv6AddressIpv6SubnetCidrPairDetails) of your choice to assign the IPv6 address from. If ipv6AddressIpv6SubnetCidrPairDetails is not provided then an IPv6 prefix is chosen for you.
+	// +kubebuilder:validation:Optional
+	IsIpv6Enabled *bool `json:"isIpv6Enabled,omitempty" tf:"is_ipv6enabled,omitempty"`
 
 	// (Updatable) The Maintenance Policy for the DB System or Read Replica that this model is included in. maintenance and backup_policy cannot be updated in the same request.
 	// +kubebuilder:validation:Optional
@@ -1154,6 +1294,9 @@ type MysqlDbSystemReadEndpointInitParameters struct {
 
 	// (Updatable) The IP address the DB System read endpoint is configured to listen on. A private IP address of your choice to assign to the read endpoint of the DB System. Must be an available IP address within the subnet's CIDR. If you don't specify a value, Oracle automatically assigns a private IP address from the subnet. This should be a "dotted-quad" style IPv4 address.
 	ReadEndpointIPAddress *string `json:"readEndpointIpAddress,omitempty" tf:"read_endpoint_ip_address,omitempty"`
+
+	// (Updatable) Details to assign an IPv6 subnet prefix or IPv6 address to a resource.
+	ReadEndpointIpv6AddressIpv6SubnetCidrPairDetails []ReadEndpointReadEndpointIpv6AddressIpv6SubnetCidrPairDetailsInitParameters `json:"readEndpointIpv6AddressIpv6SubnetCidrPairDetails,omitempty" tf:"read_endpoint_ipv6address_ipv6subnet_cidr_pair_details,omitempty"`
 }
 
 type MysqlDbSystemReadEndpointObservation struct {
@@ -1169,6 +1312,9 @@ type MysqlDbSystemReadEndpointObservation struct {
 
 	// (Updatable) The IP address the DB System read endpoint is configured to listen on. A private IP address of your choice to assign to the read endpoint of the DB System. Must be an available IP address within the subnet's CIDR. If you don't specify a value, Oracle automatically assigns a private IP address from the subnet. This should be a "dotted-quad" style IPv4 address.
 	ReadEndpointIPAddress *string `json:"readEndpointIpAddress,omitempty" tf:"read_endpoint_ip_address,omitempty"`
+
+	// (Updatable) Details to assign an IPv6 subnet prefix or IPv6 address to a resource.
+	ReadEndpointIpv6AddressIpv6SubnetCidrPairDetails []ReadEndpointReadEndpointIpv6AddressIpv6SubnetCidrPairDetailsObservation `json:"readEndpointIpv6AddressIpv6SubnetCidrPairDetails,omitempty" tf:"read_endpoint_ipv6address_ipv6subnet_cidr_pair_details,omitempty"`
 }
 
 type MysqlDbSystemReadEndpointParameters struct {
@@ -1188,6 +1334,10 @@ type MysqlDbSystemReadEndpointParameters struct {
 	// (Updatable) The IP address the DB System read endpoint is configured to listen on. A private IP address of your choice to assign to the read endpoint of the DB System. Must be an available IP address within the subnet's CIDR. If you don't specify a value, Oracle automatically assigns a private IP address from the subnet. This should be a "dotted-quad" style IPv4 address.
 	// +kubebuilder:validation:Optional
 	ReadEndpointIPAddress *string `json:"readEndpointIpAddress,omitempty" tf:"read_endpoint_ip_address,omitempty"`
+
+	// (Updatable) Details to assign an IPv6 subnet prefix or IPv6 address to a resource.
+	// +kubebuilder:validation:Optional
+	ReadEndpointIpv6AddressIpv6SubnetCidrPairDetails []ReadEndpointReadEndpointIpv6AddressIpv6SubnetCidrPairDetailsParameters `json:"readEndpointIpv6AddressIpv6SubnetCidrPairDetails,omitempty" tf:"read_endpoint_ipv6address_ipv6subnet_cidr_pair_details,omitempty"`
 }
 
 type MysqlDbSystemRestInitParameters struct {
@@ -1283,11 +1433,17 @@ type MysqlDbSystemSourceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupIDSelector *v1.NamespacedSelector `json:"backupIdSelector,omitempty" tf:"-"`
 
+	// (Applicable when source_type=DBSYSTEM) Properties to setup a replication channel with the source (cloned) DB system.
+	Channel []ChannelInitParameters `json:"channel,omitempty" tf:"channel,omitempty"`
+
 	// The OCID of the DB System from which a backup shall be selected to be restored when creating the new DB System. Use this together with recovery point to perform a point in time recovery operation.
 	DBSystemID *string `json:"dbSystemId,omitempty" tf:"db_system_id,omitempty"`
 
 	// (Applicable when source_type=PITR) The date and time, as per RFC 3339, of the change up to which the new DB System shall be restored to, using a backup and logs from the original DB System. In case no point in time is specified, then this new DB System shall be restored up to the latest change recorded for the original DB System.
 	RecoveryPoint *string `json:"recoveryPoint,omitempty" tf:"recovery_point,omitempty"`
+
+	// (Applicable when source_type=DBSYSTEM) The region identifier of the source region where the DB system exists, only if it is in a different region. If the source DB system is in the same region, then no region must be specified. For more information, please see Regions and Availability Domains.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The specific source identifier. Use BACKUP for creating a new database by restoring from a backup. Use IMPORTURL for creating a new database from a URL Object Storage PAR.
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
@@ -1301,11 +1457,17 @@ type MysqlDbSystemSourceObservation struct {
 	// The OCID of the backup to be used as the source for the new DB System.
 	BackupID *string `json:"backupId,omitempty" tf:"backup_id,omitempty"`
 
+	// (Applicable when source_type=DBSYSTEM) Properties to setup a replication channel with the source (cloned) DB system.
+	Channel []ChannelObservation `json:"channel,omitempty" tf:"channel,omitempty"`
+
 	// The OCID of the DB System from which a backup shall be selected to be restored when creating the new DB System. Use this together with recovery point to perform a point in time recovery operation.
 	DBSystemID *string `json:"dbSystemId,omitempty" tf:"db_system_id,omitempty"`
 
 	// (Applicable when source_type=PITR) The date and time, as per RFC 3339, of the change up to which the new DB System shall be restored to, using a backup and logs from the original DB System. In case no point in time is specified, then this new DB System shall be restored up to the latest change recorded for the original DB System.
 	RecoveryPoint *string `json:"recoveryPoint,omitempty" tf:"recovery_point,omitempty"`
+
+	// (Applicable when source_type=DBSYSTEM) The region identifier of the source region where the DB system exists, only if it is in a different region. If the source DB system is in the same region, then no region must be specified. For more information, please see Regions and Availability Domains.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The specific source identifier. Use BACKUP for creating a new database by restoring from a backup. Use IMPORTURL for creating a new database from a URL Object Storage PAR.
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
@@ -1327,6 +1489,10 @@ type MysqlDbSystemSourceParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupIDSelector *v1.NamespacedSelector `json:"backupIdSelector,omitempty" tf:"-"`
 
+	// (Applicable when source_type=DBSYSTEM) Properties to setup a replication channel with the source (cloned) DB system.
+	// +kubebuilder:validation:Optional
+	Channel []ChannelParameters `json:"channel,omitempty" tf:"channel,omitempty"`
+
 	// The OCID of the DB System from which a backup shall be selected to be restored when creating the new DB System. Use this together with recovery point to perform a point in time recovery operation.
 	// +kubebuilder:validation:Optional
 	DBSystemID *string `json:"dbSystemId,omitempty" tf:"db_system_id,omitempty"`
@@ -1334,6 +1500,10 @@ type MysqlDbSystemSourceParameters struct {
 	// (Applicable when source_type=PITR) The date and time, as per RFC 3339, of the change up to which the new DB System shall be restored to, using a backup and logs from the original DB System. In case no point in time is specified, then this new DB System shall be restored up to the latest change recorded for the original DB System.
 	// +kubebuilder:validation:Optional
 	RecoveryPoint *string `json:"recoveryPoint,omitempty" tf:"recovery_point,omitempty"`
+
+	// (Applicable when source_type=DBSYSTEM) The region identifier of the source region where the DB system exists, only if it is in a different region. If the source DB system is in the same region, then no region must be specified. For more information, please see Regions and Availability Domains.
+	// +kubebuilder:validation:Optional
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// The specific source identifier. Use BACKUP for creating a new database by restoring from a backup. Use IMPORTURL for creating a new database from a URL Object Storage PAR.
 	// +kubebuilder:validation:Optional
@@ -1376,6 +1546,35 @@ type PointInTimeRecoveryDetailsObservation struct {
 }
 
 type PointInTimeRecoveryDetailsParameters struct {
+}
+
+type ReadEndpointReadEndpointIpv6AddressIpv6SubnetCidrPairDetailsInitParameters struct {
+
+	// (Updatable) An IPv6 address of your choice. Must be an available IPv6 address within the subnet's prefix.
+	Ipv6Address *string `json:"ipv6address,omitempty" tf:"ipv6address,omitempty"`
+
+	// (Updatable) The IPv6 prefix allocated to the subnet.
+	Ipv6SubnetCidr *string `json:"ipv6subnetCidr,omitempty" tf:"ipv6subnet_cidr,omitempty"`
+}
+
+type ReadEndpointReadEndpointIpv6AddressIpv6SubnetCidrPairDetailsObservation struct {
+
+	// (Updatable) An IPv6 address of your choice. Must be an available IPv6 address within the subnet's prefix.
+	Ipv6Address *string `json:"ipv6address,omitempty" tf:"ipv6address,omitempty"`
+
+	// (Updatable) The IPv6 prefix allocated to the subnet.
+	Ipv6SubnetCidr *string `json:"ipv6subnetCidr,omitempty" tf:"ipv6subnet_cidr,omitempty"`
+}
+
+type ReadEndpointReadEndpointIpv6AddressIpv6SubnetCidrPairDetailsParameters struct {
+
+	// (Updatable) An IPv6 address of your choice. Must be an available IPv6 address within the subnet's prefix.
+	// +kubebuilder:validation:Optional
+	Ipv6Address *string `json:"ipv6address,omitempty" tf:"ipv6address,omitempty"`
+
+	// (Updatable) The IPv6 prefix allocated to the subnet.
+	// +kubebuilder:validation:Optional
+	Ipv6SubnetCidr *string `json:"ipv6subnetCidr,omitempty" tf:"ipv6subnet_cidr,omitempty"`
 }
 
 type SourceAnonymousTransactionsHandlingInitParameters struct {

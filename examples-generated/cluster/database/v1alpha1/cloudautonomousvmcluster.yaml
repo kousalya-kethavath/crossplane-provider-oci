@@ -22,6 +22,7 @@ spec:
     definedTags: ${var.cloud_autonomous_vm_cluster_defined_tags}
     description: ${var.cloud_autonomous_vm_cluster_description}
     displayName: ${var.cloud_autonomous_vm_cluster_display_name}
+    distributionAlgorithm: ${var.cloud_autonomous_vm_cluster_distribution_algorithm}
     freeformTags:
       Department: Finance
     isMtlsEnabledVmCluster: ${var.cloud_autonomous_vm_cluster_is_mtls_enabled_vm_cluster}
@@ -46,6 +47,7 @@ spec:
     scanListenerPortNonTls: ${var.cloud_autonomous_vm_cluster_scan_listener_port_non_tls}
     scanListenerPortTls: ${var.cloud_autonomous_vm_cluster_scan_listener_port_tls}
     securityAttributes: ${var.cloud_autonomous_vm_cluster_security_attributes}
+    sgaPercentage: ${var.cloud_autonomous_vm_cluster_sga_percentage}
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: test_subnet

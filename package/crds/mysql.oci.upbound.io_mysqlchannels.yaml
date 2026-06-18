@@ -228,6 +228,11 @@ spec:
                           description: (Updatable) The network address of the MySQL
                             instance.
                           type: string
+                        mustUseIpv6OnDualStack:
+                          description: '(Updatable) Whether the connection of the
+                            channel will be requested using the IPv6 address of the
+                            dual stack DB system or not. Default: False.'
+                          type: boolean
                         passwordSecretRef:
                           description: (Updatable) The password for the replication
                             user. The password must be between 8 and 32 characters
@@ -651,6 +656,11 @@ spec:
                           description: (Updatable) The network address of the MySQL
                             instance.
                           type: string
+                        mustUseIpv6OnDualStack:
+                          description: '(Updatable) Whether the connection of the
+                            channel will be requested using the IPv6 address of the
+                            dual stack DB system or not. Default: False.'
+                          type: boolean
                         passwordSecretRef:
                           description: (Updatable) The password for the replication
                             user. The password must be between 8 and 32 characters
@@ -1094,6 +1104,11 @@ spec:
                           description: (Updatable) The network address of the MySQL
                             instance.
                           type: string
+                        mustUseIpv6OnDualStack:
+                          description: '(Updatable) Whether the connection of the
+                            channel will be requested using the IPv6 address of the
+                            dual stack DB system or not. Default: False.'
+                          type: boolean
                         port:
                           description: (Updatable) The port the source MySQL instance
                             listens on.

@@ -6290,10 +6290,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.privateEndpointIds)
                 || (has(self.initProvider) && has(self.initProvider.privateEndpointIds))'
-            - message: spec.forProvider.shardDetails is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.shardDetails)
-                || (has(self.initProvider) && has(self.initProvider.shardDetails))'
             - message: spec.forProvider.shardingMethod is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.shardingMethod)
@@ -6952,6 +6948,11 @@ spec:
                     description: (Updatable) An optional property when incremented
                       triggers Download Gsm Certificate Signing Request. Could be
                       set to any integer value.
+                    type: number
+                  effectiveReplicationUnit:
+                    description: The replication unit count for RAFT based distributed
+                      database. For RAFT replication based Globally distributed database,
+                      the value should be at least twice the number of shards.
                     type: number
                   freeformTags:
                     additionalProperties:

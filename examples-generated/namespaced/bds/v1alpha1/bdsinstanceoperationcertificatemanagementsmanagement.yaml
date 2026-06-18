@@ -24,6 +24,7 @@ spec:
         name: example-secret
     renewOperationCertificateManagement: ${var.renew_operation_certificate_management}
     rootCertificate: ${var.bds_instance_operation_certificate_managements_management_root_certificate}
+    secret_id: ${oci_vault_secret.test_secret.id}
     serverKeyPasswordSecretRef:
       key: example-key
       name: example-secret

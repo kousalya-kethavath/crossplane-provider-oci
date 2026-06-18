@@ -47,15 +47,15 @@ type PdbCreationTypeDetailsInitParameters struct {
 	SourcePluggableDatabaseIDSelector *v1.Selector `json:"sourcePluggableDatabaseIdSelector,omitempty" tf:"-"`
 
 	// (Applicable when creation_type=LOCAL_CLONE_PDB | REMOTE_CLONE_PDB) The OCID of the Source Pluggable Database Snapshot id.
-	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/database/v1alpha1.PluggableDatabaseSnapshot
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/filestorage/v1alpha1.Snapshot
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SourcePluggableDatabaseSnapshotID *string `json:"sourcePluggableDatabaseSnapshotId,omitempty" tf:"source_pluggable_database_snapshot_id,omitempty"`
 
-	// Reference to a PluggableDatabaseSnapshot in database to populate sourcePluggableDatabaseSnapshotId.
+	// Reference to a Snapshot in filestorage to populate sourcePluggableDatabaseSnapshotId.
 	// +kubebuilder:validation:Optional
 	SourcePluggableDatabaseSnapshotIDRef *v1.Reference `json:"sourcePluggableDatabaseSnapshotIdRef,omitempty" tf:"-"`
 
-	// Selector for a PluggableDatabaseSnapshot in database to populate sourcePluggableDatabaseSnapshotId.
+	// Selector for a Snapshot in filestorage to populate sourcePluggableDatabaseSnapshotId.
 	// +kubebuilder:validation:Optional
 	SourcePluggableDatabaseSnapshotIDSelector *v1.Selector `json:"sourcePluggableDatabaseSnapshotIdSelector,omitempty" tf:"-"`
 }
@@ -122,16 +122,16 @@ type PdbCreationTypeDetailsParameters struct {
 	SourcePluggableDatabaseIDSelector *v1.Selector `json:"sourcePluggableDatabaseIdSelector,omitempty" tf:"-"`
 
 	// (Applicable when creation_type=LOCAL_CLONE_PDB | REMOTE_CLONE_PDB) The OCID of the Source Pluggable Database Snapshot id.
-	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/database/v1alpha1.PluggableDatabaseSnapshot
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/filestorage/v1alpha1.Snapshot
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourcePluggableDatabaseSnapshotID *string `json:"sourcePluggableDatabaseSnapshotId,omitempty" tf:"source_pluggable_database_snapshot_id,omitempty"`
 
-	// Reference to a PluggableDatabaseSnapshot in database to populate sourcePluggableDatabaseSnapshotId.
+	// Reference to a Snapshot in filestorage to populate sourcePluggableDatabaseSnapshotId.
 	// +kubebuilder:validation:Optional
 	SourcePluggableDatabaseSnapshotIDRef *v1.Reference `json:"sourcePluggableDatabaseSnapshotIdRef,omitempty" tf:"-"`
 
-	// Selector for a PluggableDatabaseSnapshot in database to populate sourcePluggableDatabaseSnapshotId.
+	// Selector for a Snapshot in filestorage to populate sourcePluggableDatabaseSnapshotId.
 	// +kubebuilder:validation:Optional
 	SourcePluggableDatabaseSnapshotIDSelector *v1.Selector `json:"sourcePluggableDatabaseSnapshotIdSelector,omitempty" tf:"-"`
 }

@@ -1,0 +1,19 @@
+apiVersion: managedkafka.oci.m.upbound.io/v1alpha1
+kind: KafkaClusterAddon
+metadata:
+  annotations:
+    meta.upbound.io/example-id: managedkafka/v1alpha1/kafkaclusteraddon
+  labels:
+    testing.upbound.io/example-name: test_kafka_cluster_addon
+  name: test-kafka-cluster-addon
+  namespace: upbound-system
+spec:
+  forProvider:
+    addonType: ${var.kafka_cluster_addon_addon_type}
+    authenticationMechanism: ${var.kafka_cluster_addon_authentication_mechanism}
+    description: ${var.kafka_cluster_addon_description}
+    kafkaClusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_kafka_cluster
+    name: ${var.kafka_cluster_addon_name}
+    networkCidrs: ${var.kafka_cluster_addon_network_cidrs}

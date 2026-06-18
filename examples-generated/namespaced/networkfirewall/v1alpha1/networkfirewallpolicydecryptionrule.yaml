@@ -23,3 +23,4 @@ spec:
     - afterRule: ${var.network_firewall_policy_decryption_rule_position_after_rule}
       beforeRule: ${var.network_firewall_policy_decryption_rule_position_before_rule}
     secret: ${var.network_firewall_policy_decryption_rule_secret}
+    secrets: ${var.network_firewall_policy_decryption_rule_secrets}

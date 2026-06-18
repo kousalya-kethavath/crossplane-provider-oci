@@ -160,7 +160,7 @@ type ManagementExternalMySqlDatabaseConnectorInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CompartmentIDSelector *v1.NamespacedSelector `json:"compartmentIdSelector,omitempty" tf:"-"`
 
-	// (Updatable) Create Details of external database connector.
+	// (Updatable) Create Details of external database connector. MySQL support within Oracle Cloud Infrastructure Database Management service has been deprecated as of January 29, 2026.
 	ConnectorDetails []ManagementExternalMySqlDatabaseConnectorConnectorDetailsInitParameters `json:"connectorDetails,omitempty" tf:"connector_details,omitempty"`
 
 	// Parameter indicating whether database connection needs to be tested.
@@ -181,7 +181,7 @@ type ManagementExternalMySqlDatabaseConnectorObservation struct {
 	// Connection Status
 	ConnectionStatus *string `json:"connectionStatus,omitempty" tf:"connection_status,omitempty"`
 
-	// (Updatable) Create Details of external database connector.
+	// (Updatable) Create Details of external database connector. MySQL support within Oracle Cloud Infrastructure Database Management service has been deprecated as of January 29, 2026.
 	ConnectorDetails []ManagementExternalMySqlDatabaseConnectorConnectorDetailsObservation `json:"connectorDetails,omitempty" tf:"connector_details,omitempty"`
 
 	// Connector Type.
@@ -258,7 +258,7 @@ type ManagementExternalMySqlDatabaseConnectorParameters struct {
 	// +kubebuilder:validation:Optional
 	CompartmentIDSelector *v1.NamespacedSelector `json:"compartmentIdSelector,omitempty" tf:"-"`
 
-	// (Updatable) Create Details of external database connector.
+	// (Updatable) Create Details of external database connector. MySQL support within Oracle Cloud Infrastructure Database Management service has been deprecated as of January 29, 2026.
 	// +kubebuilder:validation:Optional
 	ConnectorDetails []ManagementExternalMySqlDatabaseConnectorConnectorDetailsParameters `json:"connectorDetails,omitempty" tf:"connector_details,omitempty"`
 

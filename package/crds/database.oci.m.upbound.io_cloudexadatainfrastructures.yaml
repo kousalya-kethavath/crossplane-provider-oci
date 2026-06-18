@@ -193,6 +193,17 @@ spec:
                       {"Department": "Finance"}'
                     type: object
                     x-kubernetes-map-type: granular
+                  maintenanceVersionPreferences:
+                    description: (Updatable) The preferences for target versions of
+                      future maintenance runs.
+                    items:
+                      properties:
+                        referenceResourceIdForImageUpdates:
+                          description: (Updatable) The OCID of the resource the maintenance
+                            run will refer to when trying to fetch target versions.
+                          type: string
+                      type: object
+                    type: array
                   maintenanceWindow:
                     description: (Updatable) The scheduling details for the quarterly
                       maintenance window. Patching and system updates take place during
@@ -437,6 +448,17 @@ spec:
                       {"Department": "Finance"}'
                     type: object
                     x-kubernetes-map-type: granular
+                  maintenanceVersionPreferences:
+                    description: (Updatable) The preferences for target versions of
+                      future maintenance runs.
+                    items:
+                      properties:
+                        referenceResourceIdForImageUpdates:
+                          description: (Updatable) The OCID of the resource the maintenance
+                            run will refer to when trying to fetch target versions.
+                          type: string
+                      type: object
+                    type: array
                   maintenanceWindow:
                     description: (Updatable) The scheduling details for the quarterly
                       maintenance window. Patching and system updates take place during
@@ -689,6 +711,9 @@ spec:
                             for the Exadata Infrastructure cluster. If false, the
                             file system resize is not allowed.
                           type: boolean
+                        maxSizeGb:
+                          description: The maximum size of file system.
+                          type: number
                         minSizeGb:
                           description: The minimum size of file system.
                           type: number
@@ -756,6 +781,17 @@ spec:
                     description: Additional information about the current lifecycle
                       state.
                     type: string
+                  maintenanceVersionPreferences:
+                    description: (Updatable) The preferences for target versions of
+                      future maintenance runs.
+                    items:
+                      properties:
+                        referenceResourceIdForImageUpdates:
+                          description: (Updatable) The OCID of the resource the maintenance
+                            run will refer to when trying to fetch target versions.
+                          type: string
+                      type: object
+                    type: array
                   maintenanceWindow:
                     description: (Updatable) The scheduling details for the quarterly
                       maintenance window. Patching and system updates take place during

@@ -75,7 +75,7 @@ type ManagementCloudDbNodeObservation struct {
 	// The user-friendly name for the cloud DB node. The name does not have to be unique.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// Name of the domain.
+	// The name of the domain.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags. Example: {"Department": "Finance"}

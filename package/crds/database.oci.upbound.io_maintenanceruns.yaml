@@ -673,6 +673,14 @@ spec:
                     items:
                       type: string
                     type: array
+                  referenceResourceIdForImageUpdates:
+                    description: The OCID of the resource the maintenance run will
+                      refer to when trying to fetch target versions. This field is
+                      set during maintenance run creation based on infrastructure's
+                      maintenance run version preferences.  Currently this is only
+                      be supported for monthly maintenance runs created via scheduling
+                      plans.
+                    type: string
                   state:
                     description: The current state of the maintenance run. For Autonomous
                       AI Database Serverless instances, valid states are IN_PROGRESS,
@@ -715,6 +723,24 @@ spec:
                     description: The total time taken by corresponding resource activity
                       in minutes.
                     type: number
+                  windowTypeDescriptions:
+                    description: A list of key-value pairs where the key will contain
+                      the window type and value contains all the windowDetails of
+                      that window type.
+                    items:
+                      properties:
+                        messages:
+                          description: A list of window detail messages from all the
+                            active execution windows based on the window type.
+                          items:
+                            type: string
+                          type: array
+                        windowType:
+                          description: The execution window is of PLANNED or UNPLANNED
+                            type.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

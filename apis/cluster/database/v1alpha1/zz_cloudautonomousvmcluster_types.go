@@ -33,7 +33,7 @@ type CloudAutonomousVmClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudExadataInfrastructureIDSelector *v1.Selector `json:"cloudExadataInfrastructureIdSelector,omitempty" tf:"-"`
 
-	// The time zone to use for the Cloud Autonomous VM cluster. For details, see DB System Time Zones.
+	// (Updatable) The time zone to use for the Cloud Autonomous VM cluster. For details, see DB System Time Zones.
 	ClusterTimeZone *string `json:"clusterTimeZone,omitempty" tf:"cluster_time_zone,omitempty"`
 
 	// (Updatable) The OCID of the compartment.
@@ -64,11 +64,14 @@ type CloudAutonomousVmClusterInitParameters struct {
 	// (Updatable) The user-friendly name for the cloud Autonomous VM cluster. The name does not need to be unique.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// (Updatable) The distribution algorithm used for the Autonomous VM cluster.
+	DistributionAlgorithm *string `json:"distributionAlgorithm,omitempty" tf:"distribution_algorithm,omitempty"`
+
 	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags.  Example: {"Department": "Finance"}
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
-	// Enable mutual TLS(mTLS) authentication for database at time of provisioning a VMCluster. This is applicable to database TLS Certificates only. Default is TLS
+	// (Updatable) Enable mutual TLS(mTLS) authentication for database at time of provisioning a VMCluster. This is applicable to database TLS Certificates only. Default is TLS
 	IsMtlsEnabledVMCluster *bool `json:"isMtlsEnabledVmCluster,omitempty" tf:"is_mtls_enabled_vm_cluster,omitempty"`
 
 	// (Updatable) The Oracle license model that applies to the Oracle Autonomous AI Database. Bring your own license (BYOL) allows you to apply your current on-premises Oracle software licenses to equivalent, highly automated Oracle services in the cloud. License Included allows you to subscribe to new Oracle AI Database software licenses and the Oracle AI Database service. Note that when provisioning an Autonomous AI Database on dedicated Exadata infrastructure, this attribute must be null. It is already set at the Autonomous Exadata Infrastructure level. When provisioning an [Autonomous AI Database Serverless] (https://docs.oracle.com/en/cloud/paas/autonomous-database/index.html) database, if a value is not specified, the system defaults the value to BRING_YOUR_OWN_LICENSE. Bring your own license (BYOL) also allows you to select the DB edition using the optional parameter.
@@ -90,15 +93,18 @@ type CloudAutonomousVmClusterInitParameters struct {
 	// (Updatable) An optional property when incremented triggers Register Pkcs. Could be set to any integer value.
 	RegisterPkcsTrigger *float64 `json:"registerPkcsTrigger,omitempty" tf:"register_pkcs_trigger,omitempty"`
 
-	// The SCAN Listener Non TLS port. Default is 1521.
+	// (Updatable) The SCAN Listener Non TLS port. Default is 1521.
 	ScanListenerPortNonTLS *float64 `json:"scanListenerPortNonTls,omitempty" tf:"scan_listener_port_non_tls,omitempty"`
 
-	// The SCAN Listener TLS port. Default is 2484.
+	// (Updatable) The SCAN Listener TLS port. Default is 2484.
 	ScanListenerPortTLS *float64 `json:"scanListenerPortTls,omitempty" tf:"scan_listener_port_tls,omitempty"`
 
 	// (Updatable) Security Attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "audit"}}}
 	// +mapType=granular
 	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
+	// Percentage of ECPU memory allocated for SGA(System Global Area).
+	SgaPercentage *float64 `json:"sgaPercentage,omitempty" tf:"sga_percentage,omitempty"`
 
 	// The OCID of the subnet the cloud Autonomous VM Cluster is associated with.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/networking/v1alpha1.Subnet
@@ -383,7 +389,7 @@ type CloudAutonomousVmClusterObservation struct {
 	// The OCID of the cloud Exadata infrastructure.
 	CloudExadataInfrastructureID *string `json:"cloudExadataInfrastructureId,omitempty" tf:"cloud_exadata_infrastructure_id,omitempty"`
 
-	// The time zone to use for the Cloud Autonomous VM cluster. For details, see DB System Time Zones.
+	// (Updatable) The time zone to use for the Cloud Autonomous VM cluster. For details, see DB System Time Zones.
 	ClusterTimeZone *string `json:"clusterTimeZone,omitempty" tf:"cluster_time_zone,omitempty"`
 
 	// (Updatable) The OCID of the compartment.
@@ -414,6 +420,9 @@ type CloudAutonomousVmClusterObservation struct {
 	// (Updatable) The user-friendly name for the cloud Autonomous VM cluster. The name does not need to be unique.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// (Updatable) The distribution algorithm used for the Autonomous VM cluster.
+	DistributionAlgorithm *string `json:"distributionAlgorithm,omitempty" tf:"distribution_algorithm,omitempty"`
+
 	// The domain name for the cloud Autonomous VM cluster.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
@@ -430,7 +439,7 @@ type CloudAutonomousVmClusterObservation struct {
 	// The OCID of the Cloud Autonomous VM cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Enable mutual TLS(mTLS) authentication for database at time of provisioning a VMCluster. This is applicable to database TLS Certificates only. Default is TLS
+	// (Updatable) Enable mutual TLS(mTLS) authentication for database at time of provisioning a VMCluster. This is applicable to database TLS Certificates only. Default is TLS
 	IsMtlsEnabledVMCluster *bool `json:"isMtlsEnabledVmCluster,omitempty" tf:"is_mtls_enabled_vm_cluster,omitempty"`
 
 	// The OCID of the last maintenance run.
@@ -506,15 +515,18 @@ type CloudAutonomousVmClusterObservation struct {
 	// The number of CPUs reserved in an Autonomous VM Cluster.
 	ReservedCpus *float64 `json:"reservedCpus,omitempty" tf:"reserved_cpus,omitempty"`
 
-	// The SCAN Listener Non TLS port. Default is 1521.
+	// (Updatable) The SCAN Listener Non TLS port. Default is 1521.
 	ScanListenerPortNonTLS *float64 `json:"scanListenerPortNonTls,omitempty" tf:"scan_listener_port_non_tls,omitempty"`
 
-	// The SCAN Listener TLS port. Default is 2484.
+	// (Updatable) The SCAN Listener TLS port. Default is 2484.
 	ScanListenerPortTLS *float64 `json:"scanListenerPortTls,omitempty" tf:"scan_listener_port_tls,omitempty"`
 
 	// (Updatable) Security Attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "audit"}}}
 	// +mapType=granular
 	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
+	// Percentage of ECPU memory allocated for SGA(System Global Area).
+	SgaPercentage *float64 `json:"sgaPercentage,omitempty" tf:"sga_percentage,omitempty"`
 
 	// The model name of the Exadata hardware running the cloud Autonomous VM cluster.
 	Shape *string `json:"shape,omitempty" tf:"shape,omitempty"`
@@ -583,7 +595,7 @@ type CloudAutonomousVmClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudExadataInfrastructureIDSelector *v1.Selector `json:"cloudExadataInfrastructureIdSelector,omitempty" tf:"-"`
 
-	// The time zone to use for the Cloud Autonomous VM cluster. For details, see DB System Time Zones.
+	// (Updatable) The time zone to use for the Cloud Autonomous VM cluster. For details, see DB System Time Zones.
 	// +kubebuilder:validation:Optional
 	ClusterTimeZone *string `json:"clusterTimeZone,omitempty" tf:"cluster_time_zone,omitempty"`
 
@@ -621,12 +633,16 @@ type CloudAutonomousVmClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// (Updatable) The distribution algorithm used for the Autonomous VM cluster.
+	// +kubebuilder:validation:Optional
+	DistributionAlgorithm *string `json:"distributionAlgorithm,omitempty" tf:"distribution_algorithm,omitempty"`
+
 	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags.  Example: {"Department": "Finance"}
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
-	// Enable mutual TLS(mTLS) authentication for database at time of provisioning a VMCluster. This is applicable to database TLS Certificates only. Default is TLS
+	// (Updatable) Enable mutual TLS(mTLS) authentication for database at time of provisioning a VMCluster. This is applicable to database TLS Certificates only. Default is TLS
 	// +kubebuilder:validation:Optional
 	IsMtlsEnabledVMCluster *bool `json:"isMtlsEnabledVmCluster,omitempty" tf:"is_mtls_enabled_vm_cluster,omitempty"`
 
@@ -655,11 +671,11 @@ type CloudAutonomousVmClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	RegisterPkcsTrigger *float64 `json:"registerPkcsTrigger,omitempty" tf:"register_pkcs_trigger,omitempty"`
 
-	// The SCAN Listener Non TLS port. Default is 1521.
+	// (Updatable) The SCAN Listener Non TLS port. Default is 1521.
 	// +kubebuilder:validation:Optional
 	ScanListenerPortNonTLS *float64 `json:"scanListenerPortNonTls,omitempty" tf:"scan_listener_port_non_tls,omitempty"`
 
-	// The SCAN Listener TLS port. Default is 2484.
+	// (Updatable) The SCAN Listener TLS port. Default is 2484.
 	// +kubebuilder:validation:Optional
 	ScanListenerPortTLS *float64 `json:"scanListenerPortTls,omitempty" tf:"scan_listener_port_tls,omitempty"`
 
@@ -667,6 +683,10 @@ type CloudAutonomousVmClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
+	// Percentage of ECPU memory allocated for SGA(System Global Area).
+	// +kubebuilder:validation:Optional
+	SgaPercentage *float64 `json:"sgaPercentage,omitempty" tf:"sga_percentage,omitempty"`
 
 	// The OCID of the subnet the cloud Autonomous VM Cluster is associated with.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/networking/v1alpha1.Subnet

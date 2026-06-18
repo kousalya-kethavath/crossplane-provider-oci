@@ -163,6 +163,8 @@ spec:
                     type: object
                   connectorDetails:
                     description: (Updatable) Create Details of external database connector.
+                      MySQL support within Oracle Cloud Infrastructure Database Management
+                      service has been deprecated as of January 29, 2026.
                     items:
                       properties:
                         credentialType:
@@ -452,6 +454,8 @@ spec:
                     type: object
                   connectorDetails:
                     description: (Updatable) Create Details of external database connector.
+                      MySQL support within Oracle Cloud Infrastructure Database Management
+                      service has been deprecated as of January 29, 2026.
                     items:
                       properties:
                         credentialType:
@@ -762,6 +766,8 @@ spec:
                     type: string
                   connectorDetails:
                     description: (Updatable) Create Details of external database connector.
+                      MySQL support within Oracle Cloud Infrastructure Database Management
+                      service has been deprecated as of January 29, 2026.
                     items:
                       properties:
                         credentialType:

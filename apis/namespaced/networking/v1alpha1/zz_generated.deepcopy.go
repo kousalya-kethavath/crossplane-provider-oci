@@ -4044,6 +4044,11 @@ func (in *Ipv6InitParameters) DeepCopyInto(out *Ipv6InitParameters) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.Hostname != nil {
+		in, out := &in.Hostname, &out.Hostname
+		*out = new(string)
+		**out = **in
+	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
 		*out = new(string)
@@ -4198,6 +4203,11 @@ func (in *Ipv6Observation) DeepCopyInto(out *Ipv6Observation) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.Hostname != nil {
+		in, out := &in.Hostname, &out.Hostname
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -4304,6 +4314,11 @@ func (in *Ipv6Parameters) DeepCopyInto(out *Ipv6Parameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.Hostname != nil {
+		in, out := &in.Hostname, &out.Hostname
+		*out = new(string)
+		**out = **in
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress

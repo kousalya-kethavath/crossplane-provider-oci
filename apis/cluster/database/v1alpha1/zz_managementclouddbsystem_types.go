@@ -88,14 +88,14 @@ type ManagementCloudDbSystemObservation struct {
 	// The configuration details of Database Management for a cloud DB system.
 	DatabaseManagementConfig []ManagementCloudDbSystemDatabaseManagementConfigObservation `json:"databaseManagementConfig,omitempty" tf:"database_management_config,omitempty"`
 
-	// The OCID of the parent cloud DB Infrastructure. For VM Dbsystems , it will be the DBSystem Id. For ExaCS and ExaCC,  it will be the cloudVmClusterId and vmClusterId respectively.
+	// The OCID of the parent cloud DB Infrastructure. For VM DB systems , it will be the DBSystem ID. For ExaCS and ExaCC,  it will be the cloudVmClusterId and vmClusterId respectively.
 	DbaasParentInfrastructureID *string `json:"dbaasParentInfrastructureId,omitempty" tf:"dbaas_parent_infrastructure_id,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
 	// +mapType=granular
 	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
-	// The deployment type of cloud dbsystem.
+	// The deployment type of cloud DB system.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
 	// The OCID of the management agent used during the discovery of the DB system.

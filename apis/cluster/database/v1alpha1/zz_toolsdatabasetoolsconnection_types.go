@@ -204,7 +204,7 @@ type ProxyClientInitParameters struct {
 	// (Updatable) The proxy authentication type.
 	ProxyAuthenticationType *string `json:"proxyAuthenticationType,omitempty" tf:"proxy_authentication_type,omitempty"`
 
-	// (Applicable when proxy_authentication_type=USER_NAME) (Updatable) A list of database roles for the client. These roles are enabled if the proxy is authorized to use the roles on behalf of the client.
+	// (Applicable when proxy_authentication_type=USER_NAME | USER_NAME_AUTO_DETECT) (Updatable) A list of database roles for the client. These roles are enabled if the proxy is authorized to use the roles on behalf of the client.
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
 	// (Updatable) The user name.
@@ -229,7 +229,7 @@ type ProxyClientObservation struct {
 	// (Updatable) The proxy authentication type.
 	ProxyAuthenticationType *string `json:"proxyAuthenticationType,omitempty" tf:"proxy_authentication_type,omitempty"`
 
-	// (Applicable when proxy_authentication_type=USER_NAME) (Updatable) A list of database roles for the client. These roles are enabled if the proxy is authorized to use the roles on behalf of the client.
+	// (Applicable when proxy_authentication_type=USER_NAME | USER_NAME_AUTO_DETECT) (Updatable) A list of database roles for the client. These roles are enabled if the proxy is authorized to use the roles on behalf of the client.
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
 	// (Updatable) The user name.
@@ -245,7 +245,7 @@ type ProxyClientParameters struct {
 	// +kubebuilder:validation:Optional
 	ProxyAuthenticationType *string `json:"proxyAuthenticationType" tf:"proxy_authentication_type,omitempty"`
 
-	// (Applicable when proxy_authentication_type=USER_NAME) (Updatable) A list of database roles for the client. These roles are enabled if the proxy is authorized to use the roles on behalf of the client.
+	// (Applicable when proxy_authentication_type=USER_NAME | USER_NAME_AUTO_DETECT) (Updatable) A list of database roles for the client. These roles are enabled if the proxy is authorized to use the roles on behalf of the client.
 	// +kubebuilder:validation:Optional
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
@@ -303,6 +303,9 @@ type ToolsDatabaseToolsConnectionInitParameters struct {
 	// +mapType=granular
 	AdvancedProperties map[string]*string `json:"advancedProperties,omitempty" tf:"advanced_properties,omitempty"`
 
+	// (Applicable when type=ORACLE_DATABASE) Specifies the authentication type used by the Database Tools service to authenticate with the database.
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
 	// (Updatable) The OCID of the compartment containing the Database Tools connection.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/identity/v1alpha1.Compartment
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
@@ -354,7 +357,7 @@ type ToolsDatabaseToolsConnectionInitParameters struct {
 	// (Applicable when type=MYSQL | ORACLE_DATABASE | POSTGRESQL) (Updatable) The related resource
 	RelatedResource []RelatedResourceInitParameters `json:"relatedResource,omitempty" tf:"related_resource,omitempty"`
 
-	// Specifies the identity used by the Database Tools service to issue requests to other Oracle Cloud Infrastructure services (e.g., Secrets in Vault).
+	// Specifies the identity used when accessing Oracle Cloud Infrastructure resources at runtime. AUTHENTICATED_PRINCIPAL to use the caller’s identity (On-Behalf-Of token), or RESOURCE_PRINCIPAL to use the connection’s resource principal (RPST).
 	RuntimeIdentity *string `json:"runtimeIdentity,omitempty" tf:"runtime_identity,omitempty"`
 
 	// Specifies whether this connection is supported by the Database Tools Runtime.
@@ -388,6 +391,9 @@ type ToolsDatabaseToolsConnectionObservation struct {
 	// (Updatable) The advanced connection properties key-value pair (e.g., oracle.net.ssl_server_dn_match).
 	// +mapType=granular
 	AdvancedProperties map[string]*string `json:"advancedProperties,omitempty" tf:"advanced_properties,omitempty"`
+
+	// (Applicable when type=ORACLE_DATABASE) Specifies the authentication type used by the Database Tools service to authenticate with the database.
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// (Updatable) The OCID of the compartment containing the Database Tools connection.
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
@@ -430,7 +436,7 @@ type ToolsDatabaseToolsConnectionObservation struct {
 	// Specifies the Database Tools Runtime endpoint.
 	RuntimeEndpoint *string `json:"runtimeEndpoint,omitempty" tf:"runtime_endpoint,omitempty"`
 
-	// Specifies the identity used by the Database Tools service to issue requests to other Oracle Cloud Infrastructure services (e.g., Secrets in Vault).
+	// Specifies the identity used when accessing Oracle Cloud Infrastructure resources at runtime. AUTHENTICATED_PRINCIPAL to use the caller’s identity (On-Behalf-Of token), or RESOURCE_PRINCIPAL to use the connection’s resource principal (RPST).
 	RuntimeIdentity *string `json:"runtimeIdentity,omitempty" tf:"runtime_identity,omitempty"`
 
 	// Specifies whether this connection is supported by the Database Tools Runtime.
@@ -468,6 +474,10 @@ type ToolsDatabaseToolsConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	AdvancedProperties map[string]*string `json:"advancedProperties,omitempty" tf:"advanced_properties,omitempty"`
+
+	// (Applicable when type=ORACLE_DATABASE) Specifies the authentication type used by the Database Tools service to authenticate with the database.
+	// +kubebuilder:validation:Optional
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// (Updatable) The OCID of the compartment containing the Database Tools connection.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/identity/v1alpha1.Compartment
@@ -530,7 +540,7 @@ type ToolsDatabaseToolsConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	RelatedResource []RelatedResourceParameters `json:"relatedResource,omitempty" tf:"related_resource,omitempty"`
 
-	// Specifies the identity used by the Database Tools service to issue requests to other Oracle Cloud Infrastructure services (e.g., Secrets in Vault).
+	// Specifies the identity used when accessing Oracle Cloud Infrastructure resources at runtime. AUTHENTICATED_PRINCIPAL to use the caller’s identity (On-Behalf-Of token), or RESOURCE_PRINCIPAL to use the connection’s resource principal (RPST).
 	// +kubebuilder:validation:Optional
 	RuntimeIdentity *string `json:"runtimeIdentity,omitempty" tf:"runtime_identity,omitempty"`
 
@@ -701,7 +711,6 @@ type ToolsDatabaseToolsConnection struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || (has(self.initProvider) && has(self.initProvider.displayName))",message="spec.forProvider.displayName is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || (has(self.initProvider) && has(self.initProvider.type))",message="spec.forProvider.type is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.userPassword) || (has(self.initProvider) && has(self.initProvider.userPassword))",message="spec.forProvider.userPassword is a required parameter"
 	Spec   ToolsDatabaseToolsConnectionSpec   `json:"spec"`
 	Status ToolsDatabaseToolsConnectionStatus `json:"status,omitempty"`
 }

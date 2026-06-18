@@ -65,6 +65,12 @@ spec:
                       and certificate metadata.
                     items:
                       properties:
+                        certChainPem:
+                          description: (Updatable) The certificate chain (in PEM format).
+                          type: string
+                        certificatePem:
+                          description: (Updatable) The leaf certificate (in PEM format).
+                          type: string
                         certificateProfileType:
                           description: The name of the profile used to create the
                             certificate, which depends on the type of certificate
@@ -72,8 +78,8 @@ spec:
                           type: string
                         configType:
                           description: '(Updatable) The origin of the certificate.
-                            It must be one of the supported types: MANAGED_EXTERNALLY_ISSUED_BY_INTERNAL_CA
-                            or ISSUED_BY_INTERNAL_CA.'
+                            It must be one of the supported types: MANAGED_EXTERNALLY_ISSUED_BY_INTERNAL_CA,
+                            ISSUED_BY_INTERNAL_CA, or IMPORTED.'
                           type: string
                         csrPem:
                           description: (Updatable) The certificate signing request
@@ -168,9 +174,42 @@ spec:
                           description: (Applicable when config_type=ISSUED_BY_INTERNAL_CA)
                             The algorithm to use to create key pairs.
                           type: string
+                        privateKeyPemPassphraseSecretRef:
+                          description: (Applicable when config_type=IMPORTED) (Updatable)
+                            The passphrase for the encrypted private key in PEM format.
+                            This value is sensitive.
+                          properties:
+                            key:
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          type: object
+                        privateKeyPemSecretRef:
+                          description: (Updatable) The private key (in PEM format).
+                            This value is sensitive.
+                          properties:
+                            key:
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          type: object
                         signatureAlgorithm:
                           description: (Applicable when config_type=ISSUED_BY_INTERNAL_CA)
                             The algorithm to use to sign the public key certificate.
+                          type: string
+                        stage:
+                          description: (Applicable when config_type=IMPORTED) (Updatable)
+                            The rotation stage used for imported certificate version
+                            updates. Supported values are CURRENT and PENDING. Defaults
+                            to CURRENT when omitted.
                           type: string
                         subject:
                           description: The subject of the certificate, which is a
@@ -482,6 +521,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  currentVersionNumber:
+                    description: (Updatable) The target current certificate version
+                      number. This update cannot be combined with updates to certificate_config,
+                      description, defined_tags, freeform_tags, or certificate_rules.
+                    type: string
                   definedTags:
                     additionalProperties:
                       type: string
@@ -528,6 +572,12 @@ spec:
                       and certificate metadata.
                     items:
                       properties:
+                        certChainPem:
+                          description: (Updatable) The certificate chain (in PEM format).
+                          type: string
+                        certificatePem:
+                          description: (Updatable) The leaf certificate (in PEM format).
+                          type: string
                         certificateProfileType:
                           description: The name of the profile used to create the
                             certificate, which depends on the type of certificate
@@ -535,8 +585,8 @@ spec:
                           type: string
                         configType:
                           description: '(Updatable) The origin of the certificate.
-                            It must be one of the supported types: MANAGED_EXTERNALLY_ISSUED_BY_INTERNAL_CA
-                            or ISSUED_BY_INTERNAL_CA.'
+                            It must be one of the supported types: MANAGED_EXTERNALLY_ISSUED_BY_INTERNAL_CA,
+                            ISSUED_BY_INTERNAL_CA, or IMPORTED.'
                           type: string
                         csrPem:
                           description: (Updatable) The certificate signing request
@@ -631,9 +681,42 @@ spec:
                           description: (Applicable when config_type=ISSUED_BY_INTERNAL_CA)
                             The algorithm to use to create key pairs.
                           type: string
+                        privateKeyPemPassphraseSecretRef:
+                          description: (Applicable when config_type=IMPORTED) (Updatable)
+                            The passphrase for the encrypted private key in PEM format.
+                            This value is sensitive.
+                          properties:
+                            key:
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          type: object
+                        privateKeyPemSecretRef:
+                          description: (Updatable) The private key (in PEM format).
+                            This value is sensitive.
+                          properties:
+                            key:
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          type: object
                         signatureAlgorithm:
                           description: (Applicable when config_type=ISSUED_BY_INTERNAL_CA)
                             The algorithm to use to sign the public key certificate.
+                          type: string
+                        stage:
+                          description: (Applicable when config_type=IMPORTED) (Updatable)
+                            The rotation stage used for imported certificate version
+                            updates. Supported values are CURRENT and PENDING. Defaults
+                            to CURRENT when omitted.
                           type: string
                         subject:
                           description: The subject of the certificate, which is a
@@ -945,6 +1028,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  currentVersionNumber:
+                    description: (Updatable) The target current certificate version
+                      number. This update cannot be combined with updates to certificate_config,
+                      description, defined_tags, freeform_tags, or certificate_rules.
+                    type: string
                   definedTags:
                     additionalProperties:
                       type: string
@@ -1052,6 +1140,12 @@ spec:
                       and certificate metadata.
                     items:
                       properties:
+                        certChainPem:
+                          description: (Updatable) The certificate chain (in PEM format).
+                          type: string
+                        certificatePem:
+                          description: (Updatable) The leaf certificate (in PEM format).
+                          type: string
                         certificateProfileType:
                           description: The name of the profile used to create the
                             certificate, which depends on the type of certificate
@@ -1059,8 +1153,8 @@ spec:
                           type: string
                         configType:
                           description: '(Updatable) The origin of the certificate.
-                            It must be one of the supported types: MANAGED_EXTERNALLY_ISSUED_BY_INTERNAL_CA
-                            or ISSUED_BY_INTERNAL_CA.'
+                            It must be one of the supported types: MANAGED_EXTERNALLY_ISSUED_BY_INTERNAL_CA,
+                            ISSUED_BY_INTERNAL_CA, or IMPORTED.'
                           type: string
                         csrPem:
                           description: (Updatable) The certificate signing request
@@ -1076,6 +1170,12 @@ spec:
                         signatureAlgorithm:
                           description: (Applicable when config_type=ISSUED_BY_INTERNAL_CA)
                             The algorithm to use to sign the public key certificate.
+                          type: string
+                        stage:
+                          description: (Applicable when config_type=IMPORTED) (Updatable)
+                            The rotation stage used for imported certificate version
+                            updates. Supported values are CURRENT and PENDING. Defaults
+                            to CURRENT when omitted.
                           type: string
                         subject:
                           description: The subject of the certificate, which is a
@@ -1272,8 +1372,8 @@ spec:
                     type: string
                   configType:
                     description: '(Updatable) The origin of the certificate. It must
-                      be one of the supported types: MANAGED_EXTERNALLY_ISSUED_BY_INTERNAL_CA
-                      or ISSUED_BY_INTERNAL_CA.'
+                      be one of the supported types: MANAGED_EXTERNALLY_ISSUED_BY_INTERNAL_CA,
+                      ISSUED_BY_INTERNAL_CA, or IMPORTED.'
                     type: string
                   currentVersion:
                     description: The details of the certificate version. This object
@@ -1370,6 +1470,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  currentVersionNumber:
+                    description: (Updatable) The target current certificate version
+                      number. This update cannot be combined with updates to certificate_config,
+                      description, defined_tags, freeform_tags, or certificate_rules.
+                    type: string
                   definedTags:
                     additionalProperties:
                       type: string

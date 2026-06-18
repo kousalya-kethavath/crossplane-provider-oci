@@ -322,6 +322,15 @@ func (l *DatabaseSoftwareImageList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this DatabaseSoftwareScheduleManagementList.
+func (l *DatabaseSoftwareScheduleManagementList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this DatabaseUpgradeList.
 func (l *DatabaseUpgradeList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -1213,6 +1222,15 @@ func (l *ToolsDatabaseToolsConnectionList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ToolsDatabaseToolsDatabaseApiGatewayConfigList.
+func (l *ToolsDatabaseToolsDatabaseApiGatewayConfigList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ToolsDatabaseToolsIdentityList.
 func (l *ToolsDatabaseToolsIdentityList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -1222,8 +1240,107 @@ func (l *ToolsDatabaseToolsIdentityList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ToolsDatabaseToolsMcpServerList.
+func (l *ToolsDatabaseToolsMcpServerList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ToolsDatabaseToolsMcpToolsetList.
+func (l *ToolsDatabaseToolsMcpToolsetList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ToolsDatabaseToolsPrivateEndpointList.
 func (l *ToolsDatabaseToolsPrivateEndpointList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ToolsDatabaseToolsSqlReportList.
+func (l *ToolsDatabaseToolsSqlReportList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpecList.
+func (l *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpecList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpecList.
+func (l *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpecList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGranteeList.
+func (l *ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGranteeList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ToolsRuntimeDatabaseToolsConnectionCredentialList.
+func (l *ToolsRuntimeDatabaseToolsConnectionCredentialList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonymList.
+func (l *ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonymList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ToolsRuntimeDatabaseToolsConnectionPropertySetList.
+func (l *ToolsRuntimeDatabaseToolsConnectionPropertySetList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobalList.
+func (l *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobalList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPoolList.
+func (l *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPoolList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

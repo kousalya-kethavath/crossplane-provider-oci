@@ -19,8 +19,26 @@ type InitialDataLoadInitParameters struct {
 	// (Updatable) Action upon existing tables in target when initial Data Load is set i.e., isInitialLoad=true.
 	ActionOnExistingTable *string `json:"actionOnExistingTable,omitempty" tf:"action_on_existing_table,omitempty"`
 
+	// (Updatable) Directory path of ADB wallet locally available in Non-ADB target DB. Required for ADB to non-ADB DBLink type initial load only. If not provided the default wallet path "/u01/targetwallet" will be used.
+	AdbWalletPath *string `json:"adbWalletPath,omitempty" tf:"adb_wallet_path,omitempty"`
+
+	// (Updatable) Name of the ObjectStorage bucket. Required only for Objectstorage Initial load.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// (Updatable) Type of Initial load, which can be objectStorage or dbLink.
+	InitialLoadType *string `json:"initialLoadType,omitempty" tf:"initial_load_type,omitempty"`
+
 	// (Updatable) If ENABLED, then existing source data is also synchronized to the target when creating or updating the pipeline.
 	IsInitialLoad *string `json:"isInitialLoad,omitempty" tf:"is_initial_load,omitempty"`
+
+	// (Updatable) Namespace that serves as a container of the ObjectStorage bucket. Required only for Objectstorage Initial load.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+
+	// (Updatable) Directory path of ObjectStorage wallet locally available in Non-ADB source DB. Required for Object Storage type initial load only if source DB is Non-ADB type.
+	SourceWalletPath *string `json:"sourceWalletPath,omitempty" tf:"source_wallet_path,omitempty"`
+
+	// (Updatable) Directory path of ObjectStorage wallet locally available in Non-ADB target DB. Required for Object Storage type initial load only if target DB is Non-ADB type.
+	TargetWalletPath *string `json:"targetWalletPath,omitempty" tf:"target_wallet_path,omitempty"`
 }
 
 type InitialDataLoadObservation struct {
@@ -28,8 +46,26 @@ type InitialDataLoadObservation struct {
 	// (Updatable) Action upon existing tables in target when initial Data Load is set i.e., isInitialLoad=true.
 	ActionOnExistingTable *string `json:"actionOnExistingTable,omitempty" tf:"action_on_existing_table,omitempty"`
 
+	// (Updatable) Directory path of ADB wallet locally available in Non-ADB target DB. Required for ADB to non-ADB DBLink type initial load only. If not provided the default wallet path "/u01/targetwallet" will be used.
+	AdbWalletPath *string `json:"adbWalletPath,omitempty" tf:"adb_wallet_path,omitempty"`
+
+	// (Updatable) Name of the ObjectStorage bucket. Required only for Objectstorage Initial load.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// (Updatable) Type of Initial load, which can be objectStorage or dbLink.
+	InitialLoadType *string `json:"initialLoadType,omitempty" tf:"initial_load_type,omitempty"`
+
 	// (Updatable) If ENABLED, then existing source data is also synchronized to the target when creating or updating the pipeline.
 	IsInitialLoad *string `json:"isInitialLoad,omitempty" tf:"is_initial_load,omitempty"`
+
+	// (Updatable) Namespace that serves as a container of the ObjectStorage bucket. Required only for Objectstorage Initial load.
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+
+	// (Updatable) Directory path of ObjectStorage wallet locally available in Non-ADB source DB. Required for Object Storage type initial load only if source DB is Non-ADB type.
+	SourceWalletPath *string `json:"sourceWalletPath,omitempty" tf:"source_wallet_path,omitempty"`
+
+	// (Updatable) Directory path of ObjectStorage wallet locally available in Non-ADB target DB. Required for Object Storage type initial load only if target DB is Non-ADB type.
+	TargetWalletPath *string `json:"targetWalletPath,omitempty" tf:"target_wallet_path,omitempty"`
 }
 
 type InitialDataLoadParameters struct {
@@ -38,9 +74,33 @@ type InitialDataLoadParameters struct {
 	// +kubebuilder:validation:Optional
 	ActionOnExistingTable *string `json:"actionOnExistingTable,omitempty" tf:"action_on_existing_table,omitempty"`
 
+	// (Updatable) Directory path of ADB wallet locally available in Non-ADB target DB. Required for ADB to non-ADB DBLink type initial load only. If not provided the default wallet path "/u01/targetwallet" will be used.
+	// +kubebuilder:validation:Optional
+	AdbWalletPath *string `json:"adbWalletPath,omitempty" tf:"adb_wallet_path,omitempty"`
+
+	// (Updatable) Name of the ObjectStorage bucket. Required only for Objectstorage Initial load.
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// (Updatable) Type of Initial load, which can be objectStorage or dbLink.
+	// +kubebuilder:validation:Optional
+	InitialLoadType *string `json:"initialLoadType,omitempty" tf:"initial_load_type,omitempty"`
+
 	// (Updatable) If ENABLED, then existing source data is also synchronized to the target when creating or updating the pipeline.
 	// +kubebuilder:validation:Optional
 	IsInitialLoad *string `json:"isInitialLoad" tf:"is_initial_load,omitempty"`
+
+	// (Updatable) Namespace that serves as a container of the ObjectStorage bucket. Required only for Objectstorage Initial load.
+	// +kubebuilder:validation:Optional
+	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
+
+	// (Updatable) Directory path of ObjectStorage wallet locally available in Non-ADB source DB. Required for Object Storage type initial load only if source DB is Non-ADB type.
+	// +kubebuilder:validation:Optional
+	SourceWalletPath *string `json:"sourceWalletPath,omitempty" tf:"source_wallet_path,omitempty"`
+
+	// (Updatable) Directory path of ObjectStorage wallet locally available in Non-ADB target DB. Required for Object Storage type initial load only if target DB is Non-ADB type.
+	// +kubebuilder:validation:Optional
+	TargetWalletPath *string `json:"targetWalletPath,omitempty" tf:"target_wallet_path,omitempty"`
 }
 
 type MappingRulesInitParameters struct {
@@ -66,13 +126,13 @@ type PipelineDiagnosticDataInitParameters struct {
 
 type PipelineDiagnosticDataObservation struct {
 
-	// Name of the bucket where the object is to be uploaded in the object storage
+	// (Updatable) Name of the ObjectStorage bucket. Required only for Objectstorage Initial load.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// The state of the pipeline diagnostics collection.
 	DiagnosticState *string `json:"diagnosticState,omitempty" tf:"diagnostic_state,omitempty"`
 
-	// Name of namespace that serves as a container for all of your buckets
+	// (Updatable) Namespace that serves as a container of the ObjectStorage bucket. Required only for Objectstorage Initial load.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
 	// Name of the diagnostic collected and uploaded to object storage
@@ -99,6 +159,9 @@ type PipelineIngressIpsParameters struct {
 
 type PipelineInitParameters struct {
 
+	// (Updatable) The Minimum number of OCPUs to be made available for this Deployment.
+	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
+
 	// (Updatable) The OCID of the compartment being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/identity/v1alpha1.Compartment
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
@@ -124,6 +187,9 @@ type PipelineInitParameters struct {
 	// (Updatable) A simple key-value pair that is applied without any predefined name, type, or scope. Exists for cross-compatibility only.  Example: {"bar-key": "value"}
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+
+	// (Updatable) Indicates if auto scaling is enabled for the Deployment's CPU core count.
+	IsAutoScalingEnabled *bool `json:"isAutoScalingEnabled,omitempty" tf:"is_auto_scaling_enabled,omitempty"`
 
 	// (Updatable) The Oracle license model that applies to a Deployment.
 	LicenseModel *string `json:"licenseModel,omitempty" tf:"license_model,omitempty"`
@@ -208,7 +274,7 @@ type PipelineLocksParameters struct {
 
 type PipelineObservation struct {
 
-	// The Minimum number of OCPUs to be made available for this Deployment.
+	// (Updatable) The Minimum number of OCPUs to be made available for this Deployment.
 	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
 
 	// (Updatable) The OCID of the compartment being referenced.
@@ -234,7 +300,7 @@ type PipelineObservation struct {
 	// List of ingress IP addresses from where the GoldenGate deployment connects to this connection's privateIp.  Customers may optionally set up ingress security rules to restrict traffic from these IP addresses.
 	IngressIps []PipelineIngressIpsObservation `json:"ingressIps,omitempty" tf:"ingress_ips,omitempty"`
 
-	// Indicates if auto scaling is enabled for the Deployment's CPU core count.
+	// (Updatable) Indicates if auto scaling is enabled for the Deployment's CPU core count.
 	IsAutoScalingEnabled *bool `json:"isAutoScalingEnabled,omitempty" tf:"is_auto_scaling_enabled,omitempty"`
 
 	// (Updatable) The Oracle license model that applies to a Deployment.
@@ -289,6 +355,10 @@ type PipelineObservation struct {
 
 type PipelineParameters struct {
 
+	// (Updatable) The Minimum number of OCPUs to be made available for this Deployment.
+	// +kubebuilder:validation:Optional
+	CPUCoreCount *float64 `json:"cpuCoreCount,omitempty" tf:"cpu_core_count,omitempty"`
+
 	// (Updatable) The OCID of the compartment being referenced.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/identity/v1alpha1.Compartment
 	// +kubebuilder:validation:Optional
@@ -319,6 +389,10 @@ type PipelineParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+
+	// (Updatable) Indicates if auto scaling is enabled for the Deployment's CPU core count.
+	// +kubebuilder:validation:Optional
+	IsAutoScalingEnabled *bool `json:"isAutoScalingEnabled,omitempty" tf:"is_auto_scaling_enabled,omitempty"`
 
 	// (Updatable) The Oracle license model that applies to a Deployment.
 	// +kubebuilder:validation:Optional

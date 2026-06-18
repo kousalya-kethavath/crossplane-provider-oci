@@ -23,6 +23,7 @@ spec:
     compartmentIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    computeCount: ${var.resource_analytics_instance_compute_count}
     definedTags:
       Operations.CostCenter: "42"
     description: ${var.resource_analytics_instance_description}

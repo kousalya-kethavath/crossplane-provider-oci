@@ -1024,6 +1024,113 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        managedSoftwareUpdateDetails:
+                          description: (Applicable when source=DB_BACKUP | NONE) The
+                            database registered for Oracle Managed Database Software
+                            Updates.
+                          items:
+                            properties:
+                              isEnrolled:
+                                description: If true, database is registered for Oracle
+                                  Managed Database Software Updates otherwise database
+                                  is not registered for Oracle Managed Database Software
+                                  Updates
+                                type: boolean
+                              maintenanceDetails:
+                                description: Provides details about actual Oracle
+                                  Managed Database Software Updates scheduled time
+                                  and version.
+                                items:
+                                  properties:
+                                    timeOfLastReadinessCheck:
+                                      description: The date and time of the last readiness
+                                        check.
+                                      type: string
+                                    timeOfStatusUpdate:
+                                      description: The date and time of when the status
+                                        was updated.
+                                      type: string
+                                    timeScheduled:
+                                      description: The date and time of the database
+                                        was scheduled for update.
+                                      type: string
+                                    updateMode:
+                                      description: '(Applicable when source=DB_BACKUP
+                                        | NONE) Oracle Managed Database Software update
+                                        method, either "ROLLING" or "NONROLLING".
+                                        Default value is ROLLING. IMPORTANT: Non-rolling
+                                        Database Software update update involves system
+                                        down time.'
+                                      type: string
+                                    updateReadinessStatus:
+                                      description: The managed software update readiness
+                                        status
+                                      type: string
+                                    updateReadinessStatusDetails:
+                                      description: This field will contain actual
+                                        cause of update readiness state.
+                                      type: string
+                                    version:
+                                      description: The version of the database was
+                                        scheduled for update.
+                                      type: string
+                                  type: object
+                                type: array
+                              preferenceDetails:
+                                description: (Applicable when source=DB_BACKUP | NONE)
+                                  Oracle Managed Database Software Updates schedule
+                                  will be created based on the provided update preferences
+                                items:
+                                  properties:
+                                    daysOfWeek:
+                                      description: The update should be applied on
+                                        the database for the selected days of the
+                                        week.
+                                      items:
+                                        type: string
+                                      type: array
+                                    hourOfDay:
+                                      description: The update should be applied on
+                                        the database for the selected hour of the
+                                        day.
+                                      type: number
+                                    updateMode:
+                                      description: '(Applicable when source=DB_BACKUP
+                                        | NONE) Oracle Managed Database Software update
+                                        method, either "ROLLING" or "NONROLLING".
+                                        Default value is ROLLING. IMPORTANT: Non-rolling
+                                        Database Software update update involves system
+                                        down time.'
+                                      type: string
+                                    versionSchemeDetails:
+                                      description: The update should be applied on
+                                        the database for the selected version scheme.
+                                      items:
+                                        properties:
+                                          majorVersion:
+                                            description: The update should be applied
+                                              on the database for the selected major
+                                              version series.  The value can be provided
+                                              as 23.X.X.X then 23 major version series
+                                              will be considered.
+                                            type: string
+                                          source:
+                                            description: The update should be applied
+                                              on the database for the selected version
+                                              scheme.
+                                            type: string
+                                          versionPreference:
+                                            description: The update should be applied
+                                              on the database for the selected version
+                                              preference. *_N represents the LATEST
+                                              version
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         ncharacterSet:
                           description: '(Applicable when source=NONE) The national
                             character set for the database.  The default is AL16UTF16.
@@ -1322,8 +1429,85 @@ spec:
                               type: object
                           type: object
                         vmClusterId:
-                          description: The OCID of the VM cluster.
+                          description: (Applicable when source=DB_BACKUP | NONE) The
+                            OCID of the VM cluster.
                           type: string
+                        vmClusterIdRef:
+                          description: Reference to a VmCluster in database to populate
+                            vmClusterId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        vmClusterIdSelector:
+                          description: Selector for a VmCluster in database to populate
+                            vmClusterId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                       type: object
                     type: array
                   dbHomeId:
@@ -1577,16 +1761,115 @@ spec:
                             type: string
                         type: object
                     type: object
+                  managedSoftwareUpdateDetails:
+                    description: (Applicable when source=DB_BACKUP | NONE) The database
+                      registered for Oracle Managed Database Software Updates.
+                    items:
+                      properties:
+                        isEnrolled:
+                          description: If true, database is registered for Oracle
+                            Managed Database Software Updates otherwise database is
+                            not registered for Oracle Managed Database Software Updates
+                          type: boolean
+                        maintenanceDetails:
+                          description: Provides details about actual Oracle Managed
+                            Database Software Updates scheduled time and version.
+                          items:
+                            properties:
+                              timeOfLastReadinessCheck:
+                                description: The date and time of the last readiness
+                                  check.
+                                type: string
+                              timeOfStatusUpdate:
+                                description: The date and time of when the status
+                                  was updated.
+                                type: string
+                              timeScheduled:
+                                description: The date and time of the database was
+                                  scheduled for update.
+                                type: string
+                              updateMode:
+                                description: '(Applicable when source=DB_BACKUP |
+                                  NONE) Oracle Managed Database Software update method,
+                                  either "ROLLING" or "NONROLLING". Default value
+                                  is ROLLING. IMPORTANT: Non-rolling Database Software
+                                  update update involves system down time.'
+                                type: string
+                              updateReadinessStatus:
+                                description: The managed software update readiness
+                                  status
+                                type: string
+                              updateReadinessStatusDetails:
+                                description: This field will contain actual cause
+                                  of update readiness state.
+                                type: string
+                              version:
+                                description: The version of the database was scheduled
+                                  for update.
+                                type: string
+                            type: object
+                          type: array
+                        preferenceDetails:
+                          description: (Applicable when source=DB_BACKUP | NONE) Oracle
+                            Managed Database Software Updates schedule will be created
+                            based on the provided update preferences
+                          items:
+                            properties:
+                              daysOfWeek:
+                                description: The update should be applied on the database
+                                  for the selected days of the week.
+                                items:
+                                  type: string
+                                type: array
+                              hourOfDay:
+                                description: The update should be applied on the database
+                                  for the selected hour of the day.
+                                type: number
+                              updateMode:
+                                description: '(Applicable when source=DB_BACKUP |
+                                  NONE) Oracle Managed Database Software update method,
+                                  either "ROLLING" or "NONROLLING". Default value
+                                  is ROLLING. IMPORTANT: Non-rolling Database Software
+                                  update update involves system down time.'
+                                type: string
+                              versionSchemeDetails:
+                                description: The update should be applied on the database
+                                  for the selected version scheme.
+                                items:
+                                  properties:
+                                    majorVersion:
+                                      description: The update should be applied on
+                                        the database for the selected major version
+                                        series.  The value can be provided as 23.X.X.X
+                                        then 23 major version series will be considered.
+                                      type: string
+                                    source:
+                                      description: The update should be applied on
+                                        the database for the selected version scheme.
+                                      type: string
+                                    versionPreference:
+                                      description: The update should be applied on
+                                        the database for the selected version preference.
+                                        *_N represents the LATEST version
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   source:
-                    description: 'The source of the database: Use NONE for creating
-                      a new database. Use DB_BACKUP for creating a new database by
-                      restoring from a backup. Use DATAGUARD for creating a new STANDBY
-                      database for a Data Guard setup.. The default is NONE.'
+                    description: The update should be applied on the database for
+                      the selected version scheme.
                     type: string
                   vaultId:
                     description: (Applicable when source=NONE) The OCID of the Oracle
                       Cloud Infrastructure vault. This parameter and secretId are
                       required for Customer Managed Keys.
+                    type: string
+                  vmClusterId:
+                    description: (Applicable when source=DB_BACKUP | NONE) The OCID
+                      of the VM cluster.
                     type: string
                 type: object
               initProvider:
@@ -2553,6 +2836,113 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        managedSoftwareUpdateDetails:
+                          description: (Applicable when source=DB_BACKUP | NONE) The
+                            database registered for Oracle Managed Database Software
+                            Updates.
+                          items:
+                            properties:
+                              isEnrolled:
+                                description: If true, database is registered for Oracle
+                                  Managed Database Software Updates otherwise database
+                                  is not registered for Oracle Managed Database Software
+                                  Updates
+                                type: boolean
+                              maintenanceDetails:
+                                description: Provides details about actual Oracle
+                                  Managed Database Software Updates scheduled time
+                                  and version.
+                                items:
+                                  properties:
+                                    timeOfLastReadinessCheck:
+                                      description: The date and time of the last readiness
+                                        check.
+                                      type: string
+                                    timeOfStatusUpdate:
+                                      description: The date and time of when the status
+                                        was updated.
+                                      type: string
+                                    timeScheduled:
+                                      description: The date and time of the database
+                                        was scheduled for update.
+                                      type: string
+                                    updateMode:
+                                      description: '(Applicable when source=DB_BACKUP
+                                        | NONE) Oracle Managed Database Software update
+                                        method, either "ROLLING" or "NONROLLING".
+                                        Default value is ROLLING. IMPORTANT: Non-rolling
+                                        Database Software update update involves system
+                                        down time.'
+                                      type: string
+                                    updateReadinessStatus:
+                                      description: The managed software update readiness
+                                        status
+                                      type: string
+                                    updateReadinessStatusDetails:
+                                      description: This field will contain actual
+                                        cause of update readiness state.
+                                      type: string
+                                    version:
+                                      description: The version of the database was
+                                        scheduled for update.
+                                      type: string
+                                  type: object
+                                type: array
+                              preferenceDetails:
+                                description: (Applicable when source=DB_BACKUP | NONE)
+                                  Oracle Managed Database Software Updates schedule
+                                  will be created based on the provided update preferences
+                                items:
+                                  properties:
+                                    daysOfWeek:
+                                      description: The update should be applied on
+                                        the database for the selected days of the
+                                        week.
+                                      items:
+                                        type: string
+                                      type: array
+                                    hourOfDay:
+                                      description: The update should be applied on
+                                        the database for the selected hour of the
+                                        day.
+                                      type: number
+                                    updateMode:
+                                      description: '(Applicable when source=DB_BACKUP
+                                        | NONE) Oracle Managed Database Software update
+                                        method, either "ROLLING" or "NONROLLING".
+                                        Default value is ROLLING. IMPORTANT: Non-rolling
+                                        Database Software update update involves system
+                                        down time.'
+                                      type: string
+                                    versionSchemeDetails:
+                                      description: The update should be applied on
+                                        the database for the selected version scheme.
+                                      items:
+                                        properties:
+                                          majorVersion:
+                                            description: The update should be applied
+                                              on the database for the selected major
+                                              version series.  The value can be provided
+                                              as 23.X.X.X then 23 major version series
+                                              will be considered.
+                                            type: string
+                                          source:
+                                            description: The update should be applied
+                                              on the database for the selected version
+                                              scheme.
+                                            type: string
+                                          versionPreference:
+                                            description: The update should be applied
+                                              on the database for the selected version
+                                              preference. *_N represents the LATEST
+                                              version
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         ncharacterSet:
                           description: '(Applicable when source=NONE) The national
                             character set for the database.  The default is AL16UTF16.
@@ -2851,8 +3241,85 @@ spec:
                               type: object
                           type: object
                         vmClusterId:
-                          description: The OCID of the VM cluster.
+                          description: (Applicable when source=DB_BACKUP | NONE) The
+                            OCID of the VM cluster.
                           type: string
+                        vmClusterIdRef:
+                          description: Reference to a VmCluster in database to populate
+                            vmClusterId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        vmClusterIdSelector:
+                          description: Selector for a VmCluster in database to populate
+                            vmClusterId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                       type: object
                     type: array
                   dbHomeId:
@@ -3106,16 +3573,115 @@ spec:
                             type: string
                         type: object
                     type: object
+                  managedSoftwareUpdateDetails:
+                    description: (Applicable when source=DB_BACKUP | NONE) The database
+                      registered for Oracle Managed Database Software Updates.
+                    items:
+                      properties:
+                        isEnrolled:
+                          description: If true, database is registered for Oracle
+                            Managed Database Software Updates otherwise database is
+                            not registered for Oracle Managed Database Software Updates
+                          type: boolean
+                        maintenanceDetails:
+                          description: Provides details about actual Oracle Managed
+                            Database Software Updates scheduled time and version.
+                          items:
+                            properties:
+                              timeOfLastReadinessCheck:
+                                description: The date and time of the last readiness
+                                  check.
+                                type: string
+                              timeOfStatusUpdate:
+                                description: The date and time of when the status
+                                  was updated.
+                                type: string
+                              timeScheduled:
+                                description: The date and time of the database was
+                                  scheduled for update.
+                                type: string
+                              updateMode:
+                                description: '(Applicable when source=DB_BACKUP |
+                                  NONE) Oracle Managed Database Software update method,
+                                  either "ROLLING" or "NONROLLING". Default value
+                                  is ROLLING. IMPORTANT: Non-rolling Database Software
+                                  update update involves system down time.'
+                                type: string
+                              updateReadinessStatus:
+                                description: The managed software update readiness
+                                  status
+                                type: string
+                              updateReadinessStatusDetails:
+                                description: This field will contain actual cause
+                                  of update readiness state.
+                                type: string
+                              version:
+                                description: The version of the database was scheduled
+                                  for update.
+                                type: string
+                            type: object
+                          type: array
+                        preferenceDetails:
+                          description: (Applicable when source=DB_BACKUP | NONE) Oracle
+                            Managed Database Software Updates schedule will be created
+                            based on the provided update preferences
+                          items:
+                            properties:
+                              daysOfWeek:
+                                description: The update should be applied on the database
+                                  for the selected days of the week.
+                                items:
+                                  type: string
+                                type: array
+                              hourOfDay:
+                                description: The update should be applied on the database
+                                  for the selected hour of the day.
+                                type: number
+                              updateMode:
+                                description: '(Applicable when source=DB_BACKUP |
+                                  NONE) Oracle Managed Database Software update method,
+                                  either "ROLLING" or "NONROLLING". Default value
+                                  is ROLLING. IMPORTANT: Non-rolling Database Software
+                                  update update involves system down time.'
+                                type: string
+                              versionSchemeDetails:
+                                description: The update should be applied on the database
+                                  for the selected version scheme.
+                                items:
+                                  properties:
+                                    majorVersion:
+                                      description: The update should be applied on
+                                        the database for the selected major version
+                                        series.  The value can be provided as 23.X.X.X
+                                        then 23 major version series will be considered.
+                                      type: string
+                                    source:
+                                      description: The update should be applied on
+                                        the database for the selected version scheme.
+                                      type: string
+                                    versionPreference:
+                                      description: The update should be applied on
+                                        the database for the selected version preference.
+                                        *_N represents the LATEST version
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   source:
-                    description: 'The source of the database: Use NONE for creating
-                      a new database. Use DB_BACKUP for creating a new database by
-                      restoring from a backup. Use DATAGUARD for creating a new STANDBY
-                      database for a Data Guard setup.. The default is NONE.'
+                    description: The update should be applied on the database for
+                      the selected version scheme.
                     type: string
                   vaultId:
                     description: (Applicable when source=NONE) The OCID of the Oracle
                       Cloud Infrastructure vault. This parameter and secretId are
                       required for Customer Managed Keys.
+                    type: string
+                  vmClusterId:
+                    description: (Applicable when source=DB_BACKUP | NONE) The OCID
+                      of the VM cluster.
                     type: string
                 type: object
               managementPolicies:
@@ -3586,6 +4152,113 @@ spec:
                             Database Serverless does not use key versions, hence is
                             not applicable for Autonomous Database Serverless instances.
                           type: string
+                        managedSoftwareUpdateDetails:
+                          description: (Applicable when source=DB_BACKUP | NONE) The
+                            database registered for Oracle Managed Database Software
+                            Updates.
+                          items:
+                            properties:
+                              isEnrolled:
+                                description: If true, database is registered for Oracle
+                                  Managed Database Software Updates otherwise database
+                                  is not registered for Oracle Managed Database Software
+                                  Updates
+                                type: boolean
+                              maintenanceDetails:
+                                description: Provides details about actual Oracle
+                                  Managed Database Software Updates scheduled time
+                                  and version.
+                                items:
+                                  properties:
+                                    timeOfLastReadinessCheck:
+                                      description: The date and time of the last readiness
+                                        check.
+                                      type: string
+                                    timeOfStatusUpdate:
+                                      description: The date and time of when the status
+                                        was updated.
+                                      type: string
+                                    timeScheduled:
+                                      description: The date and time of the database
+                                        was scheduled for update.
+                                      type: string
+                                    updateMode:
+                                      description: '(Applicable when source=DB_BACKUP
+                                        | NONE) Oracle Managed Database Software update
+                                        method, either "ROLLING" or "NONROLLING".
+                                        Default value is ROLLING. IMPORTANT: Non-rolling
+                                        Database Software update update involves system
+                                        down time.'
+                                      type: string
+                                    updateReadinessStatus:
+                                      description: The managed software update readiness
+                                        status
+                                      type: string
+                                    updateReadinessStatusDetails:
+                                      description: This field will contain actual
+                                        cause of update readiness state.
+                                      type: string
+                                    version:
+                                      description: The version of the database was
+                                        scheduled for update.
+                                      type: string
+                                  type: object
+                                type: array
+                              preferenceDetails:
+                                description: (Applicable when source=DB_BACKUP | NONE)
+                                  Oracle Managed Database Software Updates schedule
+                                  will be created based on the provided update preferences
+                                items:
+                                  properties:
+                                    daysOfWeek:
+                                      description: The update should be applied on
+                                        the database for the selected days of the
+                                        week.
+                                      items:
+                                        type: string
+                                      type: array
+                                    hourOfDay:
+                                      description: The update should be applied on
+                                        the database for the selected hour of the
+                                        day.
+                                      type: number
+                                    updateMode:
+                                      description: '(Applicable when source=DB_BACKUP
+                                        | NONE) Oracle Managed Database Software update
+                                        method, either "ROLLING" or "NONROLLING".
+                                        Default value is ROLLING. IMPORTANT: Non-rolling
+                                        Database Software update update involves system
+                                        down time.'
+                                      type: string
+                                    versionSchemeDetails:
+                                      description: The update should be applied on
+                                        the database for the selected version scheme.
+                                      items:
+                                        properties:
+                                          majorVersion:
+                                            description: The update should be applied
+                                              on the database for the selected major
+                                              version series.  The value can be provided
+                                              as 23.X.X.X then 23 major version series
+                                              will be considered.
+                                            type: string
+                                          source:
+                                            description: The update should be applied
+                                              on the database for the selected version
+                                              scheme.
+                                            type: string
+                                          versionPreference:
+                                            description: The update should be applied
+                                              on the database for the selected version
+                                              preference. *_N represents the LATEST
+                                              version
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         ncharacterSet:
                           description: '(Applicable when source=NONE) The national
                             character set for the database.  The default is AL16UTF16.
@@ -3681,7 +4354,8 @@ spec:
                             secretId are required for Customer Managed Keys.
                           type: string
                         vmClusterId:
-                          description: The OCID of the VM cluster.
+                          description: (Applicable when source=DB_BACKUP | NONE) The
+                            OCID of the VM cluster.
                           type: string
                       type: object
                     type: array
@@ -3797,6 +4471,16 @@ spec:
                                   Container Database is not applicable for cross region
                                   remote backups and backups hosted on recovery Appliance
                                   backup destination.
+                                type: boolean
+                              isZeroDataLossEnabled:
+                                description: (Applicable when source=NONE) Indicates
+                                  whether Zero Data Loss functionality is enabled
+                                  for a Recovery Appliance backup destination in an
+                                  Autonomous Container Database. When enabled, the
+                                  database automatically ships all redo logs in real-time
+                                  to the Recovery Appliance for a Zero Data Loss recovery
+                                  setup (sub-second RPO). Defaults to TRUE if no value
+                                  is given.
                                 type: boolean
                               remoteRegion:
                                 description: (Applicable when source=NONE) The name
@@ -3925,6 +4609,103 @@ spec:
                     description: Additional information about the current lifecycle
                       state.
                     type: string
+                  managedSoftwareUpdateDetails:
+                    description: (Applicable when source=DB_BACKUP | NONE) The database
+                      registered for Oracle Managed Database Software Updates.
+                    items:
+                      properties:
+                        isEnrolled:
+                          description: If true, database is registered for Oracle
+                            Managed Database Software Updates otherwise database is
+                            not registered for Oracle Managed Database Software Updates
+                          type: boolean
+                        maintenanceDetails:
+                          description: Provides details about actual Oracle Managed
+                            Database Software Updates scheduled time and version.
+                          items:
+                            properties:
+                              timeOfLastReadinessCheck:
+                                description: The date and time of the last readiness
+                                  check.
+                                type: string
+                              timeOfStatusUpdate:
+                                description: The date and time of when the status
+                                  was updated.
+                                type: string
+                              timeScheduled:
+                                description: The date and time of the database was
+                                  scheduled for update.
+                                type: string
+                              updateMode:
+                                description: '(Applicable when source=DB_BACKUP |
+                                  NONE) Oracle Managed Database Software update method,
+                                  either "ROLLING" or "NONROLLING". Default value
+                                  is ROLLING. IMPORTANT: Non-rolling Database Software
+                                  update update involves system down time.'
+                                type: string
+                              updateReadinessStatus:
+                                description: The managed software update readiness
+                                  status
+                                type: string
+                              updateReadinessStatusDetails:
+                                description: This field will contain actual cause
+                                  of update readiness state.
+                                type: string
+                              version:
+                                description: The version of the database was scheduled
+                                  for update.
+                                type: string
+                            type: object
+                          type: array
+                        preferenceDetails:
+                          description: (Applicable when source=DB_BACKUP | NONE) Oracle
+                            Managed Database Software Updates schedule will be created
+                            based on the provided update preferences
+                          items:
+                            properties:
+                              daysOfWeek:
+                                description: The update should be applied on the database
+                                  for the selected days of the week.
+                                items:
+                                  type: string
+                                type: array
+                              hourOfDay:
+                                description: The update should be applied on the database
+                                  for the selected hour of the day.
+                                type: number
+                              updateMode:
+                                description: '(Applicable when source=DB_BACKUP |
+                                  NONE) Oracle Managed Database Software update method,
+                                  either "ROLLING" or "NONROLLING". Default value
+                                  is ROLLING. IMPORTANT: Non-rolling Database Software
+                                  update update involves system down time.'
+                                type: string
+                              versionSchemeDetails:
+                                description: The update should be applied on the database
+                                  for the selected version scheme.
+                                items:
+                                  properties:
+                                    majorVersion:
+                                      description: The update should be applied on
+                                        the database for the selected major version
+                                        series.  The value can be provided as 23.X.X.X
+                                        then 23 major version series will be considered.
+                                      type: string
+                                    source:
+                                      description: The update should be applied on
+                                        the database for the selected version scheme.
+                                      type: string
+                                    versionPreference:
+                                      description: The update should be applied on
+                                        the database for the selected version preference.
+                                        *_N represents the LATEST version
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   ncharacterSet:
                     description: '(Applicable when source=NONE) The national character
                       set for the database.  The default is AL16UTF16. Allowed values
@@ -3945,10 +4726,8 @@ spec:
                       to be created.
                     type: string
                   source:
-                    description: 'The source of the database: Use NONE for creating
-                      a new database. Use DB_BACKUP for creating a new database by
-                      restoring from a backup. Use DATAGUARD for creating a new STANDBY
-                      database for a Data Guard setup.. The default is NONE.'
+                    description: The update should be applied on the database for
+                      the selected version scheme.
                     type: string
                   sourceDatabasePointInTimeRecoveryTimestamp:
                     description: Point in time recovery timeStamp of the source database
@@ -3994,7 +4773,8 @@ spec:
                       required for Customer Managed Keys.
                     type: string
                   vmClusterId:
-                    description: The OCID of the VM cluster.
+                    description: (Applicable when source=DB_BACKUP | NONE) The OCID
+                      of the VM cluster.
                     type: string
                 type: object
               conditions:

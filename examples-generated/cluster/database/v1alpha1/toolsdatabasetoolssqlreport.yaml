@@ -1,0 +1,36 @@
+apiVersion: database.oci.upbound.io/v1alpha1
+kind: ToolsDatabaseToolsSqlReport
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/toolsdatabasetoolssqlreport
+  labels:
+    testing.upbound.io/example-name: test_database_tools_sql_report
+  name: test-database-tools-sql-report
+spec:
+  forProvider:
+    columns:
+    - description: ${var.database_tools_sql_report_columns_description}
+      name: ${var.database_tools_sql_report_columns_name}
+      type: ${var.database_tools_sql_report_columns_type}
+    compartmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    definedTags:
+      foo-namespace.bar-key: value
+    description: ${var.database_tools_sql_report_description}
+    displayName: ${var.database_tools_sql_report_display_name}
+    freeformTags:
+      bar-key: value
+    instructions: ${var.database_tools_sql_report_instructions}
+    locks:
+    - message: ${var.database_tools_sql_report_locks_message}
+      relatedResourceId: ${oci_cloud_guard_resource.test_resource.id}
+      timeCreated: ${var.database_tools_sql_report_locks_time_created}
+      type: ${var.database_tools_sql_report_locks_type}
+    purpose: ${var.database_tools_sql_report_purpose}
+    source: ${var.database_tools_sql_report_source}
+    type: ${var.database_tools_sql_report_type}
+    variables:
+    - description: ${var.database_tools_sql_report_variables_description}
+      name: ${var.database_tools_sql_report_variables_name}
+      type: ${var.database_tools_sql_report_variables_type}

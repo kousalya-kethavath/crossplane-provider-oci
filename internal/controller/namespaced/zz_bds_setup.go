@@ -11,8 +11,10 @@ import (
 
 	autoscalingconfiguration "github.com/oracle/provider-oci/internal/controller/namespaced/bds/autoscalingconfiguration"
 	bdscapacityreport "github.com/oracle/provider-oci/internal/controller/namespaced/bds/bdscapacityreport"
+	bdsclusteradminpasswordresetaction "github.com/oracle/provider-oci/internal/controller/namespaced/bds/bdsclusteradminpasswordresetaction"
 	bdsinstance "github.com/oracle/provider-oci/internal/controller/namespaced/bds/bdsinstance"
 	bdsinstanceapikey "github.com/oracle/provider-oci/internal/controller/namespaced/bds/bdsinstanceapikey"
+	bdsinstancebdscertificateconfiguration "github.com/oracle/provider-oci/internal/controller/namespaced/bds/bdsinstancebdscertificateconfiguration"
 	bdsinstanceexecutebootstrapscriptaction "github.com/oracle/provider-oci/internal/controller/namespaced/bds/bdsinstanceexecutebootstrapscriptaction"
 	bdsinstanceidentityconfiguration "github.com/oracle/provider-oci/internal/controller/namespaced/bds/bdsinstanceidentityconfiguration"
 	bdsinstancemetastoreconfig "github.com/oracle/provider-oci/internal/controller/namespaced/bds/bdsinstancemetastoreconfig"
@@ -33,8 +35,10 @@ func Setup_bds(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		autoscalingconfiguration.Setup,
 		bdscapacityreport.Setup,
+		bdsclusteradminpasswordresetaction.Setup,
 		bdsinstance.Setup,
 		bdsinstanceapikey.Setup,
+		bdsinstancebdscertificateconfiguration.Setup,
 		bdsinstanceexecutebootstrapscriptaction.Setup,
 		bdsinstanceidentityconfiguration.Setup,
 		bdsinstancemetastoreconfig.Setup,
@@ -61,8 +65,10 @@ func SetupGated_bds(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		autoscalingconfiguration.SetupGated,
 		bdscapacityreport.SetupGated,
+		bdsclusteradminpasswordresetaction.SetupGated,
 		bdsinstance.SetupGated,
 		bdsinstanceapikey.SetupGated,
+		bdsinstancebdscertificateconfiguration.SetupGated,
 		bdsinstanceexecutebootstrapscriptaction.SetupGated,
 		bdsinstanceidentityconfiguration.SetupGated,
 		bdsinstancemetastoreconfig.SetupGated,

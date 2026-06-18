@@ -22,6 +22,9 @@ type CapacityBinsObservation struct {
 	// Zero-based index for the corresponding capacity bucket.
 	CapacityIndex *float64 `json:"capacityIndex,omitempty" tf:"capacity_index,omitempty"`
 
+	// The remaining local volume of the capacity bucket, in GBs.
+	RemainingLocalVolumeInGbs *float64 `json:"remainingLocalVolumeInGbs,omitempty" tf:"remaining_local_volume_in_gbs,omitempty"`
+
 	// The remaining memory of the capacity bucket, in GBs.
 	RemainingMemoryInGbs *float64 `json:"remainingMemoryInGbs,omitempty" tf:"remaining_memory_in_gbs,omitempty"`
 
@@ -30,6 +33,9 @@ type CapacityBinsObservation struct {
 
 	// List of VMI shapes supported on each capacity bucket.
 	SupportedShapes []*string `json:"supportedShapes,omitempty" tf:"supported_shapes,omitempty"`
+
+	// The total local volume of the capacity bucket, in GBs.
+	TotalLocalVolumeInGbs *float64 `json:"totalLocalVolumeInGbs,omitempty" tf:"total_local_volume_in_gbs,omitempty"`
 
 	// The total memory of the capacity bucket, in GBs.
 	TotalMemoryInGbs *float64 `json:"totalMemoryInGbs,omitempty" tf:"total_memory_in_gbs,omitempty"`
@@ -90,6 +96,7 @@ type DedicatedVmHostObservation struct {
 	// The availability domain of the dedicated virtual machine host.  Example: Uocm:PHX-AD-1
 	AvailabilityDomain *string `json:"availabilityDomain,omitempty" tf:"availability_domain,omitempty"`
 
+	// A list of total and remaining CPU, memory, and local volume per capacity bucket.
 	CapacityBins []CapacityBinsObservation `json:"capacityBins,omitempty" tf:"capacity_bins,omitempty"`
 
 	// The capacity configuration selected to be configured for the Dedicated Virtual Machine host.  Run ListDedicatedVmHostShapes API first to see the capacity configuration options.
@@ -127,6 +134,9 @@ type DedicatedVmHostObservation struct {
 	// The details for providing placement constraints.
 	PlacementConstraintDetails []PlacementConstraintDetailsObservation `json:"placementConstraintDetails,omitempty" tf:"placement_constraint_details,omitempty"`
 
+	// The remaining local volume of the capacity bucket, in GBs.
+	RemainingLocalVolumeInGbs *float64 `json:"remainingLocalVolumeInGbs,omitempty" tf:"remaining_local_volume_in_gbs,omitempty"`
+
 	// The remaining memory of the capacity bucket, in GBs.
 	RemainingMemoryInGbs *float64 `json:"remainingMemoryInGbs,omitempty" tf:"remaining_memory_in_gbs,omitempty"`
 
@@ -138,6 +148,9 @@ type DedicatedVmHostObservation struct {
 
 	// The date and time the dedicated VM host was created, in the format defined by RFC3339.  Example: 2016-08-25T21:10:29.600Z
 	TimeCreated *string `json:"timeCreated,omitempty" tf:"time_created,omitempty"`
+
+	// The total local volume of the capacity bucket, in GBs.
+	TotalLocalVolumeInGbs *float64 `json:"totalLocalVolumeInGbs,omitempty" tf:"total_local_volume_in_gbs,omitempty"`
 
 	// The total memory of the capacity bucket, in GBs.
 	TotalMemoryInGbs *float64 `json:"totalMemoryInGbs,omitempty" tf:"total_memory_in_gbs,omitempty"`

@@ -29,7 +29,7 @@ type BdsInstanceNodeReplaceConfigurationInitParameters struct {
 	BdsInstanceIDSelector *v1.Selector `json:"bdsInstanceIdSelector,omitempty" tf:"-"`
 
 	// Base-64 encoded password for the cluster admin user.
-	ClusterAdminPasswordSecretRef v1.SecretKeySelector `json:"clusterAdminPasswordSecretRef" tf:"-"`
+	ClusterAdminPasswordSecretRef *v1.SecretKeySelector `json:"clusterAdminPasswordSecretRef,omitempty" tf:"-"`
 
 	// (Updatable) A user-friendly name. Only ASCII alphanumeric characters with no spaces allowed. The name does not have to be unique, and it may be changed. Avoid entering confidential information.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
@@ -42,6 +42,19 @@ type BdsInstanceNodeReplaceConfigurationInitParameters struct {
 
 	// (Updatable) Type of compute instance health metric to use for node replacement
 	MetricType *string `json:"metricType,omitempty" tf:"metric_type,omitempty"`
+
+	// The secretId for the clusterAdminPassword.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/vault/v1alpha1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in vault to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v1.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in vault to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v1.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type BdsInstanceNodeReplaceConfigurationLevelTypeDetailsInitParameters struct {
@@ -94,7 +107,7 @@ type BdsInstanceNodeReplaceConfigurationObservation struct {
 	// (Updatable) This value is the minimum period of time to wait before triggering node replacement. The value is in minutes.
 	DurationInMinutes *float64 `json:"durationInMinutes,omitempty" tf:"duration_in_minutes,omitempty"`
 
-	// The unique identifier for the NodeReplaceConfiguration.
+	// The id of the NodeReplaceConfiguration defined under BDS resources, not OCID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// (Updatable) Details of the type of level used to trigger the creation of a new node backup configuration or node replacement configuration.
@@ -102,6 +115,9 @@ type BdsInstanceNodeReplaceConfigurationObservation struct {
 
 	// (Updatable) Type of compute instance health metric to use for node replacement
 	MetricType *string `json:"metricType,omitempty" tf:"metric_type,omitempty"`
+
+	// The secretId for the clusterAdminPassword.
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
 	// The state of the NodeReplaceConfiguration.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -131,7 +147,7 @@ type BdsInstanceNodeReplaceConfigurationParameters struct {
 
 	// Base-64 encoded password for the cluster admin user.
 	// +kubebuilder:validation:Optional
-	ClusterAdminPasswordSecretRef v1.SecretKeySelector `json:"clusterAdminPasswordSecretRef" tf:"-"`
+	ClusterAdminPasswordSecretRef *v1.SecretKeySelector `json:"clusterAdminPasswordSecretRef,omitempty" tf:"-"`
 
 	// (Updatable) A user-friendly name. Only ASCII alphanumeric characters with no spaces allowed. The name does not have to be unique, and it may be changed. Avoid entering confidential information.
 	// +kubebuilder:validation:Optional
@@ -148,6 +164,20 @@ type BdsInstanceNodeReplaceConfigurationParameters struct {
 	// (Updatable) Type of compute instance health metric to use for node replacement
 	// +kubebuilder:validation:Optional
 	MetricType *string `json:"metricType,omitempty" tf:"metric_type,omitempty"`
+
+	// The secretId for the clusterAdminPassword.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/vault/v1alpha1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in vault to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v1.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in vault to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v1.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 // BdsInstanceNodeReplaceConfigurationSpec defines the desired state of BdsInstanceNodeReplaceConfiguration
@@ -186,7 +216,6 @@ type BdsInstanceNodeReplaceConfigurationStatus struct {
 type BdsInstanceNodeReplaceConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clusterAdminPasswordSecretRef)",message="spec.forProvider.clusterAdminPasswordSecretRef is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.durationInMinutes) || (has(self.initProvider) && has(self.initProvider.durationInMinutes))",message="spec.forProvider.durationInMinutes is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.levelTypeDetails) || (has(self.initProvider) && has(self.initProvider.levelTypeDetails))",message="spec.forProvider.levelTypeDetails is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.metricType) || (has(self.initProvider) && has(self.initProvider.metricType))",message="spec.forProvider.metricType is a required parameter"

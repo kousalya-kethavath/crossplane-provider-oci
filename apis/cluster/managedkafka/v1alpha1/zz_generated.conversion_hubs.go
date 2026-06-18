@@ -10,6 +10,9 @@ package v1alpha1
 func (tr *KafkaCluster) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *KafkaClusterAddon) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *KafkaClusterConfig) Hub() {}
 
 // Hub marks this type as a conversion hub.

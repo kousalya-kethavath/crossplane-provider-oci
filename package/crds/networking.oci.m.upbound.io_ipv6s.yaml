@@ -85,6 +85,10 @@ spec:
                       {"Department": "Finance"}'
                     type: object
                     x-kubernetes-map-type: granular
+                  hostname:
+                    description: (Updatable) The hostname associated with the IPv6
+                      address. Only the hostname label, not the FQDN.
+                    type: string
                   ipAddress:
                     description: 'An IPv6 address of your choice. Must be an available
                       IP address within the subnet''s CIDR. If you don''t specify
@@ -397,6 +401,10 @@ spec:
                       {"Department": "Finance"}'
                     type: object
                     x-kubernetes-map-type: granular
+                  hostname:
+                    description: (Updatable) The hostname associated with the IPv6
+                      address. Only the hostname label, not the FQDN.
+                    type: string
                   ipAddress:
                     description: 'An IPv6 address of your choice. Must be an available
                       IP address within the subnet''s CIDR. If you don''t specify
@@ -765,6 +773,10 @@ spec:
                       {"Department": "Finance"}'
                     type: object
                     x-kubernetes-map-type: granular
+                  hostname:
+                    description: (Updatable) The hostname associated with the IPv6
+                      address. Only the hostname label, not the FQDN.
+                    type: string
                   id:
                     description: The OCID of the IPv6.
                     type: string

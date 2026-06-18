@@ -44,6 +44,9 @@ type ByolInitParameters struct {
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
+	// (Updatable) The hyperscaler identifier in Broadcom systems.
+	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
+
 	// (Updatable) The type of VMware software the BYOL applies to.  Supported values:
 	SoftwareType *string `json:"softwareType,omitempty" tf:"software_type,omitempty"`
 
@@ -84,6 +87,9 @@ type ByolObservation struct {
 
 	// The OCID of the BYOL.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// (Updatable) The hyperscaler identifier in Broadcom systems.
+	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
 
 	// (Updatable) The type of VMware software the BYOL applies to.  Supported values:
 	SoftwareType *string `json:"softwareType,omitempty" tf:"software_type,omitempty"`
@@ -147,6 +153,10 @@ type ByolParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+
+	// (Updatable) The hyperscaler identifier in Broadcom systems.
+	// +kubebuilder:validation:Optional
+	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
 
 	// (Updatable) The type of VMware software the BYOL applies to.  Supported values:
 	// +kubebuilder:validation:Optional

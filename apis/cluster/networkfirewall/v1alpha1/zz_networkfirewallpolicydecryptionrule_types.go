@@ -79,6 +79,9 @@ type NetworkFirewallPolicyDecryptionRuleInitParameters struct {
 
 	// according to the specified decryptionProfile.
 	Secret *string `json:"secret,omitempty" tf:"secret,omitempty"`
+
+	// (Updatable) An array of mapped secrets. Its type must match that of the specified decryption profile.
+	Secrets []*string `json:"secrets,omitempty" tf:"secrets,omitempty"`
 }
 
 type NetworkFirewallPolicyDecryptionRuleObservation struct {
@@ -113,6 +116,9 @@ type NetworkFirewallPolicyDecryptionRuleObservation struct {
 
 	// according to the specified decryptionProfile.
 	Secret *string `json:"secret,omitempty" tf:"secret,omitempty"`
+
+	// (Updatable) An array of mapped secrets. Its type must match that of the specified decryption profile.
+	Secrets []*string `json:"secrets,omitempty" tf:"secrets,omitempty"`
 }
 
 type NetworkFirewallPolicyDecryptionRuleParameters struct {
@@ -161,6 +167,10 @@ type NetworkFirewallPolicyDecryptionRuleParameters struct {
 	// according to the specified decryptionProfile.
 	// +kubebuilder:validation:Optional
 	Secret *string `json:"secret,omitempty" tf:"secret,omitempty"`
+
+	// (Updatable) An array of mapped secrets. Its type must match that of the specified decryption profile.
+	// +kubebuilder:validation:Optional
+	Secrets []*string `json:"secrets,omitempty" tf:"secrets,omitempty"`
 }
 
 type PositionInitParameters struct {

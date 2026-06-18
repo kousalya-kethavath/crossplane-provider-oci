@@ -375,6 +375,12 @@ spec:
                   description:
                     description: (Updatable) Metadata about this specific object.
                     type: string
+                  disasterRecoveryStatus:
+                    description: Indicates if disaster recovery is enabled for a deployment.
+                      If not specified, disaster recovery is ENABLED when no clusterPlacementGroupId
+                      is provided, and DISABLED when a clusterPlacementGroupId is
+                      provided.
+                    type: string
                   displayName:
                     description: (Updatable) An object's Display Name.
                     type: string
@@ -608,8 +614,9 @@ spec:
                           type: string
                         deploymentName:
                           description: The name given to the GoldenGate service deployment.
-                            The name must be 1 to 32 characters long, must contain
-                            only alphanumeric characters and must start with a letter.
+                            The name must contain only alphanumeric characters and
+                            must start with a letter. For standby deployment the deployment
+                            name is inherited from primary.
                           type: string
                         deploymentNameRef:
                           description: Reference to a Deployment in goldengate to
@@ -1118,6 +1125,86 @@ spec:
                           description: (Updatable) The base64 encoded content of the
                             PEM file containing the private key.
                           type: string
+                        keySecretId:
+                          description: (Updatable) The OCID of the Secret where the
+                            deployment ssl private key is stored in PEM format.
+                          type: string
+                        keySecretIdRef:
+                          description: Reference to a Secret in vault to populate
+                            keySecretId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        keySecretIdSelector:
+                          description: Selector for a Secret in vault to populate
+                            keySecretId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         oggVersion:
                           description: Version of OGG
                           type: string
@@ -1644,6 +1731,12 @@ spec:
                   description:
                     description: (Updatable) Metadata about this specific object.
                     type: string
+                  disasterRecoveryStatus:
+                    description: Indicates if disaster recovery is enabled for a deployment.
+                      If not specified, disaster recovery is ENABLED when no clusterPlacementGroupId
+                      is provided, and DISABLED when a clusterPlacementGroupId is
+                      provided.
+                    type: string
                   displayName:
                     description: (Updatable) An object's Display Name.
                     type: string
@@ -1877,8 +1970,9 @@ spec:
                           type: string
                         deploymentName:
                           description: The name given to the GoldenGate service deployment.
-                            The name must be 1 to 32 characters long, must contain
-                            only alphanumeric characters and must start with a letter.
+                            The name must contain only alphanumeric characters and
+                            must start with a letter. For standby deployment the deployment
+                            name is inherited from primary.
                           type: string
                         deploymentNameRef:
                           description: Reference to a Deployment in goldengate to
@@ -2387,6 +2481,86 @@ spec:
                           description: (Updatable) The base64 encoded content of the
                             PEM file containing the private key.
                           type: string
+                        keySecretId:
+                          description: (Updatable) The OCID of the Secret where the
+                            deployment ssl private key is stored in PEM format.
+                          type: string
+                        keySecretIdRef:
+                          description: Reference to a Secret in vault to populate
+                            keySecretId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        keySecretIdSelector:
+                          description: Selector for a Secret in vault to populate
+                            keySecretId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         oggVersion:
                           description: Version of OGG
                           type: string
@@ -2812,6 +2986,12 @@ spec:
                   description:
                     description: (Updatable) Metadata about this specific object.
                     type: string
+                  disasterRecoveryStatus:
+                    description: Indicates if disaster recovery is enabled for a deployment.
+                      If not specified, disaster recovery is ENABLED when no clusterPlacementGroupId
+                      is provided, and DISABLED when a clusterPlacementGroupId is
+                      provided.
+                    type: string
                   displayName:
                     description: (Updatable) An object's Display Name.
                     type: string
@@ -3010,8 +3190,9 @@ spec:
                           type: string
                         deploymentName:
                           description: The name given to the GoldenGate service deployment.
-                            The name must be 1 to 32 characters long, must contain
-                            only alphanumeric characters and must start with a letter.
+                            The name must contain only alphanumeric characters and
+                            must start with a letter. For standby deployment the deployment
+                            name is inherited from primary.
                           type: string
                         groupToRolesMapping:
                           description: (Updatable) Defines the IDP Groups to GoldenGate
@@ -3063,6 +3244,10 @@ spec:
                         key:
                           description: (Updatable) The base64 encoded content of the
                             PEM file containing the private key.
+                          type: string
+                        keySecretId:
+                          description: (Updatable) The OCID of the Secret where the
+                            deployment ssl private key is stored in PEM format.
                           type: string
                         oggVersion:
                           description: Version of OGG

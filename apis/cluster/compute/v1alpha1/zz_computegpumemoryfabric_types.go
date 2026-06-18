@@ -67,6 +67,9 @@ type ComputeGpuMemoryFabricObservation struct {
 	// (Updatable) The OCID for the compartment. This should always be the root compartment.
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
 
+	// List of GPU memory cluster OCIDs within this GPU memory fabric.
+	ComputeGpuMemoryClusters []*string `json:"computeGpuMemoryClusters,omitempty" tf:"compute_gpu_memory_clusters,omitempty"`
+
 	// The OCID of the compute GPU memory fabric.
 	ComputeGpuMemoryFabricID *string `json:"computeGpuMemoryFabricId,omitempty" tf:"compute_gpu_memory_fabric_id,omitempty"`
 

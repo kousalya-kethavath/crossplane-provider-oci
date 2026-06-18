@@ -1,0 +1,31 @@
+apiVersion: database.oci.m.upbound.io/v1alpha1
+kind: ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/toolsruntimedatabasetoolsdatabaseapigatewayconfigglobal
+  labels:
+    testing.upbound.io/example-name: test_database_tools_database_api_gateway_config_global
+  name: test-database-tools-database-api-gateway-config-global
+  namespace: upbound-system
+spec:
+  forProvider:
+    advancedProperties: ${var.database_tools_database_api_gateway_config_global_advanced_properties}
+    certificateBundle:
+    - certificatePrivateKey:
+      - format: ${var.database_tools_database_api_gateway_config_global_certificate_bundle_certificate_private_key_format}
+        path: ${var.database_tools_database_api_gateway_config_global_certificate_bundle_certificate_private_key_path}
+      certificatePublic:
+      - format: ${var.database_tools_database_api_gateway_config_global_certificate_bundle_certificate_public_format}
+        path: ${var.database_tools_database_api_gateway_config_global_certificate_bundle_certificate_public_path}
+      type: ${var.database_tools_database_api_gateway_config_global_certificate_bundle_type}
+    databaseApiStatus: ${var.database_tools_database_api_gateway_config_global_database_api_status}
+    databaseToolsDatabaseApiGatewayConfigIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_config
+    documentRoot: ${var.database_tools_database_api_gateway_config_global_document_root}
+    globalKey: ${var.database_tools_database_api_gateway_config_global_global_key}
+    httpPort: ${var.database_tools_database_api_gateway_config_global_http_port}
+    httpsPort: ${var.database_tools_database_api_gateway_config_global_https_port}
+    poolRoute: ${var.database_tools_database_api_gateway_config_global_pool_route}
+    poolRoutingHeader: ${var.database_tools_database_api_gateway_config_global_pool_routing_header}
+    type: ${var.database_tools_database_api_gateway_config_global_type}

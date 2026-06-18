@@ -579,6 +579,9 @@ spec:
                   id:
                     description: The OCID of the BYOL Allocation.
                     type: string
+                  siteId:
+                    description: The hyperscaler identifier in Broadcom systems.
+                    type: string
                   softwareType:
                     description: 'The type of VMware software the BYOL applies to.  Supported
                       values:'

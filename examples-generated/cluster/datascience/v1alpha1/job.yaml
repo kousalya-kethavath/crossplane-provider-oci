@@ -40,10 +40,21 @@ spec:
       jobEnvironmentType: ${var.job_job_environment_configuration_details_job_environment_type}
     jobInfrastructureConfigurationDetails:
     - blockStorageSizeInGbs: ${var.job_job_infrastructure_configuration_details_block_storage_size_in_gbs}
+      computeTargetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test_compute_target
       jobInfrastructureType: ${var.job_job_infrastructure_configuration_details_job_infrastructure_type}
       jobShapeConfigDetails:
       - memoryInGbs: ${var.job_job_infrastructure_configuration_details_job_shape_config_details_memory_in_gbs}
         ocpus: ${var.job_job_infrastructure_configuration_details_job_shape_config_details_ocpus}
+      resourceConfiguration:
+      - resourceLimitConfiguration:
+        - memoryInGbs: ${var.job_job_infrastructure_configuration_details_resource_configuration_resource_limit_configuration_memory_in_gbs}
+          ocpus: ${var.job_job_infrastructure_configuration_details_resource_configuration_resource_limit_configuration_ocpus}
+        resourceRequestConfiguration:
+        - gpus: ${var.job_job_infrastructure_configuration_details_resource_configuration_resource_request_configuration_gpus}
+          memoryInGbs: ${var.job_job_infrastructure_configuration_details_resource_configuration_resource_request_configuration_memory_in_gbs}
+          ocpus: ${var.job_job_infrastructure_configuration_details_resource_configuration_resource_request_configuration_ocpus}
       shapeName: ${oci_core_shape.test_shape.name}
       subnetIdSelector:
         matchLabels:
@@ -84,10 +95,21 @@ spec:
           jobEnvironmentType: ${var.job_job_node_configuration_details_job_node_group_configuration_details_list_job_environment_configuration_details_job_environment_type}
         jobInfrastructureConfigurationDetails:
         - blockStorageSizeInGbs: ${var.job_job_node_configuration_details_job_node_group_configuration_details_list_job_infrastructure_configuration_details_block_storage_size_in_gbs}
+          computeTargetIdSelector:
+            matchLabels:
+              testing.upbound.io/example-name: test_compute_target
           jobInfrastructureType: ${var.job_job_node_configuration_details_job_node_group_configuration_details_list_job_infrastructure_configuration_details_job_infrastructure_type}
           jobShapeConfigDetails:
           - memoryInGbs: ${var.job_job_node_configuration_details_job_node_group_configuration_details_list_job_infrastructure_configuration_details_job_shape_config_details_memory_in_gbs}
             ocpus: ${var.job_job_node_configuration_details_job_node_group_configuration_details_list_job_infrastructure_configuration_details_job_shape_config_details_ocpus}
+          resourceConfiguration:
+          - resourceLimitConfiguration:
+            - memoryInGbs: ${var.job_job_node_configuration_details_job_node_group_configuration_details_list_job_infrastructure_configuration_details_resource_configuration_resource_limit_configuration_memory_in_gbs}
+              ocpus: ${var.job_job_node_configuration_details_job_node_group_configuration_details_list_job_infrastructure_configuration_details_resource_configuration_resource_limit_configuration_ocpus}
+            resourceRequestConfiguration:
+            - gpus: ${var.job_job_node_configuration_details_job_node_group_configuration_details_list_job_infrastructure_configuration_details_resource_configuration_resource_request_configuration_gpus}
+              memoryInGbs: ${var.job_job_node_configuration_details_job_node_group_configuration_details_list_job_infrastructure_configuration_details_resource_configuration_resource_request_configuration_memory_in_gbs}
+              ocpus: ${var.job_job_node_configuration_details_job_node_group_configuration_details_list_job_infrastructure_configuration_details_resource_configuration_resource_request_configuration_ocpus}
           shapeName: ${oci_core_shape.test_shape.name}
           subnetIdSelector:
             matchLabels:

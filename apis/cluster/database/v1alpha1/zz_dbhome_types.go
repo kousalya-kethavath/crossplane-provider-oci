@@ -432,8 +432,18 @@ type DbHomeDatabaseInitParameters struct {
 	// (Applicable when source=DATABASE) The point in time of the original database from which the new database is created. If not specifed, the latest backup is used to create the database.
 	TimeStampForPointInTimeRecovery *string `json:"timeStampForPointInTimeRecovery,omitempty" tf:"time_stamp_for_point_in_time_recovery,omitempty"`
 
-	// The OCID of the VM cluster.
+	// (Applicable when source=DB_BACKUP | NONE | VM_CLUSTER_BACKUP | VM_CLUSTER_NEW) The OCID of the VM cluster.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/database/v1alpha1.VmCluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VMClusterID *string `json:"vmClusterId,omitempty" tf:"vm_cluster_id,omitempty"`
+
+	// Reference to a VmCluster in database to populate vmClusterId.
+	// +kubebuilder:validation:Optional
+	VMClusterIDRef *v1.Reference `json:"vmClusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a VmCluster in database to populate vmClusterId.
+	// +kubebuilder:validation:Optional
+	VMClusterIDSelector *v1.Selector `json:"vmClusterIdSelector,omitempty" tf:"-"`
 
 	// (Applicable when source=NONE | VM_CLUSTER_NEW) The OCID of the Oracle Cloud Infrastructure vault. This parameter and secretId are required for Customer Managed Keys.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/kms/v1alpha1.Vault
@@ -529,7 +539,7 @@ type DbHomeDatabaseObservation struct {
 	// (Applicable when source=DATABASE) The point in time of the original database from which the new database is created. If not specifed, the latest backup is used to create the database.
 	TimeStampForPointInTimeRecovery *string `json:"timeStampForPointInTimeRecovery,omitempty" tf:"time_stamp_for_point_in_time_recovery,omitempty"`
 
-	// The OCID of the VM cluster.
+	// (Applicable when source=DB_BACKUP | NONE | VM_CLUSTER_BACKUP | VM_CLUSTER_NEW) The OCID of the VM cluster.
 	VMClusterID *string `json:"vmClusterId,omitempty" tf:"vm_cluster_id,omitempty"`
 
 	// (Applicable when source=NONE | VM_CLUSTER_NEW) The OCID of the Oracle Cloud Infrastructure vault. This parameter and secretId are required for Customer Managed Keys.
@@ -684,9 +694,19 @@ type DbHomeDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	TimeStampForPointInTimeRecovery *string `json:"timeStampForPointInTimeRecovery,omitempty" tf:"time_stamp_for_point_in_time_recovery,omitempty"`
 
-	// The OCID of the VM cluster.
+	// (Applicable when source=DB_BACKUP | NONE | VM_CLUSTER_BACKUP | VM_CLUSTER_NEW) The OCID of the VM cluster.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/database/v1alpha1.VmCluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VMClusterID *string `json:"vmClusterId,omitempty" tf:"vm_cluster_id,omitempty"`
+
+	// Reference to a VmCluster in database to populate vmClusterId.
+	// +kubebuilder:validation:Optional
+	VMClusterIDRef *v1.Reference `json:"vmClusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a VmCluster in database to populate vmClusterId.
+	// +kubebuilder:validation:Optional
+	VMClusterIDSelector *v1.Selector `json:"vmClusterIdSelector,omitempty" tf:"-"`
 
 	// (Applicable when source=NONE | VM_CLUSTER_NEW) The OCID of the Oracle Cloud Infrastructure vault. This parameter and secretId are required for Customer Managed Keys.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/kms/v1alpha1.Vault
@@ -775,12 +795,14 @@ type DbHomeInitParameters struct {
 	// The user-provided name of the Database Home.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// Defaults to false. If omitted or set to false the provider will not delete databases removed from the Db Home configuration.
 	EnableDatabaseDelete *bool `json:"enableDatabaseDelete,omitempty" tf:"enable_database_delete,omitempty"`
 
 	// (Applicable when source=DB_BACKUP | NONE | VM_CLUSTER_BACKUP | VM_CLUSTER_NEW) (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags.  Example: {"Department": "Finance"}
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+
+	// Represents database home will be managed by oracle or customer
+	HomeType *string `json:"homeType,omitempty" tf:"home_type,omitempty"`
 
 	// If true, the customer acknowledges that the specified Oracle Database software is an older release that is not currently supported by OCI.
 	IsDesupportedVersion *bool `json:"isDesupportedVersion,omitempty" tf:"is_desupported_version,omitempty"`
@@ -814,10 +836,10 @@ type DbHomeInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyVersionIDSelector *v1.Selector `json:"kmsKeyVersionIdSelector,omitempty" tf:"-"`
 
-	// The source of database: NONE for creating a new database. DB_BACKUP for creating a new database by restoring from a database backup. VM_CLUSTER_NEW for creating a database for VM Cluster.
+	// The update should be applied on the database for the selected version scheme.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// The OCID of the VM cluster.
+	// (Applicable when source=DB_BACKUP | NONE | VM_CLUSTER_BACKUP | VM_CLUSTER_NEW) The OCID of the VM cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/database/v1alpha1.VmCluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VMClusterID *string `json:"vmClusterId,omitempty" tf:"vm_cluster_id,omitempty"`
@@ -858,12 +880,14 @@ type DbHomeObservation struct {
 	// The user-provided name of the Database Home.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// Defaults to false. If omitted or set to false the provider will not delete databases removed from the Db Home configuration.
 	EnableDatabaseDelete *bool `json:"enableDatabaseDelete,omitempty" tf:"enable_database_delete,omitempty"`
 
 	// (Applicable when source=DB_BACKUP | NONE | VM_CLUSTER_BACKUP | VM_CLUSTER_NEW) (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags.  Example: {"Department": "Finance"}
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+
+	// Represents database home will be managed by oracle or customer
+	HomeType *string `json:"homeType,omitempty" tf:"home_type,omitempty"`
 
 	// (Applicable when source=NONE | VM_CLUSTER_NEW) The OCID of the backup destination.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -886,7 +910,7 @@ type DbHomeObservation struct {
 	// Additional information about the current lifecycle state.
 	LifecycleDetails *string `json:"lifecycleDetails,omitempty" tf:"lifecycle_details,omitempty"`
 
-	// The source of database: NONE for creating a new database. DB_BACKUP for creating a new database by restoring from a database backup. VM_CLUSTER_NEW for creating a database for VM Cluster.
+	// The update should be applied on the database for the selected version scheme.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
 	// The current state of the Database Home.
@@ -899,7 +923,7 @@ type DbHomeObservation struct {
 	// The date and time the Database Home was created.
 	TimeCreated *string `json:"timeCreated,omitempty" tf:"time_created,omitempty"`
 
-	// The OCID of the VM cluster.
+	// (Applicable when source=DB_BACKUP | NONE | VM_CLUSTER_BACKUP | VM_CLUSTER_NEW) The OCID of the VM cluster.
 	VMClusterID *string `json:"vmClusterId,omitempty" tf:"vm_cluster_id,omitempty"`
 }
 
@@ -950,7 +974,6 @@ type DbHomeParameters struct {
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// Defaults to false. If omitted or set to false the provider will not delete databases removed from the Db Home configuration.
 	// +kubebuilder:validation:Optional
 	EnableDatabaseDelete *bool `json:"enableDatabaseDelete,omitempty" tf:"enable_database_delete,omitempty"`
 
@@ -958,6 +981,10 @@ type DbHomeParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+
+	// Represents database home will be managed by oracle or customer
+	// +kubebuilder:validation:Optional
+	HomeType *string `json:"homeType,omitempty" tf:"home_type,omitempty"`
 
 	// If true, the customer acknowledges that the specified Oracle Database software is an older release that is not currently supported by OCI.
 	// +kubebuilder:validation:Optional
@@ -995,11 +1022,11 @@ type DbHomeParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyVersionIDSelector *v1.Selector `json:"kmsKeyVersionIdSelector,omitempty" tf:"-"`
 
-	// The source of database: NONE for creating a new database. DB_BACKUP for creating a new database by restoring from a database backup. VM_CLUSTER_NEW for creating a database for VM Cluster.
+	// The update should be applied on the database for the selected version scheme.
 	// +kubebuilder:validation:Optional
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
-	// The OCID of the VM cluster.
+	// (Applicable when source=DB_BACKUP | NONE | VM_CLUSTER_BACKUP | VM_CLUSTER_NEW) The OCID of the VM cluster.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/database/v1alpha1.VmCluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

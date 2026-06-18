@@ -1,0 +1,25 @@
+apiVersion: database.oci.upbound.io/v1alpha1
+kind: ToolsDatabaseToolsDatabaseApiGatewayConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/toolsdatabasetoolsdatabaseapigatewayconfig
+  labels:
+    testing.upbound.io/example-name: test_database_tools_database_api_gateway_config
+  name: test-database-tools-database-api-gateway-config
+spec:
+  forProvider:
+    compartmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    definedTags:
+      foo-namespace.bar-key: value
+    displayName: ${var.database_tools_database_api_gateway_config_display_name}
+    freeformTags:
+      bar-key: value
+    locks:
+    - message: ${var.database_tools_database_api_gateway_config_locks_message}
+      relatedResourceId: ${oci_cloud_guard_resource.test_resource.id}
+      timeCreated: ${var.database_tools_database_api_gateway_config_locks_time_created}
+      type: ${var.database_tools_database_api_gateway_config_locks_type}
+    metadataSource: ${var.database_tools_database_api_gateway_config_metadata_source}
+    type: ${var.database_tools_database_api_gateway_config_type}

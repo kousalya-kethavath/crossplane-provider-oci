@@ -68,8 +68,8 @@ type BdsInstanceInitParameters struct {
 	// The information about added Cloud SQL capability
 	CloudSQLDetails []CloudSQLDetailsInitParameters `json:"cloudSqlDetails,omitempty" tf:"cloud_sql_details,omitempty"`
 
-	// Base-64 encoded password for the cluster (and Cloudera Manager) admin user.
-	ClusterAdminPasswordSecretRef v1.SecretKeySelector `json:"clusterAdminPasswordSecretRef" tf:"-"`
+	// (Updatable) Base-64 encoded password for the cluster (and Cloudera Manager) admin user. Not required if the secretId is specified.
+	ClusterAdminPasswordSecretRef *v1.SecretKeySelector `json:"clusterAdminPasswordSecretRef,omitempty" tf:"-"`
 
 	// Profile of the Big Data Service cluster.
 	ClusterProfile *string `json:"clusterProfile,omitempty" tf:"cluster_profile,omitempty"`
@@ -124,6 +124,9 @@ type BdsInstanceInitParameters struct {
 	// Boolean flag specifying whether or not Kafka should be configured.
 	IsKafkaConfigured *bool `json:"isKafkaConfigured,omitempty" tf:"is_kafka_configured,omitempty"`
 
+	// Boolean flag specifying whether or not to persist the provided secret OCID and reuse it for future operations.
+	IsSecretReused *bool `json:"isSecretReused,omitempty" tf:"is_secret_reused,omitempty"`
+
 	// Boolean flag specifying whether or not the cluster should be setup as secure.
 	IsSecure *bool `json:"isSecure,omitempty" tf:"is_secure,omitempty"`
 
@@ -147,6 +150,22 @@ type BdsInstanceInitParameters struct {
 
 	// (Updatable) An optional property when used triggers Remove Node. Takes the node ocid as input.
 	RemoveNode *string `json:"removeNode,omitempty" tf:"remove_node,omitempty"`
+
+	// The list of nodes in the Big Data Service cluster.
+	RemoveNodes []*string `json:"removeNodes,omitempty" tf:"remove_nodes,omitempty"`
+
+	// (Updatable) The secretId for the clusterAdminPassword.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/vault/v1alpha1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in vault to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v1.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in vault to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v1.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 
 	StartClusterShapeConfigs []StartClusterShapeConfigsInitParameters `json:"startClusterShapeConfigs,omitempty" tf:"start_cluster_shape_configs,omitempty"`
 
@@ -223,6 +242,9 @@ type BdsInstanceObservation struct {
 	// Boolean flag specifying whether or not Kafka should be configured.
 	IsKafkaConfigured *bool `json:"isKafkaConfigured,omitempty" tf:"is_kafka_configured,omitempty"`
 
+	// Boolean flag specifying whether or not to persist the provided secret OCID and reuse it for future operations.
+	IsSecretReused *bool `json:"isSecretReused,omitempty" tf:"is_secret_reused,omitempty"`
+
 	// Boolean flag specifying whether or not the cluster should be setup as secure.
 	IsSecure *bool `json:"isSecure,omitempty" tf:"is_secure,omitempty"`
 
@@ -256,6 +278,12 @@ type BdsInstanceObservation struct {
 	// (Updatable) An optional property when used triggers Remove Node. Takes the node ocid as input.
 	RemoveNode *string `json:"removeNode,omitempty" tf:"remove_node,omitempty"`
 
+	// The list of nodes in the Big Data Service cluster.
+	RemoveNodes []*string `json:"removeNodes,omitempty" tf:"remove_nodes,omitempty"`
+
+	// (Updatable) The secretId for the clusterAdminPassword.
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
 	StartClusterShapeConfigs []StartClusterShapeConfigsObservation `json:"startClusterShapeConfigs,omitempty" tf:"start_cluster_shape_configs,omitempty"`
 
 	// (Updatable) The target state for the Bds Instance. Could be set to ACTIVE or INACTIVE.
@@ -263,6 +291,9 @@ type BdsInstanceObservation struct {
 
 	// The time the cluster was created, shown as an RFC 3339 formatted datetime string.
 	TimeCreated *string `json:"timeCreated,omitempty" tf:"time_created,omitempty"`
+
+	// The earliest time of certificate expiration date across the certificates of all current nodes under this cluster.
+	TimeEarliestCertificateExpiration *string `json:"timeEarliestCertificateExpiration,omitempty" tf:"time_earliest_certificate_expiration,omitempty"`
 
 	// The time the cluster was updated, shown as an RFC 3339 formatted datetime string.
 	TimeUpdated *string `json:"timeUpdated,omitempty" tf:"time_updated,omitempty"`
@@ -287,9 +318,9 @@ type BdsInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudSQLDetails []CloudSQLDetailsParameters `json:"cloudSqlDetails,omitempty" tf:"cloud_sql_details,omitempty"`
 
-	// Base-64 encoded password for the cluster (and Cloudera Manager) admin user.
+	// (Updatable) Base-64 encoded password for the cluster (and Cloudera Manager) admin user. Not required if the secretId is specified.
 	// +kubebuilder:validation:Optional
-	ClusterAdminPasswordSecretRef v1.SecretKeySelector `json:"clusterAdminPasswordSecretRef" tf:"-"`
+	ClusterAdminPasswordSecretRef *v1.SecretKeySelector `json:"clusterAdminPasswordSecretRef,omitempty" tf:"-"`
 
 	// Profile of the Big Data Service cluster.
 	// +kubebuilder:validation:Optional
@@ -359,6 +390,10 @@ type BdsInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	IsKafkaConfigured *bool `json:"isKafkaConfigured,omitempty" tf:"is_kafka_configured,omitempty"`
 
+	// Boolean flag specifying whether or not to persist the provided secret OCID and reuse it for future operations.
+	// +kubebuilder:validation:Optional
+	IsSecretReused *bool `json:"isSecretReused,omitempty" tf:"is_secret_reused,omitempty"`
+
 	// Boolean flag specifying whether or not the cluster should be setup as secure.
 	// +kubebuilder:validation:Optional
 	IsSecure *bool `json:"isSecure,omitempty" tf:"is_secure,omitempty"`
@@ -390,6 +425,24 @@ type BdsInstanceParameters struct {
 	// (Updatable) An optional property when used triggers Remove Node. Takes the node ocid as input.
 	// +kubebuilder:validation:Optional
 	RemoveNode *string `json:"removeNode,omitempty" tf:"remove_node,omitempty"`
+
+	// The list of nodes in the Big Data Service cluster.
+	// +kubebuilder:validation:Optional
+	RemoveNodes []*string `json:"removeNodes,omitempty" tf:"remove_nodes,omitempty"`
+
+	// (Updatable) The secretId for the clusterAdminPassword.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/vault/v1alpha1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in vault to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v1.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in vault to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v1.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	StartClusterShapeConfigs []StartClusterShapeConfigsParameters `json:"startClusterShapeConfigs,omitempty" tf:"start_cluster_shape_configs,omitempty"`
@@ -1406,7 +1459,6 @@ type BdsInstanceStatus struct {
 type BdsInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clusterAdminPasswordSecretRef)",message="spec.forProvider.clusterAdminPasswordSecretRef is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clusterPublicKey) || (has(self.initProvider) && has(self.initProvider.clusterPublicKey))",message="spec.forProvider.clusterPublicKey is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clusterVersion) || (has(self.initProvider) && has(self.initProvider.clusterVersion))",message="spec.forProvider.clusterVersion is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || (has(self.initProvider) && has(self.initProvider.displayName))",message="spec.forProvider.displayName is a required parameter"

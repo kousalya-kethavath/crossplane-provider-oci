@@ -1757,6 +1757,56 @@ func (mg *DatabaseSoftwareImage) SetWriteConnectionSecretToReference(r *xpv1.Sec
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this DatabaseSoftwareScheduleManagement.
+func (mg *DatabaseSoftwareScheduleManagement) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this DatabaseSoftwareScheduleManagement.
+func (mg *DatabaseSoftwareScheduleManagement) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this DatabaseSoftwareScheduleManagement.
+func (mg *DatabaseSoftwareScheduleManagement) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this DatabaseSoftwareScheduleManagement.
+func (mg *DatabaseSoftwareScheduleManagement) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this DatabaseSoftwareScheduleManagement.
+func (mg *DatabaseSoftwareScheduleManagement) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this DatabaseSoftwareScheduleManagement.
+func (mg *DatabaseSoftwareScheduleManagement) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this DatabaseSoftwareScheduleManagement.
+func (mg *DatabaseSoftwareScheduleManagement) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this DatabaseSoftwareScheduleManagement.
+func (mg *DatabaseSoftwareScheduleManagement) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this DatabaseSoftwareScheduleManagement.
+func (mg *DatabaseSoftwareScheduleManagement) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this DatabaseSoftwareScheduleManagement.
+func (mg *DatabaseSoftwareScheduleManagement) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this DatabaseUpgrade.
 func (mg *DatabaseUpgrade) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -6707,6 +6757,56 @@ func (mg *ToolsDatabaseToolsConnection) SetWriteConnectionSecretToReference(r *x
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this ToolsDatabaseToolsDatabaseApiGatewayConfig.
+func (mg *ToolsDatabaseToolsDatabaseApiGatewayConfig) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ToolsDatabaseToolsDatabaseApiGatewayConfig.
+func (mg *ToolsDatabaseToolsDatabaseApiGatewayConfig) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ToolsDatabaseToolsDatabaseApiGatewayConfig.
+func (mg *ToolsDatabaseToolsDatabaseApiGatewayConfig) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ToolsDatabaseToolsDatabaseApiGatewayConfig.
+func (mg *ToolsDatabaseToolsDatabaseApiGatewayConfig) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ToolsDatabaseToolsDatabaseApiGatewayConfig.
+func (mg *ToolsDatabaseToolsDatabaseApiGatewayConfig) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ToolsDatabaseToolsDatabaseApiGatewayConfig.
+func (mg *ToolsDatabaseToolsDatabaseApiGatewayConfig) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ToolsDatabaseToolsDatabaseApiGatewayConfig.
+func (mg *ToolsDatabaseToolsDatabaseApiGatewayConfig) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ToolsDatabaseToolsDatabaseApiGatewayConfig.
+func (mg *ToolsDatabaseToolsDatabaseApiGatewayConfig) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ToolsDatabaseToolsDatabaseApiGatewayConfig.
+func (mg *ToolsDatabaseToolsDatabaseApiGatewayConfig) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ToolsDatabaseToolsDatabaseApiGatewayConfig.
+func (mg *ToolsDatabaseToolsDatabaseApiGatewayConfig) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this ToolsDatabaseToolsIdentity.
 func (mg *ToolsDatabaseToolsIdentity) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -6757,6 +6857,106 @@ func (mg *ToolsDatabaseToolsIdentity) SetWriteConnectionSecretToReference(r *xpv
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this ToolsDatabaseToolsMcpServer.
+func (mg *ToolsDatabaseToolsMcpServer) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ToolsDatabaseToolsMcpServer.
+func (mg *ToolsDatabaseToolsMcpServer) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ToolsDatabaseToolsMcpServer.
+func (mg *ToolsDatabaseToolsMcpServer) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ToolsDatabaseToolsMcpServer.
+func (mg *ToolsDatabaseToolsMcpServer) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ToolsDatabaseToolsMcpServer.
+func (mg *ToolsDatabaseToolsMcpServer) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ToolsDatabaseToolsMcpServer.
+func (mg *ToolsDatabaseToolsMcpServer) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ToolsDatabaseToolsMcpServer.
+func (mg *ToolsDatabaseToolsMcpServer) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ToolsDatabaseToolsMcpServer.
+func (mg *ToolsDatabaseToolsMcpServer) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ToolsDatabaseToolsMcpServer.
+func (mg *ToolsDatabaseToolsMcpServer) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ToolsDatabaseToolsMcpServer.
+func (mg *ToolsDatabaseToolsMcpServer) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ToolsDatabaseToolsMcpToolset.
+func (mg *ToolsDatabaseToolsMcpToolset) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ToolsDatabaseToolsMcpToolset.
+func (mg *ToolsDatabaseToolsMcpToolset) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ToolsDatabaseToolsMcpToolset.
+func (mg *ToolsDatabaseToolsMcpToolset) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ToolsDatabaseToolsMcpToolset.
+func (mg *ToolsDatabaseToolsMcpToolset) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ToolsDatabaseToolsMcpToolset.
+func (mg *ToolsDatabaseToolsMcpToolset) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ToolsDatabaseToolsMcpToolset.
+func (mg *ToolsDatabaseToolsMcpToolset) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ToolsDatabaseToolsMcpToolset.
+func (mg *ToolsDatabaseToolsMcpToolset) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ToolsDatabaseToolsMcpToolset.
+func (mg *ToolsDatabaseToolsMcpToolset) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ToolsDatabaseToolsMcpToolset.
+func (mg *ToolsDatabaseToolsMcpToolset) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ToolsDatabaseToolsMcpToolset.
+func (mg *ToolsDatabaseToolsMcpToolset) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this ToolsDatabaseToolsPrivateEndpoint.
 func (mg *ToolsDatabaseToolsPrivateEndpoint) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -6804,6 +7004,456 @@ func (mg *ToolsDatabaseToolsPrivateEndpoint) SetProviderConfigReference(r *xpv1.
 
 // SetWriteConnectionSecretToReference of this ToolsDatabaseToolsPrivateEndpoint.
 func (mg *ToolsDatabaseToolsPrivateEndpoint) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ToolsDatabaseToolsSqlReport.
+func (mg *ToolsDatabaseToolsSqlReport) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ToolsDatabaseToolsSqlReport.
+func (mg *ToolsDatabaseToolsSqlReport) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ToolsDatabaseToolsSqlReport.
+func (mg *ToolsDatabaseToolsSqlReport) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ToolsDatabaseToolsSqlReport.
+func (mg *ToolsDatabaseToolsSqlReport) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ToolsDatabaseToolsSqlReport.
+func (mg *ToolsDatabaseToolsSqlReport) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ToolsDatabaseToolsSqlReport.
+func (mg *ToolsDatabaseToolsSqlReport) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ToolsDatabaseToolsSqlReport.
+func (mg *ToolsDatabaseToolsSqlReport) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ToolsDatabaseToolsSqlReport.
+func (mg *ToolsDatabaseToolsSqlReport) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ToolsDatabaseToolsSqlReport.
+func (mg *ToolsDatabaseToolsSqlReport) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ToolsDatabaseToolsSqlReport.
+func (mg *ToolsDatabaseToolsSqlReport) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolApiSpec) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec.
+func (mg *ToolsRuntimeDatabaseToolsApiGatewayConfigPoolAutoApiSpec) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ToolsRuntimeDatabaseToolsConnectionCredential.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredential) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ToolsRuntimeDatabaseToolsConnectionCredential.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredential) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ToolsRuntimeDatabaseToolsConnectionCredential.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredential) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ToolsRuntimeDatabaseToolsConnectionCredential.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredential) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ToolsRuntimeDatabaseToolsConnectionCredential.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredential) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ToolsRuntimeDatabaseToolsConnectionCredential.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredential) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ToolsRuntimeDatabaseToolsConnectionCredential.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredential) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ToolsRuntimeDatabaseToolsConnectionCredential.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredential) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ToolsRuntimeDatabaseToolsConnectionCredential.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredential) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ToolsRuntimeDatabaseToolsConnectionCredential.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredential) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialExecuteGrantee) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym.
+func (mg *ToolsRuntimeDatabaseToolsConnectionCredentialPublicSynonym) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ToolsRuntimeDatabaseToolsConnectionPropertySet.
+func (mg *ToolsRuntimeDatabaseToolsConnectionPropertySet) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ToolsRuntimeDatabaseToolsConnectionPropertySet.
+func (mg *ToolsRuntimeDatabaseToolsConnectionPropertySet) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ToolsRuntimeDatabaseToolsConnectionPropertySet.
+func (mg *ToolsRuntimeDatabaseToolsConnectionPropertySet) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ToolsRuntimeDatabaseToolsConnectionPropertySet.
+func (mg *ToolsRuntimeDatabaseToolsConnectionPropertySet) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ToolsRuntimeDatabaseToolsConnectionPropertySet.
+func (mg *ToolsRuntimeDatabaseToolsConnectionPropertySet) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ToolsRuntimeDatabaseToolsConnectionPropertySet.
+func (mg *ToolsRuntimeDatabaseToolsConnectionPropertySet) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ToolsRuntimeDatabaseToolsConnectionPropertySet.
+func (mg *ToolsRuntimeDatabaseToolsConnectionPropertySet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ToolsRuntimeDatabaseToolsConnectionPropertySet.
+func (mg *ToolsRuntimeDatabaseToolsConnectionPropertySet) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ToolsRuntimeDatabaseToolsConnectionPropertySet.
+func (mg *ToolsRuntimeDatabaseToolsConnectionPropertySet) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ToolsRuntimeDatabaseToolsConnectionPropertySet.
+func (mg *ToolsRuntimeDatabaseToolsConnectionPropertySet) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigGlobal) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool.
+func (mg *ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

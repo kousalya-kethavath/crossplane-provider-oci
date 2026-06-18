@@ -27,6 +27,9 @@ spec:
       display_name: ${var.model_deployment_display_name}
       environmentConfigurationDetails:
       - cmd: ${var.model_deployment_model_deployment_configuration_details_environment_configuration_details_cmd}
+        customHttpEndpoints:
+        - endpointUriSuffix: ${var.model_deployment_model_deployment_configuration_details_environment_configuration_details_custom_http_endpoints_endpoint_uri_suffix}
+          httpMethods: ${var.model_deployment_model_deployment_configuration_details_environment_configuration_details_custom_http_endpoints_http_methods}
         defaultEnvironmentVariables: ${var.model_deployment_model_deployment_configuration_details_environment_configuration_details_default_environment_variables}
         entrypoint: ${var.model_deployment_model_deployment_configuration_details_environment_configuration_details_entrypoint}
         environmentConfigurationType: ${var.model_deployment_model_deployment_configuration_details_environment_configuration_details_environment_configuration_type}
@@ -35,6 +38,7 @@ spec:
         image: ${var.model_deployment_model_deployment_configuration_details_environment_configuration_details_image}
         imageDigest: ${var.model_deployment_model_deployment_configuration_details_environment_configuration_details_image_digest}
         imageSignatureId: ${oci_datascience_image_signature.test_image_signature.id}
+        predictApiSpecification: ${var.model_deployment_model_deployment_configuration_details_environment_configuration_details_predict_api_specification}
         serverPort: ${var.model_deployment_model_deployment_configuration_details_environment_configuration_details_server_port}
       freeform_tags:
         Department: Finance

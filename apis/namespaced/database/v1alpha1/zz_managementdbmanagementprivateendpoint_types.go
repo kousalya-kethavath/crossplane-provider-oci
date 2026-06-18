@@ -52,6 +52,10 @@ type ManagementDbManagementPrivateEndpointInitParameters struct {
 	// +listType=set
 	NsgIds []*string `json:"nsgIds,omitempty" tf:"nsg_ids,omitempty"`
 
+	// (Updatable) Security attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
 	// The OCID of the subnet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/networking/v1alpha1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -100,6 +104,10 @@ type ManagementDbManagementPrivateEndpointObservation struct {
 
 	// The IP addresses assigned to the Database Management private endpoint.
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
+
+	// (Updatable) Security attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 
 	// The current lifecycle state of the Database Management private endpoint.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -163,6 +171,11 @@ type ManagementDbManagementPrivateEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	NsgIds []*string `json:"nsgIds,omitempty" tf:"nsg_ids,omitempty"`
+
+	// (Updatable) Security attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 
 	// The OCID of the subnet.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/networking/v1alpha1.Subnet

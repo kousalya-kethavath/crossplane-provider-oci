@@ -270,6 +270,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  computeCount:
+                    description: The compute amount (CPUs) available to the Autonomous
+                      Database.
+                    type: number
                   definedTags:
                     additionalProperties:
                       type: string
@@ -620,6 +624,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  computeCount:
+                    description: The compute amount (CPUs) available to the Autonomous
+                      Database.
+                    type: number
                   definedTags:
                     additionalProperties:
                       type: string
@@ -836,6 +844,10 @@ spec:
                     description: (Updatable) The OCID of the compartment to create
                       the ResourceAnalyticsInstance in.
                     type: string
+                  computeCount:
+                    description: The compute amount (CPUs) available to the Autonomous
+                      Database.
+                    type: number
                   definedTags:
                     additionalProperties:
                       type: string

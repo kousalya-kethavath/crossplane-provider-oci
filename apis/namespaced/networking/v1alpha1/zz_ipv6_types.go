@@ -30,6 +30,9 @@ type Ipv6InitParameters struct {
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
+	// (Updatable) The hostname associated with the IPv6 address. Only the hostname label, not the FQDN.
+	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
 	// An IPv6 address of your choice. Must be an available IP address within the subnet's CIDR. If you don't specify a value, Oracle automatically assigns an IPv6 address from the subnet. The subnet is the one that contains the VNIC you specify in vnicId.  Example: 2001:DB8::
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
@@ -98,6 +101,9 @@ type Ipv6Observation struct {
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
+	// (Updatable) The hostname associated with the IPv6 address. Only the hostname label, not the FQDN.
+	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
 	// The OCID of the IPv6.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -148,6 +154,10 @@ type Ipv6Parameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+
+	// (Updatable) The hostname associated with the IPv6 address. Only the hostname label, not the FQDN.
+	// +kubebuilder:validation:Optional
+	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// An IPv6 address of your choice. Must be an available IP address within the subnet's CIDR. If you don't specify a value, Oracle automatically assigns an IPv6 address from the subnet. The subnet is the one that contains the VNIC you specify in vnicId.  Example: 2001:DB8::
 	// +kubebuilder:validation:Optional

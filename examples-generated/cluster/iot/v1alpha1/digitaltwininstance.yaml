@@ -9,6 +9,7 @@ metadata:
 spec:
   forProvider:
     authId: ${oci_iot_auth.test_auth.id}
+    connectivityType: ${var.digital_twin_instance_connectivity_type}
     definedTags:
       Operations.CostCenter: "42"
     description: ${var.digital_twin_instance_description}
@@ -23,6 +24,7 @@ spec:
     externalKey: ${var.digital_twin_instance_external_key}
     freeformTags:
       Department: Finance
+    gateways: ${var.digital_twin_instance_gateways}
     iotDomainIdSelector:
       matchLabels:
         testing.upbound.io/example-name: test_iot_domain

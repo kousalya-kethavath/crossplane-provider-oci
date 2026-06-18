@@ -180,6 +180,10 @@ spec:
                       {"Department": "Finance"}'
                     type: object
                     x-kubernetes-map-type: granular
+                  siteId:
+                    description: (Updatable) The hyperscaler identifier in Broadcom
+                      systems.
+                    type: string
                   softwareType:
                     description: '(Updatable) The type of VMware software the BYOL
                       applies to.  Supported values:'
@@ -318,6 +322,10 @@ spec:
                       {"Department": "Finance"}'
                     type: object
                     x-kubernetes-map-type: granular
+                  siteId:
+                    description: (Updatable) The hyperscaler identifier in Broadcom
+                      systems.
+                    type: string
                   softwareType:
                     description: '(Updatable) The type of VMware software the BYOL
                       applies to.  Supported values:'
@@ -491,6 +499,10 @@ spec:
                     x-kubernetes-map-type: granular
                   id:
                     description: The OCID of the BYOL.
+                    type: string
+                  siteId:
+                    description: (Updatable) The hyperscaler identifier in Broadcom
+                      systems.
                     type: string
                   softwareType:
                     description: '(Updatable) The type of VMware software the BYOL

@@ -70,7 +70,7 @@ spec:
                     items:
                       properties:
                         destinationAddress:
-                          description: (Updatable) An array of IP address list names
+                          description: (Updatable) An array of address list names
                             to be evaluated against the traffic destination address.
                           items:
                             type: string
@@ -80,7 +80,7 @@ spec:
                             against the traffic protocol and protocol-specific parameters.
                           type: string
                         sourceAddress:
-                          description: (Updatable) An array of IP address list names
+                          description: (Updatable) An array of address list names
                             to be evaluated against the traffic source address.
                           items:
                             type: string
@@ -221,7 +221,7 @@ spec:
                     items:
                       properties:
                         destinationAddress:
-                          description: (Updatable) An array of IP address list names
+                          description: (Updatable) An array of address list names
                             to be evaluated against the traffic destination address.
                           items:
                             type: string
@@ -231,7 +231,7 @@ spec:
                             against the traffic protocol and protocol-specific parameters.
                           type: string
                         sourceAddress:
-                          description: (Updatable) An array of IP address list names
+                          description: (Updatable) An array of address list names
                             to be evaluated against the traffic source address.
                           items:
                             type: string
@@ -442,7 +442,7 @@ spec:
                     items:
                       properties:
                         destinationAddress:
-                          description: (Updatable) An array of IP address list names
+                          description: (Updatable) An array of address list names
                             to be evaluated against the traffic destination address.
                           items:
                             type: string
@@ -452,7 +452,7 @@ spec:
                             against the traffic protocol and protocol-specific parameters.
                           type: string
                         sourceAddress:
-                          description: (Updatable) An array of IP address list names
+                          description: (Updatable) An array of address list names
                             to be evaluated against the traffic source address.
                           items:
                             type: string

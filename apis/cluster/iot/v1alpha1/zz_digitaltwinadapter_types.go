@@ -176,17 +176,37 @@ type DigitalTwinAdapterParameters struct {
 
 type EnvelopeMappingInitParameters struct {
 
+	// (Updatable) JSON Path string to override the context root before delegating to the adapter of the target digital twin instance.
+	ContentRoot *string `json:"contentRoot,omitempty" tf:"content_root,omitempty"`
+
+	// (Updatable) Optional. JQ expression to map the target resource, which is externalKey of digital twin instance, the incoming data belongs to.
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
 	// (Updatable) JQ expression to extract the observation timestamp from the payload. If not specified, the system will default to using timeReceived as the timestamp.  Example: For payload {"time": "<timestamp>","temp": 65,"hum": 55} 'timeObserved' can be mapped as JQ Expression $.time.
 	TimeObserved *string `json:"timeObserved,omitempty" tf:"time_observed,omitempty"`
 }
 
 type EnvelopeMappingObservation struct {
 
+	// (Updatable) JSON Path string to override the context root before delegating to the adapter of the target digital twin instance.
+	ContentRoot *string `json:"contentRoot,omitempty" tf:"content_root,omitempty"`
+
+	// (Updatable) Optional. JQ expression to map the target resource, which is externalKey of digital twin instance, the incoming data belongs to.
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
 	// (Updatable) JQ expression to extract the observation timestamp from the payload. If not specified, the system will default to using timeReceived as the timestamp.  Example: For payload {"time": "<timestamp>","temp": 65,"hum": 55} 'timeObserved' can be mapped as JQ Expression $.time.
 	TimeObserved *string `json:"timeObserved,omitempty" tf:"time_observed,omitempty"`
 }
 
 type EnvelopeMappingParameters struct {
+
+	// (Updatable) JSON Path string to override the context root before delegating to the adapter of the target digital twin instance.
+	// +kubebuilder:validation:Optional
+	ContentRoot *string `json:"contentRoot,omitempty" tf:"content_root,omitempty"`
+
+	// (Updatable) Optional. JQ expression to map the target resource, which is externalKey of digital twin instance, the incoming data belongs to.
+	// +kubebuilder:validation:Optional
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// (Updatable) JQ expression to extract the observation timestamp from the payload. If not specified, the system will default to using timeReceived as the timestamp.  Example: For payload {"time": "<timestamp>","temp": 65,"hum": 55} 'timeObserved' can be mapped as JQ Expression $.time.
 	// +kubebuilder:validation:Optional

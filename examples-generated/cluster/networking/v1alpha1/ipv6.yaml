@@ -14,6 +14,7 @@ spec:
     displayName: ${var.ipv6_display_name}
     freeformTags:
       Department: Finance
+    hostname: ${var.ipv6_hostname}
     ipAddress: ${var.ipv6_ip_address}
     ipv6subnetCidr: ${var.ipv6_ipv6subnet_cidr}
     lifetime: ${var.ipv6_lifetime}

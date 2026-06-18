@@ -13,6 +13,48 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type DataPopulationInitParameters struct {
+}
+
+type DataPopulationObservation struct {
+
+	// The number of data population tasks currently in progress.
+	InProgressCount *float64 `json:"inProgressCount,omitempty" tf:"in_progress_count,omitempty"`
+
+	// The overall status of the data population from the monitored region of the tenancy.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The number of data population tasks that have succeeded.
+	SucceededCount *float64 `json:"succeededCount,omitempty" tf:"succeeded_count,omitempty"`
+
+	// The date and time the data population task completed, in the format defined by RFC 3339.  Example: 2016-08-25T21:10:29.600Z
+	TimeEnded *string `json:"timeEnded,omitempty" tf:"time_ended,omitempty"`
+
+	// The date and time the data population task was started, in the format defined by RFC 3339.  Example: 2016-08-25T21:10:29.600Z
+	TimeStarted *string `json:"timeStarted,omitempty" tf:"time_started,omitempty"`
+
+	// The total number of data population tasks.
+	TotalCount *float64 `json:"totalCount,omitempty" tf:"total_count,omitempty"`
+}
+
+type DataPopulationParameters struct {
+}
+
+type MonitoredRegionsInitParameters struct {
+}
+
+type MonitoredRegionsObservation struct {
+
+	// Data population status for a monitored region in the tenancy.
+	DataPopulation []DataPopulationObservation `json:"dataPopulation,omitempty" tf:"data_population,omitempty"`
+
+	// The Region Identifier of the monitored region. E.g. us-ashburn-1
+	RegionID *string `json:"regionId,omitempty" tf:"region_id,omitempty"`
+}
+
+type MonitoredRegionsParameters struct {
+}
+
 type TenancyAttachmentInitParameters struct {
 
 	// (Updatable) A description of the tenancy.
@@ -37,6 +79,9 @@ type TenancyAttachmentInitParameters struct {
 
 type TenancyAttachmentObservation struct {
 
+	// The overall status of the data population from the tenancy.
+	DataPopulationStatus *string `json:"dataPopulationStatus,omitempty" tf:"data_population_status,omitempty"`
+
 	// (Updatable) A description of the tenancy.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -48,6 +93,9 @@ type TenancyAttachmentObservation struct {
 
 	// A message that describes the current state of the TenancyAttachment in more detail. For example, can be used to provide actionable information for a resource in the Failed state.
 	LifecycleDetails *string `json:"lifecycleDetails,omitempty" tf:"lifecycle_details,omitempty"`
+
+	// List of monitored regions with their data population status.
+	MonitoredRegions []MonitoredRegionsObservation `json:"monitoredRegions,omitempty" tf:"monitored_regions,omitempty"`
 
 	// The OCID of the ResourceAnalyticsInstance associated with this TenancyAttachment.
 	ResourceAnalyticsInstanceID *string `json:"resourceAnalyticsInstanceId,omitempty" tf:"resource_analytics_instance_id,omitempty"`
@@ -64,6 +112,12 @@ type TenancyAttachmentObservation struct {
 
 	// The date and time the TenancyAttachment was created, in the format defined by RFC 3339.  Example: 2016-08-25T21:10:29.600Z
 	TimeCreated *string `json:"timeCreated,omitempty" tf:"time_created,omitempty"`
+
+	// The date and time the data population tasks completed, in the format defined by RFC 3339.  Example: 2016-08-25T21:10:29.600Z
+	TimeDataPopulationEnded *string `json:"timeDataPopulationEnded,omitempty" tf:"time_data_population_ended,omitempty"`
+
+	// The date and time the data population tasks started, in the format defined by RFC 3339.  Example: 2016-08-25T21:10:29.600Z
+	TimeDataPopulationStarted *string `json:"timeDataPopulationStarted,omitempty" tf:"time_data_population_started,omitempty"`
 
 	// The date and time the TenancyAttachment was updated, in the format defined by RFC 3339.  Example: 2016-08-25T21:10:29.600Z
 	TimeUpdated *string `json:"timeUpdated,omitempty" tf:"time_updated,omitempty"`

@@ -89,6 +89,10 @@ type NetworkFirewallInitParameters struct {
 	// +listType=set
 	NetworkSecurityGroupIds []*string `json:"networkSecurityGroupIds,omitempty" tf:"network_security_group_ids,omitempty"`
 
+	// (Updatable) Security attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
 	// (Updatable) The shape of a firewall to determine the bandwidth that the firewall allows.
 	Shape *string `json:"shape,omitempty" tf:"shape,omitempty"`
 
@@ -145,6 +149,10 @@ type NetworkFirewallObservation struct {
 	// (Updatable) An array of network security groups OCID associated with the Network Firewall.
 	// +listType=set
 	NetworkSecurityGroupIds []*string `json:"networkSecurityGroupIds,omitempty" tf:"network_security_group_ids,omitempty"`
+
+	// (Updatable) Security attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 
 	// (Updatable) The shape of a firewall to determine the bandwidth that the firewall allows.
 	Shape *string `json:"shape,omitempty" tf:"shape,omitempty"`
@@ -228,6 +236,11 @@ type NetworkFirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	NetworkSecurityGroupIds []*string `json:"networkSecurityGroupIds,omitempty" tf:"network_security_group_ids,omitempty"`
+
+	// (Updatable) Security attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 
 	// (Updatable) The shape of a firewall to determine the bandwidth that the firewall allows.
 	// +kubebuilder:validation:Optional

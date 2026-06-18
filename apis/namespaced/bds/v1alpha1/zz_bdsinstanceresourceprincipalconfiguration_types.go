@@ -30,13 +30,26 @@ type BdsInstanceResourcePrincipalConfigurationInitParameters struct {
 	BdsInstanceIDSelector *v1.NamespacedSelector `json:"bdsInstanceIdSelector,omitempty" tf:"-"`
 
 	// Base-64 encoded Cluster Admin Password for cluster admin user.
-	ClusterAdminPasswordSecretRef v1.LocalSecretKeySelector `json:"clusterAdminPasswordSecretRef" tf:"-"`
+	ClusterAdminPasswordSecretRef *v1.LocalSecretKeySelector `json:"clusterAdminPasswordSecretRef,omitempty" tf:"-"`
 
 	// (Updatable) A user-friendly name. Only ASCII alphanumeric characters with no spaces allowed. The name does not have to be unique, and it may be changed. Avoid entering confidential information.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// (Updatable) An optional property when incremented triggers Force Refresh Resource Principal. Could be set to any integer value.
 	ForceRefreshResourcePrincipalTrigger *float64 `json:"forceRefreshResourcePrincipalTrigger,omitempty" tf:"force_refresh_resource_principal_trigger,omitempty"`
+
+	// The secretId for the clusterAdminPassword.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/vault/v1alpha1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in vault to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v1.NamespacedReference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in vault to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v1.NamespacedSelector `json:"secretIdSelector,omitempty" tf:"-"`
 
 	// (Updatable) Life span in hours for the resource principal session token.
 	SessionTokenLifeSpanDurationInHours *float64 `json:"sessionTokenLifeSpanDurationInHours,omitempty" tf:"session_token_life_span_duration_in_hours,omitempty"`
@@ -53,8 +66,11 @@ type BdsInstanceResourcePrincipalConfigurationObservation struct {
 	// (Updatable) An optional property when incremented triggers Force Refresh Resource Principal. Could be set to any integer value.
 	ForceRefreshResourcePrincipalTrigger *float64 `json:"forceRefreshResourcePrincipalTrigger,omitempty" tf:"force_refresh_resource_principal_trigger,omitempty"`
 
-	// The id of the ResourcePrincipalConfiguration.
+	// The id of the ResourcePrincipalConfiguration defined under BDS resources, not OCID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The secretId for the clusterAdminPassword.
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
 	// (Updatable) Life span in hours for the resource principal session token.
 	SessionTokenLifeSpanDurationInHours *float64 `json:"sessionTokenLifeSpanDurationInHours,omitempty" tf:"session_token_life_span_duration_in_hours,omitempty"`
@@ -93,7 +109,7 @@ type BdsInstanceResourcePrincipalConfigurationParameters struct {
 
 	// Base-64 encoded Cluster Admin Password for cluster admin user.
 	// +kubebuilder:validation:Optional
-	ClusterAdminPasswordSecretRef v1.LocalSecretKeySelector `json:"clusterAdminPasswordSecretRef" tf:"-"`
+	ClusterAdminPasswordSecretRef *v1.LocalSecretKeySelector `json:"clusterAdminPasswordSecretRef,omitempty" tf:"-"`
 
 	// (Updatable) A user-friendly name. Only ASCII alphanumeric characters with no spaces allowed. The name does not have to be unique, and it may be changed. Avoid entering confidential information.
 	// +kubebuilder:validation:Optional
@@ -102,6 +118,20 @@ type BdsInstanceResourcePrincipalConfigurationParameters struct {
 	// (Updatable) An optional property when incremented triggers Force Refresh Resource Principal. Could be set to any integer value.
 	// +kubebuilder:validation:Optional
 	ForceRefreshResourcePrincipalTrigger *float64 `json:"forceRefreshResourcePrincipalTrigger,omitempty" tf:"force_refresh_resource_principal_trigger,omitempty"`
+
+	// The secretId for the clusterAdminPassword.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/vault/v1alpha1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in vault to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v1.NamespacedReference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in vault to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v1.NamespacedSelector `json:"secretIdSelector,omitempty" tf:"-"`
 
 	// (Updatable) Life span in hours for the resource principal session token.
 	// +kubebuilder:validation:Optional
@@ -144,7 +174,6 @@ type BdsInstanceResourcePrincipalConfigurationStatus struct {
 type BdsInstanceResourcePrincipalConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clusterAdminPasswordSecretRef)",message="spec.forProvider.clusterAdminPasswordSecretRef is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || (has(self.initProvider) && has(self.initProvider.displayName))",message="spec.forProvider.displayName is a required parameter"
 	Spec   BdsInstanceResourcePrincipalConfigurationSpec   `json:"spec"`
 	Status BdsInstanceResourcePrincipalConfigurationStatus `json:"status,omitempty"`

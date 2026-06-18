@@ -123,7 +123,7 @@ type AutonomousContainerDatabaseInitParameters struct {
 	// The Database name for the Autonomous Container Database. The name must be unique within the Cloud Autonomous VM Cluster, starting with an alphabetic character, followed by 1 to 7 alphanumeric characters.
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
-	// The CPU value beyond which an Autonomous AI Database will be opened across multiple nodes. The default value of this attribute is 16 for OCPUs and 64 for ECPUs.
+	// (Updatable) The CPU value beyond which an Autonomous AI Database will be opened across multiple nodes. The default value of this attribute is 16 for OCPUs and 64 for ECPUs.
 	DBSplitThreshold *float64 `json:"dbSplitThreshold,omitempty" tf:"db_split_threshold,omitempty"`
 
 	// Deprecated. The DB_UNIQUE_NAME value is set by Oracle Cloud Infrastructure.  Do not specify a value for this parameter.
@@ -152,7 +152,7 @@ type AutonomousContainerDatabaseInitParameters struct {
 	// (Updatable) The display name for the Autonomous Container Database.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// Determines whether an Autonomous AI Database must be opened across a minimum or maximum of nodes. By default, Minimum nodes is selected.
+	// (Updatable) Determines whether an Autonomous AI Database must be opened across a minimum or maximum of nodes. By default, Minimum nodes is selected.
 	DistributionAffinity *string `json:"distributionAffinity,omitempty" tf:"distribution_affinity,omitempty"`
 
 	// Types of providers supported for managing database encryption keys
@@ -206,7 +206,7 @@ type AutonomousContainerDatabaseInitParameters struct {
 	// (Updatable) The scheduling details for the quarterly maintenance window. Patching and system updates take place during the maintenance window.
 	MaintenanceWindowDetails []MaintenanceWindowDetailsInitParameters `json:"maintenanceWindowDetails,omitempty" tf:"maintenance_window_details,omitempty"`
 
-	// Enabling SHARED server architecture enables a database server to allow many client processes to share very few server processes, thereby increasing the number of supported users.
+	// (Updatable) Enabling SHARED server architecture enables a database server to allow many client processes to share very few server processes, thereby increasing the number of supported users.
 	NetServicesArchitecture *string `json:"netServicesArchitecture,omitempty" tf:"net_services_architecture,omitempty"`
 
 	// (Updatable) The OKV End Point Group name for the Autonomous Container Database.
@@ -306,7 +306,7 @@ type AutonomousContainerDatabaseInitParameters struct {
 	// (Updatable) An optional property when incremented triggers Switchover. Could be set to any integer value.
 	SwitchoverTrigger *float64 `json:"switchoverTrigger,omitempty" tf:"switchover_trigger,omitempty"`
 
-	// The percentage of CPUs reserved across nodes to support node failover. Allowed values are 0%, 25%, and 50%, with 50% being the default option.
+	// (Updatable) The percentage of CPUs reserved across nodes to support node failover. Allowed values are 0%, 25%, 50%, 75%, and 100%, with 50% being the default option.
 	VMFailoverReservation *float64 `json:"vmFailoverReservation,omitempty" tf:"vm_failover_reservation,omitempty"`
 
 	// The OCID of the Oracle Cloud Infrastructure vault. This parameter and secretId are required for Customer Managed Keys.
@@ -367,7 +367,7 @@ type AutonomousContainerDatabaseObservation struct {
 	// The Database name for the Autonomous Container Database. The name must be unique within the Cloud Autonomous VM Cluster, starting with an alphabetic character, followed by 1 to 7 alphanumeric characters.
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
-	// The CPU value beyond which an Autonomous AI Database will be opened across multiple nodes. The default value of this attribute is 16 for OCPUs and 64 for ECPUs.
+	// (Updatable) The CPU value beyond which an Autonomous AI Database will be opened across multiple nodes. The default value of this attribute is 16 for OCPUs and 64 for ECPUs.
 	DBSplitThreshold *float64 `json:"dbSplitThreshold,omitempty" tf:"db_split_threshold,omitempty"`
 
 	// Deprecated. The DB_UNIQUE_NAME value is set by Oracle Cloud Infrastructure.  Do not specify a value for this parameter.
@@ -392,7 +392,7 @@ type AutonomousContainerDatabaseObservation struct {
 	// (Updatable) The display name for the Autonomous Container Database.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// Determines whether an Autonomous AI Database must be opened across a minimum or maximum of nodes. By default, Minimum nodes is selected.
+	// (Updatable) Determines whether an Autonomous AI Database must be opened across a minimum or maximum of nodes. By default, Minimum nodes is selected.
 	DistributionAffinity *string `json:"distributionAffinity,omitempty" tf:"distribution_affinity,omitempty"`
 
 	// DST Time-Zone File version of the Autonomous Container Database.
@@ -471,7 +471,7 @@ type AutonomousContainerDatabaseObservation struct {
 	// The amount of memory (in GBs, rounded off to nearest integer value) enabled per ECPU or OCPU in the Autonomous VM Cluster. This is deprecated. Please refer to memoryPerComputeUnitInGBs for accurate value.
 	MemoryPerOracleComputeUnitInGbs *float64 `json:"memoryPerOracleComputeUnitInGbs,omitempty" tf:"memory_per_oracle_compute_unit_in_gbs,omitempty"`
 
-	// Enabling SHARED server architecture enables a database server to allow many client processes to share very few server processes, thereby increasing the number of supported users.
+	// (Updatable) Enabling SHARED server architecture enables a database server to allow many client processes to share very few server processes, thereby increasing the number of supported users.
 	NetServicesArchitecture *string `json:"netServicesArchitecture,omitempty" tf:"net_services_architecture,omitempty"`
 
 	// The OCID of the next maintenance run.
@@ -564,7 +564,7 @@ type AutonomousContainerDatabaseObservation struct {
 	// The number of CPUs allocated to the Autonomous VM cluster.
 	TotalCpus *float64 `json:"totalCpus,omitempty" tf:"total_cpus,omitempty"`
 
-	// The percentage of CPUs reserved across nodes to support node failover. Allowed values are 0%, 25%, and 50%, with 50% being the default option.
+	// (Updatable) The percentage of CPUs reserved across nodes to support node failover. Allowed values are 0%, 25%, 50%, 75%, and 100%, with 50% being the default option.
 	VMFailoverReservation *float64 `json:"vmFailoverReservation,omitempty" tf:"vm_failover_reservation,omitempty"`
 
 	// The OCID of the Oracle Cloud Infrastructure vault. This parameter and secretId are required for Customer Managed Keys.
@@ -647,7 +647,7 @@ type AutonomousContainerDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
-	// The CPU value beyond which an Autonomous AI Database will be opened across multiple nodes. The default value of this attribute is 16 for OCPUs and 64 for ECPUs.
+	// (Updatable) The CPU value beyond which an Autonomous AI Database will be opened across multiple nodes. The default value of this attribute is 16 for OCPUs and 64 for ECPUs.
 	// +kubebuilder:validation:Optional
 	DBSplitThreshold *float64 `json:"dbSplitThreshold,omitempty" tf:"db_split_threshold,omitempty"`
 
@@ -682,7 +682,7 @@ type AutonomousContainerDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// Determines whether an Autonomous AI Database must be opened across a minimum or maximum of nodes. By default, Minimum nodes is selected.
+	// (Updatable) Determines whether an Autonomous AI Database must be opened across a minimum or maximum of nodes. By default, Minimum nodes is selected.
 	// +kubebuilder:validation:Optional
 	DistributionAffinity *string `json:"distributionAffinity,omitempty" tf:"distribution_affinity,omitempty"`
 
@@ -747,7 +747,7 @@ type AutonomousContainerDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	MaintenanceWindowDetails []MaintenanceWindowDetailsParameters `json:"maintenanceWindowDetails,omitempty" tf:"maintenance_window_details,omitempty"`
 
-	// Enabling SHARED server architecture enables a database server to allow many client processes to share very few server processes, thereby increasing the number of supported users.
+	// (Updatable) Enabling SHARED server architecture enables a database server to allow many client processes to share very few server processes, thereby increasing the number of supported users.
 	// +kubebuilder:validation:Optional
 	NetServicesArchitecture *string `json:"netServicesArchitecture,omitempty" tf:"net_services_architecture,omitempty"`
 
@@ -864,7 +864,7 @@ type AutonomousContainerDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	SwitchoverTrigger *float64 `json:"switchoverTrigger,omitempty" tf:"switchover_trigger,omitempty"`
 
-	// The percentage of CPUs reserved across nodes to support node failover. Allowed values are 0%, 25%, and 50%, with 50% being the default option.
+	// (Updatable) The percentage of CPUs reserved across nodes to support node failover. Allowed values are 0%, 25%, 50%, 75%, and 100%, with 50% being the default option.
 	// +kubebuilder:validation:Optional
 	VMFailoverReservation *float64 `json:"vmFailoverReservation,omitempty" tf:"vm_failover_reservation,omitempty"`
 

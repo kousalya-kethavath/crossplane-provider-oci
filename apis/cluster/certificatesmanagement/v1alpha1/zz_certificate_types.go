@@ -15,10 +15,16 @@ import (
 
 type CertificateConfigInitParameters struct {
 
+	// (Updatable) The certificate chain (in PEM format).
+	CertChainPem *string `json:"certChainPem,omitempty" tf:"cert_chain_pem,omitempty"`
+
+	// (Updatable) The leaf certificate (in PEM format).
+	CertificatePem *string `json:"certificatePem,omitempty" tf:"certificate_pem,omitempty"`
+
 	// The name of the profile used to create the certificate, which depends on the type of certificate you need.
 	CertificateProfileType *string `json:"certificateProfileType,omitempty" tf:"certificate_profile_type,omitempty"`
 
-	// (Updatable) The origin of the certificate. It must be one of the supported types: MANAGED_EXTERNALLY_ISSUED_BY_INTERNAL_CA or ISSUED_BY_INTERNAL_CA.
+	// (Updatable) The origin of the certificate. It must be one of the supported types: MANAGED_EXTERNALLY_ISSUED_BY_INTERNAL_CA, ISSUED_BY_INTERNAL_CA, or IMPORTED.
 	ConfigType *string `json:"configType,omitempty" tf:"config_type,omitempty"`
 
 	// (Updatable) The certificate signing request (in PEM format).
@@ -39,8 +45,17 @@ type CertificateConfigInitParameters struct {
 	// (Applicable when config_type=ISSUED_BY_INTERNAL_CA) The algorithm to use to create key pairs.
 	KeyAlgorithm *string `json:"keyAlgorithm,omitempty" tf:"key_algorithm,omitempty"`
 
+	// (Applicable when config_type=IMPORTED) (Updatable) The passphrase for the encrypted private key in PEM format. This value is sensitive.
+	PrivateKeyPemPassphraseSecretRef *v1.SecretKeySelector `json:"privateKeyPemPassphraseSecretRef,omitempty" tf:"-"`
+
+	// (Updatable) The private key (in PEM format). This value is sensitive.
+	PrivateKeyPemSecretRef *v1.SecretKeySelector `json:"privateKeyPemSecretRef,omitempty" tf:"-"`
+
 	// (Applicable when config_type=ISSUED_BY_INTERNAL_CA) The algorithm to use to sign the public key certificate.
 	SignatureAlgorithm *string `json:"signatureAlgorithm,omitempty" tf:"signature_algorithm,omitempty"`
+
+	// (Applicable when config_type=IMPORTED) (Updatable) The rotation stage used for imported certificate version updates. Supported values are CURRENT and PENDING. Defaults to CURRENT when omitted.
+	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
 
 	// The subject of the certificate, which is a distinguished name that identifies the entity that owns the public key in the certificate.
 	Subject []SubjectInitParameters `json:"subject,omitempty" tf:"subject,omitempty"`
@@ -57,10 +72,16 @@ type CertificateConfigInitParameters struct {
 
 type CertificateConfigObservation struct {
 
+	// (Updatable) The certificate chain (in PEM format).
+	CertChainPem *string `json:"certChainPem,omitempty" tf:"cert_chain_pem,omitempty"`
+
+	// (Updatable) The leaf certificate (in PEM format).
+	CertificatePem *string `json:"certificatePem,omitempty" tf:"certificate_pem,omitempty"`
+
 	// The name of the profile used to create the certificate, which depends on the type of certificate you need.
 	CertificateProfileType *string `json:"certificateProfileType,omitempty" tf:"certificate_profile_type,omitempty"`
 
-	// (Updatable) The origin of the certificate. It must be one of the supported types: MANAGED_EXTERNALLY_ISSUED_BY_INTERNAL_CA or ISSUED_BY_INTERNAL_CA.
+	// (Updatable) The origin of the certificate. It must be one of the supported types: MANAGED_EXTERNALLY_ISSUED_BY_INTERNAL_CA, ISSUED_BY_INTERNAL_CA, or IMPORTED.
 	ConfigType *string `json:"configType,omitempty" tf:"config_type,omitempty"`
 
 	// (Updatable) The certificate signing request (in PEM format).
@@ -74,6 +95,9 @@ type CertificateConfigObservation struct {
 
 	// (Applicable when config_type=ISSUED_BY_INTERNAL_CA) The algorithm to use to sign the public key certificate.
 	SignatureAlgorithm *string `json:"signatureAlgorithm,omitempty" tf:"signature_algorithm,omitempty"`
+
+	// (Applicable when config_type=IMPORTED) (Updatable) The rotation stage used for imported certificate version updates. Supported values are CURRENT and PENDING. Defaults to CURRENT when omitted.
+	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
 
 	// The subject of the certificate, which is a distinguished name that identifies the entity that owns the public key in the certificate.
 	Subject []SubjectObservation `json:"subject,omitempty" tf:"subject,omitempty"`
@@ -90,11 +114,19 @@ type CertificateConfigObservation struct {
 
 type CertificateConfigParameters struct {
 
+	// (Updatable) The certificate chain (in PEM format).
+	// +kubebuilder:validation:Optional
+	CertChainPem *string `json:"certChainPem,omitempty" tf:"cert_chain_pem,omitempty"`
+
+	// (Updatable) The leaf certificate (in PEM format).
+	// +kubebuilder:validation:Optional
+	CertificatePem *string `json:"certificatePem,omitempty" tf:"certificate_pem,omitempty"`
+
 	// The name of the profile used to create the certificate, which depends on the type of certificate you need.
 	// +kubebuilder:validation:Optional
 	CertificateProfileType *string `json:"certificateProfileType,omitempty" tf:"certificate_profile_type,omitempty"`
 
-	// (Updatable) The origin of the certificate. It must be one of the supported types: MANAGED_EXTERNALLY_ISSUED_BY_INTERNAL_CA or ISSUED_BY_INTERNAL_CA.
+	// (Updatable) The origin of the certificate. It must be one of the supported types: MANAGED_EXTERNALLY_ISSUED_BY_INTERNAL_CA, ISSUED_BY_INTERNAL_CA, or IMPORTED.
 	// +kubebuilder:validation:Optional
 	ConfigType *string `json:"configType" tf:"config_type,omitempty"`
 
@@ -119,9 +151,21 @@ type CertificateConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyAlgorithm *string `json:"keyAlgorithm,omitempty" tf:"key_algorithm,omitempty"`
 
+	// (Applicable when config_type=IMPORTED) (Updatable) The passphrase for the encrypted private key in PEM format. This value is sensitive.
+	// +kubebuilder:validation:Optional
+	PrivateKeyPemPassphraseSecretRef *v1.SecretKeySelector `json:"privateKeyPemPassphraseSecretRef,omitempty" tf:"-"`
+
+	// (Updatable) The private key (in PEM format). This value is sensitive.
+	// +kubebuilder:validation:Optional
+	PrivateKeyPemSecretRef *v1.SecretKeySelector `json:"privateKeyPemSecretRef,omitempty" tf:"-"`
+
 	// (Applicable when config_type=ISSUED_BY_INTERNAL_CA) The algorithm to use to sign the public key certificate.
 	// +kubebuilder:validation:Optional
 	SignatureAlgorithm *string `json:"signatureAlgorithm,omitempty" tf:"signature_algorithm,omitempty"`
+
+	// (Applicable when config_type=IMPORTED) (Updatable) The rotation stage used for imported certificate version updates. Supported values are CURRENT and PENDING. Defaults to CURRENT when omitted.
+	// +kubebuilder:validation:Optional
+	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
 
 	// The subject of the certificate, which is a distinguished name that identifies the entity that owns the public key in the certificate.
 	// +kubebuilder:validation:Optional
@@ -160,6 +204,9 @@ type CertificateInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CompartmentIDSelector *v1.Selector `json:"compartmentIdSelector,omitempty" tf:"-"`
 
+	// (Updatable) The target current certificate version number. This update cannot be combined with updates to certificate_config, description, defined_tags, freeform_tags, or certificate_rules.
+	CurrentVersionNumber *string `json:"currentVersionNumber,omitempty" tf:"current_version_number,omitempty"`
+
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
 	// +mapType=granular
 	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
@@ -192,11 +239,14 @@ type CertificateObservation struct {
 	// (Updatable) The OCID of the compartment where you want to create the certificate.
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
 
-	// (Updatable) The origin of the certificate. It must be one of the supported types: MANAGED_EXTERNALLY_ISSUED_BY_INTERNAL_CA or ISSUED_BY_INTERNAL_CA.
+	// (Updatable) The origin of the certificate. It must be one of the supported types: MANAGED_EXTERNALLY_ISSUED_BY_INTERNAL_CA, ISSUED_BY_INTERNAL_CA, or IMPORTED.
 	ConfigType *string `json:"configType,omitempty" tf:"config_type,omitempty"`
 
 	// The details of the certificate version. This object does not contain the certificate contents.
 	CurrentVersion []CurrentVersionObservation `json:"currentVersion,omitempty" tf:"current_version,omitempty"`
+
+	// (Updatable) The target current certificate version number. This update cannot be combined with updates to certificate_config, description, defined_tags, freeform_tags, or certificate_rules.
+	CurrentVersionNumber *string `json:"currentVersionNumber,omitempty" tf:"current_version_number,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
 	// +mapType=granular
@@ -262,6 +312,10 @@ type CertificateParameters struct {
 	// Selector for a Compartment in identity to populate compartmentId.
 	// +kubebuilder:validation:Optional
 	CompartmentIDSelector *v1.Selector `json:"compartmentIdSelector,omitempty" tf:"-"`
+
+	// (Updatable) The target current certificate version number. This update cannot be combined with updates to certificate_config, description, defined_tags, freeform_tags, or certificate_rules.
+	// +kubebuilder:validation:Optional
+	CurrentVersionNumber *string `json:"currentVersionNumber,omitempty" tf:"current_version_number,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
 	// +kubebuilder:validation:Optional

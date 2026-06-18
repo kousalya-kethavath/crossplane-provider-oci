@@ -62,7 +62,7 @@ spec:
                 properties:
                   compartmentId:
                     description: (Updatable) The OCID of the compartment that contains
-                      the Delegation Control.
+                      the Delegation Subscription.
                     type: string
                   compartmentIdRef:
                     description: Reference to a Compartment in identity to populate
@@ -188,7 +188,7 @@ spec:
                 properties:
                   compartmentId:
                     description: (Updatable) The OCID of the compartment that contains
-                      the Delegation Control.
+                      the Delegation Subscription.
                     type: string
                   compartmentIdRef:
                     description: Reference to a Compartment in identity to populate
@@ -376,7 +376,7 @@ spec:
                 properties:
                   compartmentId:
                     description: (Updatable) The OCID of the compartment that contains
-                      the Delegation Control.
+                      the Delegation Subscription.
                     type: string
                   definedTags:
                     additionalProperties:

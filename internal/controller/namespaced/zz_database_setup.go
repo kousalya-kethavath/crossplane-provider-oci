@@ -42,6 +42,7 @@ import (
 	database "github.com/oracle/provider-oci/internal/controller/namespaced/database/database"
 	databasesnapshotstandby "github.com/oracle/provider-oci/internal/controller/namespaced/database/databasesnapshotstandby"
 	databasesoftwareimage "github.com/oracle/provider-oci/internal/controller/namespaced/database/databasesoftwareimage"
+	databasesoftwareschedulemanagement "github.com/oracle/provider-oci/internal/controller/namespaced/database/databasesoftwareschedulemanagement"
 	databaseupgrade "github.com/oracle/provider-oci/internal/controller/namespaced/database/databaseupgrade"
 	dataguardassociation "github.com/oracle/provider-oci/internal/controller/namespaced/database/dataguardassociation"
 	datapatch "github.com/oracle/provider-oci/internal/controller/namespaced/database/datapatch"
@@ -143,8 +144,20 @@ import (
 	schedulingpolicy "github.com/oracle/provider-oci/internal/controller/namespaced/database/schedulingpolicy"
 	schedulingpolicyschedulingwindow "github.com/oracle/provider-oci/internal/controller/namespaced/database/schedulingpolicyschedulingwindow"
 	toolsdatabasetoolsconnection "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsdatabasetoolsconnection"
+	toolsdatabasetoolsdatabaseapigatewayconfig "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsdatabasetoolsdatabaseapigatewayconfig"
 	toolsdatabasetoolsidentity "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsdatabasetoolsidentity"
+	toolsdatabasetoolsmcpserver "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsdatabasetoolsmcpserver"
+	toolsdatabasetoolsmcptoolset "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsdatabasetoolsmcptoolset"
 	toolsdatabasetoolsprivateendpoint "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsdatabasetoolsprivateendpoint"
+	toolsdatabasetoolssqlreport "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsdatabasetoolssqlreport"
+	toolsruntimedatabasetoolsapigatewayconfigpoolapispec "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsruntimedatabasetoolsapigatewayconfigpoolapispec"
+	toolsruntimedatabasetoolsapigatewayconfigpoolautoapispec "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsruntimedatabasetoolsapigatewayconfigpoolautoapispec"
+	toolsruntimedatabasetoolsconnectioncredential "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsruntimedatabasetoolsconnectioncredential"
+	toolsruntimedatabasetoolsconnectioncredentialexecutegrantee "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsruntimedatabasetoolsconnectioncredentialexecutegrantee"
+	toolsruntimedatabasetoolsconnectioncredentialpublicsynonym "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsruntimedatabasetoolsconnectioncredentialpublicsynonym"
+	toolsruntimedatabasetoolsconnectionpropertyset "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsruntimedatabasetoolsconnectionpropertyset"
+	toolsruntimedatabasetoolsdatabaseapigatewayconfigglobal "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsruntimedatabasetoolsdatabaseapigatewayconfigglobal"
+	toolsruntimedatabasetoolsdatabaseapigatewayconfigpool "github.com/oracle/provider-oci/internal/controller/namespaced/database/toolsruntimedatabasetoolsdatabaseapigatewayconfigpool"
 	vmcluster "github.com/oracle/provider-oci/internal/controller/namespaced/database/vmcluster"
 	vmclusteraddvirtualmachine "github.com/oracle/provider-oci/internal/controller/namespaced/database/vmclusteraddvirtualmachine"
 	vmclusternetwork "github.com/oracle/provider-oci/internal/controller/namespaced/database/vmclusternetwork"
@@ -188,6 +201,7 @@ func Setup_database(mgr ctrl.Manager, o controller.Options) error {
 		database.Setup,
 		databasesnapshotstandby.Setup,
 		databasesoftwareimage.Setup,
+		databasesoftwareschedulemanagement.Setup,
 		databaseupgrade.Setup,
 		dataguardassociation.Setup,
 		datapatch.Setup,
@@ -289,8 +303,20 @@ func Setup_database(mgr ctrl.Manager, o controller.Options) error {
 		schedulingpolicy.Setup,
 		schedulingpolicyschedulingwindow.Setup,
 		toolsdatabasetoolsconnection.Setup,
+		toolsdatabasetoolsdatabaseapigatewayconfig.Setup,
 		toolsdatabasetoolsidentity.Setup,
+		toolsdatabasetoolsmcpserver.Setup,
+		toolsdatabasetoolsmcptoolset.Setup,
 		toolsdatabasetoolsprivateendpoint.Setup,
+		toolsdatabasetoolssqlreport.Setup,
+		toolsruntimedatabasetoolsapigatewayconfigpoolapispec.Setup,
+		toolsruntimedatabasetoolsapigatewayconfigpoolautoapispec.Setup,
+		toolsruntimedatabasetoolsconnectioncredential.Setup,
+		toolsruntimedatabasetoolsconnectioncredentialexecutegrantee.Setup,
+		toolsruntimedatabasetoolsconnectioncredentialpublicsynonym.Setup,
+		toolsruntimedatabasetoolsconnectionpropertyset.Setup,
+		toolsruntimedatabasetoolsdatabaseapigatewayconfigglobal.Setup,
+		toolsruntimedatabasetoolsdatabaseapigatewayconfigpool.Setup,
 		vmcluster.Setup,
 		vmclusteraddvirtualmachine.Setup,
 		vmclusternetwork.Setup,
@@ -340,6 +366,7 @@ func SetupGated_database(mgr ctrl.Manager, o controller.Options) error {
 		database.SetupGated,
 		databasesnapshotstandby.SetupGated,
 		databasesoftwareimage.SetupGated,
+		databasesoftwareschedulemanagement.SetupGated,
 		databaseupgrade.SetupGated,
 		dataguardassociation.SetupGated,
 		datapatch.SetupGated,
@@ -441,8 +468,20 @@ func SetupGated_database(mgr ctrl.Manager, o controller.Options) error {
 		schedulingpolicy.SetupGated,
 		schedulingpolicyschedulingwindow.SetupGated,
 		toolsdatabasetoolsconnection.SetupGated,
+		toolsdatabasetoolsdatabaseapigatewayconfig.SetupGated,
 		toolsdatabasetoolsidentity.SetupGated,
+		toolsdatabasetoolsmcpserver.SetupGated,
+		toolsdatabasetoolsmcptoolset.SetupGated,
 		toolsdatabasetoolsprivateendpoint.SetupGated,
+		toolsdatabasetoolssqlreport.SetupGated,
+		toolsruntimedatabasetoolsapigatewayconfigpoolapispec.SetupGated,
+		toolsruntimedatabasetoolsapigatewayconfigpoolautoapispec.SetupGated,
+		toolsruntimedatabasetoolsconnectioncredential.SetupGated,
+		toolsruntimedatabasetoolsconnectioncredentialexecutegrantee.SetupGated,
+		toolsruntimedatabasetoolsconnectioncredentialpublicsynonym.SetupGated,
+		toolsruntimedatabasetoolsconnectionpropertyset.SetupGated,
+		toolsruntimedatabasetoolsdatabaseapigatewayconfigglobal.SetupGated,
+		toolsruntimedatabasetoolsdatabaseapigatewayconfigpool.SetupGated,
 		vmcluster.SetupGated,
 		vmclusteraddvirtualmachine.SetupGated,
 		vmclusternetwork.SetupGated,

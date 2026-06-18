@@ -1,0 +1,30 @@
+apiVersion: bds.oci.upbound.io/v1alpha1
+kind: BdsInstanceBdsCertificateConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bds/v1alpha1/bdsinstancebdscertificateconfiguration
+  labels:
+    testing.upbound.io/example-name: test_bds_instance_bds_certificate_configuration
+  name: test-bds-instance-bds-certificate-configuration
+spec:
+  forProvider:
+    bdsInstanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_bds_instance
+    certificateAuthorityIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_certificate_authority
+    certificateType: ${var.bds_instance_bds_certificate_configuration_certificate_type}
+    clusterAdminPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    compartmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    displayName: ${var.bds_instance_bds_certificate_configuration_display_name}
+    isMissingNodesOnly: ${var.is_missing_nodes_only}
+    issueCertificateTrigger: ${var.issue_certificate_trigger}
+    renewCertificateTrigger: ${var.renew_certificate_trigger}
+    secretId: ${var.secret_id}
+    setDefaultTrigger: ${var.set_default_trigger}

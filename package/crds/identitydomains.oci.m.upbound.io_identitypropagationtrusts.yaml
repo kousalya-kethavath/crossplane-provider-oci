@@ -106,6 +106,41 @@ spec:
                       of credentials containing the authentication information of
                       the user agent for the realm of the resource being requested.
                     type: string
+                  caCertChain:
+                    description: (Updatable) Certificate trust store. This is required
+                      if identity propagation type is X509.
+                    items:
+                      properties:
+                        intermediateCas:
+                          description: (Updatable) A list of PEM-encoded intermediate
+                            CA certificates.
+                          items:
+                            type: string
+                          type: array
+                        rootCas:
+                          description: (Updatable) A list of PEM-encoded root CA certificates.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  claimPropagations:
+                    description: (Updatable) A list of claims to propagate in RPST
+                    items:
+                      type: string
+                    type: array
+                  claimValidations:
+                    description: (Updatable) A list of claim validations
+                    items:
+                      properties:
+                        name:
+                          description: Claim Name
+                          type: string
+                        value:
+                          description: (Updatable) Claim Value
+                          type: string
+                      type: object
+                    type: array
                   clientClaimName:
                     description: (Updatable) The claim name that identifies to whom
                       the JWT/SAML token is issued. If AWS, then "aud" or "client_id".
@@ -129,6 +164,10 @@ spec:
                   idcsEndpoint:
                     description: The basic endpoint for the identity domain
                     type: string
+                  impersonatingResource:
+                    description: (Updatable) Defines the external workload that acts
+                      as impersonating resource principal.
+                    type: string
                   impersonationServiceUsers:
                     description: (Updatable) The Impersonating Principal.
                     items:
@@ -142,8 +181,7 @@ spec:
                             for matching the inbound token for impersonation.
                           type: string
                         value:
-                          description: (Updatable) The ID of the SCIM resource that
-                            represents the User or App who created this Resource
+                          description: (Updatable) Claim Value
                           type: string
                         valueRef:
                           description: Reference to a User in identitydomains to populate
@@ -250,7 +288,7 @@ spec:
                       type: object
                     type: array
                   name:
-                    description: The name of the the Identity Propagation Trust.
+                    description: Claim Name
                     type: string
                   oauthClients:
                     description: (Updatable) The value of all the authorized OAuth
@@ -316,8 +354,7 @@ spec:
                           description: (Updatable) Key or name of the tag.
                           type: string
                         value:
-                          description: (Updatable) The ID of the SCIM resource that
-                            represents the User or App who created this Resource
+                          description: (Updatable) Claim Value
                           type: string
                       type: object
                     type: array
@@ -384,6 +421,41 @@ spec:
                       of credentials containing the authentication information of
                       the user agent for the realm of the resource being requested.
                     type: string
+                  caCertChain:
+                    description: (Updatable) Certificate trust store. This is required
+                      if identity propagation type is X509.
+                    items:
+                      properties:
+                        intermediateCas:
+                          description: (Updatable) A list of PEM-encoded intermediate
+                            CA certificates.
+                          items:
+                            type: string
+                          type: array
+                        rootCas:
+                          description: (Updatable) A list of PEM-encoded root CA certificates.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  claimPropagations:
+                    description: (Updatable) A list of claims to propagate in RPST
+                    items:
+                      type: string
+                    type: array
+                  claimValidations:
+                    description: (Updatable) A list of claim validations
+                    items:
+                      properties:
+                        name:
+                          description: Claim Name
+                          type: string
+                        value:
+                          description: (Updatable) Claim Value
+                          type: string
+                      type: object
+                    type: array
                   clientClaimName:
                     description: (Updatable) The claim name that identifies to whom
                       the JWT/SAML token is issued. If AWS, then "aud" or "client_id".
@@ -407,6 +479,10 @@ spec:
                   idcsEndpoint:
                     description: The basic endpoint for the identity domain
                     type: string
+                  impersonatingResource:
+                    description: (Updatable) Defines the external workload that acts
+                      as impersonating resource principal.
+                    type: string
                   impersonationServiceUsers:
                     description: (Updatable) The Impersonating Principal.
                     items:
@@ -420,8 +496,7 @@ spec:
                             for matching the inbound token for impersonation.
                           type: string
                         value:
-                          description: (Updatable) The ID of the SCIM resource that
-                            represents the User or App who created this Resource
+                          description: (Updatable) Claim Value
                           type: string
                         valueRef:
                           description: Reference to a User in identitydomains to populate
@@ -528,7 +603,7 @@ spec:
                       type: object
                     type: array
                   name:
-                    description: The name of the the Identity Propagation Trust.
+                    description: Claim Name
                     type: string
                   oauthClients:
                     description: (Updatable) The value of all the authorized OAuth
@@ -594,8 +669,7 @@ spec:
                           description: (Updatable) Key or name of the tag.
                           type: string
                         value:
-                          description: (Updatable) The ID of the SCIM resource that
-                            represents the User or App who created this Resource
+                          description: (Updatable) Claim Value
                           type: string
                       type: object
                     type: array
@@ -736,6 +810,41 @@ spec:
                       of credentials containing the authentication information of
                       the user agent for the realm of the resource being requested.
                     type: string
+                  caCertChain:
+                    description: (Updatable) Certificate trust store. This is required
+                      if identity propagation type is X509.
+                    items:
+                      properties:
+                        intermediateCas:
+                          description: (Updatable) A list of PEM-encoded intermediate
+                            CA certificates.
+                          items:
+                            type: string
+                          type: array
+                        rootCas:
+                          description: (Updatable) A list of PEM-encoded root CA certificates.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  claimPropagations:
+                    description: (Updatable) A list of claims to propagate in RPST
+                    items:
+                      type: string
+                    type: array
+                  claimValidations:
+                    description: (Updatable) A list of claim validations
+                    items:
+                      properties:
+                        name:
+                          description: Claim Name
+                          type: string
+                        value:
+                          description: (Updatable) Claim Value
+                          type: string
+                      type: object
+                    type: array
                   clientClaimName:
                     description: (Updatable) The claim name that identifies to whom
                       the JWT/SAML token is issued. If AWS, then "aud" or "client_id".
@@ -800,8 +909,7 @@ spec:
                             that created this Resource
                           type: string
                         value:
-                          description: (Updatable) The ID of the SCIM resource that
-                            represents the User or App who created this Resource
+                          description: (Updatable) Claim Value
                           type: string
                       type: object
                     type: array
@@ -827,8 +935,7 @@ spec:
                             that created this Resource
                           type: string
                         value:
-                          description: (Updatable) The ID of the SCIM resource that
-                            represents the User or App who created this Resource
+                          description: (Updatable) Claim Value
                           type: string
                       type: object
                     type: array
@@ -843,6 +950,10 @@ spec:
                     items:
                       type: string
                     type: array
+                  impersonatingResource:
+                    description: (Updatable) Defines the external workload that acts
+                      as impersonating resource principal.
+                    type: string
                   impersonationServiceUsers:
                     description: (Updatable) The Impersonating Principal.
                     items:
@@ -858,8 +969,7 @@ spec:
                             for matching the inbound token for impersonation.
                           type: string
                         value:
-                          description: (Updatable) The ID of the SCIM resource that
-                            represents the User or App who created this Resource
+                          description: (Updatable) Claim Value
                           type: string
                       type: object
                     type: array
@@ -916,7 +1026,7 @@ spec:
                       type: object
                     type: array
                   name:
-                    description: The name of the the Identity Propagation Trust.
+                    description: Claim Name
                     type: string
                   oauthClients:
                     description: (Updatable) The value of all the authorized OAuth
@@ -982,8 +1092,7 @@ spec:
                           description: (Updatable) Key or name of the tag.
                           type: string
                         value:
-                          description: (Updatable) The ID of the SCIM resource that
-                            represents the User or App who created this Resource
+                          description: (Updatable) Claim Value
                           type: string
                       type: object
                     type: array

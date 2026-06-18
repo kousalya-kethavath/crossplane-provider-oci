@@ -18,6 +18,7 @@ spec:
     entitlementKey: ${var.byol_entitlement_key}
     freeformTags:
       Department: Finance
+    siteId: ${oci_ocvp_site.test_site.id}
     softwareType: ${var.byol_software_type}
     timeTermEnd: ${var.byol_time_term_end}
     timeTermStart: ${var.byol_time_term_start}

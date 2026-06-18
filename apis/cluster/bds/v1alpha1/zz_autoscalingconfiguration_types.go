@@ -29,7 +29,7 @@ type AutoScalingConfigurationInitParameters struct {
 	BdsInstanceIDSelector *v1.Selector `json:"bdsInstanceIdSelector,omitempty" tf:"-"`
 
 	// (Updatable) Base-64 encoded password for the cluster (and Cloudera Manager) admin user.
-	ClusterAdminPasswordSecretRef v1.SecretKeySelector `json:"clusterAdminPasswordSecretRef" tf:"-"`
+	ClusterAdminPasswordSecretRef *v1.SecretKeySelector `json:"clusterAdminPasswordSecretRef,omitempty" tf:"-"`
 
 	// (Updatable) A user-friendly name. The name does not have to be unique, and it may be changed. Avoid entering confidential information.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
@@ -45,6 +45,19 @@ type AutoScalingConfigurationInitParameters struct {
 
 	// (Updatable) Policy definition for the autoscale configuration.
 	PolicyDetails []PolicyDetailsInitParameters `json:"policyDetails,omitempty" tf:"policy_details,omitempty"`
+
+	// (Updatable) The secretId for the clusterAdminPassword.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/vault/v1alpha1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in vault to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v1.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in vault to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v1.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type AutoScalingConfigurationObservation struct {
@@ -55,7 +68,7 @@ type AutoScalingConfigurationObservation struct {
 	// (Updatable) A user-friendly name. The name does not have to be unique, and it may be changed. Avoid entering confidential information.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// The unique identifier for the autoscale configuration.
+	// The ID of the autoscale configuration defined under BDS resources, not OCID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// (Updatable) Whether the autoscale configuration is enabled.
@@ -69,6 +82,9 @@ type AutoScalingConfigurationObservation struct {
 
 	// (Updatable) Policy definition for the autoscale configuration.
 	PolicyDetails []PolicyDetailsObservation `json:"policyDetails,omitempty" tf:"policy_details,omitempty"`
+
+	// (Updatable) The secretId for the clusterAdminPassword.
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
 	// The state of the autoscale configuration.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -98,7 +114,7 @@ type AutoScalingConfigurationParameters struct {
 
 	// (Updatable) Base-64 encoded password for the cluster (and Cloudera Manager) admin user.
 	// +kubebuilder:validation:Optional
-	ClusterAdminPasswordSecretRef v1.SecretKeySelector `json:"clusterAdminPasswordSecretRef" tf:"-"`
+	ClusterAdminPasswordSecretRef *v1.SecretKeySelector `json:"clusterAdminPasswordSecretRef,omitempty" tf:"-"`
 
 	// (Updatable) A user-friendly name. The name does not have to be unique, and it may be changed. Avoid entering confidential information.
 	// +kubebuilder:validation:Optional
@@ -119,6 +135,20 @@ type AutoScalingConfigurationParameters struct {
 	// (Updatable) Policy definition for the autoscale configuration.
 	// +kubebuilder:validation:Optional
 	PolicyDetails []PolicyDetailsParameters `json:"policyDetails,omitempty" tf:"policy_details,omitempty"`
+
+	// (Updatable) The secretId for the clusterAdminPassword.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/vault/v1alpha1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in vault to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v1.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in vault to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v1.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type MetricInitParameters struct {
@@ -953,7 +983,6 @@ type AutoScalingConfigurationStatus struct {
 type AutoScalingConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clusterAdminPasswordSecretRef)",message="spec.forProvider.clusterAdminPasswordSecretRef is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.isEnabled) || (has(self.initProvider) && has(self.initProvider.isEnabled))",message="spec.forProvider.isEnabled is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeType) || (has(self.initProvider) && has(self.initProvider.nodeType))",message="spec.forProvider.nodeType is a required parameter"
 	Spec   AutoScalingConfigurationSpec   `json:"spec"`

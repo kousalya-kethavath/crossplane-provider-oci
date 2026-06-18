@@ -45,6 +45,26 @@ func (mg *AutoScalingConfiguration) ResolveReferences( // ResolveReferences of t
 	mg.Spec.ForProvider.BdsInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BdsInstanceIDRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("vault.oci.upbound.io", "v1alpha1", "Secret", "SecretList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecretID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.SecretIDRef,
+			Selector:     mg.Spec.ForProvider.SecretIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecretID")
+	}
+	mg.Spec.ForProvider.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SecretIDRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("bds.oci.upbound.io", "v1alpha1", "BdsInstance", "BdsInstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -64,6 +84,26 @@ func (mg *AutoScalingConfiguration) ResolveReferences( // ResolveReferences of t
 	}
 	mg.Spec.InitProvider.BdsInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BdsInstanceIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vault.oci.upbound.io", "v1alpha1", "Secret", "SecretList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecretID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.SecretIDRef,
+			Selector:     mg.Spec.InitProvider.SecretIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecretID")
+	}
+	mg.Spec.InitProvider.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SecretIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -237,6 +277,26 @@ func (mg *BdsInstance) ResolveReferences(ctx context.Context, c client.Reader) e
 		mg.Spec.ForProvider.MasterNode[i3].SubnetIDRef = rsp.ResolvedReference
 
 	}
+	{
+		m, l, err = apisresolver.GetManagedResource("vault.oci.upbound.io", "v1alpha1", "Secret", "SecretList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecretID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.SecretIDRef,
+			Selector:     mg.Spec.ForProvider.SecretIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecretID")
+	}
+	mg.Spec.ForProvider.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SecretIDRef = rsp.ResolvedReference
+
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.UtilNode); i3++ {
 		{
 			m, l, err = apisresolver.GetManagedResource("networking.oci.upbound.io", "v1alpha1", "Subnet", "SubnetList")
@@ -389,6 +449,26 @@ func (mg *BdsInstance) ResolveReferences(ctx context.Context, c client.Reader) e
 		mg.Spec.InitProvider.MasterNode[i3].SubnetIDRef = rsp.ResolvedReference
 
 	}
+	{
+		m, l, err = apisresolver.GetManagedResource("vault.oci.upbound.io", "v1alpha1", "Secret", "SecretList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecretID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.SecretIDRef,
+			Selector:     mg.Spec.InitProvider.SecretIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecretID")
+	}
+	mg.Spec.InitProvider.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SecretIDRef = rsp.ResolvedReference
+
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.UtilNode); i3++ {
 		{
 			m, l, err = apisresolver.GetManagedResource("networking.oci.upbound.io", "v1alpha1", "Subnet", "SubnetList")
@@ -525,6 +605,138 @@ func (mg *BdsInstanceApiKey) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.InitProvider.UserID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.UserIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this BdsInstanceBdsCertificateConfiguration.
+func (mg *BdsInstanceBdsCertificateConfiguration) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("bds.oci.upbound.io", "v1alpha1", "BdsInstance", "BdsInstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BdsInstanceID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.BdsInstanceIDRef,
+			Selector:     mg.Spec.ForProvider.BdsInstanceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.BdsInstanceID")
+	}
+	mg.Spec.ForProvider.BdsInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.BdsInstanceIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("certificatesmanagement.oci.upbound.io", "v1alpha1", "CertificateAuthority", "CertificateAuthorityList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateAuthorityID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CertificateAuthorityIDRef,
+			Selector:     mg.Spec.ForProvider.CertificateAuthorityIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CertificateAuthorityID")
+	}
+	mg.Spec.ForProvider.CertificateAuthorityID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CertificateAuthorityIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("identity.oci.upbound.io", "v1alpha1", "Compartment", "CompartmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
+			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CompartmentID")
+	}
+	mg.Spec.ForProvider.CompartmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CompartmentIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("bds.oci.upbound.io", "v1alpha1", "BdsInstance", "BdsInstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BdsInstanceID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.BdsInstanceIDRef,
+			Selector:     mg.Spec.InitProvider.BdsInstanceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.BdsInstanceID")
+	}
+	mg.Spec.InitProvider.BdsInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BdsInstanceIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("certificatesmanagement.oci.upbound.io", "v1alpha1", "CertificateAuthority", "CertificateAuthorityList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateAuthorityID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.CertificateAuthorityIDRef,
+			Selector:     mg.Spec.InitProvider.CertificateAuthorityIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CertificateAuthorityID")
+	}
+	mg.Spec.InitProvider.CertificateAuthorityID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CertificateAuthorityIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("identity.oci.upbound.io", "v1alpha1", "Compartment", "CompartmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
+			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CompartmentID")
+	}
+	mg.Spec.InitProvider.CompartmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CompartmentIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -1015,6 +1227,26 @@ func (mg *BdsInstanceNodeReplaceConfiguration) ResolveReferences(ctx context.Con
 	mg.Spec.ForProvider.BdsInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BdsInstanceIDRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("vault.oci.upbound.io", "v1alpha1", "Secret", "SecretList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecretID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.SecretIDRef,
+			Selector:     mg.Spec.ForProvider.SecretIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecretID")
+	}
+	mg.Spec.ForProvider.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SecretIDRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("bds.oci.upbound.io", "v1alpha1", "BdsInstance", "BdsInstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -1034,6 +1266,26 @@ func (mg *BdsInstanceNodeReplaceConfiguration) ResolveReferences(ctx context.Con
 	}
 	mg.Spec.InitProvider.BdsInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BdsInstanceIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vault.oci.upbound.io", "v1alpha1", "Secret", "SecretList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecretID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.SecretIDRef,
+			Selector:     mg.Spec.InitProvider.SecretIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecretID")
+	}
+	mg.Spec.InitProvider.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SecretIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -1194,58 +1446,6 @@ func (mg *BdsInstancePatchAction) ResolveReferences(ctx context.Context, c clien
 	return nil
 }
 
-// ResolveReferences of this BdsInstanceReplaceNodeAction.
-func (mg *BdsInstanceReplaceNodeAction) ResolveReferences(ctx context.Context, c client.Reader) error {
-	var m xpresource.Managed
-	var l xpresource.ManagedList
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-	{
-		m, l, err = apisresolver.GetManagedResource("bds.oci.upbound.io", "v1alpha1", "BdsInstance", "BdsInstanceList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BdsInstanceID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.BdsInstanceIDRef,
-			Selector:     mg.Spec.ForProvider.BdsInstanceIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.BdsInstanceID")
-	}
-	mg.Spec.ForProvider.BdsInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.BdsInstanceIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("bds.oci.upbound.io", "v1alpha1", "BdsInstance", "BdsInstanceList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BdsInstanceID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.BdsInstanceIDRef,
-			Selector:     mg.Spec.InitProvider.BdsInstanceIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.BdsInstanceID")
-	}
-	mg.Spec.InitProvider.BdsInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.BdsInstanceIDRef = rsp.ResolvedReference
-
-	return nil
-}
-
 // ResolveReferences of this BdsInstanceResourcePrincipalConfiguration.
 func (mg *BdsInstanceResourcePrincipalConfiguration) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
@@ -1275,6 +1475,26 @@ func (mg *BdsInstanceResourcePrincipalConfiguration) ResolveReferences(ctx conte
 	mg.Spec.ForProvider.BdsInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BdsInstanceIDRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("vault.oci.upbound.io", "v1alpha1", "Secret", "SecretList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecretID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.SecretIDRef,
+			Selector:     mg.Spec.ForProvider.SecretIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecretID")
+	}
+	mg.Spec.ForProvider.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SecretIDRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("bds.oci.upbound.io", "v1alpha1", "BdsInstance", "BdsInstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -1294,6 +1514,26 @@ func (mg *BdsInstanceResourcePrincipalConfiguration) ResolveReferences(ctx conte
 	}
 	mg.Spec.InitProvider.BdsInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BdsInstanceIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("vault.oci.upbound.io", "v1alpha1", "Secret", "SecretList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecretID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.SecretIDRef,
+			Selector:     mg.Spec.InitProvider.SecretIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecretID")
+	}
+	mg.Spec.InitProvider.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SecretIDRef = rsp.ResolvedReference
 
 	return nil
 }

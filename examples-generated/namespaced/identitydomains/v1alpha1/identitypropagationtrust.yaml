@@ -16,12 +16,20 @@ spec:
     - all
     attributes: ""
     authorization: ${var.identity_propagation_trust_authorization}
+    caCertChain:
+    - intermediateCas: ${var.identity_propagation_trust_ca_cert_chain_intermediate_cas}
+      rootCas: ${var.identity_propagation_trust_ca_cert_chain_root_cas}
+    claimPropagations: ${var.identity_propagation_trust_claim_propagations}
+    claimValidations:
+    - name: ${var.identity_propagation_trust_claim_validations_name}
+      value: ${var.identity_propagation_trust_claim_validations_value}
     clientClaimName: ${var.identity_propagation_trust_client_claim_name}
     clientClaimValues:
     - clientClaimValues
     clockSkewSeconds: ${var.identity_propagation_trust_clock_skew_seconds}
     description: ${var.identity_propagation_trust_description}
     idcsEndpoint: ${data.oci_identity_domain.test_domain.url}
+    impersonatingResource: ${var.identity_propagation_trust_impersonating_resource}
     impersonationServiceUsers:
     - ocid: ${var.identity_propagation_trust_impersonation_service_users_ocid}
       rule: ${var.identity_propagation_trust_impersonation_service_users_rule}

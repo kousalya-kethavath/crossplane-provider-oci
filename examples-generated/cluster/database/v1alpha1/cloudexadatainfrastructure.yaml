@@ -21,6 +21,8 @@ spec:
     displayName: ${var.cloud_exadata_infrastructure_display_name}
     freeformTags:
       Department: Finance
+    maintenanceVersionPreferences:
+    - referenceResourceIdForImageUpdates: ${var.cloud_exadata_infrastructure_maintenance_version_preferences_reference_resource_id_for_image_updates}
     maintenanceWindow:
     - customActionTimeoutInMins: ${var.cloud_exadata_infrastructure_maintenance_window_custom_action_timeout_in_mins}
       daysOfWeek:

@@ -2150,6 +2150,22 @@ func (in *CreateVnicDetailsInitParameters) DeepCopyInto(out *CreateVnicDetailsIn
 			}
 		}
 	}
+	if in.SecurityAttributes != nil {
+		in, out := &in.SecurityAttributes, &out.SecurityAttributes
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.SkipSourceDestCheck != nil {
 		in, out := &in.SkipSourceDestCheck, &out.SkipSourceDestCheck
 		*out = new(bool)
@@ -2266,6 +2282,22 @@ func (in *CreateVnicDetailsObservation) DeepCopyInto(out *CreateVnicDetailsObser
 			}
 		}
 	}
+	if in.SecurityAttributes != nil {
+		in, out := &in.SecurityAttributes, &out.SecurityAttributes
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.SkipSourceDestCheck != nil {
 		in, out := &in.SkipSourceDestCheck, &out.SkipSourceDestCheck
 		*out = new(bool)
@@ -2372,6 +2404,22 @@ func (in *CreateVnicDetailsParameters) DeepCopyInto(out *CreateVnicDetailsParame
 			}
 		}
 	}
+	if in.SecurityAttributes != nil {
+		in, out := &in.SecurityAttributes, &out.SecurityAttributes
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.SkipSourceDestCheck != nil {
 		in, out := &in.SkipSourceDestCheck, &out.SkipSourceDestCheck
 		*out = new(bool)
@@ -2435,6 +2483,22 @@ func (in *EndpointConfigInitParameters) DeepCopyInto(out *EndpointConfigInitPara
 		*out = new(v1.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.SecurityAttributes != nil {
+		in, out := &in.SecurityAttributes, &out.SecurityAttributes
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.SubnetID != nil {
 		in, out := &in.SubnetID, &out.SubnetID
 		*out = new(string)
@@ -2479,6 +2543,22 @@ func (in *EndpointConfigObservation) DeepCopyInto(out *EndpointConfigObservation
 				*out = new(string)
 				**out = **in
 			}
+		}
+	}
+	if in.SecurityAttributes != nil {
+		in, out := &in.SecurityAttributes, &out.SecurityAttributes
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
 		}
 	}
 	if in.SubnetID != nil {
@@ -2528,6 +2608,22 @@ func (in *EndpointConfigParameters) DeepCopyInto(out *EndpointConfigParameters) 
 		in, out := &in.NsgIdsSelector, &out.NsgIdsSelector
 		*out = new(v1.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.SecurityAttributes != nil {
+		in, out := &in.SecurityAttributes, &out.SecurityAttributes
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
 	}
 	if in.SubnetID != nil {
 		in, out := &in.SubnetID, &out.SubnetID
@@ -3950,6 +4046,13 @@ func (in *NodePoolInitParameters) DeepCopyInto(out *NodePoolInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PrimaryVnic != nil {
+		in, out := &in.PrimaryVnic, &out.PrimaryVnic
+		*out = make([]PrimaryVnicInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.QuantityPerSubnet != nil {
 		in, out := &in.QuantityPerSubnet, &out.QuantityPerSubnet
 		*out = new(float64)
@@ -4179,6 +4282,13 @@ func (in *NodePoolObservation) DeepCopyInto(out *NodePoolObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PrimaryVnic != nil {
+		in, out := &in.PrimaryVnic, &out.PrimaryVnic
+		*out = make([]PrimaryVnicObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.QuantityPerSubnet != nil {
 		in, out := &in.QuantityPerSubnet, &out.QuantityPerSubnet
 		*out = new(float64)
@@ -4383,6 +4493,13 @@ func (in *NodePoolParameters) DeepCopyInto(out *NodePoolParameters) {
 	if in.NodeSourceDetails != nil {
 		in, out := &in.NodeSourceDetails, &out.NodeSourceDetails
 		*out = make([]NodeSourceDetailsParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.PrimaryVnic != nil {
+		in, out := &in.PrimaryVnic, &out.PrimaryVnic
+		*out = make([]PrimaryVnicParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
@@ -6285,6 +6402,99 @@ func (in *PreemptionActionParameters) DeepCopy() *PreemptionActionParameters {
 		return nil
 	}
 	out := new(PreemptionActionParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *PrimaryVnicInitParameters) DeepCopyInto(out *PrimaryVnicInitParameters) {
+	*out = *in
+	if in.SecurityAttributes != nil {
+		in, out := &in.SecurityAttributes, &out.SecurityAttributes
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new PrimaryVnicInitParameters.
+func (in *PrimaryVnicInitParameters) DeepCopy() *PrimaryVnicInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(PrimaryVnicInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *PrimaryVnicObservation) DeepCopyInto(out *PrimaryVnicObservation) {
+	*out = *in
+	if in.SecurityAttributes != nil {
+		in, out := &in.SecurityAttributes, &out.SecurityAttributes
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new PrimaryVnicObservation.
+func (in *PrimaryVnicObservation) DeepCopy() *PrimaryVnicObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(PrimaryVnicObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *PrimaryVnicParameters) DeepCopyInto(out *PrimaryVnicParameters) {
+	*out = *in
+	if in.SecurityAttributes != nil {
+		in, out := &in.SecurityAttributes, &out.SecurityAttributes
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new PrimaryVnicParameters.
+func (in *PrimaryVnicParameters) DeepCopy() *PrimaryVnicParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(PrimaryVnicParameters)
 	in.DeepCopyInto(out)
 	return out
 }

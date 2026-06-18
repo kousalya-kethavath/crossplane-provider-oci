@@ -209,6 +209,12 @@ spec:
                   secret:
                     description: according to the specified decryptionProfile.
                     type: string
+                  secrets:
+                    description: (Updatable) An array of mapped secrets. Its type
+                      must match that of the specified decryption profile.
+                    items:
+                      type: string
+                    type: array
                 type: object
               initProvider:
                 description: |-
@@ -357,6 +363,12 @@ spec:
                   secret:
                     description: according to the specified decryptionProfile.
                     type: string
+                  secrets:
+                    description: (Updatable) An array of mapped secrets. Its type
+                      must match that of the specified decryption profile.
+                    items:
+                      type: string
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -529,6 +541,12 @@ spec:
                   secret:
                     description: according to the specified decryptionProfile.
                     type: string
+                  secrets:
+                    description: (Updatable) An array of mapped secrets. Its type
+                      must match that of the specified decryption profile.
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

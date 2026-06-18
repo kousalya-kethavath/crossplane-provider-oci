@@ -45,6 +45,10 @@ type CreateVnicDetailsInitParameters struct {
 	// +listType=set
 	NsgIds []*string `json:"nsgIds,omitempty" tf:"nsg_ids,omitempty"`
 
+	// (Updatable) Security attributes are labels for a resource that can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
 	// (Updatable) Whether the source/destination check is disabled on the VNIC
 	SkipSourceDestCheck *bool `json:"skipSourceDestCheck,omitempty" tf:"skip_source_dest_check,omitempty"`
 
@@ -94,6 +98,10 @@ type CreateVnicDetailsObservation struct {
 	// +listType=set
 	NsgIds []*string `json:"nsgIds,omitempty" tf:"nsg_ids,omitempty"`
 
+	// (Updatable) Security attributes are labels for a resource that can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
 	// (Updatable) Whether the source/destination check is disabled on the VNIC
 	SkipSourceDestCheck *bool `json:"skipSourceDestCheck,omitempty" tf:"skip_source_dest_check,omitempty"`
 
@@ -141,6 +149,11 @@ type CreateVnicDetailsParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	NsgIds []*string `json:"nsgIds,omitempty" tf:"nsg_ids,omitempty"`
+
+	// (Updatable) Security attributes are labels for a resource that can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 
 	// (Updatable) Whether the source/destination check is disabled on the VNIC
 	// +kubebuilder:validation:Optional
@@ -544,6 +557,9 @@ type NodePoolInitParameters struct {
 	// (Updatable) Specify the source to use to launch nodes in the node pool. Currently, image is the only supported source.
 	NodeSourceDetails []NodeSourceDetailsInitParameters `json:"nodeSourceDetails,omitempty" tf:"node_source_details,omitempty"`
 
+	// (Updatable) Details for node's primary VNIC
+	PrimaryVnic []PrimaryVnicInitParameters `json:"primaryVnic,omitempty" tf:"primary_vnic,omitempty"`
+
 	// (Updatable) Optional, default to 1. The number of nodes to create in each subnet specified in subnetIds property. When used, subnetIds is required. This property is deprecated, use nodeConfigDetails instead.
 	QuantityPerSubnet *float64 `json:"quantityPerSubnet,omitempty" tf:"quantity_per_subnet,omitempty"`
 
@@ -625,6 +641,9 @@ type NodePoolObservation struct {
 
 	// The nodes in the node pool.
 	Nodes []NodesObservation `json:"nodes,omitempty" tf:"nodes,omitempty"`
+
+	// (Updatable) Details for node's primary VNIC
+	PrimaryVnic []PrimaryVnicObservation `json:"primaryVnic,omitempty" tf:"primary_vnic,omitempty"`
 
 	// (Updatable) Optional, default to 1. The number of nodes to create in each subnet specified in subnetIds property. When used, subnetIds is required. This property is deprecated, use nodeConfigDetails instead.
 	QuantityPerSubnet *float64 `json:"quantityPerSubnet,omitempty" tf:"quantity_per_subnet,omitempty"`
@@ -742,6 +761,10 @@ type NodePoolParameters struct {
 	// (Updatable) Specify the source to use to launch nodes in the node pool. Currently, image is the only supported source.
 	// +kubebuilder:validation:Optional
 	NodeSourceDetails []NodeSourceDetailsParameters `json:"nodeSourceDetails,omitempty" tf:"node_source_details,omitempty"`
+
+	// (Updatable) Details for node's primary VNIC
+	// +kubebuilder:validation:Optional
+	PrimaryVnic []PrimaryVnicParameters `json:"primaryVnic,omitempty" tf:"primary_vnic,omitempty"`
 
 	// (Updatable) Optional, default to 1. The number of nodes to create in each subnet specified in subnetIds property. When used, subnetIds is required. This property is deprecated, use nodeConfigDetails instead.
 	// +kubebuilder:validation:Optional
@@ -1092,6 +1115,28 @@ type PreemptionActionParameters struct {
 	// (Updatable) The type of action to run when the instance is interrupted for eviction.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type PrimaryVnicInitParameters struct {
+
+	// (Updatable) Security attributes are labels for a resource that can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+}
+
+type PrimaryVnicObservation struct {
+
+	// (Updatable) Security attributes are labels for a resource that can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+}
+
+type PrimaryVnicParameters struct {
+
+	// (Updatable) Security attributes are labels for a resource that can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 }
 
 type SecondaryVnicsInitParameters struct {

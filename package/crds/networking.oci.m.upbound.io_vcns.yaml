@@ -213,9 +213,12 @@ spec:
                       Addresses.  Example: true'
                     type: boolean
                   isOracleGuaAllocationEnabled:
-                    description: Specifies whether to skip Oracle allocated IPv6 GUA.
-                      By default, Oracle will allocate one GUA of /56 size for an
-                      IPv6 enabled VCN.
+                    description: Specifies whether Oracle allocates an IPv6 global
+                      unicast address (GUA) prefix to the VCN. By default, Oracle
+                      allocates one GUA prefix of /56 size for an IPv6-enabled VCN
+                      if this value is not explicitly set to false. When this value
+                      is changed from true to false on an existing VCN, the provider
+                      removes that prefix from the existing VCN.
                     type: boolean
                   securityAttributes:
                     additionalProperties:
@@ -395,9 +398,12 @@ spec:
                       Addresses.  Example: true'
                     type: boolean
                   isOracleGuaAllocationEnabled:
-                    description: Specifies whether to skip Oracle allocated IPv6 GUA.
-                      By default, Oracle will allocate one GUA of /56 size for an
-                      IPv6 enabled VCN.
+                    description: Specifies whether Oracle allocates an IPv6 global
+                      unicast address (GUA) prefix to the VCN. By default, Oracle
+                      allocates one GUA prefix of /56 size for an IPv6-enabled VCN
+                      if this value is not explicitly set to false. When this value
+                      is changed from true to false on an existing VCN, the provider
+                      removes that prefix from the existing VCN.
                     type: boolean
                   securityAttributes:
                     additionalProperties:
@@ -572,9 +578,12 @@ spec:
                       Addresses.  Example: true'
                     type: boolean
                   isOracleGuaAllocationEnabled:
-                    description: Specifies whether to skip Oracle allocated IPv6 GUA.
-                      By default, Oracle will allocate one GUA of /56 size for an
-                      IPv6 enabled VCN.
+                    description: Specifies whether Oracle allocates an IPv6 global
+                      unicast address (GUA) prefix to the VCN. By default, Oracle
+                      allocates one GUA prefix of /56 size for an IPv6-enabled VCN
+                      if this value is not explicitly set to false. When this value
+                      is changed from true to false on an existing VCN, the provider
+                      removes that prefix from the existing VCN.
                     type: boolean
                   securityAttributes:
                     additionalProperties:

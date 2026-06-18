@@ -25,6 +25,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: test_network_firewall_policy
     networkSecurityGroupIds: ${var.network_firewall_network_security_group_ids}
+    securityAttributes: ${var.network_firewall_security_attributes}
     shape: ${var.network_firewall_shape}
     subnetIdSelector:
       matchLabels:

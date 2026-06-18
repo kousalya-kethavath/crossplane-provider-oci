@@ -268,6 +268,14 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        securityAttributes:
+                          additionalProperties:
+                            type: string
+                          description: Security attributes are labels for a resource
+                            that can be referenced in a Zero Trust Packet Routing
+                            (ZPR) policy to control access to ZPR-supported resources.
+                          type: object
+                          x-kubernetes-map-type: granular
                         subnetId:
                           description: The OCID of the regional subnet in which to
                             place the Cluster endpoint.
@@ -1136,6 +1144,14 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        securityAttributes:
+                          additionalProperties:
+                            type: string
+                          description: Security attributes are labels for a resource
+                            that can be referenced in a Zero Trust Packet Routing
+                            (ZPR) policy to control access to ZPR-supported resources.
+                          type: object
+                          x-kubernetes-map-type: granular
                         subnetId:
                           description: The OCID of the regional subnet in which to
                             place the Cluster endpoint.
@@ -1944,6 +1960,14 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        securityAttributes:
+                          additionalProperties:
+                            type: string
+                          description: Security attributes are labels for a resource
+                            that can be referenced in a Zero Trust Packet Routing
+                            (ZPR) policy to control access to ZPR-supported resources.
+                          type: object
+                          x-kubernetes-map-type: granular
                         subnetId:
                           description: The OCID of the regional subnet in which to
                             place the Cluster endpoint.

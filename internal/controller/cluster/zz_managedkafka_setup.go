@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	kafkacluster "github.com/oracle/provider-oci/internal/controller/cluster/managedkafka/kafkacluster"
+	kafkaclusteraddon "github.com/oracle/provider-oci/internal/controller/cluster/managedkafka/kafkaclusteraddon"
 	kafkaclusterconfig "github.com/oracle/provider-oci/internal/controller/cluster/managedkafka/kafkaclusterconfig"
 	kafkaclustersuperusersmanagement "github.com/oracle/provider-oci/internal/controller/cluster/managedkafka/kafkaclustersuperusersmanagement"
 )
@@ -19,6 +20,7 @@ import (
 func Setup_managedkafka(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		kafkacluster.Setup,
+		kafkaclusteraddon.Setup,
 		kafkaclusterconfig.Setup,
 		kafkaclustersuperusersmanagement.Setup,
 	} {
@@ -34,6 +36,7 @@ func Setup_managedkafka(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_managedkafka(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		kafkacluster.SetupGated,
+		kafkaclusteraddon.SetupGated,
 		kafkaclusterconfig.SetupGated,
 		kafkaclustersuperusersmanagement.SetupGated,
 	} {

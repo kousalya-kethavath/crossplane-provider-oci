@@ -476,7 +476,7 @@ spec:
                     type: string
                   dbaasParentInfrastructureId:
                     description: The OCID of the parent cloud DB Infrastructure. For
-                      VM Dbsystems , it will be the DBSystem Id. For ExaCS and ExaCC,  it
+                      VM DB systems , it will be the DBSystem ID. For ExaCS and ExaCC,  it
                       will be the cloudVmClusterId and vmClusterId respectively.
                     type: string
                   definedTags:
@@ -488,7 +488,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   deploymentType:
-                    description: The deployment type of cloud dbsystem.
+                    description: The deployment type of cloud DB system.
                     type: string
                   discoveryAgentId:
                     description: The OCID of the management agent used during the

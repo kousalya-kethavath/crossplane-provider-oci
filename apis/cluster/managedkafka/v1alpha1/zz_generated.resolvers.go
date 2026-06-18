@@ -108,6 +108,58 @@ func (mg *KafkaCluster) ResolveReferences( // ResolveReferences of this KafkaClu
 	return nil
 }
 
+// ResolveReferences of this KafkaClusterAddon.
+func (mg *KafkaClusterAddon) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("managedkafka.oci.upbound.io", "v1alpha1", "KafkaCluster", "KafkaClusterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KafkaClusterID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.KafkaClusterIDRef,
+			Selector:     mg.Spec.ForProvider.KafkaClusterIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KafkaClusterID")
+	}
+	mg.Spec.ForProvider.KafkaClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KafkaClusterIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("managedkafka.oci.upbound.io", "v1alpha1", "KafkaCluster", "KafkaClusterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KafkaClusterID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.KafkaClusterIDRef,
+			Selector:     mg.Spec.InitProvider.KafkaClusterIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KafkaClusterID")
+	}
+	mg.Spec.InitProvider.KafkaClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KafkaClusterIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this KafkaClusterConfig.
 func (mg *KafkaClusterConfig) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

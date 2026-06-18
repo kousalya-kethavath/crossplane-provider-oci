@@ -196,6 +196,17 @@ spec:
                             expressions.
                           items:
                             properties:
+                              contentRoot:
+                                description: (Updatable) JSON Path string to override
+                                  the context root before delegating to the adapter
+                                  of the target digital twin instance.
+                                type: string
+                              target:
+                                description: (Updatable) Optional. JQ expression to
+                                  map the target resource, which is externalKey of
+                                  digital twin instance, the incoming data belongs
+                                  to.
+                                type: string
                               timeObserved:
                                 description: '(Updatable) JQ expression to extract
                                   the observation timestamp from the payload. If not
@@ -482,6 +493,17 @@ spec:
                             expressions.
                           items:
                             properties:
+                              contentRoot:
+                                description: (Updatable) JSON Path string to override
+                                  the context root before delegating to the adapter
+                                  of the target digital twin instance.
+                                type: string
+                              target:
+                                description: (Updatable) Optional. JQ expression to
+                                  map the target resource, which is externalKey of
+                                  digital twin instance, the incoming data belongs
+                                  to.
+                                type: string
                               timeObserved:
                                 description: '(Updatable) JQ expression to extract
                                   the observation timestamp from the payload. If not
@@ -775,6 +797,17 @@ spec:
                             expressions.
                           items:
                             properties:
+                              contentRoot:
+                                description: (Updatable) JSON Path string to override
+                                  the context root before delegating to the adapter
+                                  of the target digital twin instance.
+                                type: string
+                              target:
+                                description: (Updatable) Optional. JQ expression to
+                                  map the target resource, which is externalKey of
+                                  digital twin instance, the incoming data belongs
+                                  to.
+                                type: string
                               timeObserved:
                                 description: '(Updatable) JQ expression to extract
                                   the observation timestamp from the payload. If not

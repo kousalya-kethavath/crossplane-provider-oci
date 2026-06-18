@@ -434,6 +434,10 @@ type IntegrationInstanceInitParameters struct {
 
 	// (Updatable) The target state for the instance. Could be set to ACTIVE or INACTIVE
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Usage of system tag keys. These predefined keys are scoped to namespaces. Example: {"orcl-cloud.free-tier-retained": "true"}
+	// +mapType=granular
+	SystemTags map[string]*string `json:"systemTags,omitempty" tf:"system_tags,omitempty"`
 }
 
 type IntegrationInstanceObservation struct {
@@ -678,6 +682,11 @@ type IntegrationInstanceParameters struct {
 	// (Updatable) The target state for the instance. Could be set to ACTIVE or INACTIVE
 	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Usage of system tag keys. These predefined keys are scoped to namespaces. Example: {"orcl-cloud.free-tier-retained": "true"}
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	SystemTags map[string]*string `json:"systemTags,omitempty" tf:"system_tags,omitempty"`
 }
 
 type NetworkEndpointDetailsInitParameters struct {

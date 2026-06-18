@@ -162,6 +162,10 @@ spec:
                       new ESXi host will be auto assigned to the next availability
                       domain following evenly distribution strategy.
                     type: string
+                  currentCommitment:
+                    description: The billing option currently used by the ESXi host.
+                      ListSupportedCommitments.
+                    type: string
                   currentSku:
                     description: (Deprecated)  The billing option currently used by
                       the ESXi host. It is only effective during resource creation.
@@ -220,6 +224,12 @@ spec:
                     description: (Updatable) Indicates whether this host embedded
                       VMware vSAN with BYOL Allocation.
                     type: boolean
+                  nextCommitment:
+                    description: (Updatable) The billing option to switch to after
+                      the existing billing cycle ends. If nextCommitment is null or
+                      empty, currentCommitment continues to the next billing cycle.
+                      ListSupportedCommitments.
+                    type: string
                   nextSku:
                     description: (Deprecated)  (Updatable) The billing option to switch
                       to after the existing billing cycle ends. If nextSku is null
@@ -451,6 +461,10 @@ spec:
                       new ESXi host will be auto assigned to the next availability
                       domain following evenly distribution strategy.
                     type: string
+                  currentCommitment:
+                    description: The billing option currently used by the ESXi host.
+                      ListSupportedCommitments.
+                    type: string
                   currentSku:
                     description: (Deprecated)  The billing option currently used by
                       the ESXi host. It is only effective during resource creation.
@@ -509,6 +523,12 @@ spec:
                     description: (Updatable) Indicates whether this host embedded
                       VMware vSAN with BYOL Allocation.
                     type: boolean
+                  nextCommitment:
+                    description: (Updatable) The billing option to switch to after
+                      the existing billing cycle ends. If nextCommitment is null or
+                      empty, currentCommitment continues to the next billing cycle.
+                      ListSupportedCommitments.
+                    type: string
                   nextSku:
                     description: (Deprecated)  (Updatable) The billing option to switch
                       to after the existing billing cycle ends. If nextSku is null

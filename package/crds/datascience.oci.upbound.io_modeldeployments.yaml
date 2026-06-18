@@ -86,10 +86,162 @@ spec:
                                 description: (Updatable) The OCID of a log group to
                                   work with.
                                 type: string
+                              logGroupIdRef:
+                                description: Reference to a LogGroup in logging to
+                                  populate logGroupId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              logGroupIdSelector:
+                                description: Selector for a LogGroup in logging to
+                                  populate logGroupId.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                               logId:
                                 description: (Updatable) The OCID of a log to work
                                   with.
                                 type: string
+                              logIdRef:
+                                description: Reference to a Log in logging to populate
+                                  logId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              logIdSelector:
+                                description: Selector for a Log in logging to populate
+                                  logId.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                             type: object
                           type: array
                         predict:
@@ -100,10 +252,162 @@ spec:
                                 description: (Updatable) The OCID of a log group to
                                   work with.
                                 type: string
+                              logGroupIdRef:
+                                description: Reference to a LogGroup in logging to
+                                  populate logGroupId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              logGroupIdSelector:
+                                description: Selector for a LogGroup in logging to
+                                  populate logGroupId.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                               logId:
                                 description: (Updatable) The OCID of a log to work
                                   with.
                                 type: string
+                              logIdRef:
+                                description: Reference to a Log in logging to populate
+                                  logId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              logIdSelector:
+                                description: Selector for a Log in logging to populate
+                                  logId.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                             type: object
                           type: array
                       type: object
@@ -234,6 +538,25 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                              customHttpEndpoints:
+                                description: (Applicable when environment_configuration_type=OCIR_CONTAINER)
+                                  (Updatable) List of custom inference HTTP endpoints
+                                  configured on the model deployment instance for
+                                  inferencing.
+                                items:
+                                  properties:
+                                    endpointUriSuffix:
+                                      description: (Updatable) The suffix part of
+                                        the endpoint that will be allowed for invocation.
+                                      type: string
+                                    httpMethods:
+                                      description: (Updatable) List of HTTP methods
+                                        acceptable by the URI.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
                               defaultEnvironmentVariables:
                                 additionalProperties:
                                   type: string
@@ -299,6 +622,14 @@ spec:
                                 description: (Applicable when environment_configuration_type=OCIR_CONTAINER)
                                   (Updatable) OCID of the container image signature
                                 type: string
+                              predictApiSpecification:
+                                description: (Applicable when environment_configuration_type=OCIR_CONTAINER)
+                                  (Updatable) The chosen specification from predefined
+                                  set of endpoints a user can access.  For example,
+                                  if the value is 'openai', the user can access OpenAI-compliant
+                                  endpoints  like /v1/completions, /v1/chat/completions,
+                                  /v1/models, etc., for inference.
+                                type: string
                               serverPort:
                                 description: (Applicable when environment_configuration_type=OCIR_CONTAINER)
                                   (Updatable) The port on which the web server serving
@@ -316,6 +647,85 @@ spec:
                                 description: (Updatable) The minimum network bandwidth
                                   for the model deployment.
                                 type: number
+                              computeTargetId:
+                                description: The OCID of a Compute Target.
+                                type: string
+                              computeTargetIdRef:
+                                description: Reference to a ComputeTarget in datascience
+                                  to populate computeTargetId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              computeTargetIdSelector:
+                                description: Selector for a ComputeTarget in datascience
+                                  to populate computeTargetId.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                               infrastructureType:
                                 description: The type of the model deployment infrastructure.
                                 type: string
@@ -390,6 +800,71 @@ spec:
                                 description: (Updatable) The maximum network bandwidth
                                   for the model deployment.
                                 type: number
+                              modelDeploymentResourceConfiguration:
+                                description: Resource configuration details for model
+                                  deploy on managed compute cluster type compute target.
+                                items:
+                                  properties:
+                                    resourceLimitConfiguration:
+                                      description: Resource limit configuration details
+                                        for workload on managed compute cluster type
+                                        compute target.
+                                      items:
+                                        properties:
+                                          memoryInGbs:
+                                            description: (Updatable) A model-deployment
+                                              instance of type VM.Standard.E3.Flex
+                                              or VM.Standard.E4.Flex allows the memory
+                                              to be specified with in the range of
+                                              6 to 1024 GB. VM.Standard3.Flex memory
+                                              range is between 6 to 512 GB and VM.Optimized3.Flex
+                                              memory range is between 6 to 256 GB.
+                                            type: number
+                                          ocpus:
+                                            description: (Updatable) A model-deployment
+                                              instance of type VM.Standard.E3.Flex
+                                              or VM.Standard.E4.Flex allows the ocpu
+                                              count to be specified with in the range
+                                              of 1 to 64 ocpu. VM.Standard3.Flex OCPU
+                                              range is between 1 to 32 ocpu and for
+                                              VM.Optimized3.Flex OCPU range is 1 to
+                                              18 ocpu.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    resourceRequestConfiguration:
+                                      description: Resource request configuration
+                                        to run workload on managed compute cluster
+                                        type compute target compute target.
+                                      items:
+                                        properties:
+                                          gpus:
+                                            description: The total number of gpus
+                                              required to be allocated to the workload.
+                                            type: number
+                                          memoryInGbs:
+                                            description: (Updatable) A model-deployment
+                                              instance of type VM.Standard.E3.Flex
+                                              or VM.Standard.E4.Flex allows the memory
+                                              to be specified with in the range of
+                                              6 to 1024 GB. VM.Standard3.Flex memory
+                                              range is between 6 to 512 GB and VM.Optimized3.Flex
+                                              memory range is between 6 to 256 GB.
+                                            type: number
+                                          ocpus:
+                                            description: (Updatable) A model-deployment
+                                              instance of type VM.Standard.E3.Flex
+                                              or VM.Standard.E4.Flex allows the ocpu
+                                              count to be specified with in the range
+                                              of 1 to 64 ocpu. VM.Standard3.Flex OCPU
+                                              range is between 1 to 32 ocpu and for
+                                              VM.Optimized3.Flex OCPU range is 1 to
+                                              18 ocpu.
+                                            type: number
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                               scalingPolicy:
                                 description: (Updatable) The scaling policy to apply
                                   to each model of the deployment.
@@ -447,6 +922,56 @@ spec:
                                                   description: (Updatable) Metric
                                                     type
                                                   type: string
+                                                scaleConfiguration:
+                                                  description: The scaling configuration
+                                                    for the target-based workload
+                                                    rule.
+                                                  items:
+                                                    properties:
+                                                      metricNamespace:
+                                                        description: Returned for
+                                                          TARGET_CUSTOM_EXPRESSION.
+                                                          Namespace to read the metrics
+                                                          from.
+                                                        type: string
+                                                      query:
+                                                        description: '(Updatable)
+                                                          The Monitoring Query Language
+                                                          (MQL) expression to evaluate
+                                                          for the alarm. The Alarms
+                                                          feature of the Monitoring
+                                                          service interprets results
+                                                          for each returned time series
+                                                          as Boolean values, where
+                                                          zero represents false and
+                                                          a non-zero value represents
+                                                          true. A true value means
+                                                          that the trigger rule condition
+                                                          has been met. The query
+                                                          must specify a metric, statistic,
+                                                          interval, and trigger rule
+                                                          (threshold or absence).
+                                                          Supported values for interval:
+                                                          1m-60m (also 1h). You can
+                                                          optionally specify dimensions
+                                                          and grouping functions.
+                                                          Supported grouping functions:
+                                                          grouping(), groupBy().'
+                                                        type: string
+                                                      targetScalingConfigurationType:
+                                                        description: The type of target
+                                                          scaling configuration. Supported
+                                                          values are THRESHOLD and
+                                                          QUERY.
+                                                        type: string
+                                                      threshold:
+                                                        description: (Updatable) A
+                                                          metric value at which the
+                                                          scaling operation will be
+                                                          triggered.
+                                                        type: number
+                                                    type: object
+                                                  type: array
                                                 scaleInConfiguration:
                                                   description: (Updatable) The scaling
                                                     configuration for the predefined
@@ -593,6 +1118,98 @@ spec:
                                                   type: array
                                               type: object
                                             type: array
+                                          scaleInPolicy:
+                                            description: Workload scaling policy configuration
+                                              for workloads on managed compute cluster
+                                              type compute target.
+                                            items:
+                                              properties:
+                                                coolDownInSeconds:
+                                                  description: (Applicable when policy_type=AUTOSCALING)
+                                                    (Updatable) For threshold-based
+                                                    autoscaling policies, this value
+                                                    is the minimum period of time
+                                                    to wait between scaling actions.
+                                                    The cooldown period gives the
+                                                    system time to stabilize before
+                                                    rescaling. The minimum value is
+                                                    300 seconds, which is also the
+                                                    default. The cooldown period starts
+                                                    when the model deployment becomes
+                                                    ACTIVE after the scaling operation.
+                                                  type: number
+                                                instanceCountAdjustment:
+                                                  description: (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION
+                                                    | PREDEFINED_EXPRESSION) (Updatable)
+                                                    The value is used for adjusting
+                                                    the count of instances by.
+                                                  type: number
+                                                pendingDuration:
+                                                  description: (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION
+                                                    | PREDEFINED_EXPRESSION) (Updatable)
+                                                    The period of time that the condition
+                                                    defined in the alarm must persist
+                                                    before the alarm state changes
+                                                    from "OK" to "FIRING" or vice
+                                                    versa. For example, a value of
+                                                    5 minutes means that the alarm
+                                                    must persist in breaching the
+                                                    condition for five minutes before
+                                                    the alarm updates its state to
+                                                    "FIRING"; likewise, the alarm
+                                                    must persist in not breaching
+                                                    the condition for five minutes
+                                                    before the alarm updates its state
+                                                    to "OK."
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          scaleOutPolicy:
+                                            description: Workload scaling policy configuration
+                                              for workloads on managed compute cluster
+                                              type compute target.
+                                            items:
+                                              properties:
+                                                coolDownInSeconds:
+                                                  description: (Applicable when policy_type=AUTOSCALING)
+                                                    (Updatable) For threshold-based
+                                                    autoscaling policies, this value
+                                                    is the minimum period of time
+                                                    to wait between scaling actions.
+                                                    The cooldown period gives the
+                                                    system time to stabilize before
+                                                    rescaling. The minimum value is
+                                                    300 seconds, which is also the
+                                                    default. The cooldown period starts
+                                                    when the model deployment becomes
+                                                    ACTIVE after the scaling operation.
+                                                  type: number
+                                                instanceCountAdjustment:
+                                                  description: (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION
+                                                    | PREDEFINED_EXPRESSION) (Updatable)
+                                                    The value is used for adjusting
+                                                    the count of instances by.
+                                                  type: number
+                                                pendingDuration:
+                                                  description: (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION
+                                                    | PREDEFINED_EXPRESSION) (Updatable)
+                                                    The period of time that the condition
+                                                    defined in the alarm must persist
+                                                    before the alarm state changes
+                                                    from "OK" to "FIRING" or vice
+                                                    versa. For example, a value of
+                                                    5 minutes means that the alarm
+                                                    must persist in breaching the
+                                                    condition for five minutes before
+                                                    the alarm updates its state to
+                                                    "FIRING"; likewise, the alarm
+                                                    must persist in not breaching
+                                                    the condition for five minutes
+                                                    before the alarm updates its state
+                                                    to "OK."
+                                                  type: string
+                                              type: object
+                                            type: array
                                         type: object
                                       type: array
                                     coolDownInSeconds:
@@ -601,7 +1218,7 @@ spec:
                                         policies, this value is the minimum period
                                         of time to wait between scaling actions. The
                                         cooldown period gives the system time to stabilize
-                                        before rescaling. The minimum value is 600
+                                        before rescaling. The minimum value is 300
                                         seconds, which is also the default. The cooldown
                                         period starts when the model deployment becomes
                                         ACTIVE after the scaling operation.
@@ -706,6 +1323,82 @@ spec:
                                 description: (Updatable) The OCID of the model you
                                   want to deploy.
                                 type: string
+                              modelIdRef:
+                                description: Reference to a Model in datascience to
+                                  populate modelId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              modelIdSelector:
+                                description: Selector for a Model in datascience to
+                                  populate modelId.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                               scalingPolicy:
                                 description: (Updatable) The scaling policy to apply
                                   to each model of the deployment.
@@ -917,7 +1610,7 @@ spec:
                                         policies, this value is the minimum period
                                         of time to wait between scaling actions. The
                                         cooldown period gives the system time to stabilize
-                                        before rescaling. The minimum value is 600
+                                        before rescaling. The minimum value is 300
                                         seconds, which is also the default. The cooldown
                                         period starts when the model deployment becomes
                                         ACTIVE after the scaling operation.
@@ -959,6 +1652,82 @@ spec:
                     description: The OCID of the project to associate with the model
                       deployment.
                     type: string
+                  projectIdRef:
+                    description: Reference to a Project in datascience to populate
+                      projectId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  projectIdSelector:
+                    description: Selector for a Project in datascience to populate
+                      projectId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   state:
                     description: (Updatable) The target state for the Model Deployment.
                       Could be set to ACTIVE or INACTIVE.
@@ -989,10 +1758,162 @@ spec:
                                 description: (Updatable) The OCID of a log group to
                                   work with.
                                 type: string
+                              logGroupIdRef:
+                                description: Reference to a LogGroup in logging to
+                                  populate logGroupId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              logGroupIdSelector:
+                                description: Selector for a LogGroup in logging to
+                                  populate logGroupId.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                               logId:
                                 description: (Updatable) The OCID of a log to work
                                   with.
                                 type: string
+                              logIdRef:
+                                description: Reference to a Log in logging to populate
+                                  logId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              logIdSelector:
+                                description: Selector for a Log in logging to populate
+                                  logId.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                             type: object
                           type: array
                         predict:
@@ -1003,10 +1924,162 @@ spec:
                                 description: (Updatable) The OCID of a log group to
                                   work with.
                                 type: string
+                              logGroupIdRef:
+                                description: Reference to a LogGroup in logging to
+                                  populate logGroupId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              logGroupIdSelector:
+                                description: Selector for a LogGroup in logging to
+                                  populate logGroupId.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                               logId:
                                 description: (Updatable) The OCID of a log to work
                                   with.
                                 type: string
+                              logIdRef:
+                                description: Reference to a Log in logging to populate
+                                  logId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              logIdSelector:
+                                description: Selector for a Log in logging to populate
+                                  logId.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                             type: object
                           type: array
                       type: object
@@ -1137,6 +2210,25 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                              customHttpEndpoints:
+                                description: (Applicable when environment_configuration_type=OCIR_CONTAINER)
+                                  (Updatable) List of custom inference HTTP endpoints
+                                  configured on the model deployment instance for
+                                  inferencing.
+                                items:
+                                  properties:
+                                    endpointUriSuffix:
+                                      description: (Updatable) The suffix part of
+                                        the endpoint that will be allowed for invocation.
+                                      type: string
+                                    httpMethods:
+                                      description: (Updatable) List of HTTP methods
+                                        acceptable by the URI.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
                               defaultEnvironmentVariables:
                                 additionalProperties:
                                   type: string
@@ -1202,6 +2294,14 @@ spec:
                                 description: (Applicable when environment_configuration_type=OCIR_CONTAINER)
                                   (Updatable) OCID of the container image signature
                                 type: string
+                              predictApiSpecification:
+                                description: (Applicable when environment_configuration_type=OCIR_CONTAINER)
+                                  (Updatable) The chosen specification from predefined
+                                  set of endpoints a user can access.  For example,
+                                  if the value is 'openai', the user can access OpenAI-compliant
+                                  endpoints  like /v1/completions, /v1/chat/completions,
+                                  /v1/models, etc., for inference.
+                                type: string
                               serverPort:
                                 description: (Applicable when environment_configuration_type=OCIR_CONTAINER)
                                   (Updatable) The port on which the web server serving
@@ -1219,6 +2319,85 @@ spec:
                                 description: (Updatable) The minimum network bandwidth
                                   for the model deployment.
                                 type: number
+                              computeTargetId:
+                                description: The OCID of a Compute Target.
+                                type: string
+                              computeTargetIdRef:
+                                description: Reference to a ComputeTarget in datascience
+                                  to populate computeTargetId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              computeTargetIdSelector:
+                                description: Selector for a ComputeTarget in datascience
+                                  to populate computeTargetId.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                               infrastructureType:
                                 description: The type of the model deployment infrastructure.
                                 type: string
@@ -1293,6 +2472,71 @@ spec:
                                 description: (Updatable) The maximum network bandwidth
                                   for the model deployment.
                                 type: number
+                              modelDeploymentResourceConfiguration:
+                                description: Resource configuration details for model
+                                  deploy on managed compute cluster type compute target.
+                                items:
+                                  properties:
+                                    resourceLimitConfiguration:
+                                      description: Resource limit configuration details
+                                        for workload on managed compute cluster type
+                                        compute target.
+                                      items:
+                                        properties:
+                                          memoryInGbs:
+                                            description: (Updatable) A model-deployment
+                                              instance of type VM.Standard.E3.Flex
+                                              or VM.Standard.E4.Flex allows the memory
+                                              to be specified with in the range of
+                                              6 to 1024 GB. VM.Standard3.Flex memory
+                                              range is between 6 to 512 GB and VM.Optimized3.Flex
+                                              memory range is between 6 to 256 GB.
+                                            type: number
+                                          ocpus:
+                                            description: (Updatable) A model-deployment
+                                              instance of type VM.Standard.E3.Flex
+                                              or VM.Standard.E4.Flex allows the ocpu
+                                              count to be specified with in the range
+                                              of 1 to 64 ocpu. VM.Standard3.Flex OCPU
+                                              range is between 1 to 32 ocpu and for
+                                              VM.Optimized3.Flex OCPU range is 1 to
+                                              18 ocpu.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    resourceRequestConfiguration:
+                                      description: Resource request configuration
+                                        to run workload on managed compute cluster
+                                        type compute target compute target.
+                                      items:
+                                        properties:
+                                          gpus:
+                                            description: The total number of gpus
+                                              required to be allocated to the workload.
+                                            type: number
+                                          memoryInGbs:
+                                            description: (Updatable) A model-deployment
+                                              instance of type VM.Standard.E3.Flex
+                                              or VM.Standard.E4.Flex allows the memory
+                                              to be specified with in the range of
+                                              6 to 1024 GB. VM.Standard3.Flex memory
+                                              range is between 6 to 512 GB and VM.Optimized3.Flex
+                                              memory range is between 6 to 256 GB.
+                                            type: number
+                                          ocpus:
+                                            description: (Updatable) A model-deployment
+                                              instance of type VM.Standard.E3.Flex
+                                              or VM.Standard.E4.Flex allows the ocpu
+                                              count to be specified with in the range
+                                              of 1 to 64 ocpu. VM.Standard3.Flex OCPU
+                                              range is between 1 to 32 ocpu and for
+                                              VM.Optimized3.Flex OCPU range is 1 to
+                                              18 ocpu.
+                                            type: number
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                               scalingPolicy:
                                 description: (Updatable) The scaling policy to apply
                                   to each model of the deployment.
@@ -1350,6 +2594,56 @@ spec:
                                                   description: (Updatable) Metric
                                                     type
                                                   type: string
+                                                scaleConfiguration:
+                                                  description: The scaling configuration
+                                                    for the target-based workload
+                                                    rule.
+                                                  items:
+                                                    properties:
+                                                      metricNamespace:
+                                                        description: Returned for
+                                                          TARGET_CUSTOM_EXPRESSION.
+                                                          Namespace to read the metrics
+                                                          from.
+                                                        type: string
+                                                      query:
+                                                        description: '(Updatable)
+                                                          The Monitoring Query Language
+                                                          (MQL) expression to evaluate
+                                                          for the alarm. The Alarms
+                                                          feature of the Monitoring
+                                                          service interprets results
+                                                          for each returned time series
+                                                          as Boolean values, where
+                                                          zero represents false and
+                                                          a non-zero value represents
+                                                          true. A true value means
+                                                          that the trigger rule condition
+                                                          has been met. The query
+                                                          must specify a metric, statistic,
+                                                          interval, and trigger rule
+                                                          (threshold or absence).
+                                                          Supported values for interval:
+                                                          1m-60m (also 1h). You can
+                                                          optionally specify dimensions
+                                                          and grouping functions.
+                                                          Supported grouping functions:
+                                                          grouping(), groupBy().'
+                                                        type: string
+                                                      targetScalingConfigurationType:
+                                                        description: The type of target
+                                                          scaling configuration. Supported
+                                                          values are THRESHOLD and
+                                                          QUERY.
+                                                        type: string
+                                                      threshold:
+                                                        description: (Updatable) A
+                                                          metric value at which the
+                                                          scaling operation will be
+                                                          triggered.
+                                                        type: number
+                                                    type: object
+                                                  type: array
                                                 scaleInConfiguration:
                                                   description: (Updatable) The scaling
                                                     configuration for the predefined
@@ -1496,6 +2790,98 @@ spec:
                                                   type: array
                                               type: object
                                             type: array
+                                          scaleInPolicy:
+                                            description: Workload scaling policy configuration
+                                              for workloads on managed compute cluster
+                                              type compute target.
+                                            items:
+                                              properties:
+                                                coolDownInSeconds:
+                                                  description: (Applicable when policy_type=AUTOSCALING)
+                                                    (Updatable) For threshold-based
+                                                    autoscaling policies, this value
+                                                    is the minimum period of time
+                                                    to wait between scaling actions.
+                                                    The cooldown period gives the
+                                                    system time to stabilize before
+                                                    rescaling. The minimum value is
+                                                    300 seconds, which is also the
+                                                    default. The cooldown period starts
+                                                    when the model deployment becomes
+                                                    ACTIVE after the scaling operation.
+                                                  type: number
+                                                instanceCountAdjustment:
+                                                  description: (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION
+                                                    | PREDEFINED_EXPRESSION) (Updatable)
+                                                    The value is used for adjusting
+                                                    the count of instances by.
+                                                  type: number
+                                                pendingDuration:
+                                                  description: (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION
+                                                    | PREDEFINED_EXPRESSION) (Updatable)
+                                                    The period of time that the condition
+                                                    defined in the alarm must persist
+                                                    before the alarm state changes
+                                                    from "OK" to "FIRING" or vice
+                                                    versa. For example, a value of
+                                                    5 minutes means that the alarm
+                                                    must persist in breaching the
+                                                    condition for five minutes before
+                                                    the alarm updates its state to
+                                                    "FIRING"; likewise, the alarm
+                                                    must persist in not breaching
+                                                    the condition for five minutes
+                                                    before the alarm updates its state
+                                                    to "OK."
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          scaleOutPolicy:
+                                            description: Workload scaling policy configuration
+                                              for workloads on managed compute cluster
+                                              type compute target.
+                                            items:
+                                              properties:
+                                                coolDownInSeconds:
+                                                  description: (Applicable when policy_type=AUTOSCALING)
+                                                    (Updatable) For threshold-based
+                                                    autoscaling policies, this value
+                                                    is the minimum period of time
+                                                    to wait between scaling actions.
+                                                    The cooldown period gives the
+                                                    system time to stabilize before
+                                                    rescaling. The minimum value is
+                                                    300 seconds, which is also the
+                                                    default. The cooldown period starts
+                                                    when the model deployment becomes
+                                                    ACTIVE after the scaling operation.
+                                                  type: number
+                                                instanceCountAdjustment:
+                                                  description: (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION
+                                                    | PREDEFINED_EXPRESSION) (Updatable)
+                                                    The value is used for adjusting
+                                                    the count of instances by.
+                                                  type: number
+                                                pendingDuration:
+                                                  description: (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION
+                                                    | PREDEFINED_EXPRESSION) (Updatable)
+                                                    The period of time that the condition
+                                                    defined in the alarm must persist
+                                                    before the alarm state changes
+                                                    from "OK" to "FIRING" or vice
+                                                    versa. For example, a value of
+                                                    5 minutes means that the alarm
+                                                    must persist in breaching the
+                                                    condition for five minutes before
+                                                    the alarm updates its state to
+                                                    "FIRING"; likewise, the alarm
+                                                    must persist in not breaching
+                                                    the condition for five minutes
+                                                    before the alarm updates its state
+                                                    to "OK."
+                                                  type: string
+                                              type: object
+                                            type: array
                                         type: object
                                       type: array
                                     coolDownInSeconds:
@@ -1504,7 +2890,7 @@ spec:
                                         policies, this value is the minimum period
                                         of time to wait between scaling actions. The
                                         cooldown period gives the system time to stabilize
-                                        before rescaling. The minimum value is 600
+                                        before rescaling. The minimum value is 300
                                         seconds, which is also the default. The cooldown
                                         period starts when the model deployment becomes
                                         ACTIVE after the scaling operation.
@@ -1609,6 +2995,82 @@ spec:
                                 description: (Updatable) The OCID of the model you
                                   want to deploy.
                                 type: string
+                              modelIdRef:
+                                description: Reference to a Model in datascience to
+                                  populate modelId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              modelIdSelector:
+                                description: Selector for a Model in datascience to
+                                  populate modelId.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                               scalingPolicy:
                                 description: (Updatable) The scaling policy to apply
                                   to each model of the deployment.
@@ -1820,7 +3282,7 @@ spec:
                                         policies, this value is the minimum period
                                         of time to wait between scaling actions. The
                                         cooldown period gives the system time to stabilize
-                                        before rescaling. The minimum value is 600
+                                        before rescaling. The minimum value is 300
                                         seconds, which is also the default. The cooldown
                                         period starts when the model deployment becomes
                                         ACTIVE after the scaling operation.
@@ -1862,6 +3324,82 @@ spec:
                     description: The OCID of the project to associate with the model
                       deployment.
                     type: string
+                  projectIdRef:
+                    description: Reference to a Project in datascience to populate
+                      projectId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  projectIdSelector:
+                    description: Selector for a Project in datascience to populate
+                      projectId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   state:
                     description: (Updatable) The target state for the Model Deployment.
                       Could be set to ACTIVE or INACTIVE.
@@ -1961,10 +3499,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.modelDeploymentConfigurationDetails)
                 || (has(self.initProvider) && has(self.initProvider.modelDeploymentConfigurationDetails))'
-            - message: spec.forProvider.projectId is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.projectId)
-                || (has(self.initProvider) && has(self.initProvider.projectId))'
           status:
             description: ModelDeploymentStatus defines the observed state of ModelDeployment.
             properties:
@@ -2063,6 +3597,25 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                              customHttpEndpoints:
+                                description: (Applicable when environment_configuration_type=OCIR_CONTAINER)
+                                  (Updatable) List of custom inference HTTP endpoints
+                                  configured on the model deployment instance for
+                                  inferencing.
+                                items:
+                                  properties:
+                                    endpointUriSuffix:
+                                      description: (Updatable) The suffix part of
+                                        the endpoint that will be allowed for invocation.
+                                      type: string
+                                    httpMethods:
+                                      description: (Updatable) List of HTTP methods
+                                        acceptable by the URI.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
                               defaultEnvironmentVariables:
                                 additionalProperties:
                                   type: string
@@ -2128,6 +3681,14 @@ spec:
                                 description: (Applicable when environment_configuration_type=OCIR_CONTAINER)
                                   (Updatable) OCID of the container image signature
                                 type: string
+                              predictApiSpecification:
+                                description: (Applicable when environment_configuration_type=OCIR_CONTAINER)
+                                  (Updatable) The chosen specification from predefined
+                                  set of endpoints a user can access.  For example,
+                                  if the value is 'openai', the user can access OpenAI-compliant
+                                  endpoints  like /v1/completions, /v1/chat/completions,
+                                  /v1/models, etc., for inference.
+                                type: string
                               serverPort:
                                 description: (Applicable when environment_configuration_type=OCIR_CONTAINER)
                                   (Updatable) The port on which the web server serving
@@ -2145,6 +3706,9 @@ spec:
                                 description: (Updatable) The minimum network bandwidth
                                   for the model deployment.
                                 type: number
+                              computeTargetId:
+                                description: The OCID of a Compute Target.
+                                type: string
                               infrastructureType:
                                 description: The type of the model deployment infrastructure.
                                 type: string
@@ -2219,6 +3783,71 @@ spec:
                                 description: (Updatable) The maximum network bandwidth
                                   for the model deployment.
                                 type: number
+                              modelDeploymentResourceConfiguration:
+                                description: Resource configuration details for model
+                                  deploy on managed compute cluster type compute target.
+                                items:
+                                  properties:
+                                    resourceLimitConfiguration:
+                                      description: Resource limit configuration details
+                                        for workload on managed compute cluster type
+                                        compute target.
+                                      items:
+                                        properties:
+                                          memoryInGbs:
+                                            description: (Updatable) A model-deployment
+                                              instance of type VM.Standard.E3.Flex
+                                              or VM.Standard.E4.Flex allows the memory
+                                              to be specified with in the range of
+                                              6 to 1024 GB. VM.Standard3.Flex memory
+                                              range is between 6 to 512 GB and VM.Optimized3.Flex
+                                              memory range is between 6 to 256 GB.
+                                            type: number
+                                          ocpus:
+                                            description: (Updatable) A model-deployment
+                                              instance of type VM.Standard.E3.Flex
+                                              or VM.Standard.E4.Flex allows the ocpu
+                                              count to be specified with in the range
+                                              of 1 to 64 ocpu. VM.Standard3.Flex OCPU
+                                              range is between 1 to 32 ocpu and for
+                                              VM.Optimized3.Flex OCPU range is 1 to
+                                              18 ocpu.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    resourceRequestConfiguration:
+                                      description: Resource request configuration
+                                        to run workload on managed compute cluster
+                                        type compute target compute target.
+                                      items:
+                                        properties:
+                                          gpus:
+                                            description: The total number of gpus
+                                              required to be allocated to the workload.
+                                            type: number
+                                          memoryInGbs:
+                                            description: (Updatable) A model-deployment
+                                              instance of type VM.Standard.E3.Flex
+                                              or VM.Standard.E4.Flex allows the memory
+                                              to be specified with in the range of
+                                              6 to 1024 GB. VM.Standard3.Flex memory
+                                              range is between 6 to 512 GB and VM.Optimized3.Flex
+                                              memory range is between 6 to 256 GB.
+                                            type: number
+                                          ocpus:
+                                            description: (Updatable) A model-deployment
+                                              instance of type VM.Standard.E3.Flex
+                                              or VM.Standard.E4.Flex allows the ocpu
+                                              count to be specified with in the range
+                                              of 1 to 64 ocpu. VM.Standard3.Flex OCPU
+                                              range is between 1 to 32 ocpu and for
+                                              VM.Optimized3.Flex OCPU range is 1 to
+                                              18 ocpu.
+                                            type: number
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
                               scalingPolicy:
                                 description: (Updatable) The scaling policy to apply
                                   to each model of the deployment.
@@ -2276,6 +3905,56 @@ spec:
                                                   description: (Updatable) Metric
                                                     type
                                                   type: string
+                                                scaleConfiguration:
+                                                  description: The scaling configuration
+                                                    for the target-based workload
+                                                    rule.
+                                                  items:
+                                                    properties:
+                                                      metricNamespace:
+                                                        description: Returned for
+                                                          TARGET_CUSTOM_EXPRESSION.
+                                                          Namespace to read the metrics
+                                                          from.
+                                                        type: string
+                                                      query:
+                                                        description: '(Updatable)
+                                                          The Monitoring Query Language
+                                                          (MQL) expression to evaluate
+                                                          for the alarm. The Alarms
+                                                          feature of the Monitoring
+                                                          service interprets results
+                                                          for each returned time series
+                                                          as Boolean values, where
+                                                          zero represents false and
+                                                          a non-zero value represents
+                                                          true. A true value means
+                                                          that the trigger rule condition
+                                                          has been met. The query
+                                                          must specify a metric, statistic,
+                                                          interval, and trigger rule
+                                                          (threshold or absence).
+                                                          Supported values for interval:
+                                                          1m-60m (also 1h). You can
+                                                          optionally specify dimensions
+                                                          and grouping functions.
+                                                          Supported grouping functions:
+                                                          grouping(), groupBy().'
+                                                        type: string
+                                                      targetScalingConfigurationType:
+                                                        description: The type of target
+                                                          scaling configuration. Supported
+                                                          values are THRESHOLD and
+                                                          QUERY.
+                                                        type: string
+                                                      threshold:
+                                                        description: (Updatable) A
+                                                          metric value at which the
+                                                          scaling operation will be
+                                                          triggered.
+                                                        type: number
+                                                    type: object
+                                                  type: array
                                                 scaleInConfiguration:
                                                   description: (Updatable) The scaling
                                                     configuration for the predefined
@@ -2422,6 +4101,98 @@ spec:
                                                   type: array
                                               type: object
                                             type: array
+                                          scaleInPolicy:
+                                            description: Workload scaling policy configuration
+                                              for workloads on managed compute cluster
+                                              type compute target.
+                                            items:
+                                              properties:
+                                                coolDownInSeconds:
+                                                  description: (Applicable when policy_type=AUTOSCALING)
+                                                    (Updatable) For threshold-based
+                                                    autoscaling policies, this value
+                                                    is the minimum period of time
+                                                    to wait between scaling actions.
+                                                    The cooldown period gives the
+                                                    system time to stabilize before
+                                                    rescaling. The minimum value is
+                                                    300 seconds, which is also the
+                                                    default. The cooldown period starts
+                                                    when the model deployment becomes
+                                                    ACTIVE after the scaling operation.
+                                                  type: number
+                                                instanceCountAdjustment:
+                                                  description: (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION
+                                                    | PREDEFINED_EXPRESSION) (Updatable)
+                                                    The value is used for adjusting
+                                                    the count of instances by.
+                                                  type: number
+                                                pendingDuration:
+                                                  description: (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION
+                                                    | PREDEFINED_EXPRESSION) (Updatable)
+                                                    The period of time that the condition
+                                                    defined in the alarm must persist
+                                                    before the alarm state changes
+                                                    from "OK" to "FIRING" or vice
+                                                    versa. For example, a value of
+                                                    5 minutes means that the alarm
+                                                    must persist in breaching the
+                                                    condition for five minutes before
+                                                    the alarm updates its state to
+                                                    "FIRING"; likewise, the alarm
+                                                    must persist in not breaching
+                                                    the condition for five minutes
+                                                    before the alarm updates its state
+                                                    to "OK."
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          scaleOutPolicy:
+                                            description: Workload scaling policy configuration
+                                              for workloads on managed compute cluster
+                                              type compute target.
+                                            items:
+                                              properties:
+                                                coolDownInSeconds:
+                                                  description: (Applicable when policy_type=AUTOSCALING)
+                                                    (Updatable) For threshold-based
+                                                    autoscaling policies, this value
+                                                    is the minimum period of time
+                                                    to wait between scaling actions.
+                                                    The cooldown period gives the
+                                                    system time to stabilize before
+                                                    rescaling. The minimum value is
+                                                    300 seconds, which is also the
+                                                    default. The cooldown period starts
+                                                    when the model deployment becomes
+                                                    ACTIVE after the scaling operation.
+                                                  type: number
+                                                instanceCountAdjustment:
+                                                  description: (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION
+                                                    | PREDEFINED_EXPRESSION) (Updatable)
+                                                    The value is used for adjusting
+                                                    the count of instances by.
+                                                  type: number
+                                                pendingDuration:
+                                                  description: (Applicable when metric_expression_rule_type=CUSTOM_EXPRESSION
+                                                    | PREDEFINED_EXPRESSION) (Updatable)
+                                                    The period of time that the condition
+                                                    defined in the alarm must persist
+                                                    before the alarm state changes
+                                                    from "OK" to "FIRING" or vice
+                                                    versa. For example, a value of
+                                                    5 minutes means that the alarm
+                                                    must persist in breaching the
+                                                    condition for five minutes before
+                                                    the alarm updates its state to
+                                                    "FIRING"; likewise, the alarm
+                                                    must persist in not breaching
+                                                    the condition for five minutes
+                                                    before the alarm updates its state
+                                                    to "OK."
+                                                  type: string
+                                              type: object
+                                            type: array
                                         type: object
                                       type: array
                                     coolDownInSeconds:
@@ -2430,7 +4201,7 @@ spec:
                                         policies, this value is the minimum period
                                         of time to wait between scaling actions. The
                                         cooldown period gives the system time to stabilize
-                                        before rescaling. The minimum value is 600
+                                        before rescaling. The minimum value is 300
                                         seconds, which is also the default. The cooldown
                                         period starts when the model deployment becomes
                                         ACTIVE after the scaling operation.
@@ -2746,7 +4517,7 @@ spec:
                                         policies, this value is the minimum period
                                         of time to wait between scaling actions. The
                                         cooldown period gives the system time to stabilize
-                                        before rescaling. The minimum value is 600
+                                        before rescaling. The minimum value is 300
                                         seconds, which is also the default. The cooldown
                                         period starts when the model deployment becomes
                                         ACTIVE after the scaling operation.

@@ -3796,6 +3796,12 @@ spec:
                       triggers Download Gsm Certificate Signing Request. Could be
                       set to any integer value.
                     type: number
+                  effectiveReplicationUnit:
+                    description: The replication unit count for RAFT based distributed
+                      autonomous database. For RAFT replication based Globally distributed
+                      autonomous database, the value should be at least twice the
+                      number of shards.
+                    type: number
                   freeformTags:
                     additionalProperties:
                       type: string

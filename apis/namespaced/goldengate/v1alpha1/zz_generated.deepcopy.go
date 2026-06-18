@@ -5148,6 +5148,11 @@ func (in *DeploymentInitParameters) DeepCopyInto(out *DeploymentInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.DisasterRecoveryStatus != nil {
+		in, out := &in.DisasterRecoveryStatus, &out.DisasterRecoveryStatus
+		*out = new(string)
+		**out = **in
+	}
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
 		*out = new(string)
@@ -5543,6 +5548,11 @@ func (in *DeploymentObservation) DeepCopyInto(out *DeploymentObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DisasterRecoveryStatus != nil {
+		in, out := &in.DisasterRecoveryStatus, &out.DisasterRecoveryStatus
+		*out = new(string)
+		**out = **in
+	}
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
 		*out = new(string)
@@ -5914,6 +5924,11 @@ func (in *DeploymentParameters) DeepCopyInto(out *DeploymentParameters) {
 	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.DisasterRecoveryStatus != nil {
+		in, out := &in.DisasterRecoveryStatus, &out.DisasterRecoveryStatus
 		*out = new(string)
 		**out = **in
 	}
@@ -6385,8 +6400,38 @@ func (in *InitialDataLoadInitParameters) DeepCopyInto(out *InitialDataLoadInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.AdbWalletPath != nil {
+		in, out := &in.AdbWalletPath, &out.AdbWalletPath
+		*out = new(string)
+		**out = **in
+	}
+	if in.Bucket != nil {
+		in, out := &in.Bucket, &out.Bucket
+		*out = new(string)
+		**out = **in
+	}
+	if in.InitialLoadType != nil {
+		in, out := &in.InitialLoadType, &out.InitialLoadType
+		*out = new(string)
+		**out = **in
+	}
 	if in.IsInitialLoad != nil {
 		in, out := &in.IsInitialLoad, &out.IsInitialLoad
+		*out = new(string)
+		**out = **in
+	}
+	if in.Namespace != nil {
+		in, out := &in.Namespace, &out.Namespace
+		*out = new(string)
+		**out = **in
+	}
+	if in.SourceWalletPath != nil {
+		in, out := &in.SourceWalletPath, &out.SourceWalletPath
+		*out = new(string)
+		**out = **in
+	}
+	if in.TargetWalletPath != nil {
+		in, out := &in.TargetWalletPath, &out.TargetWalletPath
 		*out = new(string)
 		**out = **in
 	}
@@ -6410,8 +6455,38 @@ func (in *InitialDataLoadObservation) DeepCopyInto(out *InitialDataLoadObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.AdbWalletPath != nil {
+		in, out := &in.AdbWalletPath, &out.AdbWalletPath
+		*out = new(string)
+		**out = **in
+	}
+	if in.Bucket != nil {
+		in, out := &in.Bucket, &out.Bucket
+		*out = new(string)
+		**out = **in
+	}
+	if in.InitialLoadType != nil {
+		in, out := &in.InitialLoadType, &out.InitialLoadType
+		*out = new(string)
+		**out = **in
+	}
 	if in.IsInitialLoad != nil {
 		in, out := &in.IsInitialLoad, &out.IsInitialLoad
+		*out = new(string)
+		**out = **in
+	}
+	if in.Namespace != nil {
+		in, out := &in.Namespace, &out.Namespace
+		*out = new(string)
+		**out = **in
+	}
+	if in.SourceWalletPath != nil {
+		in, out := &in.SourceWalletPath, &out.SourceWalletPath
+		*out = new(string)
+		**out = **in
+	}
+	if in.TargetWalletPath != nil {
+		in, out := &in.TargetWalletPath, &out.TargetWalletPath
 		*out = new(string)
 		**out = **in
 	}
@@ -6435,8 +6510,38 @@ func (in *InitialDataLoadParameters) DeepCopyInto(out *InitialDataLoadParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.AdbWalletPath != nil {
+		in, out := &in.AdbWalletPath, &out.AdbWalletPath
+		*out = new(string)
+		**out = **in
+	}
+	if in.Bucket != nil {
+		in, out := &in.Bucket, &out.Bucket
+		*out = new(string)
+		**out = **in
+	}
+	if in.InitialLoadType != nil {
+		in, out := &in.InitialLoadType, &out.InitialLoadType
+		*out = new(string)
+		**out = **in
+	}
 	if in.IsInitialLoad != nil {
 		in, out := &in.IsInitialLoad, &out.IsInitialLoad
+		*out = new(string)
+		**out = **in
+	}
+	if in.Namespace != nil {
+		in, out := &in.Namespace, &out.Namespace
+		*out = new(string)
+		**out = **in
+	}
+	if in.SourceWalletPath != nil {
+		in, out := &in.SourceWalletPath, &out.SourceWalletPath
+		*out = new(string)
+		**out = **in
+	}
+	if in.TargetWalletPath != nil {
+		in, out := &in.TargetWalletPath, &out.TargetWalletPath
 		*out = new(string)
 		**out = **in
 	}
@@ -6857,6 +6962,21 @@ func (in *OggDataInitParameters) DeepCopyInto(out *OggDataInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeySecretID != nil {
+		in, out := &in.KeySecretID, &out.KeySecretID
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeySecretIDRef != nil {
+		in, out := &in.KeySecretIDRef, &out.KeySecretIDRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KeySecretIDSelector != nil {
+		in, out := &in.KeySecretIDSelector, &out.KeySecretIDSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.OggVersion != nil {
 		in, out := &in.OggVersion, &out.OggVersion
 		*out = new(string)
@@ -6916,6 +7036,11 @@ func (in *OggDataObservation) DeepCopyInto(out *OggDataObservation) {
 	}
 	if in.Key != nil {
 		in, out := &in.Key, &out.Key
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeySecretID != nil {
+		in, out := &in.KeySecretID, &out.KeySecretID
 		*out = new(string)
 		**out = **in
 	}
@@ -7000,6 +7125,21 @@ func (in *OggDataParameters) DeepCopyInto(out *OggDataParameters) {
 		in, out := &in.Key, &out.Key
 		*out = new(string)
 		**out = **in
+	}
+	if in.KeySecretID != nil {
+		in, out := &in.KeySecretID, &out.KeySecretID
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeySecretIDRef != nil {
+		in, out := &in.KeySecretIDRef, &out.KeySecretIDRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KeySecretIDSelector != nil {
+		in, out := &in.KeySecretIDSelector, &out.KeySecretIDSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.OggVersion != nil {
 		in, out := &in.OggVersion, &out.OggVersion
@@ -7173,6 +7313,11 @@ func (in *PipelineIngressIpsParameters) DeepCopy() *PipelineIngressIpsParameters
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *PipelineInitParameters) DeepCopyInto(out *PipelineInitParameters) {
 	*out = *in
+	if in.CPUCoreCount != nil {
+		in, out := &in.CPUCoreCount, &out.CPUCoreCount
+		*out = new(float64)
+		**out = **in
+	}
 	if in.CompartmentID != nil {
 		in, out := &in.CompartmentID, &out.CompartmentID
 		*out = new(string)
@@ -7229,6 +7374,11 @@ func (in *PipelineInitParameters) DeepCopyInto(out *PipelineInitParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.IsAutoScalingEnabled != nil {
+		in, out := &in.IsAutoScalingEnabled, &out.IsAutoScalingEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.LicenseModel != nil {
 		in, out := &in.LicenseModel, &out.LicenseModel
@@ -7622,6 +7772,11 @@ func (in *PipelineObservation) DeepCopy() *PipelineObservation {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *PipelineParameters) DeepCopyInto(out *PipelineParameters) {
 	*out = *in
+	if in.CPUCoreCount != nil {
+		in, out := &in.CPUCoreCount, &out.CPUCoreCount
+		*out = new(float64)
+		**out = **in
+	}
 	if in.CompartmentID != nil {
 		in, out := &in.CompartmentID, &out.CompartmentID
 		*out = new(string)
@@ -7678,6 +7833,11 @@ func (in *PipelineParameters) DeepCopyInto(out *PipelineParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.IsAutoScalingEnabled != nil {
+		in, out := &in.IsAutoScalingEnabled, &out.IsAutoScalingEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.LicenseModel != nil {
 		in, out := &in.LicenseModel, &out.LicenseModel

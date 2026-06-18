@@ -11,12 +11,14 @@ spec:
     compartmentIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    cpuCoreCount: ${var.pipeline_cpu_core_count}
     definedTags:
       foo-namespace.bar-key: value
     description: ${var.pipeline_description}
     displayName: ${var.pipeline_display_name}
     freeformTags:
       bar-key: value
+    isAutoScalingEnabled: ${var.pipeline_is_auto_scaling_enabled}
     licenseModel: ${var.pipeline_license_model}
     locks:
     - message: ${var.pipeline_locks_message}
@@ -26,7 +28,13 @@ spec:
     processOptions:
     - initialDataLoad:
       - actionOnExistingTable: ${var.pipeline_process_options_initial_data_load_action_on_existing_table}
+        adbWalletPath: ${var.pipeline_process_options_initial_data_load_adb_wallet_path}
+        bucket: ${var.pipeline_process_options_initial_data_load_bucket}
+        initialLoadType: ${var.pipeline_process_options_initial_data_load_initial_load_type}
         isInitialLoad: ${var.pipeline_process_options_initial_data_load_is_initial_load}
+        namespace: ${var.pipeline_process_options_initial_data_load_namespace}
+        sourceWalletPath: ${var.pipeline_process_options_initial_data_load_source_wallet_path}
+        targetWalletPath: ${var.pipeline_process_options_initial_data_load_target_wallet_path}
       replicateSchemaChange:
       - actionOnDdlError: ${var.pipeline_process_options_replicate_schema_change_action_on_ddl_error}
         actionOnDmlError: ${var.pipeline_process_options_replicate_schema_change_action_on_dml_error}

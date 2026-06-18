@@ -1,0 +1,29 @@
+apiVersion: database.oci.upbound.io/v1alpha1
+kind: ToolsRuntimeDatabaseToolsDatabaseApiGatewayConfigPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/toolsruntimedatabasetoolsdatabaseapigatewayconfigpool
+  labels:
+    testing.upbound.io/example-name: test_database_tools_database_api_gateway_config_pool
+  name: test-database-tools-database-api-gateway-config-pool
+spec:
+  forProvider:
+    advancedProperties: ${var.database_tools_database_api_gateway_config_pool_advanced_properties}
+    databaseActionsStatus: ${var.database_tools_database_api_gateway_config_pool_database_actions_status}
+    databaseToolsConnectionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_database_tools_connection
+    databaseToolsDatabaseApiGatewayConfigIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_config
+    displayName: ${var.database_tools_database_api_gateway_config_pool_display_name}
+    initialPoolSize: ${var.database_tools_database_api_gateway_config_pool_initial_pool_size}
+    jwtProfileAudience: ${var.database_tools_database_api_gateway_config_pool_jwt_profile_audience}
+    jwtProfileIssuer: ${var.database_tools_database_api_gateway_config_pool_jwt_profile_issuer}
+    jwtProfileJwkUrl: ${var.database_tools_database_api_gateway_config_pool_jwt_profile_jwk_url}
+    jwtProfileRoleClaimName: ${var.database_tools_database_api_gateway_config_pool_jwt_profile_role_claim_name}
+    maxPoolSize: ${var.database_tools_database_api_gateway_config_pool_max_pool_size}
+    minPoolSize: ${var.database_tools_database_api_gateway_config_pool_min_pool_size}
+    poolRouteValue: ${var.database_tools_database_api_gateway_config_pool_pool_route_value}
+    restEnabledSqlStatus: ${var.database_tools_database_api_gateway_config_pool_rest_enabled_sql_status}
+    type: ${var.database_tools_database_api_gateway_config_pool_type}

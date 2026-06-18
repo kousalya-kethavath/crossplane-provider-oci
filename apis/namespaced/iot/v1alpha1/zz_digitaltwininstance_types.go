@@ -19,6 +19,9 @@ type DigitalTwinInstanceInitParameters struct {
 	// (Updatable) The OCID of the resource (like VaultSecret, ClientCertificate etc.,) used to authenticate the digital twin instance.
 	AuthID *string `json:"authId,omitempty" tf:"auth_id,omitempty"`
 
+	// Connectivity type of the digital twin instance
+	ConnectivityType *string `json:"connectivityType,omitempty" tf:"connectivity_type,omitempty"`
+
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Operations.CostCenter": "42"}
 	// +mapType=granular
 	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
@@ -65,6 +68,9 @@ type DigitalTwinInstanceInitParameters struct {
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
+	// (Updatable) An array of unique ids (OCIDs) of the IoT digital twin instances with connectivityType equals to GATEWAY.
+	Gateways []*string `json:"gateways,omitempty" tf:"gateways,omitempty"`
+
 	// The OCID of the IoT domain.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/iot/v1alpha1.IotDomain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -83,6 +89,9 @@ type DigitalTwinInstanceObservation struct {
 
 	// (Updatable) The OCID of the resource (like VaultSecret, ClientCertificate etc.,) used to authenticate the digital twin instance.
 	AuthID *string `json:"authId,omitempty" tf:"auth_id,omitempty"`
+
+	// Connectivity type of the digital twin instance
+	ConnectivityType *string `json:"connectivityType,omitempty" tf:"connectivity_type,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Operations.CostCenter": "42"}
 	// +mapType=granular
@@ -109,6 +118,9 @@ type DigitalTwinInstanceObservation struct {
 	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags.  Example: {"Department": "Finance"}
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+
+	// (Updatable) An array of unique ids (OCIDs) of the IoT digital twin instances with connectivityType equals to GATEWAY.
+	Gateways []*string `json:"gateways,omitempty" tf:"gateways,omitempty"`
 
 	// The OCID of the resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -136,6 +148,10 @@ type DigitalTwinInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthID *string `json:"authId,omitempty" tf:"auth_id,omitempty"`
 
+	// Connectivity type of the digital twin instance
+	// +kubebuilder:validation:Optional
+	ConnectivityType *string `json:"connectivityType,omitempty" tf:"connectivity_type,omitempty"`
+
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Operations.CostCenter": "42"}
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
@@ -189,6 +205,10 @@ type DigitalTwinInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+
+	// (Updatable) An array of unique ids (OCIDs) of the IoT digital twin instances with connectivityType equals to GATEWAY.
+	// +kubebuilder:validation:Optional
+	Gateways []*string `json:"gateways,omitempty" tf:"gateways,omitempty"`
 
 	// The OCID of the IoT domain.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/iot/v1alpha1.IotDomain

@@ -56,6 +56,8 @@ type DBHomeDatabaseDBBackupConfigBackupDestinationDetailsInitParameters struct {
 	// (Applicable when source=DATAGUARD | DB_SYSTEM | NONE) Indicates if backup retention is locked for all the database backups in the Autonomous Container Database (ACD). The retention window cannot be decreased if the backup retention lock is enabled. Once applied on the Autonomous Container Database, the retention lock cannot be removed, or the retention period cannot be decreased after a 14-day period. If the backup is a Long Term Backup and retention lock is enabled, the backup cannot be deleted and must expire. The retention lock set on the Autonomous Container Database is not applicable for cross region remote backups and backups hosted on recovery Appliance backup destination.
 	IsRetentionLockEnabled *bool `json:"isRetentionLockEnabled,omitempty" tf:"is_retention_lock_enabled,omitempty"`
 
+	IsZeroDataLossEnabled *bool `json:"isZeroDataLossEnabled,omitempty" tf:"is_zero_data_loss_enabled,omitempty"`
+
 	// (Applicable when source=DATAGUARD | DB_SYSTEM | NONE) The name of the remote region where the remote automatic incremental backups will be stored.           For information about valid region names, see Regions and Availability Domains.
 	RemoteRegion *string `json:"remoteRegion,omitempty" tf:"remote_region,omitempty"`
 
@@ -79,6 +81,8 @@ type DBHomeDatabaseDBBackupConfigBackupDestinationDetailsObservation struct {
 
 	// (Applicable when source=DATAGUARD | DB_SYSTEM | NONE) Indicates if backup retention is locked for all the database backups in the Autonomous Container Database (ACD). The retention window cannot be decreased if the backup retention lock is enabled. Once applied on the Autonomous Container Database, the retention lock cannot be removed, or the retention period cannot be decreased after a 14-day period. If the backup is a Long Term Backup and retention lock is enabled, the backup cannot be deleted and must expire. The retention lock set on the Autonomous Container Database is not applicable for cross region remote backups and backups hosted on recovery Appliance backup destination.
 	IsRetentionLockEnabled *bool `json:"isRetentionLockEnabled,omitempty" tf:"is_retention_lock_enabled,omitempty"`
+
+	IsZeroDataLossEnabled *bool `json:"isZeroDataLossEnabled,omitempty" tf:"is_zero_data_loss_enabled,omitempty"`
 
 	// (Applicable when source=DATAGUARD | DB_SYSTEM | NONE) The name of the remote region where the remote automatic incremental backups will be stored.           For information about valid region names, see Regions and Availability Domains.
 	RemoteRegion *string `json:"remoteRegion,omitempty" tf:"remote_region,omitempty"`
@@ -118,6 +122,9 @@ type DBHomeDatabaseDBBackupConfigBackupDestinationDetailsParameters struct {
 	// (Applicable when source=DATAGUARD | DB_SYSTEM | NONE) Indicates if backup retention is locked for all the database backups in the Autonomous Container Database (ACD). The retention window cannot be decreased if the backup retention lock is enabled. Once applied on the Autonomous Container Database, the retention lock cannot be removed, or the retention period cannot be decreased after a 14-day period. If the backup is a Long Term Backup and retention lock is enabled, the backup cannot be deleted and must expire. The retention lock set on the Autonomous Container Database is not applicable for cross region remote backups and backups hosted on recovery Appliance backup destination.
 	// +kubebuilder:validation:Optional
 	IsRetentionLockEnabled *bool `json:"isRetentionLockEnabled,omitempty" tf:"is_retention_lock_enabled,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IsZeroDataLossEnabled *bool `json:"isZeroDataLossEnabled,omitempty" tf:"is_zero_data_loss_enabled,omitempty"`
 
 	// (Applicable when source=DATAGUARD | DB_SYSTEM | NONE) The name of the remote region where the remote automatic incremental backups will be stored.           For information about valid region names, see Regions and Availability Domains.
 	// +kubebuilder:validation:Optional
@@ -1018,7 +1025,7 @@ type DbSystemInitParameters struct {
 	// (Updatable) The shape of the DB system. The shape determines resources allocated to the DB system.
 	Shape *string `json:"shape,omitempty" tf:"shape,omitempty"`
 
-	// The source of the database: Use NONE for creating a new database. Use DB_BACKUP for creating a new database by restoring from a backup. Use DATABASE for creating a new database from an existing database, including archive redo log data. The default is NONE.
+	// The update should be applied on the database for the selected version scheme.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
 	// The OCID of the DB system.
@@ -1120,7 +1127,7 @@ type DbSystemMaintenanceWindowDetailsInitParameters struct {
 	// (Applicable when source=NONE) (Updatable) Determines the amount of time the system will wait before the start of each database server patching operation. Custom action timeout is in minutes and valid value is between 15 to 120 (inclusive).
 	CustomActionTimeoutInMins *float64 `json:"customActionTimeoutInMins,omitempty" tf:"custom_action_timeout_in_mins,omitempty"`
 
-	// (Applicable when source=NONE) (Updatable) Days during the week when maintenance should be performed.
+	// The update should be applied on the database for the selected days of the week.
 	DaysOfWeek []DbSystemMaintenanceWindowDetailsDaysOfWeekInitParameters `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
 
 	// (Applicable when source=NONE) (Updatable) The window of hours during the day when maintenance should be performed. The window is a 4 hour slot. Valid values are - 0 - represents time slot 0:00 - 3:59 UTC - 4 - represents time slot 4:00 - 7:59 UTC - 8 - represents time slot 8:00 - 11:59 UTC - 12 - represents time slot 12:00 - 15:59 UTC - 16 - represents time slot 16:00 - 19:59 UTC - 20 - represents time slot 20:00 - 23:59 UTC
@@ -1175,7 +1182,7 @@ type DbSystemMaintenanceWindowDetailsObservation struct {
 	// (Applicable when source=NONE) (Updatable) Determines the amount of time the system will wait before the start of each database server patching operation. Custom action timeout is in minutes and valid value is between 15 to 120 (inclusive).
 	CustomActionTimeoutInMins *float64 `json:"customActionTimeoutInMins,omitempty" tf:"custom_action_timeout_in_mins,omitempty"`
 
-	// (Applicable when source=NONE) (Updatable) Days during the week when maintenance should be performed.
+	// The update should be applied on the database for the selected days of the week.
 	DaysOfWeek []DbSystemMaintenanceWindowDetailsDaysOfWeekObservation `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
 
 	// (Applicable when source=NONE) (Updatable) The window of hours during the day when maintenance should be performed. The window is a 4 hour slot. Valid values are - 0 - represents time slot 0:00 - 3:59 UTC - 4 - represents time slot 4:00 - 7:59 UTC - 8 - represents time slot 8:00 - 11:59 UTC - 12 - represents time slot 12:00 - 15:59 UTC - 16 - represents time slot 16:00 - 19:59 UTC - 20 - represents time slot 20:00 - 23:59 UTC
@@ -1212,7 +1219,7 @@ type DbSystemMaintenanceWindowDetailsParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomActionTimeoutInMins *float64 `json:"customActionTimeoutInMins,omitempty" tf:"custom_action_timeout_in_mins,omitempty"`
 
-	// (Applicable when source=NONE) (Updatable) Days during the week when maintenance should be performed.
+	// The update should be applied on the database for the selected days of the week.
 	// +kubebuilder:validation:Optional
 	DaysOfWeek []DbSystemMaintenanceWindowDetailsDaysOfWeekParameters `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
 
@@ -1273,7 +1280,7 @@ type DbSystemMaintenanceWindowObservation struct {
 	// (Applicable when source=NONE) (Updatable) Determines the amount of time the system will wait before the start of each database server patching operation. Custom action timeout is in minutes and valid value is between 15 to 120 (inclusive).
 	CustomActionTimeoutInMins *float64 `json:"customActionTimeoutInMins,omitempty" tf:"custom_action_timeout_in_mins,omitempty"`
 
-	// (Applicable when source=NONE) (Updatable) Days during the week when maintenance should be performed.
+	// The update should be applied on the database for the selected days of the week.
 	DaysOfWeek []DbSystemMaintenanceWindowDaysOfWeekObservation `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
 
 	// (Applicable when source=NONE) (Updatable) The window of hours during the day when maintenance should be performed. The window is a 4 hour slot. Valid values are - 0 - represents time slot 0:00 - 3:59 UTC - 4 - represents time slot 4:00 - 7:59 UTC - 8 - represents time slot 8:00 - 11:59 UTC - 12 - represents time slot 12:00 - 15:59 UTC - 16 - represents time slot 16:00 - 19:59 UTC - 20 - represents time slot 20:00 - 23:59 UTC
@@ -1473,7 +1480,7 @@ type DbSystemObservation struct {
 	// (Updatable) The shape of the DB system. The shape determines resources allocated to the DB system.
 	Shape *string `json:"shape,omitempty" tf:"shape,omitempty"`
 
-	// The source of the database: Use NONE for creating a new database. Use DB_BACKUP for creating a new database by restoring from a backup. Use DATABASE for creating a new database from an existing database, including archive redo log data. The default is NONE.
+	// The update should be applied on the database for the selected version scheme.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
 	// The OCID of the DB system.
@@ -1725,7 +1732,7 @@ type DbSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	Shape *string `json:"shape,omitempty" tf:"shape,omitempty"`
 
-	// The source of the database: Use NONE for creating a new database. Use DB_BACKUP for creating a new database by restoring from a backup. Use DATABASE for creating a new database from an existing database, including archive redo log data. The default is NONE.
+	// The update should be applied on the database for the selected version scheme.
 	// +kubebuilder:validation:Optional
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 

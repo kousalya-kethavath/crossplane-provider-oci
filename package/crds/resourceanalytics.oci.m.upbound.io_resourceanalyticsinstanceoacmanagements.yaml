@@ -68,6 +68,17 @@ spec:
                       ...}'
                     items:
                       properties:
+                        capacityType:
+                          description: The capacity model to use for the Analytics
+                            Instance.
+                          type: string
+                        capacityValue:
+                          description: The capacity value selected, either the number
+                            of OCPUs (OLPU_COUNT) or the number of users (USER_COUNT).
+                            This parameter affects the number of OCPUs, amount of
+                            memory, and other resources allocated to the Analytics
+                            Instance.
+                          type: number
                         idcsDomainId:
                           description: IDCS domain OCID identifying a stripe and service
                             administrator user.
@@ -273,7 +284,8 @@ spec:
                       type: object
                     type: array
                   attachmentType:
-                    description: The type of attachment the OAC instance is using.
+                    description: 'The type of attachment the OAC instance is using.
+                      Example: MANAGED'
                     type: string
                   enableOac:
                     description: (Updatable) A required field when set to true calls
@@ -384,6 +396,17 @@ spec:
                       ...}'
                     items:
                       properties:
+                        capacityType:
+                          description: The capacity model to use for the Analytics
+                            Instance.
+                          type: string
+                        capacityValue:
+                          description: The capacity value selected, either the number
+                            of OCPUs (OLPU_COUNT) or the number of users (USER_COUNT).
+                            This parameter affects the number of OCPUs, amount of
+                            memory, and other resources allocated to the Analytics
+                            Instance.
+                          type: number
                         idcsDomainId:
                           description: IDCS domain OCID identifying a stripe and service
                             administrator user.
@@ -589,7 +612,8 @@ spec:
                       type: object
                     type: array
                   attachmentType:
-                    description: The type of attachment the OAC instance is using.
+                    description: 'The type of attachment the OAC instance is using.
+                      Example: MANAGED'
                     type: string
                   enableOac:
                     description: (Updatable) A required field when set to true calls
@@ -758,6 +782,17 @@ spec:
                       ...}'
                     items:
                       properties:
+                        capacityType:
+                          description: The capacity model to use for the Analytics
+                            Instance.
+                          type: string
+                        capacityValue:
+                          description: The capacity value selected, either the number
+                            of OCPUs (OLPU_COUNT) or the number of users (USER_COUNT).
+                            This parameter affects the number of OCPUs, amount of
+                            memory, and other resources allocated to the Analytics
+                            Instance.
+                          type: number
                         idcsDomainId:
                           description: IDCS domain OCID identifying a stripe and service
                             administrator user.
@@ -799,18 +834,21 @@ spec:
                       type: object
                     type: array
                   attachmentType:
-                    description: The type of attachment the OAC instance is using.
+                    description: 'The type of attachment the OAC instance is using.
+                      Example: MANAGED'
                     type: string
                   enableOac:
                     description: (Updatable) A required field when set to true calls
                       enable action and when set to false calls disable action.
                     type: boolean
                   id:
+                    description: The OCID of the ResourceAnalyticsInstance.
                     type: string
                   resourceAnalyticsInstanceId:
                     description: The OCID of the ResourceAnalyticsInstance.
                     type: string
                   state:
+                    description: The current state of the ResourceAnalyticsInstance.
                     type: string
                 type: object
               conditions:

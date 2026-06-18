@@ -9,6 +9,7 @@ metadata:
 spec:
   forProvider:
     advancedProperties: ${var.database_tools_connection_advanced_properties}
+    authenticationType: ${var.database_tools_connection_authentication_type}
     compartmentIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

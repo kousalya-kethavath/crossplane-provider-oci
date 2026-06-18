@@ -15,7 +15,7 @@ import (
 
 type DelegationSubscriptionInitParameters struct {
 
-	// (Updatable) The OCID of the compartment that contains the Delegation Control.
+	// (Updatable) The OCID of the compartment that contains the Delegation Subscription.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/identity/v1alpha1.Compartment
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
 
@@ -47,7 +47,7 @@ type DelegationSubscriptionInitParameters struct {
 
 type DelegationSubscriptionObservation struct {
 
-	// (Updatable) The OCID of the compartment that contains the Delegation Control.
+	// (Updatable) The OCID of the compartment that contains the Delegation Subscription.
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Operations.CostCenter": "42"}
@@ -92,7 +92,7 @@ type DelegationSubscriptionObservation struct {
 
 type DelegationSubscriptionParameters struct {
 
-	// (Updatable) The OCID of the compartment that contains the Delegation Control.
+	// (Updatable) The OCID of the compartment that contains the Delegation Subscription.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/identity/v1alpha1.Compartment
 	// +kubebuilder:validation:Optional
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`

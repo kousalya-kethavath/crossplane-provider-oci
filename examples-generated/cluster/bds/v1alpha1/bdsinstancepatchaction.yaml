@@ -22,4 +22,5 @@ spec:
       toleranceThresholdPerDomain: ${var.bds_instance_patch_action_patching_config_tolerance_threshold_per_domain}
       waitTimeBetweenBatchInSeconds: ${var.bds_instance_patch_action_patching_config_wait_time_between_batch_in_seconds}
       waitTimeBetweenDomainInSeconds: ${var.bds_instance_patch_action_patching_config_wait_time_between_domain_in_seconds}
+    secret_id: ${oci_vault_secret.test_secret.id}
     version: ${var.bds_instance_patch_action_version}

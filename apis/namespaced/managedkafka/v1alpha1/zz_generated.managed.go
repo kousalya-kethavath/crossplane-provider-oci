@@ -47,6 +47,46 @@ func (mg *KafkaCluster) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretR
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this KafkaClusterAddon.
+func (mg *KafkaClusterAddon) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this KafkaClusterAddon.
+func (mg *KafkaClusterAddon) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this KafkaClusterAddon.
+func (mg *KafkaClusterAddon) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this KafkaClusterAddon.
+func (mg *KafkaClusterAddon) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this KafkaClusterAddon.
+func (mg *KafkaClusterAddon) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this KafkaClusterAddon.
+func (mg *KafkaClusterAddon) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this KafkaClusterAddon.
+func (mg *KafkaClusterAddon) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this KafkaClusterAddon.
+func (mg *KafkaClusterAddon) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this KafkaClusterConfig.
 func (mg *KafkaClusterConfig) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

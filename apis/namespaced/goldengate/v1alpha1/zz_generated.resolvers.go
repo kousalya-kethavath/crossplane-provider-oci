@@ -2229,6 +2229,28 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		mg.Spec.ForProvider.OggData[i3].IdentityDomainIDRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OggData); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("vault.oci.m.upbound.io", "v1alpha1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OggData[i3].KeySecretID),
+				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.OggData[i3].KeySecretIDRef,
+				Selector:     mg.Spec.ForProvider.OggData[i3].KeySecretIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.OggData[i3].KeySecretID")
+		}
+		mg.Spec.ForProvider.OggData[i3].KeySecretID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.OggData[i3].KeySecretIDRef = rsp.ResolvedReference
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("goldengate.oci.m.upbound.io", "v1alpha1", "Deployment", "DeploymentList")
 		if err != nil {
@@ -2487,6 +2509,28 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 		mg.Spec.InitProvider.OggData[i3].IdentityDomainID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.InitProvider.OggData[i3].IdentityDomainIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.OggData); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("vault.oci.m.upbound.io", "v1alpha1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OggData[i3].KeySecretID),
+				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.OggData[i3].KeySecretIDRef,
+				Selector:     mg.Spec.InitProvider.OggData[i3].KeySecretIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.OggData[i3].KeySecretID")
+		}
+		mg.Spec.InitProvider.OggData[i3].KeySecretID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.OggData[i3].KeySecretIDRef = rsp.ResolvedReference
 
 	}
 	{

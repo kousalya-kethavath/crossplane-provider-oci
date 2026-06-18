@@ -24,6 +24,7 @@ spec:
     identityDomainIdSelector:
       matchLabels:
         testing.upbound.io/example-name: test_domain
+    secret_id: ${oci_vault_secret.test_secret.id}
     upstConfigurationDetails:
     - masterEncryptionKeyIdSelector:
         matchLabels:

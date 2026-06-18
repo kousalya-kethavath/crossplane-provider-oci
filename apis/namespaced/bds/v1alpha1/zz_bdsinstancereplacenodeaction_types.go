@@ -16,79 +16,68 @@ import (
 
 type BdsInstanceReplaceNodeActionInitParameters struct {
 
-	// The OCID of the cluster.
-	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/bds/v1alpha1.BdsInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// The OCID of the Big Data Service cluster.
 	BdsInstanceID *string `json:"bdsInstanceId,omitempty" tf:"bds_instance_id,omitempty"`
 
-	// Reference to a BdsInstance in bds to populate bdsInstanceId.
-	// +kubebuilder:validation:Optional
-	BdsInstanceIDRef *v1.NamespacedReference `json:"bdsInstanceIdRef,omitempty" tf:"-"`
+	// Base64-encoded cluster admin password. Use this or secret_id.
+	ClusterAdminPasswordSecretRef *v1.LocalSecretKeySelector `json:"clusterAdminPasswordSecretRef,omitempty" tf:"-"`
 
-	// Selector for a BdsInstance in bds to populate bdsInstanceId.
-	// +kubebuilder:validation:Optional
-	BdsInstanceIDSelector *v1.NamespacedSelector `json:"bdsInstanceIdSelector,omitempty" tf:"-"`
-
-	// Base-64 encoded password for the cluster admin user.
-	ClusterAdminPasswordSecretRef v1.LocalSecretKeySelector `json:"clusterAdminPasswordSecretRef" tf:"-"`
-
-	// The id of the nodeBackup to use for replacing the node.
+	// The OCID of the node backup to use for replacement.
 	NodeBackupID *string `json:"nodeBackupId,omitempty" tf:"node_backup_id,omitempty"`
 
-	// Host name of the node to replace. MASTER, UTILITY and EDGE node are only supported types
+	// Host name of the node to replace.
 	NodeHostName *string `json:"nodeHostName,omitempty" tf:"node_host_name,omitempty"`
 
-	// Shape of the new vm when replacing the node. If not provided, BDS will attempt to replace the node with the shape of current node.
+	// The OCID of the secret that stores the cluster admin password. Use this or cluster_admin_password.
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// The shape to use for the replacement node. If not specified, the existing node shape is used.
 	Shape *string `json:"shape,omitempty" tf:"shape,omitempty"`
 }
 
 type BdsInstanceReplaceNodeActionObservation struct {
 
-	// The OCID of the cluster.
+	// The OCID of the Big Data Service cluster.
 	BdsInstanceID *string `json:"bdsInstanceId,omitempty" tf:"bds_instance_id,omitempty"`
 
-	// The unique identifier for the NodeBackupConfiguration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The id of the nodeBackup to use for replacing the node.
+	// The OCID of the node backup to use for replacement.
 	NodeBackupID *string `json:"nodeBackupId,omitempty" tf:"node_backup_id,omitempty"`
 
-	// Host name of the node to replace. MASTER, UTILITY and EDGE node are only supported types
+	// Host name of the node to replace.
 	NodeHostName *string `json:"nodeHostName,omitempty" tf:"node_host_name,omitempty"`
 
-	// Shape of the new vm when replacing the node. If not provided, BDS will attempt to replace the node with the shape of current node.
+	// The OCID of the secret that stores the cluster admin password. Use this or cluster_admin_password.
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// The shape to use for the replacement node. If not specified, the existing node shape is used.
 	Shape *string `json:"shape,omitempty" tf:"shape,omitempty"`
 }
 
 type BdsInstanceReplaceNodeActionParameters struct {
 
-	// The OCID of the cluster.
-	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/bds/v1alpha1.BdsInstance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// The OCID of the Big Data Service cluster.
 	// +kubebuilder:validation:Optional
 	BdsInstanceID *string `json:"bdsInstanceId,omitempty" tf:"bds_instance_id,omitempty"`
 
-	// Reference to a BdsInstance in bds to populate bdsInstanceId.
+	// Base64-encoded cluster admin password. Use this or secret_id.
 	// +kubebuilder:validation:Optional
-	BdsInstanceIDRef *v1.NamespacedReference `json:"bdsInstanceIdRef,omitempty" tf:"-"`
+	ClusterAdminPasswordSecretRef *v1.LocalSecretKeySelector `json:"clusterAdminPasswordSecretRef,omitempty" tf:"-"`
 
-	// Selector for a BdsInstance in bds to populate bdsInstanceId.
-	// +kubebuilder:validation:Optional
-	BdsInstanceIDSelector *v1.NamespacedSelector `json:"bdsInstanceIdSelector,omitempty" tf:"-"`
-
-	// Base-64 encoded password for the cluster admin user.
-	// +kubebuilder:validation:Optional
-	ClusterAdminPasswordSecretRef v1.LocalSecretKeySelector `json:"clusterAdminPasswordSecretRef" tf:"-"`
-
-	// The id of the nodeBackup to use for replacing the node.
+	// The OCID of the node backup to use for replacement.
 	// +kubebuilder:validation:Optional
 	NodeBackupID *string `json:"nodeBackupId,omitempty" tf:"node_backup_id,omitempty"`
 
-	// Host name of the node to replace. MASTER, UTILITY and EDGE node are only supported types
+	// Host name of the node to replace.
 	// +kubebuilder:validation:Optional
 	NodeHostName *string `json:"nodeHostName,omitempty" tf:"node_host_name,omitempty"`
 
-	// Shape of the new vm when replacing the node. If not provided, BDS will attempt to replace the node with the shape of current node.
+	// The OCID of the secret that stores the cluster admin password. Use this or cluster_admin_password.
+	// +kubebuilder:validation:Optional
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// The shape to use for the replacement node. If not specified, the existing node shape is used.
 	// +kubebuilder:validation:Optional
 	Shape *string `json:"shape,omitempty" tf:"shape,omitempty"`
 }
@@ -120,7 +109,7 @@ type BdsInstanceReplaceNodeActionStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// BdsInstanceReplaceNodeAction is the Schema for the BdsInstanceReplaceNodeActions API. Provides the Bds Instance Node Replace Action  resource in Oracle Cloud Infrastructure Big Data Service service
+// BdsInstanceReplaceNodeAction is the Schema for the BdsInstanceReplaceNodeActions API. Provides the Bds Instance Replace Node Action resource in Oracle Cloud Infrastructure Big Data Service service
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -129,8 +118,7 @@ type BdsInstanceReplaceNodeActionStatus struct {
 type BdsInstanceReplaceNodeAction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clusterAdminPasswordSecretRef)",message="spec.forProvider.clusterAdminPasswordSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeBackupId) || (has(self.initProvider) && has(self.initProvider.nodeBackupId))",message="spec.forProvider.nodeBackupId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.bdsInstanceId) || (has(self.initProvider) && has(self.initProvider.bdsInstanceId))",message="spec.forProvider.bdsInstanceId is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeHostName) || (has(self.initProvider) && has(self.initProvider.nodeHostName))",message="spec.forProvider.nodeHostName is a required parameter"
 	Spec   BdsInstanceReplaceNodeActionSpec   `json:"spec"`
 	Status BdsInstanceReplaceNodeActionStatus `json:"status,omitempty"`
