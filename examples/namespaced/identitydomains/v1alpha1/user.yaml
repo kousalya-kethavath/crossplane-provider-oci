@@ -1,0 +1,27 @@
+apiVersion: identitydomains.oci.m.upbound.io/v1alpha1
+kind: User
+metadata:
+  labels:
+    testing.upbound.io/example-name: user_label_1
+  name: user1
+  namespace: ${TARGET_NAMESPACE}
+spec:
+  forProvider:
+    # Prerequisite: create or use an identity domain.
+    # Identity domain URL for the domain in your compartment.
+    idcsEndpoint: "https://idcs.example.identity.oraclecloud.com"
+    # Use a unique user name/email in the target identity domain.
+    userName: "example.user@example.com"
+    name:
+      - givenName: "Example"
+        familyName: "User"
+    emails:
+      - value: "example.user@example.com"
+        type: "work"
+        primary: true
+    schemas:
+      - "urn:ietf:params:scim:schemas:core:2.0:User"
+  # providerConfig defaults to "ClusterProviderConfig"; set providerConfigRef to "ProviderConfig" to use namespaced providerConfig.
+  providerConfigRef:
+    name: default
+    kind: ProviderConfig

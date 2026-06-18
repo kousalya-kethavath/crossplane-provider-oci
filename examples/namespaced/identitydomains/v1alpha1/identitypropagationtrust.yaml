@@ -1,0 +1,39 @@
+apiVersion: identitydomains.oci.m.upbound.io/v1alpha1
+kind: IdentityPropagationTrust
+metadata:
+  labels:
+    testing.upbound.io/example-name: identitypropagationtrust_label_1
+  name: identitypropagationtrust1
+  namespace: ${TARGET_NAMESPACE}
+spec:
+  forProvider:
+    # Prerequisite: create or use an identity domain, then create an integrated application with OAuth configured in that domain.
+    # Identity domain URL for the domain in your compartment.
+    idcsEndpoint: "https://idcs.example.identity.oraclecloud.com"
+    name: identitypropagationtrust1
+    # External token issuer that this trust validates.
+    issuer: "https://issuer.example.com"
+    # Public key or certificate used to verify tokens from the issuer.
+    publicCertificate: |
+      -----BEGIN PUBLIC KEY-----
+      EXAMPLE_PUBLIC_KEY
+      -----END PUBLIC KEY-----
+    type: "JWT"
+    active: true
+    allowImpersonation: true
+    subjectType: "Resource"
+    impersonatingResource: "exampleWorkload"
+    # OAuth client/application ID from the integrated application in this identity domain.
+    oauthClients:
+      - "exampleOauthClientId"
+    claimPropagations:
+      - "ext_iss"
+    claimValidations:
+      - name: "aud"
+        value: "exampleOauthClientId"
+    schemas:
+      - "urn:ietf:params:scim:schemas:oracle:idcs:IdentityPropagationTrust"
+  # providerConfig defaults to "ClusterProviderConfig"; set providerConfigRef to "ProviderConfig" to use namespaced providerConfig.
+  providerConfigRef:
+    name: default
+    kind: ProviderConfig
