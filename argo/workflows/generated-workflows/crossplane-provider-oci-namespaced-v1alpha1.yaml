@@ -49,6 +49,8 @@ spec:
       value: "false"
     - name: run_identity_namespaced_tests
       value: "false"
+    - name: run_identitydomains_namespaced_tests
+      value: "false"
     - name: run_integration_namespaced_tests
       value: "false"
     - name: run_kms_namespaced_tests
@@ -609,6 +611,20 @@ spec:
                 value: "{{item}}"
               - name: compartment_ocid
                 value: "{{workflow.parameters.compartment_ocid}}"
+              - name: create_resources
+                value: "{{workflow.parameters.create_resources}}"
+              - name: delete_resources
+                value: "{{workflow.parameters.delete_resources}}"
+        - name: identitydomains-namespaced-tests
+          templateRef:
+            name: oci-identitydomains-namespaced-v1alpha1-tests-template
+            template: identitydomains-namespaced-tests-workflow
+          when: "{{workflow.parameters.run_identitydomains_namespaced_tests}} == true"
+          withParam: "{{workflow.parameters.namespace_list}}"
+          arguments:
+            parameters:
+              - name: target_namespace
+                value: "{{item}}"
               - name: create_resources
                 value: "{{workflow.parameters.create_resources}}"
               - name: delete_resources

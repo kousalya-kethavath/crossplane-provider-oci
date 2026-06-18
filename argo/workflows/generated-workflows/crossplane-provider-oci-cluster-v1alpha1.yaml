@@ -49,6 +49,8 @@ spec:
       value: "false"
     - name: run_identity_cluster_tests
       value: "false"
+    - name: run_identitydomains_cluster_tests
+      value: "false"
     - name: run_integration_cluster_tests
       value: "false"
     - name: run_kms_cluster_tests
@@ -550,6 +552,17 @@ spec:
             parameters:
               - name: compartment_ocid
                 value: "{{workflow.parameters.compartment_ocid}}"
+              - name: create_resources
+                value: "{{workflow.parameters.create_resources}}"
+              - name: delete_resources
+                value: "{{workflow.parameters.delete_resources}}"
+        - name: identitydomains-cluster-tests
+          templateRef:
+            name: oci-identitydomains-cluster-v1alpha1-tests-template
+            template: identitydomains-cluster-tests-workflow
+          when: "{{workflow.parameters.run_identitydomains_cluster_tests}} == true"
+          arguments:
+            parameters:
               - name: create_resources
                 value: "{{workflow.parameters.create_resources}}"
               - name: delete_resources

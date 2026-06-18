@@ -1,0 +1,81 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: oci-identitydomains-namespaced-v1alpha1-tests-template
+spec:
+  serviceAccountName: argo-workflow
+  entrypoint: identitydomains-namespaced-tests-workflow
+  volumes:
+    - name: git-repo
+      persistentVolumeClaim:
+        claimName: git-repo-pvc
+  arguments:
+    parameters:
+    - name: target_namespace
+    - name: create_resources
+      value: "true"
+    - name: delete_resources
+      value: "true"
+  templates:
+    - name: identitydomains-namespaced-tests-workflow
+      inputs:
+        parameters:
+          - name: target_namespace
+            value: "{{workflow.parameters.target_namespace}}"
+      dag:
+        tasks:
+        - name: create-identitypropagationtrust
+          templateRef:
+            name: test-template
+            template: create-resource
+          when: "{{workflow.parameters.create_resources}} == true"
+          arguments:
+            parameters:
+              - name: resourceFile
+                value: "examples/namespaced/identitydomains/v1alpha1/identitypropagationtrust.yaml"
+              - name: namespace
+                value: "{{inputs.parameters.target_namespace}}"
+        - name: create-user
+          templateRef:
+            name: test-template
+            template: create-resource
+          when: "{{workflow.parameters.create_resources}} == true"
+          arguments:
+            parameters:
+              - name: resourceFile
+                value: "examples/namespaced/identitydomains/v1alpha1/user.yaml"
+              - name: namespace
+                value: "{{inputs.parameters.target_namespace}}"
+        - name: delete-identitypropagationtrust
+          templateRef:
+            name: test-template
+            template: delete-resource
+          when: "{{workflow.parameters.delete_resources}} == true"
+          dependencies: ["create-identitypropagationtrust"]
+          arguments:
+            parameters:
+              - name: resourceKind
+                value: "{{tasks.create-identitypropagationtrust.outputs.parameters.resourceKind}}"
+              - name: resourceName
+                value: "{{tasks.create-identitypropagationtrust.outputs.parameters.resourceName}}"
+              - name: resourceGroup
+                value: "{{tasks.create-identitypropagationtrust.outputs.parameters.resourceGroup}}"
+              - name: namespace
+                value: "{{inputs.parameters.target_namespace}}"
+        - name: delete-user
+          templateRef:
+            name: test-template
+            template: delete-resource
+          when: "{{workflow.parameters.delete_resources}} == true"
+          dependencies: ["create-user"]
+          arguments:
+            parameters:
+              - name: resourceKind
+                value: "{{tasks.create-user.outputs.parameters.resourceKind}}"
+              - name: resourceName
+                value: "{{tasks.create-user.outputs.parameters.resourceName}}"
+              - name: resourceGroup
+                value: "{{tasks.create-user.outputs.parameters.resourceGroup}}"
+              - name: namespace
+                value: "{{inputs.parameters.target_namespace}}"
