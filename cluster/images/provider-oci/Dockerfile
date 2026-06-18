@@ -1,5 +1,6 @@
-FROM alpine:3.16.2
-RUN apk --no-cache add ca-certificates bash
+FROM ghcr.io/oracle/oraclelinux:9-slim
+RUN microdnf -y install ca-certificates bash unzip \
+  && microdnf clean all
 
 ARG TARGETOS
 ARG TARGETARCH
