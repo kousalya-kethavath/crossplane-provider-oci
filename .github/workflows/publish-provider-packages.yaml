@@ -4,12 +4,21 @@ on:
   workflow_dispatch:
     inputs:
       subpackages:
-        description: 'Subpackages to be built individually (e.g. config,containerengine or "all" for all services)'
-        default: 'all'
+        description: 'Subpackages to rebuild (e.g. config,containerengine, "all", or "auto" to detect from retag_from_version)'
+        default: 'auto'
         required: true
 
       version:
         description: "Version string to use while publishing the packages (e.g. v1.0.0-alpha.1)"
+        default: ''
+        required: false
+      retag_unchanged:
+        type: boolean
+        description: "Retag packages not listed in subpackages from retag_from_version to version"
+        default: false
+        required: false
+      retag_from_version:
+        description: "Existing version tag to compare against and copy unchanged packages from (e.g. v1.1.0)"
         default: ''
         required: false
       platform:
@@ -46,23 +55,56 @@ jobs:
     outputs:
       indices: ${{ steps.calc.outputs.indices }}
       subpackages: ${{ steps.calc.outputs.subpackages }}
+      retag_indices: ${{ steps.calc.outputs.retag_indices }}
+      retag_subpackages: ${{ steps.calc.outputs.retag_subpackages }}
     steps:
       - name: Validate workflow inputs
         env:
           INPUT_SUBPACKAGES: ${{ inputs.subpackages }}
           INPUT_VERSION: ${{ inputs.version }}
+          INPUT_RETAG_UNCHANGED: ${{ inputs.retag_unchanged }}
+          INPUT_RETAG_FROM_VERSION: ${{ inputs.retag_from_version }}
           INPUT_PLATFORM: ${{ inputs.platform }}
           INPUT_SIZE: ${{ inputs.size }}
         run: |
           set -euo pipefail
 
-          if [[ ! "$INPUT_SUBPACKAGES" =~ ^(all|[a-z0-9]+([,-][a-z0-9]+)*)$ ]]; then
+          if [[ ! "$INPUT_SUBPACKAGES" =~ ^(auto|all|[a-z0-9]+([,-][a-z0-9]+)*)$ ]]; then
             echo "Invalid subpackages input: $INPUT_SUBPACKAGES" >&2
             exit 1
           fi
 
           if [[ -n "$INPUT_VERSION" && ! "$INPUT_VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]]; then
             echo "Invalid version input: $INPUT_VERSION" >&2
+            exit 1
+          fi
+
+          if [[ -n "$INPUT_RETAG_FROM_VERSION" && ! "$INPUT_RETAG_FROM_VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Invalid retag_from_version input: $INPUT_RETAG_FROM_VERSION" >&2
+            exit 1
+          fi
+
+          if [[ "$INPUT_RETAG_UNCHANGED" = "true" ]]; then
+            if [[ -z "$INPUT_VERSION" ]]; then
+              echo "version is required when retag_unchanged is true" >&2
+              exit 1
+            fi
+            if [[ -z "$INPUT_RETAG_FROM_VERSION" ]]; then
+              echo "retag_from_version is required when retag_unchanged is true" >&2
+              exit 1
+            fi
+            if [[ "$INPUT_SUBPACKAGES" = "all" ]]; then
+              echo "retag_unchanged does not apply when subpackages is all" >&2
+              exit 1
+            fi
+            if [[ "$INPUT_RETAG_FROM_VERSION" = "$INPUT_VERSION" ]]; then
+              echo "retag_from_version must be different from version" >&2
+              exit 1
+            fi
+          fi
+
+          if [[ "$INPUT_SUBPACKAGES" = "auto" && -z "$INPUT_RETAG_FROM_VERSION" ]]; then
+            echo "retag_from_version is required when subpackages is auto" >&2
             exit 1
           fi
 
@@ -82,25 +124,156 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
+        with:
+          fetch-depth: 0
 
       - id: calc
         env:
           INPUT_SUBPACKAGES: ${{ inputs.subpackages }}
+          INPUT_RETAG_UNCHANGED: ${{ inputs.retag_unchanged }}
+          INPUT_RETAG_FROM_VERSION: ${{ inputs.retag_from_version }}
           INPUT_SIZE: ${{ inputs.size }}
         run: |
           set -euo pipefail
 
-          if [ "$INPUT_SUBPACKAGES" = "all" ]; then
-            SERVICES_LIST=$(find examples-generated/cluster -mindepth 1 -maxdepth 1 -type d 2>/dev/null | xargs -n1 basename | tr '\n' ',' | sed 's/,$//' || echo "")
-            if [ -n "$SERVICES_LIST" ]; then
-              SUBPACKAGES="config,$SERVICES_LIST"
-            else
-              SUBPACKAGES="config"
-            fi
+          SERVICES_LIST=$(find examples-generated/cluster -mindepth 1 -maxdepth 1 -type d 2>/dev/null | xargs -n1 basename | sort | tr '\n' ',' | sed 's/,$//' || echo "")
+          if [ -n "$SERVICES_LIST" ]; then
+            ALL_SUBPACKAGES="config,$SERVICES_LIST"
           else
-            SUBPACKAGES="$INPUT_SUBPACKAGES"
+            ALL_SUBPACKAGES="config"
           fi
-          export SUBPACKAGES
+
+          if [ "$INPUT_SUBPACKAGES" = "auto" ]; then
+            git rev-parse --verify "$INPUT_RETAG_FROM_VERSION^{commit}" >/dev/null
+            CHANGED_FILES=$(git diff --name-only "$INPUT_RETAG_FROM_VERSION"...HEAD)
+            export CHANGED_FILES
+            SUBPACKAGES=$(python3 - <<'PY'
+          import os
+          import re
+
+          all_services = [pkg for pkg in os.environ["ALL_SUBPACKAGES"].split(",") if pkg and pkg != "config"]
+          service_set = set(all_services)
+          changed = [path for path in os.environ["CHANGED_FILES"].splitlines() if path]
+          rebuild_all = False
+          changed_services = set()
+
+          ignored_prefixes = (
+              ".github/",
+              ".idea/",
+              ".oca/",
+              "argocd-examples/",
+              "argo/",
+              "docs/",
+              "examples-deprecated/",
+          )
+          ignored_files = {
+              ".gitignore",
+              "CODE_OF_CONDUCT.md",
+              "CONTRIBUTING.md",
+              "LICENSE.txt",
+              "NOTICE.txt",
+              "OWNERS.md",
+              "README.md",
+              "SECURITY.md",
+              "THIRD_PARTY_LICENSES.txt",
+              "apis/cluster/zz_register.go",
+              "apis/namespaced/zz_register.go",
+          }
+          shared_prefixes = (
+              "build/",
+              "cluster/images/",
+              "hack/",
+          )
+          shared_files = {
+              "go.mod",
+              "go.sum",
+              "apis/generate.go",
+              "apis/register.go",
+              "package/auth.yaml",
+              "package/crossplane.yaml",
+              "package/crossplane.yaml.tmpl",
+              "cmd/generator/main.go",
+              "cmd/provider/main.go",
+          }
+
+          def add_service(service):
+              if service in {"config", "monolith"}:
+                  return
+              if service in service_set:
+                  changed_services.add(service)
+              else:
+                  raise ValueError(f"Detected changed service '{service}' that is not in examples-generated/cluster")
+
+          for path in changed:
+              if path in ignored_files or path.startswith(ignored_prefixes):
+                  continue
+
+              parts = path.split("/")
+              if len(parts) >= 3 and parts[0] == "apis" and parts[1] in {"cluster", "namespaced"}:
+                  add_service(parts[2])
+                  continue
+
+              if len(parts) >= 4 and parts[0] in {"examples", "examples-generated"} and parts[1] in {"cluster", "namespaced"}:
+                  add_service(parts[2])
+                  continue
+
+              if len(parts) >= 3 and parts[0] == "cmd" and parts[1] == "provider":
+                  add_service(parts[2])
+                  continue
+
+              if len(parts) >= 4 and parts[0] == "internal" and parts[1] == "controller" and parts[2] in {"cluster", "namespaced"}:
+                  setup_match = re.match(r"^zz_([a-z0-9]+)_setup\.go$", parts[3])
+                  if setup_match:
+                      add_service(setup_match.group(1))
+                  elif parts[3] == "zz_monolith_setup.go":
+                      pass
+                  else:
+                      add_service(parts[3])
+                  continue
+
+              if len(parts) >= 3 and parts[0] == "package" and parts[1] == "crds":
+                  match = re.match(r"^([a-z0-9]+)\.oci(?:\.m)?\.upbound\.io_", parts[2])
+                  if match:
+                      add_service(match.group(1))
+                      continue
+                  rebuild_all = True
+                  break
+
+              if path in shared_files or path.startswith(shared_prefixes):
+                  rebuild_all = True
+                  break
+
+              if path.startswith("internal/") and not path.startswith("internal/argo/"):
+                  rebuild_all = True
+                  break
+
+              if path.startswith("package/"):
+                  rebuild_all = True
+                  break
+
+          if rebuild_all:
+              print(os.environ["ALL_SUBPACKAGES"])
+          else:
+              packages = ["config"] + [service for service in all_services if service in changed_services]
+              print(",".join(packages))
+          PY
+          )
+          elif [ "$INPUT_SUBPACKAGES" = "all" ]; then
+            SUBPACKAGES="$ALL_SUBPACKAGES"
+          else
+            SUBPACKAGES=$(python3 - <<'PY'
+          import os
+
+          requested = [pkg for pkg in os.environ["INPUT_SUBPACKAGES"].split(",") if pkg]
+          packages = []
+          for pkg in ["config"] + requested:
+              if pkg not in packages:
+                  packages.append(pkg)
+          print(",".join(packages))
+          PY
+          )
+          fi
+          export SUBPACKAGES ALL_SUBPACKAGES
           INDICES=$(python3 - <<'PY'
           import math
           import os
@@ -110,8 +283,32 @@ jobs:
           print(list(range(0, math.ceil(len(subpackages) / size))))
           PY
           )
+          if [ "$INPUT_RETAG_UNCHANGED" = "true" ]; then
+            RETAG_SUBPACKAGES=$(python3 - <<'PY'
+          import os
+
+          all_packages = [pkg for pkg in os.environ["ALL_SUBPACKAGES"].split(",") if pkg]
+          build_packages = {pkg for pkg in os.environ["SUBPACKAGES"].split(",") if pkg}
+          print(",".join(pkg for pkg in all_packages if pkg not in build_packages))
+          PY
+          )
+          else
+            RETAG_SUBPACKAGES=""
+          fi
+          export RETAG_SUBPACKAGES
+          RETAG_INDICES=$(python3 - <<'PY'
+          import math
+          import os
+
+          subpackages = [pkg for pkg in os.environ["RETAG_SUBPACKAGES"].split(",") if pkg]
+          size = int(os.environ["INPUT_SIZE"])
+          print(list(range(0, math.ceil(len(subpackages) / size))))
+          PY
+          )
           echo "indices=$INDICES" >> "$GITHUB_OUTPUT"
           echo "subpackages=$SUBPACKAGES" >> "$GITHUB_OUTPUT"
+          echo "retag_indices=$RETAG_INDICES" >> "$GITHUB_OUTPUT"
+          echo "retag_subpackages=$RETAG_SUBPACKAGES" >> "$GITHUB_OUTPUT"
 
   publish-artifacts:
     strategy:
@@ -244,3 +441,74 @@ jobs:
             VERSION="$INPUT_VERSION" \
             BATCH_PLATFORMS="$batch_platforms" \
             publish-subpackages
+
+  retag-unchanged:
+    if: ${{ inputs.retag_unchanged && needs.index.outputs.retag_subpackages != '' }}
+    strategy:
+      max-parallel: 4
+      matrix:
+        index: ${{ fromJSON(needs.index.outputs.retag_indices) }}
+
+    needs:
+      - index
+      - publish-artifacts
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@885d1462b80bc1c1c7f0b00334ad271f09369c55 # v2
+        with:
+          version: ${{ env.DOCKER_BUILDX_VERSION }}
+          install: true
+
+      - name: Login to GHCR using PAT
+        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3.3.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Calculate packages to retag
+        id: packages
+        env:
+          ALL_PACKAGES: ${{ needs.index.outputs.retag_subpackages }}
+          MATRIX_INDEX: ${{ matrix.index }}
+          INPUT_SIZE: ${{ inputs.size }}
+        run: |
+          set -euo pipefail
+
+          PACKAGES_BATCH=$(python3 - <<'PY'
+          import os
+
+          all_packages = [pkg for pkg in os.environ["ALL_PACKAGES"].split(",") if pkg]
+          size = int(os.environ["INPUT_SIZE"])
+          start_idx = int(os.environ["MATRIX_INDEX"]) * size
+          batch = all_packages[start_idx:start_idx + size]
+          print(",".join(batch))
+          PY
+          )
+          echo "packages_batch=$PACKAGES_BATCH" >> "$GITHUB_OUTPUT"
+
+      - name: Retag unchanged packages
+        env:
+          PACKAGES_BATCH: ${{ steps.packages.outputs.packages_batch }}
+          REGISTRY_ORG: ${{ env.CROSSPLANE_REGORG }}
+          SOURCE_VERSION: ${{ inputs.retag_from_version }}
+          TARGET_VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+
+          for pkg in $(tr ',' ' ' <<<"$PACKAGES_BATCH"); do
+            if [ "$pkg" = "config" ]; then
+              package_name="provider-family-oci"
+            else
+              package_name="provider-oci-$pkg"
+            fi
+
+            source_ref="$REGISTRY_ORG/$package_name:$SOURCE_VERSION"
+            target_ref="$REGISTRY_ORG/$package_name:$TARGET_VERSION"
+            echo "Retagging $source_ref -> $target_ref"
+            docker buildx imagetools create -t "$target_ref" "$source_ref"
+          done
