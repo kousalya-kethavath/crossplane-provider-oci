@@ -1,0 +1,149 @@
+/*
+Copyright 2026 Oracle and/or its affiliates.
+*/
+
+package clients
+
+import (
+	"testing"
+
+	"github.com/crossplane/crossplane-runtime/v2/pkg/resource/fake"
+)
+
+type typedManaged struct {
+	fake.Managed
+	tfType string
+}
+
+func (m *typedManaged) GetTerraformResourceType() string {
+	return m.tfType
+}
+
+func TestShouldConfigureSDKv2Provider(t *testing.T) {
+	tests := map[string]struct {
+		options setupOptions
+		mg      *typedManaged
+		want    bool
+	}{
+		"default skips SDKv2 provider setup": {
+			options: setupOptions{},
+			mg:      &typedManaged{tfType: "oci_budget_budget"},
+			want:    false,
+		},
+		"predicate match enables SDKv2 provider setup": {
+			options: setupOptions{isSDKv2Resource: func(name string) bool {
+				return name == "oci_budget_budget"
+			}},
+			mg:   &typedManaged{tfType: "oci_budget_budget"},
+			want: true,
+		},
+		"predicate miss skips SDKv2 provider setup": {
+			options: setupOptions{isSDKv2Resource: func(name string) bool {
+				return name == "oci_budget_budget"
+			}},
+			mg:   &typedManaged{tfType: "oci_objectstorage_bucket"},
+			want: false,
+		},
+	}
+
+	for name, tc := range tests {
+		t.Run(name, func(t *testing.T) {
+			got := tc.options.shouldConfigureSDKv2Provider(tc.mg)
+			if got != tc.want {
+				t.Fatalf("shouldConfigureSDKv2Provider() = %t, want %t", got, tc.want)
+			}
+		})
+	}
+}
+
+func TestShouldConfigureSDKv2ProviderSkipsUnknownResourceType(t *testing.T) {
+	options := setupOptions{isSDKv2Resource: func(string) bool {
+		return true
+	}}
+	if options.shouldConfigureSDKv2Provider(&fake.Managed{}) {
+		t.Fatal("shouldConfigureSDKv2Provider() = true, want false for managed resource without Terraform resource type")
+	}
+}
+
+func TestProviderConfigurationFromCredentialsIncludesOnlyNoForkSafeKeys(t *testing.T) {
+	creds := map[string]string{
+		"tenancy_ocid":        "tenancy",
+		"user_ocid":           "user",
+		"private_key":         "key",
+		"private_key_path":    "path",
+		"fingerprint":         "fingerprint",
+		"region":              "us-ashburn-1",
+		"auth":                "api_key",
+		"config_file_profile": "DEFAULT",
+	}
+
+	cfg := providerConfigurationFromCredentials(creds)
+	wantKeys := map[string]string{
+		"tenancy_ocid":        "tenancy",
+		"user_ocid":           "user",
+		"private_key":         "key",
+		"private_key_path":    "path",
+		"fingerprint":         "fingerprint",
+		"region":              "us-ashburn-1",
+		"auth":                "api_key",
+		"config_file_profile": "DEFAULT",
+	}
+
+	if len(cfg) != len(wantKeys) {
+		t.Fatalf("providerConfigurationFromCredentials() returned %d keys, want %d: %v", len(cfg), len(wantKeys), cfg)
+	}
+	for key, want := range wantKeys {
+		if got := cfg[key]; got != want {
+			t.Fatalf("providerConfigurationFromCredentials()[%q] = %v, want %q", key, got, want)
+		}
+	}
+
+	unsafeProviderGlobalKeys := []string{
+		"disable_auto_retries",
+		"retry_duration_seconds",
+		"retries_config_file",
+		"ignore_defined_tags",
+		"realm_specific_service_endpoint_template_enabled",
+		"dual_stack_endpoint_enabled",
+	}
+	for _, key := range unsafeProviderGlobalKeys {
+		if _, ok := cfg[key]; ok {
+			t.Fatalf("providerConfigurationFromCredentials() included unsafe no-fork provider-global key %q", key)
+		}
+	}
+}
+
+func TestProviderConfigurationHash(t *testing.T) {
+	base := map[string]any{
+		"region":       "us-ashburn-1",
+		"tenancy_ocid": "tenancy-a",
+	}
+	reordered := map[string]any{
+		"tenancy_ocid": "tenancy-a",
+		"region":       "us-ashburn-1",
+	}
+	rotated := map[string]any{
+		"region":       "us-ashburn-1",
+		"tenancy_ocid": "tenancy-b",
+	}
+
+	baseHash, err := providerConfigurationHash(base)
+	if err != nil {
+		t.Fatalf("providerConfigurationHash(base) error: %v", err)
+	}
+	reorderedHash, err := providerConfigurationHash(reordered)
+	if err != nil {
+		t.Fatalf("providerConfigurationHash(reordered) error: %v", err)
+	}
+	rotatedHash, err := providerConfigurationHash(rotated)
+	if err != nil {
+		t.Fatalf("providerConfigurationHash(rotated) error: %v", err)
+	}
+
+	if baseHash != reorderedHash {
+		t.Fatalf("providerConfigurationHash() changed with map order: %q != %q", baseHash, reorderedHash)
+	}
+	if baseHash == rotatedHash {
+		t.Fatal("providerConfigurationHash() did not change after provider configuration changed")
+	}
+}
