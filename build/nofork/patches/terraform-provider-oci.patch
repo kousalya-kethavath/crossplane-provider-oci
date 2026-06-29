@@ -1,0 +1,563 @@
+diff --git a/internal/client/object_storage_clients.go b/internal/client/object_storage_clients.go
+index 2245abbe..7001a1e8 100644
+--- a/internal/client/object_storage_clients.go
++++ b/internal/client/object_storage_clients.go
+@@ -4,8 +4,6 @@
+ package client
+ 
+ import (
+-	"os"
+-
+ 	oci_object_storage "github.com/oracle/oci-go-sdk/v65/objectstorage"
+ 
+ 	oci_common "github.com/oracle/oci-go-sdk/v65/common"
+@@ -16,10 +14,6 @@ func init() {
+ }
+ 
+ func initObjectstorageObjectStorageClient(configProvider oci_common.ConfigurationProvider, configureClient ConfigureClient, serviceClientOverrides ServiceClientOverrides) (interface{}, error) {
+-	err := os.Setenv("OCI_REALM_SPECIFIC_SERVICE_ENDPOINT_TEMPLATE_ENABLED", "false")
+-	if err != nil {
+-		return nil, err
+-	}
+ 	client, err := oci_object_storage.NewObjectStorageClientWithConfigurationProvider(configProvider)
+ 	if err != nil {
+ 		return nil, err
+diff --git a/internal/client/provider_clients.go b/internal/client/provider_clients.go
+index e83195c0..87163a20 100644
+--- a/internal/client/provider_clients.go
++++ b/internal/client/provider_clients.go
+@@ -5,8 +5,10 @@ package client
+ 
+ import (
+ 	"fmt"
++	"reflect"
+ 	"strconv"
+ 	"strings"
++	"sync"
+ 
+ 	"github.com/oracle/terraform-provider-oci/internal/tfresource"
+ 
+@@ -58,18 +60,55 @@ type OracleClients struct {
+ 	Configuration     map[string]string
+ 	SdkClientMap      map[string]interface{}
+ 	WorkRequestClient *oci_work_requests.WorkRequestClient
++	ConfigureClient   ConfigureClient
+ }
+ 
+ func (m *OracleClients) GetClient(name string) interface{} {
+ 	return m.SdkClientMap[name]
+ }
+ 
++var configureClientRegistry sync.Map
++
++func configurationProviderKey(configProvider oci_common.ConfigurationProvider) string {
++	if configProvider == nil {
++		return ""
++	}
++	v := reflect.ValueOf(configProvider)
++	if v.IsValid() && v.Kind() == reflect.Pointer && !v.IsNil() {
++		return fmt.Sprintf("%T:%p", configProvider, v.Interface())
++	}
++	return fmt.Sprintf("%T:%v", configProvider, configProvider)
++}
++
++func (m *OracleClients) setConfigureClient(configProvider oci_common.ConfigurationProvider, configureClient ConfigureClient) {
++	m.ConfigureClient = configureClient
++	if key := configurationProviderKey(configProvider); key != "" && configureClient != nil {
++		configureClientRegistry.Store(key, configureClient)
++	}
++}
++
++func (m *OracleClients) ConfigureBaseClient(client *oci_common.BaseClient) error {
++	if m != nil && m.ConfigureClient != nil {
++		return m.ConfigureClient(client)
++	}
++	return fmt.Errorf("cannot configure OCI client: no configure client is registered")
++}
++
++func ConfigureClientForConfigurationProvider(configProvider oci_common.ConfigurationProvider, client *oci_common.BaseClient) error {
++	if key := configurationProviderKey(configProvider); key != "" {
++		if configureClient, ok := configureClientRegistry.Load(key); ok {
++			return configureClient.(ConfigureClient)(client)
++		}
++	}
++	return fmt.Errorf("cannot configure OCI client: no configure client is registered")
++}
++
+ // The following clients require special endpoint information that is only known at Terraform apply time; so they
+ // Create duplicate clients reusing the same Configuration provider as the initialized client and adding the endpoint
+ // here.
+ func (m *OracleClients) FunctionsInvokeClientWithEndpoint(endpoint string) (*oci_functions.FunctionsInvokeClient, error) {
+ 	if client, err := oci_functions.NewFunctionsInvokeClientWithConfigurationProvider(*m.FunctionsInvokeClient().ConfigurationProvider(), endpoint); err == nil {
+-		if err = ConfigureClientVar(&client.BaseClient); err != nil {
++		if err = m.ConfigureBaseClient(&client.BaseClient); err != nil {
+ 			return nil, err
+ 		}
+ 		return &client, nil
+@@ -79,7 +118,7 @@ func (m *OracleClients) FunctionsInvokeClientWithEndpoint(endpoint string) (*oci
+ }
+ func (m *OracleClients) KmsCryptoClientWithEndpoint(endpoint string) (*oci_kms.KmsCryptoClient, error) {
+ 	if client, err := oci_kms.NewKmsCryptoClientWithConfigurationProvider(*m.KmsCryptoClient().ConfigurationProvider(), endpoint); err == nil {
+-		if err = ConfigureClientVar(&client.BaseClient); err != nil {
++		if err = m.ConfigureBaseClient(&client.BaseClient); err != nil {
+ 			return nil, err
+ 		}
+ 		return &client, nil
+@@ -90,7 +129,7 @@ func (m *OracleClients) KmsCryptoClientWithEndpoint(endpoint string) (*oci_kms.K
+ 
+ func (m *OracleClients) KmsManagementClientWithEndpoint(endpoint string) (*oci_kms.KmsManagementClient, error) {
+ 	if client, err := oci_kms.NewKmsManagementClientWithConfigurationProvider(*m.KmsManagementClient().ConfigurationProvider(), endpoint); err == nil {
+-		if err = ConfigureClientVar(&client.BaseClient); err != nil {
++		if err = m.ConfigureBaseClient(&client.BaseClient); err != nil {
+ 			return nil, err
+ 		}
+ 		return &client, nil
+@@ -101,7 +140,7 @@ func (m *OracleClients) KmsManagementClientWithEndpoint(endpoint string) (*oci_k
+ 
+ func (m *OracleClients) IdentityDomainsClientWithEndpoint(endpoint string) (*oci_identity_domains.IdentityDomainsClient, error) {
+ 	if client, err := oci_identity_domains.NewIdentityDomainsClientWithConfigurationProvider(*m.IdentityDomainsClient().ConfigurationProvider(), endpoint); err == nil {
+-		if err = ConfigureClientVar(&client.BaseClient); err != nil {
++		if err = m.ConfigureBaseClient(&client.BaseClient); err != nil {
+ 			return nil, err
+ 		}
+ 		return &client, nil
+@@ -130,6 +169,9 @@ func getClientHostOverrides() map[string]string {
+ }
+ 
+ func CreateSDKClients(clients *OracleClients, configProvider oci_common.ConfigurationProvider, configureClient ConfigureClient) (err error) {
++	if clients != nil {
++		clients.setConfigureClient(configProvider, configureClient)
++	}
+ 	if OracleClientRegistrationsVar == nil || len(OracleClientRegistrationsVar.RegisteredClients) == 0 {
+ 		return fmt.Errorf("there are no clients to Create")
+ 	}
+diff --git a/internal/provider/provider.go b/internal/provider/provider.go
+index 58cef786..b1e76bd2 100644
+--- a/internal/provider/provider.go
++++ b/internal/provider/provider.go
+@@ -257,33 +257,15 @@ func ResourcesMap() map[string]*schema.Resource {
+ }
+ 
+ func ProviderConfig(d *schema.ResourceData) (interface{}, error) {
+-	tf_resource.DefinedTagsToSuppress = IgnoreDefinedTags(d)
+-	tf_resource.RealmSpecificServiceEndpointTemplateEnabled = realmSpecificServiceEndpointTemplateEnabled(d)
+-	tf_resource.DualStackEndpointTemplateEnabled = dualStackEndpointEnabled(d)
++	if err := validateNoForkProviderGlobalConfig(d); err != nil {
++		return nil, err
++	}
++
+ 	clients := &tf_client.OracleClients{
+ 		SdkClientMap:  make(map[string]interface{}, len(tf_client.OracleClientRegistrationsVar.RegisteredClients)),
+ 		Configuration: make(map[string]string),
+ 	}
+ 
+-	if d.Get(globalvar.DisableAutoRetriesAttrName).(bool) {
+-		tf_resource.ShortRetryTime = 0
+-		tf_resource.LongRetryTime = 0
+-	} else if retryDurationSeconds, exists := d.GetOkExists(globalvar.RetryDurationSecondsAttrName); exists {
+-		val := time.Duration(retryDurationSeconds.(int)) * time.Second
+-		if retryDurationSeconds.(int) < 0 {
+-			// Retry for maximum amount of time, if a negative value was specified
+-			val = time.Duration(globalvar.MaxInt64)
+-		}
+-		tf_resource.ConfiguredRetryDuration = &val
+-	}
+-
+-	if retriesConfigFile, exists := d.GetOkExists(globalvar.RetriesConfigFile); exists {
+-		err := tf_resource.SetRetriesConfig(retriesConfigFile.(string))
+-		if err != nil {
+-			return nil, err
+-		}
+-	}
+-
+ 	sdkConfigProvider, err := GetSdkConfigProvider(d, clients)
+ 	if err != nil {
+ 		return nil, err
+@@ -292,21 +274,45 @@ func ProviderConfig(d *schema.ResourceData) (interface{}, error) {
+ 	httpClient := BuildHttpClient()
+ 
+ 	// beware: global variable `configureClient` set here--used elsewhere outside this execution path
+-	tf_client.ConfigureClientVar, err = BuildConfigureClientFn(sdkConfigProvider, httpClient)
++	configureClient, err := BuildConfigureClientFn(sdkConfigProvider, httpClient)
+ 	if err != nil {
+ 		return nil, err
+ 	}
+ 
+-	err = tf_client.CreateSDKClients(clients, sdkConfigProvider, tf_client.ConfigureClientVar)
++	err = tf_client.CreateSDKClients(clients, sdkConfigProvider, configureClient)
+ 	if err != nil {
+ 		return nil, err
+ 	}
+ 
+-	AvoidWaitingForDeleteTarget, _ = strconv.ParseBool(utils.GetEnvSettingWithDefault("avoid_waiting_for_delete_target", "false"))
+-
+ 	return clients, nil
+ }
+ 
++func validateNoForkProviderGlobalConfig(d *schema.ResourceData) error {
++	unsupported := []string{}
++	if tags := IgnoreDefinedTags(d); len(tags) != 0 {
++		unsupported = append(unsupported, globalvar.DefinedTagsToIgnore)
++	}
++	if realmSpecificServiceEndpointTemplateEnabled(d) != "" {
++		unsupported = append(unsupported, globalvar.RealmSpecificServiceEndpointTemplateEnabled)
++	}
++	if dualStackEndpointEnabled(d) != "" {
++		unsupported = append(unsupported, globalvar.DualStackEndpointEnabled)
++	}
++	if d.Get(globalvar.DisableAutoRetriesAttrName).(bool) {
++		unsupported = append(unsupported, globalvar.DisableAutoRetriesAttrName)
++	}
++	if _, exists := d.GetOkExists(globalvar.RetryDurationSecondsAttrName); exists {
++		unsupported = append(unsupported, globalvar.RetryDurationSecondsAttrName)
++	}
++	if _, exists := d.GetOkExists(globalvar.RetriesConfigFile); exists {
++		unsupported = append(unsupported, globalvar.RetriesConfigFile)
++	}
++	if len(unsupported) != 0 {
++		return fmt.Errorf("provider-global Terraform option(s) are not supported by OCI no-fork runtime: %s", strings.Join(unsupported, ", "))
++	}
++	return nil
++}
++
+ func GetSdkConfigProvider(d *schema.ResourceData, clients *tf_client.OracleClients) (oci_common.ConfigurationProvider, error) {
+ 
+ 	auth := strings.ToLower(d.Get(globalvar.AuthAttrName).(string))
+diff --git a/internal/provider/provider_framework.go b/internal/provider/provider_framework.go
+index bcba6578..78129047 100644
+--- a/internal/provider/provider_framework.go
++++ b/internal/provider/provider_framework.go
+@@ -12,7 +12,6 @@ import (
+ 	"path/filepath"
+ 	"strconv"
+ 	"strings"
+-	"time"
+ 
+ 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+ 	"github.com/hashicorp/terraform-plugin-framework/datasource"
+@@ -25,7 +24,6 @@ import (
+ 	oci_common_auth "github.com/oracle/oci-go-sdk/v65/common/auth"
+ 	tf_client "github.com/oracle/terraform-provider-oci/internal/client"
+ 	"github.com/oracle/terraform-provider-oci/internal/globalvar"
+-	tf_resource "github.com/oracle/terraform-provider-oci/internal/tfresource"
+ 	"github.com/oracle/terraform-provider-oci/internal/utils"
+ )
+ 
+@@ -248,44 +246,23 @@ func (p *ociPluginProvider) SetDefaults(config *ociProviderModel) {
+ 	p.disableAutoRetries = config.DisableAutoRetries.ValueBool()
+ 	p.retryDurationSeconds = config.RetryDurationSeconds.ValueInt64()
+ 	p.configFileProfile = config.ConfigFileProfile.ValueString()
+-	p.configured = true
+-	tf_resource.RealmSpecificServiceEndpointTemplateEnabled = getStringFromFwBool(config.RealmSpecificServiceEndpointTemplateEnabled)
+-	tf_resource.DualStackEndpointTemplateEnabled = getStringFromFwBool(config.DualStackEndpointEnabled)
++	p.realmSpecificServiceEndpointTemplateEnabled = config.RealmSpecificServiceEndpointTemplateEnabled.ValueBool()
++	p.dualStackEndpointEnabled = config.DualStackEndpointEnabled.ValueBool()
+ 	p.retriesConfigFile = config.RetriesConfigFile.ValueString()
++	p.configured = true
+ 
+ }
+ 
+ func (p *ociPluginProvider) SetProviderConfig() (interface{}, error) {
+-	//tf_resource.DefinedTagsToSuppress = IgnoreDefinedTags(req)
++	if err := p.validateNoForkProviderGlobalConfig(); err != nil {
++		return nil, err
++	}
++
+ 	clients := &tf_client.OracleClients{
+ 		SdkClientMap:  make(map[string]interface{}, len(tf_client.OracleClientRegistrationsVar.RegisteredClients)),
+ 		Configuration: make(map[string]string),
+ 	}
+ 
+-	disableAutoRetries := p.disableAutoRetries
+-
+-	retryDurationSeconds := p.retryDurationSeconds
+-
+-	if disableAutoRetries {
+-		tf_resource.ShortRetryTime = 0
+-		tf_resource.LongRetryTime = 0
+-	} else if retryDurationSeconds > 0 {
+-		val := time.Duration(retryDurationSeconds) * time.Second
+-		if retryDurationSeconds < 0 {
+-			// Retry for maximum amount of time, if a negative value was specified
+-			val = time.Duration(globalvar.MaxInt64)
+-		}
+-		tf_resource.ConfiguredRetryDuration = &val
+-	}
+-
+-	retriesConfigFile := p.retriesConfigFile
+-	if len(retriesConfigFile) > 0 {
+-		err := tf_resource.SetRetriesConfig(retriesConfigFile)
+-		if err != nil {
+-			return nil, err
+-		}
+-	}
+-
+ 	sdkConfigProvider, err := p._GetSdkConfigProvider(clients)
+ 	if err != nil {
+ 		return nil, err
+@@ -294,21 +271,45 @@ func (p *ociPluginProvider) SetProviderConfig() (interface{}, error) {
+ 	httpClient := BuildHttpClient()
+ 
+ 	// beware: global variable `configureClient` set here--used elsewhere outside this execution path
+-	tf_client.ConfigureClientVar, err = BuildConfigureClientFn(sdkConfigProvider, httpClient)
++	configureClient, err := BuildConfigureClientFn(sdkConfigProvider, httpClient)
+ 	if err != nil {
+ 		return nil, err
+ 	}
+ 
+-	err = tf_client.CreateSDKClients(clients, sdkConfigProvider, tf_client.ConfigureClientVar)
++	err = tf_client.CreateSDKClients(clients, sdkConfigProvider, configureClient)
+ 	if err != nil {
+ 		return nil, err
+ 	}
+ 
+-	AvoidWaitingForDeleteTarget, _ = strconv.ParseBool(utils.GetEnvSettingWithDefault("avoid_waiting_for_delete_target", "false"))
+-
+ 	return clients, nil
+ }
+ 
++func (p *ociPluginProvider) validateNoForkProviderGlobalConfig() error {
++	unsupported := []string{}
++	if len(p.ignoreDefinedTags) != 0 {
++		unsupported = append(unsupported, globalvar.DefinedTagsToIgnore)
++	}
++	if p.realmSpecificServiceEndpointTemplateEnabled {
++		unsupported = append(unsupported, globalvar.RealmSpecificServiceEndpointTemplateEnabled)
++	}
++	if p.dualStackEndpointEnabled {
++		unsupported = append(unsupported, globalvar.DualStackEndpointEnabled)
++	}
++	if p.disableAutoRetries {
++		unsupported = append(unsupported, globalvar.DisableAutoRetriesAttrName)
++	}
++	if p.retryDurationSeconds != 0 {
++		unsupported = append(unsupported, globalvar.RetryDurationSecondsAttrName)
++	}
++	if p.retriesConfigFile != "" {
++		unsupported = append(unsupported, globalvar.RetriesConfigFile)
++	}
++	if len(unsupported) != 0 {
++		return fmt.Errorf("provider-global Terraform option(s) are not supported by OCI no-fork runtime: %s", strings.Join(unsupported, ", "))
++	}
++	return nil
++}
++
+ func (p *ociPluginProvider) _GetSdkConfigProvider(clients *tf_client.OracleClients) (oci_common.ConfigurationProvider, error) {
+ 	auth := strings.ToLower(p.auth)
+ 	profile := p.configFileProfile
+diff --git a/internal/service/core/helpers_core.go b/internal/service/core/helpers_core.go
+index e6254bf1..aa25f536 100644
+--- a/internal/service/core/helpers_core.go
++++ b/internal/service/core/helpers_core.go
+@@ -162,7 +162,7 @@ func (s *CoreVolumeBackupResourceCrud) createBlockStorageSourceRegionClient(regi
+ 		if err != nil {
+ 			return fmt.Errorf("cannot Create client for the source region: %v", err)
+ 		}
+-		err = tf_client.ConfigureClientVar(&sourceBlockStorageClient.BaseClient)
++		err = tf_client.ConfigureClientForConfigurationProvider(*s.Client.ConfigurationProvider(), &sourceBlockStorageClient.BaseClient)
+ 		if err != nil {
+ 			return fmt.Errorf("cannot configure client for the source region: %v", err)
+ 		}
+@@ -179,7 +179,7 @@ func (s *CoreVolumeGroupBackupResourceCrud) createBlockStorageSourceRegionClient
+ 		if err != nil {
+ 			return fmt.Errorf("cannot Create client for the source region: %v", err)
+ 		}
+-		err = tf_client.ConfigureClientVar(&sourceBlockStorageClient.BaseClient)
++		err = tf_client.ConfigureClientForConfigurationProvider(*s.Client.ConfigurationProvider(), &sourceBlockStorageClient.BaseClient)
+ 		if err != nil {
+ 			return fmt.Errorf("cannot configure client for the source region: %v", err)
+ 		}
+@@ -196,7 +196,7 @@ func (s *CoreBootVolumeBackupResourceCrud) createBlockStorageSourceRegionClient(
+ 		if err != nil {
+ 			return fmt.Errorf("cannot Create client for the source region: %v", err)
+ 		}
+-		err = tf_client.ConfigureClientVar(&sourceBlockStorageClient.BaseClient)
++		err = tf_client.ConfigureClientForConfigurationProvider(*s.Client.ConfigurationProvider(), &sourceBlockStorageClient.BaseClient)
+ 		if err != nil {
+ 			return fmt.Errorf("cannot configure client for the source region: %v", err)
+ 		}
+diff --git a/internal/service/mysql/helpers_mysql.go b/internal/service/mysql/helpers_mysql.go
+index bcc3f579..ce2a27d3 100644
+--- a/internal/service/mysql/helpers_mysql.go
++++ b/internal/service/mysql/helpers_mysql.go
+@@ -13,7 +13,7 @@ func (s *MysqlMysqlBackupResourceCrud) createDbBackupClientInRegion(region strin
+ 		if err != nil {
+ 			return fmt.Errorf("cannot Create client for the region: %v", err)
+ 		}
+-		err = tf_client.ConfigureClientVar(&dbBackupClient.BaseClient)
++		err = tf_client.ConfigureClientForConfigurationProvider(*s.Client.ConfigurationProvider(), &dbBackupClient.BaseClient)
+ 		if err != nil {
+ 			return fmt.Errorf("cannot configure client for the region: %v", err)
+ 		}
+diff --git a/internal/service/objectstorage/helpers_objectstorage.go b/internal/service/objectstorage/helpers_objectstorage.go
+index 69fd52ef..9d6e68f0 100644
+--- a/internal/service/objectstorage/helpers_objectstorage.go
++++ b/internal/service/objectstorage/helpers_objectstorage.go
+@@ -422,7 +422,7 @@ func (s *ObjectStorageObjectResourceCrud) createSourceRegionClient(region string
+ 		if err != nil {
+ 			return fmt.Errorf("cannot Create client for the source region: %v", err)
+ 		}
+-		err = tf_client.ConfigureClientVar(&sourceObjectStorageClient.BaseClient)
++		err = tf_client.ConfigureClientForConfigurationProvider(*s.Client.ConfigurationProvider(), &sourceObjectStorageClient.BaseClient)
+ 		if err != nil {
+ 			return fmt.Errorf("cannot configure client for the source region: %v", err)
+ 		}
+diff --git a/internal/service/opensearch/opensearch_opensearch_cluster_resource.go b/internal/service/opensearch/opensearch_opensearch_cluster_resource.go
+index b7355d29..dd60a4f9 100644
+--- a/internal/service/opensearch/opensearch_opensearch_cluster_resource.go
++++ b/internal/service/opensearch/opensearch_opensearch_cluster_resource.go
+@@ -651,6 +651,7 @@ type OpensearchOpensearchClusterResourceCrud struct {
+ 	Client                 *oci_opensearch.OpensearchClusterClient
+ 	Res                    *oci_opensearch.OpensearchCluster
+ 	DisableNotFoundRetries bool
++	RetryPolicyOptionals   []interface{}
+ }
+ 
+ func (s *OpensearchOpensearchClusterResourceCrud) ID() string {
+@@ -1133,7 +1134,7 @@ func (s *OpensearchOpensearchClusterResourceCrud) Get() error {
+ 	tmp := s.D.Id()
+ 	request.OpensearchClusterId = &tmp
+ 
+-	request.RequestMetadata.RetryPolicy = tfresource.GetRetryPolicy(s.DisableNotFoundRetries, "opensearch")
++	request.RequestMetadata.RetryPolicy = tfresource.GetRetryPolicy(s.DisableNotFoundRetries, "opensearch", s.RetryPolicyOptionals...)
+ 
+ 	response, err := s.Client.GetOpensearchCluster(context.Background(), request)
+ 	if err != nil {
+@@ -1704,7 +1705,11 @@ func (s *OpensearchOpensearchClusterResourceCrud) UpgradeOpenSearchCluster() err
+ 	return s.getOpensearchClusterFromWorkRequest(workId, tfresource.GetRetryPolicy(s.DisableNotFoundRetries, "opensearch"), oci_opensearch.ActionTypeUpdated, s.D.Timeout(schema.TimeoutUpdate))
+ }
+ func (s *OpensearchOpensearchClusterResourceCrud) ResizeOpensearchClusterHorizontal() error {
+-	tfresource.ShortRetryTime = tfresource.LongRetryTime * 5
++	s.RetryPolicyOptionals = []interface{}{tfresource.GetShortRetryDurationFunction(tfresource.LongRetryTime * 5)}
++	defer func() {
++		s.RetryPolicyOptionals = nil
++	}()
++
+ 	request := oci_opensearch.ResizeOpensearchClusterHorizontalRequest{}
+ 
+ 	if dataNodeCount, ok := s.D.GetOkExists("data_node_count"); ok {
+@@ -1735,7 +1740,7 @@ func (s *OpensearchOpensearchClusterResourceCrud) ResizeOpensearchClusterHorizon
+ 		request.SearchNodeCount = &tmp
+ 	}
+ 
+-	request.RequestMetadata.RetryPolicy = tfresource.GetRetryPolicy(s.DisableNotFoundRetries, "opensearch")
++	request.RequestMetadata.RetryPolicy = tfresource.GetRetryPolicy(s.DisableNotFoundRetries, "opensearch", s.RetryPolicyOptionals...)
+ 
+ 	_, err := s.Client.ResizeOpensearchClusterHorizontal(context.Background(), request)
+ 	if err != nil {
+@@ -1750,7 +1755,11 @@ func (s *OpensearchOpensearchClusterResourceCrud) ResizeOpensearchClusterHorizon
+ }
+ 
+ func (s *OpensearchOpensearchClusterResourceCrud) ResizeOpensearchClusterVertical() error {
+-	tfresource.ShortRetryTime = tfresource.LongRetryTime * 5
++	s.RetryPolicyOptionals = []interface{}{tfresource.GetShortRetryDurationFunction(tfresource.LongRetryTime * 5)}
++	defer func() {
++		s.RetryPolicyOptionals = nil
++	}()
++
+ 	request := oci_opensearch.ResizeOpensearchClusterVerticalRequest{}
+ 
+ 	if dataNodeHostMemoryGB, ok := s.D.GetOkExists("data_node_host_memory_gb"); ok {
+@@ -1846,7 +1855,7 @@ func (s *OpensearchOpensearchClusterResourceCrud) ResizeOpensearchClusterVertica
+ 		request.SearchNodeStorageGB = &tmp
+ 	}
+ 
+-	request.RequestMetadata.RetryPolicy = tfresource.GetRetryPolicy(s.DisableNotFoundRetries, "opensearch")
++	request.RequestMetadata.RetryPolicy = tfresource.GetRetryPolicy(s.DisableNotFoundRetries, "opensearch", s.RetryPolicyOptionals...)
+ 
+ 	_, err := s.Client.ResizeOpensearchClusterVertical(context.Background(), request)
+ 	if err != nil {
+diff --git a/internal/service/psql/helpers_psql.go b/internal/service/psql/helpers_psql.go
+index 12adc53d..d951a6d4 100644
+--- a/internal/service/psql/helpers_psql.go
++++ b/internal/service/psql/helpers_psql.go
+@@ -13,7 +13,7 @@ func (s *PsqlBackupResourceCrud) createPsqlSourceRegionClient(region string) err
+ 		if err != nil {
+ 			return fmt.Errorf("cannot Create client for the source region: %v", err)
+ 		}
+-		err = tf_client.ConfigureClientVar(&sourcePsqlClient.BaseClient)
++		err = tf_client.ConfigureClientForConfigurationProvider(*s.Client.ConfigurationProvider(), &sourcePsqlClient.BaseClient)
+ 		if err != nil {
+ 			return fmt.Errorf("cannot configure client for the source region: %v", err)
+ 		}
+diff --git a/internal/tfresource/retry.go b/internal/tfresource/retry.go
+index 164ee6df..873f9182 100644
+--- a/internal/tfresource/retry.go
++++ b/internal/tfresource/retry.go
+@@ -285,7 +285,11 @@ func GetRetryMaxDurationConfigured(statusCode int) (time.Duration, bool) {
+ }
+ 
+ func GetDefaultExpectedRetryDuration(response oci_common.OCIOperationResponse, disableNotFoundRetries bool) time.Duration {
+-	defaultRetryTime := ShortRetryTime
++	return getDefaultExpectedRetryDuration(response, disableNotFoundRetries, ShortRetryTime, LongRetryTime, ConfiguredRetryDuration)
++}
++
++func getDefaultExpectedRetryDuration(response oci_common.OCIOperationResponse, disableNotFoundRetries bool, shortRetryTime, longRetryTime time.Duration, configuredRetryDuration *time.Duration) time.Duration {
++	defaultRetryTime := shortRetryTime
+ 
+ 	if IsNetworkError(response.Error) {
+ 		log.Printf("[DEBUG] Retrying for network error...")
+@@ -329,10 +333,10 @@ func GetDefaultExpectedRetryDuration(response oci_common.OCIOperationResponse, d
+ 		if ok {
+ 			return value
+ 		}
+-		if ConfiguredRetryDuration != nil {
+-			return *ConfiguredRetryDuration
++		if configuredRetryDuration != nil {
++			return *configuredRetryDuration
+ 		}
+-		defaultRetryTime = LongRetryTime
++		defaultRetryTime = longRetryTime
+ 	case 500:
+ 		if e != nil && (strings.Contains(e.Error(), "Out of host capacity")) {
+ 			return 0
+@@ -341,8 +345,8 @@ func GetDefaultExpectedRetryDuration(response oci_common.OCIOperationResponse, d
+ 		if ok {
+ 			return value
+ 		}
+-		if ConfiguredRetryDuration != nil {
+-			return *ConfiguredRetryDuration
++		if configuredRetryDuration != nil {
++			return *configuredRetryDuration
+ 		}
+ 	}
+ 
+@@ -354,6 +358,12 @@ func GetDefaultExpectedRetryDuration(response oci_common.OCIOperationResponse, d
+ 	return defaultRetryTime
+ }
+ 
++func GetShortRetryDurationFunction(shortRetryTime time.Duration) expectedRetryDurationFn {
++	return func(response oci_common.OCIOperationResponse, disableNotFoundRetries bool, service string, optionals ...interface{}) time.Duration {
++		return getDefaultExpectedRetryDuration(response, disableNotFoundRetries, shortRetryTime, LongRetryTime, ConfiguredRetryDuration)
++	}
++}
++
+ func isRetriableByEc(r oci_common.OCIOperationResponse) (bool, *time.Duration) {
+ 	if _, ok := isServiceErrorVar(r.Error); ok {
+ 		now := time.Now()
+diff --git a/oci/provider.go b/oci/provider.go
+new file mode 100644
+index 00000000..42866117
+--- /dev/null
++++ b/oci/provider.go
+@@ -0,0 +1,20 @@
++// Copyright (c) 2024, Oracle and/or its affiliates.
++// Licensed under the Mozilla Public License Version 2.0
++
++package oci
++
++import (
++	fwprovider "github.com/hashicorp/terraform-plugin-framework/provider"
++	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
++	internalprovider "github.com/oracle/terraform-provider-oci/internal/provider"
++)
++
++// Provider returns a fresh SDKv2 provider instance.
++func Provider() *schema.Provider {
++	return internalprovider.Provider()
++}
++
++// New returns a fresh Plugin Framework provider instance.
++func New() fwprovider.Provider {
++	return internalprovider.New()
++}
