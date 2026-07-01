@@ -64,22 +64,17 @@ type terraformResourceTyper interface {
 	GetTerraformResourceType() string
 }
 
-// TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
-// returns Terraform provider setup configuration.
-func TerraformSetupBuilder(version, providerSource, providerVersion string, opts ...SetupOption) upjetterraform.SetupFn {
+// TerraformSetupBuilder builds a terraform.SetupFn for in-process no-fork
+// connectors. Build-time Terraform values are intentionally not required at
+// runtime when all resources are routed through SDKv2 or Framework connectors.
+func TerraformSetupBuilder(opts ...SetupOption) upjetterraform.SetupFn {
 	options := setupOptions{}
 	for _, opt := range opts {
 		opt(&options)
 	}
 
 	return func(ctx context.Context, kube client.Client, mg resource.Managed) (upjetterraform.Setup, error) {
-		ps := upjetterraform.Setup{
-			Version: version,
-			Requirement: upjetterraform.ProviderRequirement{
-				Source:  providerSource,
-				Version: providerVersion,
-			},
-		}
+		ps := upjetterraform.Setup{}
 
 		pcSpec, err := resolveProviderConfig(ctx, kube, mg)
 		if err != nil {
