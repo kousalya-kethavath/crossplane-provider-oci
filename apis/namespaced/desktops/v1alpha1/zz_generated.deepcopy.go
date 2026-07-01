@@ -154,7 +154,7 @@ func (in *DesktopPoolInitParameters) DeepCopyInto(out *DesktopPoolInitParameters
 	}
 	if in.BootVolumeSizeInGbs != nil {
 		in, out := &in.BootVolumeSizeInGbs, &out.BootVolumeSizeInGbs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CompartmentID != nil {
@@ -179,18 +179,9 @@ func (in *DesktopPoolInitParameters) DeepCopyInto(out *DesktopPoolInitParameters
 	}
 	if in.DefinedTags != nil {
 		in, out := &in.DefinedTags, &out.DefinedTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.Description != nil {
@@ -212,18 +203,9 @@ func (in *DesktopPoolInitParameters) DeepCopyInto(out *DesktopPoolInitParameters
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.Image != nil {
@@ -240,7 +222,7 @@ func (in *DesktopPoolInitParameters) DeepCopyInto(out *DesktopPoolInitParameters
 	}
 	if in.MaximumSize != nil {
 		in, out := &in.MaximumSize, &out.MaximumSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NetworkConfiguration != nil {
@@ -289,7 +271,7 @@ func (in *DesktopPoolInitParameters) DeepCopyInto(out *DesktopPoolInitParameters
 	}
 	if in.StandbySize != nil {
 		in, out := &in.StandbySize, &out.StandbySize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StorageBackupPolicyID != nil {
@@ -299,7 +281,7 @@ func (in *DesktopPoolInitParameters) DeepCopyInto(out *DesktopPoolInitParameters
 	}
 	if in.StorageSizeInGbs != nil {
 		in, out := &in.StorageSizeInGbs, &out.StorageSizeInGbs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.TimeStartScheduled != nil {
@@ -366,7 +348,7 @@ func (in *DesktopPoolObservation) DeepCopyInto(out *DesktopPoolObservation) {
 	*out = *in
 	if in.ActiveDesktops != nil {
 		in, out := &in.ActiveDesktops, &out.ActiveDesktops
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ArePrivilegedUsers != nil {
@@ -393,7 +375,7 @@ func (in *DesktopPoolObservation) DeepCopyInto(out *DesktopPoolObservation) {
 	}
 	if in.BootVolumeSizeInGbs != nil {
 		in, out := &in.BootVolumeSizeInGbs, &out.BootVolumeSizeInGbs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CompartmentID != nil {
@@ -408,18 +390,9 @@ func (in *DesktopPoolObservation) DeepCopyInto(out *DesktopPoolObservation) {
 	}
 	if in.DefinedTags != nil {
 		in, out := &in.DefinedTags, &out.DefinedTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.Description != nil {
@@ -441,18 +414,9 @@ func (in *DesktopPoolObservation) DeepCopyInto(out *DesktopPoolObservation) {
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.ID != nil {
@@ -474,7 +438,7 @@ func (in *DesktopPoolObservation) DeepCopyInto(out *DesktopPoolObservation) {
 	}
 	if in.MaximumSize != nil {
 		in, out := &in.MaximumSize, &out.MaximumSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NetworkConfiguration != nil {
@@ -523,7 +487,7 @@ func (in *DesktopPoolObservation) DeepCopyInto(out *DesktopPoolObservation) {
 	}
 	if in.StandbySize != nil {
 		in, out := &in.StandbySize, &out.StandbySize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.State != nil {
@@ -538,7 +502,7 @@ func (in *DesktopPoolObservation) DeepCopyInto(out *DesktopPoolObservation) {
 	}
 	if in.StorageSizeInGbs != nil {
 		in, out := &in.StorageSizeInGbs, &out.StorageSizeInGbs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.TimeCreated != nil {
@@ -600,7 +564,7 @@ func (in *DesktopPoolParameters) DeepCopyInto(out *DesktopPoolParameters) {
 	}
 	if in.BootVolumeSizeInGbs != nil {
 		in, out := &in.BootVolumeSizeInGbs, &out.BootVolumeSizeInGbs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.CompartmentID != nil {
@@ -625,18 +589,9 @@ func (in *DesktopPoolParameters) DeepCopyInto(out *DesktopPoolParameters) {
 	}
 	if in.DefinedTags != nil {
 		in, out := &in.DefinedTags, &out.DefinedTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.Description != nil {
@@ -658,18 +613,9 @@ func (in *DesktopPoolParameters) DeepCopyInto(out *DesktopPoolParameters) {
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.Image != nil {
@@ -686,7 +632,7 @@ func (in *DesktopPoolParameters) DeepCopyInto(out *DesktopPoolParameters) {
 	}
 	if in.MaximumSize != nil {
 		in, out := &in.MaximumSize, &out.MaximumSize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NetworkConfiguration != nil {
@@ -735,7 +681,7 @@ func (in *DesktopPoolParameters) DeepCopyInto(out *DesktopPoolParameters) {
 	}
 	if in.StandbySize != nil {
 		in, out := &in.StandbySize, &out.StandbySize
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.StorageBackupPolicyID != nil {
@@ -745,7 +691,7 @@ func (in *DesktopPoolParameters) DeepCopyInto(out *DesktopPoolParameters) {
 	}
 	if in.StorageSizeInGbs != nil {
 		in, out := &in.StorageSizeInGbs, &out.StorageSizeInGbs
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.TimeStartScheduled != nil {
@@ -985,7 +931,7 @@ func (in *DisconnectInitParameters) DeepCopyInto(out *DisconnectInitParameters) 
 	}
 	if in.GracePeriodInMinutes != nil {
 		in, out := &in.GracePeriodInMinutes, &out.GracePeriodInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1010,7 +956,7 @@ func (in *DisconnectObservation) DeepCopyInto(out *DisconnectObservation) {
 	}
 	if in.GracePeriodInMinutes != nil {
 		in, out := &in.GracePeriodInMinutes, &out.GracePeriodInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1035,7 +981,7 @@ func (in *DisconnectParameters) DeepCopyInto(out *DisconnectParameters) {
 	}
 	if in.GracePeriodInMinutes != nil {
 		in, out := &in.GracePeriodInMinutes, &out.GracePeriodInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1170,7 +1116,7 @@ func (in *InactivityInitParameters) DeepCopyInto(out *InactivityInitParameters) 
 	}
 	if in.GracePeriodInMinutes != nil {
 		in, out := &in.GracePeriodInMinutes, &out.GracePeriodInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1195,7 +1141,7 @@ func (in *InactivityObservation) DeepCopyInto(out *InactivityObservation) {
 	}
 	if in.GracePeriodInMinutes != nil {
 		in, out := &in.GracePeriodInMinutes, &out.GracePeriodInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -1220,7 +1166,7 @@ func (in *InactivityParameters) DeepCopyInto(out *InactivityParameters) {
 	}
 	if in.GracePeriodInMinutes != nil {
 		in, out := &in.GracePeriodInMinutes, &out.GracePeriodInMinutes
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }

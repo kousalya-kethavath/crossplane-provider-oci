@@ -92,34 +92,16 @@ func (in *OperatorControlAssignmentInitParameters) DeepCopyInto(out *OperatorCon
 	}
 	if in.DefinedTags != nil {
 		in, out := &in.DefinedTags, &out.DefinedTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.IsAutoApproveDuringMaintenance != nil {
@@ -169,7 +151,7 @@ func (in *OperatorControlAssignmentInitParameters) DeepCopyInto(out *OperatorCon
 	}
 	if in.RemoteSyslogServerPort != nil {
 		in, out := &in.RemoteSyslogServerPort, &out.RemoteSyslogServerPort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ResourceCompartmentID != nil {
@@ -214,7 +196,7 @@ func (in *OperatorControlAssignmentInitParameters) DeepCopyInto(out *OperatorCon
 	}
 	if in.ValidateAssignmentTrigger != nil {
 		in, out := &in.ValidateAssignmentTrigger, &out.ValidateAssignmentTrigger
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -281,18 +263,9 @@ func (in *OperatorControlAssignmentObservation) DeepCopyInto(out *OperatorContro
 	}
 	if in.DefinedTags != nil {
 		in, out := &in.DefinedTags, &out.DefinedTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.DetachmentDescription != nil {
@@ -302,7 +275,7 @@ func (in *OperatorControlAssignmentObservation) DeepCopyInto(out *OperatorContro
 	}
 	if in.ErrorCode != nil {
 		in, out := &in.ErrorCode, &out.ErrorCode
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ErrorMessage != nil {
@@ -312,18 +285,9 @@ func (in *OperatorControlAssignmentObservation) DeepCopyInto(out *OperatorContro
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.ID != nil {
@@ -383,7 +347,7 @@ func (in *OperatorControlAssignmentObservation) DeepCopyInto(out *OperatorContro
 	}
 	if in.RemoteSyslogServerPort != nil {
 		in, out := &in.RemoteSyslogServerPort, &out.RemoteSyslogServerPort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ResourceCompartmentID != nil {
@@ -438,7 +402,7 @@ func (in *OperatorControlAssignmentObservation) DeepCopyInto(out *OperatorContro
 	}
 	if in.ValidateAssignmentTrigger != nil {
 		in, out := &in.ValidateAssignmentTrigger, &out.ValidateAssignmentTrigger
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -478,34 +442,16 @@ func (in *OperatorControlAssignmentParameters) DeepCopyInto(out *OperatorControl
 	}
 	if in.DefinedTags != nil {
 		in, out := &in.DefinedTags, &out.DefinedTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.IsAutoApproveDuringMaintenance != nil {
@@ -555,7 +501,7 @@ func (in *OperatorControlAssignmentParameters) DeepCopyInto(out *OperatorControl
 	}
 	if in.RemoteSyslogServerPort != nil {
 		in, out := &in.RemoteSyslogServerPort, &out.RemoteSyslogServerPort
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.ResourceCompartmentID != nil {
@@ -600,7 +546,7 @@ func (in *OperatorControlAssignmentParameters) DeepCopyInto(out *OperatorControl
 	}
 	if in.ValidateAssignmentTrigger != nil {
 		in, out := &in.ValidateAssignmentTrigger, &out.ValidateAssignmentTrigger
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 }
@@ -692,18 +638,9 @@ func (in *OperatorControlInitParameters) DeepCopyInto(out *OperatorControlInitPa
 	}
 	if in.DefinedTags != nil {
 		in, out := &in.DefinedTags, &out.DefinedTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.Description != nil {
@@ -724,18 +661,9 @@ func (in *OperatorControlInitParameters) DeepCopyInto(out *OperatorControlInitPa
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.IsFullyPreApproved != nil {
@@ -745,7 +673,7 @@ func (in *OperatorControlInitParameters) DeepCopyInto(out *OperatorControlInitPa
 	}
 	if in.NumberOfApprovers != nil {
 		in, out := &in.NumberOfApprovers, &out.NumberOfApprovers
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OperatorControlName != nil {
@@ -871,18 +799,9 @@ func (in *OperatorControlObservation) DeepCopyInto(out *OperatorControlObservati
 	}
 	if in.DefinedTags != nil {
 		in, out := &in.DefinedTags, &out.DefinedTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.Description != nil {
@@ -903,18 +822,9 @@ func (in *OperatorControlObservation) DeepCopyInto(out *OperatorControlObservati
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.ID != nil {
@@ -939,7 +849,7 @@ func (in *OperatorControlObservation) DeepCopyInto(out *OperatorControlObservati
 	}
 	if in.NumberOfApprovers != nil {
 		in, out := &in.NumberOfApprovers, &out.NumberOfApprovers
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OperatorControlName != nil {
@@ -1042,18 +952,9 @@ func (in *OperatorControlParameters) DeepCopyInto(out *OperatorControlParameters
 	}
 	if in.DefinedTags != nil {
 		in, out := &in.DefinedTags, &out.DefinedTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.Description != nil {
@@ -1074,18 +975,9 @@ func (in *OperatorControlParameters) DeepCopyInto(out *OperatorControlParameters
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.IsFullyPreApproved != nil {
@@ -1095,7 +987,7 @@ func (in *OperatorControlParameters) DeepCopyInto(out *OperatorControlParameters
 	}
 	if in.NumberOfApprovers != nil {
 		in, out := &in.NumberOfApprovers, &out.NumberOfApprovers
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OperatorControlName != nil {

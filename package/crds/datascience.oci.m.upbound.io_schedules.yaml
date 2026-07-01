@@ -85,7 +85,6 @@ spec:
                                         See Resource Tags. Example: {"Operations.CostCenter":
                                         "42"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                     displayName:
                                       description: (Applicable when http_action_type=CREATE_JOB_RUN)
                                         (Updatable) A user-friendly display name for
@@ -100,7 +99,6 @@ spec:
                                         predefined name, type, or namespace. See Resource
                                         Tags. Example: {"Department": "Finance"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                     jobConfigurationOverrideDetails:
                                       description: (Applicable when http_action_type=CREATE_JOB_RUN)
                                         (Updatable) The job configuration details
@@ -116,7 +114,6 @@ spec:
                                             description: (Updatable) Environment variables
                                               to set for the job.
                                             type: object
-                                            x-kubernetes-map-type: granular
                                           jobType:
                                             description: (Updatable) The type of job.
                                             type: string
@@ -573,7 +570,6 @@ spec:
                                             description: (Updatable) Environment variables
                                               to set for the job.
                                             type: object
-                                            x-kubernetes-map-type: granular
                                           maximumRuntimeInMinutes:
                                             description: (Updatable) A time bound
                                               for the execution of the job. Timer
@@ -593,7 +589,6 @@ spec:
                                         See Resource Tags. Example: {"Operations.CostCenter":
                                         "42"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                     displayName:
                                       description: (Applicable when http_action_type=CREATE_JOB_RUN)
                                         (Updatable) A user-friendly display name for
@@ -608,7 +603,6 @@ spec:
                                         predefined name, type, or namespace. See Resource
                                         Tags. Example: {"Department": "Finance"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                     logConfigurationOverrideDetails:
                                       description: (Applicable when http_action_type=CREATE_PIPELINE_RUN)
                                         (Updatable) The pipeline log configuration
@@ -1001,7 +995,6 @@ spec:
                                                   description: (Updatable) Environment
                                                     variables to set for the job.
                                                   type: object
-                                                  x-kubernetes-map-type: granular
                                                 maximumRuntimeInMinutes:
                                                   description: (Updatable) A time
                                                     bound for the execution of the
@@ -1077,7 +1070,6 @@ spec:
                                         Example: {"orcl-cloud.free-tier-retained":
                                         "true"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                   type: object
                                 type: array
                               httpActionType:
@@ -1380,7 +1372,6 @@ spec:
                       and scoped to a namespace. See Resource Tags. Example: {"Operations.CostCenter":
                       "42"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   description:
                     description: (Updatable) A short description of the schedule.
                     type: string
@@ -1396,7 +1387,6 @@ spec:
                       simple key-value pair with no predefined name, type, or namespace.
                       See Resource Tags. Example: {"Department": "Finance"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   logDetails:
                     description: (Updatable) Custom logging details for schedule execution.
                     items:
@@ -1673,7 +1663,8 @@ spec:
                           type: string
                         interval:
                           description: (Updatable) The interval of frequency.
-                          type: number
+                          format: int64
+                          type: integer
                         isRandomStartTime:
                           description: (Applicable when trigger_type=INTERVAL) (Updatable)
                             when true and timeStart is null, system generate a random
@@ -1739,7 +1730,6 @@ spec:
                                         See Resource Tags. Example: {"Operations.CostCenter":
                                         "42"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                     displayName:
                                       description: (Applicable when http_action_type=CREATE_JOB_RUN)
                                         (Updatable) A user-friendly display name for
@@ -1754,7 +1744,6 @@ spec:
                                         predefined name, type, or namespace. See Resource
                                         Tags. Example: {"Department": "Finance"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                     jobConfigurationOverrideDetails:
                                       description: (Applicable when http_action_type=CREATE_JOB_RUN)
                                         (Updatable) The job configuration details
@@ -1770,7 +1759,6 @@ spec:
                                             description: (Updatable) Environment variables
                                               to set for the job.
                                             type: object
-                                            x-kubernetes-map-type: granular
                                           jobType:
                                             description: (Updatable) The type of job.
                                             type: string
@@ -2227,7 +2215,6 @@ spec:
                                             description: (Updatable) Environment variables
                                               to set for the job.
                                             type: object
-                                            x-kubernetes-map-type: granular
                                           maximumRuntimeInMinutes:
                                             description: (Updatable) A time bound
                                               for the execution of the job. Timer
@@ -2247,7 +2234,6 @@ spec:
                                         See Resource Tags. Example: {"Operations.CostCenter":
                                         "42"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                     displayName:
                                       description: (Applicable when http_action_type=CREATE_JOB_RUN)
                                         (Updatable) A user-friendly display name for
@@ -2262,7 +2248,6 @@ spec:
                                         predefined name, type, or namespace. See Resource
                                         Tags. Example: {"Department": "Finance"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                     logConfigurationOverrideDetails:
                                       description: (Applicable when http_action_type=CREATE_PIPELINE_RUN)
                                         (Updatable) The pipeline log configuration
@@ -2655,7 +2640,6 @@ spec:
                                                   description: (Updatable) Environment
                                                     variables to set for the job.
                                                   type: object
-                                                  x-kubernetes-map-type: granular
                                                 maximumRuntimeInMinutes:
                                                   description: (Updatable) A time
                                                     bound for the execution of the
@@ -2731,7 +2715,6 @@ spec:
                                         Example: {"orcl-cloud.free-tier-retained":
                                         "true"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                   type: object
                                 type: array
                               httpActionType:
@@ -3034,7 +3017,6 @@ spec:
                       and scoped to a namespace. See Resource Tags. Example: {"Operations.CostCenter":
                       "42"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   description:
                     description: (Updatable) A short description of the schedule.
                     type: string
@@ -3050,7 +3032,6 @@ spec:
                       simple key-value pair with no predefined name, type, or namespace.
                       See Resource Tags. Example: {"Department": "Finance"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   logDetails:
                     description: (Updatable) Custom logging details for schedule execution.
                     items:
@@ -3327,7 +3308,8 @@ spec:
                           type: string
                         interval:
                           description: (Updatable) The interval of frequency.
-                          type: number
+                          format: int64
+                          type: integer
                         isRandomStartTime:
                           description: (Applicable when trigger_type=INTERVAL) (Updatable)
                             when true and timeStart is null, system generate a random
@@ -3458,7 +3440,6 @@ spec:
                                         See Resource Tags. Example: {"Operations.CostCenter":
                                         "42"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                     displayName:
                                       description: (Applicable when http_action_type=CREATE_JOB_RUN)
                                         (Updatable) A user-friendly display name for
@@ -3473,7 +3454,6 @@ spec:
                                         predefined name, type, or namespace. See Resource
                                         Tags. Example: {"Department": "Finance"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                     jobConfigurationOverrideDetails:
                                       description: (Applicable when http_action_type=CREATE_JOB_RUN)
                                         (Updatable) The job configuration details
@@ -3489,7 +3469,6 @@ spec:
                                             description: (Updatable) Environment variables
                                               to set for the job.
                                             type: object
-                                            x-kubernetes-map-type: granular
                                           jobType:
                                             description: (Updatable) The type of job.
                                             type: string
@@ -3612,7 +3591,6 @@ spec:
                                             description: (Updatable) Environment variables
                                               to set for the job.
                                             type: object
-                                            x-kubernetes-map-type: granular
                                           maximumRuntimeInMinutes:
                                             description: (Updatable) A time bound
                                               for the execution of the job. Timer
@@ -3632,7 +3610,6 @@ spec:
                                         See Resource Tags. Example: {"Operations.CostCenter":
                                         "42"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                     displayName:
                                       description: (Applicable when http_action_type=CREATE_JOB_RUN)
                                         (Updatable) A user-friendly display name for
@@ -3647,7 +3624,6 @@ spec:
                                         predefined name, type, or namespace. See Resource
                                         Tags. Example: {"Department": "Finance"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                     logConfigurationOverrideDetails:
                                       description: (Applicable when http_action_type=CREATE_PIPELINE_RUN)
                                         (Updatable) The pipeline log configuration
@@ -3706,7 +3682,6 @@ spec:
                                                   description: (Updatable) Environment
                                                     variables to set for the job.
                                                   type: object
-                                                  x-kubernetes-map-type: granular
                                                 maximumRuntimeInMinutes:
                                                   description: (Updatable) A time
                                                     bound for the execution of the
@@ -3782,7 +3757,6 @@ spec:
                                         Example: {"orcl-cloud.free-tier-retained":
                                         "true"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                   type: object
                                 type: array
                               httpActionType:
@@ -3841,7 +3815,6 @@ spec:
                       and scoped to a namespace. See Resource Tags. Example: {"Operations.CostCenter":
                       "42"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   description:
                     description: (Updatable) A short description of the schedule.
                     type: string
@@ -3857,7 +3830,6 @@ spec:
                       simple key-value pair with no predefined name, type, or namespace.
                       See Resource Tags. Example: {"Department": "Finance"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   id:
                     description: The OCID of the schedule.
                     type: string
@@ -3899,7 +3871,6 @@ spec:
                       are scoped to namespaces. Example: {"orcl-cloud.free-tier-retained":
                       "true"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   timeCreated:
                     description: 'The date and time the schedule was created. Format
                       is defined by RFC3339.           Example: 2022-08-05T01:02:29.600Z'
@@ -3929,7 +3900,8 @@ spec:
                           type: string
                         interval:
                           description: (Updatable) The interval of frequency.
-                          type: number
+                          format: int64
+                          type: integer
                         isRandomStartTime:
                           description: (Applicable when trigger_type=INTERVAL) (Updatable)
                             when true and timeStart is null, system generate a random

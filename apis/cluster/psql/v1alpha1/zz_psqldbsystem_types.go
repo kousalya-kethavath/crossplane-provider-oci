@@ -22,7 +22,7 @@ type BackupPolicyInitParameters struct {
 	CopyPolicy []CopyPolicyInitParameters `json:"copyPolicy,omitempty" tf:"copy_policy,omitempty"`
 
 	// (Updatable) Day of the month when the backup should start. To ensure that the backup runs monthly, the latest day of the month that you can use to schedule a backup is the the 28th day.
-	DaysOfTheMonth []*float64 `json:"daysOfTheMonth,omitempty" tf:"days_of_the_month,omitempty"`
+	DaysOfTheMonth []*int64 `json:"daysOfTheMonth,omitempty" tf:"days_of_the_month,omitempty"`
 
 	// (Updatable) The day of the week that the backup starts.
 	DaysOfTheWeek []*string `json:"daysOfTheWeek,omitempty" tf:"days_of_the_week,omitempty"`
@@ -31,7 +31,7 @@ type BackupPolicyInitParameters struct {
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// (Updatable) How many days the data should be stored after the database system deletion.
-	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+	RetentionDays *int64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 }
 
 type BackupPolicyObservation struct {
@@ -43,7 +43,7 @@ type BackupPolicyObservation struct {
 	CopyPolicy []CopyPolicyObservation `json:"copyPolicy,omitempty" tf:"copy_policy,omitempty"`
 
 	// (Updatable) Day of the month when the backup should start. To ensure that the backup runs monthly, the latest day of the month that you can use to schedule a backup is the the 28th day.
-	DaysOfTheMonth []*float64 `json:"daysOfTheMonth,omitempty" tf:"days_of_the_month,omitempty"`
+	DaysOfTheMonth []*int64 `json:"daysOfTheMonth,omitempty" tf:"days_of_the_month,omitempty"`
 
 	// (Updatable) The day of the week that the backup starts.
 	DaysOfTheWeek []*string `json:"daysOfTheWeek,omitempty" tf:"days_of_the_week,omitempty"`
@@ -52,7 +52,7 @@ type BackupPolicyObservation struct {
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// (Updatable) How many days the data should be stored after the database system deletion.
-	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+	RetentionDays *int64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 }
 
 type BackupPolicyParameters struct {
@@ -67,7 +67,7 @@ type BackupPolicyParameters struct {
 
 	// (Updatable) Day of the month when the backup should start. To ensure that the backup runs monthly, the latest day of the month that you can use to schedule a backup is the the 28th day.
 	// +kubebuilder:validation:Optional
-	DaysOfTheMonth []*float64 `json:"daysOfTheMonth,omitempty" tf:"days_of_the_month,omitempty"`
+	DaysOfTheMonth []*int64 `json:"daysOfTheMonth,omitempty" tf:"days_of_the_month,omitempty"`
 
 	// (Updatable) The day of the week that the backup starts.
 	// +kubebuilder:validation:Optional
@@ -79,7 +79,7 @@ type BackupPolicyParameters struct {
 
 	// (Updatable) How many days the data should be stored after the database system deletion.
 	// +kubebuilder:validation:Optional
-	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+	RetentionDays *int64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 }
 
 type CopyPolicyInitParameters struct {
@@ -91,7 +91,7 @@ type CopyPolicyInitParameters struct {
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
 	// (Updatable) Retention period in days of the backup copy.
-	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+	RetentionPeriod *int64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 }
 
 type CopyPolicyObservation struct {
@@ -103,7 +103,7 @@ type CopyPolicyObservation struct {
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
 	// (Updatable) Retention period in days of the backup copy.
-	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+	RetentionPeriod *int64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 }
 
 type CopyPolicyParameters struct {
@@ -118,7 +118,7 @@ type CopyPolicyParameters struct {
 
 	// (Updatable) Retention period in days of the backup copy.
 	// +kubebuilder:validation:Optional
-	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
+	RetentionPeriod *int64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 }
 
 type CredentialsInitParameters struct {
@@ -398,8 +398,7 @@ type PatchOperationsInitParameters struct {
 	Selection *string `json:"selection,omitempty" tf:"selection,omitempty"`
 
 	// Specify instance details such as displayName, description or privateIp. Example: {"displayName": "value"}.
-	// +mapType=granular
-	Value map[string]*string `json:"value,omitempty" tf:"value,omitempty"`
+	Value map[string]string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PatchOperationsObservation struct {
@@ -416,8 +415,7 @@ type PatchOperationsObservation struct {
 	Selection *string `json:"selection,omitempty" tf:"selection,omitempty"`
 
 	// Specify instance details such as displayName, description or privateIp. Example: {"displayName": "value"}.
-	// +mapType=granular
-	Value map[string]*string `json:"value,omitempty" tf:"value,omitempty"`
+	Value map[string]string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PatchOperationsParameters struct {
@@ -441,8 +439,7 @@ type PatchOperationsParameters struct {
 
 	// Specify instance details such as displayName, description or privateIp. Example: {"displayName": "value"}.
 	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	Value map[string]*string `json:"value,omitempty" tf:"value,omitempty"`
+	Value map[string]string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PsqlDbSystemInitParameters struct {
@@ -482,8 +479,7 @@ type PsqlDbSystemInitParameters struct {
 	DBVersion *string `json:"dbVersion,omitempty" tf:"db_version,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. Example: {"foo-namespace.bar-key": "value"}
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	// (Updatable) A user-provided description of a database system.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -492,17 +488,16 @@ type PsqlDbSystemInitParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// (Updatable) Simple key-value pair that is applied without any predefined name, type or scope. Exists for cross-compatibility only. Example: {"bar-key": "value"}
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// Count of database instances nodes to be created in the database system.
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// (Updatable) The total amount of memory available to each database instance node, in gigabytes.
-	InstanceMemorySizeInGbs *float64 `json:"instanceMemorySizeInGbs,omitempty" tf:"instance_memory_size_in_gbs,omitempty"`
+	InstanceMemorySizeInGbs *int64 `json:"instanceMemorySizeInGbs,omitempty" tf:"instance_memory_size_in_gbs,omitempty"`
 
 	// (Updatable) The total number of OCPUs available to each database instance node.
-	InstanceOcpuCount *float64 `json:"instanceOcpuCount,omitempty" tf:"instance_ocpu_count,omitempty"`
+	InstanceOcpuCount *int64 `json:"instanceOcpuCount,omitempty" tf:"instance_ocpu_count,omitempty"`
 
 	// Details of database instances nodes to be created. This parameter is optional. If specified, its size must match instanceCount.
 	InstancesDetails []InstancesDetailsInitParameters `json:"instancesDetails,omitempty" tf:"instances_details,omitempty"`
@@ -550,8 +545,7 @@ type PsqlDbSystemObservation struct {
 	DBVersion *string `json:"dbVersion,omitempty" tf:"db_version,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. Example: {"foo-namespace.bar-key": "value"}
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	// (Updatable) A user-provided description of a database system.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -560,20 +554,19 @@ type PsqlDbSystemObservation struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// (Updatable) Simple key-value pair that is applied without any predefined name, type or scope. Exists for cross-compatibility only. Example: {"bar-key": "value"}
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// A unique identifier for the database system. Immutable on creation.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Count of database instances nodes to be created in the database system.
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// (Updatable) The total amount of memory available to each database instance node, in gigabytes.
-	InstanceMemorySizeInGbs *float64 `json:"instanceMemorySizeInGbs,omitempty" tf:"instance_memory_size_in_gbs,omitempty"`
+	InstanceMemorySizeInGbs *int64 `json:"instanceMemorySizeInGbs,omitempty" tf:"instance_memory_size_in_gbs,omitempty"`
 
 	// (Updatable) The total number of OCPUs available to each database instance node.
-	InstanceOcpuCount *float64 `json:"instanceOcpuCount,omitempty" tf:"instance_ocpu_count,omitempty"`
+	InstanceOcpuCount *int64 `json:"instanceOcpuCount,omitempty" tf:"instance_ocpu_count,omitempty"`
 
 	// The list of instances, or nodes, in the database system.
 	Instances []InstancesObservation `json:"instances,omitempty" tf:"instances,omitempty"`
@@ -606,8 +599,7 @@ type PsqlDbSystemObservation struct {
 	StorageDetails []StorageDetailsObservation `json:"storageDetails,omitempty" tf:"storage_details,omitempty"`
 
 	// System tags for this resource. Each key is predefined and scoped to a namespace. Example: {"orcl-cloud.free-tier-retained": "true"}
-	// +mapType=granular
-	SystemTags map[string]*string `json:"systemTags,omitempty" tf:"system_tags,omitempty"`
+	SystemTags map[string]string `json:"systemTags,omitempty" tf:"system_tags,omitempty"`
 
 	// Type of the database system.
 	SystemType *string `json:"systemType,omitempty" tf:"system_type,omitempty"`
@@ -662,8 +654,7 @@ type PsqlDbSystemParameters struct {
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. Example: {"foo-namespace.bar-key": "value"}
 	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	// (Updatable) A user-provided description of a database system.
 	// +kubebuilder:validation:Optional
@@ -675,20 +666,19 @@ type PsqlDbSystemParameters struct {
 
 	// (Updatable) Simple key-value pair that is applied without any predefined name, type or scope. Exists for cross-compatibility only. Example: {"bar-key": "value"}
 	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// Count of database instances nodes to be created in the database system.
 	// +kubebuilder:validation:Optional
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *int64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// (Updatable) The total amount of memory available to each database instance node, in gigabytes.
 	// +kubebuilder:validation:Optional
-	InstanceMemorySizeInGbs *float64 `json:"instanceMemorySizeInGbs,omitempty" tf:"instance_memory_size_in_gbs,omitempty"`
+	InstanceMemorySizeInGbs *int64 `json:"instanceMemorySizeInGbs,omitempty" tf:"instance_memory_size_in_gbs,omitempty"`
 
 	// (Updatable) The total number of OCPUs available to each database instance node.
 	// +kubebuilder:validation:Optional
-	InstanceOcpuCount *float64 `json:"instanceOcpuCount,omitempty" tf:"instance_ocpu_count,omitempty"`
+	InstanceOcpuCount *int64 `json:"instanceOcpuCount,omitempty" tf:"instance_ocpu_count,omitempty"`
 
 	// Details of database instances nodes to be created. This parameter is optional. If specified, its size must match instanceCount.
 	// +kubebuilder:validation:Optional

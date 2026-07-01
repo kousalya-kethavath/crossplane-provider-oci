@@ -38,12 +38,10 @@ type BucketInitParameters struct {
 	CompartmentIDSelector *v1.NamespacedSelector `json:"compartmentIdSelector,omitempty" tf:"-"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags. Example: {"Department": "Finance"}
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// (Updatable) The OCID of a master encryption key used to call the Key Management service to generate a data encryption key or to encrypt or decrypt a data encryption key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/kms/v1alpha1.Key
@@ -59,8 +57,7 @@ type BucketInitParameters struct {
 	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
 	// (Updatable) Arbitrary string, up to 4KB, of keys and values for user-defined metadata.
-	// +mapType=granular
-	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name of the bucket. Valid characters are uppercase or lowercase letters, numbers, hyphens, underscores, and periods. Bucket names must be unique within an Object Storage namespace. Avoid entering confidential information. example: Example: my-new-bucket1
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -108,15 +105,13 @@ type BucketObservation struct {
 	CreatedBy *string `json:"createdBy,omitempty" tf:"created_by,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	// The entity tag (ETag) for the bucket.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
 	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags. Example: {"Department": "Finance"}
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -127,8 +122,7 @@ type BucketObservation struct {
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// (Updatable) Arbitrary string, up to 4KB, of keys and values for user-defined metadata.
-	// +mapType=granular
-	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name of the bucket. Valid characters are uppercase or lowercase letters, numbers, hyphens, underscores, and periods. Bucket names must be unique within an Object Storage namespace. Avoid entering confidential information. example: Example: my-new-bucket1
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -187,13 +181,11 @@ type BucketParameters struct {
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
 	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags. Example: {"Department": "Finance"}
 	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// (Updatable) The OCID of a master encryption key used to call the Key Management service to generate a data encryption key or to encrypt or decrypt a data encryption key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/kms/v1alpha1.Key
@@ -211,8 +203,7 @@ type BucketParameters struct {
 
 	// (Updatable) Arbitrary string, up to 4KB, of keys and values for user-defined metadata.
 	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name of the bucket. Valid characters are uppercase or lowercase letters, numbers, hyphens, underscores, and periods. Bucket names must be unique within an Object Storage namespace. Avoid entering confidential information. example: Example: my-new-bucket1
 	// +kubebuilder:validation:Optional

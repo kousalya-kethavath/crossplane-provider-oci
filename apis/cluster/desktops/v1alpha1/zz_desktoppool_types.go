@@ -57,7 +57,7 @@ type DesktopPoolInitParameters struct {
 	AvailabilityPolicy []AvailabilityPolicyInitParameters `json:"availabilityPolicy,omitempty" tf:"availability_policy,omitempty"`
 
 	// (Updatable) The size in GBs of the boot volume for the desktop pool.
-	BootVolumeSizeInGbs *float64 `json:"bootVolumeSizeInGbs,omitempty" tf:"boot_volume_size_in_gbs,omitempty"`
+	BootVolumeSizeInGbs *int64 `json:"bootVolumeSizeInGbs,omitempty" tf:"boot_volume_size_in_gbs,omitempty"`
 
 	// (Updatable) The OCID of the compartment which will contain the desktop pool.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/identity/v1alpha1.Compartment
@@ -75,8 +75,7 @@ type DesktopPoolInitParameters struct {
 	ContactDetails *string `json:"contactDetails,omitempty" tf:"contact_details,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	// (Updatable) A user friendly description providing additional information about the resource. Avoid entering confidential information.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -88,8 +87,7 @@ type DesktopPoolInitParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags. Example: {"Department": "Finance"}
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// (Updatable) Provides information about the desktop image.
 	Image []ImageInitParameters `json:"image,omitempty" tf:"image,omitempty"`
@@ -98,7 +96,7 @@ type DesktopPoolInitParameters struct {
 	IsStorageEnabled *bool `json:"isStorageEnabled,omitempty" tf:"is_storage_enabled,omitempty"`
 
 	// (Updatable) The maximum number of desktops permitted in the desktop pool.
-	MaximumSize *float64 `json:"maximumSize,omitempty" tf:"maximum_size,omitempty"`
+	MaximumSize *int64 `json:"maximumSize,omitempty" tf:"maximum_size,omitempty"`
 
 	// Provides information about the network configuration of the desktop pool.
 	NetworkConfiguration []NetworkConfigurationInitParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
@@ -120,13 +118,13 @@ type DesktopPoolInitParameters struct {
 	ShapeName *string `json:"shapeName,omitempty" tf:"shape_name,omitempty"`
 
 	// (Updatable) The maximum number of standby desktops available in the desktop pool.
-	StandbySize *float64 `json:"standbySize,omitempty" tf:"standby_size,omitempty"`
+	StandbySize *int64 `json:"standbySize,omitempty" tf:"standby_size,omitempty"`
 
 	// The backup policy OCID of the storage.
 	StorageBackupPolicyID *string `json:"storageBackupPolicyId,omitempty" tf:"storage_backup_policy_id,omitempty"`
 
 	// The size in GBs of the storage for the desktop pool.
-	StorageSizeInGbs *float64 `json:"storageSizeInGbs,omitempty" tf:"storage_size_in_gbs,omitempty"`
+	StorageSizeInGbs *int64 `json:"storageSizeInGbs,omitempty" tf:"storage_size_in_gbs,omitempty"`
 
 	// (Updatable) The start time of the desktop pool.
 	TimeStartScheduled *string `json:"timeStartScheduled,omitempty" tf:"time_start_scheduled,omitempty"`
@@ -141,7 +139,7 @@ type DesktopPoolInitParameters struct {
 type DesktopPoolObservation struct {
 
 	// The number of active desktops in the desktop pool.
-	ActiveDesktops *float64 `json:"activeDesktops,omitempty" tf:"active_desktops,omitempty"`
+	ActiveDesktops *int64 `json:"activeDesktops,omitempty" tf:"active_desktops,omitempty"`
 
 	// Indicates whether desktop pool users have administrative privileges on their desktop.
 	ArePrivilegedUsers *bool `json:"arePrivilegedUsers,omitempty" tf:"are_privileged_users,omitempty"`
@@ -156,7 +154,7 @@ type DesktopPoolObservation struct {
 	AvailabilityPolicy []AvailabilityPolicyObservation `json:"availabilityPolicy,omitempty" tf:"availability_policy,omitempty"`
 
 	// (Updatable) The size in GBs of the boot volume for the desktop pool.
-	BootVolumeSizeInGbs *float64 `json:"bootVolumeSizeInGbs,omitempty" tf:"boot_volume_size_in_gbs,omitempty"`
+	BootVolumeSizeInGbs *int64 `json:"bootVolumeSizeInGbs,omitempty" tf:"boot_volume_size_in_gbs,omitempty"`
 
 	// (Updatable) The OCID of the compartment which will contain the desktop pool.
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
@@ -165,8 +163,7 @@ type DesktopPoolObservation struct {
 	ContactDetails *string `json:"contactDetails,omitempty" tf:"contact_details,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	// (Updatable) A user friendly description providing additional information about the resource. Avoid entering confidential information.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -178,8 +175,7 @@ type DesktopPoolObservation struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags. Example: {"Department": "Finance"}
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// The OCID of the desktop pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -191,7 +187,7 @@ type DesktopPoolObservation struct {
 	IsStorageEnabled *bool `json:"isStorageEnabled,omitempty" tf:"is_storage_enabled,omitempty"`
 
 	// (Updatable) The maximum number of desktops permitted in the desktop pool.
-	MaximumSize *float64 `json:"maximumSize,omitempty" tf:"maximum_size,omitempty"`
+	MaximumSize *int64 `json:"maximumSize,omitempty" tf:"maximum_size,omitempty"`
 
 	// Provides information about the network configuration of the desktop pool.
 	NetworkConfiguration []NetworkConfigurationObservation `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
@@ -213,7 +209,7 @@ type DesktopPoolObservation struct {
 	ShapeName *string `json:"shapeName,omitempty" tf:"shape_name,omitempty"`
 
 	// (Updatable) The maximum number of standby desktops available in the desktop pool.
-	StandbySize *float64 `json:"standbySize,omitempty" tf:"standby_size,omitempty"`
+	StandbySize *int64 `json:"standbySize,omitempty" tf:"standby_size,omitempty"`
 
 	// The current state of the desktop pool.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -222,7 +218,7 @@ type DesktopPoolObservation struct {
 	StorageBackupPolicyID *string `json:"storageBackupPolicyId,omitempty" tf:"storage_backup_policy_id,omitempty"`
 
 	// The size in GBs of the storage for the desktop pool.
-	StorageSizeInGbs *float64 `json:"storageSizeInGbs,omitempty" tf:"storage_size_in_gbs,omitempty"`
+	StorageSizeInGbs *int64 `json:"storageSizeInGbs,omitempty" tf:"storage_size_in_gbs,omitempty"`
 
 	// The date and time the resource was created.
 	TimeCreated *string `json:"timeCreated,omitempty" tf:"time_created,omitempty"`
@@ -257,7 +253,7 @@ type DesktopPoolParameters struct {
 
 	// (Updatable) The size in GBs of the boot volume for the desktop pool.
 	// +kubebuilder:validation:Optional
-	BootVolumeSizeInGbs *float64 `json:"bootVolumeSizeInGbs,omitempty" tf:"boot_volume_size_in_gbs,omitempty"`
+	BootVolumeSizeInGbs *int64 `json:"bootVolumeSizeInGbs,omitempty" tf:"boot_volume_size_in_gbs,omitempty"`
 
 	// (Updatable) The OCID of the compartment which will contain the desktop pool.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/identity/v1alpha1.Compartment
@@ -278,8 +274,7 @@ type DesktopPoolParameters struct {
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
 	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	// (Updatable) A user friendly description providing additional information about the resource. Avoid entering confidential information.
 	// +kubebuilder:validation:Optional
@@ -295,8 +290,7 @@ type DesktopPoolParameters struct {
 
 	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags. Example: {"Department": "Finance"}
 	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// (Updatable) Provides information about the desktop image.
 	// +kubebuilder:validation:Optional
@@ -308,7 +302,7 @@ type DesktopPoolParameters struct {
 
 	// (Updatable) The maximum number of desktops permitted in the desktop pool.
 	// +kubebuilder:validation:Optional
-	MaximumSize *float64 `json:"maximumSize,omitempty" tf:"maximum_size,omitempty"`
+	MaximumSize *int64 `json:"maximumSize,omitempty" tf:"maximum_size,omitempty"`
 
 	// Provides information about the network configuration of the desktop pool.
 	// +kubebuilder:validation:Optional
@@ -337,7 +331,7 @@ type DesktopPoolParameters struct {
 
 	// (Updatable) The maximum number of standby desktops available in the desktop pool.
 	// +kubebuilder:validation:Optional
-	StandbySize *float64 `json:"standbySize,omitempty" tf:"standby_size,omitempty"`
+	StandbySize *int64 `json:"standbySize,omitempty" tf:"standby_size,omitempty"`
 
 	// The backup policy OCID of the storage.
 	// +kubebuilder:validation:Optional
@@ -345,7 +339,7 @@ type DesktopPoolParameters struct {
 
 	// The size in GBs of the storage for the desktop pool.
 	// +kubebuilder:validation:Optional
-	StorageSizeInGbs *float64 `json:"storageSizeInGbs,omitempty" tf:"storage_size_in_gbs,omitempty"`
+	StorageSizeInGbs *int64 `json:"storageSizeInGbs,omitempty" tf:"storage_size_in_gbs,omitempty"`
 
 	// (Updatable) The start time of the desktop pool.
 	// +kubebuilder:validation:Optional
@@ -455,7 +449,7 @@ type DisconnectInitParameters struct {
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// (Updatable) The period of time (in minutes) after disconnect before any action occurs. If the value is not provided, a default value is used.
-	GracePeriodInMinutes *float64 `json:"gracePeriodInMinutes,omitempty" tf:"grace_period_in_minutes,omitempty"`
+	GracePeriodInMinutes *int64 `json:"gracePeriodInMinutes,omitempty" tf:"grace_period_in_minutes,omitempty"`
 }
 
 type DisconnectObservation struct {
@@ -464,7 +458,7 @@ type DisconnectObservation struct {
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// (Updatable) The period of time (in minutes) after disconnect before any action occurs. If the value is not provided, a default value is used.
-	GracePeriodInMinutes *float64 `json:"gracePeriodInMinutes,omitempty" tf:"grace_period_in_minutes,omitempty"`
+	GracePeriodInMinutes *int64 `json:"gracePeriodInMinutes,omitempty" tf:"grace_period_in_minutes,omitempty"`
 }
 
 type DisconnectParameters struct {
@@ -475,7 +469,7 @@ type DisconnectParameters struct {
 
 	// (Updatable) The period of time (in minutes) after disconnect before any action occurs. If the value is not provided, a default value is used.
 	// +kubebuilder:validation:Optional
-	GracePeriodInMinutes *float64 `json:"gracePeriodInMinutes,omitempty" tf:"grace_period_in_minutes,omitempty"`
+	GracePeriodInMinutes *int64 `json:"gracePeriodInMinutes,omitempty" tf:"grace_period_in_minutes,omitempty"`
 }
 
 type ImageInitParameters struct {
@@ -543,7 +537,7 @@ type InactivityInitParameters struct {
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// (Updatable) The period of time (in minutes) after disconnect before any action occurs. If the value is not provided, a default value is used.
-	GracePeriodInMinutes *float64 `json:"gracePeriodInMinutes,omitempty" tf:"grace_period_in_minutes,omitempty"`
+	GracePeriodInMinutes *int64 `json:"gracePeriodInMinutes,omitempty" tf:"grace_period_in_minutes,omitempty"`
 }
 
 type InactivityObservation struct {
@@ -552,7 +546,7 @@ type InactivityObservation struct {
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// (Updatable) The period of time (in minutes) after disconnect before any action occurs. If the value is not provided, a default value is used.
-	GracePeriodInMinutes *float64 `json:"gracePeriodInMinutes,omitempty" tf:"grace_period_in_minutes,omitempty"`
+	GracePeriodInMinutes *int64 `json:"gracePeriodInMinutes,omitempty" tf:"grace_period_in_minutes,omitempty"`
 }
 
 type InactivityParameters struct {
@@ -563,7 +557,7 @@ type InactivityParameters struct {
 
 	// (Updatable) The period of time (in minutes) after disconnect before any action occurs. If the value is not provided, a default value is used.
 	// +kubebuilder:validation:Optional
-	GracePeriodInMinutes *float64 `json:"gracePeriodInMinutes,omitempty" tf:"grace_period_in_minutes,omitempty"`
+	GracePeriodInMinutes *int64 `json:"gracePeriodInMinutes,omitempty" tf:"grace_period_in_minutes,omitempty"`
 }
 
 type NetworkConfigurationInitParameters struct {

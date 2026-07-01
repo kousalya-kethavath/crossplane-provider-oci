@@ -163,12 +163,12 @@ func (in *LoadBalancerConfigInitParameters) DeepCopyInto(out *LoadBalancerConfig
 	*out = *in
 	if in.LoadBalancerMaxBandwidthInMbps != nil {
 		in, out := &in.LoadBalancerMaxBandwidthInMbps, &out.LoadBalancerMaxBandwidthInMbps
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBalancerMinBandwidthInMbps != nil {
 		in, out := &in.LoadBalancerMinBandwidthInMbps, &out.LoadBalancerMinBandwidthInMbps
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBalancerServiceType != nil {
@@ -193,12 +193,12 @@ func (in *LoadBalancerConfigObservation) DeepCopyInto(out *LoadBalancerConfigObs
 	*out = *in
 	if in.LoadBalancerMaxBandwidthInMbps != nil {
 		in, out := &in.LoadBalancerMaxBandwidthInMbps, &out.LoadBalancerMaxBandwidthInMbps
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBalancerMinBandwidthInMbps != nil {
 		in, out := &in.LoadBalancerMinBandwidthInMbps, &out.LoadBalancerMinBandwidthInMbps
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBalancerServiceType != nil {
@@ -223,12 +223,12 @@ func (in *LoadBalancerConfigParameters) DeepCopyInto(out *LoadBalancerConfigPara
 	*out = *in
 	if in.LoadBalancerMaxBandwidthInMbps != nil {
 		in, out := &in.LoadBalancerMaxBandwidthInMbps, &out.LoadBalancerMaxBandwidthInMbps
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBalancerMinBandwidthInMbps != nil {
 		in, out := &in.LoadBalancerMinBandwidthInMbps, &out.LoadBalancerMinBandwidthInMbps
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.LoadBalancerServiceType != nil {
@@ -395,12 +395,12 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 	}
 	if in.ConfigureOutboundClusterTrigger != nil {
 		in, out := &in.ConfigureOutboundClusterTrigger, &out.ConfigureOutboundClusterTrigger
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DataNodeCount != nil {
 		in, out := &in.DataNodeCount, &out.DataNodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DataNodeHostBareMetalShape != nil {
@@ -410,12 +410,12 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 	}
 	if in.DataNodeHostMemoryGb != nil {
 		in, out := &in.DataNodeHostMemoryGb, &out.DataNodeHostMemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DataNodeHostOcpuCount != nil {
 		in, out := &in.DataNodeHostOcpuCount, &out.DataNodeHostOcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DataNodeHostShape != nil {
@@ -430,23 +430,14 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 	}
 	if in.DataNodeStorageGb != nil {
 		in, out := &in.DataNodeStorageGb, &out.DataNodeStorageGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DefinedTags != nil {
 		in, out := &in.DefinedTags, &out.DefinedTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.DisplayName != nil {
@@ -456,18 +447,9 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.InboundClusterIds != nil {
@@ -490,17 +472,17 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 	}
 	if in.MLNodeCount != nil {
 		in, out := &in.MLNodeCount, &out.MLNodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MLNodeHostMemoryGb != nil {
 		in, out := &in.MLNodeHostMemoryGb, &out.MLNodeHostMemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MLNodeHostOcpuCount != nil {
 		in, out := &in.MLNodeHostOcpuCount, &out.MLNodeHostOcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MLNodeHostShape != nil {
@@ -515,7 +497,7 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 	}
 	if in.MLNodeStorageGb != nil {
 		in, out := &in.MLNodeStorageGb, &out.MLNodeStorageGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MaintenanceDetails != nil {
@@ -527,7 +509,7 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 	}
 	if in.MasterNodeCount != nil {
 		in, out := &in.MasterNodeCount, &out.MasterNodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MasterNodeHostBareMetalShape != nil {
@@ -537,12 +519,12 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 	}
 	if in.MasterNodeHostMemoryGb != nil {
 		in, out := &in.MasterNodeHostMemoryGb, &out.MasterNodeHostMemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MasterNodeHostOcpuCount != nil {
 		in, out := &in.MasterNodeHostOcpuCount, &out.MasterNodeHostOcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MasterNodeHostShape != nil {
@@ -562,17 +544,17 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 	}
 	if in.OpendashboardNodeCount != nil {
 		in, out := &in.OpendashboardNodeCount, &out.OpendashboardNodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OpendashboardNodeHostMemoryGb != nil {
 		in, out := &in.OpendashboardNodeHostMemoryGb, &out.OpendashboardNodeHostMemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OpendashboardNodeHostOcpuCount != nil {
 		in, out := &in.OpendashboardNodeHostOcpuCount, &out.OpendashboardNodeHostOcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OpendashboardNodeHostShape != nil {
@@ -600,17 +582,17 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 	}
 	if in.SearchNodeCount != nil {
 		in, out := &in.SearchNodeCount, &out.SearchNodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SearchNodeHostMemoryGb != nil {
 		in, out := &in.SearchNodeHostMemoryGb, &out.SearchNodeHostMemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SearchNodeHostOcpuCount != nil {
 		in, out := &in.SearchNodeHostOcpuCount, &out.SearchNodeHostOcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SearchNodeHostShape != nil {
@@ -625,23 +607,14 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 	}
 	if in.SearchNodeStorageGb != nil {
 		in, out := &in.SearchNodeStorageGb, &out.SearchNodeStorageGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SecurityAttributes != nil {
 		in, out := &in.SecurityAttributes, &out.SecurityAttributes
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.SecurityMasterUserName != nil {
@@ -713,23 +686,14 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 	}
 	if in.SystemTags != nil {
 		in, out := &in.SystemTags, &out.SystemTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.UpgradeMajorVersionTrigger != nil {
 		in, out := &in.UpgradeMajorVersionTrigger, &out.UpgradeMajorVersionTrigger
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.VcnCompartmentID != nil {
@@ -834,12 +798,12 @@ func (in *OpensearchClusterObservation) DeepCopyInto(out *OpensearchClusterObser
 	}
 	if in.ConfigureOutboundClusterTrigger != nil {
 		in, out := &in.ConfigureOutboundClusterTrigger, &out.ConfigureOutboundClusterTrigger
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DataNodeCount != nil {
 		in, out := &in.DataNodeCount, &out.DataNodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DataNodeHostBareMetalShape != nil {
@@ -849,12 +813,12 @@ func (in *OpensearchClusterObservation) DeepCopyInto(out *OpensearchClusterObser
 	}
 	if in.DataNodeHostMemoryGb != nil {
 		in, out := &in.DataNodeHostMemoryGb, &out.DataNodeHostMemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DataNodeHostOcpuCount != nil {
 		in, out := &in.DataNodeHostOcpuCount, &out.DataNodeHostOcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DataNodeHostShape != nil {
@@ -869,23 +833,14 @@ func (in *OpensearchClusterObservation) DeepCopyInto(out *OpensearchClusterObser
 	}
 	if in.DataNodeStorageGb != nil {
 		in, out := &in.DataNodeStorageGb, &out.DataNodeStorageGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DefinedTags != nil {
 		in, out := &in.DefinedTags, &out.DefinedTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.DisplayName != nil {
@@ -900,18 +855,9 @@ func (in *OpensearchClusterObservation) DeepCopyInto(out *OpensearchClusterObser
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.ID != nil {
@@ -944,17 +890,17 @@ func (in *OpensearchClusterObservation) DeepCopyInto(out *OpensearchClusterObser
 	}
 	if in.MLNodeCount != nil {
 		in, out := &in.MLNodeCount, &out.MLNodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MLNodeHostMemoryGb != nil {
 		in, out := &in.MLNodeHostMemoryGb, &out.MLNodeHostMemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MLNodeHostOcpuCount != nil {
 		in, out := &in.MLNodeHostOcpuCount, &out.MLNodeHostOcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MLNodeHostShape != nil {
@@ -969,7 +915,7 @@ func (in *OpensearchClusterObservation) DeepCopyInto(out *OpensearchClusterObser
 	}
 	if in.MLNodeStorageGb != nil {
 		in, out := &in.MLNodeStorageGb, &out.MLNodeStorageGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MaintenanceDetails != nil {
@@ -981,7 +927,7 @@ func (in *OpensearchClusterObservation) DeepCopyInto(out *OpensearchClusterObser
 	}
 	if in.MasterNodeCount != nil {
 		in, out := &in.MasterNodeCount, &out.MasterNodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MasterNodeHostBareMetalShape != nil {
@@ -991,12 +937,12 @@ func (in *OpensearchClusterObservation) DeepCopyInto(out *OpensearchClusterObser
 	}
 	if in.MasterNodeHostMemoryGb != nil {
 		in, out := &in.MasterNodeHostMemoryGb, &out.MasterNodeHostMemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MasterNodeHostOcpuCount != nil {
 		in, out := &in.MasterNodeHostOcpuCount, &out.MasterNodeHostOcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MasterNodeHostShape != nil {
@@ -1021,17 +967,17 @@ func (in *OpensearchClusterObservation) DeepCopyInto(out *OpensearchClusterObser
 	}
 	if in.OpendashboardNodeCount != nil {
 		in, out := &in.OpendashboardNodeCount, &out.OpendashboardNodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OpendashboardNodeHostMemoryGb != nil {
 		in, out := &in.OpendashboardNodeHostMemoryGb, &out.OpendashboardNodeHostMemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OpendashboardNodeHostOcpuCount != nil {
 		in, out := &in.OpendashboardNodeHostOcpuCount, &out.OpendashboardNodeHostOcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OpendashboardNodeHostShape != nil {
@@ -1081,17 +1027,17 @@ func (in *OpensearchClusterObservation) DeepCopyInto(out *OpensearchClusterObser
 	}
 	if in.SearchNodeCount != nil {
 		in, out := &in.SearchNodeCount, &out.SearchNodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SearchNodeHostMemoryGb != nil {
 		in, out := &in.SearchNodeHostMemoryGb, &out.SearchNodeHostMemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SearchNodeHostOcpuCount != nil {
 		in, out := &in.SearchNodeHostOcpuCount, &out.SearchNodeHostOcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SearchNodeHostShape != nil {
@@ -1106,23 +1052,14 @@ func (in *OpensearchClusterObservation) DeepCopyInto(out *OpensearchClusterObser
 	}
 	if in.SearchNodeStorageGb != nil {
 		in, out := &in.SearchNodeStorageGb, &out.SearchNodeStorageGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SecurityAttributes != nil {
 		in, out := &in.SecurityAttributes, &out.SecurityAttributes
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.SecurityMasterUserName != nil {
@@ -1164,18 +1101,9 @@ func (in *OpensearchClusterObservation) DeepCopyInto(out *OpensearchClusterObser
 	}
 	if in.SystemTags != nil {
 		in, out := &in.SystemTags, &out.SystemTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.TimeCreated != nil {
@@ -1195,12 +1123,12 @@ func (in *OpensearchClusterObservation) DeepCopyInto(out *OpensearchClusterObser
 	}
 	if in.TotalStorageGb != nil {
 		in, out := &in.TotalStorageGb, &out.TotalStorageGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.UpgradeMajorVersionTrigger != nil {
 		in, out := &in.UpgradeMajorVersionTrigger, &out.UpgradeMajorVersionTrigger
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.VcnCompartmentID != nil {
@@ -1252,12 +1180,12 @@ func (in *OpensearchClusterParameters) DeepCopyInto(out *OpensearchClusterParame
 	}
 	if in.ConfigureOutboundClusterTrigger != nil {
 		in, out := &in.ConfigureOutboundClusterTrigger, &out.ConfigureOutboundClusterTrigger
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DataNodeCount != nil {
 		in, out := &in.DataNodeCount, &out.DataNodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DataNodeHostBareMetalShape != nil {
@@ -1267,12 +1195,12 @@ func (in *OpensearchClusterParameters) DeepCopyInto(out *OpensearchClusterParame
 	}
 	if in.DataNodeHostMemoryGb != nil {
 		in, out := &in.DataNodeHostMemoryGb, &out.DataNodeHostMemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DataNodeHostOcpuCount != nil {
 		in, out := &in.DataNodeHostOcpuCount, &out.DataNodeHostOcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DataNodeHostShape != nil {
@@ -1287,23 +1215,14 @@ func (in *OpensearchClusterParameters) DeepCopyInto(out *OpensearchClusterParame
 	}
 	if in.DataNodeStorageGb != nil {
 		in, out := &in.DataNodeStorageGb, &out.DataNodeStorageGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.DefinedTags != nil {
 		in, out := &in.DefinedTags, &out.DefinedTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.DisplayName != nil {
@@ -1313,18 +1232,9 @@ func (in *OpensearchClusterParameters) DeepCopyInto(out *OpensearchClusterParame
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.InboundClusterIds != nil {
@@ -1347,17 +1257,17 @@ func (in *OpensearchClusterParameters) DeepCopyInto(out *OpensearchClusterParame
 	}
 	if in.MLNodeCount != nil {
 		in, out := &in.MLNodeCount, &out.MLNodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MLNodeHostMemoryGb != nil {
 		in, out := &in.MLNodeHostMemoryGb, &out.MLNodeHostMemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MLNodeHostOcpuCount != nil {
 		in, out := &in.MLNodeHostOcpuCount, &out.MLNodeHostOcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MLNodeHostShape != nil {
@@ -1372,7 +1282,7 @@ func (in *OpensearchClusterParameters) DeepCopyInto(out *OpensearchClusterParame
 	}
 	if in.MLNodeStorageGb != nil {
 		in, out := &in.MLNodeStorageGb, &out.MLNodeStorageGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MaintenanceDetails != nil {
@@ -1384,7 +1294,7 @@ func (in *OpensearchClusterParameters) DeepCopyInto(out *OpensearchClusterParame
 	}
 	if in.MasterNodeCount != nil {
 		in, out := &in.MasterNodeCount, &out.MasterNodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MasterNodeHostBareMetalShape != nil {
@@ -1394,12 +1304,12 @@ func (in *OpensearchClusterParameters) DeepCopyInto(out *OpensearchClusterParame
 	}
 	if in.MasterNodeHostMemoryGb != nil {
 		in, out := &in.MasterNodeHostMemoryGb, &out.MasterNodeHostMemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MasterNodeHostOcpuCount != nil {
 		in, out := &in.MasterNodeHostOcpuCount, &out.MasterNodeHostOcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.MasterNodeHostShape != nil {
@@ -1419,17 +1329,17 @@ func (in *OpensearchClusterParameters) DeepCopyInto(out *OpensearchClusterParame
 	}
 	if in.OpendashboardNodeCount != nil {
 		in, out := &in.OpendashboardNodeCount, &out.OpendashboardNodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OpendashboardNodeHostMemoryGb != nil {
 		in, out := &in.OpendashboardNodeHostMemoryGb, &out.OpendashboardNodeHostMemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OpendashboardNodeHostOcpuCount != nil {
 		in, out := &in.OpendashboardNodeHostOcpuCount, &out.OpendashboardNodeHostOcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OpendashboardNodeHostShape != nil {
@@ -1457,17 +1367,17 @@ func (in *OpensearchClusterParameters) DeepCopyInto(out *OpensearchClusterParame
 	}
 	if in.SearchNodeCount != nil {
 		in, out := &in.SearchNodeCount, &out.SearchNodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SearchNodeHostMemoryGb != nil {
 		in, out := &in.SearchNodeHostMemoryGb, &out.SearchNodeHostMemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SearchNodeHostOcpuCount != nil {
 		in, out := &in.SearchNodeHostOcpuCount, &out.SearchNodeHostOcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SearchNodeHostShape != nil {
@@ -1482,23 +1392,14 @@ func (in *OpensearchClusterParameters) DeepCopyInto(out *OpensearchClusterParame
 	}
 	if in.SearchNodeStorageGb != nil {
 		in, out := &in.SearchNodeStorageGb, &out.SearchNodeStorageGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.SecurityAttributes != nil {
 		in, out := &in.SecurityAttributes, &out.SecurityAttributes
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.SecurityMasterUserName != nil {
@@ -1570,23 +1471,14 @@ func (in *OpensearchClusterParameters) DeepCopyInto(out *OpensearchClusterParame
 	}
 	if in.SystemTags != nil {
 		in, out := &in.SystemTags, &out.SystemTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.UpgradeMajorVersionTrigger != nil {
 		in, out := &in.UpgradeMajorVersionTrigger, &out.UpgradeMajorVersionTrigger
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.VcnCompartmentID != nil {
@@ -1683,18 +1575,9 @@ func (in *OpensearchClusterPipelineInitParameters) DeepCopyInto(out *OpensearchC
 	}
 	if in.DefinedTags != nil {
 		in, out := &in.DefinedTags, &out.DefinedTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.DisplayName != nil {
@@ -1704,28 +1587,19 @@ func (in *OpensearchClusterPipelineInitParameters) DeepCopyInto(out *OpensearchC
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.MemoryGb != nil {
 		in, out := &in.MemoryGb, &out.MemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NodeCount != nil {
 		in, out := &in.NodeCount, &out.NodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NodeShape != nil {
@@ -1740,7 +1614,7 @@ func (in *OpensearchClusterPipelineInitParameters) DeepCopyInto(out *OpensearchC
 	}
 	if in.OcpuCount != nil {
 		in, out := &in.OcpuCount, &out.OcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OpcDryRun != nil {
@@ -1879,18 +1753,9 @@ func (in *OpensearchClusterPipelineObservation) DeepCopyInto(out *OpensearchClus
 	}
 	if in.DefinedTags != nil {
 		in, out := &in.DefinedTags, &out.DefinedTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.DisplayName != nil {
@@ -1900,18 +1765,9 @@ func (in *OpensearchClusterPipelineObservation) DeepCopyInto(out *OpensearchClus
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.ID != nil {
@@ -1921,12 +1777,12 @@ func (in *OpensearchClusterPipelineObservation) DeepCopyInto(out *OpensearchClus
 	}
 	if in.MemoryGb != nil {
 		in, out := &in.MemoryGb, &out.MemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NodeCount != nil {
 		in, out := &in.NodeCount, &out.NodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NodeShape != nil {
@@ -1941,7 +1797,7 @@ func (in *OpensearchClusterPipelineObservation) DeepCopyInto(out *OpensearchClus
 	}
 	if in.OcpuCount != nil {
 		in, out := &in.OcpuCount, &out.OcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OpcDryRun != nil {
@@ -1993,18 +1849,9 @@ func (in *OpensearchClusterPipelineObservation) DeepCopyInto(out *OpensearchClus
 	}
 	if in.SystemTags != nil {
 		in, out := &in.SystemTags, &out.SystemTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.TimeCreated != nil {
@@ -2064,18 +1911,9 @@ func (in *OpensearchClusterPipelineParameters) DeepCopyInto(out *OpensearchClust
 	}
 	if in.DefinedTags != nil {
 		in, out := &in.DefinedTags, &out.DefinedTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.DisplayName != nil {
@@ -2085,28 +1923,19 @@ func (in *OpensearchClusterPipelineParameters) DeepCopyInto(out *OpensearchClust
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]string, len(*in))
 		for key, val := range *in {
-			var outVal *string
-			if val == nil {
-				(*out)[key] = nil
-			} else {
-				inVal := (*in)[key]
-				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
-			}
-			(*out)[key] = outVal
+			(*out)[key] = val
 		}
 	}
 	if in.MemoryGb != nil {
 		in, out := &in.MemoryGb, &out.MemoryGb
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NodeCount != nil {
 		in, out := &in.NodeCount, &out.NodeCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.NodeShape != nil {
@@ -2121,7 +1950,7 @@ func (in *OpensearchClusterPipelineParameters) DeepCopyInto(out *OpensearchClust
 	}
 	if in.OcpuCount != nil {
 		in, out := &in.OcpuCount, &out.OcpuCount
-		*out = new(float64)
+		*out = new(int64)
 		**out = **in
 	}
 	if in.OpcDryRun != nil {
@@ -2647,11 +2476,7 @@ func (in *SecuritySAMLConfigInitParameters) DeepCopyInto(out *SecuritySAMLConfig
 		*out = new(string)
 		**out = **in
 	}
-	if in.IdpMetadataContent != nil {
-		in, out := &in.IdpMetadataContent, &out.IdpMetadataContent
-		*out = new(string)
-		**out = **in
-	}
+	in.IdpMetadataContentSecretRef.DeepCopyInto(&out.IdpMetadataContentSecretRef)
 	if in.IsEnabled != nil {
 		in, out := &in.IsEnabled, &out.IsEnabled
 		*out = new(bool)
@@ -2694,11 +2519,6 @@ func (in *SecuritySAMLConfigObservation) DeepCopyInto(out *SecuritySAMLConfigObs
 	}
 	if in.IdpEntityID != nil {
 		in, out := &in.IdpEntityID, &out.IdpEntityID
-		*out = new(string)
-		**out = **in
-	}
-	if in.IdpMetadataContent != nil {
-		in, out := &in.IdpMetadataContent, &out.IdpMetadataContent
 		*out = new(string)
 		**out = **in
 	}
@@ -2747,11 +2567,7 @@ func (in *SecuritySAMLConfigParameters) DeepCopyInto(out *SecuritySAMLConfigPara
 		*out = new(string)
 		**out = **in
 	}
-	if in.IdpMetadataContent != nil {
-		in, out := &in.IdpMetadataContent, &out.IdpMetadataContent
-		*out = new(string)
-		**out = **in
-	}
+	in.IdpMetadataContentSecretRef.DeepCopyInto(&out.IdpMetadataContentSecretRef)
 	if in.IsEnabled != nil {
 		in, out := &in.IsEnabled, &out.IsEnabled
 		*out = new(bool)

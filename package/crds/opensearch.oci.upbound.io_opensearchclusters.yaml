@@ -335,22 +335,26 @@ spec:
                     description: (Updatable) An optional property when incremented
                       triggers Configure Outbound Cluster. Could be set to any integer
                       value.
-                    type: number
+                    format: int64
+                    type: integer
                   dataNodeCount:
                     description: (Updatable) The number of data nodes to configure
                       for the cluster.
-                    type: number
+                    format: int64
+                    type: integer
                   dataNodeHostBareMetalShape:
                     description: The bare metal shape for the cluster's data nodes.
                     type: string
                   dataNodeHostMemoryGb:
                     description: (Updatable) The amount of memory in GB, to configure
                       per node for the cluster's data nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   dataNodeHostOcpuCount:
                     description: (Updatable) The number of OCPUs to configure for
                       the cluster's data nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   dataNodeHostShape:
                     description: (Updatable) The node shape for the cluster's data
                       nodes.
@@ -361,7 +365,8 @@ spec:
                   dataNodeStorageGb:
                     description: (Updatable) The amount of storage in GB, to configure
                       per node for the cluster's data nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   definedTags:
                     additionalProperties:
                       type: string
@@ -369,7 +374,6 @@ spec:
                       key is predefined and scoped to a namespace. Example: {"foo-namespace.bar-key":
                       "value"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   displayName:
                     description: (Updatable) The name of the cluster. Avoid entering
                       confidential information.
@@ -381,7 +385,6 @@ spec:
                       without any predefined name, type or scope. Exists for cross-compatibility
                       only. Example: {"bar-key": "value"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   inboundClusterIds:
                     description: List of inbound clusters that will be queried using
                       cross cluster search
@@ -398,12 +401,14 @@ spec:
                           description: (Updatable) Maximum bandwidth (Mbps) of OpenSearch
                             load balancer. Not applicable for network load balancer
                             service.
-                          type: number
+                          format: int64
+                          type: integer
                         loadBalancerMinBandwidthInMbps:
                           description: (Updatable) Minimum bandwidth (Mbps) of OpenSearch
                             load balancer. Not applicable for network load balancer
                             service.
-                          type: number
+                          format: int64
+                          type: integer
                         loadBalancerServiceType:
                           description: (Updatable) Load balancer service for OpenSearch
                             and OpenDashboard load balancer. Default value is LOAD_BALANCER.
@@ -425,18 +430,21 @@ spec:
                   masterNodeCount:
                     description: (Updatable) The number of master nodes to configure
                       for the cluster.
-                    type: number
+                    format: int64
+                    type: integer
                   masterNodeHostBareMetalShape:
                     description: The bare metal shape for the cluster's master nodes.
                     type: string
                   masterNodeHostMemoryGb:
                     description: (Updatable) The amount of memory in GB, to configure
                       per node for the cluster's master nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   masterNodeHostOcpuCount:
                     description: (Updatable) The number of OCPUs to configure for
                       the cluser's master nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   masterNodeHostShape:
                     description: (Updatable) The node shape for the cluster's master
                       nodes.
@@ -447,15 +455,18 @@ spec:
                   mlNodeCount:
                     description: (Updatable) The number of ML nodes configured for
                       the cluster.
-                    type: number
+                    format: int64
+                    type: integer
                   mlNodeHostMemoryGb:
                     description: (Updatable) The amount of memory in GB, for the cluster's
                       ML nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   mlNodeHostOcpuCount:
                     description: (Updatable) The number of OCPUs configured for the
                       cluster's ML nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   mlNodeHostShape:
                     description: (Updatable) The node shape for the cluster's ML nodes.
                     type: string
@@ -465,7 +476,8 @@ spec:
                   mlNodeStorageGb:
                     description: (Updatable) The amount of storage in GB, to configure
                       per node for the cluster's ML nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   nsgId:
                     description: The OCID of the NSG where the private endpoint vnic
                       will be attached.
@@ -473,15 +485,18 @@ spec:
                   opendashboardNodeCount:
                     description: (Updatable) The number of OpenSearch Dashboard nodes
                       to configure for the cluster.
-                    type: number
+                    format: int64
+                    type: integer
                   opendashboardNodeHostMemoryGb:
                     description: (Updatable) The amount of memory in GB, to configure
                       for the cluster's OpenSearch Dashboard nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   opendashboardNodeHostOcpuCount:
                     description: (Updatable) The number of OCPUs to configure for
                       the cluster's OpenSearch Dashboard nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   opendashboardNodeHostShape:
                     description: (Updatable) The node shape for the cluster's OpenSearch
                       Dashboard nodes.
@@ -616,15 +631,18 @@ spec:
                   searchNodeCount:
                     description: (Updatable) The number of search nodes configured
                       for the cluster.
-                    type: number
+                    format: int64
+                    type: integer
                   searchNodeHostMemoryGb:
                     description: (Updatable) The amount of memory in GB, for the cluster's
                       search nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   searchNodeHostOcpuCount:
                     description: (Updatable) The number of OCPUs configured for the
                       cluster's search nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   searchNodeHostShape:
                     description: (Updatable) The node shape for the cluster's search
                       nodes.
@@ -635,7 +653,8 @@ spec:
                   searchNodeStorageGb:
                     description: (Updatable) The amount of storage in GB, to configure
                       per node for the cluster's search nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   securityAttributes:
                     additionalProperties:
                       type: string
@@ -644,7 +663,6 @@ spec:
                       see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount":
                       {"value": "42", "mode": "enforce"}}}'
                     type: object
-                    x-kubernetes-map-type: granular
                   securityMasterUserName:
                     description: (Updatable) The name of the master user that are
                       used to manage security config
@@ -756,9 +774,23 @@ spec:
                         idpEntityId:
                           description: The unique name for a identity provider entity
                           type: string
-                        idpMetadataContent:
+                        idpMetadataContentSecretRef:
                           description: The content of identity provider metadata
-                          type: string
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         isEnabled:
                           description: (Updatable) Flag to indicate whether outbound
                             cluster configuration is enabled
@@ -944,13 +976,13 @@ spec:
                       are scoped to namespaces. Example: {"orcl-cloud.free-tier-retained":
                       "true"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   upgradeMajorVersionTrigger:
                     description: An optional property to upgrade the major version
                       of the cluster. This workflow upgrades the cluster without creating
                       a clone. If you want to create a clone and upgrade the clone
                       for testing please use SDK or CLI.
-                    type: number
+                    format: int64
+                    type: integer
                   vcnCompartmentId:
                     description: The OCID for the compartment where the cluster's
                       VCN is located.
@@ -1383,22 +1415,26 @@ spec:
                     description: (Updatable) An optional property when incremented
                       triggers Configure Outbound Cluster. Could be set to any integer
                       value.
-                    type: number
+                    format: int64
+                    type: integer
                   dataNodeCount:
                     description: (Updatable) The number of data nodes to configure
                       for the cluster.
-                    type: number
+                    format: int64
+                    type: integer
                   dataNodeHostBareMetalShape:
                     description: The bare metal shape for the cluster's data nodes.
                     type: string
                   dataNodeHostMemoryGb:
                     description: (Updatable) The amount of memory in GB, to configure
                       per node for the cluster's data nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   dataNodeHostOcpuCount:
                     description: (Updatable) The number of OCPUs to configure for
                       the cluster's data nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   dataNodeHostShape:
                     description: (Updatable) The node shape for the cluster's data
                       nodes.
@@ -1409,7 +1445,8 @@ spec:
                   dataNodeStorageGb:
                     description: (Updatable) The amount of storage in GB, to configure
                       per node for the cluster's data nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   definedTags:
                     additionalProperties:
                       type: string
@@ -1417,7 +1454,6 @@ spec:
                       key is predefined and scoped to a namespace. Example: {"foo-namespace.bar-key":
                       "value"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   displayName:
                     description: (Updatable) The name of the cluster. Avoid entering
                       confidential information.
@@ -1429,7 +1465,6 @@ spec:
                       without any predefined name, type or scope. Exists for cross-compatibility
                       only. Example: {"bar-key": "value"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   inboundClusterIds:
                     description: List of inbound clusters that will be queried using
                       cross cluster search
@@ -1446,12 +1481,14 @@ spec:
                           description: (Updatable) Maximum bandwidth (Mbps) of OpenSearch
                             load balancer. Not applicable for network load balancer
                             service.
-                          type: number
+                          format: int64
+                          type: integer
                         loadBalancerMinBandwidthInMbps:
                           description: (Updatable) Minimum bandwidth (Mbps) of OpenSearch
                             load balancer. Not applicable for network load balancer
                             service.
-                          type: number
+                          format: int64
+                          type: integer
                         loadBalancerServiceType:
                           description: (Updatable) Load balancer service for OpenSearch
                             and OpenDashboard load balancer. Default value is LOAD_BALANCER.
@@ -1473,18 +1510,21 @@ spec:
                   masterNodeCount:
                     description: (Updatable) The number of master nodes to configure
                       for the cluster.
-                    type: number
+                    format: int64
+                    type: integer
                   masterNodeHostBareMetalShape:
                     description: The bare metal shape for the cluster's master nodes.
                     type: string
                   masterNodeHostMemoryGb:
                     description: (Updatable) The amount of memory in GB, to configure
                       per node for the cluster's master nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   masterNodeHostOcpuCount:
                     description: (Updatable) The number of OCPUs to configure for
                       the cluser's master nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   masterNodeHostShape:
                     description: (Updatable) The node shape for the cluster's master
                       nodes.
@@ -1495,15 +1535,18 @@ spec:
                   mlNodeCount:
                     description: (Updatable) The number of ML nodes configured for
                       the cluster.
-                    type: number
+                    format: int64
+                    type: integer
                   mlNodeHostMemoryGb:
                     description: (Updatable) The amount of memory in GB, for the cluster's
                       ML nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   mlNodeHostOcpuCount:
                     description: (Updatable) The number of OCPUs configured for the
                       cluster's ML nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   mlNodeHostShape:
                     description: (Updatable) The node shape for the cluster's ML nodes.
                     type: string
@@ -1513,7 +1556,8 @@ spec:
                   mlNodeStorageGb:
                     description: (Updatable) The amount of storage in GB, to configure
                       per node for the cluster's ML nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   nsgId:
                     description: The OCID of the NSG where the private endpoint vnic
                       will be attached.
@@ -1521,15 +1565,18 @@ spec:
                   opendashboardNodeCount:
                     description: (Updatable) The number of OpenSearch Dashboard nodes
                       to configure for the cluster.
-                    type: number
+                    format: int64
+                    type: integer
                   opendashboardNodeHostMemoryGb:
                     description: (Updatable) The amount of memory in GB, to configure
                       for the cluster's OpenSearch Dashboard nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   opendashboardNodeHostOcpuCount:
                     description: (Updatable) The number of OCPUs to configure for
                       the cluster's OpenSearch Dashboard nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   opendashboardNodeHostShape:
                     description: (Updatable) The node shape for the cluster's OpenSearch
                       Dashboard nodes.
@@ -1664,15 +1711,18 @@ spec:
                   searchNodeCount:
                     description: (Updatable) The number of search nodes configured
                       for the cluster.
-                    type: number
+                    format: int64
+                    type: integer
                   searchNodeHostMemoryGb:
                     description: (Updatable) The amount of memory in GB, for the cluster's
                       search nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   searchNodeHostOcpuCount:
                     description: (Updatable) The number of OCPUs configured for the
                       cluster's search nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   searchNodeHostShape:
                     description: (Updatable) The node shape for the cluster's search
                       nodes.
@@ -1683,7 +1733,8 @@ spec:
                   searchNodeStorageGb:
                     description: (Updatable) The amount of storage in GB, to configure
                       per node for the cluster's search nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   securityAttributes:
                     additionalProperties:
                       type: string
@@ -1692,7 +1743,6 @@ spec:
                       see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount":
                       {"value": "42", "mode": "enforce"}}}'
                     type: object
-                    x-kubernetes-map-type: granular
                   securityMasterUserName:
                     description: (Updatable) The name of the master user that are
                       used to manage security config
@@ -1804,9 +1854,23 @@ spec:
                         idpEntityId:
                           description: The unique name for a identity provider entity
                           type: string
-                        idpMetadataContent:
+                        idpMetadataContentSecretRef:
                           description: The content of identity provider metadata
-                          type: string
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         isEnabled:
                           description: (Updatable) Flag to indicate whether outbound
                             cluster configuration is enabled
@@ -1822,6 +1886,8 @@ spec:
                           description: The subject key is used to get username from
                             SAML assertion. By default, it is NameID
                           type: string
+                      required:
+                      - idpMetadataContentSecretRef
                       type: object
                     type: array
                   softwareVersion:
@@ -1992,13 +2058,13 @@ spec:
                       are scoped to namespaces. Example: {"orcl-cloud.free-tier-retained":
                       "true"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   upgradeMajorVersionTrigger:
                     description: An optional property to upgrade the major version
                       of the cluster. This workflow upgrades the cluster without creating
                       a clone. If you want to create a clone and upgrade the clone
                       for testing please use SDK or CLI.
-                    type: number
+                    format: int64
+                    type: integer
                   vcnCompartmentId:
                     description: The OCID for the compartment where the cluster's
                       VCN is located.
@@ -2348,22 +2414,26 @@ spec:
                     description: (Updatable) An optional property when incremented
                       triggers Configure Outbound Cluster. Could be set to any integer
                       value.
-                    type: number
+                    format: int64
+                    type: integer
                   dataNodeCount:
                     description: (Updatable) The number of data nodes to configure
                       for the cluster.
-                    type: number
+                    format: int64
+                    type: integer
                   dataNodeHostBareMetalShape:
                     description: The bare metal shape for the cluster's data nodes.
                     type: string
                   dataNodeHostMemoryGb:
                     description: (Updatable) The amount of memory in GB, to configure
                       per node for the cluster's data nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   dataNodeHostOcpuCount:
                     description: (Updatable) The number of OCPUs to configure for
                       the cluster's data nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   dataNodeHostShape:
                     description: (Updatable) The node shape for the cluster's data
                       nodes.
@@ -2374,7 +2444,8 @@ spec:
                   dataNodeStorageGb:
                     description: (Updatable) The amount of storage in GB, to configure
                       per node for the cluster's data nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   definedTags:
                     additionalProperties:
                       type: string
@@ -2382,7 +2453,6 @@ spec:
                       key is predefined and scoped to a namespace. Example: {"foo-namespace.bar-key":
                       "value"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   displayName:
                     description: (Updatable) The name of the cluster. Avoid entering
                       confidential information.
@@ -2398,7 +2468,6 @@ spec:
                       without any predefined name, type or scope. Exists for cross-compatibility
                       only. Example: {"bar-key": "value"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   id:
                     description: The OCID of the cluster.
                     type: string
@@ -2422,12 +2491,14 @@ spec:
                           description: (Updatable) Maximum bandwidth (Mbps) of OpenSearch
                             load balancer. Not applicable for network load balancer
                             service.
-                          type: number
+                          format: int64
+                          type: integer
                         loadBalancerMinBandwidthInMbps:
                           description: (Updatable) Minimum bandwidth (Mbps) of OpenSearch
                             load balancer. Not applicable for network load balancer
                             service.
-                          type: number
+                          format: int64
+                          type: integer
                         loadBalancerServiceType:
                           description: (Updatable) Load balancer service for OpenSearch
                             and OpenDashboard load balancer. Default value is LOAD_BALANCER.
@@ -2458,18 +2529,21 @@ spec:
                   masterNodeCount:
                     description: (Updatable) The number of master nodes to configure
                       for the cluster.
-                    type: number
+                    format: int64
+                    type: integer
                   masterNodeHostBareMetalShape:
                     description: The bare metal shape for the cluster's master nodes.
                     type: string
                   masterNodeHostMemoryGb:
                     description: (Updatable) The amount of memory in GB, to configure
                       per node for the cluster's master nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   masterNodeHostOcpuCount:
                     description: (Updatable) The number of OCPUs to configure for
                       the cluser's master nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   masterNodeHostShape:
                     description: (Updatable) The node shape for the cluster's master
                       nodes.
@@ -2480,15 +2554,18 @@ spec:
                   mlNodeCount:
                     description: (Updatable) The number of ML nodes configured for
                       the cluster.
-                    type: number
+                    format: int64
+                    type: integer
                   mlNodeHostMemoryGb:
                     description: (Updatable) The amount of memory in GB, for the cluster's
                       ML nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   mlNodeHostOcpuCount:
                     description: (Updatable) The number of OCPUs configured for the
                       cluster's ML nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   mlNodeHostShape:
                     description: (Updatable) The node shape for the cluster's ML nodes.
                     type: string
@@ -2498,7 +2575,8 @@ spec:
                   mlNodeStorageGb:
                     description: (Updatable) The amount of storage in GB, to configure
                       per node for the cluster's ML nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   nsgId:
                     description: The OCID of the NSG where the private endpoint vnic
                       will be attached.
@@ -2510,15 +2588,18 @@ spec:
                   opendashboardNodeCount:
                     description: (Updatable) The number of OpenSearch Dashboard nodes
                       to configure for the cluster.
-                    type: number
+                    format: int64
+                    type: integer
                   opendashboardNodeHostMemoryGb:
                     description: (Updatable) The amount of memory in GB, to configure
                       for the cluster's OpenSearch Dashboard nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   opendashboardNodeHostOcpuCount:
                     description: (Updatable) The number of OCPUs to configure for
                       the cluster's OpenSearch Dashboard nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   opendashboardNodeHostShape:
                     description: (Updatable) The node shape for the cluster's OpenSearch
                       Dashboard nodes.
@@ -2602,15 +2683,18 @@ spec:
                   searchNodeCount:
                     description: (Updatable) The number of search nodes configured
                       for the cluster.
-                    type: number
+                    format: int64
+                    type: integer
                   searchNodeHostMemoryGb:
                     description: (Updatable) The amount of memory in GB, for the cluster's
                       search nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   searchNodeHostOcpuCount:
                     description: (Updatable) The number of OCPUs configured for the
                       cluster's search nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   searchNodeHostShape:
                     description: (Updatable) The node shape for the cluster's search
                       nodes.
@@ -2621,7 +2705,8 @@ spec:
                   searchNodeStorageGb:
                     description: (Updatable) The amount of storage in GB, to configure
                       per node for the cluster's search nodes.
-                    type: number
+                    format: int64
+                    type: integer
                   securityAttributes:
                     additionalProperties:
                       type: string
@@ -2630,7 +2715,6 @@ spec:
                       see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount":
                       {"value": "42", "mode": "enforce"}}}'
                     type: object
-                    x-kubernetes-map-type: granular
                   securityMasterUserName:
                     description: (Updatable) The name of the master user that are
                       used to manage security config
@@ -2649,9 +2733,6 @@ spec:
                           type: string
                         idpEntityId:
                           description: The unique name for a identity provider entity
-                          type: string
-                        idpMetadataContent:
-                          description: The content of identity provider metadata
                           type: string
                         isEnabled:
                           description: (Updatable) Flag to indicate whether outbound
@@ -2691,7 +2772,6 @@ spec:
                       are scoped to namespaces. Example: {"orcl-cloud.free-tier-retained":
                       "true"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   timeCreated:
                     description: The amount of time in milliseconds since the cluster
                       was created.
@@ -2706,13 +2786,15 @@ spec:
                     type: string
                   totalStorageGb:
                     description: The size in GB of the cluster's total storage.
-                    type: number
+                    format: int64
+                    type: integer
                   upgradeMajorVersionTrigger:
                     description: An optional property to upgrade the major version
                       of the cluster. This workflow upgrades the cluster without creating
                       a clone. If you want to create a clone and upgrade the clone
                       for testing please use SDK or CLI.
-                    type: number
+                    format: int64
+                    type: integer
                   vcnCompartmentId:
                     description: The OCID for the compartment where the cluster's
                       VCN is located.

@@ -152,7 +152,6 @@ spec:
                       key is predefined and scoped to a namespace. For more information,
                       see Resource Tags.  Example: {"Operations.CostCenter": "42"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   displayName:
                     description: '(Updatable) A user-friendly name. Does not have
                       to be unique, and it''s changeable. Avoid entering confidential
@@ -166,7 +165,6 @@ spec:
                       or namespace. For more information, see Resource Tags.  Example:
                       {"Department": "Finance"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   gatewayId:
                     description: The OCID of the resource.
                     type: string
@@ -455,7 +453,6 @@ spec:
                                         function. Values should contain an expression.
                                         Example: {"foo": "request.header[abc]"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                     publicKeys:
                                       description: (Updatable) A set of Public Keys
                                         that will be used to verify the JWT signature.
@@ -525,7 +522,8 @@ spec:
                                               (Updatable) The duration for which the
                                               JWKS should be cached before it is fetched
                                               again.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           type:
                                             description: Type of the lock.
                                             type: string
@@ -684,7 +682,8 @@ spec:
                                               (Updatable) The duration for which the
                                               OAuth2 success token should be cached
                                               before it is fetched again.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           responseCode:
                                             description: (Applicable when type=MODIFY_RESPONSE)
                                               (Updatable) HTTP response code, can
@@ -1093,7 +1092,8 @@ spec:
                                               (Updatable) The duration for which the
                                               JWKS should be cached before it is fetched
                                               again.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           sourceUriDetails:
                                             description: (Updatable) Auth endpoint
                                               details.
@@ -1202,7 +1202,8 @@ spec:
                                         for the client to cache preflight responses.
                                         This is sent as the Access-Control-Max-Age
                                         if greater than 0.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                               dynamicAuthentication:
@@ -1365,7 +1366,6 @@ spec:
                                                     an expression. Example: {"foo":
                                                     "request.header[abc]"}'
                                                   type: object
-                                                  x-kubernetes-map-type: granular
                                                 publicKeys:
                                                   description: (Updatable) A set of
                                                     Public Keys that will be used
@@ -1452,7 +1452,8 @@ spec:
                                                           The duration for which the
                                                           JWKS should be cached before
                                                           it is fetched again.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       type:
                                                         description: Type of the lock.
                                                         type: string
@@ -1631,7 +1632,8 @@ spec:
                                                           OAuth2 success token should
                                                           be cached before it is fetched
                                                           again.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       responseCode:
                                                         description: (Applicable when
                                                           type=MODIFY_RESPONSE) (Updatable)
@@ -2137,7 +2139,8 @@ spec:
                                                           The duration for which the
                                                           JWKS should be cached before
                                                           it is fetched again.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       sourceUriDetails:
                                                         description: (Updatable) Auth
                                                           endpoint details.
@@ -2305,7 +2308,8 @@ spec:
                                     rateInRequestsPerSecond:
                                       description: (Updatable) The maximum number
                                         of requests per second to allow.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     rateKey:
                                       description: (Updatable) The key used to group
                                         requests together.
@@ -2602,7 +2606,8 @@ spec:
                                                   description: (Updatable) The status
                                                     code of the stock response from
                                                     the mock backend.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 type:
                                                   description: Type of the lock.
                                                   type: string
@@ -2690,7 +2695,8 @@ spec:
                                     status:
                                       description: (Updatable) The status code of
                                         the stock response from the mock backend.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     type:
                                       description: Type of the lock.
                                       type: string
@@ -2870,7 +2876,8 @@ spec:
                                               for the client to cache preflight responses.
                                               This is sent as the Access-Control-Max-Age
                                               if greater than 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     headerTransformations:
@@ -3316,7 +3323,8 @@ spec:
                                               of seconds for a response from a backend
                                               being stored in the Response Cache before
                                               it expires.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           type:
                                             description: Type of the lock.
                                             type: string
@@ -3435,7 +3443,6 @@ spec:
                       key is predefined and scoped to a namespace. For more information,
                       see Resource Tags.  Example: {"Operations.CostCenter": "42"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   displayName:
                     description: '(Updatable) A user-friendly name. Does not have
                       to be unique, and it''s changeable. Avoid entering confidential
@@ -3449,7 +3456,6 @@ spec:
                       or namespace. For more information, see Resource Tags.  Example:
                       {"Department": "Finance"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   gatewayId:
                     description: The OCID of the resource.
                     type: string
@@ -3738,7 +3744,6 @@ spec:
                                         function. Values should contain an expression.
                                         Example: {"foo": "request.header[abc]"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                     publicKeys:
                                       description: (Updatable) A set of Public Keys
                                         that will be used to verify the JWT signature.
@@ -3808,7 +3813,8 @@ spec:
                                               (Updatable) The duration for which the
                                               JWKS should be cached before it is fetched
                                               again.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           type:
                                             description: Type of the lock.
                                             type: string
@@ -3967,7 +3973,8 @@ spec:
                                               (Updatable) The duration for which the
                                               OAuth2 success token should be cached
                                               before it is fetched again.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           responseCode:
                                             description: (Applicable when type=MODIFY_RESPONSE)
                                               (Updatable) HTTP response code, can
@@ -4376,7 +4383,8 @@ spec:
                                               (Updatable) The duration for which the
                                               JWKS should be cached before it is fetched
                                               again.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           sourceUriDetails:
                                             description: (Updatable) Auth endpoint
                                               details.
@@ -4485,7 +4493,8 @@ spec:
                                         for the client to cache preflight responses.
                                         This is sent as the Access-Control-Max-Age
                                         if greater than 0.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                               dynamicAuthentication:
@@ -4648,7 +4657,6 @@ spec:
                                                     an expression. Example: {"foo":
                                                     "request.header[abc]"}'
                                                   type: object
-                                                  x-kubernetes-map-type: granular
                                                 publicKeys:
                                                   description: (Updatable) A set of
                                                     Public Keys that will be used
@@ -4735,7 +4743,8 @@ spec:
                                                           The duration for which the
                                                           JWKS should be cached before
                                                           it is fetched again.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       type:
                                                         description: Type of the lock.
                                                         type: string
@@ -4914,7 +4923,8 @@ spec:
                                                           OAuth2 success token should
                                                           be cached before it is fetched
                                                           again.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       responseCode:
                                                         description: (Applicable when
                                                           type=MODIFY_RESPONSE) (Updatable)
@@ -5420,7 +5430,8 @@ spec:
                                                           The duration for which the
                                                           JWKS should be cached before
                                                           it is fetched again.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       sourceUriDetails:
                                                         description: (Updatable) Auth
                                                           endpoint details.
@@ -5588,7 +5599,8 @@ spec:
                                     rateInRequestsPerSecond:
                                       description: (Updatable) The maximum number
                                         of requests per second to allow.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     rateKey:
                                       description: (Updatable) The key used to group
                                         requests together.
@@ -5885,7 +5897,8 @@ spec:
                                                   description: (Updatable) The status
                                                     code of the stock response from
                                                     the mock backend.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 type:
                                                   description: Type of the lock.
                                                   type: string
@@ -5973,7 +5986,8 @@ spec:
                                     status:
                                       description: (Updatable) The status code of
                                         the stock response from the mock backend.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     type:
                                       description: Type of the lock.
                                       type: string
@@ -6153,7 +6167,8 @@ spec:
                                               for the client to cache preflight responses.
                                               This is sent as the Access-Control-Max-Age
                                               if greater than 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     headerTransformations:
@@ -6599,7 +6614,8 @@ spec:
                                               of seconds for a response from a backend
                                               being stored in the Response Cache before
                                               it expires.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           type:
                                             description: Type of the lock.
                                             type: string
@@ -6697,7 +6713,6 @@ spec:
                       key is predefined and scoped to a namespace. For more information,
                       see Resource Tags.  Example: {"Operations.CostCenter": "42"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   displayName:
                     description: '(Updatable) A user-friendly name. Does not have
                       to be unique, and it''s changeable. Avoid entering confidential
@@ -6714,7 +6729,6 @@ spec:
                       or namespace. For more information, see Resource Tags.  Example:
                       {"Department": "Finance"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   gatewayId:
                     description: The OCID of the resource.
                     type: string
@@ -6854,7 +6868,6 @@ spec:
                                         function. Values should contain an expression.
                                         Example: {"foo": "request.header[abc]"}'
                                       type: object
-                                      x-kubernetes-map-type: granular
                                     publicKeys:
                                       description: (Updatable) A set of Public Keys
                                         that will be used to verify the JWT signature.
@@ -6924,7 +6937,8 @@ spec:
                                               (Updatable) The duration for which the
                                               JWKS should be cached before it is fetched
                                               again.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           type:
                                             description: Type of the lock.
                                             type: string
@@ -6997,7 +7011,8 @@ spec:
                                               (Updatable) The duration for which the
                                               OAuth2 success token should be cached
                                               before it is fetched again.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           responseCode:
                                             description: (Applicable when type=MODIFY_RESPONSE)
                                               (Updatable) HTTP response code, can
@@ -7320,7 +7335,8 @@ spec:
                                               (Updatable) The duration for which the
                                               JWKS should be cached before it is fetched
                                               again.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           sourceUriDetails:
                                             description: (Updatable) Auth endpoint
                                               details.
@@ -7429,7 +7445,8 @@ spec:
                                         for the client to cache preflight responses.
                                         This is sent as the Access-Control-Max-Age
                                         if greater than 0.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                   type: object
                                 type: array
                               dynamicAuthentication:
@@ -7506,7 +7523,6 @@ spec:
                                                     an expression. Example: {"foo":
                                                     "request.header[abc]"}'
                                                   type: object
-                                                  x-kubernetes-map-type: granular
                                                 publicKeys:
                                                   description: (Updatable) A set of
                                                     Public Keys that will be used
@@ -7593,7 +7609,8 @@ spec:
                                                           The duration for which the
                                                           JWKS should be cached before
                                                           it is fetched again.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       type:
                                                         description: Type of the lock.
                                                         type: string
@@ -7679,7 +7696,8 @@ spec:
                                                           OAuth2 success token should
                                                           be cached before it is fetched
                                                           again.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       responseCode:
                                                         description: (Applicable when
                                                           type=MODIFY_RESPONSE) (Updatable)
@@ -8092,7 +8110,8 @@ spec:
                                                           The duration for which the
                                                           JWKS should be cached before
                                                           it is fetched again.
-                                                        type: number
+                                                        format: int64
+                                                        type: integer
                                                       sourceUriDetails:
                                                         description: (Updatable) Auth
                                                           endpoint details.
@@ -8260,7 +8279,8 @@ spec:
                                     rateInRequestsPerSecond:
                                       description: (Updatable) The maximum number
                                         of requests per second to allow.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     rateKey:
                                       description: (Updatable) The key used to group
                                         requests together.
@@ -8415,7 +8435,8 @@ spec:
                                                   description: (Updatable) The status
                                                     code of the stock response from
                                                     the mock backend.
-                                                  type: number
+                                                  format: int64
+                                                  type: integer
                                                 type:
                                                   description: Type of the lock.
                                                   type: string
@@ -8503,7 +8524,8 @@ spec:
                                     status:
                                       description: (Updatable) The status code of
                                         the stock response from the mock backend.
-                                      type: number
+                                      format: int64
+                                      type: integer
                                     type:
                                       description: Type of the lock.
                                       type: string
@@ -8683,7 +8705,8 @@ spec:
                                               for the client to cache preflight responses.
                                               This is sent as the Access-Control-Max-Age
                                               if greater than 0.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                         type: object
                                       type: array
                                     headerTransformations:
@@ -9129,7 +9152,8 @@ spec:
                                               of seconds for a response from a backend
                                               being stored in the Response Cache before
                                               it expires.
-                                            type: number
+                                            format: int64
+                                            type: integer
                                           type:
                                             description: Type of the lock.
                                             type: string
@@ -9151,7 +9175,6 @@ spec:
                       and scoped to a namespace. Example: {"orcl-cloud.free-tier-retained":
                       "true"}'
                     type: object
-                    x-kubernetes-map-type: granular
                   timeCreated:
                     description: When the lock was created.
                     type: string

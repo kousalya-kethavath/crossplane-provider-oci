@@ -54,6 +54,9 @@ type AttachedViewsParameters struct {
 }
 
 type EndpointsInitParameters struct {
+
+	// (Updatable) The OCID of the owning compartment.
+	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
 }
 
 type EndpointsObservation struct {
@@ -96,6 +99,10 @@ type EndpointsObservation struct {
 }
 
 type EndpointsParameters struct {
+
+	// (Updatable) The OCID of the owning compartment.
+	// +kubebuilder:validation:Optional
+	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
 }
 
 type ResolverInitParameters struct {
@@ -116,15 +123,13 @@ type ResolverInitParameters struct {
 	CompartmentIDSelector *v1.NamespacedSelector `json:"compartmentIdSelector,omitempty" tf:"-"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	// (Updatable) The display name of the resolver.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags.
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// The OCID of the target resolver.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/dns/v1alpha1.Resolver
@@ -161,8 +166,7 @@ type ResolverObservation struct {
 	DefaultViewID *string `json:"defaultViewId,omitempty" tf:"default_view_id,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	// (Updatable) The display name of the resolver.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
@@ -171,8 +175,7 @@ type ResolverObservation struct {
 	Endpoints []EndpointsObservation `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
 
 	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags.
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// The OCID of the resolver.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -223,8 +226,7 @@ type ResolverParameters struct {
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.
 	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	// (Updatable) The display name of the resolver.
 	// +kubebuilder:validation:Optional
@@ -232,8 +234,7 @@ type ResolverParameters struct {
 
 	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags.
 	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// The OCID of the target resolver.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/dns/v1alpha1.Resolver

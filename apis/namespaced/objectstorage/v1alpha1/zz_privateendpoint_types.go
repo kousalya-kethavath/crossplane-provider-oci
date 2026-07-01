@@ -58,13 +58,11 @@ type PrivateEndpointInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CompartmentIDSelector *v1.NamespacedSelector `json:"compartmentIdSelector,omitempty" tf:"-"`
 
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	Fqdns map[string]map[string]map[string]*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -90,15 +88,13 @@ type PrivateEndpointObservation struct {
 
 	CreatedBy *string `json:"createdBy,omitempty" tf:"created_by,omitempty"`
 
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
 	Fqdns map[string]map[string]map[string]*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -142,15 +138,13 @@ type PrivateEndpointParameters struct {
 	CompartmentIDSelector *v1.NamespacedSelector `json:"compartmentIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Fqdns map[string]map[string]map[string]*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`

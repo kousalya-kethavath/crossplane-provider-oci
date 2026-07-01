@@ -162,7 +162,6 @@ spec:
                     additionalProperties:
                       type: string
                     type: object
-                    x-kubernetes-map-type: granular
                   fqdns:
                     additionalProperties:
                       additionalProperties:
@@ -175,7 +174,6 @@ spec:
                     additionalProperties:
                       type: string
                     type: object
-                    x-kubernetes-map-type: granular
                   name:
                     type: string
                   namespace:
@@ -309,7 +307,6 @@ spec:
                     additionalProperties:
                       type: string
                     type: object
-                    x-kubernetes-map-type: granular
                   fqdns:
                     additionalProperties:
                       additionalProperties:
@@ -322,7 +319,6 @@ spec:
                     additionalProperties:
                       type: string
                     type: object
-                    x-kubernetes-map-type: granular
                   name:
                     type: string
                   namespace:
@@ -449,7 +445,6 @@ spec:
                     additionalProperties:
                       type: string
                     type: object
-                    x-kubernetes-map-type: granular
                   etag:
                     type: string
                   fqdns:
@@ -464,7 +459,6 @@ spec:
                     additionalProperties:
                       type: string
                     type: object
-                    x-kubernetes-map-type: granular
                   id:
                     type: string
                   name:

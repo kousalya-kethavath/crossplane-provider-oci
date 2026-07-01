@@ -32,8 +32,7 @@ type GenerativeAiPrivateEndpointInitParameters struct {
 	DNSPrefix *string `json:"dnsPrefix,omitempty" tf:"dns_prefix,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Operations.CostCenter": "42"}
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	// (Updatable) A description of this private endpoint.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -42,8 +41,7 @@ type GenerativeAiPrivateEndpointInitParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags.  Example: {"Department": "Finance"}
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// (Updatable) A list of the OCIDs of the network security groups (NSGs) to add the private endpoint's VNIC to.
 	// +listType=set
@@ -72,8 +70,7 @@ type GenerativeAiPrivateEndpointObservation struct {
 	DNSPrefix *string `json:"dnsPrefix,omitempty" tf:"dns_prefix,omitempty"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Operations.CostCenter": "42"}
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	// (Updatable) A description of this private endpoint.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -85,8 +82,7 @@ type GenerativeAiPrivateEndpointObservation struct {
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
 	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags.  Example: {"Department": "Finance"}
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// The OCID of a private endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -111,8 +107,7 @@ type GenerativeAiPrivateEndpointObservation struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// System tags for this resource. Each key is predefined and scoped to a namespace.  Example: {"orcl-cloud.free-tier-retained": "true"}
-	// +mapType=granular
-	SystemTags map[string]*string `json:"systemTags,omitempty" tf:"system_tags,omitempty"`
+	SystemTags map[string]string `json:"systemTags,omitempty" tf:"system_tags,omitempty"`
 
 	// The date and time that the Generative AI private endpoint was created expressed in RFC 3339 timestamp format. Example: 2018-04-03T21:10:29.600Z
 	TimeCreated *string `json:"timeCreated,omitempty" tf:"time_created,omitempty"`
@@ -142,8 +137,7 @@ type GenerativeAiPrivateEndpointParameters struct {
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Operations.CostCenter": "42"}
 	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+	DefinedTags map[string]string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
 	// (Updatable) A description of this private endpoint.
 	// +kubebuilder:validation:Optional
@@ -155,8 +149,7 @@ type GenerativeAiPrivateEndpointParameters struct {
 
 	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags.  Example: {"Department": "Finance"}
 	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// (Updatable) A list of the OCIDs of the network security groups (NSGs) to add the private endpoint's VNIC to.
 	// +kubebuilder:validation:Optional
