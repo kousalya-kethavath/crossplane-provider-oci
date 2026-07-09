@@ -5,6 +5,9 @@ Copyright 2026 Oracle and/or its affiliates.
 package clients
 
 import (
+	"errors"
+	"sync"
+	"sync/atomic"
 	"testing"
 
 	"github.com/crossplane/crossplane-runtime/v2/pkg/resource/fake"
@@ -145,5 +148,132 @@ func TestProviderConfigurationHash(t *testing.T) {
 	}
 	if baseHash == rotatedHash {
 		t.Fatal("providerConfigurationHash() did not change after provider configuration changed")
+	}
+}
+
+func TestProviderMetaCacheReusesUnchangedConfiguration(t *testing.T) {
+	cache := newProviderMetaCache(2)
+	var creates atomic.Int32
+	create := func() (any, error) {
+		return creates.Add(1), nil
+	}
+
+	first, err := cache.getOrCreate("uid-a", "hash-a", create)
+	if err != nil {
+		t.Fatal(err)
+	}
+	second, err := cache.getOrCreate("uid-a", "hash-a", create)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if first != second {
+		t.Fatalf("cache returned different metadata: %v != %v", first, second)
+	}
+	if got := creates.Load(); got != 1 {
+		t.Fatalf("provider creation count = %d, want 1", got)
+	}
+}
+
+func TestProviderMetaCacheReplacesChangedConfiguration(t *testing.T) {
+	cache := newProviderMetaCache(2)
+	var creates atomic.Int32
+	create := func() (any, error) {
+		return creates.Add(1), nil
+	}
+
+	first, err := cache.getOrCreate("uid-a", "hash-a", create)
+	if err != nil {
+		t.Fatal(err)
+	}
+	second, err := cache.getOrCreate("uid-a", "hash-b", create)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if first == second {
+		t.Fatalf("cache reused metadata after configuration change: %v", first)
+	}
+	if len(cache.entries) != 1 {
+		t.Fatalf("cache entry count = %d, want 1", len(cache.entries))
+	}
+}
+
+func TestProviderMetaCachePreservesPreviousEntryWhenCreationFails(t *testing.T) {
+	cache := newProviderMetaCache(2)
+	want := new(int)
+	if _, err := cache.getOrCreate("uid-a", "hash-a", func() (any, error) {
+		return want, nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+
+	wantErr := errors.New("configure failed")
+	if _, err := cache.getOrCreate("uid-a", "hash-b", func() (any, error) {
+		return nil, wantErr
+	}); !errors.Is(err, wantErr) {
+		t.Fatalf("getOrCreate() error = %v, want %v", err, wantErr)
+	}
+	entry := cache.entries["uid-a"]
+	if entry.configHash != "hash-a" || entry.meta != want {
+		t.Fatalf("previous entry changed after failed creation: %#v", entry)
+	}
+}
+
+func TestProviderMetaCacheEvictsLeastRecentlyUsedEntry(t *testing.T) {
+	cache := newProviderMetaCache(2)
+	create := func(value string) func() (any, error) {
+		return func() (any, error) { return value, nil }
+	}
+
+	if _, err := cache.getOrCreate("uid-a", "hash-a", create("a")); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := cache.getOrCreate("uid-b", "hash-b", create("b")); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := cache.getOrCreate("uid-a", "hash-a", create("unused")); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := cache.getOrCreate("uid-c", "hash-c", create("c")); err != nil {
+		t.Fatal(err)
+	}
+
+	if _, ok := cache.entries["uid-b"]; ok {
+		t.Fatal("least recently used entry uid-b was not evicted")
+	}
+	if len(cache.entries) != 2 {
+		t.Fatalf("cache entry count = %d, want 2", len(cache.entries))
+	}
+}
+
+func TestProviderMetaCacheCoalescesConcurrentCreation(t *testing.T) {
+	cache := newProviderMetaCache(2)
+	var creates atomic.Int32
+	create := func() (any, error) {
+		return creates.Add(1), nil
+	}
+
+	const callers = 16
+	var wg sync.WaitGroup
+	results := make(chan any, callers)
+	for range callers {
+		wg.Go(func() {
+			meta, err := cache.getOrCreate("uid-a", "hash-a", create)
+			if err != nil {
+				t.Errorf("getOrCreate() error: %v", err)
+				return
+			}
+			results <- meta
+		})
+	}
+	wg.Wait()
+	close(results)
+
+	for meta := range results {
+		if meta != int32(1) {
+			t.Fatalf("cache metadata = %v, want 1", meta)
+		}
+	}
+	if got := creates.Load(); got != 1 {
+		t.Fatalf("provider creation count = %d, want 1", got)
 	}
 }

@@ -17,6 +17,6 @@ func setFrameworkProvider(_ *upjetterraform.Setup) {
 	panic("terraform-provider-oci is available only with -tags=nofork after the no-fork patch step")
 }
 
-func getOrConfigureProviderMeta(_ context.Context, _, _ string, _ map[string]any) (any, error) {
+func getOrConfigureProviderMeta(_ context.Context, _ string, _ map[string]any) (any, error) {
 	return nil, errors.New("terraform-provider-oci is available only with -tags=nofork after the no-fork patch step")
 }

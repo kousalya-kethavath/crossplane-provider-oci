@@ -11,58 +11,33 @@ package clients
 import (
 	"context"
 	"fmt"
-	"strings"
-	"sync"
 
 	upjetterraform "github.com/crossplane/upjet/v2/pkg/terraform"
 	sdkterraform "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	ociprovider "github.com/oracle/terraform-provider-oci/oci"
 )
 
-var (
-	providerMetaCacheMu sync.RWMutex
-	providerMetaCache   = make(map[string]any)
-)
+var sdkV2ProviderMetaCache = newProviderMetaCache(defaultProviderMetaCacheSize)
 
 func setFrameworkProvider(ps *upjetterraform.Setup) {
 	ps.FrameworkProvider = ociprovider.New()
 }
 
-func getOrConfigureProviderMeta(ctx context.Context, uid, resourceVersion string, cfg map[string]any) (any, error) {
+func getOrConfigureProviderMeta(ctx context.Context, uid string, cfg map[string]any) (any, error) {
 	cfgHash, err := providerConfigurationHash(cfg)
 	if err != nil {
 		return nil, err
 	}
-	key := uid + "/" + resourceVersion + "/" + cfgHash
-
-	providerMetaCacheMu.RLock()
-	if v, ok := providerMetaCache[key]; ok {
-		providerMetaCacheMu.RUnlock()
-		return v, nil
-	}
-	providerMetaCacheMu.RUnlock()
-
-	providerMetaCacheMu.Lock()
-	defer providerMetaCacheMu.Unlock()
-	if v, ok := providerMetaCache[key]; ok {
-		return v, nil
-	}
-
-	p := ociprovider.Provider()
-	diags := p.Configure(ctx, sdkterraform.NewResourceConfigRaw(cfg))
-	if diags.HasError() {
-		return nil, fmt.Errorf("cannot configure OCI provider: %v", diags)
-	}
-	providerMeta := p.Meta()
-	if providerMeta == nil {
-		return nil, fmt.Errorf("OCI provider Configure succeeded but returned nil meta")
-	}
-
-	for k := range providerMetaCache {
-		if strings.HasPrefix(k, uid+"/") && k != key {
-			delete(providerMetaCache, k)
+	return sdkV2ProviderMetaCache.getOrCreate(uid, cfgHash, func() (any, error) {
+		p := ociprovider.Provider()
+		diags := p.Configure(ctx, sdkterraform.NewResourceConfigRaw(cfg))
+		if diags.HasError() {
+			return nil, fmt.Errorf("cannot configure OCI provider: %v", diags)
 		}
-	}
-	providerMetaCache[key] = providerMeta
-	return providerMeta, nil
+		providerMeta := p.Meta()
+		if providerMeta == nil {
+			return nil, fmt.Errorf("OCI provider Configure succeeded but returned nil meta")
+		}
+		return providerMeta, nil
+	})
 }

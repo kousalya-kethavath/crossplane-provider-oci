@@ -19,7 +19,9 @@ package config
 import (
 	"encoding/json"
 	"regexp"
+	"slices"
 	"sort"
+	"sync"
 )
 
 // terraformPluginFrameworkIncludeList is intentionally empty until OCI
@@ -32,18 +34,35 @@ type terraformProviderSchema struct {
 	} `json:"provider_schemas"`
 }
 
-func terraformPluginSDKIncludeList() []string {
-	var include []string
-	for _, resource := range terraformResourceNamesFromSchema() {
-		include = append(include, exactResourceRegex(resource))
+type terraformResourceRouting struct {
+	names          []string
+	sdkV2Resources map[string]struct{}
+	sdkV2Regexes   []string
+}
+
+var loadTerraformResourceRouting = sync.OnceValue(func() terraformResourceRouting {
+	names := parseTerraformResourceNamesFromSchema()
+	routing := terraformResourceRouting{
+		names:          names,
+		sdkV2Resources: make(map[string]struct{}, len(names)),
+		sdkV2Regexes:   make([]string, 0, len(names)),
 	}
-	return include
+	for _, resource := range names {
+		routing.sdkV2Resources[resource] = struct{}{}
+		routing.sdkV2Regexes = append(routing.sdkV2Regexes, exactResourceRegex(resource))
+	}
+	return routing
+})
+
+func terraformPluginSDKIncludeList() []string {
+	return slices.Clone(loadTerraformResourceRouting().sdkV2Regexes)
 }
 
 // IsSDKv2Resource reports whether the Terraform resource type is routed through
 // Upjet's in-process Terraform Plugin SDKv2 connector.
 func IsSDKv2Resource(terraformResourceType string) bool {
-	return resourceMatches(terraformResourceType, terraformPluginSDKIncludeList())
+	_, ok := loadTerraformResourceRouting().sdkV2Resources[terraformResourceType]
+	return ok
 }
 
 // HasFrameworkResources reports whether any resources are routed through
@@ -53,6 +72,10 @@ func HasFrameworkResources() bool {
 }
 
 func terraformResourceNamesFromSchema() []string {
+	return slices.Clone(loadTerraformResourceRouting().names)
+}
+
+func parseTerraformResourceNamesFromSchema() []string {
 	var schema terraformProviderSchema
 	if err := json.Unmarshal([]byte(providerSchema), &schema); err != nil {
 		panic(err)

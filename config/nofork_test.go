@@ -35,6 +35,30 @@ func TestSDKv2RoutingIncludesAllSchemaResources(t *testing.T) {
 	}
 }
 
+func TestSDKv2RoutingRejectsUnknownResource(t *testing.T) {
+	if IsSDKv2Resource("oci_does_not_exist") {
+		t.Fatal("IsSDKv2Resource() = true for an unknown resource")
+	}
+}
+
+func TestSDKv2ResourceLookupDoesNotAllocate(t *testing.T) {
+	const resource = "oci_core_vcn"
+	if !IsSDKv2Resource(resource) {
+		t.Fatalf("IsSDKv2Resource(%q) = false, want true", resource)
+	}
+	if got := testing.AllocsPerRun(100, func() {
+		IsSDKv2Resource(resource)
+	}); got != 0 {
+		t.Fatalf("IsSDKv2Resource() allocations = %v, want 0", got)
+	}
+}
+
+func BenchmarkIsSDKv2Resource(b *testing.B) {
+	for b.Loop() {
+		IsSDKv2Resource("oci_core_vcn")
+	}
+}
+
 func TestPreviouslySkippedNoForkResourcesUseSDKv2(t *testing.T) {
 	for _, resource := range []string{
 		"oci_management_dashboard_management_saved_search",
