@@ -15,6 +15,9 @@ func TestCleanRestoresModuleFiles(t *testing.T) {
 
 	mustWrite(t, filepath.Join(root, "go.mod"), "module broken\n")
 	mustWrite(t, filepath.Join(root, "go.sum"), "broken sum\n")
+	for _, source := range noForkSourceFiles {
+		mustWrite(t, filepath.Join(root, source[1]), "package ignored\n")
+	}
 	mustWrite(t, filepath.Join(state, "go.mod"), "module restored\n")
 	mustWrite(t, filepath.Join(state, "go.sum"), "restored sum\n")
 	mustWrite(t, filepath.Join(providerDir, "README.md"), "patched provider\n")
@@ -47,6 +50,32 @@ func TestCleanRestoresModuleFiles(t *testing.T) {
 	for _, path := range []string{state, providerDir, gopath} {
 		if _, err := os.Stat(path); !os.IsNotExist(err) {
 			t.Fatalf("expected %s to be removed, err=%v", path, err)
+		}
+	}
+	for _, source := range noForkSourceFiles {
+		if _, err := os.Stat(filepath.Join(root, source[1])); !os.IsNotExist(err) {
+			t.Fatalf("expected no-fork source %s to be removed, err=%v", source[1], err)
+		}
+	}
+}
+
+func TestMaterializeNoForkSources(t *testing.T) {
+	root := t.TempDir()
+	for _, source := range noForkSourceFiles {
+		mustWrite(t, filepath.Join(root, source[0]), "package ignored\n")
+	}
+
+	if err := materializeNoForkSources(Options{RootDir: root}); err != nil {
+		t.Fatalf("materializeNoForkSources returned error: %v", err)
+	}
+
+	for _, source := range noForkSourceFiles {
+		got, err := os.ReadFile(filepath.Join(root, source[1]))
+		if err != nil {
+			t.Fatal(err)
+		}
+		if string(got) != "package ignored\n" {
+			t.Fatalf("materialized source %s = %q", source[1], string(got))
 		}
 	}
 }

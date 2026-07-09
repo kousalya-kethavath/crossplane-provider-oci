@@ -18,6 +18,11 @@ const (
 	noForkGoFlags     = "-tags=nofork"
 )
 
+var noForkSourceFiles = [][2]string{
+	{"config/terraform_provider_nofork.go.tmpl", "config/terraform_provider_nofork.go"},
+	{"internal/clients/oci_provider_nofork.go.tmpl", "internal/clients/oci_provider_nofork.go"},
+}
+
 // Options describes the workspace paths and upstream provider coordinates used
 // by the no-fork patch flow.
 type Options struct {
@@ -108,6 +113,15 @@ func apply(ctx context.Context, opts Options, r runner) error {
 	if err := applyPatch(ctx, opts, r); err != nil {
 		return err
 	}
+	patched := false
+	defer func() {
+		if !patched {
+			_ = removeNoForkSources(opts)
+		}
+	}()
+	if err := materializeNoForkSources(opts); err != nil {
+		return err
+	}
 
 	if err := backupModuleFiles(opts); err != nil {
 		return err
@@ -127,6 +141,7 @@ func apply(ctx context.Context, opts Options, r runner) error {
 		return err
 	}
 
+	patched = true
 	fmt.Fprintf(opts.Stdout, "==> Patch applied. go.mod/go.sum backups saved to %s.\n", opts.StateDir)
 	return nil
 }
@@ -178,6 +193,9 @@ func validate(ctx context.Context, opts Options, r runner) error {
 func Clean(opts Options) error {
 	opts = normalizeOptions(opts)
 	var errs []error
+	if err := removeNoForkSources(opts); err != nil {
+		errs = append(errs, fmt.Errorf("remove no-fork source: %w", err))
+	}
 	for _, name := range []string{"go.mod", "go.sum"} {
 		src := filepath.Join(opts.StateDir, name)
 		dst := filepath.Join(opts.RootDir, name)
@@ -223,6 +241,26 @@ func backupModuleFiles(opts Options) error {
 		}
 	}
 	return nil
+}
+
+func materializeNoForkSources(opts Options) error {
+	for _, source := range noForkSourceFiles {
+		if err := copyFile(filepath.Join(opts.RootDir, source[0]), filepath.Join(opts.RootDir, source[1])); err != nil {
+			return fmt.Errorf("materialize no-fork source %s: %w", source[1], err)
+		}
+	}
+	return nil
+}
+
+func removeNoForkSources(opts Options) error {
+	var errs []error
+	for _, source := range noForkSourceFiles {
+		err := os.Remove(filepath.Join(opts.RootDir, source[1]))
+		if err != nil && !errors.Is(err, os.ErrNotExist) {
+			errs = append(errs, err)
+		}
+	}
+	return errors.Join(errs...)
 }
 
 func copyFile(src, dst string) error {
