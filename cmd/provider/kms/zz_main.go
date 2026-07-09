@@ -45,6 +45,12 @@ import (
 	namespacedcontroller "github.com/oracle/provider-oci/internal/controller/namespaced"
 )
 
+var terraformProviderVersion = "8.18.0"
+
+func defaultProviderVersion() string {
+	return "provider-oci:" + terraformProviderVersion
+}
+
 func main() {
 	var (
 		app              = kingpin.New(filepath.Base(os.Args[0]), "OCI support for Crossplane - kms Service.").DefaultEnvars()
@@ -54,7 +60,7 @@ func main() {
 		metricsBindAddress = app.Flag("metrics-bind-address", "Address the controller manager metrics endpoint binds to. Use 0 to disable metrics.").Default(":8080").Envar("METRICS_BIND_ADDRESS").String()
 		metricsStatePollInterval = app.Flag("metrics-state-poll", "Interval for recording managed resource state metrics.").Default("30s").Envar("METRICS_STATE_POLL").Duration()
 		leaderElection   = app.Flag("leader-election", "Use leader election for the controller manager.").Short('l').Default("false").Envar("LEADER_ELECTION").Bool()
-		providerVersion  = app.Flag("provider-version", "Provider version included in change log records.").Default("provider-oci").Envar("PROVIDER_VERSION").String()
+		providerVersion  = app.Flag("provider-version", "Provider version included in change log records.").Default(defaultProviderVersion()).Envar("PROVIDER_VERSION").String()
 		maxReconcileRate = app.Flag("max-reconcile-rate", "The global maximum rate per second at which resources may checked for drift from the desired state.").Default("10").Int()
 		changelogsSocketPath = app.Flag("changelogs-socket-path", "Path for changelogs socket (if enabled).").Default("/var/run/changelogs/changelogs.sock").Envar("CHANGELOGS_SOCKET_PATH").String()
 		enableManagementPolicies = app.Flag("enable-management-policies", "Enable support for ManagementPolicies.").Default("true").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
