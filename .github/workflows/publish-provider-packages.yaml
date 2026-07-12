@@ -222,6 +222,7 @@ jobs:
           INPUT_PLATFORM: ${{ inputs.platform }}
           INPUT_CONCURRENCY: ${{ inputs.concurrency }}
           REGISTRY_ORG: ${{ env.CROSSPLANE_REGORG }}
+          GOTMPDIR: ${{ runner.temp }}/go-build
           # We're using docker buildx, which doesn't actually load the images it
           # builds by default. Specifying --load does so.
           BUILD_ARGS: "--load"
@@ -229,13 +230,18 @@ jobs:
           set -euo pipefail
 
           batch_platforms=$(tr ' ' ',' <<<"$INPUT_PLATFORM")
+          rm -rf "$GOTMPDIR" /tmp/go-build*
+          mkdir -p "$GOTMPDIR"
+          go clean -cache -testcache || true
+          rm -rf .cache/nofork-go-build
+          docker buildx prune -af || true
+          docker image prune -af || true
           df -h
           make \
             CONCURRENCY="$INPUT_CONCURRENCY" \
             SUBPACKAGES_FOR_BATCH="config" \
             XPKG_REG_ORGS="$REGISTRY_ORG" \
             VERSION="$INPUT_VERSION" \
-            SKIP_GO_CACHE_CLEAN=true \
             BATCH_PLATFORMS="$batch_platforms" \
             publish-subpackages
 
@@ -354,6 +360,7 @@ jobs:
           INPUT_CONCURRENCY: ${{ inputs.concurrency }}
           REGISTRY_ORG: ${{ env.CROSSPLANE_REGORG }}
           FAMILY_BASE_IMAGE: ${{ steps.family.outputs.family_base_image }}
+          GOTMPDIR: ${{ runner.temp }}/go-build
           # We're using docker buildx, which doesn't actually load the images it
           # builds by default. Specifying --load does so.
           BUILD_ARGS: "--load"
@@ -361,6 +368,10 @@ jobs:
           set -euo pipefail
 
           batch_platforms=$(tr ' ' ',' <<<"$INPUT_PLATFORM")
+          rm -rf "$GOTMPDIR" /tmp/go-build*
+          mkdir -p "$GOTMPDIR"
+          go clean -cache -testcache || true
+          rm -rf .cache/nofork-go-build
           df -h
           make \
             CONCURRENCY="$INPUT_CONCURRENCY" \
