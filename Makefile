@@ -223,6 +223,8 @@ NOFORK_GOMODCACHE ?= $(CURDIR)/.cache/nofork-go-mod
 NOFORK_GOPATH ?= $(CURDIR)/.work/nofork-gopath
 NOFORK_GOFLAGS ?= $(strip $(GOFLAGS) -tags=nofork)
 NOFORK_GO_TAGS ?= $(strip $(GO_TAGS) nofork)
+NOFORK_WARM_PACKAGES ?= ./cmd/provider/...
+NOFORK_WARM_PLATFORMS ?= linux_amd64 linux_arm64
 NOFORK_PATCHER := GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)" go run ./cmd/noforkpatcher
 
 build:
@@ -249,6 +251,26 @@ endif
 ifneq ($(SUBPACKAGES),monolith)
 go.build: build
 endif
+
+warm-nofork-cache:
+	@set -e; \
+	trap '$(MAKE) clean-patch' EXIT; \
+	$(MAKE) $(PATCH_STAMP) GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"; \
+	$(INFO) Warming no-fork build cache for platforms: $(NOFORK_WARM_PLATFORMS); \
+	for platform in $(NOFORK_WARM_PLATFORMS); do \
+		GOOS=$$(echo $$platform | cut -d_ -f1); \
+		GOARCH=$$(echo $$platform | cut -d_ -f2); \
+		started=$$(date +%s); \
+		echo "  Warming for $$GOOS/$$GOARCH..."; \
+		CGO_ENABLED=0 GOOS=$$GOOS GOARCH=$$GOARCH \
+			GOFLAGS="$(NOFORK_GOFLAGS)" \
+			GOCACHE="$(NOFORK_GOCACHE)" \
+			GOMODCACHE="$(NOFORK_GOMODCACHE)" \
+			GOPATH="$(NOFORK_GOPATH)" \
+			$(GO) list -deps -export $(NOFORK_WARM_PACKAGES) >/dev/null; \
+		echo "  Warmed $$GOOS/$$GOARCH in $$(( $$(date +%s) - $$started ))s"; \
+	done; \
+	$(OK) Warmed no-fork build cache
 
 generate:
 	@set -e; \
@@ -310,7 +332,7 @@ validate-patch:
 		--gomodcache "$(NOFORK_GOMODCACHE)" \
 		--gopath "$(NOFORK_GOPATH)"
 
-.PHONY: clean-patch validate-patch
+.PHONY: clean-patch validate-patch warm-nofork-cache
 # ====================================================================================
 # Targets
 
