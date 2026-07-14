@@ -138,8 +138,10 @@ build-subpackages:
 publish-subpackages: kustomize-crds
 	@PLATFORMS_FOR_BUILD=$$(echo "$(BATCH_PLATFORMS)" | tr ',' ' '); \
 	$(MAKE) build PLATFORMS="$$PLATFORMS_FOR_BUILD" SUBPACKAGES="$(SUBPACKAGES_FOR_BATCH)"; \
-	if [ "$(SKIP_GO_CACHE_CLEAN)" != "true" ]; then $(GO) clean -cache -testcache || true; fi; \
-	if [ -n "$(NOFORK_GOCACHE)" ]; then rm -rf "$(NOFORK_GOCACHE)"; fi; \
+	if [ "$(SKIP_GO_CACHE_CLEAN)" != "true" ]; then \
+		$(GO) clean -cache -testcache || true; \
+		if [ -n "$(NOFORK_GOCACHE)" ]; then rm -rf "$(NOFORK_GOCACHE)"; fi; \
+	fi; \
 	docker buildx prune -af || true; \
 	for platform in $$PLATFORMS_FOR_BUILD; do \
 		docker buildx prune -af || true; \
@@ -163,8 +165,10 @@ publish-service-subpackages:
 	fi
 	@PLATFORMS_FOR_BUILD=$$(echo "$(BATCH_PLATFORMS)" | tr ',' ' '); \
 	$(MAKE) build PLATFORMS="$$PLATFORMS_FOR_BUILD" SUBPACKAGES="$(SUBPACKAGES_FOR_BATCH)"; \
-	if [ "$(SKIP_GO_CACHE_CLEAN)" != "true" ]; then $(GO) clean -cache -testcache || true; fi; \
-	if [ -n "$(NOFORK_GOCACHE)" ]; then rm -rf "$(NOFORK_GOCACHE)"; fi; \
+	if [ "$(SKIP_GO_CACHE_CLEAN)" != "true" ]; then \
+		$(GO) clean -cache -testcache || true; \
+		if [ -n "$(NOFORK_GOCACHE)" ]; then rm -rf "$(NOFORK_GOCACHE)"; fi; \
+	fi; \
 	$(MAKE) batch-process SUBPACKAGES_FOR_BATCH="$(SUBPACKAGES_FOR_BATCH)" BUILD_ONLY=false BATCH_PLATFORMS="$(BATCH_PLATFORMS)" FAMILY_BASE_IMAGE="$(FAMILY_BASE_IMAGE)"
 
 .PHONY: batch-process build-subpackages publish-subpackages publish-service-subpackages build.family.image

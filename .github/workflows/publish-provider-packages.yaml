@@ -49,6 +49,7 @@ env:
 
   # Registry/Org names
   CROSSPLANE_REGORG: 'ghcr.io/${{ github.repository_owner }}' # xpkg.crossplane.io/crossplane-contrib
+  NOFORK_GOCACHE_PATH: .cache/nofork-go-build
 jobs:
   index:
     runs-on: ubuntu-latest
@@ -193,6 +194,16 @@ jobs:
           cache: true
           cache-dependency-path: go.sum
 
+      - name: Restore No-Fork Go Build Cache
+        id: nofork-go-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ${{ env.NOFORK_GOCACHE_PATH }}
+          key: nofork-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.sum', 'build/nofork/patches/terraform-provider-oci.patch') }}-${{ github.sha }}
+          restore-keys: |
+            nofork-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.sum', 'build/nofork/patches/terraform-provider-oci.patch') }}-
+            nofork-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-
+
       - name: Vendor Dependencies
         run: make vendor vendor.check
 
@@ -233,17 +244,24 @@ jobs:
           rm -rf "$GOTMPDIR" /tmp/go-build*
           mkdir -p "$GOTMPDIR"
           go clean -cache -testcache || true
-          rm -rf .cache/nofork-go-build
           docker buildx prune -af || true
           docker image prune -af || true
           df -h
           make \
             CONCURRENCY="$INPUT_CONCURRENCY" \
+            SKIP_GO_CACHE_CLEAN=true \
             SUBPACKAGES_FOR_BATCH="config" \
             XPKG_REG_ORGS="$REGISTRY_ORG" \
             VERSION="$INPUT_VERSION" \
             BATCH_PLATFORMS="$batch_platforms" \
             publish-subpackages
+
+      - name: Save No-Fork Go Build Cache
+        if: ${{ steps.nofork-go-cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ${{ env.NOFORK_GOCACHE_PATH }}
+          key: ${{ steps.nofork-go-cache.outputs.cache-primary-key }}
 
   publish-services:
     if: ${{ needs.index.outputs.has_services == 'true' }}
@@ -302,6 +320,15 @@ jobs:
           go-version: ${{ inputs.go-version }}
           cache: true
           cache-dependency-path: go.sum
+
+      - name: Restore No-Fork Go Build Cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ${{ env.NOFORK_GOCACHE_PATH }}
+          key: nofork-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.sum', 'build/nofork/patches/terraform-provider-oci.patch') }}-${{ github.sha }}
+          restore-keys: |
+            nofork-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.sum', 'build/nofork/patches/terraform-provider-oci.patch') }}-
+            nofork-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-
 
       - name: Vendor Dependencies
         run: make vendor vendor.check
@@ -371,7 +398,6 @@ jobs:
           rm -rf "$GOTMPDIR" /tmp/go-build*
           mkdir -p "$GOTMPDIR"
           go clean -cache -testcache || true
-          rm -rf .cache/nofork-go-build
           df -h
           make \
             CONCURRENCY="$INPUT_CONCURRENCY" \
