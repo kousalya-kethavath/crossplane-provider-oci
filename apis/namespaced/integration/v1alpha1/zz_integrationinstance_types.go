@@ -339,6 +339,8 @@ type IntegrationInstanceInitParameters struct {
 	// (Updatable) A list of alternate custom endpoints to be used for the integration instance URL (contact Oracle for alternateCustomEndpoints availability for a specific instance).
 	AlternateCustomEndpoints []AlternateCustomEndpointsInitParameters `json:"alternateCustomEndpoints,omitempty" tf:"alternate_custom_endpoints,omitempty"`
 
+	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`
+
 	// (Updatable) Compartment Identifier.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/identity/v1alpha1.Compartment
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
@@ -445,6 +447,8 @@ type IntegrationInstanceObservation struct {
 	// (Updatable) A list of alternate custom endpoints to be used for the integration instance URL (contact Oracle for alternateCustomEndpoints availability for a specific instance).
 	AlternateCustomEndpoints []AlternateCustomEndpointsObservation `json:"alternateCustomEndpoints,omitempty" tf:"alternate_custom_endpoints,omitempty"`
 
+	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`
+
 	// A list of associated attachments to other services
 	Attachments []AttachmentsObservation `json:"attachments,omitempty" tf:"attachments,omitempty"`
 
@@ -532,6 +536,9 @@ type IntegrationInstanceObservation struct {
 	// Base representation for Outbound Connection (Reverse Connection).
 	PrivateEndpointOutboundConnection []PrivateEndpointOutboundConnectionObservation `json:"privateEndpointOutboundConnection,omitempty" tf:"private_endpoint_outbound_connection,omitempty"`
 
+	// OCID of LogAnalytics LogGroup, enabled for given Process Automation attached to integration instance.
+	ProcessAutomationLogGroupID *string `json:"processAutomationLogGroupId,omitempty" tf:"process_automation_log_group_id,omitempty"`
+
 	// (Updatable) Security attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}
 	// +mapType=granular
 	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
@@ -561,6 +568,9 @@ type IntegrationInstanceParameters struct {
 	// (Updatable) A list of alternate custom endpoints to be used for the integration instance URL (contact Oracle for alternateCustomEndpoints availability for a specific instance).
 	// +kubebuilder:validation:Optional
 	AlternateCustomEndpoints []AlternateCustomEndpointsParameters `json:"alternateCustomEndpoints,omitempty" tf:"alternate_custom_endpoints,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`
 
 	// (Updatable) Compartment Identifier.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/identity/v1alpha1.Compartment

@@ -34,13 +34,13 @@ func (tr *DedicatedAiCluster) Hub() {}
 func (tr *Endpoint) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *GenerativeAiPrivateEndpoint) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ImportedModel) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Model) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Project) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SemanticStore) Hub() {}

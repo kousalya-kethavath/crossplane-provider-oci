@@ -18,9 +18,9 @@ import (
 	agenttool "github.com/oracle/provider-oci/internal/controller/namespaced/generativeai/agenttool"
 	dedicatedaicluster "github.com/oracle/provider-oci/internal/controller/namespaced/generativeai/dedicatedaicluster"
 	endpoint "github.com/oracle/provider-oci/internal/controller/namespaced/generativeai/endpoint"
-	generativeaiprivateendpoint "github.com/oracle/provider-oci/internal/controller/namespaced/generativeai/generativeaiprivateendpoint"
 	importedmodel "github.com/oracle/provider-oci/internal/controller/namespaced/generativeai/importedmodel"
 	model "github.com/oracle/provider-oci/internal/controller/namespaced/generativeai/model"
+	project "github.com/oracle/provider-oci/internal/controller/namespaced/generativeai/project"
 	semanticstore "github.com/oracle/provider-oci/internal/controller/namespaced/generativeai/semanticstore"
 )
 
@@ -37,9 +37,9 @@ func Setup_generativeai(mgr ctrl.Manager, o controller.Options) error {
 		agenttool.Setup,
 		dedicatedaicluster.Setup,
 		endpoint.Setup,
-		generativeaiprivateendpoint.Setup,
 		importedmodel.Setup,
 		model.Setup,
+		project.Setup,
 		semanticstore.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -62,9 +62,9 @@ func SetupGated_generativeai(mgr ctrl.Manager, o controller.Options) error {
 		agenttool.SetupGated,
 		dedicatedaicluster.SetupGated,
 		endpoint.SetupGated,
-		generativeaiprivateendpoint.SetupGated,
 		importedmodel.SetupGated,
 		model.SetupGated,
+		project.SetupGated,
 		semanticstore.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {

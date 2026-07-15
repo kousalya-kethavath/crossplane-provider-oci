@@ -195,6 +195,11 @@ func (in *BucketInitParameters) DeepCopyInto(out *BucketInitParameters) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.IsBucketKeyEnabled != nil {
+		in, out := &in.IsBucketKeyEnabled, &out.IsBucketKeyEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.KMSKeyID != nil {
 		in, out := &in.KMSKeyID, &out.KMSKeyID
 		*out = new(string)
@@ -387,6 +392,11 @@ func (in *BucketObservation) DeepCopyInto(out *BucketObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IsBucketKeyEnabled != nil {
+		in, out := &in.IsBucketKeyEnabled, &out.IsBucketKeyEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.IsReadOnly != nil {
 		in, out := &in.IsReadOnly, &out.IsReadOnly
 		*out = new(bool)
@@ -536,6 +546,11 @@ func (in *BucketParameters) DeepCopyInto(out *BucketParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.IsBucketKeyEnabled != nil {
+		in, out := &in.IsBucketKeyEnabled, &out.IsBucketKeyEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.KMSKeyID != nil {
 		in, out := &in.KMSKeyID, &out.KMSKeyID
@@ -2206,6 +2221,22 @@ func (in *PrivateEndpointInitParameters) DeepCopyInto(out *PrivateEndpointInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityAttributes != nil {
+		in, out := &in.SecurityAttributes, &out.SecurityAttributes
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.State != nil {
 		in, out := &in.State, &out.State
 		*out = new(string)
@@ -2215,6 +2246,16 @@ func (in *PrivateEndpointInitParameters) DeepCopyInto(out *PrivateEndpointInitPa
 		in, out := &in.SubnetID, &out.SubnetID
 		*out = new(string)
 		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -2402,6 +2443,22 @@ func (in *PrivateEndpointObservation) DeepCopyInto(out *PrivateEndpointObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityAttributes != nil {
+		in, out := &in.SecurityAttributes, &out.SecurityAttributes
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.State != nil {
 		in, out := &in.State, &out.State
 		*out = new(string)
@@ -2571,6 +2628,22 @@ func (in *PrivateEndpointParameters) DeepCopyInto(out *PrivateEndpointParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityAttributes != nil {
+		in, out := &in.SecurityAttributes, &out.SecurityAttributes
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.State != nil {
 		in, out := &in.State, &out.State
 		*out = new(string)
@@ -2580,6 +2653,16 @@ func (in *PrivateEndpointParameters) DeepCopyInto(out *PrivateEndpointParameters
 		in, out := &in.SubnetID, &out.SubnetID
 		*out = new(string)
 		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.NamespacedReference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.NamespacedSelector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

@@ -25,7 +25,10 @@ spec:
     name: ${var.node_pool_name}
     networkLaunchType: ${var.node_pool_network_launch_type}
     nodeConfigDetails:
-    - definedTags:
+    - computeClusterIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test_compute_cluster
+      definedTags:
         Operations.CostCenter: "42"
       freeformTags:
         Department: Finance
@@ -45,6 +48,9 @@ spec:
       - availabilityDomain: ${var.node_pool_node_config_details_placement_configs_availability_domain}
         capacityReservationId: ${oci_containerengine_capacity_reservation.test_capacity_reservation.id}
         faultDomains: ${var.node_pool_node_config_details_placement_configs_fault_domains}
+        hostGroupIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: test_group
         preemptibleNodeConfig:
         - preemptionAction:
           - isPreserveBootVolume: ${var.node_pool_node_config_details_placement_configs_preemptible_node_config_preemption_action_is_preserve_boot_volume}

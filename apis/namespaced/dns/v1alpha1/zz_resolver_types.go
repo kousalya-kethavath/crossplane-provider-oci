@@ -61,11 +61,21 @@ type EndpointsObservation struct {
 	// (Updatable) The OCID of the owning compartment.
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
 
+	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.
+	// +mapType=granular
+	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
+
 	// The type of resolver endpoint. VNIC is currently the only supported type.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
 	// An IP address from which forwarded queries may be sent. For VNIC endpoints, this IP address must be part of the subnet and will be assigned by the system if unspecified when isForwarding is true.
 	ForwardingAddress *string `json:"forwardingAddress,omitempty" tf:"forwarding_address,omitempty"`
+
+	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags.
+	// +mapType=granular
+	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A Boolean flag indicating whether or not the resolver endpoint is for forwarding.
 	IsForwarding *bool `json:"isForwarding,omitempty" tf:"is_forwarding,omitempty"`
@@ -78,6 +88,16 @@ type EndpointsObservation struct {
 
 	// The name of the resolver endpoint. Must be unique, case-insensitive, within the resolver.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The OCID of the private endpoint resource that this resolver endpoint corresponds to.
+	PeID *string `json:"peId,omitempty" tf:"pe_id,omitempty"`
+
+	// The OCID of the target resolver.
+	ResolverID *string `json:"resolverId,omitempty" tf:"resolver_id,omitempty"`
+
+	// Security attributes are labels for a resource that can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.  Example: {"Oracle-DataSecurity-ZPR": {"MaxEgressCount": {"value":"42","mode":"audit"}}}
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 
 	// The canonical absolute URL of the resource.
 	Self *string `json:"self,omitempty" tf:"self,omitempty"`
@@ -93,6 +113,9 @@ type EndpointsObservation struct {
 
 	// The date and time the resource was last updated in "YYYY-MM-ddThh:mm:ssZ" format with a Z offset, as defined by RFC 3339.
 	TimeUpdated *string `json:"timeUpdated,omitempty" tf:"time_updated,omitempty"`
+
+	// The OCID of the VNIC resource that this resolver endpoint corresponds to.
+	VnicID *string `json:"vnicId,omitempty" tf:"vnic_id,omitempty"`
 }
 
 type EndpointsParameters struct {
@@ -174,7 +197,6 @@ type ResolverObservation struct {
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
-	// The OCID of the resolver.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A Boolean flag indicating whether or not parts of the resource are unable to be explicitly managed.

@@ -14,38 +14,53 @@ import (
 )
 
 type AccessTargetsInitParameters struct {
+
+	// (Updatable) Specifies what namespace/buckets within the allowed compartments the private endpoint can access. You can configure either a single bucket or all buckets within the allowed compartments.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
+	// (Updatable) Specifies what namespace/compartments the private endpoint can access. You can configure either a single compartment or all compartments.
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
 
+	// (Updatable) Specifies the target namespace that's to be allowed to egress from the private endpoint.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type AccessTargetsObservation struct {
+
+	// (Updatable) Specifies what namespace/buckets within the allowed compartments the private endpoint can access. You can configure either a single bucket or all buckets within the allowed compartments.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
+	// (Updatable) Specifies what namespace/compartments the private endpoint can access. You can configure either a single compartment or all compartments.
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
 
+	// (Updatable) Specifies the target namespace that's to be allowed to egress from the private endpoint.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type AccessTargetsParameters struct {
 
+	// (Updatable) Specifies what namespace/buckets within the allowed compartments the private endpoint can access. You can configure either a single bucket or all buckets within the allowed compartments.
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
 
+	// (Updatable) Specifies what namespace/compartments the private endpoint can access. You can configure either a single compartment or all compartments.
 	// +kubebuilder:validation:Optional
 	CompartmentID *string `json:"compartmentId" tf:"compartment_id,omitempty"`
 
+	// (Updatable) Specifies the target namespace that's to be allowed to egress from the private endpoint.
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 }
 
 type PrivateEndpointInitParameters struct {
+
+	// (Updatable) When you create a private endpoint, you can restrict access to certain Object Storage resources by specifying access targets (limit of 10). Each access target consists of the following required parameters: namespace, compartment_id and bucket.
 	AccessTargets []AccessTargetsInitParameters `json:"accessTargets,omitempty" tf:"access_targets,omitempty"`
 
+	// A list of additional prefixes that you can provide along with any other prefix. These resulting endpointFqdn's are added to the customer VCN's DNS record.
 	AdditionalPrefixes []*string `json:"additionalPrefixes,omitempty" tf:"additional_prefixes,omitempty"`
 
+	// (Updatable) Specifies what namespace/compartments the private endpoint can access. You can configure either a single compartment or all compartments.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/identity/v1alpha1.Compartment
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
 
@@ -57,77 +72,124 @@ type PrivateEndpointInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CompartmentIDSelector *v1.Selector `json:"compartmentIdSelector,omitempty" tf:"-"`
 
+	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
 	// +mapType=granular
 	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
+	// The object representing FQDN details formed using prefix and additionalPrefixes.
 	Fqdns map[string]map[string]map[string]*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
+	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags. Example: {"Department": "Finance"}
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
+	// The name of the private endpoint. Valid characters are uppercase or lowercase letters, numbers, hyphens, and periods. Private Endpoint names must be unique within an Object Storage namespace. Avoid entering confidential information. example: Example: my-pe1
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Updatable) Specifies the target namespace that's to be allowed to egress from the private endpoint.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
+	// A list of the OCIDs of the network security groups (NSGs) to add the private endpoint's VNIC to. For more information about NSGs, see NetworkSecurityGroup.
 	NsgIds []*string `json:"nsgIds,omitempty" tf:"nsg_ids,omitempty"`
 
+	// The DNS prefix value is part of the URL used to access Object Storage. The DNS prefix is a case-insensitive string using alpha-numeric characters (no special characters). It must be unique within the VCN.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// The private IP address that is to be assigned to this private endpoint. If it's not available, an error is returned. If you do not provide a value, an available IP address in the subnet is automatically chosen. If you do not provide a value, an available IP address in the subnet is automatically chosen.
 	PrivateEndpointIP *string `json:"privateEndpointIp,omitempty" tf:"private_endpoint_ip,omitempty"`
 
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
+	// The lifecycle state of the private endpoint resource.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
+	// The ID of the subnet that the private endpoint VNIC will be created and reside in.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/networking/v1alpha1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in networking to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in networking to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type PrivateEndpointObservation struct {
+
+	// (Updatable) When you create a private endpoint, you can restrict access to certain Object Storage resources by specifying access targets (limit of 10). Each access target consists of the following required parameters: namespace, compartment_id and bucket.
 	AccessTargets []AccessTargetsObservation `json:"accessTargets,omitempty" tf:"access_targets,omitempty"`
 
+	// A list of additional prefixes that you can provide along with any other prefix. These resulting endpointFqdn's are added to the customer VCN's DNS record.
 	AdditionalPrefixes []*string `json:"additionalPrefixes,omitempty" tf:"additional_prefixes,omitempty"`
 
+	// (Updatable) Specifies what namespace/compartments the private endpoint can access. You can configure either a single compartment or all compartments.
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
 
+	// The OCID of the user who created the private endpoint.
 	CreatedBy *string `json:"createdBy,omitempty" tf:"created_by,omitempty"`
 
+	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
 	// +mapType=granular
 	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
+	// The entity tag for the Private Endpoint.
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
+	// The object representing FQDN details formed using prefix and additionalPrefixes.
 	Fqdns map[string]map[string]map[string]*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
+	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags. Example: {"Department": "Finance"}
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name of the private endpoint. Valid characters are uppercase or lowercase letters, numbers, hyphens, and periods. Private Endpoint names must be unique within an Object Storage namespace. Avoid entering confidential information. example: Example: my-pe1
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Updatable) Specifies the target namespace that's to be allowed to egress from the private endpoint.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
+	// A list of the OCIDs of the network security groups (NSGs) to add the private endpoint's VNIC to. For more information about NSGs, see NetworkSecurityGroup.
 	NsgIds []*string `json:"nsgIds,omitempty" tf:"nsg_ids,omitempty"`
 
+	// The DNS prefix value is part of the URL used to access Object Storage. The DNS prefix is a case-insensitive string using alpha-numeric characters (no special characters). It must be unique within the VCN.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// The private IP address that is to be assigned to this private endpoint. If it's not available, an error is returned. If you do not provide a value, an available IP address in the subnet is automatically chosen. If you do not provide a value, an available IP address in the subnet is automatically chosen.
 	PrivateEndpointIP *string `json:"privateEndpointIp,omitempty" tf:"private_endpoint_ip,omitempty"`
 
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
+	// The lifecycle state of the private endpoint resource.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
+	// The ID of the subnet that the private endpoint VNIC will be created and reside in.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
+	// The date and time the private endpoint was created, as described in RFC 2616.
 	TimeCreated *string `json:"timeCreated,omitempty" tf:"time_created,omitempty"`
 
+	// The date and time the private endpoint was updated, as described in RFC 2616.
 	TimeModified *string `json:"timeModified,omitempty" tf:"time_modified,omitempty"`
 }
 
 type PrivateEndpointParameters struct {
 
+	// (Updatable) When you create a private endpoint, you can restrict access to certain Object Storage resources by specifying access targets (limit of 10). Each access target consists of the following required parameters: namespace, compartment_id and bucket.
 	// +kubebuilder:validation:Optional
 	AccessTargets []AccessTargetsParameters `json:"accessTargets,omitempty" tf:"access_targets,omitempty"`
 
+	// A list of additional prefixes that you can provide along with any other prefix. These resulting endpointFqdn's are added to the customer VCN's DNS record.
 	// +kubebuilder:validation:Optional
 	AdditionalPrefixes []*string `json:"additionalPrefixes,omitempty" tf:"additional_prefixes,omitempty"`
 
+	// (Updatable) Specifies what namespace/compartments the private endpoint can access. You can configure either a single compartment or all compartments.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/identity/v1alpha1.Compartment
 	// +kubebuilder:validation:Optional
 	CompartmentID *string `json:"compartmentId,omitempty" tf:"compartment_id,omitempty"`
@@ -140,37 +202,61 @@ type PrivateEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	CompartmentIDSelector *v1.Selector `json:"compartmentIdSelector,omitempty" tf:"-"`
 
+	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
 
+	// The object representing FQDN details formed using prefix and additionalPrefixes.
 	// +kubebuilder:validation:Optional
 	Fqdns map[string]map[string]map[string]*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
+	// (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags. Example: {"Department": "Finance"}
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
+	// The name of the private endpoint. Valid characters are uppercase or lowercase letters, numbers, hyphens, and periods. Private Endpoint names must be unique within an Object Storage namespace. Avoid entering confidential information. example: Example: my-pe1
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Updatable) Specifies the target namespace that's to be allowed to egress from the private endpoint.
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
+	// A list of the OCIDs of the network security groups (NSGs) to add the private endpoint's VNIC to. For more information about NSGs, see NetworkSecurityGroup.
 	// +kubebuilder:validation:Optional
 	NsgIds []*string `json:"nsgIds,omitempty" tf:"nsg_ids,omitempty"`
 
+	// The DNS prefix value is part of the URL used to access Object Storage. The DNS prefix is a case-insensitive string using alpha-numeric characters (no special characters). It must be unique within the VCN.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// The private IP address that is to be assigned to this private endpoint. If it's not available, an error is returned. If you do not provide a value, an available IP address in the subnet is automatically chosen. If you do not provide a value, an available IP address in the subnet is automatically chosen.
 	// +kubebuilder:validation:Optional
 	PrivateEndpointIP *string `json:"privateEndpointIp,omitempty" tf:"private_endpoint_ip,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
+	// The lifecycle state of the private endpoint resource.
+	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
+	// The ID of the subnet that the private endpoint VNIC will be created and reside in.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/networking/v1alpha1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in networking to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in networking to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // PrivateEndpointSpec defines the desired state of PrivateEndpoint
@@ -200,7 +286,7 @@ type PrivateEndpointStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// PrivateEndpoint is the Schema for the PrivateEndpoints API. <no value>
+// PrivateEndpoint is the Schema for the PrivateEndpoints API. Provides the Private Endpoint resource in Oracle Cloud Infrastructure Object Storage service
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -213,7 +299,6 @@ type PrivateEndpoint struct {
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.__namespace__) || (has(self.initProvider) && has(self.initProvider.__namespace__))",message="spec.forProvider.namespace is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.prefix) || (has(self.initProvider) && has(self.initProvider.prefix))",message="spec.forProvider.prefix is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subnetId) || (has(self.initProvider) && has(self.initProvider.subnetId))",message="spec.forProvider.subnetId is a required parameter"
 	Spec   PrivateEndpointSpec   `json:"spec"`
 	Status PrivateEndpointStatus `json:"status,omitempty"`
 }

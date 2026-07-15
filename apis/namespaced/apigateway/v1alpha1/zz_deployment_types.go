@@ -542,6 +542,9 @@ type AuthenticationServerDetailValidationFailurePolicyInitParameters struct {
 	// (Applicable when type=OAUTH2) (Updatable) The path to be used as fallback after OAuth2.
 	FallbackRedirectPath *string `json:"fallbackRedirectPath,omitempty" tf:"fallback_redirect_path,omitempty"`
 
+	// (Applicable when type=OAUTH2) (Updatable) The path (relative to the deployment) where the Identity Provider  will redirect the user after authentication. This path must match  a route in the specification that uses the OAUTH2_LOGIN_BACKEND.
+	LoginPath *string `json:"loginPath,omitempty" tf:"login_path,omitempty"`
+
 	// (Applicable when type=OAUTH2) (Updatable) The path to be used as logout.
 	LogoutPath *string `json:"logoutPath,omitempty" tf:"logout_path,omitempty"`
 
@@ -586,6 +589,9 @@ type AuthenticationServerDetailValidationFailurePolicyObservation struct {
 
 	// (Applicable when type=OAUTH2) (Updatable) The path to be used as fallback after OAuth2.
 	FallbackRedirectPath *string `json:"fallbackRedirectPath,omitempty" tf:"fallback_redirect_path,omitempty"`
+
+	// (Applicable when type=OAUTH2) (Updatable) The path (relative to the deployment) where the Identity Provider  will redirect the user after authentication. This path must match  a route in the specification that uses the OAUTH2_LOGIN_BACKEND.
+	LoginPath *string `json:"loginPath,omitempty" tf:"login_path,omitempty"`
 
 	// (Applicable when type=OAUTH2) (Updatable) The path to be used as logout.
 	LogoutPath *string `json:"logoutPath,omitempty" tf:"logout_path,omitempty"`
@@ -633,6 +639,10 @@ type AuthenticationServerDetailValidationFailurePolicyParameters struct {
 	// (Applicable when type=OAUTH2) (Updatable) The path to be used as fallback after OAuth2.
 	// +kubebuilder:validation:Optional
 	FallbackRedirectPath *string `json:"fallbackRedirectPath,omitempty" tf:"fallback_redirect_path,omitempty"`
+
+	// (Applicable when type=OAUTH2) (Updatable) The path (relative to the deployment) where the Identity Provider  will redirect the user after authentication. This path must match  a route in the specification that uses the OAUTH2_LOGIN_BACKEND.
+	// +kubebuilder:validation:Optional
+	LoginPath *string `json:"loginPath,omitempty" tf:"login_path,omitempty"`
 
 	// (Applicable when type=OAUTH2) (Updatable) The path to be used as logout.
 	// +kubebuilder:validation:Optional
@@ -781,7 +791,7 @@ type AuthenticationServerDetailValidationPolicyInitParameters struct {
 
 type AuthenticationServerDetailValidationPolicyKeysInitParameters struct {
 
-	// (Updatable) The algorithm intended for use with this key.
+	// (Applicable when format=JSON_WEB_KEY) (Updatable) The algorithm intended for use with this key.
 	Alg *string `json:"alg,omitempty" tf:"alg,omitempty"`
 
 	// (Updatable) The base64 url encoded exponent of the RSA public key represented by this key.
@@ -811,7 +821,7 @@ type AuthenticationServerDetailValidationPolicyKeysInitParameters struct {
 
 type AuthenticationServerDetailValidationPolicyKeysObservation struct {
 
-	// (Updatable) The algorithm intended for use with this key.
+	// (Applicable when format=JSON_WEB_KEY) (Updatable) The algorithm intended for use with this key.
 	Alg *string `json:"alg,omitempty" tf:"alg,omitempty"`
 
 	// (Updatable) The base64 url encoded exponent of the RSA public key represented by this key.
@@ -841,7 +851,7 @@ type AuthenticationServerDetailValidationPolicyKeysObservation struct {
 
 type AuthenticationServerDetailValidationPolicyKeysParameters struct {
 
-	// (Updatable) The algorithm intended for use with this key.
+	// (Applicable when format=JSON_WEB_KEY) (Updatable) The algorithm intended for use with this key.
 	// +kubebuilder:validation:Optional
 	Alg *string `json:"alg,omitempty" tf:"alg,omitempty"`
 
@@ -2238,7 +2248,7 @@ type KeyParameters struct {
 
 type KeysInitParameters struct {
 
-	// (Updatable) The algorithm intended for use with this key.
+	// (Applicable when format=JSON_WEB_KEY) (Updatable) The algorithm intended for use with this key.
 	Alg *string `json:"alg,omitempty" tf:"alg,omitempty"`
 
 	// (Updatable) The base64 url encoded exponent of the RSA public key represented by this key.
@@ -2268,7 +2278,7 @@ type KeysInitParameters struct {
 
 type KeysObservation struct {
 
-	// (Updatable) The algorithm intended for use with this key.
+	// (Applicable when format=JSON_WEB_KEY) (Updatable) The algorithm intended for use with this key.
 	Alg *string `json:"alg,omitempty" tf:"alg,omitempty"`
 
 	// (Updatable) The base64 url encoded exponent of the RSA public key represented by this key.
@@ -2298,7 +2308,7 @@ type KeysObservation struct {
 
 type KeysParameters struct {
 
-	// (Updatable) The algorithm intended for use with this key.
+	// (Applicable when format=JSON_WEB_KEY) (Updatable) The algorithm intended for use with this key.
 	// +kubebuilder:validation:Optional
 	Alg *string `json:"alg,omitempty" tf:"alg,omitempty"`
 
@@ -2490,7 +2500,7 @@ type PublicKeysInitParameters struct {
 
 type PublicKeysKeysInitParameters struct {
 
-	// (Updatable) The algorithm intended for use with this key.
+	// (Applicable when format=JSON_WEB_KEY) (Updatable) The algorithm intended for use with this key.
 	Alg *string `json:"alg,omitempty" tf:"alg,omitempty"`
 
 	// (Updatable) The base64 url encoded exponent of the RSA public key represented by this key.
@@ -2520,7 +2530,7 @@ type PublicKeysKeysInitParameters struct {
 
 type PublicKeysKeysObservation struct {
 
-	// (Updatable) The algorithm intended for use with this key.
+	// (Applicable when format=JSON_WEB_KEY) (Updatable) The algorithm intended for use with this key.
 	Alg *string `json:"alg,omitempty" tf:"alg,omitempty"`
 
 	// (Updatable) The base64 url encoded exponent of the RSA public key represented by this key.
@@ -2550,7 +2560,7 @@ type PublicKeysKeysObservation struct {
 
 type PublicKeysKeysParameters struct {
 
-	// (Updatable) The algorithm intended for use with this key.
+	// (Applicable when format=JSON_WEB_KEY) (Updatable) The algorithm intended for use with this key.
 	// +kubebuilder:validation:Optional
 	Alg *string `json:"alg,omitempty" tf:"alg,omitempty"`
 
@@ -4132,6 +4142,9 @@ type ValidationFailurePolicyInitParameters struct {
 	// (Applicable when type=OAUTH2) (Updatable) The path to be used as fallback after OAuth2.
 	FallbackRedirectPath *string `json:"fallbackRedirectPath,omitempty" tf:"fallback_redirect_path,omitempty"`
 
+	// (Applicable when type=OAUTH2) (Updatable) The path (relative to the deployment) where the Identity Provider  will redirect the user after authentication. This path must match  a route in the specification that uses the OAUTH2_LOGIN_BACKEND.
+	LoginPath *string `json:"loginPath,omitempty" tf:"login_path,omitempty"`
+
 	// (Applicable when type=OAUTH2) (Updatable) The path to be used as logout.
 	LogoutPath *string `json:"logoutPath,omitempty" tf:"logout_path,omitempty"`
 
@@ -4176,6 +4189,9 @@ type ValidationFailurePolicyObservation struct {
 
 	// (Applicable when type=OAUTH2) (Updatable) The path to be used as fallback after OAuth2.
 	FallbackRedirectPath *string `json:"fallbackRedirectPath,omitempty" tf:"fallback_redirect_path,omitempty"`
+
+	// (Applicable when type=OAUTH2) (Updatable) The path (relative to the deployment) where the Identity Provider  will redirect the user after authentication. This path must match  a route in the specification that uses the OAUTH2_LOGIN_BACKEND.
+	LoginPath *string `json:"loginPath,omitempty" tf:"login_path,omitempty"`
 
 	// (Applicable when type=OAUTH2) (Updatable) The path to be used as logout.
 	LogoutPath *string `json:"logoutPath,omitempty" tf:"logout_path,omitempty"`
@@ -4223,6 +4239,10 @@ type ValidationFailurePolicyParameters struct {
 	// (Applicable when type=OAUTH2) (Updatable) The path to be used as fallback after OAuth2.
 	// +kubebuilder:validation:Optional
 	FallbackRedirectPath *string `json:"fallbackRedirectPath,omitempty" tf:"fallback_redirect_path,omitempty"`
+
+	// (Applicable when type=OAUTH2) (Updatable) The path (relative to the deployment) where the Identity Provider  will redirect the user after authentication. This path must match  a route in the specification that uses the OAUTH2_LOGIN_BACKEND.
+	// +kubebuilder:validation:Optional
+	LoginPath *string `json:"loginPath,omitempty" tf:"login_path,omitempty"`
 
 	// (Applicable when type=OAUTH2) (Updatable) The path to be used as logout.
 	// +kubebuilder:validation:Optional
@@ -4478,7 +4498,7 @@ type ValidationPolicyInitParameters struct {
 
 type ValidationPolicyKeysInitParameters struct {
 
-	// (Updatable) The algorithm intended for use with this key.
+	// (Applicable when format=JSON_WEB_KEY) (Updatable) The algorithm intended for use with this key.
 	Alg *string `json:"alg,omitempty" tf:"alg,omitempty"`
 
 	// (Updatable) The base64 url encoded exponent of the RSA public key represented by this key.
@@ -4508,7 +4528,7 @@ type ValidationPolicyKeysInitParameters struct {
 
 type ValidationPolicyKeysObservation struct {
 
-	// (Updatable) The algorithm intended for use with this key.
+	// (Applicable when format=JSON_WEB_KEY) (Updatable) The algorithm intended for use with this key.
 	Alg *string `json:"alg,omitempty" tf:"alg,omitempty"`
 
 	// (Updatable) The base64 url encoded exponent of the RSA public key represented by this key.
@@ -4538,7 +4558,7 @@ type ValidationPolicyKeysObservation struct {
 
 type ValidationPolicyKeysParameters struct {
 
-	// (Updatable) The algorithm intended for use with this key.
+	// (Applicable when format=JSON_WEB_KEY) (Updatable) The algorithm intended for use with this key.
 	// +kubebuilder:validation:Optional
 	Alg *string `json:"alg,omitempty" tf:"alg,omitempty"`
 

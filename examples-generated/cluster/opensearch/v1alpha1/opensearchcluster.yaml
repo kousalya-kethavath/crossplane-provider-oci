@@ -20,6 +20,11 @@ spec:
     compartmentIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    coordinatorNodeCount: ${var.opensearch_cluster_coordinator_node_count}
+    coordinatorNodeHostMemoryGb: ${var.opensearch_cluster_coordinator_node_host_memory_gb}
+    coordinatorNodeHostOcpuCount: ${var.opensearch_cluster_coordinator_node_host_ocpu_count}
+    coordinatorNodeHostShape: ${var.opensearch_cluster_coordinator_node_host_shape}
+    coordinatorNodeHostType: ${var.opensearch_cluster_coordinator_node_host_type}
     dataNodeCount: ${var.opensearch_cluster_data_node_count}
     dataNodeHostBareMetalShape: ${var.opensearch_cluster_data_node_host_bare_metal_shape}
     dataNodeHostMemoryGb: ${var.opensearch_cluster_data_node_host_memory_gb}

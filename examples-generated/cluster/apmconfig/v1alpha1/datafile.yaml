@@ -1,0 +1,24 @@
+apiVersion: apmconfig.oci.upbound.io/v1alpha1
+kind: DataFile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apmconfig/v1alpha1/datafile
+  labels:
+    testing.upbound.io/example-name: test_data_file
+  name: test-data-file
+spec:
+  forProvider:
+    apmDomainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_apm_domain
+    apmType: ${var.data_file_apm_type}
+    contentDisposition: ${var.data_file_content_disposition}
+    contentEncoding: ${var.data_file_content_encoding}
+    contentLanguage: ${var.data_file_content_language}
+    contentMd5: ${var.data_file_content_md5}
+    contentType: ${var.data_file_content_type}
+    dataFileNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_data_file
+    metadata: ${var.data_file_metadata}
+    put_data_file_body: ${var.data_file_put_data_file_body}

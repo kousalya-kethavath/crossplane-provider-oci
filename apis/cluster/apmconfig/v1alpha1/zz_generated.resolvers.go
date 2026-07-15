@@ -107,3 +107,95 @@ func (mg *Config) ResolveReferences( // ResolveReferences of this Config.
 
 	return nil
 }
+
+// ResolveReferences of this DataFile.
+func (mg *DataFile) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("apm.oci.upbound.io", "v1alpha1", "ApmDomain", "ApmDomainList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApmDomainID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.ApmDomainIDRef,
+			Selector:     mg.Spec.ForProvider.ApmDomainIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ApmDomainID")
+	}
+	mg.Spec.ForProvider.ApmDomainID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ApmDomainIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("apmconfig.oci.upbound.io", "v1alpha1", "DataFile", "DataFileList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFileName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.DataFileNameRef,
+			Selector:     mg.Spec.ForProvider.DataFileNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DataFileName")
+	}
+	mg.Spec.ForProvider.DataFileName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFileNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("apm.oci.upbound.io", "v1alpha1", "ApmDomain", "ApmDomainList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApmDomainID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.ApmDomainIDRef,
+			Selector:     mg.Spec.InitProvider.ApmDomainIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ApmDomainID")
+	}
+	mg.Spec.InitProvider.ApmDomainID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ApmDomainIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("apmconfig.oci.upbound.io", "v1alpha1", "DataFile", "DataFileList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataFileName),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.DataFileNameRef,
+			Selector:     mg.Spec.InitProvider.DataFileNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DataFileName")
+	}
+	mg.Spec.InitProvider.DataFileName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DataFileNameRef = rsp.ResolvedReference
+
+	return nil
+}

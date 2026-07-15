@@ -26,74 +26,74 @@ func (mg *Rule) ResolveReferences( // ResolveReferences of this Rule.
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Actions); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.Actions[i3].Actions); i4++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Actions[i3].Action); i4++ {
 			{
 				m, l, err = apisresolver.GetManagedResource("functions.oci.m.upbound.io", "v1alpha1", "Function", "FunctionList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Actions[i3].Actions[i4].FunctionID),
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Actions[i3].Action[i4].FunctionID),
 					Extract:      resource.ExtractResourceID(),
 					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.ForProvider.Actions[i3].Actions[i4].FunctionIDRef,
-					Selector:     mg.Spec.ForProvider.Actions[i3].Actions[i4].FunctionIDSelector,
+					Reference:    mg.Spec.ForProvider.Actions[i3].Action[i4].FunctionIDRef,
+					Selector:     mg.Spec.ForProvider.Actions[i3].Action[i4].FunctionIDSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.Actions[i3].Actions[i4].FunctionID")
+				return errors.Wrap(err, "mg.Spec.ForProvider.Actions[i3].Action[i4].FunctionID")
 			}
-			mg.Spec.ForProvider.Actions[i3].Actions[i4].FunctionID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.ForProvider.Actions[i3].Actions[i4].FunctionIDRef = rsp.ResolvedReference
+			mg.Spec.ForProvider.Actions[i3].Action[i4].FunctionID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Actions[i3].Action[i4].FunctionIDRef = rsp.ResolvedReference
 
 		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Actions); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.Actions[i3].Actions); i4++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Actions[i3].Action); i4++ {
 			{
 				m, l, err = apisresolver.GetManagedResource("streaming.oci.m.upbound.io", "v1alpha1", "Stream", "StreamList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Actions[i3].Actions[i4].StreamID),
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Actions[i3].Action[i4].StreamID),
 					Extract:      resource.ExtractResourceID(),
 					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.ForProvider.Actions[i3].Actions[i4].StreamIDRef,
-					Selector:     mg.Spec.ForProvider.Actions[i3].Actions[i4].StreamIDSelector,
+					Reference:    mg.Spec.ForProvider.Actions[i3].Action[i4].StreamIDRef,
+					Selector:     mg.Spec.ForProvider.Actions[i3].Action[i4].StreamIDSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.Actions[i3].Actions[i4].StreamID")
+				return errors.Wrap(err, "mg.Spec.ForProvider.Actions[i3].Action[i4].StreamID")
 			}
-			mg.Spec.ForProvider.Actions[i3].Actions[i4].StreamID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.ForProvider.Actions[i3].Actions[i4].StreamIDRef = rsp.ResolvedReference
+			mg.Spec.ForProvider.Actions[i3].Action[i4].StreamID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Actions[i3].Action[i4].StreamIDRef = rsp.ResolvedReference
 
 		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Actions); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.Actions[i3].Actions); i4++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Actions[i3].Action); i4++ {
 			{
 				m, l, err = apisresolver.GetManagedResource("ons.oci.m.upbound.io", "v1alpha1", "NotificationTopic", "NotificationTopicList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Actions[i3].Actions[i4].TopicID),
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Actions[i3].Action[i4].TopicID),
 					Extract:      resource.ExtractResourceID(),
 					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.ForProvider.Actions[i3].Actions[i4].TopicIDRef,
-					Selector:     mg.Spec.ForProvider.Actions[i3].Actions[i4].TopicIDSelector,
+					Reference:    mg.Spec.ForProvider.Actions[i3].Action[i4].TopicIDRef,
+					Selector:     mg.Spec.ForProvider.Actions[i3].Action[i4].TopicIDSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.Actions[i3].Actions[i4].TopicID")
+				return errors.Wrap(err, "mg.Spec.ForProvider.Actions[i3].Action[i4].TopicID")
 			}
-			mg.Spec.ForProvider.Actions[i3].Actions[i4].TopicID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.ForProvider.Actions[i3].Actions[i4].TopicIDRef = rsp.ResolvedReference
+			mg.Spec.ForProvider.Actions[i3].Action[i4].TopicID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Actions[i3].Action[i4].TopicIDRef = rsp.ResolvedReference
 
 		}
 	}
@@ -118,74 +118,74 @@ func (mg *Rule) ResolveReferences( // ResolveReferences of this Rule.
 	mg.Spec.ForProvider.CompartmentIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Actions); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.Actions[i3].Actions); i4++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Actions[i3].Action); i4++ {
 			{
 				m, l, err = apisresolver.GetManagedResource("functions.oci.m.upbound.io", "v1alpha1", "Function", "FunctionList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Actions[i3].Actions[i4].FunctionID),
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Actions[i3].Action[i4].FunctionID),
 					Extract:      resource.ExtractResourceID(),
 					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.InitProvider.Actions[i3].Actions[i4].FunctionIDRef,
-					Selector:     mg.Spec.InitProvider.Actions[i3].Actions[i4].FunctionIDSelector,
+					Reference:    mg.Spec.InitProvider.Actions[i3].Action[i4].FunctionIDRef,
+					Selector:     mg.Spec.InitProvider.Actions[i3].Action[i4].FunctionIDSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.InitProvider.Actions[i3].Actions[i4].FunctionID")
+				return errors.Wrap(err, "mg.Spec.InitProvider.Actions[i3].Action[i4].FunctionID")
 			}
-			mg.Spec.InitProvider.Actions[i3].Actions[i4].FunctionID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.InitProvider.Actions[i3].Actions[i4].FunctionIDRef = rsp.ResolvedReference
+			mg.Spec.InitProvider.Actions[i3].Action[i4].FunctionID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Actions[i3].Action[i4].FunctionIDRef = rsp.ResolvedReference
 
 		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Actions); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.Actions[i3].Actions); i4++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Actions[i3].Action); i4++ {
 			{
 				m, l, err = apisresolver.GetManagedResource("streaming.oci.m.upbound.io", "v1alpha1", "Stream", "StreamList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Actions[i3].Actions[i4].StreamID),
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Actions[i3].Action[i4].StreamID),
 					Extract:      resource.ExtractResourceID(),
 					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.InitProvider.Actions[i3].Actions[i4].StreamIDRef,
-					Selector:     mg.Spec.InitProvider.Actions[i3].Actions[i4].StreamIDSelector,
+					Reference:    mg.Spec.InitProvider.Actions[i3].Action[i4].StreamIDRef,
+					Selector:     mg.Spec.InitProvider.Actions[i3].Action[i4].StreamIDSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.InitProvider.Actions[i3].Actions[i4].StreamID")
+				return errors.Wrap(err, "mg.Spec.InitProvider.Actions[i3].Action[i4].StreamID")
 			}
-			mg.Spec.InitProvider.Actions[i3].Actions[i4].StreamID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.InitProvider.Actions[i3].Actions[i4].StreamIDRef = rsp.ResolvedReference
+			mg.Spec.InitProvider.Actions[i3].Action[i4].StreamID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Actions[i3].Action[i4].StreamIDRef = rsp.ResolvedReference
 
 		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Actions); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.Actions[i3].Actions); i4++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Actions[i3].Action); i4++ {
 			{
 				m, l, err = apisresolver.GetManagedResource("ons.oci.m.upbound.io", "v1alpha1", "NotificationTopic", "NotificationTopicList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Actions[i3].Actions[i4].TopicID),
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Actions[i3].Action[i4].TopicID),
 					Extract:      resource.ExtractResourceID(),
 					Namespace:    mg.GetNamespace(),
-					Reference:    mg.Spec.InitProvider.Actions[i3].Actions[i4].TopicIDRef,
-					Selector:     mg.Spec.InitProvider.Actions[i3].Actions[i4].TopicIDSelector,
+					Reference:    mg.Spec.InitProvider.Actions[i3].Action[i4].TopicIDRef,
+					Selector:     mg.Spec.InitProvider.Actions[i3].Action[i4].TopicIDSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.InitProvider.Actions[i3].Actions[i4].TopicID")
+				return errors.Wrap(err, "mg.Spec.InitProvider.Actions[i3].Action[i4].TopicID")
 			}
-			mg.Spec.InitProvider.Actions[i3].Actions[i4].TopicID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.InitProvider.Actions[i3].Actions[i4].TopicIDRef = rsp.ResolvedReference
+			mg.Spec.InitProvider.Actions[i3].Action[i4].TopicID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Actions[i3].Action[i4].TopicIDRef = rsp.ResolvedReference
 
 		}
 	}

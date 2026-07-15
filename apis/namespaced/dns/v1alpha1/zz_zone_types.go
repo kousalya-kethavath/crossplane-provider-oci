@@ -295,7 +295,7 @@ type ZoneInitParameters struct {
 	// The name of the zone.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Updatable) The resolution mode of a zone defines behavior related to how query responses can be handled.
+	// (Updatable) The resolution mode of a zone defines behavior related to how query responses can be handled. See Private DNS Zone Transparency for more information.
 	ResolutionMode *string `json:"resolutionMode,omitempty" tf:"resolution_mode,omitempty"`
 
 	// Specifies to operate only on resources that have a matching DNS scope.
@@ -323,7 +323,7 @@ type ZoneNameserversInitParameters struct {
 
 type ZoneNameserversObservation struct {
 
-	// The name of the zone.
+	// The hostname of the nameserver.
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 }
 
@@ -364,9 +364,10 @@ type ZoneObservation struct {
 	// The name of the zone.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The authoritative nameservers for the zone.
 	Nameservers []ZoneNameserversObservation `json:"nameservers,omitempty" tf:"nameservers,omitempty"`
 
-	// (Updatable) The resolution mode of a zone defines behavior related to how query responses can be handled.
+	// (Updatable) The resolution mode of a zone defines behavior related to how query responses can be handled. See Private DNS Zone Transparency for more information.
 	ResolutionMode *string `json:"resolutionMode,omitempty" tf:"resolution_mode,omitempty"`
 
 	// Specifies to operate only on resources that have a matching DNS scope.
@@ -438,7 +439,7 @@ type ZoneParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Updatable) The resolution mode of a zone defines behavior related to how query responses can be handled.
+	// (Updatable) The resolution mode of a zone defines behavior related to how query responses can be handled. See Private DNS Zone Transparency for more information.
 	// +kubebuilder:validation:Optional
 	ResolutionMode *string `json:"resolutionMode,omitempty" tf:"resolution_mode,omitempty"`
 

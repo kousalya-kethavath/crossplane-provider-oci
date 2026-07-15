@@ -19,3 +19,6 @@ spec:
     freeformTags:
       bar-key: value
     isFreeTier: ${var.apm_domain_is_free_tier}
+    logGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_log_group

@@ -45,6 +45,9 @@ type BucketInitParameters struct {
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
+	// (Updatable) Specifies whether Object Storage should use intermediate cached Bucket Encryption Keys with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. This reduces calls to Oracle Cloud Infrastructure Vault Key Management Service (KMS). Existing objects are not affected.
+	IsBucketKeyEnabled *bool `json:"isBucketKeyEnabled,omitempty" tf:"is_bucket_key_enabled,omitempty"`
+
 	// (Updatable) The OCID of a master encryption key used to call the Key Management service to generate a data encryption key or to encrypt or decrypt a data encryption key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/kms/v1alpha1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -120,6 +123,9 @@ type BucketObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (Updatable) Specifies whether Object Storage should use intermediate cached Bucket Encryption Keys with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. This reduces calls to Oracle Cloud Infrastructure Vault Key Management Service (KMS). Existing objects are not affected.
+	IsBucketKeyEnabled *bool `json:"isBucketKeyEnabled,omitempty" tf:"is_bucket_key_enabled,omitempty"`
+
 	// Whether or not this bucket is read only. By default, isReadOnly is set to false. This will be set to 'true' when this bucket is configured as a destination in a replication policy.
 	IsReadOnly *bool `json:"isReadOnly,omitempty" tf:"is_read_only,omitempty"`
 
@@ -194,6 +200,10 @@ type BucketParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+
+	// (Updatable) Specifies whether Object Storage should use intermediate cached Bucket Encryption Keys with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. This reduces calls to Oracle Cloud Infrastructure Vault Key Management Service (KMS). Existing objects are not affected.
+	// +kubebuilder:validation:Optional
+	IsBucketKeyEnabled *bool `json:"isBucketKeyEnabled,omitempty" tf:"is_bucket_key_enabled,omitempty"`
 
 	// (Updatable) The OCID of a master encryption key used to call the Key Management service to generate a data encryption key or to encrypt or decrypt a data encryption key.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/kms/v1alpha1.Key

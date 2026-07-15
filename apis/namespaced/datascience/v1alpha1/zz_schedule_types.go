@@ -1206,6 +1206,9 @@ type TriggerInitParameters struct {
 	// (Updatable) The type of frequency
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
+	// (Applicable when trigger_type=INTERVAL) (Updatable) Maximum number of minutes after time_start that the scheduler may use to randomly select the first execution time. This value is considered only when is_random_start_time is true. If omitted and is_random_start_time is true, the service defaults the jitter window to half of the configured interval duration.
+	InitialJitterInMinutes *float64 `json:"initialJitterInMinutes,omitempty" tf:"initial_jitter_in_minutes,omitempty"`
+
 	// (Updatable) The interval of frequency.
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
@@ -1280,6 +1283,9 @@ type TriggerObservation struct {
 	// (Updatable) The type of frequency
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
+	// (Applicable when trigger_type=INTERVAL) (Updatable) Maximum number of minutes after time_start that the scheduler may use to randomly select the first execution time. This value is considered only when is_random_start_time is true. If omitted and is_random_start_time is true, the service defaults the jitter window to half of the configured interval duration.
+	InitialJitterInMinutes *float64 `json:"initialJitterInMinutes,omitempty" tf:"initial_jitter_in_minutes,omitempty"`
+
 	// (Updatable) The interval of frequency.
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
@@ -1308,6 +1314,10 @@ type TriggerParameters struct {
 	// (Updatable) The type of frequency
 	// +kubebuilder:validation:Optional
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
+
+	// (Applicable when trigger_type=INTERVAL) (Updatable) Maximum number of minutes after time_start that the scheduler may use to randomly select the first execution time. This value is considered only when is_random_start_time is true. If omitted and is_random_start_time is true, the service defaults the jitter window to half of the configured interval duration.
+	// +kubebuilder:validation:Optional
+	InitialJitterInMinutes *float64 `json:"initialJitterInMinutes,omitempty" tf:"initial_jitter_in_minutes,omitempty"`
 
 	// (Updatable) The interval of frequency.
 	// +kubebuilder:validation:Optional

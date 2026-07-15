@@ -99,6 +99,10 @@ type MigrationInitParameters struct {
 	// Selector for a ReplicationSchedule in cloudmigrations to populate replicationScheduleId.
 	// +kubebuilder:validation:Optional
 	ReplicationScheduleIDSelector *v1.NamespacedSelector `json:"replicationScheduleIdSelector,omitempty" tf:"-"`
+
+	// (Updatable) Security attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 }
 
 type MigrationObservation struct {
@@ -134,6 +138,10 @@ type MigrationObservation struct {
 
 	// (Updatable) Replication schedule identifier
 	ReplicationScheduleID *string `json:"replicationScheduleId,omitempty" tf:"replication_schedule_id,omitempty"`
+
+	// (Updatable) Security attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 
 	// The current state of migration.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -203,6 +211,11 @@ type MigrationParameters struct {
 	// Selector for a ReplicationSchedule in cloudmigrations to populate replicationScheduleId.
 	// +kubebuilder:validation:Optional
 	ReplicationScheduleIDSelector *v1.NamespacedSelector `json:"replicationScheduleIdSelector,omitempty" tf:"-"`
+
+	// (Updatable) Security attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 }
 
 // MigrationSpec defines the desired state of Migration

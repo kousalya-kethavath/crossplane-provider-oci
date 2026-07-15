@@ -398,6 +398,31 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 		*out = new(float64)
 		**out = **in
 	}
+	if in.CoordinatorNodeCount != nil {
+		in, out := &in.CoordinatorNodeCount, &out.CoordinatorNodeCount
+		*out = new(float64)
+		**out = **in
+	}
+	if in.CoordinatorNodeHostMemoryGb != nil {
+		in, out := &in.CoordinatorNodeHostMemoryGb, &out.CoordinatorNodeHostMemoryGb
+		*out = new(float64)
+		**out = **in
+	}
+	if in.CoordinatorNodeHostOcpuCount != nil {
+		in, out := &in.CoordinatorNodeHostOcpuCount, &out.CoordinatorNodeHostOcpuCount
+		*out = new(float64)
+		**out = **in
+	}
+	if in.CoordinatorNodeHostShape != nil {
+		in, out := &in.CoordinatorNodeHostShape, &out.CoordinatorNodeHostShape
+		*out = new(string)
+		**out = **in
+	}
+	if in.CoordinatorNodeHostType != nil {
+		in, out := &in.CoordinatorNodeHostType, &out.CoordinatorNodeHostType
+		*out = new(string)
+		**out = **in
+	}
 	if in.DataNodeCount != nil {
 		in, out := &in.DataNodeCount, &out.DataNodeCount
 		*out = new(float64)
@@ -837,6 +862,31 @@ func (in *OpensearchClusterObservation) DeepCopyInto(out *OpensearchClusterObser
 		*out = new(float64)
 		**out = **in
 	}
+	if in.CoordinatorNodeCount != nil {
+		in, out := &in.CoordinatorNodeCount, &out.CoordinatorNodeCount
+		*out = new(float64)
+		**out = **in
+	}
+	if in.CoordinatorNodeHostMemoryGb != nil {
+		in, out := &in.CoordinatorNodeHostMemoryGb, &out.CoordinatorNodeHostMemoryGb
+		*out = new(float64)
+		**out = **in
+	}
+	if in.CoordinatorNodeHostOcpuCount != nil {
+		in, out := &in.CoordinatorNodeHostOcpuCount, &out.CoordinatorNodeHostOcpuCount
+		*out = new(float64)
+		**out = **in
+	}
+	if in.CoordinatorNodeHostShape != nil {
+		in, out := &in.CoordinatorNodeHostShape, &out.CoordinatorNodeHostShape
+		*out = new(string)
+		**out = **in
+	}
+	if in.CoordinatorNodeHostType != nil {
+		in, out := &in.CoordinatorNodeHostType, &out.CoordinatorNodeHostType
+		*out = new(string)
+		**out = **in
+	}
 	if in.DataNodeCount != nil {
 		in, out := &in.DataNodeCount, &out.DataNodeCount
 		*out = new(float64)
@@ -1253,6 +1303,31 @@ func (in *OpensearchClusterParameters) DeepCopyInto(out *OpensearchClusterParame
 	if in.ConfigureOutboundClusterTrigger != nil {
 		in, out := &in.ConfigureOutboundClusterTrigger, &out.ConfigureOutboundClusterTrigger
 		*out = new(float64)
+		**out = **in
+	}
+	if in.CoordinatorNodeCount != nil {
+		in, out := &in.CoordinatorNodeCount, &out.CoordinatorNodeCount
+		*out = new(float64)
+		**out = **in
+	}
+	if in.CoordinatorNodeHostMemoryGb != nil {
+		in, out := &in.CoordinatorNodeHostMemoryGb, &out.CoordinatorNodeHostMemoryGb
+		*out = new(float64)
+		**out = **in
+	}
+	if in.CoordinatorNodeHostOcpuCount != nil {
+		in, out := &in.CoordinatorNodeHostOcpuCount, &out.CoordinatorNodeHostOcpuCount
+		*out = new(float64)
+		**out = **in
+	}
+	if in.CoordinatorNodeHostShape != nil {
+		in, out := &in.CoordinatorNodeHostShape, &out.CoordinatorNodeHostShape
+		*out = new(string)
+		**out = **in
+	}
+	if in.CoordinatorNodeHostType != nil {
+		in, out := &in.CoordinatorNodeHostType, &out.CoordinatorNodeHostType
+		*out = new(string)
 		**out = **in
 	}
 	if in.DataNodeCount != nil {

@@ -336,6 +336,25 @@ spec:
                       triggers Configure Outbound Cluster. Could be set to any integer
                       value.
                     type: number
+                  coordinatorNodeCount:
+                    description: (Updatable) The number of coordinator nodes configured
+                      for the cluster.
+                    type: number
+                  coordinatorNodeHostMemoryGb:
+                    description: (Updatable) The amount of memory in GB, for the cluster's
+                      coordinator nodes.
+                    type: number
+                  coordinatorNodeHostOcpuCount:
+                    description: (Updatable) The number of OCPUs configured for the
+                      cluster's coordinator nodes.
+                    type: number
+                  coordinatorNodeHostShape:
+                    description: (Updatable) The node shape for the cluster's coordinator
+                      nodes.
+                    type: string
+                  coordinatorNodeHostType:
+                    description: The instance type for the cluster's coordinator nodes.
+                    type: string
                   dataNodeCount:
                     description: (Updatable) The number of data nodes to configure
                       for the cluster.
@@ -1384,6 +1403,25 @@ spec:
                       triggers Configure Outbound Cluster. Could be set to any integer
                       value.
                     type: number
+                  coordinatorNodeCount:
+                    description: (Updatable) The number of coordinator nodes configured
+                      for the cluster.
+                    type: number
+                  coordinatorNodeHostMemoryGb:
+                    description: (Updatable) The amount of memory in GB, for the cluster's
+                      coordinator nodes.
+                    type: number
+                  coordinatorNodeHostOcpuCount:
+                    description: (Updatable) The number of OCPUs configured for the
+                      cluster's coordinator nodes.
+                    type: number
+                  coordinatorNodeHostShape:
+                    description: (Updatable) The node shape for the cluster's coordinator
+                      nodes.
+                    type: string
+                  coordinatorNodeHostType:
+                    description: The instance type for the cluster's coordinator nodes.
+                    type: string
                   dataNodeCount:
                     description: (Updatable) The number of data nodes to configure
                       for the cluster.
@@ -2349,6 +2387,25 @@ spec:
                       triggers Configure Outbound Cluster. Could be set to any integer
                       value.
                     type: number
+                  coordinatorNodeCount:
+                    description: (Updatable) The number of coordinator nodes configured
+                      for the cluster.
+                    type: number
+                  coordinatorNodeHostMemoryGb:
+                    description: (Updatable) The amount of memory in GB, for the cluster's
+                      coordinator nodes.
+                    type: number
+                  coordinatorNodeHostOcpuCount:
+                    description: (Updatable) The number of OCPUs configured for the
+                      cluster's coordinator nodes.
+                    type: number
+                  coordinatorNodeHostShape:
+                    description: (Updatable) The node shape for the cluster's coordinator
+                      nodes.
+                    type: string
+                  coordinatorNodeHostType:
+                    description: The instance type for the cluster's coordinator nodes.
+                    type: string
                   dataNodeCount:
                     description: (Updatable) The number of data nodes to configure
                       for the cluster.

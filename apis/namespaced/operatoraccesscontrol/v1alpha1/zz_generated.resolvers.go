@@ -45,6 +45,26 @@ func (mg *OperatorControl) ResolveReferences( // ResolveReferences of this Opera
 	mg.Spec.ForProvider.CompartmentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CompartmentIDRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("ons.oci.m.upbound.io", "v1alpha1", "NotificationTopic", "NotificationTopicList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NotificationTopicID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.NotificationTopicIDRef,
+			Selector:     mg.Spec.ForProvider.NotificationTopicIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NotificationTopicID")
+	}
+	mg.Spec.ForProvider.NotificationTopicID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NotificationTopicIDRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("operatoraccesscontrol.oci.m.upbound.io", "v1alpha1", "OperatorControl", "OperatorControlList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -84,6 +104,26 @@ func (mg *OperatorControl) ResolveReferences( // ResolveReferences of this Opera
 	}
 	mg.Spec.InitProvider.CompartmentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.CompartmentIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ons.oci.m.upbound.io", "v1alpha1", "NotificationTopic", "NotificationTopicList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NotificationTopicID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.NotificationTopicIDRef,
+			Selector:     mg.Spec.InitProvider.NotificationTopicIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NotificationTopicID")
+	}
+	mg.Spec.InitProvider.NotificationTopicID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NotificationTopicIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("operatoraccesscontrol.oci.m.upbound.io", "v1alpha1", "OperatorControl", "OperatorControlList")
 		if err != nil {

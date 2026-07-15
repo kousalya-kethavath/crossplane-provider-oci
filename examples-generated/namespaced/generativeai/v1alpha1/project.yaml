@@ -1,0 +1,46 @@
+apiVersion: generativeai.oci.m.upbound.io/v1alpha1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: generativeai/v1alpha1/project
+  labels:
+    testing.upbound.io/example-name: test_project
+  name: test-project
+  namespace: upbound-system
+spec:
+  forProvider:
+    compartmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    conversationConfig:
+    - conversationsRetentionInHours: ${var.project_conversation_config_conversations_retention_in_hours}
+      responsesRetentionInHours: ${var.project_conversation_config_responses_retention_in_hours}
+    definedTags:
+      Operations.CostCenter: "42"
+    description: ${var.project_description}
+    displayName: ${var.project_display_name}
+    freeformTags:
+      Department: Finance
+    longTermMemoryConfig:
+    - standardLongTermMemoryStrategy:
+      - embeddingConfig:
+        - llmSelection:
+          - llmSelectionType: ${var.project_long_term_memory_config_standard_long_term_memory_strategy_embedding_config_llm_selection_llm_selection_type}
+            modelIdSelector:
+              matchLabels:
+                testing.upbound.io/example-name: test_model
+        extractionConfig:
+        - llmSelection:
+          - llmSelectionType: ${var.project_long_term_memory_config_standard_long_term_memory_strategy_extraction_config_llm_selection_llm_selection_type}
+            modelIdSelector:
+              matchLabels:
+                testing.upbound.io/example-name: test_model
+        isEnabled: ${var.project_long_term_memory_config_standard_long_term_memory_strategy_is_enabled}
+    shortTermMemoryOptimizationConfig:
+    - condenserConfig:
+      - llmSelection:
+        - llmSelectionType: ${var.project_short_term_memory_optimization_config_condenser_config_llm_selection_llm_selection_type}
+          modelIdSelector:
+            matchLabels:
+              testing.upbound.io/example-name: test_model
+      isEnabled: ${var.project_short_term_memory_optimization_config_is_enabled}

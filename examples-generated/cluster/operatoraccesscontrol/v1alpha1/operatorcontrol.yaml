@@ -18,6 +18,9 @@ spec:
     emailIdList: ${var.operator_control_email_id_list}
     freeformTags: ${var.operator_control_freeform_tags}
     isFullyPreApproved: ${var.operator_control_is_fully_pre_approved}
+    notificationTopicIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_notification_topic
     numberOfApprovers: ${var.operator_control_number_of_approvers}
     operatorControlNameSelector:
       matchLabels:

@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	config "github.com/oracle/provider-oci/internal/controller/cluster/apmconfig/config"
+	datafile "github.com/oracle/provider-oci/internal/controller/cluster/apmconfig/datafile"
 )
 
 // Setup_apmconfig creates all controllers with the supplied logger and adds them to
@@ -17,6 +18,7 @@ import (
 func Setup_apmconfig(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		config.Setup,
+		datafile.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -30,6 +32,7 @@ func Setup_apmconfig(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_apmconfig(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		config.SetupGated,
+		datafile.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

@@ -216,6 +216,45 @@ type TaintsParameters struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
+type VirtualNodePoolCyclingDetailsInitParameters struct {
+
+	// (Updatable) If virtual nodes in the virtual nodepool will be cycled to have new changes.
+	IsVirtualNodeCyclingEnabled *bool `json:"isVirtualNodeCyclingEnabled,omitempty" tf:"is_virtual_node_cycling_enabled,omitempty"`
+
+	// (Updatable) Maximum additional new virtual nodes that would be temporarily created and added to virtual nodepool during the cycling virtual nodepool process. OKE supports both integer and percentage input. Defaults to 1, Ranges from 0 to Virtual Nodepool size or 0% to 100%
+	MaximumSurge *string `json:"maximumSurge,omitempty" tf:"maximum_surge,omitempty"`
+
+	// (Updatable) Maximum active virtual nodes that would be terminated from virtual nodepool during the cycling virtual nodepool process. OKE supports both integer and percentage input. Defaults to 0, Ranges from 0 to Virtual Nodepool size or 0% to 100%
+	MaximumUnavailable *string `json:"maximumUnavailable,omitempty" tf:"maximum_unavailable,omitempty"`
+}
+
+type VirtualNodePoolCyclingDetailsObservation struct {
+
+	// (Updatable) If virtual nodes in the virtual nodepool will be cycled to have new changes.
+	IsVirtualNodeCyclingEnabled *bool `json:"isVirtualNodeCyclingEnabled,omitempty" tf:"is_virtual_node_cycling_enabled,omitempty"`
+
+	// (Updatable) Maximum additional new virtual nodes that would be temporarily created and added to virtual nodepool during the cycling virtual nodepool process. OKE supports both integer and percentage input. Defaults to 1, Ranges from 0 to Virtual Nodepool size or 0% to 100%
+	MaximumSurge *string `json:"maximumSurge,omitempty" tf:"maximum_surge,omitempty"`
+
+	// (Updatable) Maximum active virtual nodes that would be terminated from virtual nodepool during the cycling virtual nodepool process. OKE supports both integer and percentage input. Defaults to 0, Ranges from 0 to Virtual Nodepool size or 0% to 100%
+	MaximumUnavailable *string `json:"maximumUnavailable,omitempty" tf:"maximum_unavailable,omitempty"`
+}
+
+type VirtualNodePoolCyclingDetailsParameters struct {
+
+	// (Updatable) If virtual nodes in the virtual nodepool will be cycled to have new changes.
+	// +kubebuilder:validation:Optional
+	IsVirtualNodeCyclingEnabled *bool `json:"isVirtualNodeCyclingEnabled,omitempty" tf:"is_virtual_node_cycling_enabled,omitempty"`
+
+	// (Updatable) Maximum additional new virtual nodes that would be temporarily created and added to virtual nodepool during the cycling virtual nodepool process. OKE supports both integer and percentage input. Defaults to 1, Ranges from 0 to Virtual Nodepool size or 0% to 100%
+	// +kubebuilder:validation:Optional
+	MaximumSurge *string `json:"maximumSurge,omitempty" tf:"maximum_surge,omitempty"`
+
+	// (Updatable) Maximum active virtual nodes that would be terminated from virtual nodepool during the cycling virtual nodepool process. OKE supports both integer and percentage input. Defaults to 0, Ranges from 0 to Virtual Nodepool size or 0% to 100%
+	// +kubebuilder:validation:Optional
+	MaximumUnavailable *string `json:"maximumUnavailable,omitempty" tf:"maximum_unavailable,omitempty"`
+}
+
 type VirtualNodePoolInitParameters struct {
 
 	// The cluster the virtual node pool is associated with. A virtual node pool can only be associated with one cluster.
@@ -281,6 +320,9 @@ type VirtualNodePoolInitParameters struct {
 	// (Updatable) A taint is a collection of <key, value, effect>. These taints will be applied to the Virtual Nodes of this Virtual Node Pool for Kubernetes scheduling.
 	Taints []TaintsInitParameters `json:"taints,omitempty" tf:"taints,omitempty"`
 
+	// (Updatable) Virtual Node Pool Cycling Details
+	VirtualNodePoolCyclingDetails []VirtualNodePoolCyclingDetailsInitParameters `json:"virtualNodePoolCyclingDetails,omitempty" tf:"virtual_node_pool_cycling_details,omitempty"`
+
 	// (Updatable) The tags associated to the virtual nodes in this virtual node pool.
 	VirtualNodeTags []VirtualNodeTagsInitParameters `json:"virtualNodeTags,omitempty" tf:"virtual_node_tags,omitempty"`
 }
@@ -344,6 +386,9 @@ type VirtualNodePoolObservation struct {
 
 	// The time the virtual node pool was updated.
 	TimeUpdated *string `json:"timeUpdated,omitempty" tf:"time_updated,omitempty"`
+
+	// (Updatable) Virtual Node Pool Cycling Details
+	VirtualNodePoolCyclingDetails []VirtualNodePoolCyclingDetailsObservation `json:"virtualNodePoolCyclingDetails,omitempty" tf:"virtual_node_pool_cycling_details,omitempty"`
 
 	// (Updatable) The tags associated to the virtual nodes in this virtual node pool.
 	VirtualNodeTags []VirtualNodeTagsObservation `json:"virtualNodeTags,omitempty" tf:"virtual_node_tags,omitempty"`
@@ -424,6 +469,10 @@ type VirtualNodePoolParameters struct {
 	// (Updatable) A taint is a collection of <key, value, effect>. These taints will be applied to the Virtual Nodes of this Virtual Node Pool for Kubernetes scheduling.
 	// +kubebuilder:validation:Optional
 	Taints []TaintsParameters `json:"taints,omitempty" tf:"taints,omitempty"`
+
+	// (Updatable) Virtual Node Pool Cycling Details
+	// +kubebuilder:validation:Optional
+	VirtualNodePoolCyclingDetails []VirtualNodePoolCyclingDetailsParameters `json:"virtualNodePoolCyclingDetails,omitempty" tf:"virtual_node_pool_cycling_details,omitempty"`
 
 	// (Updatable) The tags associated to the virtual nodes in this virtual node pool.
 	// +kubebuilder:validation:Optional

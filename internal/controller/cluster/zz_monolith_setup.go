@@ -44,6 +44,7 @@ import (
 	apiplatforminstance "github.com/oracle/provider-oci/internal/controller/cluster/apiplatform/apiplatforminstance"
 	apmdomain "github.com/oracle/provider-oci/internal/controller/cluster/apm/apmdomain"
 	config "github.com/oracle/provider-oci/internal/controller/cluster/apmconfig/config"
+	datafile "github.com/oracle/provider-oci/internal/controller/cluster/apmconfig/datafile"
 	dedicatedvantagepoint "github.com/oracle/provider-oci/internal/controller/cluster/apmsynthetics/dedicatedvantagepoint"
 	monitor "github.com/oracle/provider-oci/internal/controller/cluster/apmsynthetics/monitor"
 	onpremisevantagepoint "github.com/oracle/provider-oci/internal/controller/cluster/apmsynthetics/onpremisevantagepoint"
@@ -550,9 +551,9 @@ import (
 	agenttool "github.com/oracle/provider-oci/internal/controller/cluster/generativeai/agenttool"
 	dedicatedaicluster "github.com/oracle/provider-oci/internal/controller/cluster/generativeai/dedicatedaicluster"
 	endpointgenerativeai "github.com/oracle/provider-oci/internal/controller/cluster/generativeai/endpoint"
-	generativeaiprivateendpoint "github.com/oracle/provider-oci/internal/controller/cluster/generativeai/generativeaiprivateendpoint"
 	importedmodel "github.com/oracle/provider-oci/internal/controller/cluster/generativeai/importedmodel"
 	modelgenerativeai "github.com/oracle/provider-oci/internal/controller/cluster/generativeai/model"
+	projectgenerativeai "github.com/oracle/provider-oci/internal/controller/cluster/generativeai/project"
 	semanticstore "github.com/oracle/provider-oci/internal/controller/cluster/generativeai/semanticstore"
 	artifactbypath "github.com/oracle/provider-oci/internal/controller/cluster/genericartifactscontent/artifactbypath"
 	connectiongoldengate "github.com/oracle/provider-oci/internal/controller/cluster/goldengate/connection"
@@ -1034,6 +1035,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		apiplatforminstance.Setup,
 		apmdomain.Setup,
 		config.Setup,
+		datafile.Setup,
 		dedicatedvantagepoint.Setup,
 		monitor.Setup,
 		onpremisevantagepoint.Setup,
@@ -1540,9 +1542,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		agenttool.Setup,
 		dedicatedaicluster.Setup,
 		endpointgenerativeai.Setup,
-		generativeaiprivateendpoint.Setup,
 		importedmodel.Setup,
 		modelgenerativeai.Setup,
+		projectgenerativeai.Setup,
 		semanticstore.Setup,
 		artifactbypath.Setup,
 		connectiongoldengate.Setup,
@@ -2030,6 +2032,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		apiplatforminstance.SetupGated,
 		apmdomain.SetupGated,
 		config.SetupGated,
+		datafile.SetupGated,
 		dedicatedvantagepoint.SetupGated,
 		monitor.SetupGated,
 		onpremisevantagepoint.SetupGated,
@@ -2536,9 +2539,9 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		agenttool.SetupGated,
 		dedicatedaicluster.SetupGated,
 		endpointgenerativeai.SetupGated,
-		generativeaiprivateendpoint.SetupGated,
 		importedmodel.SetupGated,
 		modelgenerativeai.SetupGated,
+		projectgenerativeai.SetupGated,
 		semanticstore.SetupGated,
 		artifactbypath.SetupGated,
 		connectiongoldengate.SetupGated,

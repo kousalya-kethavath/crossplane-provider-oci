@@ -387,10 +387,20 @@ spec:
                       in the desktop pool.
                     type: number
                   networkConfiguration:
-                    description: Provides information about the network configuration
-                      of the desktop pool.
+                    description: (Updatable) Provides information about the network
+                      configuration of the desktop pool.
                     items:
                       properties:
+                        securityAttributes:
+                          additionalProperties:
+                            type: string
+                          description: '(Updatable) Security attributes for this resource.
+                            Each attribute can be referenced in a Zero Trust Packet
+                            Routing (ZPR) policy to control access to ZPR-supported
+                            resources.  Example: {"Oracle-ZPR": {"MaxEgressCount":
+                            {"value": "42", "mode": "audit"}}}'
+                          type: object
+                          x-kubernetes-map-type: granular
                         subnetId:
                           description: The OCID of the subnet in the customer VCN
                             where the connectivity will be established.
@@ -560,8 +570,8 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   privateAccessDetails:
-                    description: The details of the desktop's private access network
-                      connectivity to be set up for the desktop pool.
+                    description: (Updatable) The details of the desktop's private
+                      access network connectivity to be set up for the desktop pool.
                     items:
                       properties:
                         nsgIds:
@@ -577,6 +587,16 @@ spec:
                             VNIC. If not provided, it will be auto-assigned with an
                             available IPv4 address from the subnet.
                           type: string
+                        securityAttributes:
+                          additionalProperties:
+                            type: string
+                          description: '(Updatable) Security attributes for this resource.
+                            Each attribute can be referenced in a Zero Trust Packet
+                            Routing (ZPR) policy to control access to ZPR-supported
+                            resources.  Example: {"Oracle-ZPR": {"MaxEgressCount":
+                            {"value": "42", "mode": "audit"}}}'
+                          type: object
+                          x-kubernetes-map-type: granular
                         subnetId:
                           description: The OCID of the subnet in the customer VCN
                             where the connectivity will be established.
@@ -659,20 +679,27 @@ spec:
                           type: object
                       type: object
                     type: array
+                  securityAttributes:
+                    additionalProperties:
+                      type: string
+                    description: '(Updatable) Security attributes for this resource.
+                      Each attribute can be referenced in a Zero Trust Packet Routing
+                      (ZPR) policy to control access to ZPR-supported resources.  Example:
+                      {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "audit"}}}'
+                    type: object
+                    x-kubernetes-map-type: granular
                   sessionLifecycleActions:
                     description: The details of action to be triggered in case of
                       inactivity or disconnect
                     items:
                       properties:
                         disconnect:
-                          description: (Updatable) Action and grace period for disconnect.
-                            Session disconnect can not be used together with an availability_policy
-                            schedule.
+                          description: (Updatable) Action and grace period for disconnect
                           items:
                             properties:
                               action:
                                 description: (Updatable) a disconnect action to be
-                                  triggered. Could be set to NONE or STOP
+                                  triggered
                                 type: string
                               gracePeriodInMinutes:
                                 description: (Updatable) The period of time (in minutes)
@@ -687,7 +714,7 @@ spec:
                             properties:
                               action:
                                 description: (Updatable) a disconnect action to be
-                                  triggered. Could be set to NONE or STOP
+                                  triggered
                                 type: string
                               gracePeriodInMinutes:
                                 description: (Updatable) The period of time (in minutes)
@@ -1071,10 +1098,20 @@ spec:
                       in the desktop pool.
                     type: number
                   networkConfiguration:
-                    description: Provides information about the network configuration
-                      of the desktop pool.
+                    description: (Updatable) Provides information about the network
+                      configuration of the desktop pool.
                     items:
                       properties:
+                        securityAttributes:
+                          additionalProperties:
+                            type: string
+                          description: '(Updatable) Security attributes for this resource.
+                            Each attribute can be referenced in a Zero Trust Packet
+                            Routing (ZPR) policy to control access to ZPR-supported
+                            resources.  Example: {"Oracle-ZPR": {"MaxEgressCount":
+                            {"value": "42", "mode": "audit"}}}'
+                          type: object
+                          x-kubernetes-map-type: granular
                         subnetId:
                           description: The OCID of the subnet in the customer VCN
                             where the connectivity will be established.
@@ -1244,8 +1281,8 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   privateAccessDetails:
-                    description: The details of the desktop's private access network
-                      connectivity to be set up for the desktop pool.
+                    description: (Updatable) The details of the desktop's private
+                      access network connectivity to be set up for the desktop pool.
                     items:
                       properties:
                         nsgIds:
@@ -1261,6 +1298,16 @@ spec:
                             VNIC. If not provided, it will be auto-assigned with an
                             available IPv4 address from the subnet.
                           type: string
+                        securityAttributes:
+                          additionalProperties:
+                            type: string
+                          description: '(Updatable) Security attributes for this resource.
+                            Each attribute can be referenced in a Zero Trust Packet
+                            Routing (ZPR) policy to control access to ZPR-supported
+                            resources.  Example: {"Oracle-ZPR": {"MaxEgressCount":
+                            {"value": "42", "mode": "audit"}}}'
+                          type: object
+                          x-kubernetes-map-type: granular
                         subnetId:
                           description: The OCID of the subnet in the customer VCN
                             where the connectivity will be established.
@@ -1343,20 +1390,27 @@ spec:
                           type: object
                       type: object
                     type: array
+                  securityAttributes:
+                    additionalProperties:
+                      type: string
+                    description: '(Updatable) Security attributes for this resource.
+                      Each attribute can be referenced in a Zero Trust Packet Routing
+                      (ZPR) policy to control access to ZPR-supported resources.  Example:
+                      {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "audit"}}}'
+                    type: object
+                    x-kubernetes-map-type: granular
                   sessionLifecycleActions:
                     description: The details of action to be triggered in case of
                       inactivity or disconnect
                     items:
                       properties:
                         disconnect:
-                          description: (Updatable) Action and grace period for disconnect.
-                            Session disconnect can not be used together with an availability_policy
-                            schedule.
+                          description: (Updatable) Action and grace period for disconnect
                           items:
                             properties:
                               action:
                                 description: (Updatable) a disconnect action to be
-                                  triggered. Could be set to NONE or STOP
+                                  triggered
                                 type: string
                               gracePeriodInMinutes:
                                 description: (Updatable) The period of time (in minutes)
@@ -1371,7 +1425,7 @@ spec:
                             properties:
                               action:
                                 description: (Updatable) a disconnect action to be
-                                  triggered. Could be set to NONE or STOP
+                                  triggered
                                 type: string
                               gracePeriodInMinutes:
                                 description: (Updatable) The period of time (in minutes)
@@ -1746,10 +1800,20 @@ spec:
                       in the desktop pool.
                     type: number
                   networkConfiguration:
-                    description: Provides information about the network configuration
-                      of the desktop pool.
+                    description: (Updatable) Provides information about the network
+                      configuration of the desktop pool.
                     items:
                       properties:
+                        securityAttributes:
+                          additionalProperties:
+                            type: string
+                          description: '(Updatable) Security attributes for this resource.
+                            Each attribute can be referenced in a Zero Trust Packet
+                            Routing (ZPR) policy to control access to ZPR-supported
+                            resources.  Example: {"Oracle-ZPR": {"MaxEgressCount":
+                            {"value": "42", "mode": "audit"}}}'
+                          type: object
+                          x-kubernetes-map-type: granular
                         subnetId:
                           description: The OCID of the subnet in the customer VCN
                             where the connectivity will be established.
@@ -1767,8 +1831,8 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   privateAccessDetails:
-                    description: The details of the desktop's private access network
-                      connectivity to be set up for the desktop pool.
+                    description: (Updatable) The details of the desktop's private
+                      access network connectivity to be set up for the desktop pool.
                     items:
                       properties:
                         endpointFqdn:
@@ -1791,6 +1855,16 @@ spec:
                             VNIC. If not provided, it will be auto-assigned with an
                             available IPv4 address from the subnet.
                           type: string
+                        securityAttributes:
+                          additionalProperties:
+                            type: string
+                          description: '(Updatable) Security attributes for this resource.
+                            Each attribute can be referenced in a Zero Trust Packet
+                            Routing (ZPR) policy to control access to ZPR-supported
+                            resources.  Example: {"Oracle-ZPR": {"MaxEgressCount":
+                            {"value": "42", "mode": "audit"}}}'
+                          type: object
+                          x-kubernetes-map-type: granular
                         subnetId:
                           description: The OCID of the subnet in the customer VCN
                             where the connectivity will be established.
@@ -1800,20 +1874,27 @@ spec:
                           type: string
                       type: object
                     type: array
+                  securityAttributes:
+                    additionalProperties:
+                      type: string
+                    description: '(Updatable) Security attributes for this resource.
+                      Each attribute can be referenced in a Zero Trust Packet Routing
+                      (ZPR) policy to control access to ZPR-supported resources.  Example:
+                      {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "audit"}}}'
+                    type: object
+                    x-kubernetes-map-type: granular
                   sessionLifecycleActions:
                     description: The details of action to be triggered in case of
                       inactivity or disconnect
                     items:
                       properties:
                         disconnect:
-                          description: (Updatable) Action and grace period for disconnect.
-                            Session disconnect can not be used together with an availability_policy
-                            schedule.
+                          description: (Updatable) Action and grace period for disconnect
                           items:
                             properties:
                               action:
                                 description: (Updatable) a disconnect action to be
-                                  triggered. Could be set to NONE or STOP
+                                  triggered
                                 type: string
                               gracePeriodInMinutes:
                                 description: (Updatable) The period of time (in minutes)
@@ -1828,7 +1909,7 @@ spec:
                             properties:
                               action:
                                 description: (Updatable) a disconnect action to be
-                                  triggered. Could be set to NONE or STOP
+                                  triggered
                                 type: string
                               gracePeriodInMinutes:
                                 description: (Updatable) The period of time (in minutes)

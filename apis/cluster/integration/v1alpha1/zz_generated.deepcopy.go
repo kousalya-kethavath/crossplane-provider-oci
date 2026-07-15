@@ -862,6 +862,11 @@ func (in *IntegrationInstanceInitParameters) DeepCopyInto(out *IntegrationInstan
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.AttachmentType != nil {
+		in, out := &in.AttachmentType, &out.AttachmentType
+		*out = new(string)
+		**out = **in
+	}
 	if in.CompartmentID != nil {
 		in, out := &in.CompartmentID, &out.CompartmentID
 		*out = new(string)
@@ -1114,6 +1119,11 @@ func (in *IntegrationInstanceObservation) DeepCopyInto(out *IntegrationInstanceO
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.AttachmentType != nil {
+		in, out := &in.AttachmentType, &out.AttachmentType
+		*out = new(string)
+		**out = **in
+	}
 	if in.Attachments != nil {
 		in, out := &in.Attachments, &out.Attachments
 		*out = make([]AttachmentsObservation, len(*in))
@@ -1293,6 +1303,11 @@ func (in *IntegrationInstanceObservation) DeepCopyInto(out *IntegrationInstanceO
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ProcessAutomationLogGroupID != nil {
+		in, out := &in.ProcessAutomationLogGroupID, &out.ProcessAutomationLogGroupID
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecurityAttributes != nil {
 		in, out := &in.SecurityAttributes, &out.SecurityAttributes
 		*out = make(map[string]*string, len(*in))
@@ -1371,6 +1386,11 @@ func (in *IntegrationInstanceParameters) DeepCopyInto(out *IntegrationInstancePa
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.AttachmentType != nil {
+		in, out := &in.AttachmentType, &out.AttachmentType
+		*out = new(string)
+		**out = **in
 	}
 	if in.CompartmentID != nil {
 		in, out := &in.CompartmentID, &out.CompartmentID

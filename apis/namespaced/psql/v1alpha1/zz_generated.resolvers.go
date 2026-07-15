@@ -277,6 +277,50 @@ func (mg *PsqlDbSystem) ResolveReferences(ctx context.Context, c client.Reader) 
 		mg.Spec.ForProvider.Source[i3].BackupIDRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Source); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("psql.oci.m.upbound.io", "v1alpha1", "PsqlDbSystem", "PsqlDbSystemList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Source[i3].DBSystemID),
+				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.Source[i3].DBSystemIDRef,
+				Selector:     mg.Spec.ForProvider.Source[i3].DBSystemIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Source[i3].DBSystemID")
+		}
+		mg.Spec.ForProvider.Source[i3].DBSystemID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Source[i3].DBSystemIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Source); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("psql.oci.m.upbound.io", "v1alpha1", "PsqlDbSystem", "PsqlDbSystemList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Source[i3].PrimaryDBSystemID),
+				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.Source[i3].PrimaryDBSystemIDRef,
+				Selector:     mg.Spec.ForProvider.Source[i3].PrimaryDBSystemIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Source[i3].PrimaryDBSystemID")
+		}
+		mg.Spec.ForProvider.Source[i3].PrimaryDBSystemID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Source[i3].PrimaryDBSystemIDRef = rsp.ResolvedReference
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("identity.oci.m.upbound.io", "v1alpha1", "Compartment", "CompartmentList")
 		if err != nil {
@@ -383,6 +427,50 @@ func (mg *PsqlDbSystem) ResolveReferences(ctx context.Context, c client.Reader) 
 		}
 		mg.Spec.InitProvider.Source[i3].BackupID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.InitProvider.Source[i3].BackupIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Source); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("psql.oci.m.upbound.io", "v1alpha1", "PsqlDbSystem", "PsqlDbSystemList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Source[i3].DBSystemID),
+				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.Source[i3].DBSystemIDRef,
+				Selector:     mg.Spec.InitProvider.Source[i3].DBSystemIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Source[i3].DBSystemID")
+		}
+		mg.Spec.InitProvider.Source[i3].DBSystemID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Source[i3].DBSystemIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Source); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("psql.oci.m.upbound.io", "v1alpha1", "PsqlDbSystem", "PsqlDbSystemList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Source[i3].PrimaryDBSystemID),
+				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.Source[i3].PrimaryDBSystemIDRef,
+				Selector:     mg.Spec.InitProvider.Source[i3].PrimaryDBSystemIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Source[i3].PrimaryDBSystemID")
+		}
+		mg.Spec.InitProvider.Source[i3].PrimaryDBSystemID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Source[i3].PrimaryDBSystemIDRef = rsp.ResolvedReference
 
 	}
 

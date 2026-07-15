@@ -73,6 +73,12 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  applyChangeModeToStandAlone:
+                    description: Specify change mode to apply when converting from
+                      warm standby to standalone. It can be set to 'IMMEDIATELY' or
+                      'REPLAY_PENDING_UPDATES'. If source.primary_db_system_id is
+                      disabled, REPLAY_PENDING_UPDATES is used by default.
+                    type: string
                   applyConfig:
                     description: Whether a configuration update requires a restart
                       of the database instance or a reload of the configuration. Some
@@ -433,6 +439,73 @@ spec:
                           type: string
                       type: object
                     type: array
+                  kerberosAuthDetails:
+                    description: Kerberos Authentication details for the database
+                      system.
+                    items:
+                      properties:
+                        backupCredentials:
+                          description: Optional. List of Kerberos Credentials previously
+                            configured for the dbsystem. Currently supports only one
+                            entry.
+                          items:
+                            properties:
+                              keytabSecretId:
+                                description: The OCID of the secret where the Kerberos
+                                  keytab file is stored as base64 text.
+                                type: string
+                              keytabSecretVersion:
+                                description: The secret version of the stored Kerberos
+                                  keytab file.
+                                type: string
+                              realmName:
+                                description: Kerberos realm name.  https://docs.oracle.com/cd/E36784_01/html/E37126/kplanning-27.html
+                                  Realm names can consist of any ASCII string. Usually,
+                                  the realm name is the same as your DNS domain name  except
+                                  that the realm name is in uppercase. This convention
+                                  helps differentiate problems with the Kerberos  service
+                                  from problems with the DNS namespace, while keeping
+                                  a name that is familiar. You can use any string,  but
+                                  configuration and maintenance might then require
+                                  more work. Use realm names that follow the standard  Internet
+                                  naming structure.
+                                type: string
+                            type: object
+                          type: array
+                        credentials:
+                          description: Initial database system credentials that the
+                            database system will be provisioned with. The password
+                            details are not visible on any subsequent operation, such
+                            as GET /dbSystems/{dbSystemId}.
+                          items:
+                            properties:
+                              keytabSecretId:
+                                description: The OCID of the secret where the Kerberos
+                                  keytab file is stored as base64 text.
+                                type: string
+                              keytabSecretVersion:
+                                description: The secret version of the stored Kerberos
+                                  keytab file.
+                                type: string
+                              realmName:
+                                description: Kerberos realm name.  https://docs.oracle.com/cd/E36784_01/html/E37126/kplanning-27.html
+                                  Realm names can consist of any ASCII string. Usually,
+                                  the realm name is the same as your DNS domain name  except
+                                  that the realm name is in uppercase. This convention
+                                  helps differentiate problems with the Kerberos  service
+                                  from problems with the DNS namespace, while keeping
+                                  a name that is familiar. You can use any string,  but
+                                  configuration and maintenance might then require
+                                  more work. Use realm names that follow the standard  Internet
+                                  naming structure.
+                                type: string
+                            type: object
+                          type: array
+                        kind:
+                          description: (Updatable) The kind of backup policy.
+                          type: string
+                      type: object
+                    type: array
                   managementPolicy:
                     description: (Updatable) PostgreSQL database system management
                       policy update details.
@@ -494,6 +567,20 @@ spec:
                           description: (Updatable) The start of the maintenance window
                             in UTC.
                           type: string
+                        pitrPolicy:
+                          description: (Updatable) Point-in-time recovery policy.
+                          items:
+                            properties:
+                              kind:
+                                description: (Updatable) The kind of backup policy.
+                                type: string
+                              restoreDays:
+                                description: (Updatable) The number of days the database
+                                  system retains backups required for point-in-time
+                                  recovery.
+                                type: number
+                            type: object
+                          type: array
                       type: object
                     type: array
                   networkDetails:
@@ -598,6 +685,33 @@ spec:
                           type: object
                       type: object
                     type: array
+                  odspInsightDetails:
+                    description: (Updatable) ODSP Insight details for the database
+                      system.
+                    items:
+                      properties:
+                        kind:
+                          description: (Updatable) The kind of backup policy.
+                          type: string
+                        odspInsightList:
+                          description: (Updatable) List of ODSP Insight and their
+                            configurations.
+                          items:
+                            properties:
+                              insightType:
+                                description: (Updatable) Type of Insight collected
+                                  for the database system.
+                                type: string
+                              retentionPeriodInDays:
+                                description: (Applicable when kind=ENABLED) (Updatable)
+                                  Retention period for Insight data, in days. Current
+                                  supported value is 7 days. the system default is
+                                  7 days.
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   patchOperations:
                     description: (Updatable) For adding and removing from read replica
                       database instances. Please remove the patch_operations after
@@ -626,6 +740,23 @@ spec:
                             description or privateIp. Example: {"displayName": "value"}.'
                           type: object
                           x-kubernetes-map-type: granular
+                      type: object
+                    type: array
+                  replicationConfig:
+                    description: (Updatable) Details of the replication configuration
+                      that is applicable when database system gets the  PRIMARY_DB_SYSTEM
+                      role.
+                    items:
+                      properties:
+                        isRpoEnforced:
+                          description: (Updatable) Specify if Recovery point objective
+                            (RPO) enforcement needs to be enabled on the database  system.
+                          type: boolean
+                        rpoInSeconds:
+                          description: (Updatable) Specifies the Recovery point objective
+                            (RPO) in seconds that will be enforced, if the  isRpoEnforced
+                            flag is true.
+                          type: string
                       type: object
                     type: array
                   shape:
@@ -716,16 +847,183 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        dbSystemId:
+                          description: The OCID of the source database system which
+                            will be used to perform point-in-time recovery.
+                          type: string
+                        dbSystemIdRef:
+                          description: Reference to a PsqlDbSystem in psql to populate
+                            dbSystemId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        dbSystemIdSelector:
+                          description: Selector for a PsqlDbSystem in psql to populate
+                            dbSystemId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         isHavingRestoreConfigOverrides:
                           description: (Applicable when source_type=BACKUP) Deprecated.
                             Don't use.
                           type: boolean
+                        primaryDbSystemId:
+                          description: The [OCID] of the primary database system.
+                          type: string
+                        primaryDbSystemIdRef:
+                          description: Reference to a PsqlDbSystem in psql to populate
+                            primaryDbSystemId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        primaryDbSystemIdSelector:
+                          description: Selector for a PsqlDbSystem in psql to populate
+                            primaryDbSystemId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         sourceType:
-                          description: 'The source descriminator. Example: {"source_type":
-                            "BACKUP"}.'
+                          description: The source descriminator.
+                          type: string
+                        timeToRestore:
+                          description: The target point-in-time of the source database
+                            system that will be restored, expressed in RFC 3339 timestamp
+                            format.
                           type: string
                       type: object
                     type: array
+                  state:
+                    description: (Updatable) The target state for the Db System. Could
+                      be set to ACTIVE or INACTIVE.
+                    type: string
                   storageDetails:
                     description: (Updatable) Storage details of the database system.
                     items:
@@ -772,6 +1070,12 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  applyChangeModeToStandAlone:
+                    description: Specify change mode to apply when converting from
+                      warm standby to standalone. It can be set to 'IMMEDIATELY' or
+                      'REPLAY_PENDING_UPDATES'. If source.primary_db_system_id is
+                      disabled, REPLAY_PENDING_UPDATES is used by default.
+                    type: string
                   applyConfig:
                     description: Whether a configuration update requires a restart
                       of the database instance or a reload of the configuration. Some
@@ -1134,6 +1438,73 @@ spec:
                           type: string
                       type: object
                     type: array
+                  kerberosAuthDetails:
+                    description: Kerberos Authentication details for the database
+                      system.
+                    items:
+                      properties:
+                        backupCredentials:
+                          description: Optional. List of Kerberos Credentials previously
+                            configured for the dbsystem. Currently supports only one
+                            entry.
+                          items:
+                            properties:
+                              keytabSecretId:
+                                description: The OCID of the secret where the Kerberos
+                                  keytab file is stored as base64 text.
+                                type: string
+                              keytabSecretVersion:
+                                description: The secret version of the stored Kerberos
+                                  keytab file.
+                                type: string
+                              realmName:
+                                description: Kerberos realm name.  https://docs.oracle.com/cd/E36784_01/html/E37126/kplanning-27.html
+                                  Realm names can consist of any ASCII string. Usually,
+                                  the realm name is the same as your DNS domain name  except
+                                  that the realm name is in uppercase. This convention
+                                  helps differentiate problems with the Kerberos  service
+                                  from problems with the DNS namespace, while keeping
+                                  a name that is familiar. You can use any string,  but
+                                  configuration and maintenance might then require
+                                  more work. Use realm names that follow the standard  Internet
+                                  naming structure.
+                                type: string
+                            type: object
+                          type: array
+                        credentials:
+                          description: Initial database system credentials that the
+                            database system will be provisioned with. The password
+                            details are not visible on any subsequent operation, such
+                            as GET /dbSystems/{dbSystemId}.
+                          items:
+                            properties:
+                              keytabSecretId:
+                                description: The OCID of the secret where the Kerberos
+                                  keytab file is stored as base64 text.
+                                type: string
+                              keytabSecretVersion:
+                                description: The secret version of the stored Kerberos
+                                  keytab file.
+                                type: string
+                              realmName:
+                                description: Kerberos realm name.  https://docs.oracle.com/cd/E36784_01/html/E37126/kplanning-27.html
+                                  Realm names can consist of any ASCII string. Usually,
+                                  the realm name is the same as your DNS domain name  except
+                                  that the realm name is in uppercase. This convention
+                                  helps differentiate problems with the Kerberos  service
+                                  from problems with the DNS namespace, while keeping
+                                  a name that is familiar. You can use any string,  but
+                                  configuration and maintenance might then require
+                                  more work. Use realm names that follow the standard  Internet
+                                  naming structure.
+                                type: string
+                            type: object
+                          type: array
+                        kind:
+                          description: (Updatable) The kind of backup policy.
+                          type: string
+                      type: object
+                    type: array
                   managementPolicy:
                     description: (Updatable) PostgreSQL database system management
                       policy update details.
@@ -1195,6 +1566,20 @@ spec:
                           description: (Updatable) The start of the maintenance window
                             in UTC.
                           type: string
+                        pitrPolicy:
+                          description: (Updatable) Point-in-time recovery policy.
+                          items:
+                            properties:
+                              kind:
+                                description: (Updatable) The kind of backup policy.
+                                type: string
+                              restoreDays:
+                                description: (Updatable) The number of days the database
+                                  system retains backups required for point-in-time
+                                  recovery.
+                                type: number
+                            type: object
+                          type: array
                       type: object
                     type: array
                   networkDetails:
@@ -1299,6 +1684,33 @@ spec:
                           type: object
                       type: object
                     type: array
+                  odspInsightDetails:
+                    description: (Updatable) ODSP Insight details for the database
+                      system.
+                    items:
+                      properties:
+                        kind:
+                          description: (Updatable) The kind of backup policy.
+                          type: string
+                        odspInsightList:
+                          description: (Updatable) List of ODSP Insight and their
+                            configurations.
+                          items:
+                            properties:
+                              insightType:
+                                description: (Updatable) Type of Insight collected
+                                  for the database system.
+                                type: string
+                              retentionPeriodInDays:
+                                description: (Applicable when kind=ENABLED) (Updatable)
+                                  Retention period for Insight data, in days. Current
+                                  supported value is 7 days. the system default is
+                                  7 days.
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   patchOperations:
                     description: (Updatable) For adding and removing from read replica
                       database instances. Please remove the patch_operations after
@@ -1327,6 +1739,23 @@ spec:
                             description or privateIp. Example: {"displayName": "value"}.'
                           type: object
                           x-kubernetes-map-type: granular
+                      type: object
+                    type: array
+                  replicationConfig:
+                    description: (Updatable) Details of the replication configuration
+                      that is applicable when database system gets the  PRIMARY_DB_SYSTEM
+                      role.
+                    items:
+                      properties:
+                        isRpoEnforced:
+                          description: (Updatable) Specify if Recovery point objective
+                            (RPO) enforcement needs to be enabled on the database  system.
+                          type: boolean
+                        rpoInSeconds:
+                          description: (Updatable) Specifies the Recovery point objective
+                            (RPO) in seconds that will be enforced, if the  isRpoEnforced
+                            flag is true.
+                          type: string
                       type: object
                     type: array
                   shape:
@@ -1417,16 +1846,183 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        dbSystemId:
+                          description: The OCID of the source database system which
+                            will be used to perform point-in-time recovery.
+                          type: string
+                        dbSystemIdRef:
+                          description: Reference to a PsqlDbSystem in psql to populate
+                            dbSystemId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        dbSystemIdSelector:
+                          description: Selector for a PsqlDbSystem in psql to populate
+                            dbSystemId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         isHavingRestoreConfigOverrides:
                           description: (Applicable when source_type=BACKUP) Deprecated.
                             Don't use.
                           type: boolean
+                        primaryDbSystemId:
+                          description: The [OCID] of the primary database system.
+                          type: string
+                        primaryDbSystemIdRef:
+                          description: Reference to a PsqlDbSystem in psql to populate
+                            primaryDbSystemId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        primaryDbSystemIdSelector:
+                          description: Selector for a PsqlDbSystem in psql to populate
+                            primaryDbSystemId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         sourceType:
-                          description: 'The source descriminator. Example: {"source_type":
-                            "BACKUP"}.'
+                          description: The source descriminator.
+                          type: string
+                        timeToRestore:
+                          description: The target point-in-time of the source database
+                            system that will be restored, expressed in RFC 3339 timestamp
+                            format.
                           type: string
                       type: object
                     type: array
+                  state:
+                    description: (Updatable) The target state for the Db System. Could
+                      be set to ACTIVE or INACTIVE.
+                    type: string
                   storageDetails:
                     description: (Updatable) Storage details of the database system.
                     items:
@@ -1577,6 +2173,12 @@ spec:
                   adminUsername:
                     description: The database system administrator username.
                     type: string
+                  applyChangeModeToStandAlone:
+                    description: Specify change mode to apply when converting from
+                      warm standby to standalone. It can be set to 'IMMEDIATELY' or
+                      'REPLAY_PENDING_UPDATES'. If source.primary_db_system_id is
+                      disabled, REPLAY_PENDING_UPDATES is used by default.
+                    type: string
                   applyConfig:
                     description: Whether a configuration update requires a restart
                       of the database instance or a reload of the configuration. Some
@@ -1688,8 +2290,8 @@ spec:
                             information for a resource in Failed state.
                           type: string
                         state:
-                          description: The current state of the database instance
-                            node.
+                          description: (Updatable) The target state for the Db System.
+                            Could be set to ACTIVE or INACTIVE.
                           type: string
                         timeCreated:
                           description: 'The date and time that the database instance
@@ -1722,6 +2324,73 @@ spec:
                             assigned to the database instance node. This value is
                             optional. If the IP is not provided, the IP will be chosen
                             from the available IP addresses in the specified subnet.
+                          type: string
+                      type: object
+                    type: array
+                  kerberosAuthDetails:
+                    description: Kerberos Authentication details for the database
+                      system.
+                    items:
+                      properties:
+                        backupCredentials:
+                          description: Optional. List of Kerberos Credentials previously
+                            configured for the dbsystem. Currently supports only one
+                            entry.
+                          items:
+                            properties:
+                              keytabSecretId:
+                                description: The OCID of the secret where the Kerberos
+                                  keytab file is stored as base64 text.
+                                type: string
+                              keytabSecretVersion:
+                                description: The secret version of the stored Kerberos
+                                  keytab file.
+                                type: string
+                              realmName:
+                                description: Kerberos realm name.  https://docs.oracle.com/cd/E36784_01/html/E37126/kplanning-27.html
+                                  Realm names can consist of any ASCII string. Usually,
+                                  the realm name is the same as your DNS domain name  except
+                                  that the realm name is in uppercase. This convention
+                                  helps differentiate problems with the Kerberos  service
+                                  from problems with the DNS namespace, while keeping
+                                  a name that is familiar. You can use any string,  but
+                                  configuration and maintenance might then require
+                                  more work. Use realm names that follow the standard  Internet
+                                  naming structure.
+                                type: string
+                            type: object
+                          type: array
+                        credentials:
+                          description: Initial database system credentials that the
+                            database system will be provisioned with. The password
+                            details are not visible on any subsequent operation, such
+                            as GET /dbSystems/{dbSystemId}.
+                          items:
+                            properties:
+                              keytabSecretId:
+                                description: The OCID of the secret where the Kerberos
+                                  keytab file is stored as base64 text.
+                                type: string
+                              keytabSecretVersion:
+                                description: The secret version of the stored Kerberos
+                                  keytab file.
+                                type: string
+                              realmName:
+                                description: Kerberos realm name.  https://docs.oracle.com/cd/E36784_01/html/E37126/kplanning-27.html
+                                  Realm names can consist of any ASCII string. Usually,
+                                  the realm name is the same as your DNS domain name  except
+                                  that the realm name is in uppercase. This convention
+                                  helps differentiate problems with the Kerberos  service
+                                  from problems with the DNS namespace, while keeping
+                                  a name that is familiar. You can use any string,  but
+                                  configuration and maintenance might then require
+                                  more work. Use realm names that follow the standard  Internet
+                                  naming structure.
+                                type: string
+                            type: object
+                          type: array
+                        kind:
+                          description: (Updatable) The kind of backup policy.
                           type: string
                       type: object
                     type: array
@@ -1791,6 +2460,20 @@ spec:
                           description: (Updatable) The start of the maintenance window
                             in UTC.
                           type: string
+                        pitrPolicy:
+                          description: (Updatable) Point-in-time recovery policy.
+                          items:
+                            properties:
+                              kind:
+                                description: (Updatable) The kind of backup policy.
+                                type: string
+                              restoreDays:
+                                description: (Updatable) The number of days the database
+                                  system retains backups required for point-in-time
+                                  recovery.
+                                type: number
+                            type: object
+                          type: array
                       type: object
                     type: array
                   networkDetails:
@@ -1817,6 +2500,33 @@ spec:
                           description: The OCID of the customer subnet associated
                             with the database system.
                           type: string
+                      type: object
+                    type: array
+                  odspInsightDetails:
+                    description: (Updatable) ODSP Insight details for the database
+                      system.
+                    items:
+                      properties:
+                        kind:
+                          description: (Updatable) The kind of backup policy.
+                          type: string
+                        odspInsightList:
+                          description: (Updatable) List of ODSP Insight and their
+                            configurations.
+                          items:
+                            properties:
+                              insightType:
+                                description: (Updatable) Type of Insight collected
+                                  for the database system.
+                                type: string
+                              retentionPeriodInDays:
+                                description: (Applicable when kind=ENABLED) (Updatable)
+                                  Retention period for Insight data, in days. Current
+                                  supported value is 7 days. the system default is
+                                  7 days.
+                                type: number
+                            type: object
+                          type: array
                       type: object
                     type: array
                   patchOperations:
@@ -1849,6 +2559,23 @@ spec:
                           x-kubernetes-map-type: granular
                       type: object
                     type: array
+                  replicationConfig:
+                    description: (Updatable) Details of the replication configuration
+                      that is applicable when database system gets the  PRIMARY_DB_SYSTEM
+                      role.
+                    items:
+                      properties:
+                        isRpoEnforced:
+                          description: (Updatable) Specify if Recovery point objective
+                            (RPO) enforcement needs to be enabled on the database  system.
+                          type: boolean
+                        rpoInSeconds:
+                          description: (Updatable) Specifies the Recovery point objective
+                            (RPO) in seconds that will be enforced, if the  isRpoEnforced
+                            flag is true.
+                          type: string
+                      type: object
+                    type: array
                   shape:
                     description: '(Updatable) The name of the shape for the database
                       instance node. Use the /shapes API for accepted shapes. Example:
@@ -1861,18 +2588,30 @@ spec:
                         backupId:
                           description: The OCID of the database system backup.
                           type: string
+                        dbSystemId:
+                          description: The OCID of the source database system which
+                            will be used to perform point-in-time recovery.
+                          type: string
                         isHavingRestoreConfigOverrides:
                           description: (Applicable when source_type=BACKUP) Deprecated.
                             Don't use.
                           type: boolean
+                        primaryDbSystemId:
+                          description: The [OCID] of the primary database system.
+                          type: string
                         sourceType:
-                          description: 'The source descriminator. Example: {"source_type":
-                            "BACKUP"}.'
+                          description: The source descriminator.
+                          type: string
+                        timeToRestore:
+                          description: The target point-in-time of the source database
+                            system that will be restored, expressed in RFC 3339 timestamp
+                            format.
                           type: string
                       type: object
                     type: array
                   state:
-                    description: The current state of the database instance node.
+                    description: (Updatable) The target state for the Db System. Could
+                      be set to ACTIVE or INACTIVE.
                     type: string
                   storageDetails:
                     description: (Updatable) Storage details of the database system.
@@ -1903,6 +2642,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                  systemRole:
+                    description: Type of the database system.
+                    type: string
                   systemTags:
                     additionalProperties:
                       type: string

@@ -190,6 +190,21 @@ type OpensearchClusterInitParameters struct {
 	// (Updatable) An optional property when incremented triggers Configure Outbound Cluster. Could be set to any integer value.
 	ConfigureOutboundClusterTrigger *float64 `json:"configureOutboundClusterTrigger,omitempty" tf:"configure_outbound_cluster_trigger,omitempty"`
 
+	// (Updatable) The number of coordinator nodes configured for the cluster.
+	CoordinatorNodeCount *float64 `json:"coordinatorNodeCount,omitempty" tf:"coordinator_node_count,omitempty"`
+
+	// (Updatable) The amount of memory in GB, for the cluster's coordinator nodes.
+	CoordinatorNodeHostMemoryGb *float64 `json:"coordinatorNodeHostMemoryGb,omitempty" tf:"coordinator_node_host_memory_gb,omitempty"`
+
+	// (Updatable) The number of OCPUs configured for the cluster's coordinator nodes.
+	CoordinatorNodeHostOcpuCount *float64 `json:"coordinatorNodeHostOcpuCount,omitempty" tf:"coordinator_node_host_ocpu_count,omitempty"`
+
+	// (Updatable) The node shape for the cluster's coordinator nodes.
+	CoordinatorNodeHostShape *string `json:"coordinatorNodeHostShape,omitempty" tf:"coordinator_node_host_shape,omitempty"`
+
+	// The instance type for the cluster's coordinator nodes.
+	CoordinatorNodeHostType *string `json:"coordinatorNodeHostType,omitempty" tf:"coordinator_node_host_type,omitempty"`
+
 	// (Updatable) The number of data nodes to configure for the cluster.
 	DataNodeCount *float64 `json:"dataNodeCount,omitempty" tf:"data_node_count,omitempty"`
 
@@ -409,6 +424,21 @@ type OpensearchClusterObservation struct {
 	// (Updatable) An optional property when incremented triggers Configure Outbound Cluster. Could be set to any integer value.
 	ConfigureOutboundClusterTrigger *float64 `json:"configureOutboundClusterTrigger,omitempty" tf:"configure_outbound_cluster_trigger,omitempty"`
 
+	// (Updatable) The number of coordinator nodes configured for the cluster.
+	CoordinatorNodeCount *float64 `json:"coordinatorNodeCount,omitempty" tf:"coordinator_node_count,omitempty"`
+
+	// (Updatable) The amount of memory in GB, for the cluster's coordinator nodes.
+	CoordinatorNodeHostMemoryGb *float64 `json:"coordinatorNodeHostMemoryGb,omitempty" tf:"coordinator_node_host_memory_gb,omitempty"`
+
+	// (Updatable) The number of OCPUs configured for the cluster's coordinator nodes.
+	CoordinatorNodeHostOcpuCount *float64 `json:"coordinatorNodeHostOcpuCount,omitempty" tf:"coordinator_node_host_ocpu_count,omitempty"`
+
+	// (Updatable) The node shape for the cluster's coordinator nodes.
+	CoordinatorNodeHostShape *string `json:"coordinatorNodeHostShape,omitempty" tf:"coordinator_node_host_shape,omitempty"`
+
+	// The instance type for the cluster's coordinator nodes.
+	CoordinatorNodeHostType *string `json:"coordinatorNodeHostType,omitempty" tf:"coordinator_node_host_type,omitempty"`
+
 	// (Updatable) The number of data nodes to configure for the cluster.
 	DataNodeCount *float64 `json:"dataNodeCount,omitempty" tf:"data_node_count,omitempty"`
 
@@ -622,6 +652,26 @@ type OpensearchClusterParameters struct {
 	// (Updatable) An optional property when incremented triggers Configure Outbound Cluster. Could be set to any integer value.
 	// +kubebuilder:validation:Optional
 	ConfigureOutboundClusterTrigger *float64 `json:"configureOutboundClusterTrigger,omitempty" tf:"configure_outbound_cluster_trigger,omitempty"`
+
+	// (Updatable) The number of coordinator nodes configured for the cluster.
+	// +kubebuilder:validation:Optional
+	CoordinatorNodeCount *float64 `json:"coordinatorNodeCount,omitempty" tf:"coordinator_node_count,omitempty"`
+
+	// (Updatable) The amount of memory in GB, for the cluster's coordinator nodes.
+	// +kubebuilder:validation:Optional
+	CoordinatorNodeHostMemoryGb *float64 `json:"coordinatorNodeHostMemoryGb,omitempty" tf:"coordinator_node_host_memory_gb,omitempty"`
+
+	// (Updatable) The number of OCPUs configured for the cluster's coordinator nodes.
+	// +kubebuilder:validation:Optional
+	CoordinatorNodeHostOcpuCount *float64 `json:"coordinatorNodeHostOcpuCount,omitempty" tf:"coordinator_node_host_ocpu_count,omitempty"`
+
+	// (Updatable) The node shape for the cluster's coordinator nodes.
+	// +kubebuilder:validation:Optional
+	CoordinatorNodeHostShape *string `json:"coordinatorNodeHostShape,omitempty" tf:"coordinator_node_host_shape,omitempty"`
+
+	// The instance type for the cluster's coordinator nodes.
+	// +kubebuilder:validation:Optional
+	CoordinatorNodeHostType *string `json:"coordinatorNodeHostType,omitempty" tf:"coordinator_node_host_type,omitempty"`
 
 	// (Updatable) The number of data nodes to configure for the cluster.
 	// +kubebuilder:validation:Optional

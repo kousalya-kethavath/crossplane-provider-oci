@@ -652,6 +652,9 @@ type AutonomousDatabaseObservation struct {
 	// Types of providers supported for managing database encryption keys
 	EncryptionKeyLocationDetails []AutonomousDatabaseEncryptionKeyLocationDetailsObservation `json:"encryptionKeyLocationDetails,omitempty" tf:"encryption_key_location_details,omitempty"`
 
+	// The external logical zone where the Autonomous AI Database Serverless instance is located (Intended for multicloud use).
+	ExternalLocationZone *string `json:"externalLocationZone,omitempty" tf:"external_location_zone,omitempty"`
+
 	// Indicates the number of seconds of data loss for a Data Guard failover.
 	FailedDataRecoveryInSeconds *float64 `json:"failedDataRecoveryInSeconds,omitempty" tf:"failed_data_recovery_in_seconds,omitempty"`
 
@@ -1950,6 +1953,9 @@ type LocalStandbyDBObservation struct {
 	// The availability domain where the Autonomous AI Database Serverless instance is located.
 	AvailabilityDomain *string `json:"availabilityDomain,omitempty" tf:"availability_domain,omitempty"`
 
+	// The external logical zone where the Autonomous AI Database Serverless instance is located (Intended for multicloud use).
+	ExternalLocationZone *string `json:"externalLocationZone,omitempty" tf:"external_location_zone,omitempty"`
+
 	// The amount of time, in seconds, that the data of the standby database lags the data of the primary database. Can be used to determine the potential data loss in the event of a failover.
 	LagTimeInSeconds *float64 `json:"lagTimeInSeconds,omitempty" tf:"lag_time_in_seconds,omitempty"`
 
@@ -2240,6 +2246,9 @@ type StandbyDBObservation struct {
 
 	// The availability domain where the Autonomous AI Database Serverless instance is located.
 	AvailabilityDomain *string `json:"availabilityDomain,omitempty" tf:"availability_domain,omitempty"`
+
+	// The external logical zone where the Autonomous AI Database Serverless instance is located (Intended for multicloud use).
+	ExternalLocationZone *string `json:"externalLocationZone,omitempty" tf:"external_location_zone,omitempty"`
 
 	// The amount of time, in seconds, that the data of the standby database lags the data of the primary database. Can be used to determine the potential data loss in the event of a failover.
 	LagTimeInSeconds *float64 `json:"lagTimeInSeconds,omitempty" tf:"lag_time_in_seconds,omitempty"`

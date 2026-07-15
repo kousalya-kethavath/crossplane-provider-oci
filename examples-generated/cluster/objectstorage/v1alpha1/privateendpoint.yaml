@@ -1,0 +1,23 @@
+apiVersion: objectstorage.oci.upbound.io/v1alpha1
+kind: PrivateEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: objectstorage/v1alpha1/privateendpoint
+  labels:
+    testing.upbound.io/example-name: pe
+  name: pe
+spec:
+  forProvider:
+    accessTargets:
+    - bucket: '*'
+      compartmentId: '*'
+      namespace: '*'
+    compartmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: ${var.pe_name}
+    namespace: ${var.namespace_name}
+    prefix: ${var.dns_prefix}
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_subnet_1

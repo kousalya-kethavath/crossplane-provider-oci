@@ -623,6 +623,9 @@ spec:
                   memorySizeInGbs:
                     description: (Updatable) The memory to be allocated in GBs.
                     type: number
+                  nodeCount:
+                    description: The number of nodes in the cloud VM cluster.
+                    type: number
                   nsgIds:
                     description: '(Updatable) The list of OCIDs for the network security
                       groups (NSGs) to which this resource belongs. Setting this to
@@ -1450,6 +1453,9 @@ spec:
                     type: string
                   memorySizeInGbs:
                     description: (Updatable) The memory to be allocated in GBs.
+                    type: number
+                  nodeCount:
+                    description: The number of nodes in the cloud VM cluster.
                     type: number
                   nsgIds:
                     description: '(Updatable) The list of OCIDs for the network security

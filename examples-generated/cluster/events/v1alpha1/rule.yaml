@@ -9,13 +9,13 @@ metadata:
 spec:
   forProvider:
     actions:
-    - actions:
-      - actionType: ${var.rule_actions_actions_action_type}
-        description: ${var.rule_actions_actions_description}
+    - action:
+      - actionType: ${var.rule_actions_action_action_type}
+        description: ${var.rule_actions_action_description}
         functionIdSelector:
           matchLabels:
             testing.upbound.io/example-name: test_function
-        isEnabled: ${var.rule_actions_actions_is_enabled}
+        isEnabled: ${var.rule_actions_action_is_enabled}
         streamIdSelector:
           matchLabels:
             testing.upbound.io/example-name: test_stream
@@ -25,7 +25,11 @@ spec:
     compartmentIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    condition: ${var.rule_condition}
+    conditionDetails:
+    - data: ${jsonencode({})}
+      eventTypes:
+      - com.oraclecloud.objectstorage.createbucket
+      - com.oraclecloud.objectstorage.deletebucket
     definedTags:
       Operations.CostCenter: "42"
     description: ${var.rule_description}

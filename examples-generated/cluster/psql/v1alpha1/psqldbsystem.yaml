@@ -55,6 +55,9 @@ spec:
         kind: ${var.db_system_management_policy_backup_policy_kind}
         retentionDays: ${var.db_system_management_policy_backup_policy_retention_days}
       maintenanceWindowStart: ${var.db_system_management_policy_maintenance_window_start}
+      pitrPolicy:
+      - kind: ${var.db_system_management_policy_pitr_policy_kind}
+        restoreDays: ${var.db_system_management_policy_pitr_policy_restore_days}
     networkDetails:
     - isReaderEndpointEnabled: ${var.db_system_network_details_is_reader_endpoint_enabled}
       nsgIds: ${var.db_system_network_details_nsg_ids}
@@ -62,17 +65,32 @@ spec:
       subnetIdSelector:
         matchLabels:
           testing.upbound.io/example-name: test_subnet
+    odspInsightDetails:
+    - kind: ${var.db_system_odsp_insight_details_kind}
+      odspInsightList:
+      - insightType: ${var.db_system_odsp_insight_details_odsp_insight_list_insight_type}
+        retentionPeriodInDays: ${var.db_system_odsp_insight_details_odsp_insight_list_retention_period_in_days}
     patchOperations:
     - operation: ${var.db_system_patch_operations_operation}
       selection: ${var.db_system_patch_operations_selection}
       value: ${var.db_system_patch_operations_value}
+    replicationConfig:
+    - isRpoEnforced: ${var.db_system_replication_config_is_rpo_enforced}
+      rpoInSeconds: ${var.db_system_replication_config_rpo_in_seconds}
     shape: ${var.db_system_shape}
     source:
     - backupIdSelector:
         matchLabels:
           testing.upbound.io/example-name: test_backup
+      dbSystemIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test_db_system
       isHavingRestoreConfigOverrides: ${var.db_system_source_is_having_restore_config_overrides}
+      primaryDbSystemIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test_db_system
       sourceType: ${var.db_system_source_source_type}
+      timeToRestore: ${var.db_system_source_time_to_restore}
     storageDetails:
     - availabilityDomain: ${var.db_system_storage_details_availability_domain}
       iops: ${var.db_system_storage_details_iops}

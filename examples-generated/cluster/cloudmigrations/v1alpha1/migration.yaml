@@ -25,3 +25,4 @@ spec:
     replicationScheduleIdSelector:
       matchLabels:
         testing.upbound.io/example-name: test_replication_schedule
+    securityAttributes: ${var.migration_security_attributes}

@@ -69,6 +69,7 @@ spec:
               clientSecretVersionNumber: ${var.deployment_specification_request_policies_authentication_validation_failure_policy_client_details_client_secret_version_number}
               type: ${var.deployment_specification_request_policies_authentication_validation_failure_policy_client_details_type}
             fallbackRedirectPath: ${var.deployment_specification_request_policies_authentication_validation_failure_policy_fallback_redirect_path}
+            loginPath: ${var.deployment_specification_request_policies_authentication_validation_failure_policy_login_path}
             logoutPath: ${var.deployment_specification_request_policies_authentication_validation_failure_policy_logout_path}
             maxExpiryDurationInHours: ${var.deployment_specification_request_policies_authentication_validation_failure_policy_max_expiry_duration_in_hours}
             responseCode: ${var.deployment_specification_request_policies_authentication_validation_failure_policy_response_code}
@@ -177,6 +178,7 @@ spec:
                   clientSecretVersionNumber: ${var.deployment_specification_request_policies_dynamic_authentication_authentication_servers_authentication_server_detail_validation_failure_policy_client_details_client_secret_version_number}
                   type: ${var.deployment_specification_request_policies_dynamic_authentication_authentication_servers_authentication_server_detail_validation_failure_policy_client_details_type}
                 fallbackRedirectPath: ${var.deployment_specification_request_policies_dynamic_authentication_authentication_servers_authentication_server_detail_validation_failure_policy_fallback_redirect_path}
+                loginPath: ${var.deployment_specification_request_policies_dynamic_authentication_authentication_servers_authentication_server_detail_validation_failure_policy_login_path}
                 logoutPath: ${var.deployment_specification_request_policies_dynamic_authentication_authentication_servers_authentication_server_detail_validation_failure_policy_logout_path}
                 maxExpiryDurationInHours: ${var.deployment_specification_request_policies_dynamic_authentication_authentication_servers_authentication_server_detail_validation_failure_policy_max_expiry_duration_in_hours}
                 responseCode: ${var.deployment_specification_request_policies_dynamic_authentication_authentication_servers_authentication_server_detail_validation_failure_policy_response_code}

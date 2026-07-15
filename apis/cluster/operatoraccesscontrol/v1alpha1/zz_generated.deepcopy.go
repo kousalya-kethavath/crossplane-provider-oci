@@ -743,6 +743,21 @@ func (in *OperatorControlInitParameters) DeepCopyInto(out *OperatorControlInitPa
 		*out = new(bool)
 		**out = **in
 	}
+	if in.NotificationTopicID != nil {
+		in, out := &in.NotificationTopicID, &out.NotificationTopicID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NotificationTopicIDRef != nil {
+		in, out := &in.NotificationTopicIDRef, &out.NotificationTopicIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NotificationTopicIDSelector != nil {
+		in, out := &in.NotificationTopicIDSelector, &out.NotificationTopicIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.NumberOfApprovers != nil {
 		in, out := &in.NumberOfApprovers, &out.NumberOfApprovers
 		*out = new(float64)
@@ -937,6 +952,11 @@ func (in *OperatorControlObservation) DeepCopyInto(out *OperatorControlObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.NotificationTopicID != nil {
+		in, out := &in.NotificationTopicID, &out.NotificationTopicID
+		*out = new(string)
+		**out = **in
+	}
 	if in.NumberOfApprovers != nil {
 		in, out := &in.NumberOfApprovers, &out.NumberOfApprovers
 		*out = new(float64)
@@ -1092,6 +1112,21 @@ func (in *OperatorControlParameters) DeepCopyInto(out *OperatorControlParameters
 		in, out := &in.IsFullyPreApproved, &out.IsFullyPreApproved
 		*out = new(bool)
 		**out = **in
+	}
+	if in.NotificationTopicID != nil {
+		in, out := &in.NotificationTopicID, &out.NotificationTopicID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NotificationTopicIDRef != nil {
+		in, out := &in.NotificationTopicIDRef, &out.NotificationTopicIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NotificationTopicIDSelector != nil {
+		in, out := &in.NotificationTopicIDSelector, &out.NotificationTopicIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NumberOfApprovers != nil {
 		in, out := &in.NumberOfApprovers, &out.NumberOfApprovers

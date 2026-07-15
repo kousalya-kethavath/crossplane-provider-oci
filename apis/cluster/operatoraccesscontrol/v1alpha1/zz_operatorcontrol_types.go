@@ -50,6 +50,19 @@ type OperatorControlInitParameters struct {
 	// (Updatable) Whether all the operator actions have been pre-approved. If yes, all access requests associated with a resource governed by this operator control  will be auto-approved.
 	IsFullyPreApproved *bool `json:"isFullyPreApproved,omitempty" tf:"is_fully_pre_approved,omitempty"`
 
+	// (Updatable) The OCID of the Oracle Cloud Infrastructure Notification topic to publish messages related to this operator control.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/ons/v1alpha1.NotificationTopic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	NotificationTopicID *string `json:"notificationTopicId,omitempty" tf:"notification_topic_id,omitempty"`
+
+	// Reference to a NotificationTopic in ons to populate notificationTopicId.
+	// +kubebuilder:validation:Optional
+	NotificationTopicIDRef *v1.Reference `json:"notificationTopicIdRef,omitempty" tf:"-"`
+
+	// Selector for a NotificationTopic in ons to populate notificationTopicId.
+	// +kubebuilder:validation:Optional
+	NotificationTopicIDSelector *v1.Selector `json:"notificationTopicIdSelector,omitempty" tf:"-"`
+
 	// (Updatable) Number of approvers required to approve an access request.
 	NumberOfApprovers *float64 `json:"numberOfApprovers,omitempty" tf:"number_of_approvers,omitempty"`
 
@@ -114,6 +127,9 @@ type OperatorControlObservation struct {
 
 	// Description associated with the latest modification of the operator control.
 	LastModifiedInfo *string `json:"lastModifiedInfo,omitempty" tf:"last_modified_info,omitempty"`
+
+	// (Updatable) The OCID of the Oracle Cloud Infrastructure Notification topic to publish messages related to this operator control.
+	NotificationTopicID *string `json:"notificationTopicId,omitempty" tf:"notification_topic_id,omitempty"`
 
 	// (Updatable) Number of approvers required to approve an access request.
 	NumberOfApprovers *float64 `json:"numberOfApprovers,omitempty" tf:"number_of_approvers,omitempty"`
@@ -187,6 +203,20 @@ type OperatorControlParameters struct {
 	// (Updatable) Whether all the operator actions have been pre-approved. If yes, all access requests associated with a resource governed by this operator control  will be auto-approved.
 	// +kubebuilder:validation:Optional
 	IsFullyPreApproved *bool `json:"isFullyPreApproved,omitempty" tf:"is_fully_pre_approved,omitempty"`
+
+	// (Updatable) The OCID of the Oracle Cloud Infrastructure Notification topic to publish messages related to this operator control.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/ons/v1alpha1.NotificationTopic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	NotificationTopicID *string `json:"notificationTopicId,omitempty" tf:"notification_topic_id,omitempty"`
+
+	// Reference to a NotificationTopic in ons to populate notificationTopicId.
+	// +kubebuilder:validation:Optional
+	NotificationTopicIDRef *v1.Reference `json:"notificationTopicIdRef,omitempty" tf:"-"`
+
+	// Selector for a NotificationTopic in ons to populate notificationTopicId.
+	// +kubebuilder:validation:Optional
+	NotificationTopicIDSelector *v1.Selector `json:"notificationTopicIdSelector,omitempty" tf:"-"`
 
 	// (Updatable) Number of approvers required to approve an access request.
 	// +kubebuilder:validation:Optional

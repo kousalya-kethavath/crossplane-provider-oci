@@ -13,6 +13,45 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type BackupCredentialsInitParameters struct {
+
+	// The OCID of the secret where the Kerberos keytab file is stored as base64 text.
+	KeytabSecretID *string `json:"keytabSecretId,omitempty" tf:"keytab_secret_id,omitempty"`
+
+	// The secret version of the stored Kerberos keytab file.
+	KeytabSecretVersion *string `json:"keytabSecretVersion,omitempty" tf:"keytab_secret_version,omitempty"`
+
+	// Kerberos realm name.  https://docs.oracle.com/cd/E36784_01/html/E37126/kplanning-27.html Realm names can consist of any ASCII string. Usually, the realm name is the same as your DNS domain name  except that the realm name is in uppercase. This convention helps differentiate problems with the Kerberos  service from problems with the DNS namespace, while keeping a name that is familiar. You can use any string,  but configuration and maintenance might then require more work. Use realm names that follow the standard  Internet naming structure.
+	RealmName *string `json:"realmName,omitempty" tf:"realm_name,omitempty"`
+}
+
+type BackupCredentialsObservation struct {
+
+	// The OCID of the secret where the Kerberos keytab file is stored as base64 text.
+	KeytabSecretID *string `json:"keytabSecretId,omitempty" tf:"keytab_secret_id,omitempty"`
+
+	// The secret version of the stored Kerberos keytab file.
+	KeytabSecretVersion *string `json:"keytabSecretVersion,omitempty" tf:"keytab_secret_version,omitempty"`
+
+	// Kerberos realm name.  https://docs.oracle.com/cd/E36784_01/html/E37126/kplanning-27.html Realm names can consist of any ASCII string. Usually, the realm name is the same as your DNS domain name  except that the realm name is in uppercase. This convention helps differentiate problems with the Kerberos  service from problems with the DNS namespace, while keeping a name that is familiar. You can use any string,  but configuration and maintenance might then require more work. Use realm names that follow the standard  Internet naming structure.
+	RealmName *string `json:"realmName,omitempty" tf:"realm_name,omitempty"`
+}
+
+type BackupCredentialsParameters struct {
+
+	// The OCID of the secret where the Kerberos keytab file is stored as base64 text.
+	// +kubebuilder:validation:Optional
+	KeytabSecretID *string `json:"keytabSecretId,omitempty" tf:"keytab_secret_id,omitempty"`
+
+	// The secret version of the stored Kerberos keytab file.
+	// +kubebuilder:validation:Optional
+	KeytabSecretVersion *string `json:"keytabSecretVersion,omitempty" tf:"keytab_secret_version,omitempty"`
+
+	// Kerberos realm name.  https://docs.oracle.com/cd/E36784_01/html/E37126/kplanning-27.html Realm names can consist of any ASCII string. Usually, the realm name is the same as your DNS domain name  except that the realm name is in uppercase. This convention helps differentiate problems with the Kerberos  service from problems with the DNS namespace, while keeping a name that is familiar. You can use any string,  but configuration and maintenance might then require more work. Use realm names that follow the standard  Internet naming structure.
+	// +kubebuilder:validation:Optional
+	RealmName *string `json:"realmName,omitempty" tf:"realm_name,omitempty"`
+}
+
 type BackupPolicyInitParameters struct {
 
 	// (Updatable) Hour of the day when the backup starts.
@@ -209,7 +248,7 @@ type InstancesObservation struct {
 	// A message describing the current state in more detail. For example, can be used to provide actionable information for a resource in Failed state.
 	LifecycleDetails *string `json:"lifecycleDetails,omitempty" tf:"lifecycle_details,omitempty"`
 
-	// The current state of the database instance node.
+	// (Updatable) The target state for the Db System. Could be set to ACTIVE or INACTIVE.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// The date and time that the database instance node was created, expressed in RFC 3339 timestamp format.  Example: 2016-08-25T21:10:29.600Z
@@ -222,6 +261,84 @@ type InstancesObservation struct {
 type InstancesParameters struct {
 }
 
+type KerberosAuthDetailsCredentialsInitParameters struct {
+
+	// The OCID of the secret where the Kerberos keytab file is stored as base64 text.
+	KeytabSecretID *string `json:"keytabSecretId,omitempty" tf:"keytab_secret_id,omitempty"`
+
+	// The secret version of the stored Kerberos keytab file.
+	KeytabSecretVersion *string `json:"keytabSecretVersion,omitempty" tf:"keytab_secret_version,omitempty"`
+
+	// Kerberos realm name.  https://docs.oracle.com/cd/E36784_01/html/E37126/kplanning-27.html Realm names can consist of any ASCII string. Usually, the realm name is the same as your DNS domain name  except that the realm name is in uppercase. This convention helps differentiate problems with the Kerberos  service from problems with the DNS namespace, while keeping a name that is familiar. You can use any string,  but configuration and maintenance might then require more work. Use realm names that follow the standard  Internet naming structure.
+	RealmName *string `json:"realmName,omitempty" tf:"realm_name,omitempty"`
+}
+
+type KerberosAuthDetailsCredentialsObservation struct {
+
+	// The OCID of the secret where the Kerberos keytab file is stored as base64 text.
+	KeytabSecretID *string `json:"keytabSecretId,omitempty" tf:"keytab_secret_id,omitempty"`
+
+	// The secret version of the stored Kerberos keytab file.
+	KeytabSecretVersion *string `json:"keytabSecretVersion,omitempty" tf:"keytab_secret_version,omitempty"`
+
+	// Kerberos realm name.  https://docs.oracle.com/cd/E36784_01/html/E37126/kplanning-27.html Realm names can consist of any ASCII string. Usually, the realm name is the same as your DNS domain name  except that the realm name is in uppercase. This convention helps differentiate problems with the Kerberos  service from problems with the DNS namespace, while keeping a name that is familiar. You can use any string,  but configuration and maintenance might then require more work. Use realm names that follow the standard  Internet naming structure.
+	RealmName *string `json:"realmName,omitempty" tf:"realm_name,omitempty"`
+}
+
+type KerberosAuthDetailsCredentialsParameters struct {
+
+	// The OCID of the secret where the Kerberos keytab file is stored as base64 text.
+	// +kubebuilder:validation:Optional
+	KeytabSecretID *string `json:"keytabSecretId,omitempty" tf:"keytab_secret_id,omitempty"`
+
+	// The secret version of the stored Kerberos keytab file.
+	// +kubebuilder:validation:Optional
+	KeytabSecretVersion *string `json:"keytabSecretVersion,omitempty" tf:"keytab_secret_version,omitempty"`
+
+	// Kerberos realm name.  https://docs.oracle.com/cd/E36784_01/html/E37126/kplanning-27.html Realm names can consist of any ASCII string. Usually, the realm name is the same as your DNS domain name  except that the realm name is in uppercase. This convention helps differentiate problems with the Kerberos  service from problems with the DNS namespace, while keeping a name that is familiar. You can use any string,  but configuration and maintenance might then require more work. Use realm names that follow the standard  Internet naming structure.
+	// +kubebuilder:validation:Optional
+	RealmName *string `json:"realmName,omitempty" tf:"realm_name,omitempty"`
+}
+
+type KerberosAuthDetailsInitParameters struct {
+
+	// Optional. List of Kerberos Credentials previously configured for the dbsystem. Currently supports only one entry.
+	BackupCredentials []BackupCredentialsInitParameters `json:"backupCredentials,omitempty" tf:"backup_credentials,omitempty"`
+
+	// Initial database system credentials that the database system will be provisioned with. The password details are not visible on any subsequent operation, such as GET /dbSystems/{dbSystemId}.
+	Credentials []KerberosAuthDetailsCredentialsInitParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
+
+	// (Updatable) The kind of backup policy.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+}
+
+type KerberosAuthDetailsObservation struct {
+
+	// Optional. List of Kerberos Credentials previously configured for the dbsystem. Currently supports only one entry.
+	BackupCredentials []BackupCredentialsObservation `json:"backupCredentials,omitempty" tf:"backup_credentials,omitempty"`
+
+	// Initial database system credentials that the database system will be provisioned with. The password details are not visible on any subsequent operation, such as GET /dbSystems/{dbSystemId}.
+	Credentials []KerberosAuthDetailsCredentialsObservation `json:"credentials,omitempty" tf:"credentials,omitempty"`
+
+	// (Updatable) The kind of backup policy.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+}
+
+type KerberosAuthDetailsParameters struct {
+
+	// Optional. List of Kerberos Credentials previously configured for the dbsystem. Currently supports only one entry.
+	// +kubebuilder:validation:Optional
+	BackupCredentials []BackupCredentialsParameters `json:"backupCredentials,omitempty" tf:"backup_credentials,omitempty"`
+
+	// Initial database system credentials that the database system will be provisioned with. The password details are not visible on any subsequent operation, such as GET /dbSystems/{dbSystemId}.
+	// +kubebuilder:validation:Optional
+	Credentials []KerberosAuthDetailsCredentialsParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
+
+	// (Updatable) The kind of backup policy.
+	// +kubebuilder:validation:Optional
+	Kind *string `json:"kind" tf:"kind,omitempty"`
+}
+
 type ManagementPolicyInitParameters struct {
 
 	// (Updatable) PostgreSQL database system backup policy.
@@ -229,6 +346,9 @@ type ManagementPolicyInitParameters struct {
 
 	// (Updatable) The start of the maintenance window in UTC.
 	MaintenanceWindowStart *string `json:"maintenanceWindowStart,omitempty" tf:"maintenance_window_start,omitempty"`
+
+	// (Updatable) Point-in-time recovery policy.
+	PitrPolicy []PitrPolicyInitParameters `json:"pitrPolicy,omitempty" tf:"pitr_policy,omitempty"`
 }
 
 type ManagementPolicyObservation struct {
@@ -238,6 +358,9 @@ type ManagementPolicyObservation struct {
 
 	// (Updatable) The start of the maintenance window in UTC.
 	MaintenanceWindowStart *string `json:"maintenanceWindowStart,omitempty" tf:"maintenance_window_start,omitempty"`
+
+	// (Updatable) Point-in-time recovery policy.
+	PitrPolicy []PitrPolicyObservation `json:"pitrPolicy,omitempty" tf:"pitr_policy,omitempty"`
 }
 
 type ManagementPolicyParameters struct {
@@ -249,6 +372,10 @@ type ManagementPolicyParameters struct {
 	// (Updatable) The start of the maintenance window in UTC.
 	// +kubebuilder:validation:Optional
 	MaintenanceWindowStart *string `json:"maintenanceWindowStart,omitempty" tf:"maintenance_window_start,omitempty"`
+
+	// (Updatable) Point-in-time recovery policy.
+	// +kubebuilder:validation:Optional
+	PitrPolicy []PitrPolicyParameters `json:"pitrPolicy,omitempty" tf:"pitr_policy,omitempty"`
 }
 
 type NetworkDetailsInitParameters struct {
@@ -319,6 +446,64 @@ type NetworkDetailsParameters struct {
 	// Selector for a Subnet in networking to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
+type OdspInsightDetailsInitParameters struct {
+
+	// (Updatable) The kind of backup policy.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// (Updatable) List of ODSP Insight and their configurations.
+	OdspInsightList []OdspInsightListInitParameters `json:"odspInsightList,omitempty" tf:"odsp_insight_list,omitempty"`
+}
+
+type OdspInsightDetailsObservation struct {
+
+	// (Updatable) The kind of backup policy.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// (Updatable) List of ODSP Insight and their configurations.
+	OdspInsightList []OdspInsightListObservation `json:"odspInsightList,omitempty" tf:"odsp_insight_list,omitempty"`
+}
+
+type OdspInsightDetailsParameters struct {
+
+	// (Updatable) The kind of backup policy.
+	// +kubebuilder:validation:Optional
+	Kind *string `json:"kind" tf:"kind,omitempty"`
+
+	// (Updatable) List of ODSP Insight and their configurations.
+	// +kubebuilder:validation:Optional
+	OdspInsightList []OdspInsightListParameters `json:"odspInsightList,omitempty" tf:"odsp_insight_list,omitempty"`
+}
+
+type OdspInsightListInitParameters struct {
+
+	// (Updatable) Type of Insight collected for the database system.
+	InsightType *string `json:"insightType,omitempty" tf:"insight_type,omitempty"`
+
+	// (Applicable when kind=ENABLED) (Updatable) Retention period for Insight data, in days. Current supported value is 7 days. the system default is 7 days.
+	RetentionPeriodInDays *float64 `json:"retentionPeriodInDays,omitempty" tf:"retention_period_in_days,omitempty"`
+}
+
+type OdspInsightListObservation struct {
+
+	// (Updatable) Type of Insight collected for the database system.
+	InsightType *string `json:"insightType,omitempty" tf:"insight_type,omitempty"`
+
+	// (Applicable when kind=ENABLED) (Updatable) Retention period for Insight data, in days. Current supported value is 7 days. the system default is 7 days.
+	RetentionPeriodInDays *float64 `json:"retentionPeriodInDays,omitempty" tf:"retention_period_in_days,omitempty"`
+}
+
+type OdspInsightListParameters struct {
+
+	// (Updatable) Type of Insight collected for the database system.
+	// +kubebuilder:validation:Optional
+	InsightType *string `json:"insightType,omitempty" tf:"insight_type,omitempty"`
+
+	// (Applicable when kind=ENABLED) (Updatable) Retention period for Insight data, in days. Current supported value is 7 days. the system default is 7 days.
+	// +kubebuilder:validation:Optional
+	RetentionPeriodInDays *float64 `json:"retentionPeriodInDays,omitempty" tf:"retention_period_in_days,omitempty"`
 }
 
 type PasswordDetailsInitParameters struct {
@@ -445,7 +630,39 @@ type PatchOperationsParameters struct {
 	Value map[string]*string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
+type PitrPolicyInitParameters struct {
+
+	// (Updatable) The kind of backup policy.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// (Updatable) The number of days the database system retains backups required for point-in-time recovery.
+	RestoreDays *float64 `json:"restoreDays,omitempty" tf:"restore_days,omitempty"`
+}
+
+type PitrPolicyObservation struct {
+
+	// (Updatable) The kind of backup policy.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// (Updatable) The number of days the database system retains backups required for point-in-time recovery.
+	RestoreDays *float64 `json:"restoreDays,omitempty" tf:"restore_days,omitempty"`
+}
+
+type PitrPolicyParameters struct {
+
+	// (Updatable) The kind of backup policy.
+	// +kubebuilder:validation:Optional
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// (Updatable) The number of days the database system retains backups required for point-in-time recovery.
+	// +kubebuilder:validation:Optional
+	RestoreDays *float64 `json:"restoreDays,omitempty" tf:"restore_days,omitempty"`
+}
+
 type PsqlDbSystemInitParameters struct {
+
+	// Specify change mode to apply when converting from warm standby to standalone. It can be set to 'IMMEDIATELY' or 'REPLAY_PENDING_UPDATES'. If source.primary_db_system_id is disabled, REPLAY_PENDING_UPDATES is used by default.
+	ApplyChangeModeToStandAlone *string `json:"applyChangeModeToStandAlone,omitempty" tf:"apply_change_mode_to_stand_alone,omitempty"`
 
 	// Whether a configuration update requires a restart of the database instance or a reload of the configuration. Some configuration changes require a restart of database instances to be applied. Apply config can be passed as RESTART or RELOAD
 	ApplyConfig *string `json:"applyConfig,omitempty" tf:"apply_config,omitempty"`
@@ -507,20 +724,32 @@ type PsqlDbSystemInitParameters struct {
 	// Details of database instances nodes to be created. This parameter is optional. If specified, its size must match instanceCount.
 	InstancesDetails []InstancesDetailsInitParameters `json:"instancesDetails,omitempty" tf:"instances_details,omitempty"`
 
+	// Kerberos Authentication details for the database system.
+	KerberosAuthDetails []KerberosAuthDetailsInitParameters `json:"kerberosAuthDetails,omitempty" tf:"kerberos_auth_details,omitempty"`
+
 	// (Updatable) PostgreSQL database system management policy update details.
 	ManagementPolicy []ManagementPolicyInitParameters `json:"managementPolicy,omitempty" tf:"management_policy,omitempty"`
 
 	// (Updatable) Network details for the database system.
 	NetworkDetails []NetworkDetailsInitParameters `json:"networkDetails,omitempty" tf:"network_details,omitempty"`
 
+	// (Updatable) ODSP Insight details for the database system.
+	OdspInsightDetails []OdspInsightDetailsInitParameters `json:"odspInsightDetails,omitempty" tf:"odsp_insight_details,omitempty"`
+
 	// (Updatable) For adding and removing from read replica database instances. Please remove the patch_operations after it is applied. Update the instance_count arrodrandly. Cannot be specified when creating the resource.
 	PatchOperations []PatchOperationsInitParameters `json:"patchOperations,omitempty" tf:"patch_operations,omitempty"`
+
+	// (Updatable) Details of the replication configuration that is applicable when database system gets the  PRIMARY_DB_SYSTEM role.
+	ReplicationConfig []ReplicationConfigInitParameters `json:"replicationConfig,omitempty" tf:"replication_config,omitempty"`
 
 	// (Updatable) The name of the shape for the database instance node. Use the /shapes API for accepted shapes. Example: VM.Standard.E4.Flex
 	Shape *string `json:"shape,omitempty" tf:"shape,omitempty"`
 
 	// The source of the database system.
 	Source []SourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
+
+	// (Updatable) The target state for the Db System. Could be set to ACTIVE or INACTIVE.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// (Updatable) Storage details of the database system.
 	StorageDetails []StorageDetailsInitParameters `json:"storageDetails,omitempty" tf:"storage_details,omitempty"`
@@ -533,6 +762,9 @@ type PsqlDbSystemObservation struct {
 
 	// The database system administrator username.
 	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
+
+	// Specify change mode to apply when converting from warm standby to standalone. It can be set to 'IMMEDIATELY' or 'REPLAY_PENDING_UPDATES'. If source.primary_db_system_id is disabled, REPLAY_PENDING_UPDATES is used by default.
+	ApplyChangeModeToStandAlone *string `json:"applyChangeModeToStandAlone,omitempty" tf:"apply_change_mode_to_stand_alone,omitempty"`
 
 	// Whether a configuration update requires a restart of the database instance or a reload of the configuration. Some configuration changes require a restart of database instances to be applied. Apply config can be passed as RESTART or RELOAD
 	ApplyConfig *string `json:"applyConfig,omitempty" tf:"apply_config,omitempty"`
@@ -581,6 +813,9 @@ type PsqlDbSystemObservation struct {
 	// Details of database instances nodes to be created. This parameter is optional. If specified, its size must match instanceCount.
 	InstancesDetails []InstancesDetailsObservation `json:"instancesDetails,omitempty" tf:"instances_details,omitempty"`
 
+	// Kerberos Authentication details for the database system.
+	KerberosAuthDetails []KerberosAuthDetailsObservation `json:"kerberosAuthDetails,omitempty" tf:"kerberos_auth_details,omitempty"`
+
 	// A message describing the current state in more detail. For example, can be used to provide actionable information for a resource in Failed state.
 	LifecycleDetails *string `json:"lifecycleDetails,omitempty" tf:"lifecycle_details,omitempty"`
 
@@ -590,8 +825,14 @@ type PsqlDbSystemObservation struct {
 	// (Updatable) Network details for the database system.
 	NetworkDetails []NetworkDetailsObservation `json:"networkDetails,omitempty" tf:"network_details,omitempty"`
 
+	// (Updatable) ODSP Insight details for the database system.
+	OdspInsightDetails []OdspInsightDetailsObservation `json:"odspInsightDetails,omitempty" tf:"odsp_insight_details,omitempty"`
+
 	// (Updatable) For adding and removing from read replica database instances. Please remove the patch_operations after it is applied. Update the instance_count arrodrandly. Cannot be specified when creating the resource.
 	PatchOperations []PatchOperationsObservation `json:"patchOperations,omitempty" tf:"patch_operations,omitempty"`
+
+	// (Updatable) Details of the replication configuration that is applicable when database system gets the  PRIMARY_DB_SYSTEM role.
+	ReplicationConfig []ReplicationConfigObservation `json:"replicationConfig,omitempty" tf:"replication_config,omitempty"`
 
 	// (Updatable) The name of the shape for the database instance node. Use the /shapes API for accepted shapes. Example: VM.Standard.E4.Flex
 	Shape *string `json:"shape,omitempty" tf:"shape,omitempty"`
@@ -599,11 +840,14 @@ type PsqlDbSystemObservation struct {
 	// The source of the database system.
 	Source []SourceObservation `json:"source,omitempty" tf:"source,omitempty"`
 
-	// The current state of the database instance node.
+	// (Updatable) The target state for the Db System. Could be set to ACTIVE or INACTIVE.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// (Updatable) Storage details of the database system.
 	StorageDetails []StorageDetailsObservation `json:"storageDetails,omitempty" tf:"storage_details,omitempty"`
+
+	// Type of the database system.
+	SystemRole *string `json:"systemRole,omitempty" tf:"system_role,omitempty"`
 
 	// System tags for this resource. Each key is predefined and scoped to a namespace. Example: {"orcl-cloud.free-tier-retained": "true"}
 	// +mapType=granular
@@ -620,6 +864,10 @@ type PsqlDbSystemObservation struct {
 }
 
 type PsqlDbSystemParameters struct {
+
+	// Specify change mode to apply when converting from warm standby to standalone. It can be set to 'IMMEDIATELY' or 'REPLAY_PENDING_UPDATES'. If source.primary_db_system_id is disabled, REPLAY_PENDING_UPDATES is used by default.
+	// +kubebuilder:validation:Optional
+	ApplyChangeModeToStandAlone *string `json:"applyChangeModeToStandAlone,omitempty" tf:"apply_change_mode_to_stand_alone,omitempty"`
 
 	// Whether a configuration update requires a restart of the database instance or a reload of the configuration. Some configuration changes require a restart of database instances to be applied. Apply config can be passed as RESTART or RELOAD
 	// +kubebuilder:validation:Optional
@@ -694,6 +942,10 @@ type PsqlDbSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	InstancesDetails []InstancesDetailsParameters `json:"instancesDetails,omitempty" tf:"instances_details,omitempty"`
 
+	// Kerberos Authentication details for the database system.
+	// +kubebuilder:validation:Optional
+	KerberosAuthDetails []KerberosAuthDetailsParameters `json:"kerberosAuthDetails,omitempty" tf:"kerberos_auth_details,omitempty"`
+
 	// (Updatable) PostgreSQL database system management policy update details.
 	// +kubebuilder:validation:Optional
 	ManagementPolicy []ManagementPolicyParameters `json:"managementPolicy,omitempty" tf:"management_policy,omitempty"`
@@ -702,9 +954,17 @@ type PsqlDbSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkDetails []NetworkDetailsParameters `json:"networkDetails,omitempty" tf:"network_details,omitempty"`
 
+	// (Updatable) ODSP Insight details for the database system.
+	// +kubebuilder:validation:Optional
+	OdspInsightDetails []OdspInsightDetailsParameters `json:"odspInsightDetails,omitempty" tf:"odsp_insight_details,omitempty"`
+
 	// (Updatable) For adding and removing from read replica database instances. Please remove the patch_operations after it is applied. Update the instance_count arrodrandly. Cannot be specified when creating the resource.
 	// +kubebuilder:validation:Optional
 	PatchOperations []PatchOperationsParameters `json:"patchOperations,omitempty" tf:"patch_operations,omitempty"`
+
+	// (Updatable) Details of the replication configuration that is applicable when database system gets the  PRIMARY_DB_SYSTEM role.
+	// +kubebuilder:validation:Optional
+	ReplicationConfig []ReplicationConfigParameters `json:"replicationConfig,omitempty" tf:"replication_config,omitempty"`
 
 	// (Updatable) The name of the shape for the database instance node. Use the /shapes API for accepted shapes. Example: VM.Standard.E4.Flex
 	// +kubebuilder:validation:Optional
@@ -714,6 +974,10 @@ type PsqlDbSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	Source []SourceParameters `json:"source,omitempty" tf:"source,omitempty"`
 
+	// (Updatable) The target state for the Db System. Could be set to ACTIVE or INACTIVE.
+	// +kubebuilder:validation:Optional
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
 	// (Updatable) Storage details of the database system.
 	// +kubebuilder:validation:Optional
 	StorageDetails []StorageDetailsParameters `json:"storageDetails,omitempty" tf:"storage_details,omitempty"`
@@ -721,6 +985,35 @@ type PsqlDbSystemParameters struct {
 	// Type of the database system.
 	// +kubebuilder:validation:Optional
 	SystemType *string `json:"systemType,omitempty" tf:"system_type,omitempty"`
+}
+
+type ReplicationConfigInitParameters struct {
+
+	// (Updatable) Specify if Recovery point objective (RPO) enforcement needs to be enabled on the database  system.
+	IsRpoEnforced *bool `json:"isRpoEnforced,omitempty" tf:"is_rpo_enforced,omitempty"`
+
+	// (Updatable) Specifies the Recovery point objective (RPO) in seconds that will be enforced, if the  isRpoEnforced flag is true.
+	RpoInSeconds *string `json:"rpoInSeconds,omitempty" tf:"rpo_in_seconds,omitempty"`
+}
+
+type ReplicationConfigObservation struct {
+
+	// (Updatable) Specify if Recovery point objective (RPO) enforcement needs to be enabled on the database  system.
+	IsRpoEnforced *bool `json:"isRpoEnforced,omitempty" tf:"is_rpo_enforced,omitempty"`
+
+	// (Updatable) Specifies the Recovery point objective (RPO) in seconds that will be enforced, if the  isRpoEnforced flag is true.
+	RpoInSeconds *string `json:"rpoInSeconds,omitempty" tf:"rpo_in_seconds,omitempty"`
+}
+
+type ReplicationConfigParameters struct {
+
+	// (Updatable) Specify if Recovery point objective (RPO) enforcement needs to be enabled on the database  system.
+	// +kubebuilder:validation:Optional
+	IsRpoEnforced *bool `json:"isRpoEnforced,omitempty" tf:"is_rpo_enforced,omitempty"`
+
+	// (Updatable) Specifies the Recovery point objective (RPO) in seconds that will be enforced, if the  isRpoEnforced flag is true.
+	// +kubebuilder:validation:Optional
+	RpoInSeconds *string `json:"rpoInSeconds,omitempty" tf:"rpo_in_seconds,omitempty"`
 }
 
 type SourceInitParameters struct {
@@ -738,11 +1031,40 @@ type SourceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupIDSelector *v1.Selector `json:"backupIdSelector,omitempty" tf:"-"`
 
+	// The OCID of the source database system which will be used to perform point-in-time recovery.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/psql/v1alpha1.PsqlDbSystem
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	DBSystemID *string `json:"dbSystemId,omitempty" tf:"db_system_id,omitempty"`
+
+	// Reference to a PsqlDbSystem in psql to populate dbSystemId.
+	// +kubebuilder:validation:Optional
+	DBSystemIDRef *v1.Reference `json:"dbSystemIdRef,omitempty" tf:"-"`
+
+	// Selector for a PsqlDbSystem in psql to populate dbSystemId.
+	// +kubebuilder:validation:Optional
+	DBSystemIDSelector *v1.Selector `json:"dbSystemIdSelector,omitempty" tf:"-"`
+
 	// (Applicable when source_type=BACKUP) Deprecated. Don't use.
 	IsHavingRestoreConfigOverrides *bool `json:"isHavingRestoreConfigOverrides,omitempty" tf:"is_having_restore_config_overrides,omitempty"`
 
-	// The source descriminator. Example: {"source_type": "BACKUP"}.
+	// The [OCID] of the primary database system.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/psql/v1alpha1.PsqlDbSystem
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	PrimaryDBSystemID *string `json:"primaryDbSystemId,omitempty" tf:"primary_db_system_id,omitempty"`
+
+	// Reference to a PsqlDbSystem in psql to populate primaryDbSystemId.
+	// +kubebuilder:validation:Optional
+	PrimaryDBSystemIDRef *v1.Reference `json:"primaryDbSystemIdRef,omitempty" tf:"-"`
+
+	// Selector for a PsqlDbSystem in psql to populate primaryDbSystemId.
+	// +kubebuilder:validation:Optional
+	PrimaryDBSystemIDSelector *v1.Selector `json:"primaryDbSystemIdSelector,omitempty" tf:"-"`
+
+	// The source descriminator.
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
+
+	// The target point-in-time of the source database system that will be restored, expressed in RFC 3339 timestamp format.
+	TimeToRestore *string `json:"timeToRestore,omitempty" tf:"time_to_restore,omitempty"`
 }
 
 type SourceObservation struct {
@@ -750,11 +1072,20 @@ type SourceObservation struct {
 	// The OCID of the database system backup.
 	BackupID *string `json:"backupId,omitempty" tf:"backup_id,omitempty"`
 
+	// The OCID of the source database system which will be used to perform point-in-time recovery.
+	DBSystemID *string `json:"dbSystemId,omitempty" tf:"db_system_id,omitempty"`
+
 	// (Applicable when source_type=BACKUP) Deprecated. Don't use.
 	IsHavingRestoreConfigOverrides *bool `json:"isHavingRestoreConfigOverrides,omitempty" tf:"is_having_restore_config_overrides,omitempty"`
 
-	// The source descriminator. Example: {"source_type": "BACKUP"}.
+	// The [OCID] of the primary database system.
+	PrimaryDBSystemID *string `json:"primaryDbSystemId,omitempty" tf:"primary_db_system_id,omitempty"`
+
+	// The source descriminator.
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
+
+	// The target point-in-time of the source database system that will be restored, expressed in RFC 3339 timestamp format.
+	TimeToRestore *string `json:"timeToRestore,omitempty" tf:"time_to_restore,omitempty"`
 }
 
 type SourceParameters struct {
@@ -773,13 +1104,45 @@ type SourceParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupIDSelector *v1.Selector `json:"backupIdSelector,omitempty" tf:"-"`
 
+	// The OCID of the source database system which will be used to perform point-in-time recovery.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/psql/v1alpha1.PsqlDbSystem
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	DBSystemID *string `json:"dbSystemId,omitempty" tf:"db_system_id,omitempty"`
+
+	// Reference to a PsqlDbSystem in psql to populate dbSystemId.
+	// +kubebuilder:validation:Optional
+	DBSystemIDRef *v1.Reference `json:"dbSystemIdRef,omitempty" tf:"-"`
+
+	// Selector for a PsqlDbSystem in psql to populate dbSystemId.
+	// +kubebuilder:validation:Optional
+	DBSystemIDSelector *v1.Selector `json:"dbSystemIdSelector,omitempty" tf:"-"`
+
 	// (Applicable when source_type=BACKUP) Deprecated. Don't use.
 	// +kubebuilder:validation:Optional
 	IsHavingRestoreConfigOverrides *bool `json:"isHavingRestoreConfigOverrides,omitempty" tf:"is_having_restore_config_overrides,omitempty"`
 
-	// The source descriminator. Example: {"source_type": "BACKUP"}.
+	// The [OCID] of the primary database system.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/psql/v1alpha1.PsqlDbSystem
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	SourceType *string `json:"sourceType" tf:"source_type,omitempty"`
+	PrimaryDBSystemID *string `json:"primaryDbSystemId,omitempty" tf:"primary_db_system_id,omitempty"`
+
+	// Reference to a PsqlDbSystem in psql to populate primaryDbSystemId.
+	// +kubebuilder:validation:Optional
+	PrimaryDBSystemIDRef *v1.Reference `json:"primaryDbSystemIdRef,omitempty" tf:"-"`
+
+	// Selector for a PsqlDbSystem in psql to populate primaryDbSystemId.
+	// +kubebuilder:validation:Optional
+	PrimaryDBSystemIDSelector *v1.Selector `json:"primaryDbSystemIdSelector,omitempty" tf:"-"`
+
+	// The source descriminator.
+	// +kubebuilder:validation:Optional
+	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
+
+	// The target point-in-time of the source database system that will be restored, expressed in RFC 3339 timestamp format.
+	// +kubebuilder:validation:Optional
+	TimeToRestore *string `json:"timeToRestore,omitempty" tf:"time_to_restore,omitempty"`
 }
 
 type StorageDetailsInitParameters struct {

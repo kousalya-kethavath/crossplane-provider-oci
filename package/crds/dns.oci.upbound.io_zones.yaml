@@ -369,7 +369,8 @@ spec:
                     type: string
                   resolutionMode:
                     description: (Updatable) The resolution mode of a zone defines
-                      behavior related to how query responses can be handled.
+                      behavior related to how query responses can be handled. See
+                      Private DNS Zone Transparency for more information.
                     type: string
                   scope:
                     description: Specifies to operate only on resources that have
@@ -768,7 +769,8 @@ spec:
                     type: string
                   resolutionMode:
                     description: (Updatable) The resolution mode of a zone defines
-                      behavior related to how query responses can be handled.
+                      behavior related to how query responses can be handled. See
+                      Private DNS Zone Transparency for more information.
                     type: string
                   scope:
                     description: Specifies to operate only on resources that have
@@ -1232,16 +1234,18 @@ spec:
                     description: The name of the zone.
                     type: string
                   nameservers:
+                    description: The authoritative nameservers for the zone.
                     items:
                       properties:
                         hostname:
-                          description: The name of the zone.
+                          description: The hostname of the nameserver.
                           type: string
                       type: object
                     type: array
                   resolutionMode:
                     description: (Updatable) The resolution mode of a zone defines
-                      behavior related to how query responses can be handled.
+                      behavior related to how query responses can be handled. See
+                      Private DNS Zone Transparency for more information.
                     type: string
                   scope:
                     description: Specifies to operate only on resources that have

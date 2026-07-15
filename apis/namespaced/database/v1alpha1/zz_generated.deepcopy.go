@@ -8403,6 +8403,11 @@ func (in *AutonomousDatabaseObservation) DeepCopyInto(out *AutonomousDatabaseObs
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ExternalLocationZone != nil {
+		in, out := &in.ExternalLocationZone, &out.ExternalLocationZone
+		*out = new(string)
+		**out = **in
+	}
 	if in.FailedDataRecoveryInSeconds != nil {
 		in, out := &in.FailedDataRecoveryInSeconds, &out.FailedDataRecoveryInSeconds
 		*out = new(float64)
@@ -20225,6 +20230,11 @@ func (in *CloudVmClusterInitParameters) DeepCopyInto(out *CloudVmClusterInitPara
 		*out = new(float64)
 		**out = **in
 	}
+	if in.NodeCount != nil {
+		in, out := &in.NodeCount, &out.NodeCount
+		*out = new(float64)
+		**out = **in
+	}
 	if in.NsgIds != nil {
 		in, out := &in.NsgIds, &out.NsgIds
 		*out = make([]*string, len(*in))
@@ -21404,6 +21414,11 @@ func (in *CloudVmClusterParameters) DeepCopyInto(out *CloudVmClusterParameters) 
 	}
 	if in.MemorySizeInGbs != nil {
 		in, out := &in.MemorySizeInGbs, &out.MemorySizeInGbs
+		*out = new(float64)
+		**out = **in
+	}
+	if in.NodeCount != nil {
+		in, out := &in.NodeCount, &out.NodeCount
 		*out = new(float64)
 		**out = **in
 	}
@@ -57816,6 +57831,11 @@ func (in *LocalStandbyDBObservation) DeepCopyInto(out *LocalStandbyDBObservation
 	*out = *in
 	if in.AvailabilityDomain != nil {
 		in, out := &in.AvailabilityDomain, &out.AvailabilityDomain
+		*out = new(string)
+		**out = **in
+	}
+	if in.ExternalLocationZone != nil {
+		in, out := &in.ExternalLocationZone, &out.ExternalLocationZone
 		*out = new(string)
 		**out = **in
 	}
@@ -96224,6 +96244,11 @@ func (in *StandbyDBObservation) DeepCopyInto(out *StandbyDBObservation) {
 	*out = *in
 	if in.AvailabilityDomain != nil {
 		in, out := &in.AvailabilityDomain, &out.AvailabilityDomain
+		*out = new(string)
+		**out = **in
+	}
+	if in.ExternalLocationZone != nil {
+		in, out := &in.ExternalLocationZone, &out.ExternalLocationZone
 		*out = new(string)
 		**out = **in
 	}

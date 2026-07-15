@@ -30715,6 +30715,11 @@ func (in *TriggerInitParameters) DeepCopyInto(out *TriggerInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.InitialJitterInMinutes != nil {
+		in, out := &in.InitialJitterInMinutes, &out.InitialJitterInMinutes
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Interval != nil {
 		in, out := &in.Interval, &out.Interval
 		*out = new(float64)
@@ -31001,6 +31006,11 @@ func (in *TriggerObservation) DeepCopyInto(out *TriggerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.InitialJitterInMinutes != nil {
+		in, out := &in.InitialJitterInMinutes, &out.InitialJitterInMinutes
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Interval != nil {
 		in, out := &in.Interval, &out.Interval
 		*out = new(float64)
@@ -31054,6 +31064,11 @@ func (in *TriggerParameters) DeepCopyInto(out *TriggerParameters) {
 	if in.Frequency != nil {
 		in, out := &in.Frequency, &out.Frequency
 		*out = new(string)
+		**out = **in
+	}
+	if in.InitialJitterInMinutes != nil {
+		in, out := &in.InitialJitterInMinutes, &out.InitialJitterInMinutes
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Interval != nil {

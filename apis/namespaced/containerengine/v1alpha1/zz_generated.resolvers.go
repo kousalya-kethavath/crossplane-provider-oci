@@ -669,6 +669,28 @@ func (mg *NodePool) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.NodeConfigDetails); i3++ {
 		{
+			m, l, err = apisresolver.GetManagedResource("compute.oci.m.upbound.io", "v1alpha1", "ComputeCluster", "ComputeClusterList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NodeConfigDetails[i3].ComputeClusterID),
+				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.NodeConfigDetails[i3].ComputeClusterIDRef,
+				Selector:     mg.Spec.ForProvider.NodeConfigDetails[i3].ComputeClusterIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.NodeConfigDetails[i3].ComputeClusterID")
+		}
+		mg.Spec.ForProvider.NodeConfigDetails[i3].ComputeClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.NodeConfigDetails[i3].ComputeClusterIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.NodeConfigDetails); i3++ {
+		{
 			m, l, err = apisresolver.GetManagedResource("kms.oci.m.upbound.io", "v1alpha1", "Key", "KeyList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -710,6 +732,30 @@ func (mg *NodePool) ResolveReferences(ctx context.Context, c client.Reader) erro
 		mg.Spec.ForProvider.NodeConfigDetails[i3].NsgIds = reference.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.NodeConfigDetails[i3].NsgIdsRefs = mrsp.ResolvedReferences
 
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.NodeConfigDetails); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.NodeConfigDetails[i3].PlacementConfigs); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("identity.oci.m.upbound.io", "v1alpha1", "Group", "GroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NodeConfigDetails[i3].PlacementConfigs[i4].HostGroupID),
+					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.ForProvider.NodeConfigDetails[i3].PlacementConfigs[i4].HostGroupIDRef,
+					Selector:     mg.Spec.ForProvider.NodeConfigDetails[i3].PlacementConfigs[i4].HostGroupIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.NodeConfigDetails[i3].PlacementConfigs[i4].HostGroupID")
+			}
+			mg.Spec.ForProvider.NodeConfigDetails[i3].PlacementConfigs[i4].HostGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.NodeConfigDetails[i3].PlacementConfigs[i4].HostGroupIDRef = rsp.ResolvedReference
+
+		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.NodeConfigDetails); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.NodeConfigDetails[i3].PlacementConfigs); i4++ {
@@ -843,6 +889,28 @@ func (mg *NodePool) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.NodeConfigDetails); i3++ {
 		{
+			m, l, err = apisresolver.GetManagedResource("compute.oci.m.upbound.io", "v1alpha1", "ComputeCluster", "ComputeClusterList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NodeConfigDetails[i3].ComputeClusterID),
+				Extract:      resource.ExtractResourceID(),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.NodeConfigDetails[i3].ComputeClusterIDRef,
+				Selector:     mg.Spec.InitProvider.NodeConfigDetails[i3].ComputeClusterIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.NodeConfigDetails[i3].ComputeClusterID")
+		}
+		mg.Spec.InitProvider.NodeConfigDetails[i3].ComputeClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.NodeConfigDetails[i3].ComputeClusterIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.NodeConfigDetails); i3++ {
+		{
 			m, l, err = apisresolver.GetManagedResource("kms.oci.m.upbound.io", "v1alpha1", "Key", "KeyList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -884,6 +952,30 @@ func (mg *NodePool) ResolveReferences(ctx context.Context, c client.Reader) erro
 		mg.Spec.InitProvider.NodeConfigDetails[i3].NsgIds = reference.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.InitProvider.NodeConfigDetails[i3].NsgIdsRefs = mrsp.ResolvedReferences
 
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.NodeConfigDetails); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.NodeConfigDetails[i3].PlacementConfigs); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("identity.oci.m.upbound.io", "v1alpha1", "Group", "GroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NodeConfigDetails[i3].PlacementConfigs[i4].HostGroupID),
+					Extract:      resource.ExtractResourceID(),
+					Namespace:    mg.GetNamespace(),
+					Reference:    mg.Spec.InitProvider.NodeConfigDetails[i3].PlacementConfigs[i4].HostGroupIDRef,
+					Selector:     mg.Spec.InitProvider.NodeConfigDetails[i3].PlacementConfigs[i4].HostGroupIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.NodeConfigDetails[i3].PlacementConfigs[i4].HostGroupID")
+			}
+			mg.Spec.InitProvider.NodeConfigDetails[i3].PlacementConfigs[i4].HostGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NodeConfigDetails[i3].PlacementConfigs[i4].HostGroupIDRef = rsp.ResolvedReference
+
+		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.NodeConfigDetails); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.NodeConfigDetails[i3].PlacementConfigs); i4++ {

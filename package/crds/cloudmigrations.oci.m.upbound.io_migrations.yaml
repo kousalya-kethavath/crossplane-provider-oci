@@ -348,6 +348,15 @@ spec:
                             type: string
                         type: object
                     type: object
+                  securityAttributes:
+                    additionalProperties:
+                      type: string
+                    description: '(Updatable) Security attributes for this resource.
+                      Each key is predefined and scoped to a namespace. For more information,
+                      see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount":
+                      {"value": "42", "mode": "enforce"}}}'
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: |-
@@ -651,6 +660,15 @@ spec:
                             type: string
                         type: object
                     type: object
+                  securityAttributes:
+                    additionalProperties:
+                      type: string
+                    description: '(Updatable) Security attributes for this resource.
+                      Each key is predefined and scoped to a namespace. For more information,
+                      see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount":
+                      {"value": "42", "mode": "enforce"}}}'
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -773,6 +791,15 @@ spec:
                   replicationScheduleId:
                     description: (Updatable) Replication schedule identifier
                     type: string
+                  securityAttributes:
+                    additionalProperties:
+                      type: string
+                    description: '(Updatable) Security attributes for this resource.
+                      Each key is predefined and scoped to a namespace. For more information,
+                      see Resource Tags.  Example: {"Oracle-ZPR": {"MaxEgressCount":
+                      {"value": "42", "mode": "enforce"}}}'
+                    type: object
+                    x-kubernetes-map-type: granular
                   state:
                     description: The current state of migration.
                     type: string

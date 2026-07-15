@@ -473,8 +473,9 @@ spec:
                                             items:
                                               properties:
                                                 alg:
-                                                  description: (Updatable) The algorithm
-                                                    intended for use with this key.
+                                                  description: (Applicable when format=JSON_WEB_KEY)
+                                                    (Updatable) The algorithm intended
+                                                    for use with this key.
                                                   type: string
                                                 e:
                                                   description: (Updatable) The base64
@@ -674,6 +675,14 @@ spec:
                                             description: (Applicable when type=OAUTH2)
                                               (Updatable) The path to be used as fallback
                                               after OAuth2.
+                                            type: string
+                                          loginPath:
+                                            description: (Applicable when type=OAUTH2)
+                                              (Updatable) The path (relative to the
+                                              deployment) where the Identity Provider  will
+                                              redirect the user after authentication.
+                                              This path must match  a route in the
+                                              specification that uses the OAUTH2_LOGIN_BACKEND.
                                             type: string
                                           logoutPath:
                                             description: (Applicable when type=OAUTH2)
@@ -1041,8 +1050,9 @@ spec:
                                             items:
                                               properties:
                                                 alg:
-                                                  description: (Updatable) The algorithm
-                                                    intended for use with this key.
+                                                  description: (Applicable when format=JSON_WEB_KEY)
+                                                    (Updatable) The algorithm intended
+                                                    for use with this key.
                                                   type: string
                                                 e:
                                                   description: (Updatable) The base64
@@ -1386,10 +1396,11 @@ spec:
                                                         items:
                                                           properties:
                                                             alg:
-                                                              description: (Updatable)
-                                                                The algorithm intended
-                                                                for use with this
-                                                                key.
+                                                              description: (Applicable
+                                                                when format=JSON_WEB_KEY)
+                                                                (Updatable) The algorithm
+                                                                intended for use with
+                                                                this key.
                                                               type: string
                                                             e:
                                                               description: (Updatable)
@@ -1618,6 +1629,17 @@ spec:
                                                           type=OAUTH2) (Updatable)
                                                           The path to be used as fallback
                                                           after OAuth2.
+                                                        type: string
+                                                      loginPath:
+                                                        description: (Applicable when
+                                                          type=OAUTH2) (Updatable)
+                                                          The path (relative to the
+                                                          deployment) where the Identity
+                                                          Provider  will redirect
+                                                          the user after authentication.
+                                                          This path must match  a
+                                                          route in the specification
+                                                          that uses the OAUTH2_LOGIN_BACKEND.
                                                         type: string
                                                       logoutPath:
                                                         description: (Applicable when
@@ -2071,10 +2093,11 @@ spec:
                                                         items:
                                                           properties:
                                                             alg:
-                                                              description: (Updatable)
-                                                                The algorithm intended
-                                                                for use with this
-                                                                key.
+                                                              description: (Applicable
+                                                                when format=JSON_WEB_KEY)
+                                                                (Updatable) The algorithm
+                                                                intended for use with
+                                                                this key.
                                                               type: string
                                                             e:
                                                               description: (Updatable)
@@ -3756,8 +3779,9 @@ spec:
                                             items:
                                               properties:
                                                 alg:
-                                                  description: (Updatable) The algorithm
-                                                    intended for use with this key.
+                                                  description: (Applicable when format=JSON_WEB_KEY)
+                                                    (Updatable) The algorithm intended
+                                                    for use with this key.
                                                   type: string
                                                 e:
                                                   description: (Updatable) The base64
@@ -3957,6 +3981,14 @@ spec:
                                             description: (Applicable when type=OAUTH2)
                                               (Updatable) The path to be used as fallback
                                               after OAuth2.
+                                            type: string
+                                          loginPath:
+                                            description: (Applicable when type=OAUTH2)
+                                              (Updatable) The path (relative to the
+                                              deployment) where the Identity Provider  will
+                                              redirect the user after authentication.
+                                              This path must match  a route in the
+                                              specification that uses the OAUTH2_LOGIN_BACKEND.
                                             type: string
                                           logoutPath:
                                             description: (Applicable when type=OAUTH2)
@@ -4324,8 +4356,9 @@ spec:
                                             items:
                                               properties:
                                                 alg:
-                                                  description: (Updatable) The algorithm
-                                                    intended for use with this key.
+                                                  description: (Applicable when format=JSON_WEB_KEY)
+                                                    (Updatable) The algorithm intended
+                                                    for use with this key.
                                                   type: string
                                                 e:
                                                   description: (Updatable) The base64
@@ -4669,10 +4702,11 @@ spec:
                                                         items:
                                                           properties:
                                                             alg:
-                                                              description: (Updatable)
-                                                                The algorithm intended
-                                                                for use with this
-                                                                key.
+                                                              description: (Applicable
+                                                                when format=JSON_WEB_KEY)
+                                                                (Updatable) The algorithm
+                                                                intended for use with
+                                                                this key.
                                                               type: string
                                                             e:
                                                               description: (Updatable)
@@ -4901,6 +4935,17 @@ spec:
                                                           type=OAUTH2) (Updatable)
                                                           The path to be used as fallback
                                                           after OAuth2.
+                                                        type: string
+                                                      loginPath:
+                                                        description: (Applicable when
+                                                          type=OAUTH2) (Updatable)
+                                                          The path (relative to the
+                                                          deployment) where the Identity
+                                                          Provider  will redirect
+                                                          the user after authentication.
+                                                          This path must match  a
+                                                          route in the specification
+                                                          that uses the OAUTH2_LOGIN_BACKEND.
                                                         type: string
                                                       logoutPath:
                                                         description: (Applicable when
@@ -5354,10 +5399,11 @@ spec:
                                                         items:
                                                           properties:
                                                             alg:
-                                                              description: (Updatable)
-                                                                The algorithm intended
-                                                                for use with this
-                                                                key.
+                                                              description: (Applicable
+                                                                when format=JSON_WEB_KEY)
+                                                                (Updatable) The algorithm
+                                                                intended for use with
+                                                                this key.
                                                               type: string
                                                             e:
                                                               description: (Updatable)
@@ -6872,8 +6918,9 @@ spec:
                                             items:
                                               properties:
                                                 alg:
-                                                  description: (Updatable) The algorithm
-                                                    intended for use with this key.
+                                                  description: (Applicable when format=JSON_WEB_KEY)
+                                                    (Updatable) The algorithm intended
+                                                    for use with this key.
                                                   type: string
                                                 e:
                                                   description: (Updatable) The base64
@@ -6987,6 +7034,14 @@ spec:
                                             description: (Applicable when type=OAUTH2)
                                               (Updatable) The path to be used as fallback
                                               after OAuth2.
+                                            type: string
+                                          loginPath:
+                                            description: (Applicable when type=OAUTH2)
+                                              (Updatable) The path (relative to the
+                                              deployment) where the Identity Provider  will
+                                              redirect the user after authentication.
+                                              This path must match  a route in the
+                                              specification that uses the OAUTH2_LOGIN_BACKEND.
                                             type: string
                                           logoutPath:
                                             description: (Applicable when type=OAUTH2)
@@ -7268,8 +7323,9 @@ spec:
                                             items:
                                               properties:
                                                 alg:
-                                                  description: (Updatable) The algorithm
-                                                    intended for use with this key.
+                                                  description: (Applicable when format=JSON_WEB_KEY)
+                                                    (Updatable) The algorithm intended
+                                                    for use with this key.
                                                   type: string
                                                 e:
                                                   description: (Updatable) The base64
@@ -7527,10 +7583,11 @@ spec:
                                                         items:
                                                           properties:
                                                             alg:
-                                                              description: (Updatable)
-                                                                The algorithm intended
-                                                                for use with this
-                                                                key.
+                                                              description: (Applicable
+                                                                when format=JSON_WEB_KEY)
+                                                                (Updatable) The algorithm
+                                                                intended for use with
+                                                                this key.
                                                               type: string
                                                             e:
                                                               description: (Updatable)
@@ -7666,6 +7723,17 @@ spec:
                                                           type=OAUTH2) (Updatable)
                                                           The path to be used as fallback
                                                           after OAuth2.
+                                                        type: string
+                                                      loginPath:
+                                                        description: (Applicable when
+                                                          type=OAUTH2) (Updatable)
+                                                          The path (relative to the
+                                                          deployment) where the Identity
+                                                          Provider  will redirect
+                                                          the user after authentication.
+                                                          This path must match  a
+                                                          route in the specification
+                                                          that uses the OAUTH2_LOGIN_BACKEND.
                                                         type: string
                                                       logoutPath:
                                                         description: (Applicable when
@@ -8026,10 +8094,11 @@ spec:
                                                         items:
                                                           properties:
                                                             alg:
-                                                              description: (Updatable)
-                                                                The algorithm intended
-                                                                for use with this
-                                                                key.
+                                                              description: (Applicable
+                                                                when format=JSON_WEB_KEY)
+                                                                (Updatable) The algorithm
+                                                                intended for use with
+                                                                this key.
                                                               type: string
                                                             e:
                                                               description: (Updatable)

@@ -34,8 +34,9 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: PrivateEndpoint is the Schema for the PrivateEndpoints API. <no
-          value>
+        description: PrivateEndpoint is the Schema for the PrivateEndpoints API. Provides
+          the Private Endpoint resource in Oracle Cloud Infrastructure Object Storage
+          service
         properties:
           apiVersion:
             description: |-
@@ -74,21 +75,41 @@ spec:
               forProvider:
                 properties:
                   accessTargets:
+                    description: '(Updatable) When you create a private endpoint,
+                      you can restrict access to certain Object Storage resources
+                      by specifying access targets (limit of 10). Each access target
+                      consists of the following required parameters: namespace, compartment_id
+                      and bucket.'
                     items:
                       properties:
                         bucket:
+                          description: (Updatable) Specifies what namespace/buckets
+                            within the allowed compartments the private endpoint can
+                            access. You can configure either a single bucket or all
+                            buckets within the allowed compartments.
                           type: string
                         compartmentId:
+                          description: (Updatable) Specifies what namespace/compartments
+                            the private endpoint can access. You can configure either
+                            a single compartment or all compartments.
                           type: string
                         namespace:
+                          description: (Updatable) Specifies the target namespace
+                            that's to be allowed to egress from the private endpoint.
                           type: string
                       type: object
                     type: array
                   additionalPrefixes:
+                    description: A list of additional prefixes that you can provide
+                      along with any other prefix. These resulting endpointFqdn's
+                      are added to the customer VCN's DNS record.
                     items:
                       type: string
                     type: array
                   compartmentId:
+                    description: (Updatable) Specifies what namespace/compartments
+                      the private endpoint can access. You can configure either a
+                      single compartment or all compartments.
                     type: string
                   compartmentIdRef:
                     description: Reference to a Compartment in identity to populate
@@ -169,6 +190,9 @@ spec:
                   definedTags:
                     additionalProperties:
                       type: string
+                    description: '(Updatable) Defined tags for this resource. Each
+                      key is predefined and scoped to a namespace. For more information,
+                      see Resource Tags. Example: {"Operations.CostCenter": "42"}'
                     type: object
                     x-kubernetes-map-type: granular
                   fqdns:
@@ -178,28 +202,135 @@ spec:
                           type: string
                         type: object
                       type: object
+                    description: The object representing FQDN details formed using
+                      prefix and additionalPrefixes.
                     type: object
                   freeformTags:
                     additionalProperties:
                       type: string
+                    description: '(Updatable) Free-form tags for this resource. Each
+                      tag is a simple key-value pair with no predefined name, type,
+                      or namespace. For more information, see Resource Tags. Example:
+                      {"Department": "Finance"}'
                     type: object
                     x-kubernetes-map-type: granular
                   name:
+                    description: 'The name of the private endpoint. Valid characters
+                      are uppercase or lowercase letters, numbers, hyphens, and periods.
+                      Private Endpoint names must be unique within an Object Storage
+                      namespace. Avoid entering confidential information. example:
+                      Example: my-pe1'
                     type: string
                   namespace:
+                    description: (Updatable) Specifies the target namespace that's
+                      to be allowed to egress from the private endpoint.
                     type: string
                   nsgIds:
+                    description: A list of the OCIDs of the network security groups
+                      (NSGs) to add the private endpoint's VNIC to. For more information
+                      about NSGs, see NetworkSecurityGroup.
                     items:
                       type: string
                     type: array
                   prefix:
+                    description: The DNS prefix value is part of the URL used to access
+                      Object Storage. The DNS prefix is a case-insensitive string
+                      using alpha-numeric characters (no special characters). It must
+                      be unique within the VCN.
                     type: string
                   privateEndpointIp:
+                    description: The private IP address that is to be assigned to
+                      this private endpoint. If it's not available, an error is returned.
+                      If you do not provide a value, an available IP address in the
+                      subnet is automatically chosen. If you do not provide a value,
+                      an available IP address in the subnet is automatically chosen.
                     type: string
+                  securityAttributes:
+                    additionalProperties:
+                      type: string
+                    type: object
+                    x-kubernetes-map-type: granular
                   state:
+                    description: The lifecycle state of the private endpoint resource.
                     type: string
                   subnetId:
+                    description: The ID of the subnet that the private endpoint VNIC
+                      will be created and reside in.
                     type: string
+                  subnetIdRef:
+                    description: Reference to a Subnet in networking to populate subnetId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  subnetIdSelector:
+                    description: Selector for a Subnet in networking to populate subnetId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                 type: object
               initProvider:
                 description: |-
@@ -215,21 +346,41 @@ spec:
                   autoscaler.
                 properties:
                   accessTargets:
+                    description: '(Updatable) When you create a private endpoint,
+                      you can restrict access to certain Object Storage resources
+                      by specifying access targets (limit of 10). Each access target
+                      consists of the following required parameters: namespace, compartment_id
+                      and bucket.'
                     items:
                       properties:
                         bucket:
+                          description: (Updatable) Specifies what namespace/buckets
+                            within the allowed compartments the private endpoint can
+                            access. You can configure either a single bucket or all
+                            buckets within the allowed compartments.
                           type: string
                         compartmentId:
+                          description: (Updatable) Specifies what namespace/compartments
+                            the private endpoint can access. You can configure either
+                            a single compartment or all compartments.
                           type: string
                         namespace:
+                          description: (Updatable) Specifies the target namespace
+                            that's to be allowed to egress from the private endpoint.
                           type: string
                       type: object
                     type: array
                   additionalPrefixes:
+                    description: A list of additional prefixes that you can provide
+                      along with any other prefix. These resulting endpointFqdn's
+                      are added to the customer VCN's DNS record.
                     items:
                       type: string
                     type: array
                   compartmentId:
+                    description: (Updatable) Specifies what namespace/compartments
+                      the private endpoint can access. You can configure either a
+                      single compartment or all compartments.
                     type: string
                   compartmentIdRef:
                     description: Reference to a Compartment in identity to populate
@@ -310,6 +461,9 @@ spec:
                   definedTags:
                     additionalProperties:
                       type: string
+                    description: '(Updatable) Defined tags for this resource. Each
+                      key is predefined and scoped to a namespace. For more information,
+                      see Resource Tags. Example: {"Operations.CostCenter": "42"}'
                     type: object
                     x-kubernetes-map-type: granular
                   fqdns:
@@ -319,28 +473,135 @@ spec:
                           type: string
                         type: object
                       type: object
+                    description: The object representing FQDN details formed using
+                      prefix and additionalPrefixes.
                     type: object
                   freeformTags:
                     additionalProperties:
                       type: string
+                    description: '(Updatable) Free-form tags for this resource. Each
+                      tag is a simple key-value pair with no predefined name, type,
+                      or namespace. For more information, see Resource Tags. Example:
+                      {"Department": "Finance"}'
                     type: object
                     x-kubernetes-map-type: granular
                   name:
+                    description: 'The name of the private endpoint. Valid characters
+                      are uppercase or lowercase letters, numbers, hyphens, and periods.
+                      Private Endpoint names must be unique within an Object Storage
+                      namespace. Avoid entering confidential information. example:
+                      Example: my-pe1'
                     type: string
                   namespace:
+                    description: (Updatable) Specifies the target namespace that's
+                      to be allowed to egress from the private endpoint.
                     type: string
                   nsgIds:
+                    description: A list of the OCIDs of the network security groups
+                      (NSGs) to add the private endpoint's VNIC to. For more information
+                      about NSGs, see NetworkSecurityGroup.
                     items:
                       type: string
                     type: array
                   prefix:
+                    description: The DNS prefix value is part of the URL used to access
+                      Object Storage. The DNS prefix is a case-insensitive string
+                      using alpha-numeric characters (no special characters). It must
+                      be unique within the VCN.
                     type: string
                   privateEndpointIp:
+                    description: The private IP address that is to be assigned to
+                      this private endpoint. If it's not available, an error is returned.
+                      If you do not provide a value, an available IP address in the
+                      subnet is automatically chosen. If you do not provide a value,
+                      an available IP address in the subnet is automatically chosen.
                     type: string
+                  securityAttributes:
+                    additionalProperties:
+                      type: string
+                    type: object
+                    x-kubernetes-map-type: granular
                   state:
+                    description: The lifecycle state of the private endpoint resource.
                     type: string
                   subnetId:
+                    description: The ID of the subnet that the private endpoint VNIC
+                      will be created and reside in.
                     type: string
+                  subnetIdRef:
+                    description: Reference to a Subnet in networking to populate subnetId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  subnetIdSelector:
+                    description: Selector for a Subnet in networking to populate subnetId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -447,40 +708,61 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.prefix)
                 || (has(self.initProvider) && has(self.initProvider.prefix))'
-            - message: spec.forProvider.subnetId is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.subnetId)
-                || (has(self.initProvider) && has(self.initProvider.subnetId))'
           status:
             description: PrivateEndpointStatus defines the observed state of PrivateEndpoint.
             properties:
               atProvider:
                 properties:
                   accessTargets:
+                    description: '(Updatable) When you create a private endpoint,
+                      you can restrict access to certain Object Storage resources
+                      by specifying access targets (limit of 10). Each access target
+                      consists of the following required parameters: namespace, compartment_id
+                      and bucket.'
                     items:
                       properties:
                         bucket:
+                          description: (Updatable) Specifies what namespace/buckets
+                            within the allowed compartments the private endpoint can
+                            access. You can configure either a single bucket or all
+                            buckets within the allowed compartments.
                           type: string
                         compartmentId:
+                          description: (Updatable) Specifies what namespace/compartments
+                            the private endpoint can access. You can configure either
+                            a single compartment or all compartments.
                           type: string
                         namespace:
+                          description: (Updatable) Specifies the target namespace
+                            that's to be allowed to egress from the private endpoint.
                           type: string
                       type: object
                     type: array
                   additionalPrefixes:
+                    description: A list of additional prefixes that you can provide
+                      along with any other prefix. These resulting endpointFqdn's
+                      are added to the customer VCN's DNS record.
                     items:
                       type: string
                     type: array
                   compartmentId:
+                    description: (Updatable) Specifies what namespace/compartments
+                      the private endpoint can access. You can configure either a
+                      single compartment or all compartments.
                     type: string
                   createdBy:
+                    description: The OCID of the user who created the private endpoint.
                     type: string
                   definedTags:
                     additionalProperties:
                       type: string
+                    description: '(Updatable) Defined tags for this resource. Each
+                      key is predefined and scoped to a namespace. For more information,
+                      see Resource Tags. Example: {"Operations.CostCenter": "42"}'
                     type: object
                     x-kubernetes-map-type: granular
                   etag:
+                    description: The entity tag for the Private Endpoint.
                     type: string
                   fqdns:
                     additionalProperties:
@@ -489,33 +771,70 @@ spec:
                           type: string
                         type: object
                       type: object
+                    description: The object representing FQDN details formed using
+                      prefix and additionalPrefixes.
                     type: object
                   freeformTags:
                     additionalProperties:
                       type: string
+                    description: '(Updatable) Free-form tags for this resource. Each
+                      tag is a simple key-value pair with no predefined name, type,
+                      or namespace. For more information, see Resource Tags. Example:
+                      {"Department": "Finance"}'
                     type: object
                     x-kubernetes-map-type: granular
                   id:
                     type: string
                   name:
+                    description: 'The name of the private endpoint. Valid characters
+                      are uppercase or lowercase letters, numbers, hyphens, and periods.
+                      Private Endpoint names must be unique within an Object Storage
+                      namespace. Avoid entering confidential information. example:
+                      Example: my-pe1'
                     type: string
                   namespace:
+                    description: (Updatable) Specifies the target namespace that's
+                      to be allowed to egress from the private endpoint.
                     type: string
                   nsgIds:
+                    description: A list of the OCIDs of the network security groups
+                      (NSGs) to add the private endpoint's VNIC to. For more information
+                      about NSGs, see NetworkSecurityGroup.
                     items:
                       type: string
                     type: array
                   prefix:
+                    description: The DNS prefix value is part of the URL used to access
+                      Object Storage. The DNS prefix is a case-insensitive string
+                      using alpha-numeric characters (no special characters). It must
+                      be unique within the VCN.
                     type: string
                   privateEndpointIp:
+                    description: The private IP address that is to be assigned to
+                      this private endpoint. If it's not available, an error is returned.
+                      If you do not provide a value, an available IP address in the
+                      subnet is automatically chosen. If you do not provide a value,
+                      an available IP address in the subnet is automatically chosen.
                     type: string
+                  securityAttributes:
+                    additionalProperties:
+                      type: string
+                    type: object
+                    x-kubernetes-map-type: granular
                   state:
+                    description: The lifecycle state of the private endpoint resource.
                     type: string
                   subnetId:
+                    description: The ID of the subnet that the private endpoint VNIC
+                      will be created and reside in.
                     type: string
                   timeCreated:
+                    description: The date and time the private endpoint was created,
+                      as described in RFC 2616.
                     type: string
                   timeModified:
+                    description: The date and time the private endpoint was updated,
+                      as described in RFC 2616.
                     type: string
                 type: object
               conditions:

@@ -169,6 +169,8 @@ spec:
                           type: string
                       type: object
                     type: array
+                  attachmentType:
+                    type: string
                   compartmentId:
                     description: (Updatable) Compartment Identifier.
                     type: string
@@ -760,6 +762,8 @@ spec:
                           type: string
                       type: object
                     type: array
+                  attachmentType:
+                    type: string
                   compartmentId:
                     description: (Updatable) Compartment Identifier.
                     type: string
@@ -1390,6 +1394,8 @@ spec:
                           type: string
                       type: object
                     type: array
+                  attachmentType:
+                    type: string
                   attachments:
                     description: A list of associated attachments to other services
                     items:
@@ -1735,6 +1741,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  processAutomationLogGroupId:
+                    description: OCID of LogAnalytics LogGroup, enabled for given
+                      Process Automation attached to integration instance.
+                    type: string
                   securityAttributes:
                     additionalProperties:
                       type: string

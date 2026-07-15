@@ -74,9 +74,17 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  definedTags:
+                    additionalProperties:
+                      type: string
+                    description: (Updatable) Defined tags for this resource. Each
+                      key is predefined and scoped to a namespace. For more information,
+                      see Resource Tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   endpointType:
-                    description: (Updatable) The type of resolver endpoint. VNIC is
-                      currently the only supported type.
+                    description: The type of resolver endpoint. VNIC is currently
+                      the only supported type.
                     type: string
                   forwardingAddress:
                     description: An IP address from which forwarded queries may be
@@ -84,6 +92,14 @@ spec:
                       subnet and will be assigned by the system if unspecified when
                       isForwarding is true.
                     type: string
+                  freeformTags:
+                    additionalProperties:
+                      type: string
+                    description: (Updatable) Free-form tags for this resource. Each
+                      tag is a simple key-value pair with no predefined name, type,
+                      or namespace. For more information, see Resource Tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   isForwarding:
                     description: A Boolean flag indicating whether or not the resolver
                       endpoint is for forwarding.
@@ -269,6 +285,15 @@ spec:
                     description: Value must be PRIVATE when creating private name
                       resolver endpoints.
                     type: string
+                  securityAttributes:
+                    additionalProperties:
+                      type: string
+                    description: '(Updatable) Security attributes are labels for a
+                      resource that can be referenced in a Zero Trust Packet Routing
+                      (ZPR) policy to control access to ZPR-supported resources.  Example:
+                      {"Oracle-DataSecurity-ZPR": {"MaxEgressCount": {"value":"42","mode":"audit"}}}'
+                    type: object
+                    x-kubernetes-map-type: granular
                   subnetId:
                     description: The OCID of a subnet. Must be part of the VCN that
                       the resolver is attached to.
@@ -361,9 +386,17 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  definedTags:
+                    additionalProperties:
+                      type: string
+                    description: (Updatable) Defined tags for this resource. Each
+                      key is predefined and scoped to a namespace. For more information,
+                      see Resource Tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   endpointType:
-                    description: (Updatable) The type of resolver endpoint. VNIC is
-                      currently the only supported type.
+                    description: The type of resolver endpoint. VNIC is currently
+                      the only supported type.
                     type: string
                   forwardingAddress:
                     description: An IP address from which forwarded queries may be
@@ -371,6 +404,14 @@ spec:
                       subnet and will be assigned by the system if unspecified when
                       isForwarding is true.
                     type: string
+                  freeformTags:
+                    additionalProperties:
+                      type: string
+                    description: (Updatable) Free-form tags for this resource. Each
+                      tag is a simple key-value pair with no predefined name, type,
+                      or namespace. For more information, see Resource Tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   isForwarding:
                     description: A Boolean flag indicating whether or not the resolver
                       endpoint is for forwarding.
@@ -556,6 +597,15 @@ spec:
                     description: Value must be PRIVATE when creating private name
                       resolver endpoints.
                     type: string
+                  securityAttributes:
+                    additionalProperties:
+                      type: string
+                    description: '(Updatable) Security attributes are labels for a
+                      resource that can be referenced in a Zero Trust Packet Routing
+                      (ZPR) policy to control access to ZPR-supported resources.  Example:
+                      {"Oracle-DataSecurity-ZPR": {"MaxEgressCount": {"value":"42","mode":"audit"}}}'
+                    type: object
+                    x-kubernetes-map-type: granular
                   subnetId:
                     description: The OCID of a subnet. Must be part of the VCN that
                       the resolver is attached to.
@@ -746,9 +796,17 @@ spec:
                       the resolver that the resolver endpoint is under and will be
                       updated if the resolver's compartment is changed.
                     type: string
+                  definedTags:
+                    additionalProperties:
+                      type: string
+                    description: (Updatable) Defined tags for this resource. Each
+                      key is predefined and scoped to a namespace. For more information,
+                      see Resource Tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   endpointType:
-                    description: (Updatable) The type of resolver endpoint. VNIC is
-                      currently the only supported type.
+                    description: The type of resolver endpoint. VNIC is currently
+                      the only supported type.
                     type: string
                   forwardingAddress:
                     description: An IP address from which forwarded queries may be
@@ -756,6 +814,14 @@ spec:
                       subnet and will be assigned by the system if unspecified when
                       isForwarding is true.
                     type: string
+                  freeformTags:
+                    additionalProperties:
+                      type: string
+                    description: (Updatable) Free-form tags for this resource. Each
+                      tag is a simple key-value pair with no predefined name, type,
+                      or namespace. For more information, see Resource Tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   id:
                     type: string
                   isForwarding:
@@ -783,6 +849,10 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  peId:
+                    description: The OCID of the private endpoint resource that this
+                      resolver endpoint corresponds to.
+                    type: string
                   resolverId:
                     description: The OCID of the target resolver.
                     type: string
@@ -790,6 +860,15 @@ spec:
                     description: Value must be PRIVATE when creating private name
                       resolver endpoints.
                     type: string
+                  securityAttributes:
+                    additionalProperties:
+                      type: string
+                    description: '(Updatable) Security attributes are labels for a
+                      resource that can be referenced in a Zero Trust Packet Routing
+                      (ZPR) policy to control access to ZPR-supported resources.  Example:
+                      {"Oracle-DataSecurity-ZPR": {"MaxEgressCount": {"value":"42","mode":"audit"}}}'
+                    type: object
+                    x-kubernetes-map-type: granular
                   self:
                     description: The canonical absolute URL of the resource.
                     type: string
@@ -808,6 +887,10 @@ spec:
                     description: The date and time the resource was last updated in
                       "YYYY-MM-ddThh:mm:ssZ" format with a Z offset, as defined by
                       RFC 3339.
+                    type: string
+                  vnicId:
+                    description: The OCID of the VNIC resource that this resolver
+                      endpoint corresponds to.
                     type: string
                 type: object
               conditions:

@@ -253,6 +253,19 @@ type Ipv6AddressIpv6SubnetCidrPairDetailsParameters struct {
 
 type NodeConfigDetailsInitParameters struct {
 
+	// The OCID of the Compute Cluster to be associated with the worker node instance.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/compute/v1alpha1.ComputeCluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	ComputeClusterID *string `json:"computeClusterId,omitempty" tf:"compute_cluster_id,omitempty"`
+
+	// Reference to a ComputeCluster in compute to populate computeClusterId.
+	// +kubebuilder:validation:Optional
+	ComputeClusterIDRef *v1.NamespacedReference `json:"computeClusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a ComputeCluster in compute to populate computeClusterId.
+	// +kubebuilder:validation:Optional
+	ComputeClusterIDSelector *v1.NamespacedSelector `json:"computeClusterIdSelector,omitempty" tf:"-"`
+
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
 	// +mapType=granular
 	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
@@ -302,6 +315,9 @@ type NodeConfigDetailsInitParameters struct {
 
 type NodeConfigDetailsObservation struct {
 
+	// The OCID of the Compute Cluster to be associated with the worker node instance.
+	ComputeClusterID *string `json:"computeClusterId,omitempty" tf:"compute_cluster_id,omitempty"`
+
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
 	// +mapType=granular
 	DefinedTags map[string]*string `json:"definedTags,omitempty" tf:"defined_tags,omitempty"`
@@ -331,6 +347,20 @@ type NodeConfigDetailsObservation struct {
 }
 
 type NodeConfigDetailsParameters struct {
+
+	// The OCID of the Compute Cluster to be associated with the worker node instance.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/compute/v1alpha1.ComputeCluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	ComputeClusterID *string `json:"computeClusterId,omitempty" tf:"compute_cluster_id,omitempty"`
+
+	// Reference to a ComputeCluster in compute to populate computeClusterId.
+	// +kubebuilder:validation:Optional
+	ComputeClusterIDRef *v1.NamespacedReference `json:"computeClusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a ComputeCluster in compute to populate computeClusterId.
+	// +kubebuilder:validation:Optional
+	ComputeClusterIDSelector *v1.NamespacedSelector `json:"computeClusterIdSelector,omitempty" tf:"-"`
 
 	// (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Operations.CostCenter": "42"}
 	// +kubebuilder:validation:Optional
@@ -1004,6 +1034,19 @@ type PlacementConfigsInitParameters struct {
 	// (Updatable) A list of fault domains in which to place nodes.
 	FaultDomains []*string `json:"faultDomains,omitempty" tf:"fault_domains,omitempty"`
 
+	// (Updatable) The OCID of the Host Group to be associated with the worker node instance.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/identity/v1alpha1.Group
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	HostGroupID *string `json:"hostGroupId,omitempty" tf:"host_group_id,omitempty"`
+
+	// Reference to a Group in identity to populate hostGroupId.
+	// +kubebuilder:validation:Optional
+	HostGroupIDRef *v1.NamespacedReference `json:"hostGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a Group in identity to populate hostGroupId.
+	// +kubebuilder:validation:Optional
+	HostGroupIDSelector *v1.NamespacedSelector `json:"hostGroupIdSelector,omitempty" tf:"-"`
+
 	// (Updatable) Configuration options for preemptible nodes.
 	PreemptibleNodeConfig []PreemptibleNodeConfigInitParameters `json:"preemptibleNodeConfig,omitempty" tf:"preemptible_node_config,omitempty"`
 
@@ -1031,6 +1074,9 @@ type PlacementConfigsObservation struct {
 	// (Updatable) A list of fault domains in which to place nodes.
 	FaultDomains []*string `json:"faultDomains,omitempty" tf:"fault_domains,omitempty"`
 
+	// (Updatable) The OCID of the Host Group to be associated with the worker node instance.
+	HostGroupID *string `json:"hostGroupId,omitempty" tf:"host_group_id,omitempty"`
+
 	// (Updatable) Configuration options for preemptible nodes.
 	PreemptibleNodeConfig []PreemptibleNodeConfigObservation `json:"preemptibleNodeConfig,omitempty" tf:"preemptible_node_config,omitempty"`
 
@@ -1051,6 +1097,20 @@ type PlacementConfigsParameters struct {
 	// (Updatable) A list of fault domains in which to place nodes.
 	// +kubebuilder:validation:Optional
 	FaultDomains []*string `json:"faultDomains,omitempty" tf:"fault_domains,omitempty"`
+
+	// (Updatable) The OCID of the Host Group to be associated with the worker node instance.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/identity/v1alpha1.Group
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	HostGroupID *string `json:"hostGroupId,omitempty" tf:"host_group_id,omitempty"`
+
+	// Reference to a Group in identity to populate hostGroupId.
+	// +kubebuilder:validation:Optional
+	HostGroupIDRef *v1.NamespacedReference `json:"hostGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a Group in identity to populate hostGroupId.
+	// +kubebuilder:validation:Optional
+	HostGroupIDSelector *v1.NamespacedSelector `json:"hostGroupIdSelector,omitempty" tf:"-"`
 
 	// (Updatable) Configuration options for preemptible nodes.
 	// +kubebuilder:validation:Optional

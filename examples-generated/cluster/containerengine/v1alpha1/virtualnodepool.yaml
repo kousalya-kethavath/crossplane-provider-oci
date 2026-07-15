@@ -44,6 +44,10 @@ spec:
     - effect: ${var.virtual_node_pool_taints_effect}
       key: ${var.virtual_node_pool_taints_key}
       value: ${var.virtual_node_pool_taints_value}
+    virtualNodePoolCyclingDetails:
+    - isVirtualNodeCyclingEnabled: ${var.virtual_node_pool_virtual_node_pool_cycling_details_is_virtual_node_cycling_enabled}
+      maximumSurge: ${var.virtual_node_pool_virtual_node_pool_cycling_details_maximum_surge}
+      maximumUnavailable: ${var.virtual_node_pool_virtual_node_pool_cycling_details_maximum_unavailable}
     virtualNodeTags:
     - definedTags:
         Operations.CostCenter: "42"

@@ -1645,6 +1645,11 @@ func (in *AuthenticationServerDetailValidationFailurePolicyInitParameters) DeepC
 		*out = new(string)
 		**out = **in
 	}
+	if in.LoginPath != nil {
+		in, out := &in.LoginPath, &out.LoginPath
+		*out = new(string)
+		**out = **in
+	}
 	if in.LogoutPath != nil {
 		in, out := &in.LogoutPath, &out.LogoutPath
 		*out = new(string)
@@ -1742,6 +1747,11 @@ func (in *AuthenticationServerDetailValidationFailurePolicyObservation) DeepCopy
 		*out = new(string)
 		**out = **in
 	}
+	if in.LoginPath != nil {
+		in, out := &in.LoginPath, &out.LoginPath
+		*out = new(string)
+		**out = **in
+	}
 	if in.LogoutPath != nil {
 		in, out := &in.LogoutPath, &out.LogoutPath
 		*out = new(string)
@@ -1836,6 +1846,11 @@ func (in *AuthenticationServerDetailValidationFailurePolicyParameters) DeepCopyI
 	}
 	if in.FallbackRedirectPath != nil {
 		in, out := &in.FallbackRedirectPath, &out.FallbackRedirectPath
+		*out = new(string)
+		**out = **in
+	}
+	if in.LoginPath != nil {
+		in, out := &in.LoginPath, &out.LoginPath
 		*out = new(string)
 		**out = **in
 	}
@@ -14008,6 +14023,11 @@ func (in *ValidationFailurePolicyInitParameters) DeepCopyInto(out *ValidationFai
 		*out = new(string)
 		**out = **in
 	}
+	if in.LoginPath != nil {
+		in, out := &in.LoginPath, &out.LoginPath
+		*out = new(string)
+		**out = **in
+	}
 	if in.LogoutPath != nil {
 		in, out := &in.LogoutPath, &out.LogoutPath
 		*out = new(string)
@@ -14105,6 +14125,11 @@ func (in *ValidationFailurePolicyObservation) DeepCopyInto(out *ValidationFailur
 		*out = new(string)
 		**out = **in
 	}
+	if in.LoginPath != nil {
+		in, out := &in.LoginPath, &out.LoginPath
+		*out = new(string)
+		**out = **in
+	}
 	if in.LogoutPath != nil {
 		in, out := &in.LogoutPath, &out.LogoutPath
 		*out = new(string)
@@ -14199,6 +14224,11 @@ func (in *ValidationFailurePolicyParameters) DeepCopyInto(out *ValidationFailure
 	}
 	if in.FallbackRedirectPath != nil {
 		in, out := &in.FallbackRedirectPath, &out.FallbackRedirectPath
+		*out = new(string)
+		**out = **in
+	}
+	if in.LoginPath != nil {
+		in, out := &in.LoginPath, &out.LoginPath
 		*out = new(string)
 		**out = **in
 	}

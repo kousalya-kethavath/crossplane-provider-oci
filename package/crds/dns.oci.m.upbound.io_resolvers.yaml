@@ -818,6 +818,14 @@ spec:
                         compartmentId:
                           description: (Updatable) The OCID of the owning compartment.
                           type: string
+                        definedTags:
+                          additionalProperties:
+                            type: string
+                          description: (Updatable) Defined tags for this resource.
+                            Each key is predefined and scoped to a namespace. For
+                            more information, see Resource Tags.
+                          type: object
+                          x-kubernetes-map-type: granular
                         endpointType:
                           description: The type of resolver endpoint. VNIC is currently
                             the only supported type.
@@ -827,6 +835,17 @@ spec:
                             may be sent. For VNIC endpoints, this IP address must
                             be part of the subnet and will be assigned by the system
                             if unspecified when isForwarding is true.
+                          type: string
+                        freeformTags:
+                          additionalProperties:
+                            type: string
+                          description: (Updatable) Free-form tags for this resource.
+                            Each tag is a simple key-value pair with no predefined
+                            name, type, or namespace. For more information, see Resource
+                            Tags.
+                          type: object
+                          x-kubernetes-map-type: granular
+                        id:
                           type: string
                         isForwarding:
                           description: A Boolean flag indicating whether or not the
@@ -846,6 +865,22 @@ spec:
                           description: The name of the resolver endpoint. Must be
                             unique, case-insensitive, within the resolver.
                           type: string
+                        peId:
+                          description: The OCID of the private endpoint resource that
+                            this resolver endpoint corresponds to.
+                          type: string
+                        resolverId:
+                          description: The OCID of the target resolver.
+                          type: string
+                        securityAttributes:
+                          additionalProperties:
+                            type: string
+                          description: 'Security attributes are labels for a resource
+                            that can be referenced in a Zero Trust Packet Routing
+                            (ZPR) policy to control access to ZPR-supported resources.  Example:
+                            {"Oracle-DataSecurity-ZPR": {"MaxEgressCount": {"value":"42","mode":"audit"}}}'
+                          type: object
+                          x-kubernetes-map-type: granular
                         self:
                           description: The canonical absolute URL of the resource.
                           type: string
@@ -866,6 +901,10 @@ spec:
                             in "YYYY-MM-ddThh:mm:ssZ" format with a Z offset, as defined
                             by RFC 3339.
                           type: string
+                        vnicId:
+                          description: The OCID of the VNIC resource that this resolver
+                            endpoint corresponds to.
+                          type: string
                       type: object
                     type: array
                   freeformTags:
@@ -877,7 +916,6 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   id:
-                    description: The OCID of the resolver.
                     type: string
                   isProtected:
                     description: A Boolean flag indicating whether or not parts of

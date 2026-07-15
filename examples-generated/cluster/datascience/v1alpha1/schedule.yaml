@@ -119,6 +119,7 @@ spec:
     trigger:
     - cronExpression: ${var.schedule_trigger_cron_expression}
       frequency: ${var.schedule_trigger_frequency}
+      initialJitterInMinutes: 30
       interval: ${var.schedule_trigger_interval}
       isRandomStartTime: ${var.schedule_trigger_is_random_start_time}
       recurrence: ${var.schedule_trigger_recurrence}

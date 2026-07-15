@@ -209,6 +209,9 @@ type CloudVmClusterInitParameters struct {
 	// (Updatable) The memory to be allocated in GBs.
 	MemorySizeInGbs *float64 `json:"memorySizeInGbs,omitempty" tf:"memory_size_in_gbs,omitempty"`
 
+	// The number of nodes in the cloud VM cluster.
+	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
+
 	// (Updatable) The list of OCIDs for the network security groups (NSGs) to which this resource belongs. Setting this to an empty list removes all resources from all NSGs. For more information about NSGs, see Security Rules. NsgIds restrictions:
 	// +listType=set
 	NsgIds []*string `json:"nsgIds,omitempty" tf:"nsg_ids,omitempty"`
@@ -643,6 +646,10 @@ type CloudVmClusterParameters struct {
 	// (Updatable) The memory to be allocated in GBs.
 	// +kubebuilder:validation:Optional
 	MemorySizeInGbs *float64 `json:"memorySizeInGbs,omitempty" tf:"memory_size_in_gbs,omitempty"`
+
+	// The number of nodes in the cloud VM cluster.
+	// +kubebuilder:validation:Optional
+	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
 	// (Updatable) The list of OCIDs for the network security groups (NSGs) to which this resource belongs. Setting this to an empty list removes all resources from all NSGs. For more information about NSGs, see Security Rules. NsgIds restrictions:
 	// +kubebuilder:validation:Optional

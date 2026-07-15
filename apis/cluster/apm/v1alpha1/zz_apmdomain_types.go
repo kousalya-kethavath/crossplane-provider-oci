@@ -43,6 +43,19 @@ type ApmDomainInitParameters struct {
 
 	// Indicates whether this is an "Always Free" resource. The default value is false.
 	IsFreeTier *bool `json:"isFreeTier,omitempty" tf:"is_free_tier,omitempty"`
+
+	// (Updatable) The OCID of the Log Analytics log group to which the data uploaded to this APM domain will be mapped to.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/logging/v1alpha1.LogGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
+
+	// Reference to a LogGroup in logging to populate logGroupId.
+	// +kubebuilder:validation:Optional
+	LogGroupIDRef *v1.Reference `json:"logGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a LogGroup in logging to populate logGroupId.
+	// +kubebuilder:validation:Optional
+	LogGroupIDSelector *v1.Selector `json:"logGroupIdSelector,omitempty" tf:"-"`
 }
 
 type ApmDomainObservation struct {
@@ -72,6 +85,9 @@ type ApmDomainObservation struct {
 
 	// Indicates whether this is an "Always Free" resource. The default value is false.
 	IsFreeTier *bool `json:"isFreeTier,omitempty" tf:"is_free_tier,omitempty"`
+
+	// (Updatable) The OCID of the Log Analytics log group to which the data uploaded to this APM domain will be mapped to.
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
 	// The current lifecycle state of the APM domain.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
@@ -119,6 +135,20 @@ type ApmDomainParameters struct {
 	// Indicates whether this is an "Always Free" resource. The default value is false.
 	// +kubebuilder:validation:Optional
 	IsFreeTier *bool `json:"isFreeTier,omitempty" tf:"is_free_tier,omitempty"`
+
+	// (Updatable) The OCID of the Log Analytics log group to which the data uploaded to this APM domain will be mapped to.
+	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/cluster/logging/v1alpha1.LogGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
+
+	// Reference to a LogGroup in logging to populate logGroupId.
+	// +kubebuilder:validation:Optional
+	LogGroupIDRef *v1.Reference `json:"logGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a LogGroup in logging to populate logGroupId.
+	// +kubebuilder:validation:Optional
+	LogGroupIDSelector *v1.Selector `json:"logGroupIdSelector,omitempty" tf:"-"`
 }
 
 // ApmDomainSpec defines the desired state of ApmDomain

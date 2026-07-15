@@ -4227,6 +4227,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  externalLocationZone:
+                    description: The external logical zone where the Autonomous AI
+                      Database Serverless instance is located (Intended for multicloud
+                      use).
+                    type: string
                   failedDataRecoveryInSeconds:
                     description: Indicates the number of seconds of data loss for
                       a Data Guard failover.
@@ -4465,6 +4470,11 @@ spec:
                         availabilityDomain:
                           description: The availability domain where the Autonomous
                             AI Database Serverless instance is located.
+                          type: string
+                        externalLocationZone:
+                          description: The external logical zone where the Autonomous
+                            AI Database Serverless instance is located (Intended for
+                            multicloud use).
                           type: string
                         lagTimeInSeconds:
                           description: The amount of time, in seconds, that the data
@@ -4818,6 +4828,11 @@ spec:
                         availabilityDomain:
                           description: The availability domain where the Autonomous
                             AI Database Serverless instance is located.
+                          type: string
+                        externalLocationZone:
+                          description: The external logical zone where the Autonomous
+                            AI Database Serverless instance is located (Intended for
+                            multicloud use).
                           type: string
                         lagTimeInSeconds:
                           description: The amount of time, in seconds, that the data

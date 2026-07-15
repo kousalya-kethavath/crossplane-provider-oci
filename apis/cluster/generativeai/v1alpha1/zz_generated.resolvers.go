@@ -1667,26 +1667,6 @@ func (mg *Endpoint) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.DedicatedAIClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DedicatedAIClusterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("generativeai.oci.upbound.io", "v1alpha1", "GenerativeAiPrivateEndpoint", "GenerativeAiPrivateEndpointList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GenerativeAIPrivateEndpointID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.GenerativeAIPrivateEndpointIDRef,
-			Selector:     mg.Spec.ForProvider.GenerativeAIPrivateEndpointIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.GenerativeAIPrivateEndpointID")
-	}
-	mg.Spec.ForProvider.GenerativeAIPrivateEndpointID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.GenerativeAIPrivateEndpointIDRef = rsp.ResolvedReference
-	{
 		m, l, err = apisresolver.GetManagedResource("generativeai.oci.upbound.io", "v1alpha1", "Model", "ModelList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -1769,26 +1749,6 @@ func (mg *Endpoint) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.InitProvider.DedicatedAIClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DedicatedAIClusterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("generativeai.oci.upbound.io", "v1alpha1", "GenerativeAiPrivateEndpoint", "GenerativeAiPrivateEndpointList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GenerativeAIPrivateEndpointID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.GenerativeAIPrivateEndpointIDRef,
-			Selector:     mg.Spec.InitProvider.GenerativeAIPrivateEndpointIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.GenerativeAIPrivateEndpointID")
-	}
-	mg.Spec.InitProvider.GenerativeAIPrivateEndpointID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.GenerativeAIPrivateEndpointIDRef = rsp.ResolvedReference
-	{
 		m, l, err = apisresolver.GetManagedResource("generativeai.oci.upbound.io", "v1alpha1", "Model", "ModelList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -1808,98 +1768,6 @@ func (mg *Endpoint) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.InitProvider.ModelID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ModelIDRef = rsp.ResolvedReference
-
-	return nil
-}
-
-// ResolveReferences of this GenerativeAiPrivateEndpoint.
-func (mg *GenerativeAiPrivateEndpoint) ResolveReferences(ctx context.Context, c client.Reader) error {
-	var m xpresource.Managed
-	var l xpresource.ManagedList
-	r := reference.NewAPIResolver(c, mg)
-
-	var rsp reference.ResolutionResponse
-	var err error
-	{
-		m, l, err = apisresolver.GetManagedResource("identity.oci.upbound.io", "v1alpha1", "Compartment", "CompartmentList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
-			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.CompartmentID")
-	}
-	mg.Spec.ForProvider.CompartmentID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.CompartmentIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("networking.oci.upbound.io", "v1alpha1", "Subnet", "SubnetList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.SubnetIDRef,
-			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetID")
-	}
-	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("identity.oci.upbound.io", "v1alpha1", "Compartment", "CompartmentList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
-			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.CompartmentID")
-	}
-	mg.Spec.InitProvider.CompartmentID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.CompartmentIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("networking.oci.upbound.io", "v1alpha1", "Subnet", "SubnetList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
-			Extract:      resource.ExtractResourceID(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.SubnetIDRef,
-			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetID")
-	}
-	mg.Spec.InitProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.SubnetIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -2133,6 +2001,223 @@ func (mg *Model) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mg.Spec.InitProvider.FineTuneDetails[i3].DedicatedAIClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.InitProvider.FineTuneDetails[i3].DedicatedAIClusterIDRef = rsp.ResolvedReference
 
+	}
+
+	return nil
+}
+
+// ResolveReferences of this Project.
+func (mg *Project) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("identity.oci.upbound.io", "v1alpha1", "Compartment", "CompartmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
+			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CompartmentID")
+	}
+	mg.Spec.ForProvider.CompartmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CompartmentIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LongTermMemoryConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].EmbeddingConfig); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].EmbeddingConfig[i5].LlmSelection); i6++ {
+					{
+						m, l, err = apisresolver.GetManagedResource("generativeai.oci.upbound.io", "v1alpha1", "Model", "ModelList")
+						if err != nil {
+							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+						}
+						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].EmbeddingConfig[i5].LlmSelection[i6].ModelID),
+							Extract:      resource.ExtractResourceID(),
+							Namespace:    mg.GetNamespace(),
+							Reference:    mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].EmbeddingConfig[i5].LlmSelection[i6].ModelIDRef,
+							Selector:     mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].EmbeddingConfig[i5].LlmSelection[i6].ModelIDSelector,
+							To:           reference.To{List: l, Managed: m},
+						})
+					}
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].EmbeddingConfig[i5].LlmSelection[i6].ModelID")
+					}
+					mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].EmbeddingConfig[i5].LlmSelection[i6].ModelID = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].EmbeddingConfig[i5].LlmSelection[i6].ModelIDRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LongTermMemoryConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].ExtractionConfig); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].ExtractionConfig[i5].LlmSelection); i6++ {
+					{
+						m, l, err = apisresolver.GetManagedResource("generativeai.oci.upbound.io", "v1alpha1", "Model", "ModelList")
+						if err != nil {
+							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+						}
+						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].ExtractionConfig[i5].LlmSelection[i6].ModelID),
+							Extract:      resource.ExtractResourceID(),
+							Namespace:    mg.GetNamespace(),
+							Reference:    mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].ExtractionConfig[i5].LlmSelection[i6].ModelIDRef,
+							Selector:     mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].ExtractionConfig[i5].LlmSelection[i6].ModelIDSelector,
+							To:           reference.To{List: l, Managed: m},
+						})
+					}
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].ExtractionConfig[i5].LlmSelection[i6].ModelID")
+					}
+					mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].ExtractionConfig[i5].LlmSelection[i6].ModelID = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.ForProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].ExtractionConfig[i5].LlmSelection[i6].ModelIDRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ShortTermMemoryOptimizationConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ShortTermMemoryOptimizationConfig[i3].CondenserConfig); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.ShortTermMemoryOptimizationConfig[i3].CondenserConfig[i4].LlmSelection); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("generativeai.oci.upbound.io", "v1alpha1", "Model", "ModelList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShortTermMemoryOptimizationConfig[i3].CondenserConfig[i4].LlmSelection[i5].ModelID),
+						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.ForProvider.ShortTermMemoryOptimizationConfig[i3].CondenserConfig[i4].LlmSelection[i5].ModelIDRef,
+						Selector:     mg.Spec.ForProvider.ShortTermMemoryOptimizationConfig[i3].CondenserConfig[i4].LlmSelection[i5].ModelIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.ShortTermMemoryOptimizationConfig[i3].CondenserConfig[i4].LlmSelection[i5].ModelID")
+				}
+				mg.Spec.ForProvider.ShortTermMemoryOptimizationConfig[i3].CondenserConfig[i4].LlmSelection[i5].ModelID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.ShortTermMemoryOptimizationConfig[i3].CondenserConfig[i4].LlmSelection[i5].ModelIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("identity.oci.upbound.io", "v1alpha1", "Compartment", "CompartmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
+			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CompartmentID")
+	}
+	mg.Spec.InitProvider.CompartmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CompartmentIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LongTermMemoryConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].EmbeddingConfig); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].EmbeddingConfig[i5].LlmSelection); i6++ {
+					{
+						m, l, err = apisresolver.GetManagedResource("generativeai.oci.upbound.io", "v1alpha1", "Model", "ModelList")
+						if err != nil {
+							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+						}
+						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].EmbeddingConfig[i5].LlmSelection[i6].ModelID),
+							Extract:      resource.ExtractResourceID(),
+							Namespace:    mg.GetNamespace(),
+							Reference:    mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].EmbeddingConfig[i5].LlmSelection[i6].ModelIDRef,
+							Selector:     mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].EmbeddingConfig[i5].LlmSelection[i6].ModelIDSelector,
+							To:           reference.To{List: l, Managed: m},
+						})
+					}
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].EmbeddingConfig[i5].LlmSelection[i6].ModelID")
+					}
+					mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].EmbeddingConfig[i5].LlmSelection[i6].ModelID = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].EmbeddingConfig[i5].LlmSelection[i6].ModelIDRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LongTermMemoryConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].ExtractionConfig); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].ExtractionConfig[i5].LlmSelection); i6++ {
+					{
+						m, l, err = apisresolver.GetManagedResource("generativeai.oci.upbound.io", "v1alpha1", "Model", "ModelList")
+						if err != nil {
+							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+						}
+						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].ExtractionConfig[i5].LlmSelection[i6].ModelID),
+							Extract:      resource.ExtractResourceID(),
+							Namespace:    mg.GetNamespace(),
+							Reference:    mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].ExtractionConfig[i5].LlmSelection[i6].ModelIDRef,
+							Selector:     mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].ExtractionConfig[i5].LlmSelection[i6].ModelIDSelector,
+							To:           reference.To{List: l, Managed: m},
+						})
+					}
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].ExtractionConfig[i5].LlmSelection[i6].ModelID")
+					}
+					mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].ExtractionConfig[i5].LlmSelection[i6].ModelID = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.InitProvider.LongTermMemoryConfig[i3].StandardLongTermMemoryStrategy[i4].ExtractionConfig[i5].LlmSelection[i6].ModelIDRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ShortTermMemoryOptimizationConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ShortTermMemoryOptimizationConfig[i3].CondenserConfig); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.ShortTermMemoryOptimizationConfig[i3].CondenserConfig[i4].LlmSelection); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("generativeai.oci.upbound.io", "v1alpha1", "Model", "ModelList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ShortTermMemoryOptimizationConfig[i3].CondenserConfig[i4].LlmSelection[i5].ModelID),
+						Extract:      resource.ExtractResourceID(),
+						Namespace:    mg.GetNamespace(),
+						Reference:    mg.Spec.InitProvider.ShortTermMemoryOptimizationConfig[i3].CondenserConfig[i4].LlmSelection[i5].ModelIDRef,
+						Selector:     mg.Spec.InitProvider.ShortTermMemoryOptimizationConfig[i3].CondenserConfig[i4].LlmSelection[i5].ModelIDSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.ShortTermMemoryOptimizationConfig[i3].CondenserConfig[i4].LlmSelection[i5].ModelID")
+				}
+				mg.Spec.InitProvider.ShortTermMemoryOptimizationConfig[i3].CondenserConfig[i4].LlmSelection[i5].ModelID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.ShortTermMemoryOptimizationConfig[i3].CondenserConfig[i4].LlmSelection[i5].ModelIDRef = rsp.ResolvedReference
+
+			}
+		}
 	}
 
 	return nil

@@ -101,15 +101,19 @@ type DesktopPoolInitParameters struct {
 	// (Updatable) The maximum number of desktops permitted in the desktop pool.
 	MaximumSize *float64 `json:"maximumSize,omitempty" tf:"maximum_size,omitempty"`
 
-	// Provides information about the network configuration of the desktop pool.
+	// (Updatable) Provides information about the network configuration of the desktop pool.
 	NetworkConfiguration []NetworkConfigurationInitParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
 	// A list of network security groups for the private access.
 	// +listType=set
 	NsgIds []*string `json:"nsgIds,omitempty" tf:"nsg_ids,omitempty"`
 
-	// The details of the desktop's private access network connectivity to be set up for the desktop pool.
+	// (Updatable) The details of the desktop's private access network connectivity to be set up for the desktop pool.
 	PrivateAccessDetails []PrivateAccessDetailsInitParameters `json:"privateAccessDetails,omitempty" tf:"private_access_details,omitempty"`
+
+	// (Updatable) Security attributes for this resource. Each attribute can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "audit"}}}
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 
 	// The details of action to be triggered in case of inactivity or disconnect
 	SessionLifecycleActions []SessionLifecycleActionsInitParameters `json:"sessionLifecycleActions,omitempty" tf:"session_lifecycle_actions,omitempty"`
@@ -194,15 +198,19 @@ type DesktopPoolObservation struct {
 	// (Updatable) The maximum number of desktops permitted in the desktop pool.
 	MaximumSize *float64 `json:"maximumSize,omitempty" tf:"maximum_size,omitempty"`
 
-	// Provides information about the network configuration of the desktop pool.
+	// (Updatable) Provides information about the network configuration of the desktop pool.
 	NetworkConfiguration []NetworkConfigurationObservation `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
 	// A list of network security groups for the private access.
 	// +listType=set
 	NsgIds []*string `json:"nsgIds,omitempty" tf:"nsg_ids,omitempty"`
 
-	// The details of the desktop's private access network connectivity to be set up for the desktop pool.
+	// (Updatable) The details of the desktop's private access network connectivity to be set up for the desktop pool.
 	PrivateAccessDetails []PrivateAccessDetailsObservation `json:"privateAccessDetails,omitempty" tf:"private_access_details,omitempty"`
+
+	// (Updatable) Security attributes for this resource. Each attribute can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "audit"}}}
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 
 	// The details of action to be triggered in case of inactivity or disconnect
 	SessionLifecycleActions []SessionLifecycleActionsObservation `json:"sessionLifecycleActions,omitempty" tf:"session_lifecycle_actions,omitempty"`
@@ -311,7 +319,7 @@ type DesktopPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	MaximumSize *float64 `json:"maximumSize,omitempty" tf:"maximum_size,omitempty"`
 
-	// Provides information about the network configuration of the desktop pool.
+	// (Updatable) Provides information about the network configuration of the desktop pool.
 	// +kubebuilder:validation:Optional
 	NetworkConfiguration []NetworkConfigurationParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
@@ -320,9 +328,14 @@ type DesktopPoolParameters struct {
 	// +listType=set
 	NsgIds []*string `json:"nsgIds,omitempty" tf:"nsg_ids,omitempty"`
 
-	// The details of the desktop's private access network connectivity to be set up for the desktop pool.
+	// (Updatable) The details of the desktop's private access network connectivity to be set up for the desktop pool.
 	// +kubebuilder:validation:Optional
 	PrivateAccessDetails []PrivateAccessDetailsParameters `json:"privateAccessDetails,omitempty" tf:"private_access_details,omitempty"`
+
+	// (Updatable) Security attributes for this resource. Each attribute can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "audit"}}}
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 
 	// The details of action to be triggered in case of inactivity or disconnect
 	// +kubebuilder:validation:Optional
@@ -452,7 +465,7 @@ type DevicePolicyParameters struct {
 
 type DisconnectInitParameters struct {
 
-	// (Updatable) a disconnect action to be triggered. Could be set to NONE or STOP
+	// (Updatable) a disconnect action to be triggered
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// (Updatable) The period of time (in minutes) after disconnect before any action occurs. If the value is not provided, a default value is used.
@@ -461,7 +474,7 @@ type DisconnectInitParameters struct {
 
 type DisconnectObservation struct {
 
-	// (Updatable) a disconnect action to be triggered. Could be set to NONE or STOP
+	// (Updatable) a disconnect action to be triggered
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// (Updatable) The period of time (in minutes) after disconnect before any action occurs. If the value is not provided, a default value is used.
@@ -470,7 +483,7 @@ type DisconnectObservation struct {
 
 type DisconnectParameters struct {
 
-	// (Updatable) a disconnect action to be triggered. Could be set to NONE or STOP
+	// (Updatable) a disconnect action to be triggered
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 
@@ -540,7 +553,7 @@ type ImageParameters struct {
 
 type InactivityInitParameters struct {
 
-	// (Updatable) a disconnect action to be triggered. Could be set to NONE or STOP
+	// (Updatable) a disconnect action to be triggered
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// (Updatable) The period of time (in minutes) after disconnect before any action occurs. If the value is not provided, a default value is used.
@@ -549,7 +562,7 @@ type InactivityInitParameters struct {
 
 type InactivityObservation struct {
 
-	// (Updatable) a disconnect action to be triggered. Could be set to NONE or STOP
+	// (Updatable) a disconnect action to be triggered
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// (Updatable) The period of time (in minutes) after disconnect before any action occurs. If the value is not provided, a default value is used.
@@ -558,7 +571,7 @@ type InactivityObservation struct {
 
 type InactivityParameters struct {
 
-	// (Updatable) a disconnect action to be triggered. Could be set to NONE or STOP
+	// (Updatable) a disconnect action to be triggered
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 
@@ -568,6 +581,10 @@ type InactivityParameters struct {
 }
 
 type NetworkConfigurationInitParameters struct {
+
+	// (Updatable) Security attributes for this resource. Each attribute can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "audit"}}}
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 
 	// The OCID of the subnet in the customer VCN where the connectivity will be established.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/networking/v1alpha1.Subnet
@@ -598,6 +615,10 @@ type NetworkConfigurationInitParameters struct {
 
 type NetworkConfigurationObservation struct {
 
+	// (Updatable) Security attributes for this resource. Each attribute can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "audit"}}}
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
 	// The OCID of the subnet in the customer VCN where the connectivity will be established.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -606,6 +627,11 @@ type NetworkConfigurationObservation struct {
 }
 
 type NetworkConfigurationParameters struct {
+
+	// (Updatable) Security attributes for this resource. Each attribute can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "audit"}}}
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
 
 	// The OCID of the subnet in the customer VCN where the connectivity will be established.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/networking/v1alpha1.Subnet
@@ -645,6 +671,10 @@ type PrivateAccessDetailsInitParameters struct {
 	// The IPv4 address from the provided Oracle Cloud Infrastructure subnet which needs to be assigned to the VNIC. If not provided, it will be auto-assigned with an available IPv4 address from the subnet.
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
+	// (Updatable) Security attributes for this resource. Each attribute can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "audit"}}}
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
 	// The OCID of the subnet in the customer VCN where the connectivity will be established.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/networking/v1alpha1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -671,6 +701,10 @@ type PrivateAccessDetailsObservation struct {
 	// The IPv4 address from the provided Oracle Cloud Infrastructure subnet which needs to be assigned to the VNIC. If not provided, it will be auto-assigned with an available IPv4 address from the subnet.
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
+	// (Updatable) Security attributes for this resource. Each attribute can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "audit"}}}
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
 	// The OCID of the subnet in the customer VCN where the connectivity will be established.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -689,6 +723,11 @@ type PrivateAccessDetailsParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
+	// (Updatable) Security attributes for this resource. Each attribute can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.  Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "audit"}}}
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	SecurityAttributes map[string]*string `json:"securityAttributes,omitempty" tf:"security_attributes,omitempty"`
+
 	// The OCID of the subnet in the customer VCN where the connectivity will be established.
 	// +crossplane:generate:reference:type=github.com/oracle/provider-oci/apis/namespaced/networking/v1alpha1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -706,7 +745,7 @@ type PrivateAccessDetailsParameters struct {
 
 type SessionLifecycleActionsInitParameters struct {
 
-	// (Updatable) Action and grace period for disconnect. Session disconnect can not be used together with an availability_policy schedule.
+	// (Updatable) Action and grace period for disconnect
 	Disconnect []DisconnectInitParameters `json:"disconnect,omitempty" tf:"disconnect,omitempty"`
 
 	// (Updatable) Action and grace period for inactivity
@@ -715,7 +754,7 @@ type SessionLifecycleActionsInitParameters struct {
 
 type SessionLifecycleActionsObservation struct {
 
-	// (Updatable) Action and grace period for disconnect. Session disconnect can not be used together with an availability_policy schedule.
+	// (Updatable) Action and grace period for disconnect
 	Disconnect []DisconnectObservation `json:"disconnect,omitempty" tf:"disconnect,omitempty"`
 
 	// (Updatable) Action and grace period for inactivity
@@ -724,7 +763,7 @@ type SessionLifecycleActionsObservation struct {
 
 type SessionLifecycleActionsParameters struct {
 
-	// (Updatable) Action and grace period for disconnect. Session disconnect can not be used together with an availability_policy schedule.
+	// (Updatable) Action and grace period for disconnect
 	// +kubebuilder:validation:Optional
 	Disconnect []DisconnectParameters `json:"disconnect,omitempty" tf:"disconnect,omitempty"`
 

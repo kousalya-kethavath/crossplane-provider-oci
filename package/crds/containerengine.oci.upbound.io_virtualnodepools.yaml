@@ -651,6 +651,31 @@ spec:
                           type: string
                       type: object
                     type: array
+                  virtualNodePoolCyclingDetails:
+                    description: (Updatable) Virtual Node Pool Cycling Details
+                    items:
+                      properties:
+                        isVirtualNodeCyclingEnabled:
+                          description: (Updatable) If virtual nodes in the virtual
+                            nodepool will be cycled to have new changes.
+                          type: boolean
+                        maximumSurge:
+                          description: (Updatable) Maximum additional new virtual
+                            nodes that would be temporarily created and added to virtual
+                            nodepool during the cycling virtual nodepool process.
+                            OKE supports both integer and percentage input. Defaults
+                            to 1, Ranges from 0 to Virtual Nodepool size or 0% to
+                            100%
+                          type: string
+                        maximumUnavailable:
+                          description: (Updatable) Maximum active virtual nodes that
+                            would be terminated from virtual nodepool during the cycling
+                            virtual nodepool process. OKE supports both integer and
+                            percentage input. Defaults to 0, Ranges from 0 to Virtual
+                            Nodepool size or 0% to 100%
+                          type: string
+                      type: object
+                    type: array
                   virtualNodeTags:
                     description: (Updatable) The tags associated to the virtual nodes
                       in this virtual node pool.
@@ -1267,6 +1292,31 @@ spec:
                           type: string
                       type: object
                     type: array
+                  virtualNodePoolCyclingDetails:
+                    description: (Updatable) Virtual Node Pool Cycling Details
+                    items:
+                      properties:
+                        isVirtualNodeCyclingEnabled:
+                          description: (Updatable) If virtual nodes in the virtual
+                            nodepool will be cycled to have new changes.
+                          type: boolean
+                        maximumSurge:
+                          description: (Updatable) Maximum additional new virtual
+                            nodes that would be temporarily created and added to virtual
+                            nodepool during the cycling virtual nodepool process.
+                            OKE supports both integer and percentage input. Defaults
+                            to 1, Ranges from 0 to Virtual Nodepool size or 0% to
+                            100%
+                          type: string
+                        maximumUnavailable:
+                          description: (Updatable) Maximum active virtual nodes that
+                            would be terminated from virtual nodepool during the cycling
+                            virtual nodepool process. OKE supports both integer and
+                            percentage input. Defaults to 0, Ranges from 0 to Virtual
+                            Nodepool size or 0% to 100%
+                          type: string
+                      type: object
+                    type: array
                   virtualNodeTags:
                     description: (Updatable) The tags associated to the virtual nodes
                       in this virtual node pool.
@@ -1545,6 +1595,31 @@ spec:
                   timeUpdated:
                     description: The time the virtual node pool was updated.
                     type: string
+                  virtualNodePoolCyclingDetails:
+                    description: (Updatable) Virtual Node Pool Cycling Details
+                    items:
+                      properties:
+                        isVirtualNodeCyclingEnabled:
+                          description: (Updatable) If virtual nodes in the virtual
+                            nodepool will be cycled to have new changes.
+                          type: boolean
+                        maximumSurge:
+                          description: (Updatable) Maximum additional new virtual
+                            nodes that would be temporarily created and added to virtual
+                            nodepool during the cycling virtual nodepool process.
+                            OKE supports both integer and percentage input. Defaults
+                            to 1, Ranges from 0 to Virtual Nodepool size or 0% to
+                            100%
+                          type: string
+                        maximumUnavailable:
+                          description: (Updatable) Maximum active virtual nodes that
+                            would be terminated from virtual nodepool during the cycling
+                            virtual nodepool process. OKE supports both integer and
+                            percentage input. Defaults to 0, Ranges from 0 to Virtual
+                            Nodepool size or 0% to 100%
+                          type: string
+                      type: object
+                    type: array
                   virtualNodeTags:
                     description: (Updatable) The tags associated to the virtual nodes
                       in this virtual node pool.

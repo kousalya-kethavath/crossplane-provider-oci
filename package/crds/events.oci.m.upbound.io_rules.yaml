@@ -64,9 +64,9 @@ spec:
                       for a rule.
                     items:
                       properties:
-                        actions:
-                          description: (Updatable) A list of ActionDetails objects
-                            to create for a rule.
+                        action:
+                          description: (Updatable) A list of one or more ActionDetails
+                            objects.
                           items:
                             properties:
                               actionType:
@@ -344,6 +344,40 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        actions:
+                          description: (Updatable) A list of ActionDetails objects
+                            to create for a rule.
+                          items:
+                            properties:
+                              actionType:
+                                description: (Updatable) The action to perform if
+                                  the condition in the rule matches an event.
+                                type: string
+                              description:
+                                description: (Updatable) A string that describes the
+                                  details of the action. It does not have to be unique,
+                                  and you can change it. Avoid entering confidential
+                                  information.
+                                type: string
+                              functionId:
+                                description: (Applicable when action_type=FAAS) (Updatable)
+                                  The OCID of a Function hosted by Oracle Functions
+                                  Service.
+                                type: string
+                              isEnabled:
+                                description: '(Updatable) Whether or not this action
+                                  is currently enabled.  Example: true'
+                                type: boolean
+                              streamId:
+                                description: (Updatable) The OCID of the stream to
+                                  which messages are delivered.
+                                type: string
+                              topicId:
+                                description: (Applicable when action_type=ONS) (Updatable)
+                                  The OCID of the topic to which messages are delivered.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   compartmentId:
@@ -433,10 +467,31 @@ spec:
                         type: object
                     type: object
                   condition:
-                    description: '(Updatable) A filter that specifies the event that
-                      will trigger actions associated with this rule. A few  important
-                      things to remember about filters:'
+                    description: '(Updatable) A JSON string filter that specifies
+                      the event that will trigger actions associated with this rule.
+                      Use either condition or condition_details. This argument is
+                      retained for backward compatibility. For new configurations,
+                      condition_details is recommended because it avoids manually
+                      escaping JSON and is easier to maintain when matching multiple
+                      event types. A few  important things to remember about filters:'
                     type: string
+                  conditionDetails:
+                    description: (Updatable) A structured helper for building the
+                      rule condition JSON. Use either condition or condition_details.
+                      This is the recommended form for new configurations.
+                    items:
+                      properties:
+                        data:
+                          description: (Updatable) A JSON string containing additional
+                            event data filters.
+                          type: string
+                        eventTypes:
+                          description: (Updatable) A list of event types to match.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   definedTags:
                     additionalProperties:
                       type: string
@@ -487,9 +542,9 @@ spec:
                       for a rule.
                     items:
                       properties:
-                        actions:
-                          description: (Updatable) A list of ActionDetails objects
-                            to create for a rule.
+                        action:
+                          description: (Updatable) A list of one or more ActionDetails
+                            objects.
                           items:
                             properties:
                               actionType:
@@ -767,6 +822,40 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        actions:
+                          description: (Updatable) A list of ActionDetails objects
+                            to create for a rule.
+                          items:
+                            properties:
+                              actionType:
+                                description: (Updatable) The action to perform if
+                                  the condition in the rule matches an event.
+                                type: string
+                              description:
+                                description: (Updatable) A string that describes the
+                                  details of the action. It does not have to be unique,
+                                  and you can change it. Avoid entering confidential
+                                  information.
+                                type: string
+                              functionId:
+                                description: (Applicable when action_type=FAAS) (Updatable)
+                                  The OCID of a Function hosted by Oracle Functions
+                                  Service.
+                                type: string
+                              isEnabled:
+                                description: '(Updatable) Whether or not this action
+                                  is currently enabled.  Example: true'
+                                type: boolean
+                              streamId:
+                                description: (Updatable) The OCID of the stream to
+                                  which messages are delivered.
+                                type: string
+                              topicId:
+                                description: (Applicable when action_type=ONS) (Updatable)
+                                  The OCID of the topic to which messages are delivered.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   compartmentId:
@@ -856,10 +945,31 @@ spec:
                         type: object
                     type: object
                   condition:
-                    description: '(Updatable) A filter that specifies the event that
-                      will trigger actions associated with this rule. A few  important
-                      things to remember about filters:'
+                    description: '(Updatable) A JSON string filter that specifies
+                      the event that will trigger actions associated with this rule.
+                      Use either condition or condition_details. This argument is
+                      retained for backward compatibility. For new configurations,
+                      condition_details is recommended because it avoids manually
+                      escaping JSON and is easier to maintain when matching multiple
+                      event types. A few  important things to remember about filters:'
                     type: string
+                  conditionDetails:
+                    description: (Updatable) A structured helper for building the
+                      rule condition JSON. Use either condition or condition_details.
+                      This is the recommended form for new configurations.
+                    items:
+                      properties:
+                        data:
+                          description: (Updatable) A JSON string containing additional
+                            event data filters.
+                          type: string
+                        eventTypes:
+                          description: (Updatable) A list of event types to match.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   definedTags:
                     additionalProperties:
                       type: string
@@ -957,10 +1067,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.actions)
                 || (has(self.initProvider) && has(self.initProvider.actions))'
-            - message: spec.forProvider.condition is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.condition)
-                || (has(self.initProvider) && has(self.initProvider.condition))'
             - message: spec.forProvider.displayName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)
@@ -979,6 +1085,50 @@ spec:
                       for a rule.
                     items:
                       properties:
+                        action:
+                          description: (Updatable) A list of one or more ActionDetails
+                            objects.
+                          items:
+                            properties:
+                              actionType:
+                                description: (Updatable) The action to perform if
+                                  the condition in the rule matches an event.
+                                type: string
+                              description:
+                                description: (Updatable) A string that describes the
+                                  details of the action. It does not have to be unique,
+                                  and you can change it. Avoid entering confidential
+                                  information.
+                                type: string
+                              functionId:
+                                description: (Applicable when action_type=FAAS) (Updatable)
+                                  The OCID of a Function hosted by Oracle Functions
+                                  Service.
+                                type: string
+                              id:
+                                description: The OCID of the action.
+                                type: string
+                              isEnabled:
+                                description: '(Updatable) Whether or not this action
+                                  is currently enabled.  Example: true'
+                                type: boolean
+                              lifecycleMessage:
+                                description: A message generated by the Events service
+                                  about the current state of this action.
+                                type: string
+                              state:
+                                description: The current state of the rule.
+                                type: string
+                              streamId:
+                                description: (Updatable) The OCID of the stream to
+                                  which messages are delivered.
+                                type: string
+                              topicId:
+                                description: (Applicable when action_type=ONS) (Updatable)
+                                  The OCID of the topic to which messages are delivered.
+                                type: string
+                            type: object
+                          type: array
                         actions:
                           description: (Updatable) A list of ActionDetails objects
                             to create for a rule.
@@ -1030,10 +1180,31 @@ spec:
                       this rule belongs.
                     type: string
                   condition:
-                    description: '(Updatable) A filter that specifies the event that
-                      will trigger actions associated with this rule. A few  important
-                      things to remember about filters:'
+                    description: '(Updatable) A JSON string filter that specifies
+                      the event that will trigger actions associated with this rule.
+                      Use either condition or condition_details. This argument is
+                      retained for backward compatibility. For new configurations,
+                      condition_details is recommended because it avoids manually
+                      escaping JSON and is easier to maintain when matching multiple
+                      event types. A few  important things to remember about filters:'
                     type: string
+                  conditionDetails:
+                    description: (Updatable) A structured helper for building the
+                      rule condition JSON. Use either condition or condition_details.
+                      This is the recommended form for new configurations.
+                    items:
+                      properties:
+                        data:
+                          description: (Updatable) A JSON string containing additional
+                            event data filters.
+                          type: string
+                        eventTypes:
+                          description: (Updatable) A list of event types to match.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   definedTags:
                     additionalProperties:
                       type: string

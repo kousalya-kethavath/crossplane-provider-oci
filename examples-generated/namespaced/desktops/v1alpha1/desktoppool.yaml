@@ -48,7 +48,8 @@ spec:
     isStorageEnabled: ${var.desktop_pool_is_storage_enabled}
     maximumSize: ${var.desktop_pool_maximum_size}
     networkConfiguration:
-    - subnetIdSelector:
+    - securityAttributes: ${var.desktop_pool_network_configuration_security_attributes}
+      subnetIdSelector:
         matchLabels:
           testing.upbound.io/example-name: test_subnet
       vcnIdSelector:
@@ -58,16 +59,11 @@ spec:
     privateAccessDetails:
     - nsgIds: ${var.desktop_pool_private_access_details_nsg_ids}
       privateIp: ${var.desktop_pool_private_access_details_private_ip}
+      securityAttributes: ${var.desktop_pool_private_access_details_security_attributes}
       subnetIdSelector:
         matchLabels:
           testing.upbound.io/example-name: test_subnet
-    sessionLifecycleActions:
-    - disconnect:
-      - action: STOP
-        gracePeriodInMinutes: ${var.desktop_pool_session_lifecycle_actions_disconnect_grace_period_in_minutes}
-      inactivity:
-      - action: DISCONNECT
-        gracePeriodInMinutes: ${var.desktop_pool_session_lifecycle_actions_inactivity_grace_period_in_minutes}
+    securityAttributes: ${var.desktop_pool_security_attributes}
     shapeConfig:
     - baselineOcpuUtilization: ${var.desktop_pool_shape_config_baseline_ocpu_utilization}
       memoryInGbs: ${var.desktop_pool_shape_config_memory_in_gbs}
@@ -76,6 +72,3 @@ spec:
     standbySize: ${var.desktop_pool_standby_size}
     storageBackupPolicyId: ocid1.volumebackuppolicy.oc1.xxxxyyyyyzzzz
     storageSizeInGbs: ${var.desktop_pool_storage_size_in_gbs}
-    timeStartScheduled: ${var.desktop_pool_time_start_scheduled}
-    timeStopScheduled: ${var.desktop_pool_time_stop_scheduled}
-    useDedicatedVmHost: ${var.desktop_pool_use_dedicated_vm_host}
