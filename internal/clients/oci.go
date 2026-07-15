@@ -34,6 +34,27 @@ const (
 	errUnsupportedProviderCfgKind = "unsupported providerConfigRef.kind"
 )
 
+const (
+	credentialKeyTenancyOCID                     = "tenancy_ocid"
+	credentialKeyUserOCID                        = "user_ocid"
+	credentialKeyPrivateKey                      = "private_key"
+	credentialKeyPrivateKeyPath                  = "private_key_path"
+	credentialKeyFingerprint                     = "fingerprint"
+	credentialKeyRegion                          = "region"
+	credentialKeyAuth                            = "auth"
+	credentialKeyConfigFileProfile               = "config_file_profile"
+	credentialKeyWorkloadIdentityTokenPath       = "workload_identity_token_path"
+	credentialKeyTokenExchangeDomainURL          = "token_exchange_domain_url"
+	credentialKeyTokenExchangeAuth               = "token_exchange_auth"
+	credentialKeyTokenExchangeClientID           = "token_exchange_client_id"
+	credentialKeyTokenExchangeClientSecret       = "token_exchange_client_secret"
+	credentialKeyTokenExchangeRequestedTokenType = "token_exchange_requested_token_type"
+	credentialKeyTokenExchangeSubjectTokenType   = "token_exchange_subject_token_type"
+	credentialKeyTokenExchangeResourceType       = "token_exchange_resource_type"
+	credentialKeyTokenExchangeRPSTExpiration     = "token_exchange_rpst_exp"
+	credentialKeyTokenExchangePublicKey          = "token_exchange_public_key"
+)
+
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
 // returns Terraform provider setup configuration.
 func TerraformSetupBuilder(version, providerSource, providerVersion string) terraform.SetupFn {
@@ -60,18 +81,31 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			return ps, errors.Wrap(err, errUnmarshalCredentials)
 		}
 
-		// Set credentials in Terraform provider configuration.
-		ps.Configuration = map[string]any{
-			"tenancy_ocid":        ociCreds["tenancy_ocid"],
-			"user_ocid":           ociCreds["user_ocid"],
-			"private_key":         ociCreds["private_key"],
-			"private_key_path":    ociCreds["private_key_path"],
-			"fingerprint":         ociCreds["fingerprint"],
-			"region":              ociCreds["region"],
-			"auth":                ociCreds["auth"],
-			"config_file_profile": ociCreds["config_file_profile"],
-		}
+		ps.Configuration = terraformProviderConfig(ociCreds)
 		return ps, nil
+	}
+}
+
+func terraformProviderConfig(ociCreds map[string]string) terraform.ProviderConfiguration {
+	return terraform.ProviderConfiguration{
+		credentialKeyTenancyOCID:                     ociCreds[credentialKeyTenancyOCID],
+		credentialKeyUserOCID:                        ociCreds[credentialKeyUserOCID],
+		credentialKeyPrivateKey:                      ociCreds[credentialKeyPrivateKey],
+		credentialKeyPrivateKeyPath:                  ociCreds[credentialKeyPrivateKeyPath],
+		credentialKeyFingerprint:                     ociCreds[credentialKeyFingerprint],
+		credentialKeyRegion:                          ociCreds[credentialKeyRegion],
+		credentialKeyAuth:                            ociCreds[credentialKeyAuth],
+		credentialKeyConfigFileProfile:               ociCreds[credentialKeyConfigFileProfile],
+		credentialKeyWorkloadIdentityTokenPath:       ociCreds[credentialKeyWorkloadIdentityTokenPath],
+		credentialKeyTokenExchangeDomainURL:          ociCreds[credentialKeyTokenExchangeDomainURL],
+		credentialKeyTokenExchangeAuth:               ociCreds[credentialKeyTokenExchangeAuth],
+		credentialKeyTokenExchangeClientID:           ociCreds[credentialKeyTokenExchangeClientID],
+		credentialKeyTokenExchangeClientSecret:       ociCreds[credentialKeyTokenExchangeClientSecret],
+		credentialKeyTokenExchangeRequestedTokenType: ociCreds[credentialKeyTokenExchangeRequestedTokenType],
+		credentialKeyTokenExchangeSubjectTokenType:   ociCreds[credentialKeyTokenExchangeSubjectTokenType],
+		credentialKeyTokenExchangeResourceType:       ociCreds[credentialKeyTokenExchangeResourceType],
+		credentialKeyTokenExchangeRPSTExpiration:     ociCreds[credentialKeyTokenExchangeRPSTExpiration],
+		credentialKeyTokenExchangePublicKey:          ociCreds[credentialKeyTokenExchangePublicKey],
 	}
 }
 

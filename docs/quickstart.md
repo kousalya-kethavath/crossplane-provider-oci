@@ -208,6 +208,95 @@ This method uses OCI Workload Identity for authentication in OKE environments.
    EOF
    ```
 
+### Workload Identity Federation Authentication for Non-OKE
+
+This method uses a projected Kubernetes service account token for provider authentication in non-OKE Kubernetes clusters, including self-managed clusters.
+
+Before creating the credentials secret, configure an OCI Identity Propagation Trust for the Kubernetes token issuer and IAM policies for the federated workload. For the full setup flow, including how to collect the Kubernetes token issuer, subject, and JWKS public key, see [Non-OKE Kubernetes Workload Identity Authentication](non-oke-workload-identity-auth.md).
+
+1. Create a service account for the provider.
+   ```bash
+   cat <<EOF | kubectl apply -f -
+   apiVersion: v1
+   kind: ServiceAccount
+   metadata:
+     name: crossplane-oci-provider-wif
+     namespace: crossplane-system
+   EOF
+   ```
+
+2. Configure a runtime token mount for the provider.
+
+   The token path must match the `workload_identity_token_path` value in the credentials secret. This example uses `/var/run/secrets/tokens/oci`.
+
+   ```bash
+   cat <<EOF | kubectl apply -f -
+   apiVersion: pkg.crossplane.io/v1beta1
+   kind: DeploymentRuntimeConfig
+   metadata:
+     name: oci-wif-runtime
+   spec:
+     deploymentTemplate:
+       spec:
+         selector: {}
+         template:
+           spec:
+             serviceAccountName: crossplane-oci-provider-wif
+             containers:
+               - name: package-runtime
+                 volumeMounts:
+                   - name: oci-wif-token
+                     mountPath: /var/run/secrets/tokens
+                     readOnly: true
+             volumes:
+               - name: oci-wif-token
+                 projected:
+                   sources:
+                     - serviceAccountToken:
+                         path: oci
+                         expirationSeconds: 3600
+                         audience: https://kubernetes.default.svc.cluster.local
+   ---
+   apiVersion: pkg.crossplane.io/v1
+   kind: Provider
+   metadata:
+     name: oracle-provider-family-oci
+   spec:
+     package: ghcr.io/oracle/provider-family-oci:v1.1.0
+     runtimeConfigRef:
+       name: oci-wif-runtime
+   ---
+   apiVersion: pkg.crossplane.io/v1
+   kind: Provider
+   metadata:
+     name: provider-oci-objectstorage
+   spec:
+     package: ghcr.io/oracle/provider-oci-objectstorage:v1.1.0
+     runtimeConfigRef:
+       name: oci-wif-runtime
+   EOF
+   ```
+
+3. Create the credentials secret for Workload Identity Federation.
+
+   ```bash
+   kubectl create secret generic oci-creds \
+   --namespace=crossplane-system \
+   --from-literal=credentials='{
+   "auth": "WorkloadIdentityFederation",
+   "region": "REPLACE_WITH_YOUR_REGION",
+   "workload_identity_token_path": "/var/run/secrets/tokens/oci",
+   "token_exchange_domain_url": "https://REPLACE_WITH_IDENTITY_DOMAIN_URL",
+   "token_exchange_auth": "OAuthClientCredentials",
+   "token_exchange_client_id": "REPLACE_WITH_OAUTH_CLIENT_ID",
+   "token_exchange_client_secret": "REPLACE_WITH_OAUTH_CLIENT_SECRET",
+   "token_exchange_requested_token_type": "urn:oci:token-type:oci-rpst",
+   "token_exchange_subject_token_type": "jwt",
+   "token_exchange_resource_type": "k8sworkload",
+   "token_exchange_rpst_exp": "3600"
+   }'
+   ```
+
 After choosing one authentication method above, create the ProviderConfig objects that match your workloads:
 
 - **Legacy resources (`*.oci.upbound.io`)** continue to use a cluster-scoped `ProviderConfig.oci.upbound.io`.
