@@ -808,7 +808,6 @@ import (
 	table "github.com/oracle/provider-oci/internal/controller/cluster/nosql/table"
 	tablereplica "github.com/oracle/provider-oci/internal/controller/cluster/nosql/tablereplica"
 	bucket "github.com/oracle/provider-oci/internal/controller/cluster/objectstorage/bucket"
-	namespacemetadata "github.com/oracle/provider-oci/internal/controller/cluster/objectstorage/namespacemetadata"
 	object "github.com/oracle/provider-oci/internal/controller/cluster/objectstorage/object"
 	objectlifecyclepolicy "github.com/oracle/provider-oci/internal/controller/cluster/objectstorage/objectlifecyclepolicy"
 	preauthrequest "github.com/oracle/provider-oci/internal/controller/cluster/objectstorage/preauthrequest"
@@ -1799,7 +1798,6 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		table.Setup,
 		tablereplica.Setup,
 		bucket.Setup,
-		namespacemetadata.Setup,
 		object.Setup,
 		objectlifecyclepolicy.Setup,
 		preauthrequest.Setup,
@@ -2796,7 +2794,6 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		table.SetupGated,
 		tablereplica.SetupGated,
 		bucket.SetupGated,
-		namespacemetadata.SetupGated,
 		object.SetupGated,
 		objectlifecyclepolicy.SetupGated,
 		preauthrequest.SetupGated,

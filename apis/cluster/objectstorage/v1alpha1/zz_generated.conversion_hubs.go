@@ -10,9 +10,6 @@ package v1alpha1
 func (tr *Bucket) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *NamespaceMetadata) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Object) Hub() {}
 
 // Hub marks this type as a conversion hub.
