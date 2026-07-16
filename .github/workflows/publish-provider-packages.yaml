@@ -27,7 +27,7 @@ on:
         required: false
       size:
         description: "Number of smaller provider packages to build and push with each build job"
-        default: '10'
+        default: '20'
         required: true
       concurrency:
         description: "Number of provider packages to process concurrently within each build job"
@@ -109,7 +109,29 @@ jobs:
 
           if [ "$INPUT_SUBPACKAGES" = "all" ]; then
             SERVICES_LIST=$(find examples-generated/cluster -mindepth 1 -maxdepth 1 -type d -exec basename {} \; 2>/dev/null | LC_ALL=C sort | paste -sd, -)
-            SUBPACKAGES="$SERVICES_LIST"
+            export SERVICES_LIST
+            SUBPACKAGES=$(python3 - <<'PY'
+          import math
+          import os
+
+          services = [pkg for pkg in os.environ["SERVICES_LIST"].split(",") if pkg]
+          size = int(os.environ["INPUT_SIZE"])
+          batch_count = math.ceil(len(services) / size)
+          batches = [[] for _ in range(batch_count)]
+          capacities = [size] * batch_count
+          if batches:
+              capacities[-1] = len(services) - size * (batch_count - 1)
+
+          batch_index = 0
+          for service in services:
+              while len(batches[batch_index]) >= capacities[batch_index]:
+                  batch_index = (batch_index + 1) % batch_count
+              batches[batch_index].append(service)
+              batch_index = (batch_index + 1) % batch_count
+
+          print(",".join(pkg for batch in batches for pkg in batch))
+          PY
+          )
           else
             SUBPACKAGES=$(python3 - <<'PY'
           import os
@@ -140,6 +162,76 @@ jobs:
           else
             echo "has_services=false" >> "$GITHUB_OUTPUT"
           fi
+
+  warm-nofork-cache:
+    if: ${{ needs.index.outputs.has_services == 'true' }}
+    needs: index
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Cleanup Disk
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
+        if: ${{ inputs.cleanup-disk }}
+        with:
+          android: true
+          dotnet: true
+          haskell: true
+          tool-cache: true
+          large-packages: false
+          swap-storage: false
+
+      - name: Checkout
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
+        with:
+          submodules: true
+
+      - name: Setup Go
+        uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6
+        with:
+          go-version: ${{ inputs.go-version }}
+          cache: true
+          cache-dependency-path: go.sum
+
+      - name: Restore Complete No-Fork Go Build Cache
+        id: nofork-service-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ${{ env.NOFORK_GOCACHE_PATH }}
+          key: nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'build/nofork/**', 'config/*nofork*.tmpl', 'internal/clients/*nofork*.tmpl') }}-${{ github.sha }}
+          restore-keys: |
+            nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'build/nofork/**', 'config/*nofork*.tmpl', 'internal/clients/*nofork*.tmpl') }}-
+            nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-
+
+      - name: Vendor Dependencies
+        if: ${{ steps.nofork-service-cache.outputs.cache-hit != 'true' }}
+        run: make vendor vendor.check
+
+      - name: Warm Complete No-Fork Go Build Cache
+        if: ${{ steps.nofork-service-cache.outputs.cache-hit != 'true' }}
+        env:
+          INPUT_PLATFORM: ${{ inputs.platform }}
+        run: |
+          set -euo pipefail
+
+          started=$(date +%s)
+          gomodcache=$(go env GOMODCACHE)
+          echo "Runner CPUs: $(nproc)"
+          df -h
+          make \
+            NOFORK_GOMODCACHE="$gomodcache" \
+            NOFORK_WARM_PLATFORMS="$INPUT_PLATFORM" \
+            warm-nofork-cache
+          du -sh "${{ env.NOFORK_GOCACHE_PATH }}"
+          df -h
+          echo "No-fork cache warming completed in $(( $(date +%s) - started ))s"
+
+      - name: Save Complete No-Fork Go Build Cache
+        if: ${{ steps.nofork-service-cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ${{ env.NOFORK_GOCACHE_PATH }}
+          key: ${{ steps.nofork-service-cache.outputs.cache-primary-key }}
 
   publish-family:
     needs: index
@@ -194,15 +286,14 @@ jobs:
           cache: true
           cache-dependency-path: go.sum
 
-      - name: Restore No-Fork Go Build Cache
-        id: nofork-go-cache
+      - name: Restore Complete No-Fork Go Build Cache
         uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ${{ env.NOFORK_GOCACHE_PATH }}
-          key: nofork-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.sum', 'build/nofork/patches/terraform-provider-oci.patch') }}-${{ github.sha }}
+          key: nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'build/nofork/**', 'config/*nofork*.tmpl', 'internal/clients/*nofork*.tmpl') }}-${{ github.sha }}
           restore-keys: |
-            nofork-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.sum', 'build/nofork/patches/terraform-provider-oci.patch') }}-
-            nofork-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-
+            nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'build/nofork/**', 'config/*nofork*.tmpl', 'internal/clients/*nofork*.tmpl') }}-
+            nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-
 
       - name: Vendor Dependencies
         run: make vendor vendor.check
@@ -240,28 +331,26 @@ jobs:
         run: |
           set -euo pipefail
 
+          started=$(date +%s)
           batch_platforms=$(tr ' ' ',' <<<"$INPUT_PLATFORM")
+          gomodcache=$(go env GOMODCACHE)
           rm -rf "$GOTMPDIR" /tmp/go-build*
           mkdir -p "$GOTMPDIR"
           go clean -cache -testcache || true
           docker buildx prune -af || true
           docker image prune -af || true
+          echo "Runner CPUs: $(nproc)"
           df -h
           make \
             CONCURRENCY="$INPUT_CONCURRENCY" \
-            SKIP_GO_CACHE_CLEAN=true \
+            NOFORK_GOMODCACHE="$gomodcache" \
             SUBPACKAGES_FOR_BATCH="config" \
             XPKG_REG_ORGS="$REGISTRY_ORG" \
             VERSION="$INPUT_VERSION" \
             BATCH_PLATFORMS="$batch_platforms" \
             publish-subpackages
-
-      - name: Save No-Fork Go Build Cache
-        if: ${{ steps.nofork-go-cache.outputs.cache-hit != 'true' }}
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          path: ${{ env.NOFORK_GOCACHE_PATH }}
-          key: ${{ steps.nofork-go-cache.outputs.cache-primary-key }}
+          df -h
+          echo "Family publish completed in $(( $(date +%s) - started ))s"
 
   publish-services:
     if: ${{ needs.index.outputs.has_services == 'true' }}
@@ -272,6 +361,7 @@ jobs:
     needs:
       - index
       - publish-family
+      - warm-nofork-cache
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -321,14 +411,14 @@ jobs:
           cache: true
           cache-dependency-path: go.sum
 
-      - name: Restore No-Fork Go Build Cache
+      - name: Restore Complete No-Fork Go Build Cache
         uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ${{ env.NOFORK_GOCACHE_PATH }}
-          key: nofork-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.sum', 'build/nofork/patches/terraform-provider-oci.patch') }}-${{ github.sha }}
+          key: nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'build/nofork/**', 'config/*nofork*.tmpl', 'internal/clients/*nofork*.tmpl') }}-${{ github.sha }}
           restore-keys: |
-            nofork-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.sum', 'build/nofork/patches/terraform-provider-oci.patch') }}-
-            nofork-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-
+            nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'build/nofork/**', 'config/*nofork*.tmpl', 'internal/clients/*nofork*.tmpl') }}-
+            nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-
 
       - name: Vendor Dependencies
         run: make vendor vendor.check
@@ -394,16 +484,22 @@ jobs:
         run: |
           set -euo pipefail
 
+          started=$(date +%s)
           batch_platforms=$(tr ' ' ',' <<<"$INPUT_PLATFORM")
+          gomodcache=$(go env GOMODCACHE)
           rm -rf "$GOTMPDIR" /tmp/go-build*
           mkdir -p "$GOTMPDIR"
           go clean -cache -testcache || true
+          echo "Runner CPUs: $(nproc)"
           df -h
           make \
             CONCURRENCY="$INPUT_CONCURRENCY" \
+            NOFORK_GOMODCACHE="$gomodcache" \
             SUBPACKAGES_FOR_BATCH="$PACKAGES_BATCH" \
             FAMILY_BASE_IMAGE="$FAMILY_BASE_IMAGE" \
             XPKG_REG_ORGS="$REGISTRY_ORG" \
             VERSION="$INPUT_VERSION" \
             BATCH_PLATFORMS="$batch_platforms" \
             publish-service-subpackages
+          df -h
+          echo "Service publish completed in $(( $(date +%s) - started ))s"
