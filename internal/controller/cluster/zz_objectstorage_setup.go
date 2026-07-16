@@ -10,7 +10,6 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	bucket "github.com/oracle/provider-oci/internal/controller/cluster/objectstorage/bucket"
-	namespacemetadata "github.com/oracle/provider-oci/internal/controller/cluster/objectstorage/namespacemetadata"
 	object "github.com/oracle/provider-oci/internal/controller/cluster/objectstorage/object"
 	objectlifecyclepolicy "github.com/oracle/provider-oci/internal/controller/cluster/objectstorage/objectlifecyclepolicy"
 	preauthrequest "github.com/oracle/provider-oci/internal/controller/cluster/objectstorage/preauthrequest"
@@ -23,7 +22,6 @@ import (
 func Setup_objectstorage(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		bucket.Setup,
-		namespacemetadata.Setup,
 		object.Setup,
 		objectlifecyclepolicy.Setup,
 		preauthrequest.Setup,
@@ -42,7 +40,6 @@ func Setup_objectstorage(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated_objectstorage(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		bucket.SetupGated,
-		namespacemetadata.SetupGated,
 		object.SetupGated,
 		objectlifecyclepolicy.SetupGated,
 		preauthrequest.SetupGated,

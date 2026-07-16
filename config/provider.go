@@ -65,6 +65,7 @@ func ProblematicResources() []string {
 		`oci_network_firewall_network_firewall_policy_application_list$`, // Similar potential naming conflict
 		`oci_load_balancer_backendset$`,                                  // Alias for oci_load_balancer_backend_set
 		`oci_load_balancer$`,                                             // Alias for oci_load_balancer_load_balancer
+		`oci_objectstorage_namespace_metadata$`,                          // Does not support import and manages tenancy-level S3/Swift defaults
 
 		// Add more specific resources here as we discover generation issues
 	}

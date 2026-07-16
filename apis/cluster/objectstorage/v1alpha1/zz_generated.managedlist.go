@@ -16,15 +16,6 @@ func (l *BucketList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this NamespaceMetadataList.
-func (l *NamespaceMetadataList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this ObjectLifecyclePolicyList.
 func (l *ObjectLifecyclePolicyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
