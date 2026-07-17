@@ -27,7 +27,7 @@ on:
         required: false
       size:
         description: "Number of smaller provider packages to build and push with each build job"
-        default: '20'
+        default: '10'
         required: true
       concurrency:
         description: "Number of provider packages to process concurrently within each build job"

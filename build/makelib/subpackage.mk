@@ -163,7 +163,8 @@ publish-service-subpackages:
 		echo "Error: FAMILY_BASE_IMAGE must reference the pulled provider-family-oci image."; \
 		exit 1; \
 	fi
-	@PLATFORMS_FOR_BUILD=$$(echo "$(BATCH_PLATFORMS)" | tr ',' ' '); \
+	@set -e; \
+	PLATFORMS_FOR_BUILD=$$(echo "$(BATCH_PLATFORMS)" | tr ',' ' '); \
 	$(MAKE) build PLATFORMS="$$PLATFORMS_FOR_BUILD" SUBPACKAGES="$(SUBPACKAGES_FOR_BATCH)"; \
 	if [ "$(SKIP_GO_CACHE_CLEAN)" != "true" ]; then \
 		$(GO) clean -cache -testcache || true; \
