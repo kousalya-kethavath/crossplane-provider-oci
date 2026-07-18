@@ -32,3 +32,47 @@ func TestTerraformProviderConfigIncludesWorkloadIdentityFederation(t *testing.T)
 		}
 	}
 }
+
+func TestTerraformProviderConfigOmitsUnsetInstancePrincipalCredentials(t *testing.T) {
+	creds := map[string]string{
+		credentialKeyTenancyOCID: "ocid1.tenancy.oc1..example",
+		credentialKeyAuth:        "InstancePrincipal",
+		credentialKeyRegion:      "us-ashburn-1",
+	}
+
+	cfg := terraformProviderConfig(creds)
+
+	if len(cfg) != len(creds) {
+		t.Fatalf("len(cfg) = %d, want %d", len(cfg), len(creds))
+	}
+	for key, want := range creds {
+		if got, ok := cfg[key]; !ok || got != want {
+			t.Fatalf("cfg[%q] = %v, %t, want %q, true", key, got, ok, want)
+		}
+	}
+	if _, ok := cfg[credentialKeyTokenExchangeAuth]; ok {
+		t.Fatalf("cfg unexpectedly includes %q", credentialKeyTokenExchangeAuth)
+	}
+}
+
+func TestTerraformProviderConfigOmitsUnsetOKEWorkloadIdentityCredentials(t *testing.T) {
+	creds := map[string]string{
+		credentialKeyTenancyOCID: "ocid1.tenancy.oc1..example",
+		credentialKeyAuth:        "OKEWorkloadIdentity",
+		credentialKeyRegion:      "us-ashburn-1",
+	}
+
+	cfg := terraformProviderConfig(creds)
+
+	if len(cfg) != len(creds) {
+		t.Fatalf("len(cfg) = %d, want %d", len(cfg), len(creds))
+	}
+	for key, want := range creds {
+		if got, ok := cfg[key]; !ok || got != want {
+			t.Fatalf("cfg[%q] = %v, %t, want %q, true", key, got, ok, want)
+		}
+	}
+	if _, ok := cfg[credentialKeyTokenExchangeAuth]; ok {
+		t.Fatalf("cfg unexpectedly includes %q", credentialKeyTokenExchangeAuth)
+	}
+}

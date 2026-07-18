@@ -87,7 +87,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 }
 
 func terraformProviderConfig(ociCreds map[string]string) terraform.ProviderConfiguration {
-	return terraform.ProviderConfiguration{
+	config := terraform.ProviderConfiguration{
 		credentialKeyTenancyOCID:                     ociCreds[credentialKeyTenancyOCID],
 		credentialKeyUserOCID:                        ociCreds[credentialKeyUserOCID],
 		credentialKeyPrivateKey:                      ociCreds[credentialKeyPrivateKey],
@@ -107,6 +107,14 @@ func terraformProviderConfig(ociCreds map[string]string) terraform.ProviderConfi
 		credentialKeyTokenExchangeRPSTExpiration:     ociCreds[credentialKeyTokenExchangeRPSTExpiration],
 		credentialKeyTokenExchangePublicKey:          ociCreds[credentialKeyTokenExchangePublicKey],
 	}
+
+	for key, value := range config {
+		if value == "" {
+			delete(config, key)
+		}
+	}
+
+	return config
 }
 
 func resolveProviderConfig(ctx context.Context, kube client.Client, mg resource.Managed) (*namespacedv1beta1.ProviderConfigSpec, error) {
