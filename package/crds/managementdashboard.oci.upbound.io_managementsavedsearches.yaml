@@ -179,13 +179,12 @@ spec:
                     type: string
                   freeformTags:
                     additionalProperties:
-                      additionalProperties:
-                        type: string
-                      type: object
+                      type: string
                     description: '(Updatable) Simple key-value pair that is applied
                       without any predefined name, type or scope. Exists for cross-compatibility
                       only. Example: {"bar-key": "value"}'
                     type: object
+                    x-kubernetes-map-type: granular
                   isOobSavedSearch:
                     description: (Updatable) Determines whether the saved search is
                       an Out-of-the-Box (OOB) saved search. Note that OOB saved searches
@@ -356,13 +355,12 @@ spec:
                     type: string
                   freeformTags:
                     additionalProperties:
-                      additionalProperties:
-                        type: string
-                      type: object
+                      type: string
                     description: '(Updatable) Simple key-value pair that is applied
                       without any predefined name, type or scope. Exists for cross-compatibility
                       only. Example: {"bar-key": "value"}'
                     type: object
+                    x-kubernetes-map-type: granular
                   isOobSavedSearch:
                     description: (Updatable) Determines whether the saved search is
                       an Out-of-the-Box (OOB) saved search. Note that OOB saved searches
@@ -610,13 +608,12 @@ spec:
                     type: string
                   freeformTags:
                     additionalProperties:
-                      additionalProperties:
-                        type: string
-                      type: object
+                      type: string
                     description: '(Updatable) Simple key-value pair that is applied
                       without any predefined name, type or scope. Exists for cross-compatibility
                       only. Example: {"bar-key": "value"}'
                     type: object
+                    x-kubernetes-map-type: granular
                   id:
                     description: ID of the saved search, which must only be provided
                       for Out-of-the-Box (OOB) saved search.

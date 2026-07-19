@@ -2722,11 +2722,7 @@ func (in *SecuritySAMLConfigInitParameters) DeepCopyInto(out *SecuritySAMLConfig
 		*out = new(string)
 		**out = **in
 	}
-	if in.IdpMetadataContent != nil {
-		in, out := &in.IdpMetadataContent, &out.IdpMetadataContent
-		*out = new(string)
-		**out = **in
-	}
+	in.IdpMetadataContentSecretRef.DeepCopyInto(&out.IdpMetadataContentSecretRef)
 	if in.IsEnabled != nil {
 		in, out := &in.IsEnabled, &out.IsEnabled
 		*out = new(bool)
@@ -2769,11 +2765,6 @@ func (in *SecuritySAMLConfigObservation) DeepCopyInto(out *SecuritySAMLConfigObs
 	}
 	if in.IdpEntityID != nil {
 		in, out := &in.IdpEntityID, &out.IdpEntityID
-		*out = new(string)
-		**out = **in
-	}
-	if in.IdpMetadataContent != nil {
-		in, out := &in.IdpMetadataContent, &out.IdpMetadataContent
 		*out = new(string)
 		**out = **in
 	}
@@ -2822,11 +2813,7 @@ func (in *SecuritySAMLConfigParameters) DeepCopyInto(out *SecuritySAMLConfigPara
 		*out = new(string)
 		**out = **in
 	}
-	if in.IdpMetadataContent != nil {
-		in, out := &in.IdpMetadataContent, &out.IdpMetadataContent
-		*out = new(string)
-		**out = **in
-	}
+	in.IdpMetadataContentSecretRef.DeepCopyInto(&out.IdpMetadataContentSecretRef)
 	if in.IsEnabled != nil {
 		in, out := &in.IsEnabled, &out.IsEnabled
 		*out = new(bool)

@@ -1059,7 +1059,7 @@ type SecuritySAMLConfigInitParameters struct {
 	IdpEntityID *string `json:"idpEntityId,omitempty" tf:"idp_entity_id,omitempty"`
 
 	// The content of identity provider metadata
-	IdpMetadataContent *string `json:"idpMetadataContent,omitempty" tf:"idp_metadata_content,omitempty"`
+	IdpMetadataContentSecretRef v1.SecretKeySelector `json:"idpMetadataContentSecretRef" tf:"-"`
 
 	// (Updatable) Flag to indicate whether outbound cluster configuration is enabled
 	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
@@ -1081,9 +1081,6 @@ type SecuritySAMLConfigObservation struct {
 
 	// The unique name for a identity provider entity
 	IdpEntityID *string `json:"idpEntityId,omitempty" tf:"idp_entity_id,omitempty"`
-
-	// The content of identity provider metadata
-	IdpMetadataContent *string `json:"idpMetadataContent,omitempty" tf:"idp_metadata_content,omitempty"`
 
 	// (Updatable) Flag to indicate whether outbound cluster configuration is enabled
 	IsEnabled *bool `json:"isEnabled,omitempty" tf:"is_enabled,omitempty"`
@@ -1110,7 +1107,7 @@ type SecuritySAMLConfigParameters struct {
 
 	// The content of identity provider metadata
 	// +kubebuilder:validation:Optional
-	IdpMetadataContent *string `json:"idpMetadataContent" tf:"idp_metadata_content,omitempty"`
+	IdpMetadataContentSecretRef v1.SecretKeySelector `json:"idpMetadataContentSecretRef" tf:"-"`
 
 	// (Updatable) Flag to indicate whether outbound cluster configuration is enabled
 	// +kubebuilder:validation:Optional
