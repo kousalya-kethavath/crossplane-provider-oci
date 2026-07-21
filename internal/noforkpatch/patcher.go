@@ -9,6 +9,8 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strings"
+
+	"github.com/oracle/provider-oci/internal/noforkscope"
 )
 
 const (
@@ -113,6 +115,9 @@ func apply(ctx context.Context, opts Options, r runner) error {
 	if err := applyPatch(ctx, opts, r); err != nil {
 		return err
 	}
+	if err := noforkscope.PrepareProvider(opts.ProviderDir); err != nil {
+		return fmt.Errorf("prepare service-scoped provider: %w", err)
+	}
 	patched := false
 	defer func() {
 		if !patched {
@@ -126,6 +131,26 @@ func apply(ctx context.Context, opts Options, r runner) error {
 	if err := backupModuleFiles(opts); err != nil {
 		return err
 	}
+	if err := applyModuleChanges(ctx, opts, r); err != nil {
+		return err
+	}
+
+	patched = true
+	fmt.Fprintf(opts.Stdout, "==> Patch applied. go.mod/go.sum backups saved to %s.\n", opts.StateDir)
+	return nil
+}
+
+// applyModuleChanges updates the workspace dependency graph and generates the
+// scoped registries. Any failure rolls the workspace back to its pre-apply state.
+func applyModuleChanges(ctx context.Context, opts Options, r runner) (retErr error) {
+	defer func() {
+		if retErr == nil {
+			return
+		}
+		if err := Clean(opts); err != nil {
+			retErr = errors.Join(retErr, fmt.Errorf("roll back failed no-fork apply: %w", err))
+		}
+	}()
 
 	fmt.Fprintln(opts.Stdout, "==> Updating go.mod (require + replace)")
 	env := goEnv(opts)
@@ -141,8 +166,14 @@ func apply(ctx context.Context, opts Options, r runner) error {
 		return err
 	}
 
-	patched = true
-	fmt.Fprintf(opts.Stdout, "==> Patch applied. go.mod/go.sum backups saved to %s.\n", opts.StateDir)
+	fmt.Fprintln(opts.Stdout, "==> Generating service-scoped provider registries")
+	if err := r.Run(ctx, opts.RootDir, env, "go", "run", "./cmd/noforkscopegen",
+		"--provider-dir", opts.ProviderDir,
+		"--report", filepath.Join(opts.ProviderDir, "nofork-service-scopes.json"),
+	); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -179,6 +210,9 @@ func validate(ctx context.Context, opts Options, r runner) error {
 	}
 	if err := applyPatch(ctx, validationOpts, r); err != nil {
 		return err
+	}
+	if err := noforkscope.PrepareProvider(validationDir); err != nil {
+		return fmt.Errorf("prepare service-scoped provider: %w", err)
 	}
 	if err := ValidatePatchedTree(validationDir); err != nil {
 		return err

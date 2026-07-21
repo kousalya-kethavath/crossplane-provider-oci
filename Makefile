@@ -467,6 +467,12 @@ build.subpackage.%:
 		exit 1; \
 	fi
 	@package_started=$$(date +%s); \
+	build_goflags='$(NOFORK_GOFLAGS)'; \
+	build_ldflags='$(GO_LDFLAGS)'; \
+	if [ "$*" != "config" ] && [ "$*" != "monolith" ]; then \
+		build_goflags='$(filter-out -tags=%,$(NOFORK_GOFLAGS)) -tags=nofork,nofork_scoped,oci_service_$*'; \
+		build_ldflags="$$build_ldflags -X github.com/oracle/provider-oci/config.serviceScope=$*"; \
+	fi; \
 	for platform in $(PLATFORMS); do \
 		GOOS=$$(echo $$platform | cut -d_ -f1); \
 		GOARCH=$$(echo $$platform | cut -d_ -f2); \
@@ -475,7 +481,7 @@ build.subpackage.%:
 		output_name="$*"; \
 		mkdir -p $(OUTPUT_DIR)/bin/$${GOOS}_$${GOARCH}; \
 		output_path=$(OUTPUT_DIR)/bin/$${GOOS}_$${GOARCH}/$$output_name$(BINARY_EXT); \
-		CGO_ENABLED=0 GOOS=$$GOOS GOARCH=$$GOARCH $(GO) build $(GO_BUILDFLAGS) -ldflags '$(GO_LDFLAGS)' \
+		CGO_ENABLED=0 GOOS=$$GOOS GOARCH=$$GOARCH GOFLAGS="$$build_goflags" $(GO) build $(GO_BUILDFLAGS) -ldflags "$$build_ldflags" \
 			-o $$output_path $(GO_PROJECT)/cmd/provider/$*/ || exit 1; \
 		binary_size=$$(du -h "$$output_path" | awk '{print $$1}'); \
 		echo "  Built $$GOOS/$$GOARCH in $$(( $$(date +%s) - $$platform_started ))s ($$binary_size)"; \
