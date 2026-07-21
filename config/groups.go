@@ -29,7 +29,6 @@ const (
 	maxGeneratedKindNameLength = maxKubernetesNameLength - len("List")
 )
 
-
 // GroupKindCalculator returns the correct service group and kind for a resource
 type GroupKindCalculator func(resource string) (group string, kind string)
 
@@ -892,6 +891,7 @@ func generateKindName(resourceName, group string) string {
 	}
 	return kindName
 }
+
 // removeLongestDuplicateSubstring shortens long generated kinds by removing the
 // latest duplicated token window whose normalized form already appears earlier
 // in the same name. This keeps the logic generic for overlong kinds without
@@ -961,14 +961,20 @@ func contains(resourceName string, patterns []string) bool {
 	return false
 }
 
+// ResourceGroupKind returns the effective service group and kind for a
+// Terraform resource, applying explicit GroupMap overrides before automatic
+// detection. Build-time service scoping and Upjet configuration must use this
+// same decision path.
+func ResourceGroupKind(resource string) (group string, kind string) {
+	if f, ok := GroupMap[resource]; ok {
+		return f(resource)
+	}
+	return ServiceGroupDetector(resource)
+}
+
 // GroupKindOverrides applies the GroupMap during provider configuration
 func GroupKindOverrides() config.ResourceOption {
 	return func(r *config.Resource) {
-		if f, ok := GroupMap[r.Name]; ok {
-			r.ShortGroup, r.Kind = f(r.Name)
-		} else {
-			// Fallback to automatic detection for any unmapped resources
-			r.ShortGroup, r.Kind = ServiceGroupDetector(r.Name)
-		}
+		r.ShortGroup, r.Kind = ResourceGroupKind(r.Name)
 	}
 }

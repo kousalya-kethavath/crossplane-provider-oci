@@ -28,6 +28,11 @@ import (
 // Terraform Plugin Framework resources are validated for no-fork routing.
 var terraformPluginFrameworkIncludeList = []string{}
 
+// serviceScope is set at link time for service provider binaries. An empty
+// value preserves the complete provider schema used by generation, monolith,
+// and provider-family builds.
+var serviceScope string
+
 type terraformProviderSchema struct {
 	ProviderSchemas map[string]struct {
 		ResourceSchemas map[string]json.RawMessage `json:"resource_schemas"`
@@ -41,7 +46,7 @@ type terraformResourceRouting struct {
 }
 
 var loadTerraformResourceRouting = sync.OnceValue(func() terraformResourceRouting {
-	names := parseTerraformResourceNamesFromSchema()
+	names := terraformResourceNamesForService(parseTerraformResourceNamesFromSchema(), serviceScope)
 	routing := terraformResourceRouting{
 		names:          names,
 		sdkV2Resources: make(map[string]struct{}, len(names)),
@@ -53,6 +58,21 @@ var loadTerraformResourceRouting = sync.OnceValue(func() terraformResourceRoutin
 	}
 	return routing
 })
+
+func terraformResourceNamesForService(resources []string, service string) []string {
+	if service == "" {
+		return slices.Clone(resources)
+	}
+
+	scoped := make([]string, 0, len(resources))
+	for _, resource := range resources {
+		group, _ := ResourceGroupKind(resource)
+		if group == service {
+			scoped = append(scoped, resource)
+		}
+	}
+	return scoped
+}
 
 func terraformPluginSDKIncludeList() []string {
 	return slices.Clone(loadTerraformResourceRouting().sdkV2Regexes)

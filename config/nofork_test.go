@@ -100,3 +100,31 @@ func TestSDKv2RoutingIncludesRepresentativeResources(t *testing.T) {
 		}
 	}
 }
+
+func TestTerraformResourceNamesForService(t *testing.T) {
+	resources := []string{
+		"oci_core_instance",
+		"oci_core_subnet",
+		"oci_core_drg_route_table",
+		"oci_health_checks_http_monitor",
+	}
+
+	got := terraformResourceNamesForService(resources, "networking")
+	if len(got) != 1 || got[0] != "oci_core_subnet" {
+		t.Fatalf("terraformResourceNamesForService() = %v, want [oci_core_subnet]", got)
+	}
+
+	all := terraformResourceNamesForService(resources, "")
+	if len(all) != len(resources) {
+		t.Fatalf("full resource count = %d, want %d", len(all), len(resources))
+	}
+	all[0] = "changed"
+	if resources[0] == "changed" {
+		t.Fatal("full resource list aliases its input")
+	}
+
+	networkConnectivity := terraformResourceNamesForService(resources, "networkconnectivity")
+	if len(networkConnectivity) != 1 || networkConnectivity[0] != "oci_core_drg_route_table" {
+		t.Fatalf("network connectivity resources = %v, want [oci_core_drg_route_table]", networkConnectivity)
+	}
+}
