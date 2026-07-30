@@ -230,6 +230,20 @@ NOFORK_GOFLAGS ?= $(strip $(GOFLAGS) -tags=nofork)
 NOFORK_GO_TAGS ?= $(strip $(GO_TAGS) nofork)
 NOFORK_PATCHER := GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)" go run ./cmd/noforkpatcher
 
+# Most generated provider groups match Terraform Provider OCI's registration
+# service name. These exceptions group resources from one or more upstream
+# services and must enable every service whose resource schemas they use.
+NOFORK_SERVICE_SCOPE_appmgmt := appmgmtcontrol
+NOFORK_SERVICE_SCOPE_blockstorage := core
+NOFORK_SERVICE_SCOPE_compute := core
+NOFORK_SERVICE_SCOPE_core := core
+NOFORK_SERVICE_SCOPE_database := database,databasemanagement,databasemigration,databasetools,databasetoolsruntime
+NOFORK_SERVICE_SCOPE_generativeai := generativeai,generativeaiagent
+NOFORK_SERVICE_SCOPE_monitoring := core,monitoring
+NOFORK_SERVICE_SCOPE_networkconnectivity := core
+NOFORK_SERVICE_SCOPE_networking := core
+NOFORK_SERVICE_SCOPE = $(if $(NOFORK_SERVICE_SCOPE_$(1)),$(NOFORK_SERVICE_SCOPE_$(1)),$(1))
+
 # Internal operations below assume the no-fork patch is already active. Public
 # developer targets continue to own the apply/clean lifecycle.
 nofork.generate.inner:
@@ -471,6 +485,7 @@ build.subpackage.%:
 		exit 1; \
 	fi
 	@package_started=$$(date +%s); \
+	provider_service_scope='$(call NOFORK_SERVICE_SCOPE,$*)'; \
 	for platform in $(PLATFORMS); do \
 		GOOS=$$(echo $$platform | cut -d_ -f1); \
 		GOARCH=$$(echo $$platform | cut -d_ -f2); \
@@ -479,7 +494,8 @@ build.subpackage.%:
 		output_name="$*"; \
 		mkdir -p $(OUTPUT_DIR)/bin/$${GOOS}_$${GOARCH}; \
 		output_path=$(OUTPUT_DIR)/bin/$${GOOS}_$${GOARCH}/$$output_name$(BINARY_EXT); \
-		CGO_ENABLED=0 GOOS=$$GOOS GOARCH=$$GOARCH $(GO) build $(GO_BUILDFLAGS) -ldflags '$(GO_LDFLAGS)' \
+		CGO_ENABLED=0 GOOS=$$GOOS GOARCH=$$GOARCH $(GO) build $(GO_BUILDFLAGS) \
+			-ldflags '$(GO_LDFLAGS) -X github.com/oracle/terraform-provider-oci/internal/provider/crossplaneservices.Scope='$$provider_service_scope \
 			-o $$output_path $(GO_PROJECT)/cmd/provider/$*/ || exit 1; \
 		binary_size=$$(du -h "$$output_path" | awk '{print $$1}'); \
 		echo "  Built $$GOOS/$$GOARCH in $$(( $$(date +%s) - $$platform_started ))s ($$binary_size)"; \

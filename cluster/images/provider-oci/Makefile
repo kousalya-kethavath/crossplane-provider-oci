@@ -23,7 +23,13 @@ img.publish:
 
 img.build.shared:
 	@cp Dockerfile $(IMAGE_TEMP_DIR) || $(FAIL)
-	@cp -r $(OUTPUT_DIR)/bin/ $(IMAGE_TEMP_DIR)/bin || $(FAIL)
+	@set -e; \
+	mkdir -p "$(IMAGE_TEMP_DIR)/bin"; \
+	for platform in $(subst $(COMMA), ,$(IMAGE_PLATFORMS)); do \
+		platform_dir=$$(echo "$$platform" | tr '/' '_'); \
+		mkdir -p "$(IMAGE_TEMP_DIR)/bin/$$platform_dir"; \
+		cp "$(OUTPUT_DIR)/bin/$$platform_dir/provider" "$(IMAGE_TEMP_DIR)/bin/$$platform_dir/provider" || $(FAIL); \
+	done
 	@docker buildx build $(BUILD_ARGS) \
 		--platform $(IMAGE_PLATFORMS) \
 		--build-arg USER_AGENT_PROVIDER_NAME='$(USER_AGENT_PROVIDER_NAME)' \
