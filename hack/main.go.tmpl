@@ -138,10 +138,10 @@ func main() {
 			Features:                &feature.Flags{},
 			MetricOptions:           metricOptions,
 		},
-		Provider: config.GetProvider(),
+		Provider: config.GetProviderForRuntime("{{ .Group }}"),
 		OperationTrackerStore: tjcontroller.NewOperationStore(log),
 		SetupFn: clients.TerraformSetupBuilder(
-			clients.WithSDKv2ResourcePredicate(config.IsSDKv2Resource),
+			clients.WithSDKv2ResourcePredicate(config.SDKv2ResourcePredicateForRuntime("{{ .Group }}")),
 			clients.WithFrameworkProvider(config.HasFrameworkResources()),
 			clients.WithProviderMetaCacheSize(*providerMetaCacheSize),
 		),
