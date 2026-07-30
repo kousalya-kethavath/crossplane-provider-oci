@@ -1,0 +1,36 @@
+//go:build nofork
+
+// This template is materialized by the no-fork patch workflow.
+
+/*
+Copyright 2026 Oracle and/or its affiliates.
+*/
+
+package clients
+
+import (
+	"context"
+	"strings"
+
+	upjetterraform "github.com/crossplane/upjet/v2/pkg/terraform"
+	ociprovider "github.com/oracle/terraform-provider-oci/oci"
+)
+
+func setFrameworkProvider(ps *upjetterraform.Setup) {
+	ps.FrameworkProvider = ociprovider.New()
+}
+
+func getOrConfigureProviderMeta(ctx context.Context, cache *providerMetaCache, uid string, cfg map[string]any, terraformResourceType string) (any, error) {
+	cfgHash, err := providerConfigurationHash(cfg)
+	if err != nil {
+		return nil, err
+	}
+	clientServices, err := ociprovider.MetadataClientServices(terraformResourceType)
+	if err != nil {
+		return nil, err
+	}
+	cacheKey := uid + "\x00" + strings.Join(clientServices, ",")
+	return cache.getOrCreate(ctx, cacheKey, cfgHash, func() (any, error) {
+		return ociprovider.ConfigureMeta(ctx, cfg, terraformResourceType)
+	})
+}
