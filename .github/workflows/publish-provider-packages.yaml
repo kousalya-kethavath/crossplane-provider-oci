@@ -197,9 +197,9 @@ jobs:
         uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ${{ env.NOFORK_GOCACHE_PATH }}
-          key: nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'build/nofork/**', 'config/*nofork*.tmpl', 'internal/clients/*nofork*.tmpl') }}-${{ github.sha }}
+          key: nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'config/terraform_provider.go', 'internal/clients/oci_provider.go') }}-${{ github.sha }}
           restore-keys: |
-            nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'build/nofork/**', 'config/*nofork*.tmpl', 'internal/clients/*nofork*.tmpl') }}-
+            nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'config/terraform_provider.go', 'internal/clients/oci_provider.go') }}-
             nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-
 
       - name: Vendor Dependencies
@@ -288,9 +288,9 @@ jobs:
         uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ${{ env.NOFORK_GOCACHE_PATH }}
-          key: nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'build/nofork/**', 'config/*nofork*.tmpl', 'internal/clients/*nofork*.tmpl') }}-${{ github.sha }}
+          key: nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'config/terraform_provider.go', 'internal/clients/oci_provider.go') }}-${{ github.sha }}
           restore-keys: |
-            nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'build/nofork/**', 'config/*nofork*.tmpl', 'internal/clients/*nofork*.tmpl') }}-
+            nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'config/terraform_provider.go', 'internal/clients/oci_provider.go') }}-
             nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-
 
       - name: Vendor Dependencies
@@ -412,9 +412,9 @@ jobs:
         uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ${{ env.NOFORK_GOCACHE_PATH }}
-          key: nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'build/nofork/**', 'config/*nofork*.tmpl', 'internal/clients/*nofork*.tmpl') }}-${{ github.sha }}
+          key: nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'config/terraform_provider.go', 'internal/clients/oci_provider.go') }}-${{ github.sha }}
           restore-keys: |
-            nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'build/nofork/**', 'config/*nofork*.tmpl', 'internal/clients/*nofork*.tmpl') }}-
+            nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-${{ hashFiles('go.mod', 'go.sum', 'Makefile', 'config/terraform_provider.go', 'internal/clients/oci_provider.go') }}-
             nofork-service-go-build-${{ runner.os }}-go-${{ inputs.go-version }}-
 
       - name: Vendor Dependencies

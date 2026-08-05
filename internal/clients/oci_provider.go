@@ -1,7 +1,3 @@
-//go:build nofork
-
-// This template is materialized by the no-fork patch workflow.
-
 /*
 Copyright 2026 Oracle and/or its affiliates.
 */

@@ -214,35 +214,23 @@ build.complete: generate.resolve build
 
 .PHONY: $(TERRAFORM_PROVIDER_SCHEMA) pull-docs generate.resolve build.complete
 
-PATCH_STAMP := .patch-stamp-$(TERRAFORM_PROVIDER_VERSION)
-NOFORK_PATCH_FILE ?= $(CURDIR)/build/nofork/patches/terraform-provider-oci.patch
-NOFORK_PROVIDER_DIR ?= $(CURDIR)/.work/nofork/terraform-provider-oci
-NOFORK_STATE_DIR ?= $(CURDIR)/.work/nofork/state
 NOFORK_GOCACHE ?= $(CURDIR)/.cache/nofork-go-build
 NOFORK_GOMODCACHE ?= $(CURDIR)/.cache/nofork-go-mod
 NOFORK_GOPATH ?= $(CURDIR)/.work/nofork-gopath
-NOFORK_GOFLAGS ?= $(strip $(GOFLAGS) -tags=nofork)
-NOFORK_GO_TAGS ?= $(strip $(GO_TAGS) nofork)
 NOFORK_WARM_PACKAGES ?= ./cmd/provider/...
 NOFORK_WARM_PLATFORMS ?= linux_amd64 linux_arm64
-NOFORK_PATCHER := GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)" go run ./cmd/noforkpatcher
 
 build:
 ifneq ($(SUBPACKAGES),monolith)
 	@set -e; \
-	trap '$(MAKE) clean-patch' EXIT; \
-	$(MAKE) $(PATCH_STAMP) GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"; \
 	$(INFO) Building sub-packages: $(SUBPACKAGES); \
 	for pkg in $(SUBPACKAGE_LIST); do \
-		GOFLAGS="$(NOFORK_GOFLAGS)" GO_TAGS="$(NOFORK_GO_TAGS)" $(MAKE) build.subpackage.$$pkg PLATFORMS="$(PLATFORMS)" GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)" || exit 1; \
+		$(MAKE) build.subpackage.$$pkg PLATFORMS="$(PLATFORMS)" GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)" || exit 1; \
 	done; \
 	$(OK) Built sub-packages: $(SUBPACKAGES)
 else
 ifneq ($(BUILD_PLATFORMS),)
-	@set -e; \
-	trap '$(MAKE) clean-patch' EXIT; \
-	$(MAKE) $(PATCH_STAMP) GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"; \
-	GOFLAGS="$(NOFORK_GOFLAGS)" GO_TAGS="$(NOFORK_GO_TAGS)" $(MAKE) build.all PLATFORMS="$(BUILD_PLATFORMS)" GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"
+	@$(MAKE) build.all PLATFORMS="$(BUILD_PLATFORMS)" GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"
 else
 	@:
 endif
@@ -254,8 +242,6 @@ endif
 
 warm-nofork-cache:
 	@set -e; \
-	trap '$(MAKE) clean-patch' EXIT; \
-	$(MAKE) $(PATCH_STAMP) GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"; \
 	$(INFO) Warming no-fork build cache for platforms: $(NOFORK_WARM_PLATFORMS); \
 	for platform in $(NOFORK_WARM_PLATFORMS); do \
 		GOOS=$$(echo $$platform | cut -d_ -f1); \
@@ -263,7 +249,6 @@ warm-nofork-cache:
 		started=$$(date +%s); \
 		echo "  Warming for $$GOOS/$$GOARCH..."; \
 		CGO_ENABLED=0 GOOS=$$GOOS GOARCH=$$GOARCH \
-			GOFLAGS="$(NOFORK_GOFLAGS)" \
 			GOCACHE="$(NOFORK_GOCACHE)" \
 			GOMODCACHE="$(NOFORK_GOMODCACHE)" \
 			GOPATH="$(NOFORK_GOPATH)" \
@@ -272,67 +257,7 @@ warm-nofork-cache:
 	done; \
 	$(OK) Warmed no-fork build cache
 
-generate:
-	@set -e; \
-	trap '$(MAKE) clean-patch' EXIT; \
-	$(MAKE) $(PATCH_STAMP) GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"; \
-	GOFLAGS="$(NOFORK_GOFLAGS)" GO_TAGS="$(NOFORK_GO_TAGS)" $(MAKE) generate.init GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"; \
-	GOFLAGS="$(NOFORK_GOFLAGS)" GO_TAGS="$(NOFORK_GO_TAGS)" $(MAKE) generate.run GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"; \
-	GOFLAGS="$(NOFORK_GOFLAGS)" GO_TAGS="$(NOFORK_GO_TAGS)" $(MAKE) generate.done GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"
-
-test:
-	@set -e; \
-	trap '$(MAKE) clean-patch' EXIT; \
-	$(MAKE) $(PATCH_STAMP) GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"; \
-	GOFLAGS="$(NOFORK_GOFLAGS)" GO_TAGS="$(NOFORK_GO_TAGS)" $(MAKE) test.init GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"; \
-	GOFLAGS="$(NOFORK_GOFLAGS)" GO_TAGS="$(NOFORK_GO_TAGS)" $(MAKE) test.run GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"; \
-	GOFLAGS="$(NOFORK_GOFLAGS)" GO_TAGS="$(NOFORK_GO_TAGS)" $(MAKE) test.done GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"
-
-lint:
-	@set -e; \
-	trap '$(MAKE) clean-patch' EXIT; \
-	$(MAKE) $(PATCH_STAMP) GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"; \
-	GOFLAGS="$(NOFORK_GOFLAGS)" GO_TAGS="$(NOFORK_GO_TAGS)" $(MAKE) lint.init GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"; \
-	GOFLAGS="$(NOFORK_GOFLAGS)" GO_TAGS="$(NOFORK_GO_TAGS)" $(MAKE) lint.run GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"; \
-	GOFLAGS="$(NOFORK_GOFLAGS)" GO_TAGS="$(NOFORK_GO_TAGS)" $(MAKE) lint.done GOCACHE="$(NOFORK_GOCACHE)" GOMODCACHE="$(NOFORK_GOMODCACHE)" GOPATH="$(NOFORK_GOPATH)"
-
-$(PATCH_STAMP):
-	@mkdir -p "$(NOFORK_GOCACHE)" "$(NOFORK_GOMODCACHE)" "$(NOFORK_GOPATH)" "$(dir $(NOFORK_PROVIDER_DIR))" "$(NOFORK_STATE_DIR)"
-	@$(NOFORK_PATCHER) apply \
-		--provider-version "$(TERRAFORM_PROVIDER_VERSION)" \
-		--provider-dir "$(NOFORK_PROVIDER_DIR)" \
-		--state-dir "$(NOFORK_STATE_DIR)" \
-		--patch-file "$(NOFORK_PATCH_FILE)" \
-		--repo-url "$(TERRAFORM_PROVIDER_REPO)" \
-		--gocache "$(NOFORK_GOCACHE)" \
-		--gomodcache "$(NOFORK_GOMODCACHE)" \
-		--gopath "$(NOFORK_GOPATH)"
-	@touch $(PATCH_STAMP)
-
-clean-patch:
-	@mkdir -p "$(NOFORK_GOCACHE)" "$(NOFORK_GOMODCACHE)" "$(NOFORK_GOPATH)" "$(NOFORK_STATE_DIR)"
-	@$(NOFORK_PATCHER) clean \
-		--provider-dir "$(NOFORK_PROVIDER_DIR)" \
-		--state-dir "$(NOFORK_STATE_DIR)" \
-		--patch-file "$(NOFORK_PATCH_FILE)" \
-		--gocache "$(NOFORK_GOCACHE)" \
-		--gomodcache "$(NOFORK_GOMODCACHE)" \
-		--gopath "$(NOFORK_GOPATH)"
-	@rm -f .patch-stamp-*
-
-validate-patch:
-	@mkdir -p "$(NOFORK_GOCACHE)" "$(NOFORK_GOMODCACHE)" "$(NOFORK_GOPATH)" "$(dir $(NOFORK_PROVIDER_DIR))" "$(NOFORK_STATE_DIR)"
-	@$(NOFORK_PATCHER) validate \
-		--provider-version "$(TERRAFORM_PROVIDER_VERSION)" \
-		--patch-file "$(NOFORK_PATCH_FILE)" \
-		--repo-url "$(TERRAFORM_PROVIDER_REPO)" \
-		--provider-dir "$(NOFORK_PROVIDER_DIR)" \
-		--state-dir "$(NOFORK_STATE_DIR)" \
-		--gocache "$(NOFORK_GOCACHE)" \
-		--gomodcache "$(NOFORK_GOMODCACHE)" \
-		--gopath "$(NOFORK_GOPATH)"
-
-.PHONY: clean-patch validate-patch warm-nofork-cache
+.PHONY: warm-nofork-cache
 # ====================================================================================
 # Targets
 

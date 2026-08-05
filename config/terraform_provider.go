@@ -1,7 +1,3 @@
-//go:build nofork
-
-// This template is materialized by the no-fork patch workflow.
-
 /*
  * Copyright (c) 2026 Oracle and/or its affiliates
  *
@@ -21,7 +17,7 @@
 package config
 
 import (
-	fwprovider "github.com/hashicorp/terraform-plugin-framework/provider"
+	frameworkprovider "github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	tfoci "github.com/oracle/terraform-provider-oci/oci"
 )
@@ -30,6 +26,6 @@ func terraformSDKProvider() *schema.Provider {
 	return tfoci.Provider()
 }
 
-func terraformFrameworkProvider() fwprovider.Provider {
+func terraformFrameworkProvider() frameworkprovider.Provider {
 	return tfoci.New()
 }
