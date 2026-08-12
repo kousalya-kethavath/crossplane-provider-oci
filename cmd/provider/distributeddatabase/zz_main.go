@@ -35,14 +35,13 @@ import (
 	"github.com/crossplane/crossplane-runtime/v2/pkg/reconciler/managed"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/statemetrics"
 	tjcontroller "github.com/crossplane/upjet/v2/pkg/controller"
-
-	"github.com/oracle/provider-oci/apis"
+	serviceapis "github.com/oracle/provider-oci/internal/apis/runtime/distributeddatabase"
 	"github.com/oracle/provider-oci/config"
 	resolverapis "github.com/oracle/provider-oci/internal/apis"
 	"github.com/oracle/provider-oci/internal/clients"
-	clustercontroller "github.com/oracle/provider-oci/internal/controller/cluster"
+	clustercontroller "github.com/oracle/provider-oci/internal/controller/cluster/distributeddatabase"
 	"github.com/oracle/provider-oci/internal/features"
-	namespacedcontroller "github.com/oracle/provider-oci/internal/controller/namespaced"
+	namespacedcontroller "github.com/oracle/provider-oci/internal/controller/namespaced/distributeddatabase"
 )
 
 var terraformProviderVersion = "8.22.0"
@@ -108,9 +107,9 @@ func main() {
 		RenewDeadline:              func() *time.Duration { d := 50 * time.Second; return &d }(),
 	})
 	kingpin.FatalIfError(err, "Cannot create controller manager")
-	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add Oci APIs to scheme")
+	kingpin.FatalIfError(serviceapis.AddToSchemes.AddToScheme(mgr.GetScheme()), "Cannot add distributeddatabase APIs to scheme")
 	kingpin.FatalIfError(apiextensionsv1.AddToScheme(mgr.GetScheme()), "Cannot add apiextensions APIs to scheme")
-	kingpin.FatalIfError(resolverapis.BuildScheme(apis.AddToSchemes), "Cannot register the OCI APIs with the API resolver's runtime scheme")
+	kingpin.FatalIfError(resolverapis.BuildScheme(serviceapis.AddToSchemes), "Cannot register the distributeddatabase APIs with the API resolver's runtime scheme")
 
 	var metricOptions *xpcontroller.MetricOptions
 	if *metricsBindAddress != "0" {
@@ -133,10 +132,10 @@ func main() {
 			Features:                &feature.Flags{},
 			MetricOptions:           metricOptions,
 		},
-		Provider: config.GetProvider(),
+		Provider: config.GetProviderForRuntime("distributeddatabase"),
 		OperationTrackerStore: tjcontroller.NewOperationStore(log),
 		SetupFn: clients.TerraformSetupBuilder(
-			clients.WithSDKv2ResourcePredicate(config.IsSDKv2Resource),
+			clients.WithSDKv2ResourcePredicate(config.SDKv2ResourcePredicateForRuntime("distributeddatabase")),
 			clients.WithFrameworkProvider(config.HasFrameworkResources()),
 		),
 	}

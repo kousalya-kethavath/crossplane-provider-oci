@@ -45,8 +45,7 @@ type ManagementSavedSearchInitParameters struct {
 	DrilldownConfig *string `json:"drilldownConfig,omitempty" tf:"drilldown_config,omitempty"`
 
 	// (Updatable) Simple key-value pair that is applied without any predefined name, type or scope. Exists for cross-compatibility only. Example: {"bar-key": "value"}
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// (Updatable) Determines whether the saved search is an Out-of-the-Box (OOB) saved search. Note that OOB saved searches are only provided by Oracle and cannot be modified.
 	IsOobSavedSearch *bool `json:"isOobSavedSearch,omitempty" tf:"is_oob_saved_search,omitempty"`
@@ -110,8 +109,7 @@ type ManagementSavedSearchObservation struct {
 	DrilldownConfig *string `json:"drilldownConfig,omitempty" tf:"drilldown_config,omitempty"`
 
 	// (Updatable) Simple key-value pair that is applied without any predefined name, type or scope. Exists for cross-compatibility only. Example: {"bar-key": "value"}
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// ID of the saved search, which must only be provided for Out-of-the-Box (OOB) saved search.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -207,8 +205,7 @@ type ManagementSavedSearchParameters struct {
 
 	// (Updatable) Simple key-value pair that is applied without any predefined name, type or scope. Exists for cross-compatibility only. Example: {"bar-key": "value"}
 	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	FreeformTags map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
+	FreeformTags map[string]map[string]*string `json:"freeformTags,omitempty" tf:"freeform_tags,omitempty"`
 
 	// (Updatable) Determines whether the saved search is an Out-of-the-Box (OOB) saved search. Note that OOB saved searches are only provided by Oracle and cannot be modified.
 	// +kubebuilder:validation:Optional

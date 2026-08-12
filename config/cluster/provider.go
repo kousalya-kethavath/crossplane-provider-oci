@@ -13,7 +13,6 @@ import (
 	"github.com/oracle/provider-oci/config/cluster/identity"
 	"github.com/oracle/provider-oci/config/cluster/kms"
 	"github.com/oracle/provider-oci/config/cluster/loadbalancer"
-	"github.com/oracle/provider-oci/config/cluster/managementdashboard"
 	"github.com/oracle/provider-oci/config/cluster/monitoring"
 	"github.com/oracle/provider-oci/config/cluster/mysql"
 	"github.com/oracle/provider-oci/config/cluster/networkfirewall"
@@ -40,7 +39,6 @@ func init() {
 	ProviderConfiguration.AddConfig(identity.Configure)
 	ProviderConfiguration.AddConfig(kms.Configure)
 	ProviderConfiguration.AddConfig(loadbalancer.Configure)
-	ProviderConfiguration.AddConfig(managementdashboard.Configure)
 	ProviderConfiguration.AddConfig(monitoring.Configure)
 	ProviderConfiguration.AddConfig(mysql.Configure)
 	ProviderConfiguration.AddConfig(networkfirewall.Configure)

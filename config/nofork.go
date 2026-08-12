@@ -58,6 +58,42 @@ func terraformPluginSDKIncludeList() []string {
 	return slices.Clone(loadTerraformResourceRouting().sdkV2Regexes)
 }
 
+func terraformPluginSDKResourcesForRuntime(service string) []string {
+	resources, ok := runtimeTerraformResources[service]
+	if !ok {
+		panic("no Terraform runtime resource manifest for service " + service)
+	}
+	sdkResources := make([]string, 0, len(resources))
+	for _, resource := range resources {
+		if IsSDKv2Resource(resource) {
+			sdkResources = append(sdkResources, resource)
+		}
+	}
+	return sdkResources
+}
+
+func terraformPluginSDKIncludeListForResources(resources []string) []string {
+	includeList := make([]string, 0, len(resources))
+	for _, resource := range resources {
+		includeList = append(includeList, exactResourceRegex(resource))
+	}
+	return includeList
+}
+
+// SDKv2ResourcePredicateForRuntime returns a predicate that accepts only the
+// Terraform resources assigned to the specified service runtime.
+func SDKv2ResourcePredicateForRuntime(service string) func(string) bool {
+	resources := terraformPluginSDKResourcesForRuntime(service)
+	resourceSet := make(map[string]struct{}, len(resources))
+	for _, resource := range resources {
+		resourceSet[resource] = struct{}{}
+	}
+	return func(terraformResourceType string) bool {
+		_, ok := resourceSet[terraformResourceType]
+		return ok
+	}
+}
+
 // IsSDKv2Resource reports whether the Terraform resource type is routed through
 // Upjet's in-process Terraform Plugin SDKv2 connector.
 func IsSDKv2Resource(terraformResourceType string) bool {

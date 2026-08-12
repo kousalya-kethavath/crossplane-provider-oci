@@ -75,6 +75,7 @@ func TestProviderConfigurationFromCredentialsIncludesOnlyNoForkSafeKeys(t *testi
 		"tenancy_ocid":         "tenancy",
 		"user_ocid":            "user",
 		"private_key":          "key",
+		"private_key_password": "password",
 		"private_key_path":     "path",
 		"fingerprint":          "fingerprint",
 		"region":               "us-ashburn-1",
@@ -85,14 +86,15 @@ func TestProviderConfigurationFromCredentialsIncludesOnlyNoForkSafeKeys(t *testi
 
 	cfg := providerConfigurationFromCredentials(creds)
 	wantKeys := map[string]string{
-		"tenancy_ocid":        "tenancy",
-		"user_ocid":           "user",
-		"private_key":         "key",
-		"private_key_path":    "path",
-		"fingerprint":         "fingerprint",
-		"region":              "us-ashburn-1",
-		"auth":                "api_key",
-		"config_file_profile": "DEFAULT",
+		"tenancy_ocid":         "tenancy",
+		"user_ocid":            "user",
+		"private_key":          "key",
+		"private_key_password": "password",
+		"private_key_path":     "path",
+		"fingerprint":          "fingerprint",
+		"region":               "us-ashburn-1",
+		"auth":                 "api_key",
+		"config_file_profile":  "DEFAULT",
 	}
 
 	if len(cfg) != len(wantKeys) {
@@ -121,6 +123,15 @@ func TestProviderConfigurationFromCredentialsIncludesOnlyNoForkSafeKeys(t *testi
 
 func TestProviderConfigurationFromCredentialsSupportsAuthenticationModes(t *testing.T) {
 	tests := map[string]map[string]string{
+		"encrypted API key": {
+			credentialKeyTenancyOCID:        "ocid1.tenancy.oc1..example",
+			credentialKeyUserOCID:           "ocid1.user.oc1..example",
+			credentialKeyPrivateKey:         "encrypted-key",
+			credentialKeyPrivateKeyPassword: "password",
+			credentialKeyFingerprint:        "fingerprint",
+			credentialKeyAuth:               "api_key",
+			credentialKeyRegion:             "us-ashburn-1",
+		},
 		"workload identity federation": {
 			credentialKeyTenancyOCID:                     "ocid1.tenancy.oc1..example",
 			credentialKeyAuth:                            "WorkloadIdentityFederation",

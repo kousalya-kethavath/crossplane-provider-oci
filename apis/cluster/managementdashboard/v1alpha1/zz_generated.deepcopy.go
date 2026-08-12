@@ -315,16 +315,27 @@ func (in *ManagementSavedSearchInitParameters) DeepCopyInto(out *ManagementSaved
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]map[string]*string, len(*in))
 		for key, val := range *in {
-			var outVal *string
+			var outVal map[string]*string
 			if val == nil {
 				(*out)[key] = nil
 			} else {
 				inVal := (*in)[key]
 				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
+				*out = make(map[string]*string, len(*in))
+				for key, val := range *in {
+					var outVal *string
+					if val == nil {
+						(*out)[key] = nil
+					} else {
+						inVal := (*in)[key]
+						in, out := &inVal, &outVal
+						*out = new(string)
+						**out = **in
+					}
+					(*out)[key] = outVal
+				}
 			}
 			(*out)[key] = outVal
 		}
@@ -484,16 +495,27 @@ func (in *ManagementSavedSearchObservation) DeepCopyInto(out *ManagementSavedSea
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]map[string]*string, len(*in))
 		for key, val := range *in {
-			var outVal *string
+			var outVal map[string]*string
 			if val == nil {
 				(*out)[key] = nil
 			} else {
 				inVal := (*in)[key]
 				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
+				*out = make(map[string]*string, len(*in))
+				for key, val := range *in {
+					var outVal *string
+					if val == nil {
+						(*out)[key] = nil
+					} else {
+						inVal := (*in)[key]
+						in, out := &inVal, &outVal
+						*out = new(string)
+						**out = **in
+					}
+					(*out)[key] = outVal
+				}
 			}
 			(*out)[key] = outVal
 		}
@@ -667,16 +689,27 @@ func (in *ManagementSavedSearchParameters) DeepCopyInto(out *ManagementSavedSear
 	}
 	if in.FreeformTags != nil {
 		in, out := &in.FreeformTags, &out.FreeformTags
-		*out = make(map[string]*string, len(*in))
+		*out = make(map[string]map[string]*string, len(*in))
 		for key, val := range *in {
-			var outVal *string
+			var outVal map[string]*string
 			if val == nil {
 				(*out)[key] = nil
 			} else {
 				inVal := (*in)[key]
 				in, out := &inVal, &outVal
-				*out = new(string)
-				**out = **in
+				*out = make(map[string]*string, len(*in))
+				for key, val := range *in {
+					var outVal *string
+					if val == nil {
+						(*out)[key] = nil
+					} else {
+						inVal := (*in)[key]
+						in, out := &inVal, &outVal
+						*out = new(string)
+						**out = **in
+					}
+					(*out)[key] = outVal
+				}
 			}
 			(*out)[key] = outVal
 		}

@@ -786,18 +786,9 @@ spec:
                         idpEntityId:
                           description: The unique name for a identity provider entity
                           type: string
-                        idpMetadataContentSecretRef:
+                        idpMetadataContent:
                           description: The content of identity provider metadata
-                          properties:
-                            key:
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          type: object
+                          type: string
                         isEnabled:
                           description: (Updatable) Flag to indicate whether outbound
                             cluster configuration is enabled
@@ -1911,18 +1902,9 @@ spec:
                         idpEntityId:
                           description: The unique name for a identity provider entity
                           type: string
-                        idpMetadataContentSecretRef:
+                        idpMetadataContent:
                           description: The content of identity provider metadata
-                          properties:
-                            key:
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          type: object
+                          type: string
                         isEnabled:
                           description: (Updatable) Flag to indicate whether outbound
                             cluster configuration is enabled
@@ -1938,8 +1920,6 @@ spec:
                           description: The subject key is used to get username from
                             SAML assertion. By default, it is NameID
                           type: string
-                      required:
-                      - idpMetadataContentSecretRef
                       type: object
                     type: array
                   softwareVersion:
@@ -2782,6 +2762,9 @@ spec:
                           type: string
                         idpEntityId:
                           description: The unique name for a identity provider entity
+                          type: string
+                        idpMetadataContent:
+                          description: The content of identity provider metadata
                           type: string
                         isEnabled:
                           description: (Updatable) Flag to indicate whether outbound

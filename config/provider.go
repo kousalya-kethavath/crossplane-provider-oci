@@ -67,19 +67,23 @@ func ProblematicResources() []string {
 	}
 }
 
-func newProvider(rootGroup string, register func(*ujconfig.Provider), useTerraformJSONGenerationSchema bool) *ujconfig.Provider {
-	sdkProvider := terraformSDKProvider()
+func newProvider(rootGroup string, register func(*ujconfig.Provider), useTerraformJSONGenerationSchema bool, sdkResourceNames []string) *ujconfig.Provider {
+	sdkProvider := terraformSDKProvider(sdkResourceNames)
 	if useTerraformJSONGenerationSchema {
 		applyTerraformJSONGenerationSchemas(sdkProvider, []byte(providerSchema))
 	}
 
+	sdkIncludeList := terraformPluginSDKIncludeList()
+	if sdkResourceNames != nil {
+		sdkIncludeList = terraformPluginSDKIncludeListForResources(sdkResourceNames)
+	}
 	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
 		ujconfig.WithRootGroup(rootGroup),
 		// Disable Upjet's Terraform CLI route. All generated OCI resources are
 		// routed through in-process no-fork connectors.
 		ujconfig.WithIncludeList(nil),
 		ujconfig.WithTerraformProvider(sdkProvider),
-		ujconfig.WithTerraformPluginSDKIncludeList(terraformPluginSDKIncludeList()),
+		ujconfig.WithTerraformPluginSDKIncludeList(sdkIncludeList),
 		ujconfig.WithTerraformPluginFrameworkProvider(terraformFrameworkProvider()),
 		ujconfig.WithTerraformPluginFrameworkIncludeList(terraformPluginFrameworkIncludeList),
 		ujconfig.WithSkipList(ProblematicResources()),
@@ -109,7 +113,17 @@ func GetProvider() *ujconfig.Provider {
 		for _, configure := range cluster.ProviderConfiguration {
 			configure(pc)
 		}
-	}, false)
+	}, false, nil)
+}
+
+// GetProviderForRuntime returns the cluster-scoped provider configuration
+// containing only Terraform resources reconciled by the specified service.
+func GetProviderForRuntime(service string) *ujconfig.Provider {
+	return newProvider("oci.upbound.io", func(pc *ujconfig.Provider) {
+		for _, configure := range cluster.ProviderConfiguration {
+			configure(pc)
+		}
+	}, false, terraformPluginSDKResourcesForRuntime(service))
 }
 
 // GetProviderNamespaced returns namespaced provider configuration.
@@ -118,7 +132,7 @@ func GetProviderNamespaced() *ujconfig.Provider {
 		for _, configure := range namespaced.ProviderConfiguration {
 			configure(pc)
 		}
-	}, false)
+	}, false, nil)
 }
 
 // GetProviderForGeneration returns the cluster-scoped provider configuration
@@ -130,7 +144,7 @@ func GetProviderForGeneration() *ujconfig.Provider {
 		for _, configure := range cluster.ProviderConfiguration {
 			configure(pc)
 		}
-	}, true)
+	}, true, nil)
 }
 
 // GetProviderNamespacedForGeneration returns the namespaced provider
@@ -140,5 +154,5 @@ func GetProviderNamespacedForGeneration() *ujconfig.Provider {
 		for _, configure := range namespaced.ProviderConfiguration {
 			configure(pc)
 		}
-	}, true)
+	}, true, nil)
 }

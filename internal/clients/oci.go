@@ -42,6 +42,7 @@ const (
 	credentialKeyTenancyOCID                     = "tenancy_ocid"
 	credentialKeyUserOCID                        = "user_ocid"
 	credentialKeyPrivateKey                      = "private_key"
+	credentialKeyPrivateKeyPassword              = "private_key_password"
 	credentialKeyPrivateKeyPath                  = "private_key_path"
 	credentialKeyFingerprint                     = "fingerprint"
 	credentialKeyRegion                          = "region"
@@ -148,6 +149,7 @@ func providerConfigurationFromCredentials(ociCreds map[string]string) map[string
 		credentialKeyTenancyOCID:                     ociCreds[credentialKeyTenancyOCID],
 		credentialKeyUserOCID:                        ociCreds[credentialKeyUserOCID],
 		credentialKeyPrivateKey:                      ociCreds[credentialKeyPrivateKey],
+		credentialKeyPrivateKeyPassword:              ociCreds[credentialKeyPrivateKeyPassword],
 		credentialKeyPrivateKeyPath:                  ociCreds[credentialKeyPrivateKeyPath],
 		credentialKeyFingerprint:                     ociCreds[credentialKeyFingerprint],
 		credentialKeyRegion:                          ociCreds[credentialKeyRegion],

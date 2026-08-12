@@ -18,7 +18,6 @@ package opensearch
 
 import (
 	"github.com/crossplane/upjet/v2/pkg/config"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func Configure(p *config.Provider) {
@@ -28,13 +27,5 @@ func Configure(p *config.Provider) {
 			return
 		}
 		samlConfig.Sensitive = false
-
-		samlResource, ok := samlConfig.Elem.(*schema.Resource)
-		if !ok {
-			return
-		}
-		if idpMetadataContent, ok := samlResource.Schema["idp_metadata_content"]; ok {
-			idpMetadataContent.Sensitive = true
-		}
 	})
 }

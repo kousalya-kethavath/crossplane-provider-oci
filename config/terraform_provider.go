@@ -22,8 +22,15 @@ import (
 	tfoci "github.com/oracle/terraform-provider-oci/oci"
 )
 
-func terraformSDKProvider() *schema.Provider {
-	return tfoci.Provider()
+func terraformSDKProvider(resourceNames []string) *schema.Provider {
+	if resourceNames == nil {
+		return tfoci.Provider()
+	}
+	provider, err := tfoci.ProviderForResources(resourceNames...)
+	if err != nil {
+		panic(err)
+	}
+	return provider
 }
 
 func terraformFrameworkProvider() frameworkprovider.Provider {

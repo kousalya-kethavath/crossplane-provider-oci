@@ -25,7 +25,7 @@ func getOrConfigureProviderMeta(ctx context.Context, uid string, cfg map[string]
 		return nil, err
 	}
 	return sdkV2ProviderMetaCache.getOrCreate(ctx, uid, cfgHash, func() (any, error) {
-		p := ociprovider.Provider()
+		p := ociprovider.ProviderForConfiguration()
 		diags := p.Configure(ctx, sdkterraform.NewResourceConfigRaw(cfg))
 		if diags.HasError() {
 			return nil, fmt.Errorf("cannot configure OCI provider: %v", diags)
