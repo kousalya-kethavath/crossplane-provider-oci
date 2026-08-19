@@ -5,14 +5,18 @@ Copyright 2021 Upbound Inc.
 package clients
 
 import (
+	"container/list"
 	"context"
+	"crypto/sha256"
 	"encoding/json"
+	"fmt"
 	"strings"
+	"sync"
 
 	xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/meta"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
-	"github.com/crossplane/upjet/v2/pkg/terraform"
+	upjetterraform "github.com/crossplane/upjet/v2/pkg/terraform"
 	"github.com/pkg/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	kruntime "k8s.io/apimachinery/pkg/runtime"
@@ -38,6 +42,7 @@ const (
 	credentialKeyTenancyOCID                     = "tenancy_ocid"
 	credentialKeyUserOCID                        = "user_ocid"
 	credentialKeyPrivateKey                      = "private_key"
+	credentialKeyPrivateKeyPassword              = "private_key_password"
 	credentialKeyPrivateKeyPath                  = "private_key_path"
 	credentialKeyFingerprint                     = "fingerprint"
 	credentialKeyRegion                          = "region"
@@ -55,17 +60,45 @@ const (
 	credentialKeyTokenExchangePublicKey          = "token_exchange_public_key"
 )
 
-// TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
-// returns Terraform provider setup configuration.
-func TerraformSetupBuilder(version, providerSource, providerVersion string) terraform.SetupFn {
-	return func(ctx context.Context, kube client.Client, mg resource.Managed) (terraform.Setup, error) {
-		ps := terraform.Setup{
-			Version: version,
-			Requirement: terraform.ProviderRequirement{
-				Source:  providerSource,
-				Version: providerVersion,
-			},
-		}
+type setupOptions struct {
+	enableFrameworkProvider bool
+	isSDKv2Resource         func(string) bool
+}
+
+// SetupOption customizes Terraform setup behavior.
+type SetupOption func(*setupOptions)
+
+// WithFrameworkProvider controls whether setup returns a Plugin Framework
+// provider instance for framework-routed resources.
+func WithFrameworkProvider(enabled bool) SetupOption {
+	return func(o *setupOptions) {
+		o.enableFrameworkProvider = enabled
+	}
+}
+
+// WithSDKv2ResourcePredicate controls which Terraform resources receive
+// in-process SDKv2 provider meta.
+func WithSDKv2ResourcePredicate(predicate func(string) bool) SetupOption {
+	return func(o *setupOptions) {
+		o.isSDKv2Resource = predicate
+	}
+}
+
+type terraformResourceTyper interface {
+	GetTerraformResourceType() string
+}
+
+// TerraformSetupBuilder builds a terraform.SetupFn for in-process no-fork
+// connectors. Build-time Terraform values are intentionally not required at
+// runtime when all resources are routed through SDKv2 or Framework connectors.
+func TerraformSetupBuilder(opts ...SetupOption) upjetterraform.SetupFn {
+	options := setupOptions{}
+	for _, opt := range opts {
+		opt(&options)
+	}
+
+	return func(ctx context.Context, kube client.Client, mg resource.Managed) (upjetterraform.Setup, error) {
+		ps := upjetterraform.Setup{}
 
 		pcSpec, err := resolveProviderConfig(ctx, kube, mg)
 		if err != nil {
@@ -81,16 +114,42 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			return ps, errors.Wrap(err, errUnmarshalCredentials)
 		}
 
-		ps.Configuration = terraformProviderConfig(ociCreds)
+		cfg := providerConfigurationFromCredentials(ociCreds)
+		ps.Configuration = cfg
+
+		if options.enableFrameworkProvider {
+			setFrameworkProvider(&ps)
+		}
+
+		if !options.shouldConfigureSDKv2Provider(mg) {
+			return ps, nil
+		}
+
+		uid, err := resolveProviderConfigIdentity(ctx, kube, mg)
+		if err != nil {
+			return ps, fmt.Errorf("cannot resolve ProviderConfig identity: %w", err)
+		}
+		if uid == "" {
+			return ps, fmt.Errorf("ProviderConfig has empty UID")
+		}
+
+		providerMeta, err := getOrConfigureProviderMeta(ctx, uid, cfg)
+		if err != nil {
+			return ps, fmt.Errorf("cannot get or init OCI provider: %w", err)
+		}
+		ps.Meta = providerMeta
+		ps.Scheduler = upjetterraform.NewNoOpProviderScheduler()
+
 		return ps, nil
 	}
 }
 
-func terraformProviderConfig(ociCreds map[string]string) terraform.ProviderConfiguration {
-	config := terraform.ProviderConfiguration{
+func providerConfigurationFromCredentials(ociCreds map[string]string) map[string]any {
+	config := map[string]any{
 		credentialKeyTenancyOCID:                     ociCreds[credentialKeyTenancyOCID],
 		credentialKeyUserOCID:                        ociCreds[credentialKeyUserOCID],
 		credentialKeyPrivateKey:                      ociCreds[credentialKeyPrivateKey],
+		credentialKeyPrivateKeyPassword:              ociCreds[credentialKeyPrivateKeyPassword],
 		credentialKeyPrivateKeyPath:                  ociCreds[credentialKeyPrivateKeyPath],
 		credentialKeyFingerprint:                     ociCreds[credentialKeyFingerprint],
 		credentialKeyRegion:                          ociCreds[credentialKeyRegion],
@@ -115,6 +174,203 @@ func terraformProviderConfig(ociCreds map[string]string) terraform.ProviderConfi
 	}
 
 	return config
+}
+
+func (o setupOptions) shouldConfigureSDKv2Provider(mg resource.Managed) bool {
+	if o.isSDKv2Resource == nil {
+		return false
+	}
+	tr, ok := mg.(terraformResourceTyper)
+	if !ok {
+		return false
+	}
+	return o.isSDKv2Resource(tr.GetTerraformResourceType())
+}
+
+func providerConfigurationHash(cfg map[string]any) (string, error) {
+	data, err := json.Marshal(cfg)
+	if err != nil {
+		return "", fmt.Errorf("cannot hash OCI provider configuration: %w", err)
+	}
+	return fmt.Sprintf("%x", sha256.Sum256(data)), nil
+}
+
+const defaultProviderMetaCacheSize = 32
+
+type providerMetaCacheEntry struct {
+	configHash string
+	meta       any
+	recency    *list.Element
+}
+
+type providerMetaCacheCall struct {
+	meta any
+	err  error
+	done chan struct{}
+}
+
+type providerMetaCache struct {
+	mu         sync.Mutex
+	maxEntries int
+	entries    map[string]*providerMetaCacheEntry
+	recency    *list.List
+	inflight   map[string]*providerMetaCacheCall
+}
+
+func newProviderMetaCache(maxEntries int) *providerMetaCache {
+	if maxEntries < 1 {
+		maxEntries = 1
+	}
+	return &providerMetaCache{
+		maxEntries: maxEntries,
+		entries:    make(map[string]*providerMetaCacheEntry, maxEntries),
+		recency:    list.New(),
+		inflight:   make(map[string]*providerMetaCacheCall),
+	}
+}
+
+func (c *providerMetaCache) getOrCreate(ctx context.Context, uid, configHash string, create func() (any, error)) (any, error) {
+	for {
+		c.mu.Lock()
+		if entry, ok := c.entries[uid]; ok && entry.configHash == configHash {
+			c.recency.MoveToFront(entry.recency)
+			c.mu.Unlock()
+			return entry.meta, nil
+		}
+
+		if call, ok := c.inflight[uid]; ok {
+			c.mu.Unlock()
+			select {
+			case <-call.done:
+			case <-ctx.Done():
+				return nil, ctx.Err()
+			}
+			if call.err != nil {
+				return nil, call.err
+			}
+			continue
+		}
+
+		call := &providerMetaCacheCall{done: make(chan struct{})}
+		c.inflight[uid] = call
+		c.mu.Unlock()
+
+		call.meta, call.err = create()
+
+		c.mu.Lock()
+		if call.err == nil {
+			if entry, ok := c.entries[uid]; ok {
+				entry.configHash = configHash
+				entry.meta = call.meta
+				c.recency.MoveToFront(entry.recency)
+			} else {
+				c.entries[uid] = &providerMetaCacheEntry{
+					configHash: configHash,
+					meta:       call.meta,
+					recency:    c.recency.PushFront(uid),
+				}
+			}
+			c.evictOverflow()
+		}
+		delete(c.inflight, uid)
+		close(call.done)
+		c.mu.Unlock()
+		return call.meta, call.err
+	}
+}
+
+func (c *providerMetaCache) evictOverflow() {
+	for len(c.entries) > c.maxEntries {
+		oldest := c.recency.Back()
+		if oldest == nil {
+			return
+		}
+		delete(c.entries, oldest.Value.(string))
+		c.recency.Remove(oldest)
+	}
+}
+
+func resolveProviderConfigIdentity(ctx context.Context, kube client.Client, mg resource.Managed) (string, error) {
+	switch managed := mg.(type) {
+	case resource.LegacyManaged:
+		return resolveLegacyProviderConfigIdentity(ctx, kube, managed)
+	case resource.ModernManaged:
+		if isNamespacedModernManaged(managed) {
+			return resolveNamespacedProviderConfigIdentity(ctx, kube, managed)
+		}
+		return resolveClusterProviderConfigIdentityForModernMR(ctx, kube, managed)
+	default:
+		return "", errors.New(errUnsupportedManaged)
+	}
+}
+
+func resolveLegacyProviderConfigIdentity(ctx context.Context, kube client.Client, mg resource.LegacyManaged) (string, error) {
+	configRef := mg.GetProviderConfigReference()
+	if configRef == nil {
+		return "", errors.New(errNoProviderConfig)
+	}
+
+	pc := &clusterv1beta1.ProviderConfig{}
+	if err := kube.Get(ctx, types.NamespacedName{Name: configRef.Name}, pc); err != nil {
+		return "", errors.Wrap(err, errGetProviderConfig)
+	}
+	return string(pc.GetUID()), nil
+}
+
+func resolveClusterProviderConfigIdentityForModernMR(ctx context.Context, kube client.Client, mg resource.ModernManaged) (string, error) {
+	configRef := mg.GetProviderConfigReference()
+	if configRef == nil || configRef.Name == "" {
+		return "", errors.New(errNoProviderConfig)
+	}
+
+	kind := configRef.Kind
+	if kind == "" {
+		kind = clusterv1beta1.ProviderConfigGroupVersionKind.Kind
+	}
+	if kind != clusterv1beta1.ProviderConfigGroupVersionKind.Kind && kind != namespacedv1beta1.ClusterProviderConfigKind {
+		return "", errors.Wrap(errors.New(kind), errUnsupportedProviderCfgKind)
+	}
+
+	pc := &clusterv1beta1.ProviderConfig{}
+	if err := kube.Get(ctx, types.NamespacedName{Name: configRef.Name}, pc); err != nil {
+		return "", errors.Wrap(err, errGetProviderConfig)
+	}
+	return string(pc.GetUID()), nil
+}
+
+func resolveNamespacedProviderConfigIdentity(ctx context.Context, kube client.Client, mg resource.ModernManaged) (string, error) {
+	configRef := mg.GetProviderConfigReference()
+	if configRef == nil || configRef.Name == "" {
+		return "", errors.New(errNoProviderConfig)
+	}
+
+	kind := configRef.Kind
+	if kind == "" {
+		kind = namespacedv1beta1.ClusterProviderConfigKind
+	}
+	switch kind {
+	case namespacedv1beta1.ProviderConfigKind, namespacedv1beta1.ClusterProviderConfigKind:
+	default:
+		return "", errors.Wrap(errors.New(kind), errUnsupportedProviderCfgKind)
+	}
+
+	pcRuntimeObj, err := kube.Scheme().New(namespacedv1beta1.SchemeGroupVersion.WithKind(kind))
+	if err != nil {
+		return "", errors.Wrap(err, errUnsupportedProviderCfgKind)
+	}
+	pcObj, ok := pcRuntimeObj.(client.Object)
+	if !ok {
+		return "", errors.New(errUnsupportedProviderCfgKind)
+	}
+
+	key := types.NamespacedName{Name: configRef.Name}
+	if kind == namespacedv1beta1.ProviderConfigKind {
+		key.Namespace = mg.GetNamespace()
+	}
+	if err := kube.Get(ctx, key, pcObj); err != nil {
+		return "", errors.Wrap(err, errGetProviderConfig)
+	}
+	return string(pcObj.GetUID()), nil
 }
 
 func resolveProviderConfig(ctx context.Context, kube client.Client, mg resource.Managed) (*namespacedv1beta1.ProviderConfigSpec, error) {

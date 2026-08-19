@@ -19,6 +19,7 @@ import (
 	"github.com/oracle/provider-oci/config/cluster/networkloadbalancer"
 	"github.com/oracle/provider-oci/config/cluster/nosql"
 	"github.com/oracle/provider-oci/config/cluster/objectstorage"
+	"github.com/oracle/provider-oci/config/cluster/opensearch"
 	"github.com/oracle/provider-oci/config/cluster/psql"
 	"github.com/oracle/provider-oci/config/cluster/recovery"
 	"github.com/oracle/provider-oci/config/cluster/redis"
@@ -44,6 +45,7 @@ func init() {
 	ProviderConfiguration.AddConfig(networkloadbalancer.Configure)
 	ProviderConfiguration.AddConfig(nosql.Configure)
 	ProviderConfiguration.AddConfig(objectstorage.Configure)
+	ProviderConfiguration.AddConfig(opensearch.Configure)
 	ProviderConfiguration.AddConfig(psql.Configure)
 	ProviderConfiguration.AddConfig(recovery.Configure)
 	ProviderConfiguration.AddConfig(redis.Configure)
