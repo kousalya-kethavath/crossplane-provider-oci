@@ -47,7 +47,7 @@ NPROCS ?= 1
 # to half the number of CPU cores.
 GO_TEST_PARALLEL := $(shell echo $$(( $(NPROCS) / 2 )))
 
-GO_REQUIRED_VERSION ?= 1.25
+GO_REQUIRED_VERSION ?= 1.26
 GOLANGCILINT_VERSION ?= 1.50.0
 GO_STATIC_PACKAGES = $(GO_PROJECT)/cmd/provider/monolith $(GO_PROJECT)/cmd/generator
 GO_LDFLAGS += -X $(GO_PROJECT)/internal/version.Version=$(VERSION)
@@ -225,6 +225,7 @@ generate.clean:
 	@find apis -type d -empty -delete
 	@find internal/controller -iname 'zz_*' -delete
 	@find internal/controller -type d -empty -delete
+	@rm -rf internal/apis/runtime
 	@find cmd/provider -name 'zz_*' -type f -delete
 	@find cmd/provider -type d -maxdepth 1 -mindepth 1 -empty -delete
 	@rm -rf examples-generated
