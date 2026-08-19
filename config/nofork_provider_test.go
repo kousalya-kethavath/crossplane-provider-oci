@@ -52,7 +52,7 @@ func TestRuntimeTerraformResourceManifests(t *testing.T) {
 	}
 }
 
-func TestRuntimeProviderRoutesOnlyServiceResourcesWithFullTerraformSchema(t *testing.T) {
+func TestRuntimeProviderContainsOnlyServiceResources(t *testing.T) {
 	const service = "events"
 	want := runtimeTerraformResources[service]
 	if len(want) == 0 {
@@ -63,11 +63,11 @@ func TestRuntimeProviderRoutesOnlyServiceResourcesWithFullTerraformSchema(t *tes
 	if len(provider.Resources) != len(want) {
 		t.Fatalf("runtime provider has %d resources, want %d", len(provider.Resources), len(want))
 	}
-	if len(provider.TerraformProvider.ResourcesMap) <= len(want) {
-		t.Fatalf("runtime Terraform provider has %d resources, want a full schema larger than the %d routed resources", len(provider.TerraformProvider.ResourcesMap), len(want))
+	if len(provider.TerraformProvider.ResourcesMap) != len(want) {
+		t.Fatalf("runtime Terraform provider has %d resources, want %d", len(provider.TerraformProvider.ResourcesMap), len(want))
 	}
-	if len(provider.TerraformProvider.DataSourcesMap) == 0 {
-		t.Fatal("runtime Terraform provider has no data sources, want the full minimum-contract schema")
+	if len(provider.TerraformProvider.DataSourcesMap) != 0 {
+		t.Fatalf("runtime Terraform provider has %d data sources, want 0", len(provider.TerraformProvider.DataSourcesMap))
 	}
 	predicate := SDKv2ResourcePredicateForRuntime(service)
 	for _, resourceName := range want {
@@ -80,12 +80,6 @@ func TestRuntimeProviderRoutesOnlyServiceResourcesWithFullTerraformSchema(t *tes
 	}
 	if predicate("oci_core_vcn") {
 		t.Error("events runtime SDKv2 predicate accepted unrelated resource oci_core_vcn")
-	}
-	if provider.Resources["oci_core_vcn"] != nil {
-		t.Error("events runtime routed unrelated resource oci_core_vcn")
-	}
-	if provider.TerraformProvider.ResourcesMap["oci_core_vcn"] == nil {
-		t.Error("minimum-contract Terraform provider does not retain unrelated resource oci_core_vcn in its full schema")
 	}
 }
 
