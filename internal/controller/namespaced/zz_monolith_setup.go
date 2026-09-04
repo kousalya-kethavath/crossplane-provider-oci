@@ -336,6 +336,9 @@ import (
 	connection "github.com/oracle/provider-oci/internal/controller/namespaced/datacatalog/connection"
 	dataasset "github.com/oracle/provider-oci/internal/controller/namespaced/datacatalog/dataasset"
 	metastore "github.com/oracle/provider-oci/internal/controller/namespaced/datacatalog/metastore"
+	infrastructure "github.com/oracle/provider-oci/internal/controller/namespaced/datacc/infrastructure"
+	vmclusternetworkdatacc "github.com/oracle/provider-oci/internal/controller/namespaced/datacc/vmclusternetwork"
+	vminstance "github.com/oracle/provider-oci/internal/controller/namespaced/datacc/vminstance"
 	application "github.com/oracle/provider-oci/internal/controller/namespaced/dataflow/application"
 	invokerun "github.com/oracle/provider-oci/internal/controller/namespaced/dataflow/invokerun"
 	pool "github.com/oracle/provider-oci/internal/controller/namespaced/dataflow/pool"
@@ -776,6 +779,7 @@ import (
 	networkfirewallpolicyservice "github.com/oracle/provider-oci/internal/controller/namespaced/networkfirewall/networkfirewallpolicyservice"
 	networkfirewallpolicytunnelinspectionrule "github.com/oracle/provider-oci/internal/controller/namespaced/networkfirewall/networkfirewallpolicytunnelinspectionrule"
 	defaultdhcpoptions "github.com/oracle/provider-oci/internal/controller/namespaced/networking/defaultdhcpoptions"
+	defaultdrgroutetable "github.com/oracle/provider-oci/internal/controller/namespaced/networking/defaultdrgroutetable"
 	defaultroutetable "github.com/oracle/provider-oci/internal/controller/namespaced/networking/defaultroutetable"
 	defaultsecuritylist "github.com/oracle/provider-oci/internal/controller/namespaced/networking/defaultsecuritylist"
 	dhcpoptions "github.com/oracle/provider-oci/internal/controller/namespaced/networking/dhcpoptions"
@@ -1326,6 +1330,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		connection.Setup,
 		dataasset.Setup,
 		metastore.Setup,
+		infrastructure.Setup,
+		vmclusternetworkdatacc.Setup,
+		vminstance.Setup,
 		application.Setup,
 		invokerun.Setup,
 		pool.Setup,
@@ -1766,6 +1773,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		networkfirewallpolicyservice.Setup,
 		networkfirewallpolicytunnelinspectionrule.Setup,
 		defaultdhcpoptions.Setup,
+		defaultdrgroutetable.Setup,
 		defaultroutetable.Setup,
 		defaultsecuritylist.Setup,
 		dhcpoptions.Setup,
@@ -2322,6 +2330,9 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		connection.SetupGated,
 		dataasset.SetupGated,
 		metastore.SetupGated,
+		infrastructure.SetupGated,
+		vmclusternetworkdatacc.SetupGated,
+		vminstance.SetupGated,
 		application.SetupGated,
 		invokerun.SetupGated,
 		pool.SetupGated,
@@ -2762,6 +2773,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		networkfirewallpolicyservice.SetupGated,
 		networkfirewallpolicytunnelinspectionrule.SetupGated,
 		defaultdhcpoptions.SetupGated,
+		defaultdrgroutetable.SetupGated,
 		defaultroutetable.SetupGated,
 		defaultsecuritylist.SetupGated,
 		dhcpoptions.SetupGated,
