@@ -361,16 +361,25 @@ resources:
                   "freeform_tags": {
                     "Department": "Finance"
                   },
-                  "system_tags": "${var.ai_data_platform_system_tags}"
+                  "is_enable_ai_feature": "${var.ai_data_platform_is_enable_ai_feature}",
+                  "system_tags": "${var.ai_data_platform_system_tags}",
+                  "vector_db_admin_cred": "${var.ai_data_platform_vector_db_admin_cred}",
+                  "vector_db_admin_secret_id": "${oci_vault_secret.test_secret.id}",
+                  "vector_db_id": "${oci_ai_data_platform_vector_db.test_vector_db.id}"
                 }
               references:
                 ai_data_platform_type: var.ai_data_platform_ai_data_platform_type
                 compartment_id: var.compartment_id
                 default_workspace_name: oci_dataintegration_workspace.test_workspace.name
                 display_name: var.ai_data_platform_display_name
+                is_enable_ai_feature: var.ai_data_platform_is_enable_ai_feature
                 system_tags: var.ai_data_platform_system_tags
+                vector_db_admin_cred: var.ai_data_platform_vector_db_admin_cred
+                vector_db_admin_secret_id: oci_vault_secret.test_secret.id
+                vector_db_id: oci_ai_data_platform_vector_db.test_vector_db.id
         argumentDocs:
             ai_data_platform_type: '- (Optional) (Updatable) The AiDataPlatform type.'
+            ai_feature_status: '- The current aiFeatureStatus of the AiDataPlatform.'
             alias_key: '- The alias Id of the AiDataPlatform which is the short form of OCID.'
             compartment_id: '- (Required) (Updatable) The OCID of the compartment to create the AiDataPlatform in.'
             created_by: '- The OCID of the IAM user.'
@@ -379,11 +388,15 @@ resources:
             display_name: '- (Optional) (Updatable) A user-friendly name. Does not have to be unique, and it''s changeable. Avoid entering confidential information.'
             freeform_tags: '- (Optional) (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags.  Example: {"Department": "Finance"}'
             id: '- The OCID of the AiDataPlatform.'
+            is_enable_ai_feature: '- (Optional) The flag to enable/disable AiFeatures for the instance.'
             lifecycle_details: '- A message that describes the current state of the AiDataPlatform in more detail. For example, can be used to provide actionable information for a resource in the Failed state.'
             state: '- The current state of the AiDataPlatform.'
             system_tags: '- (Optional) (Updatable) System tags for this resource. Each key is predefined and scoped to a namespace.  Example: {"orcl-cloud.free-tier-retained": "true"}'
             time_created: '- The date and time the AiDataPlatform was created, in the format defined by RFC 3339.  Example: 2016-08-25T21:10:29.600Z'
             time_updated: '- The date and time the AiDataPlatform was updated, in the format defined by RFC 3339.  Example: 2016-08-25T21:10:29.600Z'
+            vector_db_admin_cred: '- (Optional) (Updatable) The Vector DB Lakehouse 26ai ADMIN user password.'
+            vector_db_admin_secret_id: '- (Optional) (Updatable) The OCID of the Oracle Cloud Infrastructure Vault secret holding the vector db Lakehouse 26ai Admin user password.'
+            vector_db_id: '- (Optional) (Updatable) The OCID of the vector db Lakehouse 26ai.'
             web_socket_endpoint: '- The WebSocket URL of the AiDataPlatform.'
         importStatements: []
     oci_ai_document_model:
@@ -10391,6 +10404,13 @@ resources:
                       "username": "${var.container_instance_image_pull_secrets_username}"
                     }
                   ],
+                  "security_context": [
+                    {
+                      "fs_group": "${var.container_instance_security_context_fs_group}",
+                      "fs_group_change_policy": "${var.container_instance_security_context_fs_group_change_policy}",
+                      "security_context_type": "${var.container_instance_security_context_security_context_type}"
+                    }
+                  ],
                   "shape": "${var.container_instance_shape}",
                   "shape_config": [
                     {
@@ -10421,7 +10441,36 @@ resources:
                           "path": "${var.container_instance_volumes_configs_path}"
                         }
                       ],
+                      "export": [
+                        {
+                          "id": "${var.container_instance_volumes_export_id}",
+                          "oci_fss_export_type": "${var.container_instance_volumes_export_oci_fss_export_type}"
+                        }
+                      ],
+                      "mount_command": [
+                        {
+                          "mount_options": [
+                            {
+                              "option": "${var.container_instance_volumes_mount_command_mount_options_option}",
+                              "value": "${var.container_instance_volumes_mount_command_mount_options_value}"
+                            }
+                          ]
+                        }
+                      ],
+                      "mount_target": [
+                        {
+                          "id": "${var.container_instance_volumes_mount_target_id}",
+                          "oci_fss_mount_target_type": "${var.container_instance_volumes_mount_target_oci_fss_mount_target_type}"
+                        }
+                      ],
                       "name": "${var.container_instance_volumes_name}",
+                      "security": [
+                        {
+                          "auth": "${var.container_instance_volumes_security_auth}",
+                          "is_encrypted_in_transit": "${var.container_instance_volumes_security_is_encrypted_in_transit}"
+                        }
+                      ],
+                      "subnet_id": "${oci_core_subnet.test_subnet.id}",
                       "volume_type": "${var.container_instance_volumes_volume_type}"
                     }
                   ]
@@ -10476,6 +10525,9 @@ resources:
                 image_pull_secrets.secret_id: oci_vault_secret.test_secret.id
                 image_pull_secrets.secret_type: var.container_instance_image_pull_secrets_secret_type
                 image_pull_secrets.username: var.container_instance_image_pull_secrets_username
+                security_context.fs_group: var.container_instance_security_context_fs_group
+                security_context.fs_group_change_policy: var.container_instance_security_context_fs_group_change_policy
+                security_context.security_context_type: var.container_instance_security_context_security_context_type
                 shape: var.container_instance_shape
                 shape_config.memory_in_gbs: var.container_instance_shape_config_memory_in_gbs
                 shape_config.ocpus: var.container_instance_shape_config_ocpus
@@ -10492,11 +10544,21 @@ resources:
                 volumes.configs.data: var.container_instance_volumes_configs_data
                 volumes.configs.file_name: var.container_instance_volumes_configs_file_name
                 volumes.configs.path: var.container_instance_volumes_configs_path
+                volumes.export.id: var.container_instance_volumes_export_id
+                volumes.export.oci_fss_export_type: var.container_instance_volumes_export_oci_fss_export_type
+                volumes.mount_command.mount_options.option: var.container_instance_volumes_mount_command_mount_options_option
+                volumes.mount_command.mount_options.value: var.container_instance_volumes_mount_command_mount_options_value
+                volumes.mount_target.id: var.container_instance_volumes_mount_target_id
+                volumes.mount_target.oci_fss_mount_target_type: var.container_instance_volumes_mount_target_oci_fss_mount_target_type
                 volumes.name: var.container_instance_volumes_name
+                volumes.security.auth: var.container_instance_volumes_security_auth
+                volumes.security.is_encrypted_in_transit: var.container_instance_volumes_security_is_encrypted_in_transit
+                volumes.subnet_id: oci_core_subnet.test_subnet.id
                 volumes.volume_type: var.container_instance_volumes_volume_type
         argumentDocs:
             add_capabilities: '- (Optional) A list of additional configurable container capabilities.'
             arguments: '- (Optional) A list of string arguments for a container''s ENTRYPOINT process.'
+            auth: '- (Optional) NFS authentication type to be used. Currently, only auth type SYS is supported.'
             availability_domain: '- (Required) The availability domain where the container instance runs.'
             backing_store: '- (Applicable when volume_type=EMPTYDIR) The volume type of the empty directory, can be either File Storage or Memory.'
             capabilities: '- (Optional) Linux Container capabilities to configure capabilities of container.'
@@ -10514,21 +10576,25 @@ resources:
             docker.io/library: .
             drop_capabilities: '- (Optional) A list of container capabilities that can be dropped.'
             environment_variables: '- (Optional) A map of additional environment variables to set in the environment of the container''s ENTRYPOINT process. These variables are in addition to any variables already defined in the container''s image.'
+            export: '- (Required when volume_type=OCI_FSS_FILE_SYSTEM) An Oracle Cloud Infrastructure File Storage Service (FSS) Export. Check https://docs.oracle.com/en-us/iaas/api/#/en/filestorage/20171215/Export/ for more details.'
             failure_action: '- (Optional) The action will be triggered when the container health check fails. There are two types of action: KILL or NONE. The default action is KILL. If failure action is KILL, the container will be subject to the container restart policy.'
             failure_threshold: '- (Optional) Number of consecutive failures at which we consider the check failed.'
             fault_domain: '- (Optional) The fault domain where the container instance runs.'
             file_name: '- (Required when volume_type=CONFIGFILE) The name of the file. The fileName should be unique across the volume.'
             freeform_tags: '- (Optional) Simple key-value pair that is applied without any predefined name, type or scope. Exists for cross-compatibility only. Example: {"bar-key": "value"}'
+            fs_group: '- (Optional) A special supplemental group that applies to all containers in the container instance. Some volume types allow the container instance to change ownership of the volume. The owning GID will be the fsGroup, the setgid bit will be set (new files will be owned by the fsGroup), and the permission bits are OR''d with rw-rw----. If unset, the container instance will not modify the ownership and permissions of volumes.'
+            fs_group_change_policy: '- (Optional) Defines behavior of changing ownership and permission of the volume before being exposed inside the containers. This only applies to volumes which support fsGroup ownership and permissions, and will have no effect on ephemeral volumes. ON_ROOT_MISMATCH only changes permissions and ownership if the permission and ownership of the root directory does not match the expected permissions and ownership of the volume. This can improve container instance start times. ALWAYS  changes permission and ownership of the volume when it is mounted. If unset, ALWAYS is used.'
             graceful_shutdown_timeout_in_seconds: '- (Optional) The amount of time that processes in a container have to gracefully end when the container must be stopped. For example, when you delete a container instance. After the timeout is reached, the processes are sent a signal to be deleted.'
             headers: '- (Applicable when health_check_type=HTTP) Container health check HTTP headers.'
             health_check_type: '- (Required) Container health check type.'
             health_checks: '- (Optional) list of container health checks to check container status and take appropriate action if container status is failed. There are two types of health checks that we currently support HTTP and TCP.'
             hostname_label: '- (Optional) The hostname for the VNIC''s primary private IP. Used for DNS.'
-            id: '- An OCID that cannot be changed.'
+            id: '- (Required) The OCID of the Oracle Cloud Infrastructure File Storage Service (FSS) Export.'
             image_pull_secrets: '- (Optional) The image pulls secrets so you can access private registry to pull container images.'
             image_url: '- (Required) A URL identifying the image that the container runs in, such as docker.io/library/busybox:latest. If you do not provide a tag, the tag will default to latest.'
             initial_delay_in_seconds: '- (Optional) The initial delay in seconds before start checking container health status.'
             interval_in_seconds: '- (Optional) Number of seconds between two consecutive runs for checking container health.'
+            is_encrypted_in_transit: '- (Optional) Determines whether in-transit encryption needs to be enables.  Check https://docs.oracle.com/en-us/iaas/Content/File/Tasks/intransitencryption.htm#Using_Intransit_Encryption for more details.'
             is_non_root_user_check_enabled: '- (Optional) Indicates if the container must run as a non-root user. If true, the service validates the container image at runtime to ensure that it is not going to run with UID 0 (root) and fails the container instance creation if the validation fails.'
             is_public_ip_assigned: '- (Optional) Whether the VNIC should be assigned a public IP address.'
             is_read_only: '- (Optional) Whether the volume was mounted in read-only mode. By default, the volume is not read-only.'
@@ -10537,12 +10603,18 @@ resources:
             lifecycle_details: '- A message that describes the current state of the container in more detail. Can be used to provide actionable information.'
             memory_in_gbs: '- (Optional) The total amount of memory available to the container instance (GB).'
             memory_limit_in_gbs: '- (Optional) The maximum amount of memory that can be consumed by the container''s process.'
+            mount_command: '- (Applicable when volume_type=OCI_FSS_FILE_SYSTEM) Specifications for the mount command to mount the Oracle Cloud Infrastructure File Storage Service (FSS) File System to Containers.'
+            mount_options: '- (Applicable when volume_type=OCI_FSS_FILE_SYSTEM) List of mount options to be used in the mount command. The order of this array will be maintained while preparing the mount command.'
             mount_path: '- (Required) The volume access path.'
+            mount_target: '- (Required when volume_type=OCI_FSS_FILE_SYSTEM) An Oracle Cloud Infrastructure File Storage Service (FSS) Mount Target.  Check https://docs.oracle.com/en-us/iaas/api/#/en/filestorage/20171215/MountTarget for more details.'
             name: '- (Required when health_check_type=HTTP) Container HTTP header Key.'
             nameservers: '- (Optional) IP address of a name server that the resolver should query, either an IPv4 address (in dot notation), or an IPv6 address in colon (and possibly dot) notation. If null, uses nameservers from subnet dhcpDnsOptions.'
             networking_bandwidth_in_gbps: '- The networking bandwidth available to the container instance, in gigabits per second.'
             nsg_ids: '- (Optional) A list of the OCIDs of the network security groups (NSGs) to add the VNIC to.'
+            oci_fss_export_type: '- (Optional) Determines the mode for supplying the Oracle Cloud Infrastructure File Storage Service (FSS) Export details. The value must be an OCID unless your tenancy is allowed to use PATH as a value.'
+            oci_fss_mount_target_type: '- (Optional) Determines the mode for supplying the Oracle Cloud Infrastructure File Storage Service (FSS) Mount target details. The value must be an OCID unless your tenancy is allowed to use HOST as a value.'
             ocpus: '- (Required) The total number of OCPUs available to the container instance.'
+            option: '- (Required when volume_type=OCI_FSS_FILE_SYSTEM) A generic (https://man7.org/linux/man-pages/man8/mount.8.html) or nfs (https://man7.org/linux/man-pages/man5/nfs.5.html) mount option.'
             options: '- (Optional) Options allows certain internal resolver variables to be modified. Options are a list of objects in https://man7.org/linux/man-pages/man5/resolv.conf.5.html. Examples: ["ndots:n", "edns0"].'
             partition: '- (Optional) If there is more than one partition in the volume, reference this number of partitions. Here is an example: Number  Start   End     Size    File system  Name                  Flags 1      1049kB  106MB   105MB   fat16        EFI System Partition  boot, esp 2      106MB   1180MB  1074MB  xfs 3      1180MB  50.0GB  48.8GB                                     lvm'
             password: '- (Required when secret_type=BASIC) The password which should be used with the registry for authentication. The value is expected in base64 format.'
@@ -10557,6 +10629,7 @@ resources:
             searches: '- (Optional) Search list for host-name lookup. If null, we will use searches from subnet dhcpDnsOptios.'
             secret_id: '- (Required when secret_type=VAULT) The OCID of the secret for registry credentials.'
             secret_type: '- (Required) The type of ImagePullSecret.'
+            security: '- (Applicable when volume_type=OCI_FSS_FILE_SYSTEM) Security options for Oracle Cloud Infrastructure FSS File System.'
             security_context: '- (Optional) Security context for container.'
             security_context_type: '- (Optional) The type of security context'
             shape: '- (Required) The shape of the container instance. The shape determines the resources available to the container instance.'
@@ -11867,6 +11940,7 @@ resources:
             network_block_ids: '- (Optional) The list of network block OCIDs.'
             placement_configuration: '- (Required) The location for where the instance pools in a cluster network will place instances.'
             placement_configurations: '- The placement configurations for the instance pool.'
+            pool_type: '- The type of resources managed by the pool.'
             port: '- The port value used for the backends.'
             primary_subnet_id: '- (Optional) The OCID of the primary subnet to place instances. This field is deprecated. Use primaryVnicSubnets instead to set VNIC data for instances in the pool.'
             primary_vnic_subnets: '- (Optional) Details about the IPv6 primary subnet.'
@@ -12076,21 +12150,43 @@ resources:
                   "display_name": "${var.compute_cluster_display_name}",
                   "freeform_tags": {
                     "Department": "Finance"
-                  }
+                  },
+                  "placement_constraint_details": [
+                    {
+                      "hpc_island_id": "${oci_core_hpc_island.test_hpc_island.id}",
+                      "logical_placement_constraint": "${var.compute_cluster_placement_constraint_details_logical_placement_constraint}",
+                      "target_memory_fabric_ids": "${var.compute_cluster_placement_constraint_details_target_memory_fabric_ids}",
+                      "target_network_block_ids": "${var.compute_cluster_placement_constraint_details_target_network_block_ids}",
+                      "type": "COMPUTE_CLUSTER"
+                    }
+                  ]
                 }
               references:
                 availability_domain: var.compute_cluster_availability_domain
                 compartment_id: var.compartment_id
                 display_name: var.compute_cluster_display_name
+                placement_constraint_details.hpc_island_id: oci_core_hpc_island.test_hpc_island.id
+                placement_constraint_details.logical_placement_constraint: var.compute_cluster_placement_constraint_details_logical_placement_constraint
+                placement_constraint_details.target_memory_fabric_ids: var.compute_cluster_placement_constraint_details_target_memory_fabric_ids
+                placement_constraint_details.target_network_block_ids: var.compute_cluster_placement_constraint_details_target_network_block_ids
         argumentDocs:
             availability_domain: '- (Required) The availability domain to place the compute cluster in.  Example: Uocm:PHX-AD-1'
             compartment_id: '- (Required) (Updatable) The OCID of the compartment.'
             defined_tags: '- (Optional) (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Operations.CostCenter": "42"}'
             display_name: '- (Optional) (Updatable) A user-friendly name. Does not have to be unique, and it''s changeable. Avoid entering confidential information.'
             freeform_tags: '- (Optional) (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags.  Example: {"Department": "Finance"}'
+            hpc_island_id: '- (Optional) The OCID of the HPC island for the compute cluster.'
+            hpcIslandId: must be set on the compute cluster, and the provided GMFs must belong to that same HPC island.
             id: '- The OCID of the compute cluster.'
+            logical_placement_constraint: '- (Updatable) The logical placement strategy to apply. Allowed values are SINGLE_TIER, SINGLE_BLOCK, and PACKED_DISTRIBUTION_MULTI_BLOCK.'
+            placement_constraint_details: '- (Optional) (Updatable) The details for providing placement constraints.'
             state: '- The current state of the compute cluster.'
+            target_memory_fabric_ids: '- (Updatable) The list of target GPU memory fabric OCIDs to constrain placement. Up to 15 items are allowed.'
+            target_network_block_ids: '- (Updatable) The list of target network block OCIDs to constrain placement. Up to 15 items are allowed.'
+            targetNetworkBlockIds: is provided, the hpcIslandId must be set on the compute cluster, and the provided network blocks must belong to that same HPC island.
             time_created: '- The date and time the compute cluster was created, in the format defined by RFC3339.  Example: 2016-08-25T21:10:29.600Z'
+            time_updated: '- The date and time the compute cluster was updated, in the format defined by RFC3339.  Example: 2016-08-25T21:10:29.600Z'
+            type: '- (Required) (Updatable) The type for the placement constraints. Supported value: COMPUTE_CLUSTER.'
         importStatements: []
     oci_core_compute_gpu_memory_cluster:
         subCategory: Core
@@ -12664,6 +12760,42 @@ resources:
             total_memory_in_gbs: '- The total memory of the capacity bucket, in GBs.'
             total_ocpus: '- The total OCPUs of the capacity bucket.'
             type: '- (Required) The type for the placement constraints. Use COMPUTE_BARE_METAL_HOST when specifying the compute bare metal host OCID. Use HOST_GROUP when specifying the compute host group OCID.'
+        importStatements: []
+    oci_core_default_drg_route_table:
+        subCategory: Core
+        description: Provides the Default Drg Route Table resource in Oracle Cloud Infrastructure Core service
+        name: oci_core_default_drg_route_table
+        title: oci_core_default_drg_route_table
+        examples:
+            - name: default_drg_route_table
+              manifest: |-
+                {
+                  "defined_tags": {
+                    "Operations.CostCenter": "42"
+                  },
+                  "display_name": "managed-default-drg-route-table",
+                  "freeform_tags": {
+                    "Department": "Finance"
+                  },
+                  "import_drg_route_distribution_id": "${oci_core_drg_route_distribution.test_drg_route_distribution.id}",
+                  "is_ecmp_enabled": true,
+                  "manage_default_resource_id": "${oci_core_drg.test_drg.default_drg_route_tables[0].vcn}"
+                }
+              references:
+                import_drg_route_distribution_id: oci_core_drg_route_distribution.test_drg_route_distribution.id
+                manage_default_resource_id: oci_core_drg.test_drg.default_drg_route_tables[0].vcn
+        argumentDocs:
+            compartment_id: '- The OCID of the compartment the DRG is in. The DRG route table is always in the same compartment as the DRG.'
+            defined_tags: '- (Optional) (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags.  Example: {"Operations.CostCenter": "42"}'
+            display_name: '- (Optional) (Updatable) A user-friendly name. Does not have to be unique, and it''s changeable. Avoid entering confidential information.'
+            freeform_tags: '- (Optional) (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags.  Example: {"Department": "Finance"}'
+            id: '- The OCID of the DRG route table.'
+            import_drg_route_distribution_id: '- (Optional) (Updatable) The OCID of the import route distribution used to specify how incoming route advertisements through referenced attachments are inserted into the DRG route table.'
+            is_ecmp_enabled: '- (Optional) (Updatable) If you want traffic to be routed using ECMP across your virtual circuits or IPSec tunnels to your on-premises networks, enable ECMP on the DRG route table.'
+            manage_default_resource_id: '- (Required) The OCID of the default DRG route table to manage.'
+            remove_import_trigger: '- (Optional) (Updatable) An optional property when flipped disables the import of route Distribution by setting import_drg_route_distribution_id to null.'
+            state: '- The DRG route table''s current state.'
+            time_created: '- The date and time the DRG route table was created, in the format defined by RFC3339.  Example: 2016-08-25T21:10:29.600Z'
         importStatements: []
     oci_core_dhcp_options:
         subCategory: Core
@@ -13659,6 +13791,28 @@ resources:
                   "freeform_tags": {
                     "Department": "Finance"
                   },
+                  "gmc_configs": [
+                    {
+                      "availability_domain": "${var.instance_configuration_gmc_configs_availability_domain}",
+                      "compartment_id": "${var.compartment_id}",
+                      "defined_tags": {
+                        "Operations.CostCenter": "42"
+                      },
+                      "display_name": "${var.instance_configuration_gmc_configs_display_name}",
+                      "freeform_tags": {
+                        "Department": "Finance"
+                      },
+                      "gpu_memory_cluster_scale_config": [
+                        {
+                          "is_downsize_enabled": "${var.instance_configuration_gmc_configs_gpu_memory_cluster_scale_config_is_downsize_enabled}",
+                          "is_upsize_enabled": "${var.instance_configuration_gmc_configs_gpu_memory_cluster_scale_config_is_upsize_enabled}",
+                          "target_size": "${var.instance_configuration_gmc_configs_gpu_memory_cluster_scale_config_target_size}"
+                        }
+                      ],
+                      "instance_configuration_id": "${oci_core_instance_configuration.test_instance_configuration.id}",
+                      "size": "${var.instance_configuration_gmc_configs_size}"
+                    }
+                  ],
                   "instance_details": [
                     {
                       "block_volumes": [
@@ -14158,6 +14312,14 @@ resources:
               references:
                 compartment_id: var.compartment_id
                 display_name: var.instance_configuration_display_name
+                gmc_configs.availability_domain: var.instance_configuration_gmc_configs_availability_domain
+                gmc_configs.compartment_id: var.compartment_id
+                gmc_configs.display_name: var.instance_configuration_gmc_configs_display_name
+                gmc_configs.gpu_memory_cluster_scale_config.is_downsize_enabled: var.instance_configuration_gmc_configs_gpu_memory_cluster_scale_config_is_downsize_enabled
+                gmc_configs.gpu_memory_cluster_scale_config.is_upsize_enabled: var.instance_configuration_gmc_configs_gpu_memory_cluster_scale_config_is_upsize_enabled
+                gmc_configs.gpu_memory_cluster_scale_config.target_size: var.instance_configuration_gmc_configs_gpu_memory_cluster_scale_config_target_size
+                gmc_configs.instance_configuration_id: oci_core_instance_configuration.test_instance_configuration.id
+                gmc_configs.size: var.instance_configuration_gmc_configs_size
                 instance_details.block_volumes.attach_details.device: var.instance_configuration_instance_details_block_volumes_attach_details_device
                 instance_details.block_volumes.attach_details.display_name: var.instance_configuration_instance_details_block_volumes_attach_details_display_name
                 instance_details.block_volumes.attach_details.is_pv_encryption_in_transit_enabled: var.instance_configuration_instance_details_block_volumes_attach_details_is_pv_encryption_in_transit_enabled
@@ -14411,6 +14573,7 @@ resources:
             CUSTOM: '- VM instances launch with custom configuration settings specified in the LaunchOptions parameter.'
             E1000: '- Emulated Gigabit ethernet controller. Compatible with Linux e1000 network driver.'
             EMULATED: '- VM instances launch with emulated devices, such as the E1000 network driver and emulated SCSI disk controller.'
+            GMC: ': Creates an instance configuration which can be used to create GMC backed pools.'
             IDE: '- Emulated IDE disk.'
             INSTANCE: ': Creates an instance configuration using an existing instance as a template.'
             ISCSI: '- ISCSI attached block storage device.'
@@ -14437,7 +14600,7 @@ resources:
             autotune_policies: '- (Applicable when instance_type=compute) The list of autotune policies enabled for this volume.'
             autotune_type: '- (Required) This specifies the type of autotunes supported by OCI.'
             availability_config: '- (Applicable when instance_type=compute) Options for defining the availabiity of a VM instance after a maintenance event that impacts the underlying hardware.'
-            availability_domain: '- (Applicable when instance_type=compute) The availability domain of the volume.  Example: Uocm:PHX-AD-1'
+            availability_domain: '- (Required when source=GMC) The availability domain for this GMC configuration entry.'
             backup_policy_id: '- (Applicable when instance_type=compute) If provided, specifies the ID of the volume backup policy to assign to the newly created volume. If omitted, no policy will be assigned.'
             baseline_ocpu_utilization: '- (Applicable when instance_type=compute) The baseline OCPU utilization for a subcore burstable VM instance. Leave this attribute blank for a non-burstable instance, or explicitly specify non-burstable with BASELINE_1_1.'
             block_volume_replicas: '- (Applicable when instance_type=compute) The list of block volume replicas to be enabled for this volume in the specified destination availability domains.'
@@ -14473,9 +14636,12 @@ resources:
             fault_domain: '- (Applicable when instance_type=compute) A fault domain is a grouping of hardware and infrastructure within an availability domain. Each availability domain contains three fault domains. Fault domains let you distribute your instances so that they are not on the same physical hardware within a single availability domain. A hardware failure or Compute hardware maintenance that affects one fault domain does not affect instances in other fault domains.'
             firmware: '- (Applicable when instance_type=compute) Firmware used to boot VM. Select the option that matches your operating system.'
             freeform_tags: '- (Optional) (Updatable) Free-form tags for this resource. Each tag is a simple key-value pair with no predefined name, type, or namespace. For more information, see Resource Tags.  Example: {"Department": "Finance"}'
+            gmc_configs: '- (Required when source=GMC) The GPU Memory Cluster configuration entries for.'
+            gpu_memory_cluster_scale_config: '- (Applicable when source=GMC) Configuration settings for GPU Memory Cluster scaling.'
             hostname_label: '- (Applicable when instance_type=compute) The hostname for the VNIC''s primary private IP. See the hostnameLabel attribute of CreateVnicDetails for more information.'
             id: '- (Optional) The OCID of the volume backup.'
             image_id: '- (Applicable when source_type=image) The OCID of the image used to boot the instance.'
+            instance_configuration_id: '- (Required when source=GMC) The OCID of the base compute instance configuration associated with this GMC configuration entry.'
             instance_details: '- (Required when source=NONE)'
             instance_id: '- (Required when source=INSTANCE) The OCID of the instance to use to create the instance configuration.'
             instance_options: '- (Applicable when instance_type=compute) Optional mutable instance options. As a part of Instance Metadata Service Security Header, This allows user to disable the legacy imds endpoints.'
@@ -14490,6 +14656,7 @@ resources:
             is_ai_enterprise_enabled: '- (Applicable when instance_type=compute) Whether to enable AI enterprise on the instance.'
             is_auto_tune_enabled: '- (Applicable when instance_type=compute) Specifies whether the auto-tune performance is enabled for this boot volume. This field is deprecated. Use the InstanceConfigurationDetachedVolumeAutotunePolicy instead to enable the volume for detached autotune.'
             is_consistent_volume_naming_enabled: '- (Applicable when instance_type=compute) Whether to enable consistent volume naming feature. Defaults to false.'
+            is_downsize_enabled: '- (Applicable when source=GMC) Enables downsizing towards the target size.'
             is_input_output_memory_management_unit_enabled: '- (Applicable when type=AMD_MILAN_BM | AMD_MILAN_BM_GPU | AMD_ROME_BM | AMD_ROME_BM_GPU | GENERIC_BM | INTEL_ICELAKE_BM | INTEL_SKYLAKE_BM) Whether the input-output memory management unit is enabled.'
             is_live_migration_preferred: '- (Optional) Whether to live migrate supported VM instances to a healthy physical VM host without disrupting running instances during infrastructure maintenance events. If null, Oracle chooses the best option for migrating the VM during infrastructure maintenance events.'
             is_management_disabled: '- (Applicable when instance_type=compute) Whether Oracle Cloud Agent can run all the available management plugins. Default value is false (management plugins are enabled).'
@@ -14503,6 +14670,7 @@ resources:
             is_shareable: '- (Applicable when instance_type=compute) Whether the attachment should be created in shareable mode. If an attachment is created in shareable mode, then other instances can attach the same volume, provided that they also create their attachments in shareable mode. Only certain volume types can be attached in shareable mode. Defaults to false if not specified.'
             is_symmetric_multi_threading_enabled: '- (Applicable when type=AMD_MILAN_BM | AMD_MILAN_BM_GPU | AMD_ROME_BM | AMD_ROME_BM_GPU | GENERIC_BM | INTEL_ICELAKE_BM | INTEL_SKYLAKE_BM) (Updatable only for AMD_VM and INTEL_VM) Whether symmetric multithreading is enabled on the instance. Symmetric multithreading is also called simultaneous multithreading (SMT) or Intel Hyper-Threading.'
             is_trusted_platform_module_enabled: '- (Applicable when instance_type=compute) Whether the Trusted Platform Module (TPM) is enabled on the instance.'
+            is_upsize_enabled: '- (Required when source=GMC) Enables upsizing towards the target size.'
             isManagementDisabled: is true, all of the management plugins are disabled, regardless of the per-plugin configuration.
             isMonitoringDisabled: is true, all of the monitoring plugins are disabled, regardless of the per-plugin configuration.
             kms_key_id: '- (Applicable when instance_type=compute) The OCID of the Vault service key to assign as the master encryption key for the volume.'
@@ -14512,7 +14680,7 @@ resources:
             launch_mode: '- (Applicable when instance_type=compute) Specifies the configuration mode for launching virtual machine (VM) instances. The configuration modes are:'
             launch_options: '- (Applicable when instance_type=compute) Options for tuning the compatibility and performance of VM shapes. The values that you specify override any default values.'
             license_type: '- (Optional) License Type for the OS license.'
-            licensing_configs: '- (Applicable when instance_type=instance_options) List of licensing configurations associated with target launch values.'
+            licensing_configs: '- (Applicable when instance_type=compute) List of licensing configurations associated with target launch values.'
             local_volume_size_in_gbs: '- (Applicable when instance_type=compute) The NVMe-backed local storage capacity, in GB, for flexible dense (DenseLV) VM shapes. If the selected shape  is DenseLV, the value must be greater than 0. For all other shapes, the value must be null (if specified);  any non-null value for a non-DenseLV shape results in an error.'
             max_vpus_per_gb: '- (Required when autotune_type=PERFORMANCE_BASED) This will be the maximum VPUs/GB performance level that the volume will be auto-tuned temporarily based on performance monitoring.'
             memory_in_gbs: '- (Applicable when instance_type=compute) The total amount of memory available to the instance, in gigabytes.'
@@ -14545,6 +14713,7 @@ resources:
             security_attributes: '- (Applicable when instance_type=compute) Security attributes are labels for a resource that can be referenced in a Zero Trust Packet Routing (ZPR) policy to control access to ZPR-supported resources.  Example: {"Oracle-DataSecurity-ZPR": {"MaxEgressCount": {"value":"42","mode":"audit"}}}'
             shape: that you specify. If you don't provide the parameter, the default values for the shape are used.
             shape_config: '- (Applicable when instance_type=compute) The shape configuration requested for the instance.'
+            size: '- (Applicable when source=GMC) The desired number of instances for this GMC configuration entry.'
             size_in_gbs: '- (Applicable when instance_type=compute) The size of the volume in GBs.'
             skip_source_dest_check: '- (Applicable when instance_type=compute) Whether the source/destination check is disabled on the VNIC. See the skipSourceDestCheck attribute of CreateVnicDetails for more information.'
             source: '- (Optional) The source of the instance configuration. An instance configuration defines the settings to use when creating Compute instances, including details such as the base image, shape, and metadata. You can also specify the associated resources for the instance, such as block volume attachments and network configuration.'
@@ -14552,6 +14721,7 @@ resources:
             source_type: '- (Required) The source type for the instance. Use image when specifying the image OCID. Use bootVolume when specifying the boot volume OCID.'
             subnet_cidr: '- (Applicable when instance_type=compute) One of the IPv4 CIDR blocks allocated to the subnet. Represents the IP range from which the VNIC''s private IP address will be assigned if privateIp or privateIpId is not specified. Either this field or the privateIp (or privateIpId, if applicable) field must be provided, but not both simultaneously. Example: 192.168.1.0/28 See the subnetCidr attribute of CreateVnicDetails for more information.'
             subnet_id: '- (Applicable when instance_type=compute) The OCID of the subnet to create the VNIC in. See the subnetId attribute of CreateVnicDetails for more information.'
+            target_size: '- (Applicable when source=GMC) The configured target size for the GPU Memory Cluster.'
             time_created: '- The date and time the instance configuration was created, in the format defined by RFC3339.  Example: 2016-08-25T21:10:29.600Z'
             timeouts.create: '- (Defaults to 20 minutes), when creating the Instance Configuration'
             timeouts.delete: '- (Defaults to 20 minutes), when destroying the Instance Configuration'
@@ -14789,6 +14959,7 @@ resources:
             load_balancers: '- (Optional) The load balancers to attach to the instance pool. (Note: From 6.16.0 load_balancers field in oci_core_instance_pool is changed from TypeList to TypeSet - to support load balancer insert operation. Also, LB cant by accessed by index)'
             on_timeout: '- (Required) (Updatable) Options to handle timeout for pre-termination action.'
             placement_configurations: '- (Required) (Updatable) The placement configurations for the instance pool. Provide one placement configuration for each availability domain.'
+            pool_type: '- The type of resources managed by the pool.'
             port: '- (Required) The port value to use when creating the backend set.'
             pre_termination: '- (Optional) (Updatable) The data for pre-termination action for an instance pool'
             preserve_block_volume_mode: '- (Required) (Updatable) Whether the block volume should be preserved after termination.'
@@ -14796,7 +14967,7 @@ resources:
             primary_subnet_id: '- (Optional) (Updatable) The OCID of the primary subnet to place instances. This field is deprecated. Use primaryVnicSubnets instead to set VNIC data for instances in the pool.'
             primary_vnic_subnets: '- (Optional) (Updatable) Details about the IPv6 primary subnet.'
             secondary_vnic_subnets: '- (Optional) (Updatable) The set of secondary VNIC data for instances in the pool.'
-            size: '- (Required) (Updatable) The number of instances that should be in the instance pool. Modifying this value will override the size of the instance pool. If the instance pool is linked with autoscaling configuration, autoscaling configuration could resize the instance pool at a later point. The instance pool''s actual size may differ from the configured size if it is associated with an autoscaling configuration, instance pool''s actual size will be reflected in this size attribute.'
+            size: '- (Required) (Updatable) The number of instances that should be in the instance pool. Modifying this value will override the size of the instance pool. If the instance pool is linked with autoscaling configuration, autoscaling configuration could resize the instance pool at a later point. The instance pool''s actual size may differ from the configured size if it is associated with an autoscaling configuration, instance pool''s actual size will be reflected in this size attribute. For a GMC-enabled resource pool, this is the number of GMC resources that should be in the pool.'
             state: '- (Optional) (Updatable) The target state for the instance pool update operation (ignored at create time and should not be set). Could be set to RUNNING or STOPPED.'
             subnet_id: '- (Required) (Updatable) The subnet OCID for the secondary VNIC.'
             time_created: '- The date and time the instance pool was created, in the format defined by RFC3339. Example: 2016-08-25T21:10:29.600Z'
@@ -17857,6 +18028,7 @@ resources:
                   },
                   "nsg_ids": "${var.data_safe_private_endpoint_nsg_ids}",
                   "private_endpoint_ip": "${var.data_safe_private_endpoint_private_endpoint_ip}",
+                  "security_attributes": "${var.data_safe_private_endpoint_security_attributes}",
                   "subnet_id": "${oci_core_subnet.test_subnet.id}",
                   "vcn_id": "${oci_core_vcn.test_vcn.id}"
                 }
@@ -17866,6 +18038,7 @@ resources:
                 display_name: var.data_safe_private_endpoint_display_name
                 nsg_ids: var.data_safe_private_endpoint_nsg_ids
                 private_endpoint_ip: var.data_safe_private_endpoint_private_endpoint_ip
+                security_attributes: var.data_safe_private_endpoint_security_attributes
                 subnet_id: oci_core_subnet.test_subnet.id
                 vcn_id: oci_core_vcn.test_vcn.id
         argumentDocs:
@@ -17879,6 +18052,7 @@ resources:
             nsg_ids: '- (Optional) (Updatable) The OCIDs of the network security groups that the private endpoint belongs to.'
             private_endpoint_id: '- The OCID of the underlying private endpoint.'
             private_endpoint_ip: '- (Optional) The private IP address of the private endpoint.'
+            security_attributes: '- (Optional) (Updatable) Security attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}'
             state: '- The current state of the private endpoint.'
             subnet_id: '- (Required) The OCID of the subnet.'
             system_tags: '- System tags for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"orcl-cloud.free-tier-retained": "true"}'
@@ -18565,6 +18739,8 @@ resources:
             id: '- The OCID of the report.'
             lifecycle_details: '- Details about the current state of the report in Data Safe.'
             mime_type: '- Specifies the format of report to be .xls or .pdf or .json'
+            next_report_id: '- The OCID of the next report generated.'
+            previous_report_id: '- The OCID of the previous report generated.'
             report_definition_id: '- The OCID of the report definition.'
             report_id: '- (Required) Unique report identifier'
             state: '- The current state of the audit report.'
@@ -18680,6 +18856,7 @@ resources:
             is_ascending: '- (Required) (Updatable) Indicates if the column must be sorted in ascending order. Values can either be ''true'' or ''false''.'
             is_enabled: '- (Required) (Updatable) Indicates whether the filter is enabled. Values can either be ''true'' or ''false''.'
             is_hidden: '- (Required) (Updatable) Indicates whether the filter is hidden. Values can either be ''true'' or ''false''.'
+            is_schedule_pagination_enabled: '- Indicates if the reports being generated should be paginated. If set to true, multiple reports can be generated and the details of next and previous report are present in Report. Values can either be ''true'' or ''false''.'
             is_seeded: '- Signifies whether the definition is seeded or user defined. Values can either be ''true'' or ''false''.'
             is_virtual: '- (Optional) (Updatable) Specifies if column is virtual and can only be used as column filter.'
             lifecycle_details: '- Details about the current state of the report definition in Data Safe.'
@@ -32124,6 +32301,400 @@ resources:
             time_created: '- When the lock was created.'
             time_updated: '- Time at which the metastore was last modified. An RFC3339 formatted datetime string.'
             type: '- Type of the lock.'
+        importStatements: []
+    oci_datacc_infrastructure:
+        subCategory: Datacc
+        description: Provides the Infrastructure resource in Oracle Cloud Infrastructure Datacc service
+        name: oci_datacc_infrastructure
+        title: oci_datacc_infrastructure
+        examples:
+            - name: test_infrastructure
+              manifest: |-
+                {
+                  "acfs_file_system_storage_in_gbs": "${var.infrastructure_acfs_file_system_storage_in_gbs}",
+                  "admin_networkcidr": "${var.infrastructure_admin_networkcidr}",
+                  "backup_network_bonding_interface": "${var.infrastructure_backup_network_bonding_interface}",
+                  "backup_network_bonding_mode": "${var.infrastructure_backup_network_bonding_mode}",
+                  "client_network_bonding_interface": "${var.infrastructure_client_network_bonding_interface}",
+                  "client_network_bonding_mode": "${var.infrastructure_client_network_bonding_mode}",
+                  "cloud_control_plane_server1": "${var.infrastructure_cloud_control_plane_server1}",
+                  "cloud_control_plane_server2": "${var.infrastructure_cloud_control_plane_server2}",
+                  "compartment_id": "${var.compartment_id}",
+                  "contacts": [
+                    {
+                      "email": "${var.infrastructure_contacts_email}",
+                      "is_contact_mos_validated": "${var.infrastructure_contacts_is_contact_mos_validated}",
+                      "is_primary": "${var.infrastructure_contacts_is_primary}",
+                      "name": "${var.infrastructure_contacts_name}",
+                      "phone_number": "${var.infrastructure_contacts_phone_number}"
+                    }
+                  ],
+                  "corporate_proxy": "${var.infrastructure_corporate_proxy}",
+                  "cps_network_bonding_interface": "${var.infrastructure_cps_network_bonding_interface}",
+                  "cps_network_bonding_mode": "${var.infrastructure_cps_network_bonding_mode}",
+                  "data_disk_percentage": "${var.infrastructure_data_disk_percentage}",
+                  "defined_tags": {
+                    "foo-namespace.bar-key": "value"
+                  },
+                  "description": "${var.infrastructure_description}",
+                  "display_name": "${var.infrastructure_display_name}",
+                  "dns_servers": "${var.infrastructure_dns_servers}",
+                  "freeform_tags": {
+                    "bar-key": "value"
+                  },
+                  "gateway": "${var.infrastructure_gateway}",
+                  "maintenance_window": [
+                    {
+                      "custom_action_timeout_in_mins": "${var.infrastructure_maintenance_window_custom_action_timeout_in_mins}",
+                      "days_of_week": "${var.infrastructure_maintenance_window_days_of_week}",
+                      "hours_of_day": "${var.infrastructure_maintenance_window_hours_of_day}",
+                      "is_custom_action_timeout_enabled": "${var.infrastructure_maintenance_window_is_custom_action_timeout_enabled}",
+                      "is_monthly_patching_enabled": "${var.infrastructure_maintenance_window_is_monthly_patching_enabled}",
+                      "lead_time_in_weeks": "${var.infrastructure_maintenance_window_lead_time_in_weeks}",
+                      "months": "${var.infrastructure_maintenance_window_months}",
+                      "patching_mode": "${var.infrastructure_maintenance_window_patching_mode}",
+                      "preference": "${var.infrastructure_maintenance_window_preference}",
+                      "weeks_of_month": "${var.infrastructure_maintenance_window_weeks_of_month}"
+                    }
+                  ],
+                  "netmask": "${var.infrastructure_netmask}",
+                  "ntp_servers": "${var.infrastructure_ntp_servers}",
+                  "shape": "${var.infrastructure_shape}",
+                  "system_model": "${var.infrastructure_system_model}",
+                  "vlan_id": "${oci_core_vlan.test_vlan.id}"
+                }
+              references:
+                acfs_file_system_storage_in_gbs: var.infrastructure_acfs_file_system_storage_in_gbs
+                admin_networkcidr: var.infrastructure_admin_networkcidr
+                backup_network_bonding_interface: var.infrastructure_backup_network_bonding_interface
+                backup_network_bonding_mode: var.infrastructure_backup_network_bonding_mode
+                client_network_bonding_interface: var.infrastructure_client_network_bonding_interface
+                client_network_bonding_mode: var.infrastructure_client_network_bonding_mode
+                cloud_control_plane_server1: var.infrastructure_cloud_control_plane_server1
+                cloud_control_plane_server2: var.infrastructure_cloud_control_plane_server2
+                compartment_id: var.compartment_id
+                contacts.email: var.infrastructure_contacts_email
+                contacts.is_contact_mos_validated: var.infrastructure_contacts_is_contact_mos_validated
+                contacts.is_primary: var.infrastructure_contacts_is_primary
+                contacts.name: var.infrastructure_contacts_name
+                contacts.phone_number: var.infrastructure_contacts_phone_number
+                corporate_proxy: var.infrastructure_corporate_proxy
+                cps_network_bonding_interface: var.infrastructure_cps_network_bonding_interface
+                cps_network_bonding_mode: var.infrastructure_cps_network_bonding_mode
+                data_disk_percentage: var.infrastructure_data_disk_percentage
+                description: var.infrastructure_description
+                display_name: var.infrastructure_display_name
+                dns_servers: var.infrastructure_dns_servers
+                gateway: var.infrastructure_gateway
+                maintenance_window.custom_action_timeout_in_mins: var.infrastructure_maintenance_window_custom_action_timeout_in_mins
+                maintenance_window.days_of_week: var.infrastructure_maintenance_window_days_of_week
+                maintenance_window.hours_of_day: var.infrastructure_maintenance_window_hours_of_day
+                maintenance_window.is_custom_action_timeout_enabled: var.infrastructure_maintenance_window_is_custom_action_timeout_enabled
+                maintenance_window.is_monthly_patching_enabled: var.infrastructure_maintenance_window_is_monthly_patching_enabled
+                maintenance_window.lead_time_in_weeks: var.infrastructure_maintenance_window_lead_time_in_weeks
+                maintenance_window.months: var.infrastructure_maintenance_window_months
+                maintenance_window.patching_mode: var.infrastructure_maintenance_window_patching_mode
+                maintenance_window.preference: var.infrastructure_maintenance_window_preference
+                maintenance_window.weeks_of_month: var.infrastructure_maintenance_window_weeks_of_month
+                netmask: var.infrastructure_netmask
+                ntp_servers: var.infrastructure_ntp_servers
+                shape: var.infrastructure_shape
+                system_model: var.infrastructure_system_model
+                vlan_id: oci_core_vlan.test_vlan.id
+        argumentDocs:
+            acfs: '- The amount of storage (in GB) in the DATA disk group that is currently utilized for creating local storage for VM Clusters and application VMs.'
+            acfs_file_system_storage_in_gbs: '- (Optional) (Updatable) The amount of storage (in GB) in the DATA disk group that is reserved for creating local storage for VM Clusters and application VMs.'
+            acfs_file_system_used_storage_in_gbs: '- The amount of storage (in GB) in the DATA disk group that is currently utilized for creating local storage for VM Clusters and application VMs. This attribute is deprecated and will be removed in a subsequent release. Please read from systemStorageCapacity instead.'
+            admin_networkcidr: '- (Optional) (Updatable) The CIDR block for the system network. The system network is a private network in Database Infrastructure and is not connected to your corporate network. The system network is used for storage (ASM) traffic, high-performance interconnect traffic and administration of infrastructure components.'
+            allocated_cores: '- Total CPU cores count allocated..'
+            available_cores: '- Total available CPU cores count.'
+            available_memory_in_gbs: '- Available memory, in gigabytes (GB).'
+            backup_network_bonding_interface: '- (Optional) (Updatable) The network bonding interface for backup network for the Database Infrastructure.'
+            backup_network_bonding_mode: '- (Optional) (Updatable) The network bonding mode for Backup networks for the Database Infrastructure.'
+            base_vm_count: '- Number of database virtual machines hosted on the server.'
+            client_network_bonding_interface: '- (Optional) (Updatable) The network bonding interface for client network for the Database Infrastructure.'
+            client_network_bonding_mode: '- (Optional) (Updatable) The network bonding mode for Client networks for the Database Infrastructure.'
+            cloud_control_plane_server1: '- (Required) (Updatable) The IP address for the first control plane server.'
+            cloud_control_plane_server2: '- (Required) (Updatable) The IP address for the second control plane server.'
+            compartment_id: '- (Required) (Updatable) The OCID of the compartment.'
+            compute_capacity: '- Capacity details of the Database Infrastructure.'
+            contacts: '- (Optional) (Updatable) The list of contacts for the Database Infrastructure.'
+            corporate_proxy: '- (Optional) (Updatable) The corporate network proxy for access to the control plane network. Oracle recommends using an HTTPS proxy when possible for enhanced security.'
+            cps_network_bonding_interface: '- (Optional) (Updatable) The network bonding interface for CPS network for the Database Infrastructure.'
+            cps_network_bonding_mode: '- (Optional) (Updatable) The network bonding mode for CPS networks for the Database Infrastructure.'
+            custom_action_timeout_in_mins: '- (Optional) (Updatable) Determines the amount of time the system will wait before the start of each Database Infrastructure server patching operation. Custom action timeout is in minutes and valid value is between 15 to 120 (inclusive).'
+            data_disk_percentage: '- (Optional) (Updatable) Percentage of disk space assigned for DATA disk group. Remaining disk space will get assiged to RECO disk group'
+            days_of_week: '- (Optional) (Updatable) Days during the week when maintenance should be performed.'
+            defined_tags: '- (Optional) (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. Example: {"foo-namespace.bar-key": "value"}'
+            description: '- (Optional) (Updatable) Database Infrastructure description.'
+            disk_group: '- Disk group name.'
+            disk_groups: '- List of storage disk group capacity details.'
+            display_name: '- (Required) (Updatable) The user-friendly name for the Database Infrastructure. The name does not need to be unique.'
+            dns_servers: '- (Required) (Updatable) The list of DNS server IP addresses. Maximum of 3 allowed.'
+            email: '- (Required) (Updatable) The email for the Database Infrastructure contact.'
+            free_space_in_gbs: '- The total amount of logical disk space that is currently available for use, in gigabytes (GB).'
+            freeform_tags: '- (Optional) (Updatable) Simple key-value pair that is applied without any predefined name, type or scope. This tag option exists for cross-compatibility only. Example: {"bar-key": "value"}'
+            gateway: '- (Required) (Updatable) The gateway for the control plane network.'
+            hours_of_day: '- (Optional) (Updatable) The window of hours during the day when maintenance should be performed. The window is a 4 hour slot. Valid values are - 0 - represents time slot 0:00 - 3:59 UTC - 4 - represents time slot 4:00 - 7:59 UTC - 8 - represents time slot 8:00 - 11:59 UTC - 12 - represents time slot 12:00 - 15:59 UTC - 16 - represents time slot 16:00 - 19:59 UTC - 20 - represents time slot 20:00 - 23:59 UTC'
+            id: '- The OCID of the Database Infrastructure.'
+            ilom_ip_address: '- Database Infrastructure Server ILOM IP address.'
+            ilom_name: '- Database Infrastructure Server ILOM name.'
+            instance_vm_count: '- Number of instances hosted on the server.'
+            is_contact_mos_validated: '- (Optional) (Updatable) If true, this Database Infrastructure contact is a valid My Oracle Support (MOS) contact.  If false, this Database Infrastructure contact is not a valid MOS contact.'
+            is_custom_action_timeout_enabled: '- (Optional) (Updatable) If true, enables the configuration of a custom action timeout (waiting period) between Database Infrastructure server patching operations.'
+            is_monthly_patching_enabled: '- (Optional) (Updatable) If true, enables the monthly patching option.'
+            is_primary: '- (Required) (Updatable) If true, this Database Infrastructure contact is a primary contact.  If false, this Database Infrastructure is a secondary contact.'
+            lead_time_in_weeks: '- (Optional) (Updatable) Lead time window allows user to set a lead time to prepare for a down time.  The lead time is in weeks and valid value is between 1 to 4.'
+            lifecycle_state_details: '- Lifecycle state details of the Database Infrastructure.'
+            logical_free_space_in_gbs: '- The total amount of logical disk space that is currently available for use in a disk group, in gigabytes (GB).'
+            maintenance_window: '- (Optional) (Updatable) The scheduling details for the quarterly maintenance window. Patching and system updates take place during the maintenance window.'
+            months: '- (Optional) (Updatable) Months during the year when maintenance should be performed.'
+            name: '- (Required) (Updatable) The name of the Database Infrastructure contact.'
+            netmask: '- (Required) (Updatable) The netmask for the control plane network.'
+            network_adapter_configuration: '- The network adapter, transceiver and cable configuration for the client and backup networks.'
+            ntp_servers: '- (Required) (Updatable) The list of NTP server IP addresses. Maximum of 3 allowed.'
+            patching_mode: '- (Optional) (Updatable) Cloud Database Infrastructure node patching method. IMPORTANT: Non-rolling infrastructure patching involves system down time. See Oracle-Managed Database Infrastructure Maintenance Updates  for more information.'
+            phone_number: '- (Optional) (Updatable) The phone number for the Database Infrastructure contact.'
+            phy_free_space_in_gbs: '- The total amount of physical disk space that is currently available for use in a disk group, in gigabytes (GB).'
+            phy_reserved_space_in_gbs: '- The total amount of physical disk space that is reserved for system use in a disk group, in gigabytes (GB).'
+            phy_total_space_in_gbs: '- The total amount of physical disk space available in a disk group, in gigabytes (GB).'
+            preference: '- (Optional) (Updatable) The maintenance window scheduling preference.'
+            rack_serial_number: '- The serial number for the Database Infrastructure.'
+            reco_disk_percentage: '- Percentage of disk space assigned for RECO disk group.'
+            reserved_cores: '- Total Reserved CPU cores count.'
+            reserved_memory_in_gbs: '- Reserved memory, in gigabytes (GB).'
+            reserved_space_in_gbs: '- The total amount of logical disk space that is reserved for system use, in gigabytes (GB).'
+            scale_storage_trigger: '- (Optional) (Updatable) An optional property when incremented triggers Scale Storage. Could be set to any integer value.'
+            server_ip_address: '- Database Infrastructure Server IP address.'
+            server_name: '- Database Infrastructure Server name.'
+            servers: '- A list of Database Infrastructure nodes.'
+            shape: '- (Required) (Updatable) The shape of the Database Infrastructure. The shape determines the amount of CPU, storage, and memory resources allocated to the instance.'
+            ssd_configuration_requested: '- SSD configuration requested for the infrastructure.'
+            state: '- The current state of the Database Infrastructure server.'
+            storage_capacity: '- Capacity details of the Storage disk group.  This attribute is deprecated and will be removed in a subsequent release. Please use systemStorageCapacity instead.'
+            storage_disk_redundancy: '- The Disk redundancy for Database Infrastructure storage.'
+            storage_type: '- The storage type for the Cloud Database Infrastructure.'
+            subscription_plan_number: '- The unique identifier for the subscription plan number.'
+            system_model: '- (Required) (Updatable) Database Infrastructure System Model specification. The system model determines the model of the Database Infrastructure hardware to be used.'
+            system_storage_capacity: '- Capacity details of different storage types.'
+            system_tags: '- Usage of system tag keys. These predefined keys are scoped to namespaces. Example: {"orcl-cloud.free-tier-retained": "true"}'
+            time_activated: '- The time, in RFC3339 format, when the Database Infrastructure was activated.'
+            time_created: '- The time that the Database Infrastructure cluster was created. An RFC3339 formatted datetime string.'
+            time_last_state_updated: '- The time, in RFC3339 format, when the lifecycle state was last updated.'
+            time_updated: '- The time that the Database Infrastructure was last updated. An RFC3339 formatted datetime string.'
+            time_validated: '- The time, in RFC3339 format, when the Database Infrastructure network was validated.'
+            total_cores: '- Total CPU cores count.'
+            total_memory_in_gbs: '- Total memory allocated, in gigabytes (GB).'
+            total_space_in_gbs: '- The total amount of logical disk space available, in gigabytes (GB).'
+            used_memory_in_gbs: '- Memory allocated to Oracle database virtual machine cluster or Instance, in gigabytes (GB).'
+            version: '- The version of the system software on the Database Infrastructure.'
+            vlan_id: '- (Optional) (Updatable) The CPS network VLAN ID.'
+            weeks_of_month: '- (Optional) (Updatable) Weeks during the month when maintenance should be performed. Weeks start on the 1st, 8th, 15th, and  22nd days of the month, and have a duration of 7 days. Weeks start and end based on calendar dates,  not days of the week.For example, to allow maintenance during the 2nd week of the month  (from the 8th day to the 14th day of the month), use the value 2. Maintenance cannot be scheduled for the fifth week of months that contain more than 28 days. Note that this parameter works in conjunction  with the  daysOfWeek and hoursOfDay parameters to allow you to specify specific days of the week and  hours that maintenance will be performed.'
+        importStatements: []
+    oci_datacc_vm_cluster_network:
+        subCategory: Datacc
+        description: Provides the Vm Cluster Network resource in Oracle Cloud Infrastructure Datacc service
+        name: oci_datacc_vm_cluster_network
+        title: oci_datacc_vm_cluster_network
+        examples:
+            - name: test_vm_cluster_network
+              manifest: |-
+                {
+                  "compartment_id": "${var.compartment_id}",
+                  "consumer_type": "${var.vm_cluster_network_consumer_type}",
+                  "defined_tags": {
+                    "foo-namespace.bar-key": "value"
+                  },
+                  "display_name": "${var.vm_cluster_network_display_name}",
+                  "dns_servers": "${var.vm_cluster_network_dns_servers}",
+                  "freeform_tags": {
+                    "bar-key": "value"
+                  },
+                  "infrastructure_id": "${oci_datacc_infrastructure.test_infrastructure.id}",
+                  "listener_port": "${var.vm_cluster_network_listener_port}",
+                  "listener_port_ssl": "${var.vm_cluster_network_listener_port_ssl}",
+                  "node_count": "${var.vm_cluster_network_node_count}",
+                  "ntp_servers": "${var.vm_cluster_network_ntp_servers}",
+                  "scans": [
+                    {
+                      "hostname": "${var.vm_cluster_network_scans_hostname}",
+                      "ips": "${var.vm_cluster_network_scans_ips}"
+                    }
+                  ],
+                  "vm_networks": [
+                    {
+                      "domain_name": "${oci_identity_domain.test_domain.name}",
+                      "gateway": "${var.vm_cluster_network_vm_networks_gateway}",
+                      "netmask": "${var.vm_cluster_network_vm_networks_netmask}",
+                      "network_type": "${var.vm_cluster_network_vm_networks_network_type}",
+                      "nodes": [
+                        {
+                          "hostname": "${var.vm_cluster_network_vm_networks_nodes_hostname}",
+                          "ip": "${var.vm_cluster_network_vm_networks_nodes_ip}",
+                          "vip": "${var.vm_cluster_network_vm_networks_nodes_vip}",
+                          "vip_hostname": "${var.vm_cluster_network_vm_networks_nodes_vip_hostname}"
+                        }
+                      ],
+                      "prefix": "${var.vm_cluster_network_vm_networks_prefix}",
+                      "vlan_id": "${oci_core_vlan.test_vlan.id}"
+                    }
+                  ]
+                }
+              references:
+                compartment_id: var.compartment_id
+                consumer_type: var.vm_cluster_network_consumer_type
+                display_name: var.vm_cluster_network_display_name
+                dns_servers: var.vm_cluster_network_dns_servers
+                infrastructure_id: oci_datacc_infrastructure.test_infrastructure.id
+                listener_port: var.vm_cluster_network_listener_port
+                listener_port_ssl: var.vm_cluster_network_listener_port_ssl
+                node_count: var.vm_cluster_network_node_count
+                ntp_servers: var.vm_cluster_network_ntp_servers
+                scans.hostname: var.vm_cluster_network_scans_hostname
+                scans.ips: var.vm_cluster_network_scans_ips
+                vm_networks.domain_name: oci_identity_domain.test_domain.name
+                vm_networks.gateway: var.vm_cluster_network_vm_networks_gateway
+                vm_networks.netmask: var.vm_cluster_network_vm_networks_netmask
+                vm_networks.network_type: var.vm_cluster_network_vm_networks_network_type
+                vm_networks.nodes.hostname: var.vm_cluster_network_vm_networks_nodes_hostname
+                vm_networks.nodes.ip: var.vm_cluster_network_vm_networks_nodes_ip
+                vm_networks.nodes.vip: var.vm_cluster_network_vm_networks_nodes_vip
+                vm_networks.nodes.vip_hostname: var.vm_cluster_network_vm_networks_nodes_vip_hostname
+                vm_networks.prefix: var.vm_cluster_network_vm_networks_prefix
+                vm_networks.vlan_id: oci_core_vlan.test_vlan.id
+        argumentDocs:
+            associated_resource_id: '- The OCID of the associated resource.'
+            base_vm_cluster_id: '- The OCID of the associated VM cluster.'
+            compartment_id: '- (Required) (Updatable) The OCID of the compartment containing the VM cluster network.'
+            consumer_type: '- (Optional) Consumer type for the VM cluster network.'
+            defined_tags: '- (Optional) (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. Example: {"foo-namespace.bar-key": "value"}'
+            display_name: '- (Required) (Updatable) The user-friendly name for the VM cluster network. The name does not need to be unique.'
+            dns_servers: '- (Optional) (Updatable) The list of DNS server IP addresses. Maximum of 3 allowed.'
+            domain_name: '- (Required) (Updatable) The network domain name.'
+            freeform_tags: '- (Optional) (Updatable) Simple key-value pair that is applied without any predefined name, type or scope. This tag option exists for cross-compatibility only. Example: {"bar-key": "value"}'
+            gateway: '- (Required) (Updatable) The network gateway.'
+            hostname: '- (Required) (Updatable) The SCAN hostname.'
+            id: '- The OCID of the VM cluster network.'
+            infrastructure_id: '- (Required) The OCID of the Database Infrastructure.'
+            ip: '- (Required) (Updatable) The node IP address.'
+            ips: '- (Required) (Updatable) The list of SCAN IP addresses. Three addresses should be provided.'
+            is_scan_enabled: '- Indicates whether Single Client Access Name (SCAN) is enabled on the VM cluster.'
+            lifecycle_details: '- Lifecycle state details of the VM cluster network.'
+            listener_port: '- (Optional) (Updatable) The listener TCP/IP port.'
+            listener_port_ssl: '- (Optional) (Updatable) The listener TCP/IP SSL port. Default is 2484.'
+            netmask: '- (Required) (Updatable) The network netmask.'
+            network_type: '- (Required) (Updatable) The network type.'
+            node_count: '- (Optional) Count of virtual machines in this VM cluster.'
+            nodes: '- (Required) (Updatable) The list of node details.'
+            ntp_servers: '- (Optional) (Updatable) The list of NTP server IP addresses. Maximum of 3 allowed.'
+            prefix: '- (Optional) (Updatable) The network domain name prefix.'
+            scans: '- (Optional) (Updatable) The SCAN details.'
+            state: '- The current state of the virtual machine cluster network.'
+            system_tags: '- Usage of system tag keys. These predefined keys are scoped to namespaces. Example: {"orcl-cloud.free-tier-retained": "true"}'
+            time_created: '- The time that the VM cluster network was created. An RFC3339 formatted datetime string.'
+            time_updated: '- The time that the VM cluster network was last updated. An RFC3339 formatted datetime string.'
+            vip: '- (Optional) (Updatable) The node virtual IP (VIP) address.'
+            vip_hostname: '- (Optional) (Updatable) The node virtual IP (VIP) host name.'
+            vlan_id: '- (Optional) (Updatable) The network VLAN ID.'
+            vm_networks: '- (Required) (Updatable) Details of the client and backup networks.'
+        importStatements: []
+    oci_datacc_vm_instance:
+        subCategory: Datacc
+        description: Provides the Vm Instance resource in Oracle Cloud Infrastructure Datacc service
+        name: oci_datacc_vm_instance
+        title: oci_datacc_vm_instance
+        examples:
+            - name: test_vm_instance
+              manifest: |-
+                {
+                  "boot_storage_size_in_gbs": "${var.vm_instance_boot_storage_size_in_gbs}",
+                  "compartment_id": "${var.compartment_id}",
+                  "cpus_enabled": "${var.vm_instance_cpus_enabled}",
+                  "data_storage_size_in_gb": "${var.vm_instance_data_storage_size_in_gb}",
+                  "defined_tags": {
+                    "foo-namespace.bar-key": "value"
+                  },
+                  "description": "${var.vm_instance_description}",
+                  "display_name": "${var.vm_instance_display_name}",
+                  "dns_servers": "${var.vm_instance_dns_servers}",
+                  "domain_name": "${oci_identity_domain.test_domain.name}",
+                  "freeform_tags": {
+                    "bar-key": "value"
+                  },
+                  "gateway": "${var.vm_instance_gateway}",
+                  "hostname": "${var.vm_instance_hostname}",
+                  "image_id": "${oci_core_image.test_image.id}",
+                  "infrastructure_id": "${oci_datacc_infrastructure.test_infrastructure.id}",
+                  "ip_address": "${var.vm_instance_ip_address}",
+                  "memory_size_in_gbs": "${var.vm_instance_memory_size_in_gbs}",
+                  "metadata": "${var.vm_instance_metadata}",
+                  "netmask": "${var.vm_instance_netmask}",
+                  "ntp_servers": "${var.vm_instance_ntp_servers}",
+                  "server_id": "${oci_datacc_server.test_server.id}",
+                  "ssh_public_keys": "${var.vm_instance_ssh_public_keys}",
+                  "system_tags": "${var.vm_instance_system_tags}",
+                  "time_zone": "${var.vm_instance_time_zone}",
+                  "userdata": "${var.vm_instance_userdata}",
+                  "vlan_id": "${oci_core_vlan.test_vlan.id}",
+                  "vm_network_id": "${oci_datacc_vm_network.test_vm_network.id}"
+                }
+              references:
+                boot_storage_size_in_gbs: var.vm_instance_boot_storage_size_in_gbs
+                compartment_id: var.compartment_id
+                cpus_enabled: var.vm_instance_cpus_enabled
+                data_storage_size_in_gb: var.vm_instance_data_storage_size_in_gb
+                description: var.vm_instance_description
+                display_name: var.vm_instance_display_name
+                dns_servers: var.vm_instance_dns_servers
+                domain_name: oci_identity_domain.test_domain.name
+                gateway: var.vm_instance_gateway
+                hostname: var.vm_instance_hostname
+                image_id: oci_core_image.test_image.id
+                infrastructure_id: oci_datacc_infrastructure.test_infrastructure.id
+                ip_address: var.vm_instance_ip_address
+                memory_size_in_gbs: var.vm_instance_memory_size_in_gbs
+                metadata: var.vm_instance_metadata
+                netmask: var.vm_instance_netmask
+                ntp_servers: var.vm_instance_ntp_servers
+                server_id: oci_datacc_server.test_server.id
+                ssh_public_keys: var.vm_instance_ssh_public_keys
+                system_tags: var.vm_instance_system_tags
+                time_zone: var.vm_instance_time_zone
+                userdata: var.vm_instance_userdata
+                vlan_id: oci_core_vlan.test_vlan.id
+                vm_network_id: oci_datacc_vm_network.test_vm_network.id
+        argumentDocs:
+            boot_storage_size_in_gbs: '- (Optional) Boot storage memory to be allocated in GBs.'
+            compartment_id: '- (Required) (Updatable) The OCID of the compartment containing the VM instance.'
+            cpus_enabled: '- (Required) The number of CPU cores enabled for each VM instance.'
+            data_storage_size_in_gb: '- (Optional) (Updatable) Data storage to be allocated in GBs.'
+            defined_tags: '- (Optional) (Updatable) Defined tags for this resource. Each key is predefined and scoped to a namespace. Example: {"foo-namespace.bar-key": "value"}'
+            description: '- (Optional) (Updatable) VM instance description.'
+            display_name: '- (Optional) (Updatable) VM instance display name. This name does not have to be unique, and is changeable.'
+            dns_servers: '- (Optional) The list of DNS server IP addresses. Maximum of 3 allowed.'
+            domain_name: '- (Optional) The domain name of the VM instance.'
+            freeform_tags: '- (Optional) (Updatable) Simple key-value pair that is applied without any predefined name, type or scope. This tag option exists for cross-compatibility only. Example: {"bar-key": "value"}'
+            gateway: '- (Optional) The gateway IP address of the VM instance network'
+            hostname: '- (Optional) The host name of the instance.'
+            id: '- The OCID of the VM instance.'
+            image_id: '- (Optional) The OCID of the VM custom instance uploaded.'
+            infrastructure_id: '- (Required) The OCID of the Database Infrastructure.'
+            ip_address: '- (Optional) The IP address of the instance.'
+            lifecycle_details: '- Lifecycle state details of the VM instance.'
+            memory_size_in_gbs: '- (Optional) The memory to be allocated in GBs.'
+            metadata: '- (Optional) Custom metadata key/value pairs which can be used to:'
+            netmask: '- (Optional) The netmask of the VM instance network.'
+            ntp_servers: '- (Optional) The list of NTP server IP addresses. Maximum of 3 allowed.'
+            server_id: '- (Optional) The OCID of the compute node on which VM instance should be launched.'
+            ssh_public_keys: '- (Required) List of public key used for SSH access to the VM instance.'
+            state: '- The current state of the VM instance.'
+            system_tags: '- (Optional) Usage of system tag keys. These predefined keys are scoped to namespaces. Example: {"orcl-cloud.free-tier-retained": "true"}'
+            time_created: '- The time that the VM instance was created. An RFC3339 formatted datetime string.'
+            time_updated: '- The time that the VM instance was last updated. An RFC3339 formatted datetime string.'
+            time_zone: '- (Optional) The time zone to use for the VM instance.'
+            userdata: '- (Optional) Base64-encoded data to be used by Cloud-Init to run custom scripts or provide custom Cloud-Init configuration.  For information about how to take advantage of user data, see the Cloud-Init Documentation.'
+            vlan_id: '- (Optional) The network VLAN ID.'
+            vm_network_id: '- (Optional) The OCID of the VM Network.'
         importStatements: []
     oci_dataflow_application:
         subCategory: Data Flow
@@ -68134,6 +68705,7 @@ resources:
                     "bar-key": "value"
                   },
                   "nsg_ids": "${var.oda_private_endpoint_nsg_ids}",
+                  "security_attributes": "${var.oda_private_endpoint_security_attributes}",
                   "subnet_id": "${oci_core_subnet.test_subnet.id}"
                 }
               references:
@@ -68141,6 +68713,7 @@ resources:
                 description: var.oda_private_endpoint_description
                 display_name: var.oda_private_endpoint_display_name
                 nsg_ids: var.oda_private_endpoint_nsg_ids
+                security_attributes: var.oda_private_endpoint_security_attributes
                 subnet_id: oci_core_subnet.test_subnet.id
         argumentDocs:
             compartment_id: '- (Required) (Updatable) The OCID of the compartment that the ODA private endpoint belongs to.'
@@ -68150,6 +68723,7 @@ resources:
             freeform_tags: '- (Optional) (Updatable) Simple key-value pair that is applied without any predefined name, type, or scope. Example: {"bar-key": "value"}'
             id: '- The OCID that was assigned when the ODA private endpoint was created.'
             nsg_ids: '- (Optional) (Updatable) List of OCIDs of network security groups'
+            security_attributes: '- (Optional) (Updatable) Security attributes for this resource. Each key is predefined and scoped to a namespace. For more information, see Resource Tags. Example: {"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}'
             state: '- The current state of the ODA private endpoint.'
             subnet_id: '- (Required) The OCID of the subnet that the private endpoint belongs to.'
             time_created: '- When the resource was created. A date-time string as described in RFC 3339, section 14.29.'
@@ -71796,7 +72370,7 @@ resources:
             profile_type: '- (Required) The type of profile.'
             profile_version: '- The version of the profile. The version is automatically incremented each time the profiled is edited.'
             registration_type: '- (Optional) The type of instance to register.'
-            software_source_ids: '- (Required when profile_type=SOFTWARESOURCE) The list of software source OCIDs that the registration profile will use.'
+            software_source_ids: '- (Applicable when profile_type=SOFTWARESOURCE) The list of software source OCIDs that the registration profile will use.'
             software_source_type: '- Type of the software source.'
             software_sources: '- The list of software sources that the registration profile will use.'
             state: '- The current state of the registration profile.'

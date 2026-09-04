@@ -336,6 +336,9 @@ import (
 	connection "github.com/oracle/provider-oci/internal/controller/namespaced/datacatalog/connection"
 	dataasset "github.com/oracle/provider-oci/internal/controller/namespaced/datacatalog/dataasset"
 	metastore "github.com/oracle/provider-oci/internal/controller/namespaced/datacatalog/metastore"
+	infrastructure "github.com/oracle/provider-oci/internal/controller/namespaced/datacc/infrastructure"
+	vmclusternetworkdatacc "github.com/oracle/provider-oci/internal/controller/namespaced/datacc/vmclusternetwork"
+	vminstance "github.com/oracle/provider-oci/internal/controller/namespaced/datacc/vminstance"
 	application "github.com/oracle/provider-oci/internal/controller/namespaced/dataflow/application"
 	invokerun "github.com/oracle/provider-oci/internal/controller/namespaced/dataflow/invokerun"
 	pool "github.com/oracle/provider-oci/internal/controller/namespaced/dataflow/pool"
@@ -752,6 +755,7 @@ import (
 	cpe "github.com/oracle/provider-oci/internal/controller/namespaced/networkconnectivity/cpe"
 	crossconnect "github.com/oracle/provider-oci/internal/controller/namespaced/networkconnectivity/crossconnect"
 	crossconnectgroup "github.com/oracle/provider-oci/internal/controller/namespaced/networkconnectivity/crossconnectgroup"
+	defaultdrgroutetable "github.com/oracle/provider-oci/internal/controller/namespaced/networkconnectivity/defaultdrgroutetable"
 	drg "github.com/oracle/provider-oci/internal/controller/namespaced/networkconnectivity/drg"
 	drgattachment "github.com/oracle/provider-oci/internal/controller/namespaced/networkconnectivity/drgattachment"
 	drgattachmentmanagement "github.com/oracle/provider-oci/internal/controller/namespaced/networkconnectivity/drgattachmentmanagement"
@@ -1326,6 +1330,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		connection.Setup,
 		dataasset.Setup,
 		metastore.Setup,
+		infrastructure.Setup,
+		vmclusternetworkdatacc.Setup,
+		vminstance.Setup,
 		application.Setup,
 		invokerun.Setup,
 		pool.Setup,
@@ -1742,6 +1749,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		cpe.Setup,
 		crossconnect.Setup,
 		crossconnectgroup.Setup,
+		defaultdrgroutetable.Setup,
 		drg.Setup,
 		drgattachment.Setup,
 		drgattachmentmanagement.Setup,
@@ -2322,6 +2330,9 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		connection.SetupGated,
 		dataasset.SetupGated,
 		metastore.SetupGated,
+		infrastructure.SetupGated,
+		vmclusternetworkdatacc.SetupGated,
+		vminstance.SetupGated,
 		application.SetupGated,
 		invokerun.SetupGated,
 		pool.SetupGated,
@@ -2738,6 +2749,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		cpe.SetupGated,
 		crossconnect.SetupGated,
 		crossconnectgroup.SetupGated,
+		defaultdrgroutetable.SetupGated,
 		drg.SetupGated,
 		drgattachment.SetupGated,
 		drgattachmentmanagement.SetupGated,

@@ -48,6 +48,7 @@ import (
 	v1alpha1costad "github.com/oracle/provider-oci/apis/namespaced/costad/v1alpha1"
 	v1alpha1database "github.com/oracle/provider-oci/apis/namespaced/database/v1alpha1"
 	v1alpha1datacatalog "github.com/oracle/provider-oci/apis/namespaced/datacatalog/v1alpha1"
+	v1alpha1datacc "github.com/oracle/provider-oci/apis/namespaced/datacc/v1alpha1"
 	v1alpha1dataflow "github.com/oracle/provider-oci/apis/namespaced/dataflow/v1alpha1"
 	v1alpha1dataintegration "github.com/oracle/provider-oci/apis/namespaced/dataintegration/v1alpha1"
 	v1alpha1datalabelingservice "github.com/oracle/provider-oci/apis/namespaced/datalabelingservice/v1alpha1"
@@ -185,6 +186,7 @@ func init() {
 		v1alpha1costad.SchemeBuilder.AddToScheme,
 		v1alpha1database.SchemeBuilder.AddToScheme,
 		v1alpha1datacatalog.SchemeBuilder.AddToScheme,
+		v1alpha1datacc.SchemeBuilder.AddToScheme,
 		v1alpha1dataflow.SchemeBuilder.AddToScheme,
 		v1alpha1dataintegration.SchemeBuilder.AddToScheme,
 		v1alpha1datalabelingservice.SchemeBuilder.AddToScheme,

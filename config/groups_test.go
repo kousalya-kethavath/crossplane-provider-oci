@@ -177,6 +177,20 @@ func TestGroupKindOverrides(t *testing.T) {
 	}
 }
 
+// TestDefaultDrgRouteTableGrouping verifies that the exact override wins over
+// generic route-name detection for this DRG resource.
+func TestDefaultDrgRouteTableGrouping(t *testing.T) {
+	resource := &config.Resource{Name: "oci_core_default_drg_route_table"}
+	GroupKindOverrides()(resource)
+
+	if resource.ShortGroup != "networkconnectivity" {
+		t.Errorf("Expected ShortGroup to be 'networkconnectivity', got %q", resource.ShortGroup)
+	}
+	if resource.Kind != "DefaultDrgRouteTable" {
+		t.Errorf("Expected Kind to be 'DefaultDrgRouteTable', got %q", resource.Kind)
+	}
+}
+
 // TestGroupKindOverridesTruncatesLongAutoDetectedKinds verifies that the
 // auto-detected path keeps generated kinds within the Kubernetes name budget.
 func TestGroupKindOverridesTruncatesLongAutoDetectedKinds(t *testing.T) {
