@@ -22,11 +22,15 @@ import (
 	tfoci "github.com/oracle/terraform-provider-oci/oci"
 )
 
-func terraformSDKProvider(_ []string) *schema.Provider {
-	// The minimum upstream contract exposes a full, isolated SDKv2 provider.
-	// Crossplane still scopes controller registration and connector routing to
-	// the service runtime; only the embedded Terraform schema remains complete.
-	return tfoci.Provider()
+func terraformSDKProvider(resourceNames []string) *schema.Provider {
+	if resourceNames == nil {
+		return tfoci.Provider()
+	}
+	provider, err := tfoci.ProviderForResources(resourceNames...)
+	if err != nil {
+		panic(err)
+	}
+	return provider
 }
 
 func terraformFrameworkProvider() frameworkprovider.Provider {
