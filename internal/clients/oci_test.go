@@ -7,6 +7,7 @@ package clients
 import (
 	"context"
 	"errors"
+	"fmt"
 	"sync"
 	"sync/atomic"
 	"testing"
@@ -67,6 +68,39 @@ func TestShouldConfigureSDKv2ProviderSkipsUnknownResourceType(t *testing.T) {
 	}}
 	if options.shouldConfigureSDKv2Provider(&fake.Managed{}) {
 		t.Fatal("shouldConfigureSDKv2Provider() = true, want false for managed resource without Terraform resource type")
+	}
+}
+
+func TestSetupOptionsProviderMetaCacheSize(t *testing.T) {
+	tests := map[string]struct {
+		opts []SetupOption
+		want int
+	}{
+		"default": {
+			want: defaultProviderMetaCacheSize,
+		},
+		"custom": {
+			opts: []SetupOption{WithProviderMetaCacheSize(7)},
+			want: 7,
+		},
+	}
+
+	for name, tc := range tests {
+		t.Run(name, func(t *testing.T) {
+			if got := newSetupOptions(tc.opts...).providerMetaCacheSize; got != tc.want {
+				t.Fatalf("providerMetaCacheSize = %d, want %d", got, tc.want)
+			}
+		})
+	}
+}
+
+func TestNewProviderMetaCacheUsesMinimumSize(t *testing.T) {
+	for _, size := range []int{-1, 0} {
+		t.Run(fmt.Sprintf("size_%d", size), func(t *testing.T) {
+			if got := newProviderMetaCache(size).maxEntries; got != 1 {
+				t.Fatalf("maxEntries = %d, want 1", got)
+			}
+		})
 	}
 }
 

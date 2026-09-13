@@ -13,18 +13,16 @@ import (
 	ociprovider "github.com/oracle/terraform-provider-oci/oci"
 )
 
-var sdkV2ProviderMetaCache = newProviderMetaCache(defaultProviderMetaCacheSize)
-
 func setFrameworkProvider(ps *upjetterraform.Setup) {
 	ps.FrameworkProvider = ociprovider.New()
 }
 
-func getOrConfigureProviderMeta(ctx context.Context, uid string, cfg map[string]any) (any, error) {
+func (c *providerMetaCache) getOrConfigureProviderMeta(ctx context.Context, uid string, cfg map[string]any) (any, error) {
 	cfgHash, err := providerConfigurationHash(cfg)
 	if err != nil {
 		return nil, err
 	}
-	return sdkV2ProviderMetaCache.getOrCreate(ctx, uid, cfgHash, func() (any, error) {
+	return c.getOrCreate(ctx, uid, cfgHash, func() (any, error) {
 		p := ociprovider.ProviderForConfiguration()
 		diags := p.Configure(ctx, sdkterraform.NewResourceConfigRaw(cfg))
 		if diags.HasError() {

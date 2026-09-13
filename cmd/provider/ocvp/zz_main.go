@@ -60,6 +60,7 @@ func main() {
 		metricsStatePollInterval = app.Flag("metrics-state-poll", "Interval for recording managed resource state metrics.").Default("30s").Envar("METRICS_STATE_POLL").Duration()
 		leaderElection   = app.Flag("leader-election", "Use leader election for the controller manager.").Short('l').Default("false").Envar("LEADER_ELECTION").Bool()
 		providerVersion  = app.Flag("provider-version", "Provider version included in change log records.").Default(defaultProviderVersion()).Envar("PROVIDER_VERSION").String()
+		providerMetaCacheSize = app.Flag("provider-meta-cache-size", "Maximum number of configured SDKv2 provider instances cached by this service.").Default("32").Envar("PROVIDER_META_CACHE_SIZE").Int()
 		maxReconcileRate = app.Flag("max-reconcile-rate", "The global maximum rate per second at which resources may checked for drift from the desired state.").Default("10").Int()
 		changelogsSocketPath = app.Flag("changelogs-socket-path", "Path for changelogs socket (if enabled).").Default("/var/run/changelogs/changelogs.sock").Envar("CHANGELOGS_SOCKET_PATH").String()
 		enableManagementPolicies = app.Flag("enable-management-policies", "Enable support for ManagementPolicies.").Default("true").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
@@ -137,6 +138,7 @@ func main() {
 		SetupFn: clients.TerraformSetupBuilder(
 			clients.WithSDKv2ResourcePredicate(config.SDKv2ResourcePredicateForRuntime("ocvp")),
 			clients.WithFrameworkProvider(config.HasFrameworkResources()),
+			clients.WithProviderMetaCacheSize(*providerMetaCacheSize),
 		),
 	}
 

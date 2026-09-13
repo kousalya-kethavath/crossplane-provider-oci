@@ -63,6 +63,7 @@ const (
 type setupOptions struct {
 	enableFrameworkProvider bool
 	isSDKv2Resource         func(string) bool
+	providerMetaCacheSize   int
 }
 
 // SetupOption customizes Terraform setup behavior.
@@ -84,6 +85,22 @@ func WithSDKv2ResourcePredicate(predicate func(string) bool) SetupOption {
 	}
 }
 
+// WithProviderMetaCacheSize controls the maximum number of configured SDKv2
+// provider instances retained by a service process.
+func WithProviderMetaCacheSize(size int) SetupOption {
+	return func(o *setupOptions) {
+		o.providerMetaCacheSize = size
+	}
+}
+
+func newSetupOptions(opts ...SetupOption) setupOptions {
+	options := setupOptions{providerMetaCacheSize: defaultProviderMetaCacheSize}
+	for _, opt := range opts {
+		opt(&options)
+	}
+	return options
+}
+
 type terraformResourceTyper interface {
 	GetTerraformResourceType() string
 }
@@ -92,10 +109,8 @@ type terraformResourceTyper interface {
 // connectors. Build-time Terraform values are intentionally not required at
 // runtime when all resources are routed through SDKv2 or Framework connectors.
 func TerraformSetupBuilder(opts ...SetupOption) upjetterraform.SetupFn {
-	options := setupOptions{}
-	for _, opt := range opts {
-		opt(&options)
-	}
+	options := newSetupOptions(opts...)
+	providerMetaCache := newProviderMetaCache(options.providerMetaCacheSize)
 
 	return func(ctx context.Context, kube client.Client, mg resource.Managed) (upjetterraform.Setup, error) {
 		ps := upjetterraform.Setup{}
@@ -133,7 +148,7 @@ func TerraformSetupBuilder(opts ...SetupOption) upjetterraform.SetupFn {
 			return ps, fmt.Errorf("ProviderConfig has empty UID")
 		}
 
-		providerMeta, err := getOrConfigureProviderMeta(ctx, uid, cfg)
+		providerMeta, err := providerMetaCache.getOrConfigureProviderMeta(ctx, uid, cfg)
 		if err != nil {
 			return ps, fmt.Errorf("cannot get or init OCI provider: %w", err)
 		}
