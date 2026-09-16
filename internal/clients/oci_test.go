@@ -8,17 +8,39 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strings"
 	"sync"
 	"sync/atomic"
 	"testing"
 	"time"
 
+	xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/resource/fake"
+	"github.com/prometheus/client_golang/prometheus/testutil"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime"
+	"k8s.io/apimachinery/pkg/types"
+	"sigs.k8s.io/controller-runtime/pkg/client"
+	fakeclient "sigs.k8s.io/controller-runtime/pkg/client/fake"
+
+	namespacedv1beta1 "github.com/oracle/provider-oci/apis/namespaced/v1beta1"
 )
 
 type typedManaged struct {
 	fake.Managed
 	tfType string
+}
+
+type providerConfigGetCountingClient struct {
+	client.Client
+	gets atomic.Int32
+}
+
+func (c *providerConfigGetCountingClient) Get(ctx context.Context, key client.ObjectKey, obj client.Object, opts ...client.GetOption) error {
+	if _, ok := obj.(*namespacedv1beta1.ProviderConfig); ok {
+		c.gets.Add(1)
+	}
+	return c.Client.Get(ctx, key, obj, opts...)
 }
 
 func (m *typedManaged) GetTerraformResourceType() string {
@@ -91,6 +113,49 @@ func TestSetupOptionsProviderMetaCacheSize(t *testing.T) {
 				t.Fatalf("providerMetaCacheSize = %d, want %d", got, tc.want)
 			}
 		})
+	}
+}
+
+func TestResolveProviderConfigReturnsSpecAndIdentityFromOneFetch(t *testing.T) {
+	scheme := runtime.NewScheme()
+	if err := namespacedv1beta1.SchemeBuilder.AddToScheme(scheme); err != nil {
+		t.Fatal(err)
+	}
+	pc := &namespacedv1beta1.ProviderConfig{
+		ObjectMeta: metav1.ObjectMeta{
+			Name:      "default",
+			Namespace: "testing",
+			UID:       types.UID("provider-config-uid"),
+		},
+		Spec: namespacedv1beta1.ProviderConfigSpec{
+			Credentials: namespacedv1beta1.ProviderCredentials{Source: xpv1.CredentialsSourceInjectedIdentity},
+		},
+	}
+	kube := &providerConfigGetCountingClient{Client: fakeclient.NewClientBuilder().WithScheme(scheme).WithObjects(pc).Build()}
+	mg := &fake.ModernManaged{
+		ObjectMeta: metav1.ObjectMeta{
+			Name:      "managed",
+			Namespace: "testing",
+			UID:       types.UID("managed-uid"),
+		},
+		TypedProviderConfigReferencer: fake.TypedProviderConfigReferencer{Ref: &xpv1.ProviderConfigReference{
+			Name: "default",
+			Kind: namespacedv1beta1.ProviderConfigKind,
+		}},
+	}
+
+	resolved, err := resolveProviderConfig(t.Context(), kube, mg)
+	if err != nil {
+		t.Fatalf("resolveProviderConfig() error: %v", err)
+	}
+	if resolved.uid != "provider-config-uid" {
+		t.Fatalf("resolved UID = %q, want provider-config-uid", resolved.uid)
+	}
+	if resolved.spec == nil || resolved.spec.Credentials.Source != xpv1.CredentialsSourceInjectedIdentity {
+		t.Fatalf("resolved spec = %#v, want injected identity credentials", resolved.spec)
+	}
+	if got := kube.gets.Load(); got != 1 {
+		t.Fatalf("ProviderConfig GET count = %d, want 1", got)
 	}
 }
 
@@ -313,6 +378,89 @@ func TestProviderMetaCachePreservesPreviousEntryWhenCreationFails(t *testing.T) 
 	}
 }
 
+func TestProviderMetaCacheRecoversFromInitializationPanic(t *testing.T) {
+	cache := newProviderMetaCache(1)
+	_, err := cache.getOrCreate(t.Context(), "uid-a", "hash-a", func() (any, error) {
+		panic("constructor panic")
+	})
+	if err == nil || !strings.Contains(err.Error(), "provider metadata initialization panicked: constructor panic") {
+		t.Fatalf("getOrCreate() error = %v, want recovered initialization panic", err)
+	}
+	if len(cache.inflight) != 0 {
+		t.Fatalf("inflight call count = %d, want 0", len(cache.inflight))
+	}
+
+	meta, err := cache.getOrCreate(t.Context(), "uid-a", "hash-a", func() (any, error) {
+		return "recovered", nil
+	})
+	if err != nil {
+		t.Fatalf("retry after panic failed: %v", err)
+	}
+	if meta != "recovered" {
+		t.Fatalf("retry metadata = %v, want recovered", meta)
+	}
+}
+
+func TestProviderMetaCacheDoesNotShareFailureAcrossConfigurationChanges(t *testing.T) {
+	cache := newProviderMetaCache(1)
+	started := make(chan struct{})
+	release := make(chan struct{})
+	oldErr := errors.New("old configuration failed")
+	oldDone := make(chan error, 1)
+	go func() {
+		_, err := cache.getOrCreate(t.Context(), "uid-a", "hash-old", func() (any, error) {
+			close(started)
+			<-release
+			return nil, oldErr
+		})
+		oldDone <- err
+	}()
+	<-started
+
+	newStarted := make(chan struct{})
+	newDone := make(chan struct {
+		meta any
+		err  error
+	}, 1)
+	go func() {
+		meta, err := cache.getOrCreate(t.Context(), "uid-a", "hash-new", func() (any, error) {
+			close(newStarted)
+			return "new metadata", nil
+		})
+		newDone <- struct {
+			meta any
+			err  error
+		}{meta: meta, err: err}
+	}()
+
+	deadline := time.Now().Add(time.Second)
+	for testutil.ToFloat64(cache.metrics.waiting) != 1 && time.Now().Before(deadline) {
+		time.Sleep(time.Millisecond)
+	}
+	if got := testutil.ToFloat64(cache.metrics.waiting); got != 1 {
+		t.Fatalf("waiting calls = %v, want 1", got)
+	}
+	select {
+	case <-newStarted:
+		t.Fatal("new configuration initialized before the prior call completed")
+	default:
+	}
+	close(release)
+	if err := <-oldDone; !errors.Is(err, oldErr) {
+		t.Fatalf("old configuration error = %v, want %v", err, oldErr)
+	}
+	result := <-newDone
+	if result.err != nil {
+		t.Fatalf("new configuration inherited old error: %v", result.err)
+	}
+	if result.meta != "new metadata" {
+		t.Fatalf("new configuration metadata = %v, want new metadata", result.meta)
+	}
+	if entry := cache.entries["uid-a"]; entry == nil || entry.configHash != "hash-new" || entry.meta != "new metadata" {
+		t.Fatalf("cache entry = %#v, want new configuration metadata", entry)
+	}
+}
+
 func TestProviderMetaCacheEvictsLeastRecentlyUsedEntry(t *testing.T) {
 	cache := newProviderMetaCache(2)
 	create := func(value string) func() (any, error) {
@@ -416,6 +564,42 @@ func TestProviderMetaCacheConstructsDifferentProviderConfigsConcurrently(t *test
 	if !got["uid-a"] || !got["uid-b"] {
 		t.Fatalf("results = %v, want both ProviderConfig values", got)
 	}
+}
+
+func TestProviderMetaCacheReturnsMetadataForValidatedConfiguration(t *testing.T) {
+	type providerMeta struct {
+		configHash string
+	}
+
+	cache := newProviderMetaCache(1)
+	const (
+		callers    = 8
+		iterations = 250
+	)
+
+	start := make(chan struct{})
+	var wg sync.WaitGroup
+	for caller := range callers {
+		wg.Go(func() {
+			<-start
+			for iteration := range iterations {
+				configHash := fmt.Sprintf("hash-%d", (caller+iteration)%2)
+				meta, err := cache.getOrCreate(t.Context(), "uid-a", configHash, func() (any, error) {
+					return &providerMeta{configHash: configHash}, nil
+				})
+				if err != nil {
+					t.Errorf("getOrCreate(%q) error: %v", configHash, err)
+					return
+				}
+				if got := meta.(*providerMeta).configHash; got != configHash {
+					t.Errorf("getOrCreate(%q) returned metadata for %q", configHash, got)
+					return
+				}
+			}
+		})
+	}
+	close(start)
+	wg.Wait()
 }
 
 func TestProviderMetaCacheWaiterHonorsContextCancellation(t *testing.T) {

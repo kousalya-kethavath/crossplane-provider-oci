@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"strings"
 	"sync"
+	"time"
 
 	xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/meta"
@@ -115,12 +116,12 @@ func TerraformSetupBuilder(opts ...SetupOption) upjetterraform.SetupFn {
 	return func(ctx context.Context, kube client.Client, mg resource.Managed) (upjetterraform.Setup, error) {
 		ps := upjetterraform.Setup{}
 
-		pcSpec, err := resolveProviderConfig(ctx, kube, mg)
+		pc, err := resolveProviderConfig(ctx, kube, mg)
 		if err != nil {
 			return ps, errors.Wrap(err, "cannot resolve provider config")
 		}
 
-		data, err := resource.CommonCredentialExtractor(ctx, pcSpec.Credentials.Source, kube, pcSpec.Credentials.CommonCredentialSelectors)
+		data, err := resource.CommonCredentialExtractor(ctx, pc.spec.Credentials.Source, kube, pc.spec.Credentials.CommonCredentialSelectors)
 		if err != nil {
 			return ps, errors.Wrap(err, errExtractCredentials)
 		}
@@ -140,15 +141,11 @@ func TerraformSetupBuilder(opts ...SetupOption) upjetterraform.SetupFn {
 			return ps, nil
 		}
 
-		uid, err := resolveProviderConfigIdentity(ctx, kube, mg)
-		if err != nil {
-			return ps, fmt.Errorf("cannot resolve ProviderConfig identity: %w", err)
-		}
-		if uid == "" {
+		if pc.uid == "" {
 			return ps, fmt.Errorf("ProviderConfig has empty UID")
 		}
 
-		providerMeta, err := providerMetaCache.getOrConfigureProviderMeta(ctx, uid, cfg)
+		providerMeta, err := providerMetaCache.getOrConfigureProviderMeta(ctx, pc.uid, cfg)
 		if err != nil {
 			return ps, fmt.Errorf("cannot get or init OCI provider: %w", err)
 		}
@@ -219,9 +216,10 @@ type providerMetaCacheEntry struct {
 }
 
 type providerMetaCacheCall struct {
-	meta any
-	err  error
-	done chan struct{}
+	configHash string
+	meta       any
+	err        error
+	done       chan struct{}
 }
 
 type providerMetaCache struct {
@@ -230,17 +228,27 @@ type providerMetaCache struct {
 	entries    map[string]*providerMetaCacheEntry
 	recency    *list.List
 	inflight   map[string]*providerMetaCacheCall
+	metrics    *providerMetaCacheMetrics
 }
 
 func newProviderMetaCache(maxEntries int) *providerMetaCache {
+	return newProviderMetaCacheWithMetrics(maxEntries, defaultProviderMetaCacheMetrics)
+}
+
+func newProviderMetaCacheWithMetrics(maxEntries int, metrics *providerMetaCacheMetrics) *providerMetaCache {
 	if maxEntries < 1 {
 		maxEntries = 1
 	}
+	metrics.capacity.Set(float64(maxEntries))
+	metrics.entries.Set(0)
+	metrics.inflight.Set(0)
+	metrics.waiting.Set(0)
 	return &providerMetaCache{
 		maxEntries: maxEntries,
 		entries:    make(map[string]*providerMetaCacheEntry, maxEntries),
 		recency:    list.New(),
 		inflight:   make(map[string]*providerMetaCacheCall),
+		metrics:    metrics,
 	}
 }
 
@@ -249,28 +257,54 @@ func (c *providerMetaCache) getOrCreate(ctx context.Context, uid, configHash str
 		c.mu.Lock()
 		if entry, ok := c.entries[uid]; ok && entry.configHash == configHash {
 			c.recency.MoveToFront(entry.recency)
+			c.metrics.hits.Inc()
+			meta := entry.meta
 			c.mu.Unlock()
-			return entry.meta, nil
+			return meta, nil
 		}
 
 		if call, ok := c.inflight[uid]; ok {
+			sameConfiguration := call.configHash == configHash
 			c.mu.Unlock()
+			c.metrics.waiting.Inc()
 			select {
 			case <-call.done:
 			case <-ctx.Done():
+				c.metrics.waiting.Dec()
+				c.metrics.waits.WithLabelValues("canceled").Inc()
 				return nil, ctx.Err()
 			}
-			if call.err != nil {
+			c.metrics.waiting.Dec()
+			if sameConfiguration && call.err != nil {
+				c.metrics.waits.WithLabelValues("initialization_error").Inc()
 				return nil, call.err
 			}
+			result := "completed"
+			if !sameConfiguration {
+				result = "configuration_changed"
+			}
+			c.metrics.waits.WithLabelValues(result).Inc()
 			continue
 		}
 
-		call := &providerMetaCacheCall{done: make(chan struct{})}
+		missReason := "absent"
+		if _, ok := c.entries[uid]; ok {
+			missReason = "configuration_changed"
+		}
+		c.metrics.misses.WithLabelValues(missReason).Inc()
+		call := &providerMetaCacheCall{configHash: configHash, done: make(chan struct{})}
 		c.inflight[uid] = call
+		c.metrics.inflight.Set(float64(len(c.inflight)))
 		c.mu.Unlock()
 
-		call.meta, call.err = create()
+		start := time.Now()
+		call.meta, call.err = initializeProviderMeta(create)
+		result := "success"
+		if call.err != nil {
+			result = "error"
+		}
+		c.metrics.initializations.WithLabelValues(result).Inc()
+		c.metrics.initializationDuration.WithLabelValues(result).Observe(time.Since(start).Seconds())
 
 		c.mu.Lock()
 		if call.err == nil {
@@ -286,12 +320,24 @@ func (c *providerMetaCache) getOrCreate(ctx context.Context, uid, configHash str
 				}
 			}
 			c.evictOverflow()
+			c.metrics.entries.Set(float64(len(c.entries)))
 		}
 		delete(c.inflight, uid)
+		c.metrics.inflight.Set(float64(len(c.inflight)))
 		close(call.done)
 		c.mu.Unlock()
 		return call.meta, call.err
 	}
+}
+
+func initializeProviderMeta(create func() (any, error)) (meta any, err error) {
+	defer func() {
+		if recovered := recover(); recovered != nil {
+			meta = nil
+			err = fmt.Errorf("provider metadata initialization panicked: %v", recovered)
+		}
+	}()
+	return create()
 }
 
 func (c *providerMetaCache) evictOverflow() {
@@ -302,93 +348,16 @@ func (c *providerMetaCache) evictOverflow() {
 		}
 		delete(c.entries, oldest.Value.(string))
 		c.recency.Remove(oldest)
+		c.metrics.evictions.Inc()
 	}
 }
 
-func resolveProviderConfigIdentity(ctx context.Context, kube client.Client, mg resource.Managed) (string, error) {
-	switch managed := mg.(type) {
-	case resource.LegacyManaged:
-		return resolveLegacyProviderConfigIdentity(ctx, kube, managed)
-	case resource.ModernManaged:
-		if isNamespacedModernManaged(managed) {
-			return resolveNamespacedProviderConfigIdentity(ctx, kube, managed)
-		}
-		return resolveClusterProviderConfigIdentityForModernMR(ctx, kube, managed)
-	default:
-		return "", errors.New(errUnsupportedManaged)
-	}
+type resolvedProviderConfig struct {
+	spec *namespacedv1beta1.ProviderConfigSpec
+	uid  string
 }
 
-func resolveLegacyProviderConfigIdentity(ctx context.Context, kube client.Client, mg resource.LegacyManaged) (string, error) {
-	configRef := mg.GetProviderConfigReference()
-	if configRef == nil {
-		return "", errors.New(errNoProviderConfig)
-	}
-
-	pc := &clusterv1beta1.ProviderConfig{}
-	if err := kube.Get(ctx, types.NamespacedName{Name: configRef.Name}, pc); err != nil {
-		return "", errors.Wrap(err, errGetProviderConfig)
-	}
-	return string(pc.GetUID()), nil
-}
-
-func resolveClusterProviderConfigIdentityForModernMR(ctx context.Context, kube client.Client, mg resource.ModernManaged) (string, error) {
-	configRef := mg.GetProviderConfigReference()
-	if configRef == nil || configRef.Name == "" {
-		return "", errors.New(errNoProviderConfig)
-	}
-
-	kind := configRef.Kind
-	if kind == "" {
-		kind = clusterv1beta1.ProviderConfigGroupVersionKind.Kind
-	}
-	if kind != clusterv1beta1.ProviderConfigGroupVersionKind.Kind && kind != namespacedv1beta1.ClusterProviderConfigKind {
-		return "", errors.Wrap(errors.New(kind), errUnsupportedProviderCfgKind)
-	}
-
-	pc := &clusterv1beta1.ProviderConfig{}
-	if err := kube.Get(ctx, types.NamespacedName{Name: configRef.Name}, pc); err != nil {
-		return "", errors.Wrap(err, errGetProviderConfig)
-	}
-	return string(pc.GetUID()), nil
-}
-
-func resolveNamespacedProviderConfigIdentity(ctx context.Context, kube client.Client, mg resource.ModernManaged) (string, error) {
-	configRef := mg.GetProviderConfigReference()
-	if configRef == nil || configRef.Name == "" {
-		return "", errors.New(errNoProviderConfig)
-	}
-
-	kind := configRef.Kind
-	if kind == "" {
-		kind = namespacedv1beta1.ClusterProviderConfigKind
-	}
-	switch kind {
-	case namespacedv1beta1.ProviderConfigKind, namespacedv1beta1.ClusterProviderConfigKind:
-	default:
-		return "", errors.Wrap(errors.New(kind), errUnsupportedProviderCfgKind)
-	}
-
-	pcRuntimeObj, err := kube.Scheme().New(namespacedv1beta1.SchemeGroupVersion.WithKind(kind))
-	if err != nil {
-		return "", errors.Wrap(err, errUnsupportedProviderCfgKind)
-	}
-	pcObj, ok := pcRuntimeObj.(client.Object)
-	if !ok {
-		return "", errors.New(errUnsupportedProviderCfgKind)
-	}
-
-	key := types.NamespacedName{Name: configRef.Name}
-	if kind == namespacedv1beta1.ProviderConfigKind {
-		key.Namespace = mg.GetNamespace()
-	}
-	if err := kube.Get(ctx, key, pcObj); err != nil {
-		return "", errors.Wrap(err, errGetProviderConfig)
-	}
-	return string(pcObj.GetUID()), nil
-}
-
-func resolveProviderConfig(ctx context.Context, kube client.Client, mg resource.Managed) (*namespacedv1beta1.ProviderConfigSpec, error) {
+func resolveProviderConfig(ctx context.Context, kube client.Client, mg resource.Managed) (resolvedProviderConfig, error) {
 	switch managed := mg.(type) {
 	case resource.LegacyManaged:
 		return resolveLegacyProviderConfig(ctx, kube, managed)
@@ -398,7 +367,7 @@ func resolveProviderConfig(ctx context.Context, kube client.Client, mg resource.
 		}
 		return resolveClusterProviderConfigForModernMR(ctx, kube, managed)
 	default:
-		return nil, errors.New(errUnsupportedManaged)
+		return resolvedProviderConfig{}, errors.New(errUnsupportedManaged)
 	}
 }
 
@@ -411,32 +380,33 @@ func isNamespacedModernManaged(mg resource.ModernManaged) bool {
 	return group == namespacedv1beta1.Group || strings.HasSuffix(group, "."+namespacedv1beta1.Group)
 }
 
-func resolveLegacyProviderConfig(ctx context.Context, kube client.Client, mg resource.LegacyManaged) (*namespacedv1beta1.ProviderConfigSpec, error) {
+func resolveLegacyProviderConfig(ctx context.Context, kube client.Client, mg resource.LegacyManaged) (resolvedProviderConfig, error) {
 	configRef := mg.GetProviderConfigReference()
 	if configRef == nil {
-		return nil, errors.New(errNoProviderConfig)
+		return resolvedProviderConfig{}, errors.New(errNoProviderConfig)
 	}
 
 	pc := &clusterv1beta1.ProviderConfig{}
 	if err := kube.Get(ctx, types.NamespacedName{Name: configRef.Name}, pc); err != nil {
-		return nil, errors.Wrap(err, errGetProviderConfig)
+		return resolvedProviderConfig{}, errors.Wrap(err, errGetProviderConfig)
 	}
 
 	t := resource.NewLegacyProviderConfigUsageTracker(kube, &clusterv1beta1.ProviderConfigUsage{})
 	if err := t.Track(ctx, mg); err != nil {
-		return nil, errors.Wrap(err, errTrackUsage)
+		return resolvedProviderConfig{}, errors.Wrap(err, errTrackUsage)
 	}
 
-	return toSharedPCSpec(pc.Spec)
+	spec, err := toSharedPCSpec(pc.Spec)
+	return resolvedProviderConfig{spec: spec, uid: string(pc.GetUID())}, err
 }
 
-func resolveClusterProviderConfigForModernMR(ctx context.Context, kube client.Client, mg resource.ModernManaged) (*namespacedv1beta1.ProviderConfigSpec, error) {
+func resolveClusterProviderConfigForModernMR(ctx context.Context, kube client.Client, mg resource.ModernManaged) (resolvedProviderConfig, error) {
 	configRef := mg.GetProviderConfigReference()
 	if configRef == nil {
-		return nil, errors.New(errNoProviderConfig)
+		return resolvedProviderConfig{}, errors.New(errNoProviderConfig)
 	}
 	if configRef.Name == "" {
-		return nil, errors.New(errNoProviderConfig)
+		return resolvedProviderConfig{}, errors.New(errNoProviderConfig)
 	}
 
 	kind := configRef.Kind
@@ -444,28 +414,29 @@ func resolveClusterProviderConfigForModernMR(ctx context.Context, kube client.Cl
 		kind = clusterv1beta1.ProviderConfigGroupVersionKind.Kind
 	}
 	if kind != clusterv1beta1.ProviderConfigGroupVersionKind.Kind && kind != namespacedv1beta1.ClusterProviderConfigKind {
-		return nil, errors.Wrap(errors.New(kind), errUnsupportedProviderCfgKind)
+		return resolvedProviderConfig{}, errors.Wrap(errors.New(kind), errUnsupportedProviderCfgKind)
 	}
 
 	pc := &clusterv1beta1.ProviderConfig{}
 	if err := kube.Get(ctx, types.NamespacedName{Name: configRef.Name}, pc); err != nil {
-		return nil, errors.Wrap(err, errGetProviderConfig)
+		return resolvedProviderConfig{}, errors.Wrap(err, errGetProviderConfig)
 	}
 
 	if err := trackLegacyProviderConfigUsageForModernMR(ctx, kube, mg, configRef.Name); err != nil {
-		return nil, errors.Wrap(err, errTrackUsage)
+		return resolvedProviderConfig{}, errors.Wrap(err, errTrackUsage)
 	}
 
-	return toSharedPCSpec(pc.Spec)
+	spec, err := toSharedPCSpec(pc.Spec)
+	return resolvedProviderConfig{spec: spec, uid: string(pc.GetUID())}, err
 }
 
-func resolveNamespacedProviderConfig(ctx context.Context, kube client.Client, mg resource.ModernManaged) (*namespacedv1beta1.ProviderConfigSpec, error) {
+func resolveNamespacedProviderConfig(ctx context.Context, kube client.Client, mg resource.ModernManaged) (resolvedProviderConfig, error) {
 	configRef := mg.GetProviderConfigReference()
 	if configRef == nil {
-		return nil, errors.New(errNoProviderConfig)
+		return resolvedProviderConfig{}, errors.New(errNoProviderConfig)
 	}
 	if configRef.Name == "" {
-		return nil, errors.New(errNoProviderConfig)
+		return resolvedProviderConfig{}, errors.New(errNoProviderConfig)
 	}
 
 	kind := configRef.Kind
@@ -475,7 +446,7 @@ func resolveNamespacedProviderConfig(ctx context.Context, kube client.Client, mg
 	switch kind {
 	case namespacedv1beta1.ProviderConfigKind, namespacedv1beta1.ClusterProviderConfigKind:
 	default:
-		return nil, errors.Wrap(errors.New(kind), errUnsupportedProviderCfgKind)
+		return resolvedProviderConfig{}, errors.Wrap(errors.New(kind), errUnsupportedProviderCfgKind)
 	}
 
 	if configRef.Kind != kind {
@@ -484,11 +455,11 @@ func resolveNamespacedProviderConfig(ctx context.Context, kube client.Client, mg
 
 	pcRuntimeObj, err := kube.Scheme().New(namespacedv1beta1.SchemeGroupVersion.WithKind(kind))
 	if err != nil {
-		return nil, errors.Wrap(err, errUnsupportedProviderCfgKind)
+		return resolvedProviderConfig{}, errors.Wrap(err, errUnsupportedProviderCfgKind)
 	}
 	pcObj, ok := pcRuntimeObj.(client.Object)
 	if !ok {
-		return nil, errors.New(errUnsupportedProviderCfgKind)
+		return resolvedProviderConfig{}, errors.New(errUnsupportedProviderCfgKind)
 	}
 
 	key := types.NamespacedName{Name: configRef.Name}
@@ -496,7 +467,7 @@ func resolveNamespacedProviderConfig(ctx context.Context, kube client.Client, mg
 		key.Namespace = mg.GetNamespace()
 	}
 	if err := kube.Get(ctx, key, pcObj); err != nil {
-		return nil, errors.Wrap(err, errGetProviderConfig)
+		return resolvedProviderConfig{}, errors.Wrap(err, errGetProviderConfig)
 	}
 
 	var pcSpec namespacedv1beta1.ProviderConfigSpec
@@ -509,15 +480,15 @@ func resolveNamespacedProviderConfig(ctx context.Context, kube client.Client, mg
 	case *namespacedv1beta1.ClusterProviderConfig:
 		pcSpec = pc.Spec
 	default:
-		return nil, errors.New(errUnsupportedProviderCfgKind)
+		return resolvedProviderConfig{}, errors.New(errUnsupportedProviderCfgKind)
 	}
 
 	t := resource.NewProviderConfigUsageTracker(kube, &namespacedv1beta1.ProviderConfigUsage{})
 	if err := t.Track(ctx, mg); err != nil {
-		return nil, errors.Wrap(err, errTrackUsage)
+		return resolvedProviderConfig{}, errors.Wrap(err, errTrackUsage)
 	}
 
-	return &pcSpec, nil
+	return resolvedProviderConfig{spec: &pcSpec, uid: string(pcObj.GetUID())}, nil
 }
 
 func toSharedPCSpec(spec any) (*namespacedv1beta1.ProviderConfigSpec, error) {
