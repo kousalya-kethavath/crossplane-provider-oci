@@ -313,7 +313,28 @@ func TestProviderConfigurationHash(t *testing.T) {
 	}
 }
 
+// clearFileCredentialEnvironment prevents ambient inline credentials and profile
+// selections from overriding the explicit file-backed configuration under test.
+// t.Setenv restores the environment, so callers must not run in parallel.
+func clearFileCredentialEnvironment(t *testing.T) {
+	t.Helper()
+	for _, name := range []string{
+		"TF_VAR_auth",
+		"OCI_AUTH",
+		"TF_VAR_private_key",
+		"OCI_PRIVATE_KEY",
+		"TF_VAR_private_key_path",
+		"OCI_PRIVATE_KEY_PATH",
+		"TF_VAR_config_file_profile",
+		"OCI_CONFIG_FILE_PROFILE",
+		"OCI_CONFIG_FILE",
+	} {
+		t.Setenv(name, "")
+	}
+}
+
 func TestInProcessProviderConfigurationHashChangesWhenPrivateKeyFileRotates(t *testing.T) {
+	clearFileCredentialEnvironment(t)
 	keyPath := filepath.Join(t.TempDir(), "oci_api_key.pem")
 	if err := os.WriteFile(keyPath, []byte("first-key"), 0o600); err != nil {
 		t.Fatalf("cannot write first test key: %v", err)
@@ -344,6 +365,7 @@ func TestInProcessProviderConfigurationHashChangesWhenPrivateKeyFileRotates(t *t
 }
 
 func TestInProcessProviderConfigurationHashReportsUnreadableCredentialFile(t *testing.T) {
+	clearFileCredentialEnvironment(t)
 	cfg := map[string]any{
 		credentialKeyAuth:           "ApiKey",
 		credentialKeyTenancyOCID:    "tenancy",
@@ -360,6 +382,7 @@ func TestInProcessProviderConfigurationHashReportsUnreadableCredentialFile(t *te
 }
 
 func TestProviderMetaCacheReconfiguresAfterPrivateKeyFileRotation(t *testing.T) {
+	clearFileCredentialEnvironment(t)
 	keyPath := filepath.Join(t.TempDir(), "oci_api_key.pem")
 	if err := os.WriteFile(keyPath, []byte("first-key"), 0o600); err != nil {
 		t.Fatalf("cannot write first test key: %v", err)

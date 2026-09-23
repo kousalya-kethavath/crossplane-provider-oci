@@ -109,7 +109,11 @@ type terraformResourceTyper interface {
 // TerraformSetupBuilder builds a terraform.SetupFn for in-process no-fork
 // connectors. Build-time Terraform values are intentionally not required at
 // runtime when all resources are routed through SDKv2 or Framework connectors.
+// Construct it at startup: it suppresses the process-wide standard Go logger
+// before embedded provider operations can log sensitive payloads.
 func TerraformSetupBuilder(opts ...SetupOption) upjetterraform.SetupFn {
+	configureEmbeddedTerraformLogging()
+
 	options := newSetupOptions(opts...)
 	providerMetaCache := newProviderMetaCache(options.providerMetaCacheSize)
 
