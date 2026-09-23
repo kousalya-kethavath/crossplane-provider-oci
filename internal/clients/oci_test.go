@@ -8,6 +8,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"os"
+	"path/filepath"
 	"strings"
 	"sync"
 	"sync/atomic"
@@ -308,6 +310,101 @@ func TestProviderConfigurationHash(t *testing.T) {
 	}
 	if baseHash == rotatedHash {
 		t.Fatal("providerConfigurationHash() did not change after provider configuration changed")
+	}
+}
+
+func TestInProcessProviderConfigurationHashChangesWhenPrivateKeyFileRotates(t *testing.T) {
+	keyPath := filepath.Join(t.TempDir(), "oci_api_key.pem")
+	if err := os.WriteFile(keyPath, []byte("first-key"), 0o600); err != nil {
+		t.Fatalf("cannot write first test key: %v", err)
+	}
+	cfg := map[string]any{
+		credentialKeyAuth:           "ApiKey",
+		credentialKeyTenancyOCID:    "tenancy",
+		credentialKeyUserOCID:       "user",
+		credentialKeyFingerprint:    "fingerprint",
+		credentialKeyRegion:         "us-ashburn-1",
+		credentialKeyPrivateKeyPath: keyPath,
+	}
+
+	first, err := inProcessProviderConfigurationHash(cfg)
+	if err != nil {
+		t.Fatalf("first inProcessProviderConfigurationHash() error: %v", err)
+	}
+	if err := os.WriteFile(keyPath, []byte("second-key"), 0o600); err != nil {
+		t.Fatalf("cannot rotate test key: %v", err)
+	}
+	second, err := inProcessProviderConfigurationHash(cfg)
+	if err != nil {
+		t.Fatalf("second inProcessProviderConfigurationHash() error: %v", err)
+	}
+	if first == second {
+		t.Fatal("in-process provider configuration hash did not change after replacing private key file contents")
+	}
+}
+
+func TestInProcessProviderConfigurationHashReportsUnreadableCredentialFile(t *testing.T) {
+	cfg := map[string]any{
+		credentialKeyAuth:           "ApiKey",
+		credentialKeyTenancyOCID:    "tenancy",
+		credentialKeyUserOCID:       "user",
+		credentialKeyFingerprint:    "fingerprint",
+		credentialKeyRegion:         "us-ashburn-1",
+		credentialKeyPrivateKeyPath: filepath.Join(t.TempDir(), "missing.pem"),
+	}
+
+	_, err := inProcessProviderConfigurationHash(cfg)
+	if err == nil || !strings.Contains(err.Error(), "cannot fingerprint OCI file-backed credentials") {
+		t.Fatalf("inProcessProviderConfigurationHash() error = %v, want credential-file error", err)
+	}
+}
+
+func TestProviderMetaCacheReconfiguresAfterPrivateKeyFileRotation(t *testing.T) {
+	keyPath := filepath.Join(t.TempDir(), "oci_api_key.pem")
+	if err := os.WriteFile(keyPath, []byte("first-key"), 0o600); err != nil {
+		t.Fatalf("cannot write first test key: %v", err)
+	}
+	cfg := map[string]any{
+		credentialKeyAuth:           "ApiKey",
+		credentialKeyTenancyOCID:    "tenancy",
+		credentialKeyUserOCID:       "user",
+		credentialKeyFingerprint:    "fingerprint",
+		credentialKeyRegion:         "us-ashburn-1",
+		credentialKeyPrivateKeyPath: keyPath,
+	}
+	cache := newProviderMetaCache(1)
+	var creates atomic.Int32
+
+	firstHash, err := inProcessProviderConfigurationHash(cfg)
+	if err != nil {
+		t.Fatalf("first configuration hash error: %v", err)
+	}
+	first, err := cache.getOrCreate(t.Context(), "provider-config-uid", firstHash, func() (any, error) {
+		return creates.Add(1), nil
+	})
+	if err != nil {
+		t.Fatalf("first provider metadata creation error: %v", err)
+	}
+
+	if err := os.WriteFile(keyPath, []byte("second-key"), 0o600); err != nil {
+		t.Fatalf("cannot rotate test key: %v", err)
+	}
+	secondHash, err := inProcessProviderConfigurationHash(cfg)
+	if err != nil {
+		t.Fatalf("second configuration hash error: %v", err)
+	}
+	second, err := cache.getOrCreate(t.Context(), "provider-config-uid", secondHash, func() (any, error) {
+		return creates.Add(1), nil
+	})
+	if err != nil {
+		t.Fatalf("second provider metadata creation error: %v", err)
+	}
+
+	if first == second {
+		t.Fatalf("cache reused metadata after private-key rotation: %v", first)
+	}
+	if got := creates.Load(); got != 2 {
+		t.Fatalf("provider metadata creation count = %d, want 2", got)
 	}
 }
 

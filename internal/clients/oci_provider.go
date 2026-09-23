@@ -7,6 +7,7 @@ package clients
 import (
 	"context"
 	"fmt"
+	"maps"
 
 	upjetterraform "github.com/crossplane/upjet/v2/pkg/terraform"
 	sdkterraform "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
@@ -18,7 +19,7 @@ func setFrameworkProvider(ps *upjetterraform.Setup) {
 }
 
 func (c *providerMetaCache) getOrConfigureProviderMeta(ctx context.Context, uid string, cfg map[string]any) (any, error) {
-	cfgHash, err := providerConfigurationHash(cfg)
+	cfgHash, err := inProcessProviderConfigurationHash(cfg)
 	if err != nil {
 		return nil, err
 	}
@@ -34,4 +35,17 @@ func (c *providerMetaCache) getOrConfigureProviderMeta(ctx context.Context, uid 
 		}
 		return providerMeta, nil
 	})
+}
+
+func inProcessProviderConfigurationHash(cfg map[string]any) (string, error) {
+	fileCredentialFingerprint, err := ociprovider.InProcessFileCredentialFingerprint(cfg)
+	if err != nil {
+		return "", fmt.Errorf("cannot fingerprint OCI file-backed credentials: %w", err)
+	}
+	hashInput := maps.Clone(cfg)
+	if hashInput == nil {
+		hashInput = map[string]any{}
+	}
+	hashInput["__in_process_file_credential_fingerprint"] = fileCredentialFingerprint
+	return providerConfigurationHash(hashInput)
 }

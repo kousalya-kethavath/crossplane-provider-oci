@@ -11,7 +11,7 @@ require (
 	github.com/hashicorp/terraform-json v0.27.2
 	github.com/hashicorp/terraform-plugin-framework v1.16.1
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.38.1
-	github.com/oracle/terraform-provider-oci v0.0.0-20260918174504-4870caab3891
+	github.com/oracle/terraform-provider-oci v1.0.19-0.20260923175910-917abba4b805
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.23.2
 	golang.org/x/text v0.41.0

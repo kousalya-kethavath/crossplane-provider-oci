@@ -93,6 +93,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("oci_kms_vault_replication", func(r *config.Resource) {
+		r.ExternalName.GetIDFn = GetVaultReplicationID
 		// REQUIRED
 		r.References["vault_id"] = config.Reference{
 			TerraformName: "oci_kms_vault",

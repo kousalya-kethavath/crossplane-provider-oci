@@ -17,7 +17,9 @@
 package config
 
 import (
+	"context"
 	"slices"
+	"strings"
 	"testing"
 
 	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
@@ -166,6 +168,31 @@ func TestProviderConfigIncludesPreviouslySkippedNoForkResources(t *testing.T) {
 			}
 			if idpMetadataContent.Sensitive {
 				t.Fatal("OpensearchCluster security_saml_config.idp_metadata_content is sensitive, want existing plain API field")
+			}
+		})
+	}
+}
+
+func TestVaultReplicationExternalNameValidationIsConfiguredForBothScopes(t *testing.T) {
+	for name, provider := range map[string]func() *ujconfig.Provider{
+		"cluster":    GetProvider,
+		"namespaced": GetProviderNamespaced,
+	} {
+		t.Run(name, func(t *testing.T) {
+			resource := provider().Resources["oci_kms_vault_replication"]
+			if resource == nil {
+				t.Fatal("VaultReplication resource is missing")
+			}
+			if resource.ExternalName.GetIDFn == nil {
+				t.Fatal("VaultReplication GetIDFn is not configured")
+			}
+			if _, err := resource.ExternalName.GetIDFn(context.Background(), "bad-id", nil, nil); err == nil || !strings.Contains(err.Error(), "expected {vault_id}:{replica_region}") {
+				t.Fatalf("VaultReplication GetIDFn error = %v, want composite-ID validation error", err)
+			}
+			want := "ocid1.vault.oc1.iad.example:us-phoenix-1"
+			got, err := resource.ExternalName.GetIDFn(context.Background(), want, nil, nil)
+			if err != nil || got != want {
+				t.Fatalf("VaultReplication GetIDFn() = %q, %v, want %q, nil", got, err, want)
 			}
 		})
 	}
