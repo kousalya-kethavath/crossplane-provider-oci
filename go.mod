@@ -166,4 +166,4 @@ require (
 	sigs.k8s.io/yaml v1.6.0 // indirect
 )
 
-replace github.com/oracle/terraform-provider-oci => github.com/kousalya-kethavath/terraform-provider-oci v0.0.0-20260929010430-8a8cb81730b6
+replace github.com/oracle/terraform-provider-oci => github.com/kousalya-kethavath/terraform-provider-oci v0.0.0-20260930061140-825319ad47ee
