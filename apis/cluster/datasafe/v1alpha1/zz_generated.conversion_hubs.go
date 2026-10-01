@@ -55,6 +55,12 @@ func (tr *CompareSecurityAssessment) Hub() {}
 func (tr *CompareUserAssessment) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *CryptoAssessment) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *CryptoAssessmentManagement) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *DatabaseSecurityConfig) Hub() {}
 
 // Hub marks this type as a conversion hub.

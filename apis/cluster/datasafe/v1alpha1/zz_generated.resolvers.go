@@ -1156,6 +1156,150 @@ func (mg *CompareUserAssessment) ResolveReferences(ctx context.Context, c client
 	return nil
 }
 
+// ResolveReferences of this CryptoAssessment.
+func (mg *CryptoAssessment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("identity.oci.upbound.io", "v1alpha1", "Compartment", "CompartmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
+			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CompartmentID")
+	}
+	mg.Spec.ForProvider.CompartmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CompartmentIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("datasafe.oci.upbound.io", "v1alpha1", "CryptoAssessment", "CryptoAssessmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CryptoAssessmentID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CryptoAssessmentIDRef,
+			Selector:     mg.Spec.ForProvider.CryptoAssessmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CryptoAssessmentID")
+	}
+	mg.Spec.ForProvider.CryptoAssessmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CryptoAssessmentIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("identity.oci.upbound.io", "v1alpha1", "Compartment", "CompartmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
+			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CompartmentID")
+	}
+	mg.Spec.InitProvider.CompartmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CompartmentIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("datasafe.oci.upbound.io", "v1alpha1", "CryptoAssessment", "CryptoAssessmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CryptoAssessmentID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.CryptoAssessmentIDRef,
+			Selector:     mg.Spec.InitProvider.CryptoAssessmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CryptoAssessmentID")
+	}
+	mg.Spec.InitProvider.CryptoAssessmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CryptoAssessmentIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this CryptoAssessmentManagement.
+func (mg *CryptoAssessmentManagement) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("identity.oci.upbound.io", "v1alpha1", "Compartment", "CompartmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CompartmentID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.CompartmentIDRef,
+			Selector:     mg.Spec.ForProvider.CompartmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CompartmentID")
+	}
+	mg.Spec.ForProvider.CompartmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CompartmentIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("identity.oci.upbound.io", "v1alpha1", "Compartment", "CompartmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CompartmentID),
+			Extract:      reference.ExternalName(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.CompartmentIDRef,
+			Selector:     mg.Spec.InitProvider.CompartmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CompartmentID")
+	}
+	mg.Spec.InitProvider.CompartmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CompartmentIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this DataSafeConfiguration.
 func (mg *DataSafeConfiguration) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

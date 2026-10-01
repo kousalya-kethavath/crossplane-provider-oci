@@ -25,6 +25,8 @@ import (
 	calculateauditvolumecollected "github.com/oracle/provider-oci/internal/controller/cluster/datasafe/calculateauditvolumecollected"
 	comparesecurityassessment "github.com/oracle/provider-oci/internal/controller/cluster/datasafe/comparesecurityassessment"
 	compareuserassessment "github.com/oracle/provider-oci/internal/controller/cluster/datasafe/compareuserassessment"
+	cryptoassessment "github.com/oracle/provider-oci/internal/controller/cluster/datasafe/cryptoassessment"
+	cryptoassessmentmanagement "github.com/oracle/provider-oci/internal/controller/cluster/datasafe/cryptoassessmentmanagement"
 	databasesecurityconfig "github.com/oracle/provider-oci/internal/controller/cluster/datasafe/databasesecurityconfig"
 	databasesecurityconfigmanagement "github.com/oracle/provider-oci/internal/controller/cluster/datasafe/databasesecurityconfigmanagement"
 	datasafeconfiguration "github.com/oracle/provider-oci/internal/controller/cluster/datasafe/datasafeconfiguration"
@@ -99,6 +101,8 @@ func Setup_datasafe(mgr ctrl.Manager, o controller.Options) error {
 		calculateauditvolumecollected.Setup,
 		comparesecurityassessment.Setup,
 		compareuserassessment.Setup,
+		cryptoassessment.Setup,
+		cryptoassessmentmanagement.Setup,
 		databasesecurityconfig.Setup,
 		databasesecurityconfigmanagement.Setup,
 		datasafeconfiguration.Setup,
@@ -179,6 +183,8 @@ func SetupGated_datasafe(mgr ctrl.Manager, o controller.Options) error {
 		calculateauditvolumecollected.SetupGated,
 		comparesecurityassessment.SetupGated,
 		compareuserassessment.SetupGated,
+		cryptoassessment.SetupGated,
+		cryptoassessmentmanagement.SetupGated,
 		databasesecurityconfig.SetupGated,
 		databasesecurityconfigmanagement.SetupGated,
 		datasafeconfiguration.SetupGated,

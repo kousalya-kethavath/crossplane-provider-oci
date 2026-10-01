@@ -112,7 +112,7 @@ require (
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/muvaf/typewriter v0.0.0-20240614220100-70f9d4a54ea0 // indirect
 	github.com/oklog/run v1.2.0 // indirect
-	github.com/oracle/oci-go-sdk/v65 v65.124.1 // indirect
+	github.com/oracle/oci-go-sdk/v65 v65.126.0 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/prometheus/client_model v0.6.2 // indirect
 	github.com/prometheus/common v0.66.1 // indirect
@@ -165,3 +165,5 @@ require (
 	sigs.k8s.io/structured-merge-diff/v6 v6.3.0 // indirect
 	sigs.k8s.io/yaml v1.6.0 // indirect
 )
+
+replace github.com/oracle/terraform-provider-oci => github.com/kousalya-kethavath/terraform-provider-oci v0.0.0-20261001000853-c39d8ec3b33b

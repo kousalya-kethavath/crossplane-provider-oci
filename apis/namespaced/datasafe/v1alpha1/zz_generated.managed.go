@@ -647,6 +647,86 @@ func (mg *CompareUserAssessment) SetWriteConnectionSecretToReference(r *xpv1.Loc
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this CryptoAssessment.
+func (mg *CryptoAssessment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this CryptoAssessment.
+func (mg *CryptoAssessment) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this CryptoAssessment.
+func (mg *CryptoAssessment) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this CryptoAssessment.
+func (mg *CryptoAssessment) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this CryptoAssessment.
+func (mg *CryptoAssessment) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this CryptoAssessment.
+func (mg *CryptoAssessment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this CryptoAssessment.
+func (mg *CryptoAssessment) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this CryptoAssessment.
+func (mg *CryptoAssessment) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this CryptoAssessmentManagement.
+func (mg *CryptoAssessmentManagement) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this CryptoAssessmentManagement.
+func (mg *CryptoAssessmentManagement) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this CryptoAssessmentManagement.
+func (mg *CryptoAssessmentManagement) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this CryptoAssessmentManagement.
+func (mg *CryptoAssessmentManagement) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this CryptoAssessmentManagement.
+func (mg *CryptoAssessmentManagement) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this CryptoAssessmentManagement.
+func (mg *CryptoAssessmentManagement) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this CryptoAssessmentManagement.
+func (mg *CryptoAssessmentManagement) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this CryptoAssessmentManagement.
+func (mg *CryptoAssessmentManagement) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this DataSafeConfiguration.
 func (mg *DataSafeConfiguration) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
