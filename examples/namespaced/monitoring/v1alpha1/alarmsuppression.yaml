@@ -12,9 +12,9 @@ spec:
           matchLabels:
             testing.upbound.io/example-name: alarm_label_1
         targetType: ALARM
-    # timeSuppressFrom cannot be older than 5 min from current time.
-    timeSuppressFrom: "2026-02-22T20:43:40Z"
-    timeSuppressUntil: "2026-02-22T20:53:30Z"
+    # Suppression timestamps are generated immediately before live validation.
+    timeSuppressFrom: "${TIME_SUPPRESS_FROM}"
+    timeSuppressUntil: "${TIME_SUPPRESS_UNTIL}"
     displayName: alarmsuppression1
     dimensions: {'availabilityDomain': 'phx-ad-1'}
   # providerConfig defaults to "ClusterProviderConfig"; set providerConfigRef to "ProviderConfig" to use namespaced providerConfig.
