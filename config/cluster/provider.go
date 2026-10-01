@@ -26,6 +26,7 @@ import (
 	"github.com/oracle/provider-oci/config/cluster/psql"
 	"github.com/oracle/provider-oci/config/cluster/recovery"
 	"github.com/oracle/provider-oci/config/cluster/redis"
+	"github.com/oracle/provider-oci/config/cluster/self"
 	"github.com/oracle/provider-oci/config/cluster/streaming"
 )
 
@@ -55,5 +56,6 @@ func init() {
 	ProviderConfiguration.AddConfig(psql.Configure)
 	ProviderConfiguration.AddConfig(recovery.Configure)
 	ProviderConfiguration.AddConfig(redis.Configure)
+	ProviderConfiguration.AddConfig(self.Configure)
 	ProviderConfiguration.AddConfig(streaming.Configure)
 }
