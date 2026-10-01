@@ -143,7 +143,7 @@ type DimensionsInitParameters struct {
 	MetricType *string `json:"metricType,omitempty" tf:"metric_type,omitempty"`
 
 	// Dimension-level rates in various supported currencies.
-	Rates []RatesInitParameters `json:"rates,omitempty" tf:"rates,omitempty"`
+	Rates []SubscriptionDimensionsRatesInitParameters `json:"rates,omitempty" tf:"rates,omitempty"`
 }
 
 type DimensionsObservation struct {
@@ -167,7 +167,7 @@ type DimensionsObservation struct {
 	MetricType *string `json:"metricType,omitempty" tf:"metric_type,omitempty"`
 
 	// Dimension-level rates in various supported currencies.
-	Rates []RatesObservation `json:"rates,omitempty" tf:"rates,omitempty"`
+	Rates []SubscriptionDimensionsRatesObservation `json:"rates,omitempty" tf:"rates,omitempty"`
 }
 
 type DimensionsParameters struct {
@@ -198,7 +198,7 @@ type DimensionsParameters struct {
 
 	// Dimension-level rates in various supported currencies.
 	// +kubebuilder:validation:Optional
-	Rates []RatesParameters `json:"rates" tf:"rates,omitempty"`
+	Rates []SubscriptionDimensionsRatesParameters `json:"rates" tf:"rates,omitempty"`
 }
 
 type ExtendedMetadataInitParameters struct {
@@ -290,7 +290,7 @@ type PricingPlanInitParameters struct {
 	PlanType *string `json:"planType,omitempty" tf:"plan_type,omitempty"`
 
 	// Dimension-level rates in various supported currencies.
-	Rates []PricingPlanRatesInitParameters `json:"rates,omitempty" tf:"rates,omitempty"`
+	Rates []SubscriptionDimensionsRatesInitParameters `json:"rates,omitempty" tf:"rates,omitempty"`
 }
 
 type PricingPlanObservation struct {
@@ -314,7 +314,7 @@ type PricingPlanObservation struct {
 	PlanType *string `json:"planType,omitempty" tf:"plan_type,omitempty"`
 
 	// Dimension-level rates in various supported currencies.
-	Rates []PricingPlanRatesObservation `json:"rates,omitempty" tf:"rates,omitempty"`
+	Rates []SubscriptionDimensionsRatesObservation `json:"rates,omitempty" tf:"rates,omitempty"`
 }
 
 type PricingPlanParameters struct {
@@ -345,65 +345,7 @@ type PricingPlanParameters struct {
 
 	// Dimension-level rates in various supported currencies.
 	// +kubebuilder:validation:Optional
-	Rates []PricingPlanRatesParameters `json:"rates" tf:"rates,omitempty"`
-}
-
-type PricingPlanRatesInitParameters struct {
-
-	// The currency supported, in the format specified by ISO-4217
-	Currency *string `json:"currency,omitempty" tf:"currency,omitempty"`
-
-	// The amount charged for the plan in the specified currency.
-	Rate *float64 `json:"rate,omitempty" tf:"rate,omitempty"`
-}
-
-type PricingPlanRatesObservation struct {
-
-	// The currency supported, in the format specified by ISO-4217
-	Currency *string `json:"currency,omitempty" tf:"currency,omitempty"`
-
-	// The amount charged for the plan in the specified currency.
-	Rate *float64 `json:"rate,omitempty" tf:"rate,omitempty"`
-}
-
-type PricingPlanRatesParameters struct {
-
-	// The currency supported, in the format specified by ISO-4217
-	// +kubebuilder:validation:Optional
-	Currency *string `json:"currency" tf:"currency,omitempty"`
-
-	// The amount charged for the plan in the specified currency.
-	// +kubebuilder:validation:Optional
-	Rate *float64 `json:"rate" tf:"rate,omitempty"`
-}
-
-type RatesInitParameters struct {
-
-	// The currency supported, in the format specified by ISO-4217
-	Currency *string `json:"currency,omitempty" tf:"currency,omitempty"`
-
-	// The amount charged for the plan in the specified currency.
-	Rate *float64 `json:"rate,omitempty" tf:"rate,omitempty"`
-}
-
-type RatesObservation struct {
-
-	// The currency supported, in the format specified by ISO-4217
-	Currency *string `json:"currency,omitempty" tf:"currency,omitempty"`
-
-	// The amount charged for the plan in the specified currency.
-	Rate *float64 `json:"rate,omitempty" tf:"rate,omitempty"`
-}
-
-type RatesParameters struct {
-
-	// The currency supported, in the format specified by ISO-4217
-	// +kubebuilder:validation:Optional
-	Currency *string `json:"currency" tf:"currency,omitempty"`
-
-	// The amount charged for the plan in the specified currency.
-	// +kubebuilder:validation:Optional
-	Rate *float64 `json:"rate" tf:"rate,omitempty"`
+	Rates []SubscriptionDimensionsRatesParameters `json:"rates" tf:"rates,omitempty"`
 }
 
 type SubscriptionDetailsInitParameters struct {
@@ -473,6 +415,35 @@ type SubscriptionDetailsParameters struct {
 	// A pricing plan details provided by the Publisher.
 	// +kubebuilder:validation:Optional
 	PricingPlan []PricingPlanParameters `json:"pricingPlan" tf:"pricing_plan,omitempty"`
+}
+
+type SubscriptionDimensionsRatesInitParameters struct {
+
+	// The currency supported, in the format specified by ISO-4217
+	Currency *string `json:"currency,omitempty" tf:"currency,omitempty"`
+
+	// The amount charged for the plan in the specified currency.
+	Rate *float64 `json:"rate,omitempty" tf:"rate,omitempty"`
+}
+
+type SubscriptionDimensionsRatesObservation struct {
+
+	// The currency supported, in the format specified by ISO-4217
+	Currency *string `json:"currency,omitempty" tf:"currency,omitempty"`
+
+	// The amount charged for the plan in the specified currency.
+	Rate *float64 `json:"rate,omitempty" tf:"rate,omitempty"`
+}
+
+type SubscriptionDimensionsRatesParameters struct {
+
+	// The currency supported, in the format specified by ISO-4217
+	// +kubebuilder:validation:Optional
+	Currency *string `json:"currency" tf:"currency,omitempty"`
+
+	// The amount charged for the plan in the specified currency.
+	// +kubebuilder:validation:Optional
+	Rate *float64 `json:"rate" tf:"rate,omitempty"`
 }
 
 type SubscriptionInitParameters struct {
