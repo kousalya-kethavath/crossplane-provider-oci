@@ -151,6 +151,24 @@ func (l *CompareUserAssessmentList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this CryptoAssessmentList.
+func (l *CryptoAssessmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this CryptoAssessmentManagementList.
+func (l *CryptoAssessmentManagementList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this DataSafeConfigurationList.
 func (l *DataSafeConfigurationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

@@ -83557,6 +83557,11 @@ func (in *MigrationAssessmentInitParameters) DeepCopyInto(out *MigrationAssessme
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.MigrationScope != nil {
+		in, out := &in.MigrationScope, &out.MigrationScope
+		*out = new(string)
+		**out = **in
+	}
 	if in.NetworkSpeedMegabitPerSecond != nil {
 		in, out := &in.NetworkSpeedMegabitPerSecond, &out.NetworkSpeedMegabitPerSecond
 		*out = new(string)
@@ -83734,6 +83739,11 @@ func (in *MigrationAssessmentObservation) DeepCopyInto(out *MigrationAssessmentO
 		*out = new(string)
 		**out = **in
 	}
+	if in.MigrationScope != nil {
+		in, out := &in.MigrationScope, &out.MigrationScope
+		*out = new(string)
+		**out = **in
+	}
 	if in.NetworkSpeedMegabitPerSecond != nil {
 		in, out := &in.NetworkSpeedMegabitPerSecond, &out.NetworkSpeedMegabitPerSecond
 		*out = new(string)
@@ -83899,6 +83909,11 @@ func (in *MigrationAssessmentParameters) DeepCopyInto(out *MigrationAssessmentPa
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.MigrationScope != nil {
+		in, out := &in.MigrationScope, &out.MigrationScope
+		*out = new(string)
+		**out = **in
 	}
 	if in.NetworkSpeedMegabitPerSecond != nil {
 		in, out := &in.NetworkSpeedMegabitPerSecond, &out.NetworkSpeedMegabitPerSecond

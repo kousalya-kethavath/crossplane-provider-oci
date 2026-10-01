@@ -376,6 +376,8 @@ import (
 	calculateauditvolumecollected "github.com/oracle/provider-oci/internal/controller/cluster/datasafe/calculateauditvolumecollected"
 	comparesecurityassessment "github.com/oracle/provider-oci/internal/controller/cluster/datasafe/comparesecurityassessment"
 	compareuserassessment "github.com/oracle/provider-oci/internal/controller/cluster/datasafe/compareuserassessment"
+	cryptoassessment "github.com/oracle/provider-oci/internal/controller/cluster/datasafe/cryptoassessment"
+	cryptoassessmentmanagement "github.com/oracle/provider-oci/internal/controller/cluster/datasafe/cryptoassessmentmanagement"
 	databasesecurityconfig "github.com/oracle/provider-oci/internal/controller/cluster/datasafe/databasesecurityconfig"
 	databasesecurityconfigmanagement "github.com/oracle/provider-oci/internal/controller/cluster/datasafe/databasesecurityconfigmanagement"
 	datasafeconfiguration "github.com/oracle/provider-oci/internal/controller/cluster/datasafe/datasafeconfiguration"
@@ -564,6 +566,7 @@ import (
 	importedmodel "github.com/oracle/provider-oci/internal/controller/cluster/generativeai/importedmodel"
 	modelgenerativeai "github.com/oracle/provider-oci/internal/controller/cluster/generativeai/model"
 	projectgenerativeai "github.com/oracle/provider-oci/internal/controller/cluster/generativeai/project"
+	routingprofile "github.com/oracle/provider-oci/internal/controller/cluster/generativeai/routingprofile"
 	semanticstore "github.com/oracle/provider-oci/internal/controller/cluster/generativeai/semanticstore"
 	artifactbypath "github.com/oracle/provider-oci/internal/controller/cluster/genericartifactscontent/artifactbypath"
 	connectiongoldengate "github.com/oracle/provider-oci/internal/controller/cluster/goldengate/connection"
@@ -1382,6 +1385,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		calculateauditvolumecollected.Setup,
 		comparesecurityassessment.Setup,
 		compareuserassessment.Setup,
+		cryptoassessment.Setup,
+		cryptoassessmentmanagement.Setup,
 		databasesecurityconfig.Setup,
 		databasesecurityconfigmanagement.Setup,
 		datasafeconfiguration.Setup,
@@ -1570,6 +1575,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		importedmodel.Setup,
 		modelgenerativeai.Setup,
 		projectgenerativeai.Setup,
+		routingprofile.Setup,
 		semanticstore.Setup,
 		artifactbypath.Setup,
 		connectiongoldengate.Setup,
@@ -2394,6 +2400,8 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		calculateauditvolumecollected.SetupGated,
 		comparesecurityassessment.SetupGated,
 		compareuserassessment.SetupGated,
+		cryptoassessment.SetupGated,
+		cryptoassessmentmanagement.SetupGated,
 		databasesecurityconfig.SetupGated,
 		databasesecurityconfigmanagement.SetupGated,
 		datasafeconfiguration.SetupGated,
@@ -2582,6 +2590,7 @@ func SetupGated_monolith(mgr ctrl.Manager, o controller.Options) error {
 		importedmodel.SetupGated,
 		modelgenerativeai.SetupGated,
 		projectgenerativeai.SetupGated,
+		routingprofile.SetupGated,
 		semanticstore.SetupGated,
 		artifactbypath.SetupGated,
 		connectiongoldengate.SetupGated,
