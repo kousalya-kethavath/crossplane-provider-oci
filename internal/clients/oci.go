@@ -65,6 +65,7 @@ type setupOptions struct {
 	enableFrameworkProvider bool
 	isSDKv2Resource         func(string) bool
 	providerMetaCacheSize   int
+	serviceAccounts         serviceAccountCredentials
 }
 
 // SetupOption customizes Terraform setup behavior.
@@ -125,20 +126,18 @@ func TerraformSetupBuilder(opts ...SetupOption) upjetterraform.SetupFn {
 			return ps, errors.Wrap(err, "cannot resolve provider config")
 		}
 
-		data, err := resource.CommonCredentialExtractor(ctx, pc.spec.Credentials.Source, kube, pc.spec.Credentials.CommonCredentialSelectors)
+		cfg, authentication, err := options.configuration(ctx, kube, pc)
 		if err != nil {
-			return ps, errors.Wrap(err, errExtractCredentials)
+			return ps, err
 		}
-		ociCreds := map[string]string{}
-		if err := json.Unmarshal(data, &ociCreds); err != nil {
-			return ps, errors.Wrap(err, errUnmarshalCredentials)
+		if authentication.identity != "" && !options.enableFrameworkProvider && !options.shouldConfigureSDKv2Provider(mg) {
+			return ps, fmt.Errorf("ServiceAccount credentials require an in-process SDKv2 or Framework resource")
 		}
 
-		cfg := providerConfigurationFromCredentials(ociCreds)
 		ps.Configuration = cfg
 
 		if options.enableFrameworkProvider {
-			setFrameworkProvider(&ps)
+			setFrameworkProvider(&ps, authentication)
 		}
 
 		if !options.shouldConfigureSDKv2Provider(mg) {
@@ -149,7 +148,7 @@ func TerraformSetupBuilder(opts ...SetupOption) upjetterraform.SetupFn {
 			return ps, fmt.Errorf("ProviderConfig has empty UID")
 		}
 
-		providerMeta, err := providerMetaCache.getOrConfigureProviderMeta(ctx, pc.uid, cfg)
+		providerMeta, err := providerMetaCache.getOrConfigureProviderMeta(ctx, pc.uid, cfg, authentication)
 		if err != nil {
 			return ps, fmt.Errorf("cannot get or init OCI provider: %w", err)
 		}
@@ -357,8 +356,9 @@ func (c *providerMetaCache) evictOverflow() {
 }
 
 type resolvedProviderConfig struct {
-	spec *namespacedv1beta1.ProviderConfigSpec
-	uid  string
+	spec      *namespacedv1beta1.ProviderConfigSpec
+	uid       string
+	namespace string
 }
 
 func resolveProviderConfig(ctx context.Context, kube client.Client, mg resource.Managed) (resolvedProviderConfig, error) {
@@ -477,12 +477,16 @@ func resolveNamespacedProviderConfig(ctx context.Context, kube client.Client, mg
 	var pcSpec namespacedv1beta1.ProviderConfigSpec
 	switch pc := pcObj.(type) {
 	case *namespacedv1beta1.ProviderConfig:
-		pcSpec = pc.Spec
+		pcSpec = *pc.Spec.DeepCopy()
 		if pcSpec.Credentials.SecretRef != nil {
 			pcSpec.Credentials.SecretRef.Namespace = mg.GetNamespace()
 		}
 	case *namespacedv1beta1.ClusterProviderConfig:
-		pcSpec = pc.Spec
+		shared, err := toSharedPCSpec(pc.Spec)
+		if err != nil {
+			return resolvedProviderConfig{}, err
+		}
+		pcSpec = *shared
 	default:
 		return resolvedProviderConfig{}, errors.New(errUnsupportedProviderCfgKind)
 	}
@@ -492,7 +496,7 @@ func resolveNamespacedProviderConfig(ctx context.Context, kube client.Client, mg
 		return resolvedProviderConfig{}, errors.Wrap(err, errTrackUsage)
 	}
 
-	return resolvedProviderConfig{spec: &pcSpec, uid: string(pcObj.GetUID())}, nil
+	return resolvedProviderConfig{spec: &pcSpec, uid: string(pcObj.GetUID()), namespace: pcObj.GetNamespace()}, nil
 }
 
 func toSharedPCSpec(spec any) (*namespacedv1beta1.ProviderConfigSpec, error) {

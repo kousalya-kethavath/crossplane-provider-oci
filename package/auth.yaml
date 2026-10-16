@@ -2,6 +2,20 @@
 version: '2023-01-30'
 discriminant: spec.credentials.source
 sources:
+- name: ServiceAccount
+  docs: |
+    # Using a namespace-local OKE ServiceAccount
+
+    Namespaced ProviderConfigs can select a ServiceAccount in their own namespace.
+    Set spec.region and credentials.serviceAccountRef.name. The actual reconciling
+    provider runtime must receive namespace-local ServiceAccount GET and named
+    serviceaccounts/token CREATE permissions. No token permissions are granted
+    by default. OKE Enhanced cluster and matching OCI workload IAM policies are
+    required. See docs/namespaced-serviceaccount-auth.md for configuration,
+    renewal, lifecycle and validation guidance.
+  showFields:
+  - spec.region
+  - spec.credentials.serviceAccountRef.name
 - name: Secret
   docs: |
     # Using OCI API Key Authentication

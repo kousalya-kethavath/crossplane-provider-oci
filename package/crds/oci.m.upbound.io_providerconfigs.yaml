@@ -92,6 +92,20 @@ spec:
                     - name
                     - namespace
                     type: object
+                  serviceAccountRef:
+                    description: ServiceAccountRef selects an account in this ProviderConfig's
+                      namespace.
+                    properties:
+                      name:
+                        description: Name is the ServiceAccount name. Namespace overrides
+                          are not supported.
+                        maxLength: 253
+                        minLength: 1
+                        pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+                        type: string
+                    required:
+                    - name
+                    type: object
                   source:
                     description: Source of the provider credentials.
                     enum:
@@ -99,13 +113,36 @@ spec:
                     - InjectedIdentity
                     - Environment
                     - Filesystem
+                    - ServiceAccount
                     type: string
                 required:
                 - source
                 type: object
+                x-kubernetes-validations:
+                - message: serviceAccountRef is required only for ServiceAccount credentials
+                  rule: (self.source == 'ServiceAccount') == has(self.serviceAccountRef)
+                - message: ServiceAccount credentials cannot include secretRef, env
+                    or fs
+                  rule: self.source != 'ServiceAccount' || (!has(self.secretRef) &&
+                    !has(self.env) && !has(self.fs))
+              region:
+                description: |-
+                  Region is the OCI API region for ServiceAccount credentials.
+                  Other sources configure their region in the existing credential data.
+                maxLength: 63
+                minLength: 1
+                pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                type: string
             required:
             - credentials
             type: object
+            x-kubernetes-validations:
+            - message: region is required for ServiceAccount credentials
+              rule: self.credentials.source != 'ServiceAccount' || (has(self.region)
+                && size(self.region) > 0)
+            - message: region must be configured in the credential data for other
+                credential sources
+              rule: self.credentials.source == 'ServiceAccount' || !has(self.region)
           status:
             description: A ProviderConfigStatus reflects the observed state of a ProviderConfig.
             properties:

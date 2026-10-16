@@ -46,7 +46,8 @@ spec:
           metadata:
             type: object
           spec:
-            description: A ProviderConfigSpec defines the desired state of a ProviderConfig.
+            description: ClusterProviderConfigSpec preserves the cluster-scoped authentication
+              API.
             properties:
               credentials:
                 description: Credentials required to authenticate to this provider.

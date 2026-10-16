@@ -210,6 +210,11 @@ This method uses OCI Workload Identity for authentication in OKE environments.
 
 ### Workload Identity Federation Authentication for Non-OKE
 
+For separate tenant ServiceAccount identities on a shared OKE provider runtime,
+see [Namespaced ServiceAccount authentication](namespaced-serviceaccount-auth.md).
+This uses a namespace-local TokenRequest instead of the provider pod's mounted
+token and requires matching controller/CRD support and explicit RBAC grants.
+
 This method uses a projected Kubernetes service account token for provider authentication in non-OKE Kubernetes clusters, including self-managed clusters.
 
 Before creating the credentials secret, configure an OCI Identity Propagation Trust for the Kubernetes token issuer and IAM policies for the federated workload. For the full setup flow, including how to collect the Kubernetes token issuer, subject, and JWKS public key, see [Non-OKE Kubernetes Workload Identity Authentication](non-oke-workload-identity-auth.md).

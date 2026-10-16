@@ -124,6 +124,10 @@ func main() {
 		}
 	}
 
+	runCtx := ctrl.SetupSignalHandler()
+	tokenClient, err := kubernetes.NewForConfig(cfg)
+	kingpin.FatalIfError(err, "Cannot create ServiceAccount token client")
+
 	o := tjcontroller.Options{
 		Options: xpcontroller.Options{
 			Logger:                  log,
@@ -136,6 +140,7 @@ func main() {
 		Provider: config.GetProviderForRuntime("dblm"),
 		OperationTrackerStore: tjcontroller.NewOperationStore(log),
 		SetupFn: clients.TerraformSetupBuilder(
+			clients.WithServiceAccountCredentials(runCtx, mgr.GetAPIReader(), tokenClient.CoreV1()),
 			clients.WithSDKv2ResourcePredicate(config.SDKv2ResourcePredicateForRuntime("dblm")),
 			clients.WithFrameworkProvider(config.HasFrameworkResources()),
 			clients.WithProviderMetaCacheSize(*providerMetaCacheSize),
@@ -170,7 +175,7 @@ func main() {
 		log.Info("SafeStart disabled; falling back to eager controller setup", "service", "dblm")
 		kingpin.FatalIfError(setupControllers(mgr, o), "Cannot setup dblm controllers")
 	}
-	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
+	kingpin.FatalIfError(mgr.Start(runCtx), "Cannot start controller manager")
 }
 
 func setupControllers(mgr ctrl.Manager, o tjcontroller.Options) error {

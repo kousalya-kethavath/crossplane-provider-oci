@@ -14,17 +14,27 @@ import (
 	ociprovider "github.com/oracle/terraform-provider-oci/oci"
 )
 
-func setFrameworkProvider(ps *upjetterraform.Setup) {
-	ps.FrameworkProvider = ociprovider.New()
+func setFrameworkProvider(ps *upjetterraform.Setup, authentication providerAuthentication) {
+	ps.FrameworkProvider = ociprovider.NewWithOptions(authentication.options)
 }
 
-func (c *providerMetaCache) getOrConfigureProviderMeta(ctx context.Context, uid string, cfg map[string]any) (any, error) {
+func (c *providerMetaCache) getOrConfigureProviderMeta(ctx context.Context, uid string, cfg map[string]any, authentications ...providerAuthentication) (any, error) {
+	authentication := providerAuthentication{}
+	if len(authentications) != 0 {
+		authentication = authentications[0]
+	}
 	cfgHash, err := inProcessProviderConfigurationHash(cfg)
 	if err != nil {
 		return nil, err
 	}
+	if authentication.identity != "" {
+		cfgHash, err = providerConfigurationHash(map[string]any{"config": cfgHash, "identity": authentication.identity})
+		if err != nil {
+			return nil, err
+		}
+	}
 	return c.getOrCreate(ctx, uid, cfgHash, func() (any, error) {
-		p := ociprovider.ProviderForConfiguration()
+		p := ociprovider.ProviderForConfigurationWithOptions(authentication.options)
 		diags := p.Configure(ctx, sdkterraform.NewResourceConfigRaw(cfg))
 		if diags.HasError() {
 			return nil, fmt.Errorf("cannot configure OCI provider: %v", diags)
