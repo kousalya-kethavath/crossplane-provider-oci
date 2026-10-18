@@ -175,4 +175,4 @@ require (
 
 // Development pin for per-ProviderConfig ServiceAccount authentication.
 // Replace with an upstream dependency revision after the Terraform change lands.
-replace github.com/oracle/terraform-provider-oci => github.com/kousalya-kethavath/terraform-provider-oci v0.0.0-20261018212305-b373f0f46a56
+replace github.com/oracle/terraform-provider-oci => github.com/kousalya-kethavath/terraform-provider-oci v0.0.0-20261018222832-70dcc079b9fd

@@ -247,10 +247,10 @@ IDs and sanitized Audit evidence for the release validation record.
 ## Developing across both repositories
 
 This development branch uses a `go.mod` replacement to pin the Terraform fork at
-commit `fb8245ec3dd325f7beff63e549fbfd06504684fb`, containing the
-`oci.InProcessOptions` extension. The pin is immutable; moving the Terraform
-branch does not silently change the Crossplane dependency. A local Go workspace
-is not required to build this branch.
+commit `70dcc079b9fd54b0472b63ee4dc8e4f4a97ac9fa`, containing per-provider token
+suppliers, renewable CLI token files and rejection of unknown token-file paths.
+The pin is immutable; moving the Terraform branch does not silently change the
+Crossplane dependency. A local Go workspace is not required to build this branch.
 
 Run the authentication and admission tests against the downloaded dependency:
 

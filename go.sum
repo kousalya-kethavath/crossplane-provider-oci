@@ -228,8 +228,8 @@ github.com/kisielk/errcheck v1.5.0/go.mod h1:pFxgyoBC7bSaBwPgfKdkLd5X25qrDl4LWUI
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
 github.com/klauspost/compress v1.18.0 h1:c/Cqfb0r+Yi+JtIEq73FWXVkRonBlf0CRNYc8Zttxdo=
 github.com/klauspost/compress v1.18.0/go.mod h1:2Pp+KzxcywXVXMr50+X0Q/Lsb43OQHYWRCY2AiWywWQ=
-github.com/kousalya-kethavath/terraform-provider-oci v0.0.0-20261018212305-b373f0f46a56 h1:d4zeytLXh+NqlL16hcD0FzY2oMgXl4tBV11kNdOZt20=
-github.com/kousalya-kethavath/terraform-provider-oci v0.0.0-20261018212305-b373f0f46a56/go.mod h1:k0LukFLoLpiKK0yyZPSDnJwgzrMA9hdA0vTx3LujbP8=
+github.com/kousalya-kethavath/terraform-provider-oci v0.0.0-20261018222832-70dcc079b9fd h1:38EJgWmIkAkTMsWxXyelux1k62CT2vz8nuWuUvQExDM=
+github.com/kousalya-kethavath/terraform-provider-oci v0.0.0-20261018222832-70dcc079b9fd/go.mod h1:k0LukFLoLpiKK0yyZPSDnJwgzrMA9hdA0vTx3LujbP8=
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=
 github.com/kr/pretty v0.3.1 h1:flRD4NNwYAUpkphVc1HcthR4KEIFJ65n8Mw5qdRn3LE=
 github.com/kr/pretty v0.3.1/go.mod h1:hoEshYVHaxMs3cyo3Yncou5ZscifuDolrwPKZanG3xk=
