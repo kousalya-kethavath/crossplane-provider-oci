@@ -144,14 +144,20 @@ client; changing a ProviderConfig does not revoke credentials already issued.
 
 ## Terraform CLI execution
 
-In-process execution remains the default. Set `--terraform-cli` (or
-`TERRAFORM_CLI=true`) on a service provider to select the existing Upjet CLI
-connector and workspace finalizer. The ProviderConfig and namespace-local RBAC
-are identical for both modes. The family/config runtime does not reconcile OCI
-resources and does not need this flag.
+Execution follows each resource's build-time Upjet include list. SDKv2 and
+Framework resources use the in-process token supplier; CLI resources use a
+renewable token file. A shared service runtime can contain both paths. No global
+execution-mode flag or ProviderConfig change is required. The current lists
+assign all generated OCI resources to SDKv2; the CLI list is empty.
 
-CLI mode requires a Terraform executable on PATH and a patched Terraform OCI
-plugin that accepts `oke_workload_identity_token_path`. Configure
+To assign a resource to CLI execution, add it to `terraformCLIIncludeList` in
+`config/nofork.go` and regenerate. It is excluded from the default SDKv2 list;
+CLI and Framework assignments must not overlap. Validate the generated API/CRD
+shape and resource operations when changing an execution route. Service runtime
+manifests retain resources from every route.
+
+CLI-routed resources require a Terraform executable on PATH and a patched
+Terraform OCI plugin that accepts `oke_workload_identity_token_path`. Configure
 `--terraform-version`, `--terraform-provider-source` and
 `--terraform-provider-version` to match the installed tools. An unpatched public
 plugin does not implement this field. The normal minimal provider image does
@@ -177,8 +183,8 @@ docker build --platform=linux/amd64 -f cluster/images/provider-oci/Dockerfile.cl
 ```
 
 The filesystem mirror ensures the patched OCI plugin is used instead of
-silently fetching an unpatched OCI release. The regular image and default
-execution mode are unchanged.
+silently fetching an unpatched OCI release. Runtimes containing only in-process
+resources do not need these executables.
 
 Crossplane writes a private token file inside each managed resource's Upjet
 workspace under the process temporary directory. Directories are mode 0700 and

@@ -1,10 +1,19 @@
 package main
 
 import (
+	"bytes"
+	"fmt"
+	"go/parser"
+	"go/token"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
+	"text/template"
+
+	"github.com/crossplane/upjet/v2/pkg/pipeline/templates"
+
+	"github.com/oracle/provider-oci/hack"
 )
 
 func TestGenerateServiceControllerSetupPackages(t *testing.T) {
@@ -120,6 +129,78 @@ func TestWriteServiceAPIScheme(t *testing.T) {
 	} {
 		if !strings.Contains(string(content), want) {
 			t.Errorf("generated scheme does not contain %q", want)
+		}
+	}
+}
+
+func TestControllerTemplatePreservesPerResourceConnectorsAndMetrics(t *testing.T) {
+	source := controllerTemplateWithCLIWorkspaceFinalizer(controllerTemplateWithManagedMetricRecorder(templates.ControllerTemplate))
+	for _, async := range []bool{false, true} {
+		for _, route := range []string{"sdk", "framework", "cli"} {
+			t.Run(fmt.Sprintf("%s/async=%t", route, async), func(t *testing.T) {
+				vars := map[string]any{"Header": "", "GenStatement": "", "Imports": "", "Package": "resource", "CRD": map[string]string{"Kind": "Example"}, "TypePackageAlias": "v1alpha1.", "UseAsync": async, "UseTerraformPluginSDKClient": route == "sdk", "UseTerraformPluginFrameworkClient": route == "framework", "FeaturesPackageAlias": "features.", "ResourceType": "oci_example"}
+				tmpl, err := template.New("controller").Parse(source)
+				if err != nil {
+					t.Fatal(err)
+				}
+				var out bytes.Buffer
+				if err := tmpl.Execute(&out, vars); err != nil {
+					t.Fatal(err)
+				}
+				got := out.String()
+				if _, err := parser.ParseFile(token.NewFileSet(), "zz_controller.go", got, parser.AllErrors); err != nil {
+					t.Fatal(err)
+				}
+				wantConnector := "tjcontroller.NewConnector("
+				if route == "sdk" {
+					wantConnector = "tjcontroller.NewTerraformPluginSDK"
+					if async {
+						wantConnector += "Async"
+					}
+					wantConnector += "Connector("
+				}
+				if route == "framework" {
+					wantConnector = "tjcontroller.NewTerraformPluginFramework"
+					if async {
+						wantConnector += "Async"
+					}
+					wantConnector += "Connector("
+				}
+				if !strings.Contains(got, wantConnector) {
+					t.Fatalf("missing %s", wantConnector)
+				}
+				if route == "cli" {
+					if strings.Contains(got, "mgr.Add(metricRecorder)") || strings.Contains(got, "NewOperationTrackerFinalizer") || strings.Contains(got, "WithStatusUpdates(false)") {
+						t.Fatal("CLI controller received in-process behavior")
+					}
+					if !strings.Contains(got, "runtimeconnector.NewCLIWorkspaceFinalizer") {
+						t.Fatal("missing CLI token cleanup")
+					}
+				} else {
+					for _, want := range []string{"mgr.Add(metricRecorder)", "NewOperationTrackerFinalizer", "MetricRecorder(metricRecorder)"} {
+						if !strings.Contains(got, want) {
+							t.Fatalf("missing %s", want)
+						}
+					}
+					if async && !strings.Contains(got, "WithStatusUpdates(false)") {
+						t.Fatal("in-process callbacks changed")
+					}
+					if strings.Contains(got, "runtimeconnector") || strings.Contains(got, "o.WorkspaceStore") {
+						t.Fatal("in-process connector depends on CLI workspace presence")
+					}
+				}
+			})
+		}
+	}
+}
+
+func TestMainTemplateHasNoGlobalExecutionOverride(t *testing.T) {
+	if strings.Contains(hack.MainTemplate, `Flag("terraform-cli"`) || strings.Contains(hack.MainTemplate, "TERRAFORM_CLI") {
+		t.Fatal("global CLI override remains")
+	}
+	for _, want := range []string{"WithResourceConfiguration(provider.Resources)", "if config.HasCLIResources(provider)", "WithTerraformCLIConfiguration"} {
+		if !strings.Contains(hack.MainTemplate, want) {
+			t.Fatalf("missing %s", want)
 		}
 	}
 }

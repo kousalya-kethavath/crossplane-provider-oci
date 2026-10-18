@@ -68,7 +68,6 @@ func main() {
 		enableChangeLogs = app.Flag("enable-changelogs", "Enable support for capturing change logs during reconciliation.").Default("false").Envar("ENABLE_CHANGE_LOGS").Bool()
 	)
 
-	terraformCLI := app.Flag("terraform-cli", "Use the external Terraform CLI connector instead of in-process execution.").Default("false").Envar("TERRAFORM_CLI").Bool()
 	terraformVersion := app.Flag("terraform-version", "Required Terraform CLI version.").Default("1.4.6").String()
 	terraformSource := app.Flag("terraform-provider-source", "Terraform CLI provider source.").Default("oracle/oci").String()
 	terraformVersionConstraint := app.Flag("terraform-provider-version", "Terraform CLI provider version constraint; must include ServiceAccount token-file support.").Default(terraformProviderVersion).String()
@@ -130,14 +129,12 @@ func main() {
 	tokenClient, err := kubernetes.NewForConfig(cfg)
 	kingpin.FatalIfError(err, "Cannot create ServiceAccount token client")
 
+	provider := config.GetProviderForRuntime("mediaservices")
 	setupOptions := []clients.SetupOption{
 		clients.WithServiceAccountCredentials(runCtx, mgr.GetAPIReader(), tokenClient.CoreV1()),
-		clients.WithSDKv2ResourcePredicate(config.SDKv2ResourcePredicateForRuntime("mediaservices")),
-		clients.WithFrameworkProvider(config.HasFrameworkResources()),
+		clients.WithResourceConfiguration(provider.Resources),
+		clients.WithTerraformCLIConfiguration(*terraformVersion, *terraformSource, *terraformVersionConstraint),
 		clients.WithProviderMetaCacheSize(*providerMetaCacheSize),
-	}
-	if *terraformCLI {
-		setupOptions = append(setupOptions, clients.WithTerraformCLI(*terraformVersion, *terraformSource, *terraformVersionConstraint))
 	}
 	o := tjcontroller.Options{
 		Options: xpcontroller.Options{
@@ -148,7 +145,7 @@ func main() {
 			Features:                &feature.Flags{},
 			MetricOptions:           metricOptions,
 		},
-		Provider: config.GetProviderForRuntime("mediaservices"),
+		Provider: provider,
 		OperationTrackerStore: tjcontroller.NewOperationStore(log),
 		SetupFn: clients.TerraformSetupBuilder(setupOptions...),
 	}
@@ -157,7 +154,7 @@ func main() {
 		o.Features.Enable(features.EnableBetaManagementPolicies)
 		log.Info("Beta feature enabled", "flag", features.EnableBetaManagementPolicies)
 	}
-	if *terraformCLI {
+	if config.HasCLIResources(provider) {
 		o.WorkspaceStore = terraform.NewWorkspaceStore(log, terraform.WithFeatures(o.Features))
 	}
 	if *enableChangeLogs {

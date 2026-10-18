@@ -18,6 +18,7 @@ import (
 	xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/meta"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
 	upjetterraform "github.com/crossplane/upjet/v2/pkg/terraform"
 	"github.com/pkg/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -64,16 +65,17 @@ const (
 )
 
 type setupOptions struct {
-	enableFrameworkProvider bool
-	isSDKv2Resource         func(string) bool
-	providerMetaCacheSize   int
-	serviceAccounts         serviceAccountCredentials
-	cli                     *upjetterraform.Setup
+	isFrameworkResource   func(string) bool
+	resources             map[string]*ujconfig.Resource
+	isSDKv2Resource       func(string) bool
+	providerMetaCacheSize int
+	serviceAccounts       serviceAccountCredentials
+	cli                   *upjetterraform.Setup
 }
 
-// WithTerraformCLI enables the external Terraform execution path. The runtime
-// must also select CLI connectors and provide Terraform and a matching plugin.
-func WithTerraformCLI(version, source, providerVersion string) SetupOption {
+// WithTerraformCLIConfiguration supplies requirements for CLI-routed resources.
+// It does not change any resource's execution path.
+func WithTerraformCLIConfiguration(version, source, providerVersion string) SetupOption {
 	return func(o *setupOptions) {
 		o.cli = &upjetterraform.Setup{Version: version, Requirement: upjetterraform.ProviderRequirement{Source: source, Version: providerVersion}}
 	}
@@ -82,11 +84,17 @@ func WithTerraformCLI(version, source, providerVersion string) SetupOption {
 // SetupOption customizes Terraform setup behavior.
 type SetupOption func(*setupOptions)
 
-// WithFrameworkProvider controls whether setup returns a Plugin Framework
-// provider instance for framework-routed resources.
-func WithFrameworkProvider(enabled bool) SetupOption {
+// WithResourceConfiguration selects authentication transport from the same
+// resource configuration that selects the generated Upjet connectors.
+func WithResourceConfiguration(resources map[string]*ujconfig.Resource) SetupOption {
 	return func(o *setupOptions) {
-		o.enableFrameworkProvider = enabled
+		o.resources = resources
+		o.isSDKv2Resource = func(name string) bool {
+			return resources[name] != nil && resources[name].ShouldUseTerraformPluginSDKClient()
+		}
+		o.isFrameworkResource = func(name string) bool {
+			return resources[name] != nil && resources[name].ShouldUseTerraformPluginFrameworkClient()
+		}
 	}
 }
 
@@ -118,9 +126,8 @@ type terraformResourceTyper interface {
 	GetTerraformResourceType() string
 }
 
-// TerraformSetupBuilder builds a terraform.SetupFn for in-process no-fork
-// connectors. Build-time Terraform values are intentionally not required at
-// runtime when all resources are routed through SDKv2 or Framework connectors.
+// TerraformSetupBuilder builds a terraform.SetupFn for per-resource SDKv2,
+// Framework and CLI connectors. CLI requirements are only used for CLI resources.
 // Construct it at startup: it suppresses the process-wide standard Go logger
 // before embedded provider operations can log sensitive payloads.
 func TerraformSetupBuilder(opts ...SetupOption) upjetterraform.SetupFn {
@@ -133,6 +140,21 @@ func TerraformSetupBuilder(opts ...SetupOption) upjetterraform.SetupFn {
 	return func(ctx context.Context, kube client.Client, mg resource.Managed) (upjetterraform.Setup, error) {
 		ps := upjetterraform.Setup{}
 
+		if options.resources != nil {
+			tr, ok := mg.(terraformResourceTyper)
+			if !ok || options.resources[tr.GetTerraformResourceType()] == nil {
+				return ps, fmt.Errorf("managed resource has no configured Terraform execution route")
+			}
+		}
+		useSDKv2 := options.shouldConfigureSDKv2Provider(mg)
+		useFramework := options.shouldConfigureFrameworkProvider(mg)
+		if useSDKv2 && useFramework {
+			return ps, fmt.Errorf("managed resource has conflicting Terraform execution routes")
+		}
+		if !useSDKv2 && !useFramework && options.cli == nil {
+			return ps, fmt.Errorf("Terraform CLI requirements are missing for a CLI-routed resource")
+		}
+
 		pc, err := resolveProviderConfig(ctx, kube, mg)
 		if err != nil {
 			return ps, errors.Wrap(err, "cannot resolve provider config")
@@ -142,7 +164,7 @@ func TerraformSetupBuilder(opts ...SetupOption) upjetterraform.SetupFn {
 		if err != nil {
 			return ps, err
 		}
-		if options.cli != nil {
+		if !useSDKv2 && !useFramework {
 			ps.Version, ps.Requirement = options.cli.Version, options.cli.Requirement
 			if authentication.identity != "" {
 				supplier, ok := authentication.options.OKEWorkloadIdentityTokenProvider.(*serviceAccountTokenProvider)
@@ -158,17 +180,13 @@ func TerraformSetupBuilder(opts ...SetupOption) upjetterraform.SetupFn {
 			ps.Configuration = cfg
 			return ps, nil
 		}
-		if authentication.identity != "" && !options.enableFrameworkProvider && !options.shouldConfigureSDKv2Provider(mg) {
-			return ps, fmt.Errorf("ServiceAccount credentials require an in-process SDKv2 or Framework resource")
-		}
-
 		ps.Configuration = cfg
 
-		if options.enableFrameworkProvider {
+		if useFramework {
 			setFrameworkProvider(&ps, authentication)
 		}
 
-		if !options.shouldConfigureSDKv2Provider(mg) {
+		if !useSDKv2 {
 			return ps, nil
 		}
 
@@ -228,6 +246,11 @@ func (o setupOptions) shouldConfigureSDKv2Provider(mg resource.Managed) bool {
 		return false
 	}
 	return o.isSDKv2Resource(tr.GetTerraformResourceType())
+}
+
+func (o setupOptions) shouldConfigureFrameworkProvider(mg resource.Managed) bool {
+	tr, ok := mg.(terraformResourceTyper)
+	return ok && o.isFrameworkResource != nil && o.isFrameworkResource(tr.GetTerraformResourceType())
 }
 
 func providerConfigurationHash(cfg map[string]any) (string, error) {

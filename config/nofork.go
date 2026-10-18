@@ -22,7 +22,14 @@ import (
 	"slices"
 	"sort"
 	"sync"
+
+	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
 )
+
+// terraformCLIIncludeList explicitly assigns resources to Upjet's CLI connector.
+// These resources are excluded from the default SDKv2 routing. Changing a route
+// requires regeneration and a runtime image with the corresponding executables.
+var terraformCLIIncludeList = []string{}
 
 // terraformPluginFrameworkIncludeList is intentionally empty until OCI
 // Terraform Plugin Framework resources are validated for no-fork routing.
@@ -35,27 +42,65 @@ type terraformProviderSchema struct {
 }
 
 type terraformResourceRouting struct {
-	names          []string
-	sdkV2Resources map[string]struct{}
-	sdkV2Regexes   []string
+	names            []string
+	sdkV2Resources   map[string]struct{}
+	cliRegexes       []string
+	frameworkRegexes []string
 }
 
 var loadTerraformResourceRouting = sync.OnceValue(func() terraformResourceRouting {
-	names := parseTerraformResourceNamesFromSchema()
-	routing := terraformResourceRouting{
-		names:          names,
-		sdkV2Resources: make(map[string]struct{}, len(names)),
-		sdkV2Regexes:   make([]string, 0, len(names)),
-	}
-	for _, resource := range names {
-		routing.sdkV2Resources[resource] = struct{}{}
-		routing.sdkV2Regexes = append(routing.sdkV2Regexes, exactResourceRegex(resource))
-	}
-	return routing
+	return newTerraformResourceRouting(parseTerraformResourceNamesFromSchema(), terraformCLIIncludeList, terraformPluginFrameworkIncludeList)
 })
 
-func terraformPluginSDKIncludeList() []string {
-	return slices.Clone(loadTerraformResourceRouting().sdkV2Regexes)
+func newTerraformResourceRouting(names, cliRegexes, frameworkRegexes []string) terraformResourceRouting {
+	routing := terraformResourceRouting{
+		names:            slices.Clone(names),
+		sdkV2Resources:   make(map[string]struct{}, len(names)),
+		cliRegexes:       slices.Clone(cliRegexes),
+		frameworkRegexes: slices.Clone(frameworkRegexes),
+	}
+	for _, resource := range names {
+		cli, framework := resourceMatches(resource, cliRegexes), resourceMatches(resource, frameworkRegexes)
+		if cli && framework {
+			panic("Terraform resource assigned to both CLI and Framework: " + resource)
+		}
+		if cli || framework {
+			continue
+		}
+		routing.sdkV2Resources[resource] = struct{}{}
+	}
+	return routing
+}
+
+// includeLists restricts each execution route to the resources in a runtime.
+// A nil manifest selects all schema resources during full-provider generation.
+func (r terraformResourceRouting) includeLists(resources []string) (sdk, cli, framework []string) {
+	if resources == nil {
+		resources = r.names
+	}
+	for _, name := range resources {
+		switch {
+		case resourceMatches(name, r.cliRegexes):
+			cli = append(cli, exactResourceRegex(name))
+		case resourceMatches(name, r.frameworkRegexes):
+			framework = append(framework, exactResourceRegex(name))
+		default:
+			if _, ok := r.sdkV2Resources[name]; ok {
+				sdk = append(sdk, exactResourceRegex(name))
+			}
+		}
+	}
+	return sdk, cli, framework
+}
+
+// HasCLIResources reports whether this configured runtime needs CLI workspaces.
+func HasCLIResources(provider *ujconfig.Provider) bool {
+	for _, resource := range provider.Resources {
+		if !resource.ShouldUseTerraformPluginSDKClient() && !resource.ShouldUseTerraformPluginFrameworkClient() {
+			return true
+		}
+	}
+	return false
 }
 
 func terraformPluginSDKResourcesForRuntime(service string) []string {
@@ -70,14 +115,6 @@ func terraformPluginSDKResourcesForRuntime(service string) []string {
 		}
 	}
 	return sdkResources
-}
-
-func terraformPluginSDKIncludeListForResources(resources []string) []string {
-	includeList := make([]string, 0, len(resources))
-	for _, resource := range resources {
-		includeList = append(includeList, exactResourceRegex(resource))
-	}
-	return includeList
 }
 
 // SDKv2ResourcePredicateForRuntime returns a predicate that accepts only the

@@ -67,25 +67,34 @@ func ProblematicResources() []string {
 	}
 }
 
-func newProvider(rootGroup string, register func(*ujconfig.Provider), useTerraformJSONGenerationSchema bool, sdkResourceNames []string) *ujconfig.Provider {
+func newProvider(rootGroup string, register func(*ujconfig.Provider), useTerraformJSONGenerationSchema bool, runtimeResourceNames []string) *ujconfig.Provider {
+	return newProviderWithRouting(rootGroup, register, useTerraformJSONGenerationSchema, runtimeResourceNames, loadTerraformResourceRouting())
+}
+
+func newProviderWithRouting(rootGroup string, register func(*ujconfig.Provider), useTerraformJSONGenerationSchema bool, runtimeResourceNames []string, routing terraformResourceRouting) *ujconfig.Provider {
+	sdkIncludeList, cliIncludeList, frameworkIncludeList := routing.includeLists(runtimeResourceNames)
+	var sdkResourceNames []string
+	if runtimeResourceNames != nil {
+		sdkResourceNames = make([]string, 0, len(runtimeResourceNames))
+		for _, name := range runtimeResourceNames {
+			if _, ok := routing.sdkV2Resources[name]; ok {
+				sdkResourceNames = append(sdkResourceNames, name)
+			}
+		}
+	}
 	sdkProvider := terraformSDKProvider(sdkResourceNames)
 	if useTerraformJSONGenerationSchema {
 		applyTerraformJSONGenerationSchemas(sdkProvider, []byte(providerSchema))
 	}
 
-	sdkIncludeList := terraformPluginSDKIncludeList()
-	if sdkResourceNames != nil {
-		sdkIncludeList = terraformPluginSDKIncludeListForResources(sdkResourceNames)
-	}
 	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
 		ujconfig.WithRootGroup(rootGroup),
-		// Disable Upjet's Terraform CLI route. All generated OCI resources are
-		// routed through in-process no-fork connectors.
-		ujconfig.WithIncludeList(nil),
+		// Keep the three execution routes mutually exclusive and service-scoped.
+		ujconfig.WithIncludeList(cliIncludeList),
 		ujconfig.WithTerraformProvider(sdkProvider),
 		ujconfig.WithTerraformPluginSDKIncludeList(sdkIncludeList),
 		ujconfig.WithTerraformPluginFrameworkProvider(terraformFrameworkProvider()),
-		ujconfig.WithTerraformPluginFrameworkIncludeList(terraformPluginFrameworkIncludeList),
+		ujconfig.WithTerraformPluginFrameworkIncludeList(frameworkIncludeList),
 		ujconfig.WithSkipList(ProblematicResources()),
 		ujconfig.WithDefaultResourceOptions(
 			GroupKindOverrides(),
@@ -119,11 +128,15 @@ func GetProvider() *ujconfig.Provider {
 // GetProviderForRuntime returns the cluster-scoped provider configuration
 // containing only Terraform resources reconciled by the specified service.
 func GetProviderForRuntime(service string) *ujconfig.Provider {
+	resources, ok := runtimeTerraformResources[service]
+	if !ok {
+		panic("no Terraform runtime resource manifest for service " + service)
+	}
 	return newProvider("oci.upbound.io", func(pc *ujconfig.Provider) {
 		for _, configure := range cluster.ProviderConfiguration {
 			configure(pc)
 		}
-	}, false, terraformPluginSDKResourcesForRuntime(service))
+	}, false, resources)
 }
 
 // GetProviderNamespaced returns namespaced provider configuration.

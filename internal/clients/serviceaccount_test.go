@@ -287,7 +287,7 @@ func TestServiceAccountRefreshFailureDoesNotReuseCachedToken(t *testing.T) {
 	}
 }
 
-func TestServiceAccountSetupRequiresInProcessRouting(t *testing.T) {
+func TestServiceAccountSetupRequiresCLIMetadataForCLIRoute(t *testing.T) {
 	s, _, kube := serviceAccountFixture(t)
 	if err := namespacedv1beta1.SchemeBuilder.AddToScheme(kube.Scheme()); err != nil {
 		t.Fatal(err)
@@ -296,15 +296,15 @@ func TestServiceAccountSetupRequiresInProcessRouting(t *testing.T) {
 	if err := kube.Create(t.Context(), pc); err != nil {
 		t.Fatal(err)
 	}
-	mg := &fake.ModernManaged{
+	mg := &routedManaged{tfType: "oci_framework", ModernManaged: fake.ModernManaged{
 		ObjectMeta:                    metav1.ObjectMeta{Namespace: "tenant-a", Name: "bucket", UID: "managed-a"},
 		TypedProviderConfigReferencer: fake.TypedProviderConfigReferencer{Ref: &xpv1.ProviderConfigReference{Name: pc.Name, Kind: namespacedv1beta1.ProviderConfigKind}},
-	}
+	}}
 	setup := TerraformSetupBuilder(WithServiceAccountCredentials(t.Context(), s.reader, s.tokens))
-	if _, err := setup(t.Context(), kube, mg); err == nil || !strings.Contains(err.Error(), "require an in-process") {
+	if _, err := setup(t.Context(), kube, mg); err == nil || !strings.Contains(err.Error(), "CLI requirements are missing") {
 		t.Fatalf("accepted unsupported routing: %v", err)
 	}
-	setup = TerraformSetupBuilder(WithServiceAccountCredentials(t.Context(), s.reader, s.tokens), WithFrameworkProvider(true))
+	setup = TerraformSetupBuilder(WithServiceAccountCredentials(t.Context(), s.reader, s.tokens), WithResourceConfiguration(testMixedResourceConfiguration()))
 	configured, err := setup(t.Context(), kube, mg)
 	if err != nil || configured.FrameworkProvider == nil || len(configured.Configuration) != 2 {
 		t.Fatalf("Framework setup did not retain tenant authentication: %v", err)

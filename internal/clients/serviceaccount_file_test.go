@@ -180,7 +180,7 @@ func TestServiceAccountCLISetupKeepsJWTOutOfConfiguration(t *testing.T) {
 	})
 	lifetime, cancel := context.WithCancel(t.Context())
 	defer cancel()
-	setup := TerraformSetupBuilder(WithServiceAccountCredentials(lifetime, s.reader, s.tokens), WithTerraformCLI("1.4.6", "oracle/oci", "9.0.0"))
+	setup := TerraformSetupBuilder(WithServiceAccountCredentials(lifetime, s.reader, s.tokens), WithTerraformCLIConfiguration("1.4.6", "oracle/oci", "9.0.0"))
 	configured, err := setup(t.Context(), kube, mg)
 	if err != nil {
 		t.Fatal(err)
