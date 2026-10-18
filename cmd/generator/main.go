@@ -36,7 +36,7 @@ func main() {
 		}
 		return
 	}
-	templates.ControllerTemplate = controllerTemplateWithManagedMetricRecorder(templates.ControllerTemplate)
+	templates.ControllerTemplate = controllerTemplateWithRuntimeConnectors(templates.ControllerTemplate)
 	pipeline.Run(config.GetProviderForGeneration(), config.GetProviderNamespacedForGeneration(), absRootDir)
 	if err := generateServiceControllerSetupPackages(absRootDir); err != nil {
 		panic(fmt.Sprintf("cannot generate service-scoped controller setup packages: %v", err))
@@ -364,11 +364,11 @@ func generateProviderConfigMain(rootDir string) error {
 	return os.WriteFile(filepath.Join(rootDir, "cmd", "provider", "config", "zz_main.go"), formatted, 0o644)
 }
 
-// controllerTemplateWithManagedMetricRecorder makes each Terraform in-process
+// controllerTemplateWithRuntimeConnectors makes each Terraform in-process
 // metric recorder a controller-runtime Runnable. Upjet's v2.2.0 template
 // constructs the recorder inline, so its delete-event cleanup loop is never
 // started and metric series for deleted managed resources remain retained.
-func controllerTemplateWithManagedMetricRecorder(t string) string {
+func controllerTemplateWithRuntimeConnectors(t string) string {
 	const constructor = `metrics.NewMetricRecorder({{ .TypePackageAlias }}{{ .CRD.Kind }}_GroupVersionKind, mgr, o.PollInterval)`
 	if got := strings.Count(t, constructor); got != 4 {
 		panic(fmt.Sprintf("unexpected Upjet controller template: found %d metric recorder constructors, want 4", got))
@@ -388,6 +388,20 @@ func controllerTemplateWithManagedMetricRecorder(t string) string {
 		panic(fmt.Sprintf("unexpected Upjet controller template: found %d reconciler option anchors, want 1", got))
 	}
 
+	t = strings.Replace(t, `{{ .Imports }}`, `runtimeconnector "github.com/oracle/provider-oci/internal/controller/connector"
+    {{ .Imports }}`, 1)
+	t = strings.ReplaceAll(t, "tjcontroller.WithStatusUpdates(false)", "tjcontroller.WithStatusUpdates(o.WorkspaceStore != nil)")
+	start := strings.Index(t, "tjcontroller.NewTerraformPluginSDKAsyncConnector(")
+	if start < 0 {
+		panic("SDKv2 async connector missing from Upjet template")
+	}
+	end := strings.Index(t[start:], "{{- else -}}")
+	if end < 0 {
+		panic("SDKv2 async connector boundary missing from Upjet template")
+	}
+	t = t[:start] + `runtimeconnector.NewAsyncConnector(mgr, o, o.Provider.Resources["{{ .ResourceType }}"], eventHandler, ac, metricRecorder)
+              ` + t[start+end:]
+	t = strings.ReplaceAll(t, "tjcontroller.NewOperationTrackerFinalizer(o.OperationTrackerStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName))", "runtimeconnector.NewFinalizer(mgr.GetClient(), o)")
 	t = strings.ReplaceAll(t, constructor, "metricRecorder")
 	return strings.Replace(t, optsAnchor, managedRecorder, 1)
 }

@@ -1,0 +1,14 @@
+# Optional CLI-capable image. BASE_IMAGE must contain this branch's provider.
+# Supply independently built, matching-platform Terraform and patched OCI plugin
+# binaries in bin/<os>_<arch>/; this build does not download executable code.
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+USER 0
+ARG TARGETOS=linux
+ARG TARGETARCH
+ARG TF_PROVIDER_VERSION=9.0.0
+COPY --chmod=0555 bin/${TARGETOS}_${TARGETARCH}/terraform /usr/local/bin/terraform
+COPY --chmod=0555 bin/${TARGETOS}_${TARGETARCH}/terraform-provider-oci /opt/terraform/plugins/registry.terraform.io/oracle/oci/${TF_PROVIDER_VERSION}/${TARGETOS}_${TARGETARCH}/terraform-provider-oci_v${TF_PROVIDER_VERSION}
+COPY terraform-cli.tfrc /etc/terraform-cli.tfrc
+ENV TF_CLI_CONFIG_FILE=/etc/terraform-cli.tfrc
+USER 65532

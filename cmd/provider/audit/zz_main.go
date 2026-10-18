@@ -35,6 +35,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/v2/pkg/reconciler/managed"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/statemetrics"
 	tjcontroller "github.com/crossplane/upjet/v2/pkg/controller"
+	"github.com/crossplane/upjet/v2/pkg/terraform"
 	serviceapis "github.com/oracle/provider-oci/internal/apis/runtime/audit"
 	"github.com/oracle/provider-oci/config"
 	resolverapis "github.com/oracle/provider-oci/internal/apis"
@@ -67,9 +68,10 @@ func main() {
 		enableChangeLogs = app.Flag("enable-changelogs", "Enable support for capturing change logs during reconciliation.").Default("false").Envar("ENABLE_CHANGE_LOGS").Bool()
 	)
 
-	app.Flag("terraform-version", "Deprecated no-op. Terraform CLI is not used by the no-fork runtime.").Hidden().String()
-	app.Flag("terraform-provider-source", "Deprecated no-op. Terraform CLI is not used by the no-fork runtime.").Hidden().String()
-	app.Flag("terraform-provider-version", "Deprecated no-op. Terraform CLI is not used by the no-fork runtime.").Hidden().String()
+	terraformCLI := app.Flag("terraform-cli", "Use the external Terraform CLI connector instead of in-process execution.").Default("false").Envar("TERRAFORM_CLI").Bool()
+	terraformVersion := app.Flag("terraform-version", "Required Terraform CLI version.").Default("1.4.6").String()
+	terraformSource := app.Flag("terraform-provider-source", "Terraform CLI provider source.").Default("oracle/oci").String()
+	terraformVersionConstraint := app.Flag("terraform-provider-version", "Terraform CLI provider version constraint; must include ServiceAccount token-file support.").Default(terraformProviderVersion).String()
 
 	kingpin.MustParse(app.Parse(os.Args[1:]))
 	if *metricsBindAddress != "0" && *metricsStatePollInterval <= 0 {
@@ -128,6 +130,15 @@ func main() {
 	tokenClient, err := kubernetes.NewForConfig(cfg)
 	kingpin.FatalIfError(err, "Cannot create ServiceAccount token client")
 
+	setupOptions := []clients.SetupOption{
+		clients.WithServiceAccountCredentials(runCtx, mgr.GetAPIReader(), tokenClient.CoreV1()),
+		clients.WithSDKv2ResourcePredicate(config.SDKv2ResourcePredicateForRuntime("audit")),
+		clients.WithFrameworkProvider(config.HasFrameworkResources()),
+		clients.WithProviderMetaCacheSize(*providerMetaCacheSize),
+	}
+	if *terraformCLI {
+		setupOptions = append(setupOptions, clients.WithTerraformCLI(*terraformVersion, *terraformSource, *terraformVersionConstraint))
+	}
 	o := tjcontroller.Options{
 		Options: xpcontroller.Options{
 			Logger:                  log,
@@ -139,17 +150,15 @@ func main() {
 		},
 		Provider: config.GetProviderForRuntime("audit"),
 		OperationTrackerStore: tjcontroller.NewOperationStore(log),
-		SetupFn: clients.TerraformSetupBuilder(
-			clients.WithServiceAccountCredentials(runCtx, mgr.GetAPIReader(), tokenClient.CoreV1()),
-			clients.WithSDKv2ResourcePredicate(config.SDKv2ResourcePredicateForRuntime("audit")),
-			clients.WithFrameworkProvider(config.HasFrameworkResources()),
-			clients.WithProviderMetaCacheSize(*providerMetaCacheSize),
-		),
+		SetupFn: clients.TerraformSetupBuilder(setupOptions...),
 	}
 
 	if *enableManagementPolicies {
 		o.Features.Enable(features.EnableBetaManagementPolicies)
 		log.Info("Beta feature enabled", "flag", features.EnableBetaManagementPolicies)
+	}
+	if *terraformCLI {
+		o.WorkspaceStore = terraform.NewWorkspaceStore(log, terraform.WithFeatures(o.Features))
 	}
 	if *enableChangeLogs {
 		o.Features.Enable(features.EnableAlphaChangeLogs)

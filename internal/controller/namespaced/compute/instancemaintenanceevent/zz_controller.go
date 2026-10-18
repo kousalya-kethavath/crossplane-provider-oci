@@ -22,6 +22,7 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	v1alpha1 "github.com/oracle/provider-oci/apis/namespaced/compute/v1alpha1"
+	runtimeconnector "github.com/oracle/provider-oci/internal/controller/connector"
 	features "github.com/oracle/provider-oci/internal/features"
 )
 
@@ -40,22 +41,17 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	name := managed.ControllerName(v1alpha1.InstanceMaintenanceEvent_GroupVersionKind.String())
 	var initializers managed.InitializerChain
 	eventHandler := handler.NewEventHandler(handler.WithLogger(o.Logger.WithValues("gvk", v1alpha1.InstanceMaintenanceEvent_GroupVersionKind)))
-	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1alpha1.InstanceMaintenanceEvent_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
+	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1alpha1.InstanceMaintenanceEvent_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(o.WorkspaceStore != nil))
 	metricRecorder := metrics.NewMetricRecorder(v1alpha1.InstanceMaintenanceEvent_GroupVersionKind, mgr, o.PollInterval)
 	if err := mgr.Add(metricRecorder); err != nil {
 		return errors.Wrap(err, "cannot register Terraform metric recorder")
 	}
 	opts := []managed.ReconcilerOption{
 		managed.WithExternalConnecter(
-			tjcontroller.NewTerraformPluginSDKAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["oci_core_instance_maintenance_event"],
-				tjcontroller.WithTerraformPluginSDKAsyncLogger(o.Logger),
-				tjcontroller.WithTerraformPluginSDKAsyncConnectorEventHandler(eventHandler),
-				tjcontroller.WithTerraformPluginSDKAsyncCallbackProvider(ac),
-				tjcontroller.WithTerraformPluginSDKAsyncMetricRecorder(metricRecorder),
-				tjcontroller.WithTerraformPluginSDKAsyncManagementPolicies(o.Features.Enabled(features.EnableBetaManagementPolicies)))),
+			runtimeconnector.NewAsyncConnector(mgr, o, o.Provider.Resources["oci_core_instance_maintenance_event"], eventHandler, ac, metricRecorder)),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
-		managed.WithFinalizer(tjcontroller.NewOperationTrackerFinalizer(o.OperationTrackerStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName))),
+		managed.WithFinalizer(runtimeconnector.NewFinalizer(mgr.GetClient(), o)),
 		managed.WithTimeout(3 * time.Minute),
 		managed.WithInitializers(initializers),
 		managed.WithPollInterval(o.PollInterval),

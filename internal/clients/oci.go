@@ -10,6 +10,7 @@ import (
 	"crypto/sha256"
 	"encoding/json"
 	"fmt"
+	"os"
 	"strings"
 	"sync"
 	"time"
@@ -47,6 +48,7 @@ const (
 	credentialKeyPrivateKeyPath                  = "private_key_path"
 	credentialKeyFingerprint                     = "fingerprint"
 	credentialKeyRegion                          = "region"
+	credentialKeyOKETokenPath                    = "oke_workload_identity_token_path"
 	credentialKeyAuth                            = "auth"
 	credentialKeyConfigFileProfile               = "config_file_profile"
 	credentialKeyWorkloadIdentityTokenPath       = "workload_identity_token_path"
@@ -66,6 +68,15 @@ type setupOptions struct {
 	isSDKv2Resource         func(string) bool
 	providerMetaCacheSize   int
 	serviceAccounts         serviceAccountCredentials
+	cli                     *upjetterraform.Setup
+}
+
+// WithTerraformCLI enables the external Terraform execution path. The runtime
+// must also select CLI connectors and provide Terraform and a matching plugin.
+func WithTerraformCLI(version, source, providerVersion string) SetupOption {
+	return func(o *setupOptions) {
+		o.cli = &upjetterraform.Setup{Version: version, Requirement: upjetterraform.ProviderRequirement{Source: source, Version: providerVersion}}
+	}
 }
 
 // SetupOption customizes Terraform setup behavior.
@@ -117,6 +128,7 @@ func TerraformSetupBuilder(opts ...SetupOption) upjetterraform.SetupFn {
 
 	options := newSetupOptions(opts...)
 	providerMetaCache := newProviderMetaCache(options.providerMetaCacheSize)
+	cliTokens := &cliServiceAccountTokens{lifetime: options.serviceAccounts.lifetime, baseDir: os.TempDir()}
 
 	return func(ctx context.Context, kube client.Client, mg resource.Managed) (upjetterraform.Setup, error) {
 		ps := upjetterraform.Setup{}
@@ -129,6 +141,22 @@ func TerraformSetupBuilder(opts ...SetupOption) upjetterraform.SetupFn {
 		cfg, authentication, err := options.configuration(ctx, kube, pc)
 		if err != nil {
 			return ps, err
+		}
+		if options.cli != nil {
+			ps.Version, ps.Requirement = options.cli.Version, options.cli.Requirement
+			if authentication.identity != "" {
+				supplier, ok := authentication.options.OKEWorkloadIdentityTokenProvider.(*serviceAccountTokenProvider)
+				if !ok {
+					return ps, fmt.Errorf("invalid ServiceAccount token supplier for Terraform CLI")
+				}
+				path, err := cliTokens.ensure(string(mg.GetUID()), authentication.identity, supplier)
+				if err != nil {
+					return ps, err
+				}
+				cfg[credentialKeyOKETokenPath] = path
+			}
+			ps.Configuration = cfg
+			return ps, nil
 		}
 		if authentication.identity != "" && !options.enableFrameworkProvider && !options.shouldConfigureSDKv2Provider(mg) {
 			return ps, fmt.Errorf("ServiceAccount credentials require an in-process SDKv2 or Framework resource")

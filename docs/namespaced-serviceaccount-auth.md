@@ -125,8 +125,8 @@ documentation](https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengg
 
 ## Renewal and lifecycle
 
-Tokens remain in memory and are not written into Terraform configuration, Secrets
-or ProviderConfig status. TokenRequests ask for one hour using the API-server's
+In-process execution keeps tokens in memory. Neither execution path puts JWTs
+into Terraform configuration, Secrets or ProviderConfig status. TokenRequests ask for one hour using the API-server's
 default audience, matching the existing OKE CCM request shape. Actual expiry is
 bounded by both the API response and JWT expiry. Concurrent refreshes on a cached
 client are coalesced; refresh is lazy when OCI needs a token and starts between
@@ -141,6 +141,63 @@ Account UID changes invalidate cached provider metadata on the next setup. A
 supplier bound to an account that was recreated refuses new tokens until setup
 resolves the new identity. In-flight OCI operations can retain their original
 client; changing a ProviderConfig does not revoke credentials already issued.
+
+## Terraform CLI execution
+
+In-process execution remains the default. Set `--terraform-cli` (or
+`TERRAFORM_CLI=true`) on a service provider to select the existing Upjet CLI
+connector and workspace finalizer. The ProviderConfig and namespace-local RBAC
+are identical for both modes. The family/config runtime does not reconcile OCI
+resources and does not need this flag.
+
+CLI mode requires a Terraform executable on PATH and a patched Terraform OCI
+plugin that accepts `oke_workload_identity_token_path`. Configure
+`--terraform-version`, `--terraform-provider-source` and
+`--terraform-provider-version` to match the installed tools. An unpatched public
+plugin does not implement this field. The normal minimal provider image does
+not contain these CLI executables.
+
+For a CLI-capable test image, `cluster/images/provider-oci/Dockerfile.cli` accepts
+a base image built from this branch and a build context containing:
+
+```text
+bin/linux_amd64/terraform
+bin/linux_amd64/terraform-provider-oci
+terraform-cli.tfrc
+```
+
+Use matching binaries for the target architecture and copy the supplied
+`cluster/images/provider-oci/terraform-cli.tfrc` into that context. For example:
+
+```bash
+docker build --platform=linux/amd64 -f cluster/images/provider-oci/Dockerfile.cli \
+  --build-arg BASE_IMAGE=YOUR_UPDATED_NETWORKING_IMAGE \
+  --build-arg TARGETARCH=amd64 --build-arg TF_PROVIDER_VERSION=9.0.0 \
+  -t YOUR_CLI_NETWORKING_IMAGE /path/to/cli-build-context
+```
+
+The filesystem mirror ensures the patched OCI plugin is used instead of
+silently fetching an unpatched OCI release. The regular image and default
+execution mode are unchanged.
+
+Crossplane writes a private token file inside each managed resource's Upjet
+workspace under the process temporary directory. Directories are mode 0700 and
+token files mode 0600. Only the absolute path enters Terraform configuration.
+The filename includes the selected identity hash; account changes cannot reuse
+another identity's file. The temporary directory must be private to the provider
+pod; do not mount it into tenant pods or persist it as a shared volume.
+
+A provider-lifetime background loop checks every 30 seconds and atomically
+replaces a JWT when its supplier reaches the 70–80% refresh threshold. This
+continues while a Terraform asynchronous operation is running. Failed renewal
+removes the file so the plugin cannot read a stale JWT as a fallback. Already
+issued RPSTs keep their normal SDK lifetime. Workspace finalization removes
+token files after resource deletion; process shutdown removes owned token files
+as well. Keep permissions and the selected ServiceAccount until deletion ends.
+
+Validate both modes separately, including long-running operations, token
+rotation, deletion, provider restart and the complete JWT/RPST renewal window.
+Initial CLI protocol/schema tests do not establish a successful OKE exchange.
 
 Keep the ProviderConfig, ServiceAccount, RBAC and OCI policies available until
 managed-resource deletion and finalizers complete. Before downgrading to a
