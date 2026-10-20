@@ -44,7 +44,7 @@ import (
 	namespacedcontroller "github.com/oracle/provider-oci/internal/controller/namespaced/containerengine"
 )
 
-var terraformProviderVersion = "9.0.0"
+var terraformProviderVersion = "9.10.0"
 
 func defaultProviderVersion() string {
 	return "provider-oci:" + terraformProviderVersion

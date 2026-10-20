@@ -1,0 +1,2180 @@
+{
+  "baseline_commit": "0f1ac07a93a50d7f8470dc1bbbef6d6f70bae0cf",
+  "terraform_commit": "e2bd7c1ea8ef999186202330ae8ef47a6740634f",
+  "baseline_source": "Tracked main CRDs; baseline tests passed; baseline CRDs were not regenerated",
+  "old_count": 2003,
+  "new_count": 2037,
+  "added": [
+    "datasafe.oci.m.upbound.io_cryptoassessmentmanagements.yaml",
+    "datasafe.oci.m.upbound.io_cryptoassessments.yaml",
+    "datasafe.oci.m.upbound.io_estimatetablesizes.yaml",
+    "datasafe.oci.m.upbound.io_registrationpolicies.yaml",
+    "datasafe.oci.m.upbound.io_subsetdata.yaml",
+    "datasafe.oci.m.upbound.io_subsettingpolicies.yaml",
+    "datasafe.oci.m.upbound.io_subsettingpolicyhealthreportmanagements.yaml",
+    "datasafe.oci.m.upbound.io_subsettingpolicysubsettingruleprocessingchainobjects.yaml",
+    "datasafe.oci.m.upbound.io_subsettingpolicysubsettingrules.yaml",
+    "datasafe.oci.m.upbound.io_subsettingpolicysubsettingschemarelations.yaml",
+    "datasafe.oci.m.upbound.io_subsettingreportmanagements.yaml",
+    "datasafe.oci.upbound.io_cryptoassessmentmanagements.yaml",
+    "datasafe.oci.upbound.io_cryptoassessments.yaml",
+    "datasafe.oci.upbound.io_estimatetablesizes.yaml",
+    "datasafe.oci.upbound.io_registrationpolicies.yaml",
+    "datasafe.oci.upbound.io_subsetdata.yaml",
+    "datasafe.oci.upbound.io_subsettingpolicies.yaml",
+    "datasafe.oci.upbound.io_subsettingpolicyhealthreportmanagements.yaml",
+    "datasafe.oci.upbound.io_subsettingpolicysubsettingruleprocessingchainobjects.yaml",
+    "datasafe.oci.upbound.io_subsettingpolicysubsettingrules.yaml",
+    "datasafe.oci.upbound.io_subsettingpolicysubsettingschemarelations.yaml",
+    "datasafe.oci.upbound.io_subsettingreportmanagements.yaml",
+    "dbmulticloud.oci.m.upbound.io_oracledbawskeypools.yaml",
+    "dbmulticloud.oci.upbound.io_oracledbawskeypools.yaml",
+    "generativeai.oci.m.upbound.io_routingprofiles.yaml",
+    "generativeai.oci.upbound.io_routingprofiles.yaml",
+    "networkconnectivity.oci.m.upbound.io_drgnatpolicies.yaml",
+    "networkconnectivity.oci.m.upbound.io_drgnatpolicydrgnatrules.yaml",
+    "networkconnectivity.oci.upbound.io_drgnatpolicies.yaml",
+    "networkconnectivity.oci.upbound.io_drgnatpolicydrgnatrules.yaml",
+    "oci.oci.m.upbound.io_productcataloginternaladminproducts.yaml",
+    "oci.oci.m.upbound.io_productcataloginternalproducts.yaml",
+    "oci.oci.upbound.io_productcataloginternaladminproducts.yaml",
+    "oci.oci.upbound.io_productcataloginternalproducts.yaml"
+  ],
+  "removed": [],
+  "structurally_modified": [
+    "apmsynthetics.oci.m.upbound.io_monitors.yaml",
+    "apmsynthetics.oci.upbound.io_monitors.yaml",
+    "blockstorage.oci.m.upbound.io_volumeattachments.yaml",
+    "blockstorage.oci.upbound.io_volumeattachments.yaml",
+    "compute.oci.m.upbound.io_instanceconfigurations.yaml",
+    "compute.oci.m.upbound.io_instances.yaml",
+    "compute.oci.upbound.io_instanceconfigurations.yaml",
+    "compute.oci.upbound.io_instances.yaml",
+    "database.oci.m.upbound.io_autonomousdatabases.yaml",
+    "database.oci.m.upbound.io_backups.yaml",
+    "database.oci.m.upbound.io_databases.yaml",
+    "database.oci.m.upbound.io_dbhomes.yaml",
+    "database.oci.m.upbound.io_dbsystems.yaml",
+    "database.oci.m.upbound.io_migrationassessments.yaml",
+    "database.oci.m.upbound.io_migrationjobs.yaml",
+    "database.oci.upbound.io_autonomousdatabases.yaml",
+    "database.oci.upbound.io_backups.yaml",
+    "database.oci.upbound.io_databases.yaml",
+    "database.oci.upbound.io_dbhomes.yaml",
+    "database.oci.upbound.io_dbsystems.yaml",
+    "database.oci.upbound.io_migrationassessments.yaml",
+    "database.oci.upbound.io_migrationjobs.yaml",
+    "datasafe.oci.m.upbound.io_securityassessmentfindings.yaml",
+    "datasafe.oci.m.upbound.io_targetdatabasegroups.yaml",
+    "datasafe.oci.m.upbound.io_targetdatabases.yaml",
+    "datasafe.oci.upbound.io_securityassessmentfindings.yaml",
+    "datasafe.oci.upbound.io_targetdatabasegroups.yaml",
+    "datasafe.oci.upbound.io_targetdatabases.yaml",
+    "datascience.oci.m.upbound.io_notebooksessions.yaml",
+    "datascience.oci.upbound.io_notebooksessions.yaml",
+    "dbmulticloud.oci.m.upbound.io_oracledbawskeys.yaml",
+    "dbmulticloud.oci.upbound.io_oracledbawskeys.yaml",
+    "functions.oci.m.upbound.io_functions.yaml",
+    "functions.oci.upbound.io_functions.yaml",
+    "networkconnectivity.oci.m.upbound.io_drgattachmentmanagements.yaml",
+    "networkconnectivity.oci.m.upbound.io_drgattachments.yaml",
+    "networkconnectivity.oci.upbound.io_drgattachmentmanagements.yaml",
+    "networkconnectivity.oci.upbound.io_drgattachments.yaml",
+    "ocvp.oci.m.upbound.io_clusters.yaml",
+    "ocvp.oci.m.upbound.io_esxihosts.yaml",
+    "ocvp.oci.m.upbound.io_sddcs.yaml",
+    "ocvp.oci.upbound.io_clusters.yaml",
+    "ocvp.oci.upbound.io_esxihosts.yaml",
+    "ocvp.oci.upbound.io_sddcs.yaml",
+    "opensearch.oci.m.upbound.io_opensearchclusters.yaml",
+    "opensearch.oci.upbound.io_opensearchclusters.yaml",
+    "psql.oci.m.upbound.io_psqlbackups.yaml",
+    "psql.oci.m.upbound.io_psqldbsystems.yaml",
+    "psql.oci.upbound.io_psqlbackups.yaml",
+    "psql.oci.upbound.io_psqldbsystems.yaml",
+    "redis.oci.m.upbound.io_redisclusters.yaml",
+    "redis.oci.upbound.io_redisclusters.yaml",
+    "self.oci.m.upbound.io_subscriptions.yaml",
+    "self.oci.upbound.io_subscriptions.yaml"
+  ],
+  "documentation_only": [
+    "artifacts.oci.m.upbound.io_containerconfigurations.yaml",
+    "artifacts.oci.upbound.io_containerconfigurations.yaml",
+    "compute.oci.m.upbound.io_images.yaml",
+    "compute.oci.upbound.io_images.yaml",
+    "database.oci.m.upbound.io_autonomousvmclusters.yaml",
+    "database.oci.m.upbound.io_cloudautonomousvmclusters.yaml",
+    "database.oci.upbound.io_autonomousvmclusters.yaml",
+    "database.oci.upbound.io_cloudautonomousvmclusters.yaml",
+    "fusionapps.oci.m.upbound.io_fusionenvironments.yaml",
+    "fusionapps.oci.upbound.io_fusionenvironments.yaml",
+    "identity.oci.m.upbound.io_tags.yaml",
+    "identity.oci.upbound.io_tags.yaml",
+    "resourceanalytics.oci.m.upbound.io_resourceanalyticsinstanceoacmanagements.yaml",
+    "resourceanalytics.oci.upbound.io_resourceanalyticsinstanceoacmanagements.yaml"
+  ],
+  "breaking_or_behavior_risks": [],
+  "non_breaking_changes": [
+    {
+      "file": "apmsynthetics.oci.m.upbound.io_monitors.yaml",
+      "path": "v1alpha1.spec.forProvider.maintenanceWindowSchedule[].recurrenceType",
+      "kind": "property_added"
+    },
+    {
+      "file": "apmsynthetics.oci.m.upbound.io_monitors.yaml",
+      "path": "v1alpha1.spec.forProvider.maintenanceWindowSchedule[].scheduleType",
+      "kind": "property_added"
+    },
+    {
+      "file": "apmsynthetics.oci.m.upbound.io_monitors.yaml",
+      "path": "v1alpha1.spec.initProvider.maintenanceWindowSchedule[].recurrenceType",
+      "kind": "property_added"
+    },
+    {
+      "file": "apmsynthetics.oci.m.upbound.io_monitors.yaml",
+      "path": "v1alpha1.spec.initProvider.maintenanceWindowSchedule[].scheduleType",
+      "kind": "property_added"
+    },
+    {
+      "file": "apmsynthetics.oci.m.upbound.io_monitors.yaml",
+      "path": "v1alpha1.status.atProvider.maintenanceWindowSchedule[].recurrenceType",
+      "kind": "property_added"
+    },
+    {
+      "file": "apmsynthetics.oci.m.upbound.io_monitors.yaml",
+      "path": "v1alpha1.status.atProvider.maintenanceWindowSchedule[].scheduleType",
+      "kind": "property_added"
+    },
+    {
+      "file": "apmsynthetics.oci.upbound.io_monitors.yaml",
+      "path": "v1alpha1.spec.forProvider.maintenanceWindowSchedule[].recurrenceType",
+      "kind": "property_added"
+    },
+    {
+      "file": "apmsynthetics.oci.upbound.io_monitors.yaml",
+      "path": "v1alpha1.spec.forProvider.maintenanceWindowSchedule[].scheduleType",
+      "kind": "property_added"
+    },
+    {
+      "file": "apmsynthetics.oci.upbound.io_monitors.yaml",
+      "path": "v1alpha1.spec.initProvider.maintenanceWindowSchedule[].recurrenceType",
+      "kind": "property_added"
+    },
+    {
+      "file": "apmsynthetics.oci.upbound.io_monitors.yaml",
+      "path": "v1alpha1.spec.initProvider.maintenanceWindowSchedule[].scheduleType",
+      "kind": "property_added"
+    },
+    {
+      "file": "apmsynthetics.oci.upbound.io_monitors.yaml",
+      "path": "v1alpha1.status.atProvider.maintenanceWindowSchedule[].recurrenceType",
+      "kind": "property_added"
+    },
+    {
+      "file": "apmsynthetics.oci.upbound.io_monitors.yaml",
+      "path": "v1alpha1.status.atProvider.maintenanceWindowSchedule[].scheduleType",
+      "kind": "property_added"
+    },
+    {
+      "file": "blockstorage.oci.m.upbound.io_volumeattachments.yaml",
+      "path": "v1alpha1.status.atProvider.isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "blockstorage.oci.upbound.io_volumeattachments.yaml",
+      "path": "v1alpha1.status.atProvider.isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.forProvider.instanceDetails[].blockVolumes[].createDetails[].isReservationsEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.forProvider.instanceDetails[].launchDetails[].launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.forProvider.instanceDetails[].options[].blockVolumes[].createDetails[].isReservationsEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.forProvider.instanceDetails[].options[].launchDetails[].launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.forProvider.instanceDetails[].options[].launchDetails[].platformConfig[].configMap",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.initProvider.instanceDetails[].blockVolumes[].createDetails[].isReservationsEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.initProvider.instanceDetails[].launchDetails[].launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.initProvider.instanceDetails[].options[].blockVolumes[].createDetails[].isReservationsEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.initProvider.instanceDetails[].options[].launchDetails[].launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.initProvider.instanceDetails[].options[].launchDetails[].platformConfig[].configMap",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.status.atProvider.instanceDetails[].blockVolumes[].createDetails[].isReservationsEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.status.atProvider.instanceDetails[].launchDetails[].launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.status.atProvider.instanceDetails[].options[].blockVolumes[].createDetails[].isReservationsEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.status.atProvider.instanceDetails[].options[].launchDetails[].launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.status.atProvider.instanceDetails[].options[].launchDetails[].platformConfig[].configMap",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instances.yaml",
+      "path": "v1alpha1.spec.forProvider.launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instances.yaml",
+      "path": "v1alpha1.spec.initProvider.launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.m.upbound.io_instances.yaml",
+      "path": "v1alpha1.status.atProvider.launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.forProvider.instanceDetails[].blockVolumes[].createDetails[].isReservationsEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.forProvider.instanceDetails[].launchDetails[].launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.forProvider.instanceDetails[].options[].blockVolumes[].createDetails[].isReservationsEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.forProvider.instanceDetails[].options[].launchDetails[].launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.forProvider.instanceDetails[].options[].launchDetails[].platformConfig[].configMap",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.initProvider.instanceDetails[].blockVolumes[].createDetails[].isReservationsEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.initProvider.instanceDetails[].launchDetails[].launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.initProvider.instanceDetails[].options[].blockVolumes[].createDetails[].isReservationsEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.initProvider.instanceDetails[].options[].launchDetails[].launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.spec.initProvider.instanceDetails[].options[].launchDetails[].platformConfig[].configMap",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.status.atProvider.instanceDetails[].blockVolumes[].createDetails[].isReservationsEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.status.atProvider.instanceDetails[].launchDetails[].launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.status.atProvider.instanceDetails[].options[].blockVolumes[].createDetails[].isReservationsEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.status.atProvider.instanceDetails[].options[].launchDetails[].launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instanceconfigurations.yaml",
+      "path": "v1alpha1.status.atProvider.instanceDetails[].options[].launchDetails[].platformConfig[].configMap",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instances.yaml",
+      "path": "v1alpha1.spec.forProvider.launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instances.yaml",
+      "path": "v1alpha1.spec.initProvider.launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "compute.oci.upbound.io_instances.yaml",
+      "path": "v1alpha1.status.atProvider.launchOptions[].isEncryptionInTransitEnabled",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_autonomousdatabases.yaml",
+      "path": "v1alpha1.status.atProvider.connectionUrls[].essbaseUrl",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_autonomousdatabases.yaml",
+      "path": "v1alpha1.status.atProvider.publicConnectionUrls[].essbaseUrl",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_autonomousdatabases.yaml",
+      "path": "v1alpha1.status.atProvider.vanityConnectionUrls[].essbaseUrl",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_backups.yaml",
+      "path": "v1alpha1.status.atProvider.encryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyPoolIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyPoolIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].azureEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].azureEncryptionKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].azureEncryptionKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].googleCloudProviderEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].googleCloudProviderEncryptionKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].googleCloudProviderEncryptionKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyPoolIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyPoolIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].azureEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].azureEncryptionKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].azureEncryptionKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].googleCloudProviderEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].googleCloudProviderEncryptionKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].googleCloudProviderEncryptionKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.status.atProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.status.atProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.status.atProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.status.atProvider.database[].sourceEncryptionKeyLocationDetails[].azureEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_databases.yaml",
+      "path": "v1alpha1.status.atProvider.database[].sourceEncryptionKeyLocationDetails[].googleCloudProviderEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.status.atProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_dbsystems.yaml",
+      "path": "v1alpha1.status.atProvider.dbHome[].database[].dbBackupConfig[].backupDestinationDetails[].vpcUser",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_migrationassessments.yaml",
+      "path": "v1alpha1.spec.forProvider.migrationScope",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_migrationassessments.yaml",
+      "path": "v1alpha1.spec.initProvider.migrationScope",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_migrationassessments.yaml",
+      "path": "v1alpha1.status.atProvider.migrationScope",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.m.upbound.io_migrationjobs.yaml",
+      "path": "v1alpha1.status.atProvider.progress[].jobProgress",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_autonomousdatabases.yaml",
+      "path": "v1alpha1.status.atProvider.connectionUrls[].essbaseUrl",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_autonomousdatabases.yaml",
+      "path": "v1alpha1.status.atProvider.publicConnectionUrls[].essbaseUrl",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_autonomousdatabases.yaml",
+      "path": "v1alpha1.status.atProvider.vanityConnectionUrls[].essbaseUrl",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_backups.yaml",
+      "path": "v1alpha1.status.atProvider.encryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyPoolIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyPoolIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].azureEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].azureEncryptionKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].azureEncryptionKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].googleCloudProviderEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].googleCloudProviderEncryptionKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].sourceEncryptionKeyLocationDetails[].googleCloudProviderEncryptionKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyPoolIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyPoolIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].azureEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].azureEncryptionKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].azureEncryptionKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].googleCloudProviderEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].googleCloudProviderEncryptionKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].sourceEncryptionKeyLocationDetails[].googleCloudProviderEncryptionKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.status.atProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.status.atProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.status.atProvider.database[].sourceEncryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.status.atProvider.database[].sourceEncryptionKeyLocationDetails[].azureEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_databases.yaml",
+      "path": "v1alpha1.status.atProvider.database[].sourceEncryptionKeyLocationDetails[].googleCloudProviderEncryptionKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.forProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.spec.initProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_dbhomes.yaml",
+      "path": "v1alpha1.status.atProvider.database[].encryptionKeyLocationDetails[].awsEncryptionKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_dbsystems.yaml",
+      "path": "v1alpha1.status.atProvider.dbHome[].database[].dbBackupConfig[].backupDestinationDetails[].vpcUser",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_migrationassessments.yaml",
+      "path": "v1alpha1.spec.forProvider.migrationScope",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_migrationassessments.yaml",
+      "path": "v1alpha1.spec.initProvider.migrationScope",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_migrationassessments.yaml",
+      "path": "v1alpha1.status.atProvider.migrationScope",
+      "kind": "property_added"
+    },
+    {
+      "file": "database.oci.upbound.io_migrationjobs.yaml",
+      "path": "v1alpha1.status.atProvider.progress[].jobProgress",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.m.upbound.io_securityassessmentfindings.yaml",
+      "path": "v1alpha1.status.atProvider.doclink",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.m.upbound.io_securityassessmentfindings.yaml",
+      "path": "v1alpha1.status.atProvider.references[].orp",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.m.upbound.io_targetdatabasegroups.yaml",
+      "path": "v1alpha1.spec.forProvider.matchingCriteria[].include[].freeformTagsIn",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.m.upbound.io_targetdatabasegroups.yaml",
+      "path": "v1alpha1.spec.forProvider.matchingCriteria[].include[].systemTags",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.m.upbound.io_targetdatabasegroups.yaml",
+      "path": "v1alpha1.spec.initProvider.matchingCriteria[].include[].freeformTagsIn",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.m.upbound.io_targetdatabasegroups.yaml",
+      "path": "v1alpha1.spec.initProvider.matchingCriteria[].include[].systemTags",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.m.upbound.io_targetdatabasegroups.yaml",
+      "path": "v1alpha1.status.atProvider.matchingCriteria[].include[].freeformTagsIn",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.m.upbound.io_targetdatabasegroups.yaml",
+      "path": "v1alpha1.status.atProvider.matchingCriteria[].include[].systemTags",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.m.upbound.io_targetdatabases.yaml",
+      "path": "v1alpha1.spec.forProvider.managePrivilegesTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.m.upbound.io_targetdatabases.yaml",
+      "path": "v1alpha1.spec.initProvider.managePrivilegesTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.m.upbound.io_targetdatabases.yaml",
+      "path": "v1alpha1.status.atProvider.features",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.m.upbound.io_targetdatabases.yaml",
+      "path": "v1alpha1.status.atProvider.managePrivilegesTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.upbound.io_securityassessmentfindings.yaml",
+      "path": "v1alpha1.status.atProvider.doclink",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.upbound.io_securityassessmentfindings.yaml",
+      "path": "v1alpha1.status.atProvider.references[].orp",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.upbound.io_targetdatabasegroups.yaml",
+      "path": "v1alpha1.spec.forProvider.matchingCriteria[].include[].freeformTagsIn",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.upbound.io_targetdatabasegroups.yaml",
+      "path": "v1alpha1.spec.forProvider.matchingCriteria[].include[].systemTags",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.upbound.io_targetdatabasegroups.yaml",
+      "path": "v1alpha1.spec.initProvider.matchingCriteria[].include[].freeformTagsIn",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.upbound.io_targetdatabasegroups.yaml",
+      "path": "v1alpha1.spec.initProvider.matchingCriteria[].include[].systemTags",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.upbound.io_targetdatabasegroups.yaml",
+      "path": "v1alpha1.status.atProvider.matchingCriteria[].include[].freeformTagsIn",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.upbound.io_targetdatabasegroups.yaml",
+      "path": "v1alpha1.status.atProvider.matchingCriteria[].include[].systemTags",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.upbound.io_targetdatabases.yaml",
+      "path": "v1alpha1.spec.forProvider.managePrivilegesTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.upbound.io_targetdatabases.yaml",
+      "path": "v1alpha1.spec.initProvider.managePrivilegesTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.upbound.io_targetdatabases.yaml",
+      "path": "v1alpha1.status.atProvider.features",
+      "kind": "property_added"
+    },
+    {
+      "file": "datasafe.oci.upbound.io_targetdatabases.yaml",
+      "path": "v1alpha1.status.atProvider.managePrivilegesTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "datascience.oci.m.upbound.io_notebooksessions.yaml",
+      "path": "v1alpha1.spec.forProvider.notebookSessionConfigDetails[].capacityReservationId",
+      "kind": "property_added"
+    },
+    {
+      "file": "datascience.oci.m.upbound.io_notebooksessions.yaml",
+      "path": "v1alpha1.spec.forProvider.notebookSessionConfigurationDetails[].capacityReservationId",
+      "kind": "property_added"
+    },
+    {
+      "file": "datascience.oci.m.upbound.io_notebooksessions.yaml",
+      "path": "v1alpha1.spec.initProvider.notebookSessionConfigDetails[].capacityReservationId",
+      "kind": "property_added"
+    },
+    {
+      "file": "datascience.oci.m.upbound.io_notebooksessions.yaml",
+      "path": "v1alpha1.spec.initProvider.notebookSessionConfigurationDetails[].capacityReservationId",
+      "kind": "property_added"
+    },
+    {
+      "file": "datascience.oci.m.upbound.io_notebooksessions.yaml",
+      "path": "v1alpha1.status.atProvider.notebookSessionConfigDetails[].capacityReservationId",
+      "kind": "property_added"
+    },
+    {
+      "file": "datascience.oci.m.upbound.io_notebooksessions.yaml",
+      "path": "v1alpha1.status.atProvider.notebookSessionConfigurationDetails[].capacityReservationId",
+      "kind": "property_added"
+    },
+    {
+      "file": "datascience.oci.upbound.io_notebooksessions.yaml",
+      "path": "v1alpha1.spec.forProvider.notebookSessionConfigDetails[].capacityReservationId",
+      "kind": "property_added"
+    },
+    {
+      "file": "datascience.oci.upbound.io_notebooksessions.yaml",
+      "path": "v1alpha1.spec.forProvider.notebookSessionConfigurationDetails[].capacityReservationId",
+      "kind": "property_added"
+    },
+    {
+      "file": "datascience.oci.upbound.io_notebooksessions.yaml",
+      "path": "v1alpha1.spec.initProvider.notebookSessionConfigDetails[].capacityReservationId",
+      "kind": "property_added"
+    },
+    {
+      "file": "datascience.oci.upbound.io_notebooksessions.yaml",
+      "path": "v1alpha1.spec.initProvider.notebookSessionConfigurationDetails[].capacityReservationId",
+      "kind": "property_added"
+    },
+    {
+      "file": "datascience.oci.upbound.io_notebooksessions.yaml",
+      "path": "v1alpha1.status.atProvider.notebookSessionConfigDetails[].capacityReservationId",
+      "kind": "property_added"
+    },
+    {
+      "file": "datascience.oci.upbound.io_notebooksessions.yaml",
+      "path": "v1alpha1.status.atProvider.notebookSessionConfigurationDetails[].capacityReservationId",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.m.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.spec.forProvider.oracleDbAwsKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.m.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.spec.forProvider.oracleDbAwsKeyPoolIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.m.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.spec.forProvider.oracleDbAwsKeyPoolIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.m.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.spec.initProvider.oracleDbAwsKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.m.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.spec.initProvider.oracleDbAwsKeyPoolIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.m.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.spec.initProvider.oracleDbAwsKeyPoolIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.m.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.status.atProvider.isOracleAwsKeyUsed",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.m.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.status.atProvider.oracleDbAwsKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.m.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.status.atProvider.refCount",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.spec.forProvider.oracleDbAwsKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.spec.forProvider.oracleDbAwsKeyPoolIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.spec.forProvider.oracleDbAwsKeyPoolIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.spec.initProvider.oracleDbAwsKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.spec.initProvider.oracleDbAwsKeyPoolIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.spec.initProvider.oracleDbAwsKeyPoolIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.status.atProvider.isOracleAwsKeyUsed",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.status.atProvider.oracleDbAwsKeyPoolId",
+      "kind": "property_added"
+    },
+    {
+      "file": "dbmulticloud.oci.upbound.io_oracledbawskeys.yaml",
+      "path": "v1alpha1.status.atProvider.refCount",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.forProvider.sourceDetails[].archiveSourceDetails",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.forProvider.sourceDetails[].handler",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.forProvider.sourceDetails[].image",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.forProvider.sourceDetails[].imageDigest",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.forProvider.sourceDetails[].runtimeConfig",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.initProvider.sourceDetails[].archiveSourceDetails",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.initProvider.sourceDetails[].handler",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.initProvider.sourceDetails[].image",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.initProvider.sourceDetails[].imageDigest",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.initProvider.sourceDetails[].runtimeConfig",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.status.atProvider.sourceDetails[].archiveSourceDetails",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.status.atProvider.sourceDetails[].handler",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.status.atProvider.sourceDetails[].image",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.status.atProvider.sourceDetails[].imageDigest",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.status.atProvider.sourceDetails[].runtimeConfig",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.status.atProvider.sourceDetails[].sourceCodeSha256",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.forProvider.sourceDetails[].archiveSourceDetails",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.forProvider.sourceDetails[].handler",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.forProvider.sourceDetails[].image",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.forProvider.sourceDetails[].imageDigest",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.forProvider.sourceDetails[].runtimeConfig",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.initProvider.sourceDetails[].archiveSourceDetails",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.initProvider.sourceDetails[].handler",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.initProvider.sourceDetails[].image",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.initProvider.sourceDetails[].imageDigest",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.initProvider.sourceDetails[].runtimeConfig",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.status.atProvider.sourceDetails[].archiveSourceDetails",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.status.atProvider.sourceDetails[].handler",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.status.atProvider.sourceDetails[].image",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.status.atProvider.sourceDetails[].imageDigest",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.status.atProvider.sourceDetails[].runtimeConfig",
+      "kind": "property_added"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.status.atProvider.sourceDetails[].sourceCodeSha256",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.forProvider.doesPreserveOriginalRoutesWithNat",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.forProvider.drgNatPolicyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.forProvider.drgNatPolicyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.forProvider.drgNatPolicyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.forProvider.removeDrgNatPolicyTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.initProvider.doesPreserveOriginalRoutesWithNat",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.initProvider.drgNatPolicyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.initProvider.drgNatPolicyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.initProvider.drgNatPolicyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.initProvider.removeDrgNatPolicyTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.status.atProvider.doesPreserveOriginalRoutesWithNat",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.status.atProvider.drgNatPolicyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.status.atProvider.removeDrgNatPolicyTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.forProvider.doesPreserveOriginalRoutesWithNat",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.forProvider.drgNatPolicyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.forProvider.drgNatPolicyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.forProvider.drgNatPolicyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.forProvider.removeDrgNatPolicyTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.initProvider.doesPreserveOriginalRoutesWithNat",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.initProvider.drgNatPolicyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.initProvider.drgNatPolicyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.initProvider.drgNatPolicyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.initProvider.removeDrgNatPolicyTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.status.atProvider.doesPreserveOriginalRoutesWithNat",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.status.atProvider.drgNatPolicyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.m.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.status.atProvider.removeDrgNatPolicyTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.forProvider.doesPreserveOriginalRoutesWithNat",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.forProvider.drgNatPolicyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.forProvider.drgNatPolicyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.forProvider.drgNatPolicyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.forProvider.removeDrgNatPolicyTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.initProvider.doesPreserveOriginalRoutesWithNat",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.initProvider.drgNatPolicyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.initProvider.drgNatPolicyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.initProvider.drgNatPolicyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.spec.initProvider.removeDrgNatPolicyTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.status.atProvider.doesPreserveOriginalRoutesWithNat",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.status.atProvider.drgNatPolicyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachmentmanagements.yaml",
+      "path": "v1alpha1.status.atProvider.removeDrgNatPolicyTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.forProvider.doesPreserveOriginalRoutesWithNat",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.forProvider.drgNatPolicyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.forProvider.drgNatPolicyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.forProvider.drgNatPolicyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.forProvider.removeDrgNatPolicyTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.initProvider.doesPreserveOriginalRoutesWithNat",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.initProvider.drgNatPolicyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.initProvider.drgNatPolicyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.initProvider.drgNatPolicyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.spec.initProvider.removeDrgNatPolicyTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.status.atProvider.doesPreserveOriginalRoutesWithNat",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.status.atProvider.drgNatPolicyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "networkconnectivity.oci.upbound.io_drgattachments.yaml",
+      "path": "v1alpha1.status.atProvider.removeDrgNatPolicyTrigger",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.m.upbound.io_clusters.yaml",
+      "path": "v1alpha1.spec.forProvider.initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.m.upbound.io_clusters.yaml",
+      "path": "v1alpha1.spec.initProvider.initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.m.upbound.io_clusters.yaml",
+      "path": "v1alpha1.status.atProvider.initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.m.upbound.io_esxihosts.yaml",
+      "path": "v1alpha1.spec.forProvider.initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.m.upbound.io_esxihosts.yaml",
+      "path": "v1alpha1.spec.initProvider.initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.m.upbound.io_esxihosts.yaml",
+      "path": "v1alpha1.status.atProvider.computeFaultDomain",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.m.upbound.io_esxihosts.yaml",
+      "path": "v1alpha1.status.atProvider.initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.m.upbound.io_sddcs.yaml",
+      "path": "v1alpha1.spec.forProvider.initialConfiguration[].initialClusterConfigurations[].initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.m.upbound.io_sddcs.yaml",
+      "path": "v1alpha1.spec.initProvider.initialConfiguration[].initialClusterConfigurations[].initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.m.upbound.io_sddcs.yaml",
+      "path": "v1alpha1.status.atProvider.initialConfiguration[].initialClusterConfigurations[].initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.upbound.io_clusters.yaml",
+      "path": "v1alpha1.spec.forProvider.initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.upbound.io_clusters.yaml",
+      "path": "v1alpha1.spec.initProvider.initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.upbound.io_clusters.yaml",
+      "path": "v1alpha1.status.atProvider.initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.upbound.io_esxihosts.yaml",
+      "path": "v1alpha1.spec.forProvider.initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.upbound.io_esxihosts.yaml",
+      "path": "v1alpha1.spec.initProvider.initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.upbound.io_esxihosts.yaml",
+      "path": "v1alpha1.status.atProvider.computeFaultDomain",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.upbound.io_esxihosts.yaml",
+      "path": "v1alpha1.status.atProvider.initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.upbound.io_sddcs.yaml",
+      "path": "v1alpha1.spec.forProvider.initialConfiguration[].initialClusterConfigurations[].initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.upbound.io_sddcs.yaml",
+      "path": "v1alpha1.spec.initProvider.initialConfiguration[].initialClusterConfigurations[].initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "ocvp.oci.upbound.io_sddcs.yaml",
+      "path": "v1alpha1.status.atProvider.initialConfiguration[].initialClusterConfigurations[].initialFaultDomainHostDistribution",
+      "kind": "property_added"
+    },
+    {
+      "file": "opensearch.oci.m.upbound.io_opensearchclusters.yaml",
+      "path": "v1alpha1.spec.forProvider.remoteReindexTrustConfig",
+      "kind": "property_added"
+    },
+    {
+      "file": "opensearch.oci.m.upbound.io_opensearchclusters.yaml",
+      "path": "v1alpha1.spec.forProvider.securityMasterUserAuthDetails",
+      "kind": "property_added"
+    },
+    {
+      "file": "opensearch.oci.m.upbound.io_opensearchclusters.yaml",
+      "path": "v1alpha1.spec.initProvider.remoteReindexTrustConfig",
+      "kind": "property_added"
+    },
+    {
+      "file": "opensearch.oci.m.upbound.io_opensearchclusters.yaml",
+      "path": "v1alpha1.spec.initProvider.securityMasterUserAuthDetails",
+      "kind": "property_added"
+    },
+    {
+      "file": "opensearch.oci.m.upbound.io_opensearchclusters.yaml",
+      "path": "v1alpha1.status.atProvider.remoteReindexTrustConfig",
+      "kind": "property_added"
+    },
+    {
+      "file": "opensearch.oci.m.upbound.io_opensearchclusters.yaml",
+      "path": "v1alpha1.status.atProvider.securityMasterUserAuthDetails",
+      "kind": "property_added"
+    },
+    {
+      "file": "opensearch.oci.upbound.io_opensearchclusters.yaml",
+      "path": "v1alpha1.spec.forProvider.remoteReindexTrustConfig",
+      "kind": "property_added"
+    },
+    {
+      "file": "opensearch.oci.upbound.io_opensearchclusters.yaml",
+      "path": "v1alpha1.spec.forProvider.securityMasterUserAuthDetails",
+      "kind": "property_added"
+    },
+    {
+      "file": "opensearch.oci.upbound.io_opensearchclusters.yaml",
+      "path": "v1alpha1.spec.initProvider.remoteReindexTrustConfig",
+      "kind": "property_added"
+    },
+    {
+      "file": "opensearch.oci.upbound.io_opensearchclusters.yaml",
+      "path": "v1alpha1.spec.initProvider.securityMasterUserAuthDetails",
+      "kind": "property_added"
+    },
+    {
+      "file": "opensearch.oci.upbound.io_opensearchclusters.yaml",
+      "path": "v1alpha1.status.atProvider.remoteReindexTrustConfig",
+      "kind": "property_added"
+    },
+    {
+      "file": "opensearch.oci.upbound.io_opensearchclusters.yaml",
+      "path": "v1alpha1.status.atProvider.securityMasterUserAuthDetails",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.m.upbound.io_psqlbackups.yaml",
+      "path": "v1alpha1.status.atProvider.kmsKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.m.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.spec.forProvider.managementPolicy[].backupPolicy[].copyPolicy[].kmsKeyIds",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.m.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.spec.forProvider.storageDetails[].kmsKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.m.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.spec.forProvider.storageDetails[].kmsKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.m.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.spec.forProvider.storageDetails[].kmsKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.m.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.spec.initProvider.managementPolicy[].backupPolicy[].copyPolicy[].kmsKeyIds",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.m.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.spec.initProvider.storageDetails[].kmsKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.m.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.spec.initProvider.storageDetails[].kmsKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.m.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.spec.initProvider.storageDetails[].kmsKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.m.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.status.atProvider.managementPolicy[].backupPolicy[].copyPolicy[].kmsKeyIds",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.m.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.status.atProvider.storageDetails[].kmsKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.upbound.io_psqlbackups.yaml",
+      "path": "v1alpha1.status.atProvider.kmsKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.spec.forProvider.managementPolicy[].backupPolicy[].copyPolicy[].kmsKeyIds",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.spec.forProvider.storageDetails[].kmsKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.spec.forProvider.storageDetails[].kmsKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.spec.forProvider.storageDetails[].kmsKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.spec.initProvider.managementPolicy[].backupPolicy[].copyPolicy[].kmsKeyIds",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.spec.initProvider.storageDetails[].kmsKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.spec.initProvider.storageDetails[].kmsKeyIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.spec.initProvider.storageDetails[].kmsKeyIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.status.atProvider.managementPolicy[].backupPolicy[].copyPolicy[].kmsKeyIds",
+      "kind": "property_added"
+    },
+    {
+      "file": "psql.oci.upbound.io_psqldbsystems.yaml",
+      "path": "v1alpha1.status.atProvider.storageDetails[].kmsKeyId",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.m.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.spec.forProvider.primaryClusterId",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.m.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.spec.forProvider.primaryClusterIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.m.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.spec.forProvider.primaryClusterIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.m.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.spec.initProvider.primaryClusterId",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.m.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.spec.initProvider.primaryClusterIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.m.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.spec.initProvider.primaryClusterIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.m.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.status.atProvider.clusterReplicationTopology",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.m.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.status.atProvider.clusterRole",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.m.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.status.atProvider.primaryClusterId",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.spec.forProvider.primaryClusterId",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.spec.forProvider.primaryClusterIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.spec.forProvider.primaryClusterIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.spec.initProvider.primaryClusterId",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.spec.initProvider.primaryClusterIdRef",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.spec.initProvider.primaryClusterIdSelector",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.status.atProvider.clusterReplicationTopology",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.status.atProvider.clusterRole",
+      "kind": "property_added"
+    },
+    {
+      "file": "redis.oci.upbound.io_redisclusters.yaml",
+      "path": "v1alpha1.status.atProvider.primaryClusterId",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.m.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.spec.forProvider.subscriptionDetails[].billingDetails[].billingModel",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.m.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.spec.forProvider.subscriptionDetails[].billingDetails[].pricingPlanKey",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.m.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.spec.forProvider.subscriptionDetails[].pricingPlan[].dimensions",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.m.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.spec.initProvider.subscriptionDetails[].billingDetails[].billingModel",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.m.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.spec.initProvider.subscriptionDetails[].billingDetails[].pricingPlanKey",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.m.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.spec.initProvider.subscriptionDetails[].pricingPlan[].dimensions",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.m.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.status.atProvider.subscriptionDetails[].billingDetails[].billingModel",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.m.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.status.atProvider.subscriptionDetails[].billingDetails[].pricingPlanKey",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.m.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.status.atProvider.subscriptionDetails[].pricingPlan[].dimensions",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.spec.forProvider.subscriptionDetails[].billingDetails[].billingModel",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.spec.forProvider.subscriptionDetails[].billingDetails[].pricingPlanKey",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.spec.forProvider.subscriptionDetails[].pricingPlan[].dimensions",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.spec.initProvider.subscriptionDetails[].billingDetails[].billingModel",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.spec.initProvider.subscriptionDetails[].billingDetails[].pricingPlanKey",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.spec.initProvider.subscriptionDetails[].pricingPlan[].dimensions",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.status.atProvider.subscriptionDetails[].billingDetails[].billingModel",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.status.atProvider.subscriptionDetails[].billingDetails[].pricingPlanKey",
+      "kind": "property_added"
+    },
+    {
+      "file": "self.oci.upbound.io_subscriptions.yaml",
+      "path": "v1alpha1.status.atProvider.subscriptionDetails[].pricingPlan[].dimensions",
+      "kind": "property_added"
+    }
+  ],
+  "deprecation_changes": [
+    {
+      "file": "compute.oci.m.upbound.io_images.yaml",
+      "path": "v1alpha1.status.atProvider.launchOptions[].isPvEncryptionInTransitEnabled",
+      "description": "Deprecated. Use isEncryptionInTransitEnabled instead."
+    },
+    {
+      "file": "compute.oci.upbound.io_images.yaml",
+      "path": "v1alpha1.status.atProvider.launchOptions[].isPvEncryptionInTransitEnabled",
+      "description": "Deprecated. Use isEncryptionInTransitEnabled instead."
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.forProvider.image",
+      "description": "(Updatable) Deprecated. The 'image' field has been deprecated. Use source_details.image in a CONTAINER_IMAGE source_details block instead. If both fields are specified, then 'source_details.image' will be used. Example: phx.ocir.io/ten/functions/function:0.0.1"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.forProvider.imageDigest",
+      "description": "(Updatable) Deprecated. The 'image_digest' field has been deprecated. Use source_details.image_digest in a CONTAINER_IMAGE source_details block instead. If both fields are specified, then 'source_details.image_digest' will be used. Example: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.initProvider.image",
+      "description": "(Updatable) Deprecated. The 'image' field has been deprecated. Use source_details.image in a CONTAINER_IMAGE source_details block instead. If both fields are specified, then 'source_details.image' will be used. Example: phx.ocir.io/ten/functions/function:0.0.1"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.initProvider.imageDigest",
+      "description": "(Updatable) Deprecated. The 'image_digest' field has been deprecated. Use source_details.image_digest in a CONTAINER_IMAGE source_details block instead. If both fields are specified, then 'source_details.image_digest' will be used. Example: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.status.atProvider.image",
+      "description": "(Updatable) Deprecated. The 'image' field has been deprecated. Use source_details.image in a CONTAINER_IMAGE source_details block instead. If both fields are specified, then 'source_details.image' will be used. Example: phx.ocir.io/ten/functions/function:0.0.1"
+    },
+    {
+      "file": "functions.oci.m.upbound.io_functions.yaml",
+      "path": "v1alpha1.status.atProvider.imageDigest",
+      "description": "(Updatable) Deprecated. The 'image_digest' field has been deprecated. Use source_details.image_digest in a CONTAINER_IMAGE source_details block instead. If both fields are specified, then 'source_details.image_digest' will be used. Example: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.forProvider.image",
+      "description": "(Updatable) Deprecated. The 'image' field has been deprecated. Use source_details.image in a CONTAINER_IMAGE source_details block instead. If both fields are specified, then 'source_details.image' will be used. Example: phx.ocir.io/ten/functions/function:0.0.1"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.forProvider.imageDigest",
+      "description": "(Updatable) Deprecated. The 'image_digest' field has been deprecated. Use source_details.image_digest in a CONTAINER_IMAGE source_details block instead. If both fields are specified, then 'source_details.image_digest' will be used. Example: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.initProvider.image",
+      "description": "(Updatable) Deprecated. The 'image' field has been deprecated. Use source_details.image in a CONTAINER_IMAGE source_details block instead. If both fields are specified, then 'source_details.image' will be used. Example: phx.ocir.io/ten/functions/function:0.0.1"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.spec.initProvider.imageDigest",
+      "description": "(Updatable) Deprecated. The 'image_digest' field has been deprecated. Use source_details.image_digest in a CONTAINER_IMAGE source_details block instead. If both fields are specified, then 'source_details.image_digest' will be used. Example: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.status.atProvider.image",
+      "description": "(Updatable) Deprecated. The 'image' field has been deprecated. Use source_details.image in a CONTAINER_IMAGE source_details block instead. If both fields are specified, then 'source_details.image' will be used. Example: phx.ocir.io/ten/functions/function:0.0.1"
+    },
+    {
+      "file": "functions.oci.upbound.io_functions.yaml",
+      "path": "v1alpha1.status.atProvider.imageDigest",
+      "description": "(Updatable) Deprecated. The 'image_digest' field has been deprecated. Use source_details.image_digest in a CONTAINER_IMAGE source_details block instead. If both fields are specified, then 'source_details.image_digest' will be used. Example: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7"
+    },
+    {
+      "file": "fusionapps.oci.m.upbound.io_fusionenvironments.yaml",
+      "path": "v1alpha1.spec.forProvider.kmsKeyId",
+      "description": "(Deprecated) The BYOK KMS key OCID. Starting November 23, 2026, kmsKeyId will no longer be supported when updating a Fusion Application environment. Use the Oracle Cloud Console to add customer-managed keys to existing environments. It remains supported for initial BYOK enablement when creating a Fusion Environment."
+    },
+    {
+      "file": "fusionapps.oci.m.upbound.io_fusionenvironments.yaml",
+      "path": "v1alpha1.spec.initProvider.kmsKeyId",
+      "description": "(Deprecated) The BYOK KMS key OCID. Starting November 23, 2026, kmsKeyId will no longer be supported when updating a Fusion Application environment. Use the Oracle Cloud Console to add customer-managed keys to existing environments. It remains supported for initial BYOK enablement when creating a Fusion Environment."
+    },
+    {
+      "file": "fusionapps.oci.m.upbound.io_fusionenvironments.yaml",
+      "path": "v1alpha1.status.atProvider.kmsKeyId",
+      "description": "(Deprecated) The BYOK KMS key OCID. Starting November 23, 2026, kmsKeyId will no longer be supported when updating a Fusion Application environment. Use the Oracle Cloud Console to add customer-managed keys to existing environments. It remains supported for initial BYOK enablement when creating a Fusion Environment."
+    },
+    {
+      "file": "fusionapps.oci.upbound.io_fusionenvironments.yaml",
+      "path": "v1alpha1.spec.forProvider.kmsKeyId",
+      "description": "(Deprecated) The BYOK KMS key OCID. Starting November 23, 2026, kmsKeyId will no longer be supported when updating a Fusion Application environment. Use the Oracle Cloud Console to add customer-managed keys to existing environments. It remains supported for initial BYOK enablement when creating a Fusion Environment."
+    },
+    {
+      "file": "fusionapps.oci.upbound.io_fusionenvironments.yaml",
+      "path": "v1alpha1.spec.initProvider.kmsKeyId",
+      "description": "(Deprecated) The BYOK KMS key OCID. Starting November 23, 2026, kmsKeyId will no longer be supported when updating a Fusion Application environment. Use the Oracle Cloud Console to add customer-managed keys to existing environments. It remains supported for initial BYOK enablement when creating a Fusion Environment."
+    },
+    {
+      "file": "fusionapps.oci.upbound.io_fusionenvironments.yaml",
+      "path": "v1alpha1.status.atProvider.kmsKeyId",
+      "description": "(Deprecated) The BYOK KMS key OCID. Starting November 23, 2026, kmsKeyId will no longer be supported when updating a Fusion Application environment. Use the Oracle Cloud Console to add customer-managed keys to existing environments. It remains supported for initial BYOK enablement when creating a Fusion Environment."
+    }
+  ],
+  "risk_kind_counts": {},
+  "limitations": [
+    "Static schema comparison; no rename inference or automatic approval of risks.",
+    "Does not prove runtime API or OCI service compatibility."
+  ],
+  "validation": {
+    "baseline_tests": "passed",
+    "full_generation": "passed",
+    "full_repository_tests": "passed",
+    "module_checksums": "passed",
+    "version_alignment": "passed",
+    "native_build": "passed: monolith, events, oci (Product Catalog), config",
+    "linux_amd64_build": "pending",
+    "live_reconciliation": "blocked_pending_user_OCI_authentication_refresh",
+    "cluster_context": "my-cluster",
+    "native_cli_startup": "passed: --help for all four binaries"
+  },
+  "terraform_module_requirement": "github.com/oracle/terraform-provider-oci v1.0.19-0.20261020170817-e2bd7c1ea8ef",
+  "terraform_module_replacement": "github.com/kousalya-kethavath/terraform-provider-oci v0.0.0-20261020170817-e2bd7c1ea8ef"
+}

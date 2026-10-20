@@ -7,6 +7,29 @@ import (
 	"testing"
 )
 
+func TestProviderMainTemplateVersionMatchesBuild(t *testing.T) {
+	makefile, err := os.ReadFile("../../Makefile")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var version string
+	for _, line := range strings.Split(string(makefile), "\n") {
+		if value, ok := strings.CutPrefix(line, "export TERRAFORM_PROVIDER_VERSION := "); ok {
+			version = strings.TrimSpace(value)
+		}
+	}
+	if version == "" {
+		t.Fatal("Terraform provider version is missing from Makefile")
+	}
+	template, err := os.ReadFile("../../hack/main.go.tmpl")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(string(template), `var terraformProviderVersion = "`+version+`"`) {
+		t.Fatalf("provider main template does not default to build version %s", version)
+	}
+}
+
 func TestGenerateServiceControllerSetupPackages(t *testing.T) {
 	root := t.TempDir()
 	content := []byte("package controller\n")
