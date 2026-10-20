@@ -2170,7 +2170,7 @@
     "module_checksums": "passed",
     "version_alignment": "passed",
     "native_build": "passed: monolith, events, oci (Product Catalog), config",
-    "linux_amd64_build": "pending",
+    "linux_amd64_build": "passed: events, oci (Product Catalog), config; CGO_ENABLED=0",
     "live_reconciliation": "blocked_pending_user_OCI_authentication_refresh",
     "cluster_context": "my-cluster",
     "native_cli_startup": "passed: --help for all four binaries"
