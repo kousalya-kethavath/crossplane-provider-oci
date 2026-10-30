@@ -163,28 +163,7 @@ Terraform OCI plugin that accepts `oke_workload_identity_token_path`. Configure
 plugin does not implement this field. The normal minimal provider image does
 not contain these CLI executables.
 
-For a CLI-capable test image, `cluster/images/provider-oci/Dockerfile.cli` accepts
-a base image built from this branch and a build context containing:
-
-```text
-bin/linux_amd64/terraform
-bin/linux_amd64/terraform-provider-oci
-terraform-cli.tfrc
-```
-
-Use matching binaries for the target architecture and copy the supplied
-`cluster/images/provider-oci/terraform-cli.tfrc` into that context. For example:
-
-```bash
-docker build --platform=linux/amd64 -f cluster/images/provider-oci/Dockerfile.cli \
-  --build-arg BASE_IMAGE=YOUR_UPDATED_NETWORKING_IMAGE \
-  --build-arg TARGETARCH=amd64 --build-arg TF_PROVIDER_VERSION=9.0.0 \
-  -t YOUR_CLI_NETWORKING_IMAGE /path/to/cli-build-context
-```
-
-The filesystem mirror ensures the patched OCI plugin is used instead of
-silently fetching an unpatched OCI release. Runtimes containing only in-process
-resources do not need these executables.
+Runtimes containing only in-process resources do not need these executables.
 
 Crossplane writes a private token file inside each managed resource's Upjet
 workspace under the process temporary directory. Directories are mode 0700 and
